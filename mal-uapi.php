@@ -254,8 +254,29 @@ namespace MAL {
 			});
 
 			$this->setSearch("related", "/Related Anime<\/h2>/", function(){
+				$return = array();
 				$matches = array();
-				$return = "";
+				//todo
+
+				//not going to work cuz regex reads off on different positions, no unique patterns in the source.
+				//attempt dirty method
+				if (preg_match("#<td nowrap=\"\" valign=\"top\" class=\"ar fw-n borderClass\">Adaptation:<\/td><td width=\"100%\" class=\"borderClass\">(.*)<\/td>#", $this->link_arr[$this->lineNo])) {
+					$return["adaption"] = array();
+					$matches2 = array();
+
+					preg_match("#<td nowrap=\"\" valign=\"top\" class=\"ar fw-n borderClass\">Adaptation:<\/td><td width=\"100%\" class=\"borderClass\">(.*)<\/td>#", $this->link_arr[$this->lineNo], $matches2);
+					var_dump($matches2);
+					if (strpos($matches2[2], ",")) {
+						$arr = explode(",", $matches2[2]);
+						foreach ($arr as $key => $value) {
+							preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $value, $matches);
+							$return["adaption"][] = array($matches[1], $matches[2]);
+						}
+					} else {
+						preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $matches2[2], $matches);
+						$return["adaption"][] = array($matches[1], $matches[2]);
+					}
+				}
 
 				return $return;
 			});

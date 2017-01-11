@@ -297,7 +297,13 @@ namespace MAL {
 
 	}
 
+
+
+	/**
+	*	Tasks that require authentication. Acts as a wrapper using the official API.
+	*/
+	class AUTH {}
+
 }
 
-namespace AUTH {}
 ?>

@@ -161,7 +161,7 @@ namespace MAL {
 			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function(){
 					$return = array();
 					$matches = array();
-					if (strpos($this->link_arr[$this->lineNo+1], ",")) {
+				if (strpos($this->link_arr[$this->lineNo+1], ",")) {
 					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
 					foreach ($arr as $key => $value) {
 						preg_match("#<a href=\"\/anime\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $value, $matches);
@@ -234,6 +234,30 @@ namespace MAL {
 
 					return $return;
 				}				
+			});
+
+			$this->setSearch("external", "/<h2>External Links<\/h2>/", function(){
+				$return = array();
+				$matches = array();
+				if (strpos($this->link_arr[$this->lineNo+1], ",")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+					foreach ($arr as $key => $value) {
+						preg_match("#<a href=\"(.*)\" target=\"_blank\">(.*)<\/a>#", $value, $matches);
+						$return[] = array($matches[1], $matches[2]);
+					}
+				} else {
+					preg_match("#<a href=\"(.*)\" target=\"_blank\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+					$return = array($matches[1], $matches[2]);
+				}
+
+				return $return;
+			});
+
+			$this->setSearch("related", "/Related Anime<\/h2>/", function(){
+				$matches = array();
+				$return = "";
+
+				return $return;
 			});
 
 			$this->data = array();

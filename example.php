@@ -1,9 +1,9 @@
 <?php
 
-require_once 'mal-uapi2.php';
+require_once 'mal-uapi.php';
 
 $mal = new \MAL\GET;
 
-$mal->anime(1);
-var_dump($mal->data);
+var_dump($mal->anime(1)); // anime id here
+
 ?>

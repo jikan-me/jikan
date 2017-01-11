@@ -260,6 +260,20 @@ namespace MAL {
 		public function person($id) {}
 
 
+		public function videos() {}
+		public function episodes() {}
+		public function reviews() {}
+		public function recommendations() {}
+		public function stats() {}
+		public function characters() {}
+		public function news() {}
+		public function forum() {}
+		public function featured() {}
+		public function clubs() {}
+		public function pictures() {}
+		public function moreinfo() {}
+
+
 		public function json() {
 			if ($this->data !== false) {
 				return json_encode($this->data);

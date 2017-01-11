@@ -9,6 +9,7 @@ More to follow.
 
 ### Planned Features
 - Provides access to anime, manga, person, character details
+- Search results w/ page support
 - Authentication Tasks using Official API
 - Command Line Usage
 - JSON formats ;)

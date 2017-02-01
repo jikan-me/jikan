@@ -501,9 +501,9 @@ namespace MAL {
 
 				return $return;
 			});*/
-
-			var_dump($this->search);
-			die();
+			//todo
+			//var_dump($this->search);
+			//die();
 
 			$this->data = array();
 

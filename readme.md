@@ -13,3 +13,9 @@ More to follow.
 - Authentication Tasks using Official API
 - Command Line Usage
 - JSON formats ;)
+
+##Changelog
+###0.0.1 alpha - Feb 2, 17
+- You're now able to fetch manga details
+- Bug fixes
+

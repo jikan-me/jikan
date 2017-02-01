@@ -1,6 +1,6 @@
 <?php
 /**
-*	MyAnimeList Unofficial API @version 0.0.0 alpha
+*	MyAnimeList Unofficial API @version 0.0.1 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -74,6 +74,10 @@ namespace MAL {
 
 			$this->setSearch("episodes", "#<span class=\"dark_text\">Episodes:<\/span>#", function(){
 				return (int) $this->link_arr[$this->lineNo+1];
+			});
+
+			$this->setSearch("status", "#<span class=\"dark_text\">Status:<\/span>#", function(){
+				return $this->link_arr[$this->lineNo+1];
 			});
 
 			$this->setSearch("aired", "#<span class=\"dark_text\">Aired:<\/span>#", function(){
@@ -253,7 +257,7 @@ namespace MAL {
 				return $return;
 			});
 
-			$this->setSearch("related", "/Related Anime<\/h2>/", function(){
+			/*$this->setSearch("related", "/Related Anime<\/h2>/", function(){
 				$return = array();
 				$matches = array();
 				//todo
@@ -279,7 +283,7 @@ namespace MAL {
 				}
 
 				return $return;
-			});
+			});*/
 
 			$this->data = array();
 
@@ -298,7 +302,225 @@ namespace MAL {
 			return $this->data;
 		}
 
-		public function manga($id) {}
+		public function manga($id) {
+			$this->link = $this->types["manga"].$id;
+			$this->type = "manga";
+
+			if ($this->link_exists($this->link)) {
+				$this->link_arr = @file($this->link);
+				array_walk($this->link_arr, array($this, 'trim'));
+			} else {
+				$this->log("Error: Could not access \"".$this->link."\"");
+				return false;
+			}
+
+			if (!empty($this->data)) {
+				unset($this->data);
+				$this->data = arary();
+			}
+
+			$this->setSearch("link_canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("title", "#<h1 class=\"h1\"><span itemprop=\"name\">(.*)<\/span><\/h1>#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("synonyms", "#<span class=\"dark_text\">Synonyms:<\/span> (.*)#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("japanese", "#<span class=\"dark_text\">Japanese:<\/span>(.*?)<\/div>#", function(){
+				return trim($this->matches[1]);
+			});
+
+			$this->setSearch("image", "#<img src=\"(.*)\" alt=\"(.*)\" itemprop=\"image\" class=\"ac\">#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span> <a href=\"https://myanimelist.net/topmanga.php?type=(.*)\">(.*)<\/a>#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("volumes", "#<span class=\"dark_text\">Volumes:<\/span>(.*)$#", function(){
+				return (int) trim($this->matches[1]);
+			});
+
+			$this->setSearch("chapters", "#<span class=\"dark_text\">Chapters:<\/span>(.*)$#", function(){
+				//return (int) $this->link_arr[$this->lineNo+1];
+				return (int) trim($this->matches[1]);
+			});
+
+			$this->setSearch("status", "#<span class=\"dark_text\">Status:<\/span>([A-Z-a-z]{1,})<\/div>#", function(){
+				return trim($this->matches[1]);
+			});
+
+			$this->setSearch("published", "#<span class=\"dark_text\">Published:<\/span>(.*)<\/div>#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function(){
+				$return = array();
+				$matches = array();
+				if (strpos($this->link_arr[$this->lineNo+1], ",")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+					foreach ($arr as $key => $value) {
+						preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $value, $matches);
+						$return[] = array($matches[1], $matches[3]);
+					}
+				} else {
+					preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+					$return = array($matches[1], $matches[3]);
+				}
+
+				return $return;
+			});
+
+			$this->setSearch("authors", "#<span class=\"dark_text\">Authors:<\/span>#", function(){
+				$return = array();
+				$matches = array();
+				if (strpos($this->link_arr[$this->lineNo+1], ">,")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+					foreach ($arr as $key => $value) {
+						preg_match("#<a href=\"(.*)\">(.*)<\/a>(.*?)<\/div>#", $value, $matches);
+						$return[] = array($matches[1], $matches[2], trim($matches[3]));
+					}
+				} else {
+					preg_match("#<a href=\"(.*)\">(.*)<\/a>(.*?)<\/div>#", $this->link_arr[$this->lineNo+1], $matches);
+					$return = array($matches[1], $matches[2], trim($matches[3]));
+				}
+
+				return $return;
+			});
+
+			$this->setSearch("serialization", "#<span class=\"dark_text\">Serialization:<\/span>#", function(){
+				$return = array();
+				$matches = array();
+				if (strpos($this->link_arr[$this->lineNo+1], ">,")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+					foreach ($arr as $key => $value) {
+						preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $value, $matches);
+						$return[] = array($matches[1], $matches[2]);
+					}
+				} else {
+					preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+					$return = array($matches[1], $matches[2]);
+				}
+
+				return $return;
+			});
+
+			// $this->setSearch("score", "#<span class=\"dark_text\">Score:<\/span> <span itemprop=\"ratingValue\">(.*?)<\/span>#", function(){
+			// 	$score = (float) $this->matches[1];
+			// 	preg_match("#<span itemprop=\"ratingCount\">(.*?)<\/span> users\)<\/small>#", $this->line_arr[$this->lineNo], $this->matches);
+			// 	var_dump($this->matches);
+			// 	return array((float)$this->matches[1], (int) str_replace(",", "", $this->matches[2]));
+			// });
+
+			$this->setSearch("ranked", "#<span class=\"dark_text\">Ranked:</span> #(.*)<sup><small>2<\/small><\/sup>#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("popularity", "#<span class=\"dark_text\">Popularity:<\/span> #(.*)<\/#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("members", "#<span class=\"dark_text\">Members:<\/span>(.*)<\/div>#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("favorites", "#<span class=\"dark_text\">Favorites:<\/span>(.*)<\div>#", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("synopsis", "/<span itemprop=\"description\">(.*?)/", function(){
+				$matches = array();
+				$return = "";
+				$this->link_arr[$this->lineNo] = preg_replace("#\<br \/\>#", "", $this->line);
+				if (preg_match("#<span itemprop=\"description\">(.*)<\/span>#", $this->link_arr[$this->lineNo], $matches)) {
+					$return = $matches[1];
+				} else {
+					$offset = 1;
+					preg_match("/<span itemprop=\"description\">(.*)/", $this->line, $matches);
+					$return = $matches[1];
+					$this->link_arr[$this->lineNo+1] = preg_replace("#\<br \>#", "", $this->link_arr[$this->lineNo+1]);
+					while (!preg_match("#(.*)<\/span>#", $this->link_arr[$this->lineNo+$offset])) {
+						$return .= $this->link_arr[$this->lineNo+$offset];
+						$offset++;
+					}
+					if (preg_match("/(.*)<\/span>/", $this->line, $matches)) {
+						$return .= $matches[1];
+					}
+
+					return $return;
+				}				
+			});
+
+			$this->setSearch("external", "/<h2>External Links<\/h2>/", function(){
+				$return = array();
+				$matches = array();
+				if (strpos($this->link_arr[$this->lineNo+1], ",")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+					foreach ($arr as $key => $value) {
+						preg_match("#<a href=\"(.*)\" target=\"_blank\">(.*)<\/a>#", $value, $matches);
+						$return[] = array($matches[1], $matches[2]);
+					}
+				} else {
+					preg_match("#<a href=\"(.*)\" target=\"_blank\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+					$return = array($matches[1], $matches[2]);
+				}
+
+				return $return;
+			});
+
+			/*$this->setSearch("related", "/Related Anime<\/h2>/", function(){
+				$return = array();
+				$matches = array();
+				//todo
+
+				//not going to work cuz regex reads off on different positions, no unique patterns in the source.
+				//attempt dirty method
+				if (preg_match("#<td nowrap=\"\" valign=\"top\" class=\"ar fw-n borderClass\">Adaptation:<\/td><td width=\"100%\" class=\"borderClass\">(.*)<\/td>#", $this->link_arr[$this->lineNo])) {
+					$return["adaption"] = array();
+					$matches2 = array();
+
+					preg_match("#<td nowrap=\"\" valign=\"top\" class=\"ar fw-n borderClass\">Adaptation:<\/td><td width=\"100%\" class=\"borderClass\">(.*)<\/td>#", $this->link_arr[$this->lineNo], $matches2);
+					var_dump($matches2);
+					if (strpos($matches2[2], ",")) {
+						$arr = explode(",", $matches2[2]);
+						foreach ($arr as $key => $value) {
+							preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $value, $matches);
+							$return["adaption"][] = array($matches[1], $matches[2]);
+						}
+					} else {
+						preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $matches2[2], $matches);
+						$return["adaption"][] = array($matches[1], $matches[2]);
+					}
+				}
+
+				return $return;
+			});*/
+
+			var_dump($this->search);
+			die();
+
+			$this->data = array();
+
+			foreach ($this->link_arr as $lineNo => $line) {
+				$this->line = $line;
+				$this->lineNo = $lineNo;
+				
+				$this->find();
+			}
+
+			unset($this->matches);
+			$this->matches = array();
+
+			$this->data = (empty($this->data)) ? false : $this->data;
+
+			return $this->data;			
+		}
 
 		public function character($id) {}
 

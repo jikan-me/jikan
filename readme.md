@@ -15,7 +15,7 @@ More to follow.
 - JSON formats ;)
 
 ##Changelog
-###0.0.1 alpha - Feb 2, 17
+###0.1.0 alpha - Feb 2, 17
 - You're now able to fetch manga details
 - Bug fixes
 

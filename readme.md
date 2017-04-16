@@ -6,7 +6,9 @@ This is a very early alpha version and is in WIP. The only functional part getti
 
 More to follow.
 
+
 ##What data does this scrap?
+
 ###Anime
 - Canonical Name (for links)
 - Title
@@ -32,6 +34,7 @@ More to follow.
 - Members
 - Favorites
 - Related Anime (types + links to them); e.g, Adaption + Adaption link, etc
+
 
 ###Manga
 - Canonical Name (for links)

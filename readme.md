@@ -54,7 +54,7 @@ More to follow.
 - Related Manga
 
 
-### Planned Features
+## Planned Features
 - Fetch Anime + Manga Reviews, Recommendations, Stats, Characters, News, Pictures, etc
 - Fetch Person & Character Details
 - Search results w/ pagination
@@ -62,7 +62,7 @@ More to follow.
 - Command Line Usage
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
-### Todo
+## Todo
 - Fix synonyms breaking for certain anime/manga
 - Fix authors breaking for mangas
 

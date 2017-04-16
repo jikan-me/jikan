@@ -1,6 +1,6 @@
 <?php
 /**
-*	MyAnimeList Unofficial API @version 0.1.0 alpha
+*	MyAnimeList Unofficial API @version 0.1.1 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -357,7 +357,7 @@ namespace MAL {
 			});
 
 			$this->setSearch("published", "#<span class=\"dark_text\">Published:<\/span>(.*)<\/div>#", function(){
-				return $this->matches[1];
+				return trim($this->matches[1]);
 			});
 
 			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function(){
@@ -418,16 +418,18 @@ namespace MAL {
 			// 	return array((float)$this->matches[1], (int) str_replace(",", "", $this->matches[2]));
 			// });
 
-			$this->setSearch("ranked", "#<span class=\"dark_text\">Ranked:</span> #(.*)<sup><small>2<\/small><\/sup>#", function(){
-				return $this->matches[1];
+			$this->setSearch("ranked", "~<span class=\"dark_text\">Ranked:<\/span> #(.*[[:alnum:]])<sup>~", function(){
+				return ($this->matches[1] == "N/A" ? $this->matches[1] : (int) $this->matches[1]);
 			});
 
-			$this->setSearch("popularity", "#<span class=\"dark_text\">Popularity:<\/span> #(.*)<\/#", function(){
-				return $this->matches[1];
+
+			$this->setSearch("popularity", "~<span class=\"dark_text\">Popularity:<\/span> #(.*[[:alnum:]])<\/div>~", function(){
+				return ($this->matches[1] == "N/A" ? $this->matches[1] : (int) $this->matches[1]);
 			});
 
 			$this->setSearch("members", "#<span class=\"dark_text\">Members:<\/span>(.*)<\/div>#", function(){
-				return $this->matches[1];
+				$this->matches[1] = str_replace(",", "", trim($this->matches[1]));
+				return (int) $this->matches[1];
 			});
 
 			$this->setSearch("favorites", "#<span class=\"dark_text\">Favorites:<\/span>(.*)<\div>#", function(){
@@ -474,33 +476,47 @@ namespace MAL {
 				return $return;
 			});
 
-			/*$this->setSearch("related", "/Related Anime<\/h2>/", function(){
+			$this->setSearch("related", "~<table class=\"anime_detail_related_anime\"~", function(){
 				$return = array();
 				$matches = array();
-				//todo
+				// i'm sure there's a better way around this... x.x
 
-				//not going to work cuz regex reads off on different positions, no unique patterns in the source.
-				//attempt dirty method
-				if (preg_match("#<td nowrap=\"\" valign=\"top\" class=\"ar fw-n borderClass\">Adaptation:<\/td><td width=\"100%\" class=\"borderClass\">(.*)<\/td>#", $this->link_arr[$this->lineNo])) {
-					$return["adaption"] = array();
-					$matches2 = array();
+				$workingLine = $this->link_arr[$this->lineNo];
+				$workingLine = substr($workingLine, strpos($workingLine, "<table class=\"anime_detail_related_anime\""));
+				$workingLine = substr($workingLine, strpos($workingLine, "<tr>")+4);
+				$workingLine = substr($workingLine, 0, strpos($workingLine, "</table>"));
 
-					preg_match("#<td nowrap=\"\" valign=\"top\" class=\"ar fw-n borderClass\">Adaptation:<\/td><td width=\"100%\" class=\"borderClass\">(.*)<\/td>#", $this->link_arr[$this->lineNo], $matches2);
-					var_dump($matches2);
-					if (strpos($matches2[2], ",")) {
-						$arr = explode(",", $matches2[2]);
-						foreach ($arr as $key => $value) {
-							preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $value, $matches);
-							$return["adaption"][] = array($matches[1], $matches[2]);
+				$workingLine = str_replace("</td>", "</td>,,,,", $workingLine);
+				$workingLine = explode(",,,,", $workingLine);
+
+
+				$title = "";
+				foreach ($workingLine as $key => $value) {
+					if (empty($value)){unset($workingLine[$key]);}else{
+						$tmp = null;
+						preg_match("~<td.*?>(.*?)</td>~", $value, $tmp);
+						$working = $tmp[1];
+						if (preg_match("~<a href=\"(.*)\">(.*)</a>~", $working)) {
+							$working2 = explode(",", $working);
+							if (count($working2) > 1) {
+								foreach ($working2 as $key2 => $value2) {
+									$tmp2 = null;
+									preg_match("~<a href=\"(.*)\">(.*)</a>~", $value2, $tmp2);
+									$return[$title][] = array($tmp2[2], $tmp2[1]);									
+								}
+							} else {
+								preg_match("~<a href=\"(.*)\">(.*)</a>~", $working, $tmp);
+								$return[$title] = array($tmp[2], $tmp[1]);
+							}
+						} else {
+							$title = str_replace(":", "", $working);
 						}
-					} else {
-						preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $matches2[2], $matches);
-						$return["adaption"][] = array($matches[1], $matches[2]);
 					}
 				}
 
+
 				return $return;
-			});*/
+			});
 			//todo
 			//var_dump($this->search);
 			//die();

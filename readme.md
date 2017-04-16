@@ -6,10 +6,8 @@ This is a very early alpha version and is in WIP. The only functional part getti
 
 More to follow.
 
-
-##What data does this scrap?
-
-###Anime
+## What data does this scrap?
+### Anime
 - Canonical Name (for links)
 - Title
 - Alternative Titles
@@ -35,8 +33,7 @@ More to follow.
 - Favorites
 - Related Anime (types + links to them); e.g, Adaption + Adaption link, etc
 
-
-###Manga
+### Manga
 - Canonical Name (for links)
 - Title
 - Alternative Title
@@ -65,17 +62,17 @@ More to follow.
 - Command Line Usage
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
-###Todo
+### Todo
 - Fix synonyms breaking for certain anime/manga
 - Fix authors breaking for mangas
 
-##Changelog
-###0.1.1 alpha - Apr 17, 17
+## Changelog
+### 0.1.1 alpha - Apr 17, 17
 - Many bug fixes
 - Manga fetching works without any errors now
 - You can now fetch related mangas
 
-###0.1.0 alpha - Feb 2, 17
+### 0.1.0 alpha - Feb 2, 17
 - You're now able to fetch manga details
 - Bug fixes
 

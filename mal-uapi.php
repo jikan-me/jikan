@@ -45,7 +45,7 @@ namespace MAL {
 
 			if (!empty($this->data)) {
 				unset($this->data);
-				$this->data = arary();
+				$this->data = array();
 			}
 
 			$this->setSearch("link_canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){

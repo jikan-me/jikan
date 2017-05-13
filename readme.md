@@ -8,13 +8,13 @@ This is a very early alpha version and is in WIP. The only functional part are g
 
 *More to follow!*
 
-# Features ![person-coverage](https://img.shields.io/badge/coverage-31.6%-orange.svg?style=flat)
-- ![anime-coverage](https://img.shields.io/badge/coverage-95%-green.svg?style=flat) **Anime** 
-- ![manga-coverage](https://img.shields.io/badge/coverage-95%-green.svg?style=flat) **Manga** 
-- ![extended-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Extended data for Anime/Manga**
-- ![character-coverage](https://img.shields.io/badge/coverage-_50%-red.svg?style=flat) **Character**
-- ![person-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Person**
-- ![wrapper-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Official MAL Wrapper**
+# Features ![person-coverage](https://img.shields.io/badge/coverage-31.6%-orange.svg?style=flat&maxAge=3600)
+- ![anime-coverage](https://img.shields.io/badge/coverage-95%-green.svg?style=flat&maxAge=3600) **Anime** 
+- ![manga-coverage](https://img.shields.io/badge/coverage-95%-green.svg?style=flat&maxAge=3600) **Manga** 
+- ![extended-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat&maxAge=3600) **Extended data for Anime/Manga**
+- ![character-coverage](https://img.shields.io/badge/coverage-_50%-red.svg?style=flat&maxAge=3600) **Character**
+- ![person-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat&maxAge=3600) **Person**
+- ![wrapper-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat&maxAge=3600) **Official MAL Wrapper**
 
 ## What data does this scrap?
 ### Anime

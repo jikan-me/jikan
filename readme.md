@@ -1,16 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-![build](https://img.shields.io/badge/build-passing-green.svg?style=flat) ![coverage](https://img.shields.io/badge/coverage-30%-red.svg?style=flat) ![version](https://img.shields.io/badge/ver-0.1.2-blue.svg?style=flat) ![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat) 
-
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![build](https://img.shields.io/badge/build-passing-green.svg?style=flat)]() [![coverage](https://img.shields.io/badge/coverage-30%-orange.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.2-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
 
 This PHP based API works through extracting data through scraping of data that the official API does not provide, such as Anime, Manga, Person, Character details. It goes even further to extend these details by scraping dedicated pages of Anime/Manga such as videos, reviews, stats, recommendations, etc. It also provides a wrapper for the original MAL API.
@@ -19,13 +8,13 @@ This is a very early alpha version and is in WIP. The only functional part are g
 
 *More to follow!*
 
-# Features ![person-coverage](https://img.shields.io/badge/coverage-31.6%-orange.svg?style=flat&maxAge=3600)
-- ![anime-coverage](https://img.shields.io/badge/coverage-95%-green.svg?style=flat&maxAge=3600) **Anime** 
-- ![manga-coverage](https://img.shields.io/badge/coverage-95%-green.svg?style=flat&maxAge=3600) **Manga** 
-- ![extended-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat&maxAge=3600) **Extended data for Anime/Manga**
-- ![character-coverage](https://img.shields.io/badge/coverage-_50%-red.svg?style=flat&maxAge=3600) **Character**
-- ![person-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat&maxAge=3600) **Person**
-- ![wrapper-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat&maxAge=3600) **Official MAL Wrapper**
+# Features ![person-coverage](https://img.shields.io/badge/coverage-31.6%-orange.svg?style=flat)
+- ![anime-coverage](https://img.shields.io/badge/coverage-95%-brightgreen.svg?style=flat) **Anime** 
+- ![manga-coverage](https://img.shields.io/badge/coverage-95%-brightgreen.svg?style=flat) **Manga** 
+- ![extended-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Extended data for Anime/Manga**
+- ![character-coverage](https://img.shields.io/badge/coverage-_50%-yellow.svg?style=flat) **Character**
+- ![person-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Person**
+- ![wrapper-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Official MAL Wrapper**
 
 ## What data does this scrap?
 ### Anime

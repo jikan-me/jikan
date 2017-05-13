@@ -1,6 +1,6 @@
 <?php
 /**
-*	MyAnimeList Unofficial API @version 0.1.1 alpha
+*	MyAnimeList Unofficial API @version 0.1.2 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -217,7 +217,10 @@ namespace MAL {
 				return (int) str_replace(",", "", $this->link_arr[$this->lineNo+1]);
 			});
 
+/*				
+	Depreciated Method
 			$this->setSearch("synopsis", "/<span itemprop=\"description\">(.*?)/", function(){
+
 				$matches = array();
 				$return = "";
 				$this->link_arr[$this->lineNo] = preg_replace("#\<br \/\>#", "", $this->line);
@@ -237,7 +240,11 @@ namespace MAL {
 					}
 
 					return $return;
-				}				
+				}		
+			});
+*/		
+			$this->setSearch("synopsis", "%<meta property=\"og:description\" content=\"(.*)\">%", function() {
+				return $this->matches[1];
 			});
 
 			$this->setSearch("external", "/<h2>External Links<\/h2>/", function(){
@@ -284,6 +291,47 @@ namespace MAL {
 
 				return $return;
 			});*/
+			$this->setSearch("related", "~<table class=\"anime_detail_related_anime\"~", function(){
+				$return = array();
+				$matches = array();
+				// i'm sure there's a better way around this... x.x
+
+				$workingLine = $this->link_arr[$this->lineNo];
+				$workingLine = substr($workingLine, strpos($workingLine, "<table class=\"anime_detail_related_anime\""));
+				$workingLine = substr($workingLine, strpos($workingLine, "<tr>")+4);
+				$workingLine = substr($workingLine, 0, strpos($workingLine, "</table>"));
+
+				$workingLine = str_replace("</td>", "</td>,,,,", $workingLine);
+				$workingLine = explode(",,,,", $workingLine);
+
+
+				$title = "";
+				foreach ($workingLine as $key => $value) {
+					if (empty($value)){unset($workingLine[$key]);}else{
+						$tmp = null;
+						preg_match("~<td.*?>(.*?)</td>~", $value, $tmp);
+						$working = $tmp[1];
+						if (preg_match("~<a href=\"(.*)\">(.*)</a>~", $working)) {
+							$working2 = explode(",", $working);
+							if (count($working2) > 1) {
+								foreach ($working2 as $key2 => $value2) {
+									$tmp2 = null;
+									preg_match("~<a href=\"(.*)\">(.*)</a>~", $value2, $tmp2);
+									$return[$title][] = array($tmp2[2], $tmp2[1]);									
+								}
+							} else {
+								preg_match("~<a href=\"(.*)\">(.*)</a>~", $working, $tmp);
+								$return[$title] = array($tmp[2], $tmp[1]);
+							}
+						} else {
+							$title = str_replace(":", "", $working);
+						}
+					}
+				}
+
+
+				return $return;
+			});
 
 			$this->data = array();
 
@@ -299,7 +347,7 @@ namespace MAL {
 
 			$this->data = (empty($this->data)) ? false : $this->data;
 
-			return $this->data;
+			return $this;
 		}
 
 		public function manga($id) {
@@ -436,6 +484,8 @@ namespace MAL {
 				return $this->matches[1];
 			});
 
+/*		
+	Depreciated	
 			$this->setSearch("synopsis", "/<span itemprop=\"description\">(.*?)/", function(){
 				$matches = array();
 				$return = "";
@@ -458,6 +508,7 @@ namespace MAL {
 					return $return;
 				}				
 			});
+*/
 
 			$this->setSearch("external", "/<h2>External Links<\/h2>/", function(){
 				$return = array();
@@ -535,10 +586,77 @@ namespace MAL {
 
 			$this->data = (empty($this->data)) ? false : $this->data;
 
-			return $this->data;			
+			return $this;		
 		}
 
-		public function character($id) {}
+		public function character($id) {
+			$this->link = $this->types["character"].$id;
+			$this->type = "character";
+
+			if ($this->link_exists($this->link)) {
+				$this->link_arr = @file($this->link);
+				array_walk($this->link_arr, array($this, 'trim'));
+			} else {
+				$this->log("Error: Could not access \"".$this->link."\"");
+				return false;
+			}
+
+			if (!empty($this->data)) {
+				unset($this->data);
+				$this->data = arary();
+			}
+
+			$this->setSearch("name", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function(){
+				return $this->matches[1];
+			});
+
+			$this->setSearch("name-japanese", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function(){
+				return $this->matches[2];
+			});
+
+			$this->setSearch("about", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>([\s\S]*)~", function(){
+				$match = array();
+				$match[] = $this->matches[3];
+
+				$finding = true;
+				$i = $this->lineNo;
+				while ($finding) {
+					if (preg_match('~<div class="normal_header">Voice Actors</div>~', $this->link_arr[$i])) {
+						$finding = false;
+					} else {
+						$i++;
+						$match[] = $this->link_arr[$i];
+					}
+				}
+
+				//filter out the residue
+				$about = implode(" ", $match);
+				$about = str_replace("<br />", "\n", $about);
+				$about = str_replace("<div class=\"normal_header\">Voice Actors</div>", "", $about);
+				$about = str_replace("<div class=\"spoiler\"><input type=\"button\" class=\"button show_button\" onClick=\"this.nextSibling.style.display='inline-block';this.style.display='none';\" data-showname=\"Show spoiler\" data-hidename=\"Hide spoiler\" value=\"Show spoiler\"><span class=\"spoiler_content\" style=\"display:none\"><input type=\"button\" class=\"button hide_button\" onClick=\"this.parentNode.style.display='none';this.parentNode.parentNode.childNodes[0].style.display='inline-block';\" value=\"Hide spoiler\">", "", $about);
+				$about = str_replace("<br>", "", $about);
+				$about = str_replace("</span></div>", "", $about);
+				$about = htmlspecialchars_decode($about);
+				return $about;
+			});
+
+
+			$this->data = array();
+
+			foreach ($this->link_arr as $lineNo => $line) {
+				$this->line = $line;
+				$this->lineNo = $lineNo;
+				
+				$this->find();
+			}
+
+			unset($this->matches);
+			$this->matches = array();
+
+			$this->data = (empty($this->data)) ? false : $this->data;
+
+			return $this;
+		}
 
 		public function person($id) {}
 
@@ -556,6 +674,9 @@ namespace MAL {
 		public function pictures() {}
 		public function moreinfo() {}
 
+		public function return() {
+			return $this->data;
+		}
 
 		public function json() {
 			if ($this->data !== false) {

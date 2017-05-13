@@ -3,7 +3,7 @@
 require_once 'mal-uapi.php';
 
 $mal = new \MAL\GET;
-$dis = $mal->anime(30727);
-var_dump($dis); // anime id here
+$character = $mal->character(5)->data;
+var_dump($character); // anime id here
 
 ?>

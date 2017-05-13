@@ -1,5 +1,16 @@
 # Jikan - The Unofficial MyAnimelist PHP API
 ![build](https://img.shields.io/badge/build-passing-green.svg?style=flat) ![coverage](https://img.shields.io/badge/coverage-30%-red.svg?style=flat) ![version](https://img.shields.io/badge/ver-0.1.2-blue.svg?style=flat) ![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat) 
+
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
 [![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
 
 This PHP based API works through extracting data through scraping of data that the official API does not provide, such as Anime, Manga, Person, Character details. It goes even further to extend these details by scraping dedicated pages of Anime/Manga such as videos, reviews, stats, recommendations, etc. It also provides a wrapper for the original MAL API.

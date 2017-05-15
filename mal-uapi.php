@@ -766,10 +766,6 @@ namespace MAL {
 		public function pictures() {}
 		public function moreinfo() {}
 
-		public function return() {
-			return $this->data;
-		}
-
 		public function json() {
 			if ($this->data !== false) {
 				return json_encode($this->data);

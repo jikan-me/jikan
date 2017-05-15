@@ -6,4 +6,4 @@ php:
   - '7.0'
   - '7.1'
   - hhvm
-script: phpunit example.php
+script: php example.php

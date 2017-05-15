@@ -1,6 +1,6 @@
 <?php
 /**
-*	MyAnimeList Unofficial API @version 0.1.2 alpha
+*	MyAnimeList Unofficial API @version 0.1.3 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.

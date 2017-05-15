@@ -1,20 +1,22 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://img.shields.io/badge/build-passing-green.svg?style=flat)]() [![coverage](https://img.shields.io/badge/coverage-30%-orange.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.2-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
-[![REST API](https://img.shields.io/badge/jikan.me-development-red.svg?style=flat)](http://jikan.me)
+[![build](https://img.shields.io/badge/build-passing-green.svg?style=flat)]() [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.2-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
+
+## The REST API & Documentation is available at [https://jikan.me](Jikan.me)
 
 This PHP based API works through extracting data through scraping of data that the official API does not provide, such as Anime, Manga, Person, Character details. It goes even further to extend these details by scraping dedicated pages of Anime/Manga such as videos, reviews, stats, recommendations, etc. It also provides a wrapper for the original MAL API.
 
-This is a very early alpha version and is in WIP. The only functional part are getting anime and manga details
+This is an alpha version and is in WIP.
 
 *More to follow!*
 
-# Features ![person-coverage](https://img.shields.io/badge/coverage-31.6%-orange.svg?style=flat)
-- ![anime-coverage](https://img.shields.io/badge/coverage-95%-brightgreen.svg?style=flat) **Anime** 
-- ![manga-coverage](https://img.shields.io/badge/coverage-95%-brightgreen.svg?style=flat) **Manga** 
-- ![extended-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Extended data for Anime/Manga**
-- ![character-coverage](https://img.shields.io/badge/coverage-_50%-yellow.svg?style=flat) **Character**
-- ![person-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Person**
-- ![wrapper-coverage](https://img.shields.io/badge/coverage-_0%-red.svg?style=flat) **Official MAL Wrapper**
+# Features
+- Anime  **100%**
+- Manga  **100%**
+- Character **100%**
+- Person **0%**
+- Extended data for Anime/Manga/Characters/People **0%**
+- Official MAL Wrapper **0%**
 
 ## What data does this scrap?
 ### Anime
@@ -67,11 +69,15 @@ This is a very early alpha version and is in WIP. The only functional part are g
 - Name
 - Japanese Name
 - Biography
+- Animeography
+- Mangaography
+- Voice Actors
+- Member Favorites
 
 
 ## Planned Features
 - Fetch Anime + Manga Reviews, Recommendations, Stats, Characters, News, Pictures, etc
-- Fetch Person & Character Details
+- Fetch Person Details
 - Search results w/ pagination
 - Authentication Tasks using Official API
 - Command Line Usage
@@ -82,9 +88,16 @@ This is a very early alpha version and is in WIP. The only functional part are g
 - Fix authors breaking for mangas
 - Add the other page gets such as videos, reviews, recommendations, etc
 - Make it more OOP
-- Complete Character GET - Animeography, Mangaography & voice actors list
 
 ## Changelog
+### 0.1.3 alpha - May 15, 17
+- Completed character fetch data
+	- You can now fetch animeography, mangaography, voice actors and member favorites of that character
+	```php
+	$mal = new \MAL\GET;
+	$character = $mal->character(1)->data;
+	```
+
 ### 0.1.2 alpha - May 12, 17
 - Added Character fetch, you can now get character data.
 	- Yet to fetch character animeography, mangaography & voice actors

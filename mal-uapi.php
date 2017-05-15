@@ -640,6 +640,98 @@ namespace MAL {
 				return $about;
 			});
 
+			$this->setSearch("animeography", "~<div class=\"normal_header\">Animeography</div>~", function() {
+				$running = true;
+				$i = 1;
+				$animeography = array();
+				while ($running) {
+					$line = $this->link_arr[$this->lineNo+$i];
+					if (preg_match("~</table>~", $line)) {
+						$running = false;
+					}
+
+					if (preg_match("~<tr>~", $line)) {
+						$i++;
+						$animeMeta = array();
+						preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $animeMeta);
+						$i++;
+						$animeName = array();
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $animeName);
+						$animeography[] = array(
+							'name' => $animeName[2],
+							'link' => $animeMeta[1],
+							'image' => $animeMeta[2]
+						);
+					}
+					$i++;
+				}
+				return $animeography;
+			});
+
+			$this->setSearch("mangaography", "~<div class=\"normal_header\">Mangaography</div>~", function() {
+				$running = true;
+				$i = 1;
+				$mangaography = array();
+				while ($running) {
+					$line = $this->link_arr[$this->lineNo+$i];
+					if (preg_match("~</table>~", $line)) {
+						$running = false;
+					}
+
+					if (preg_match("~<tr>~", $line)) {
+						$i++;
+						$mangaMeta = array();
+						preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $mangaMeta);
+						$i++;
+						$mangaName = array();
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $mangaName);
+						$mangaography[] = array(
+							'name' => $mangaName[2],
+							'link' => $mangaMeta[1],
+							'image' => $mangaMeta[2]
+						);
+					}
+					$i++;
+				}
+				return $mangaography;
+			});
+
+			$this->setSearch("voice-actors", "~<div class=\"normal_header\">Voice Actors</div>~", function() {
+				$running = true;
+				$i = 1;
+				$voiceActors = array();
+				while($running) {
+					$line = $this->link_arr[$this->lineNo+$i];
+					if (preg_match('~<h2><div class="floatRightHeader"><a href="(.*)">See More</a></div>Recent Featured Articles</h2>~', $line)) {
+						$running = false;
+					}
+
+					if (preg_match("~<tr>~", $line)) {
+						$i++;
+						$personMeta = array();
+						preg_match('~<td class="borderClass" valign="top" width="25"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $personMeta);
+						$i++;
+						$personName = array();
+						preg_match('~<td class="borderClass" valign="top"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $personName);
+						$i++;
+						$personType = array();
+						preg_match('~<div style="margin-top: 2px;"><small>(.*)</small></div>~', $this->link_arr[$this->lineNo+$i], $personType);
+						$voiceActors[] = array(
+							'name' => $personName[2],
+							'link' => $personMeta[1],
+							'image' => $personMeta[2],
+							'language' => $personType[1]
+						);
+					}
+					$i++;
+				}
+
+				return $voiceActors;
+			});
+
+			$this->setSearch("member-favorites", "~Member Favorites: (.*)~", function() {
+				return (int)str_replace(',', '', trim($this->matches[1]));
+			});
 
 			$this->data = array();
 

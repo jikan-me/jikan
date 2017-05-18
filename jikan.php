@@ -1,18 +1,20 @@
 <?php
 /**
-*	MyAnimeList Unofficial API @version 0.1.3 alpha
+*	Jikan - MyAnimeList Unofficial API @version 0.1.4 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
-*	This UAPI scraps web pages, parses the data you require from them and returns it back as a PHP/JSON array.
-*	Therefore, no authentication is needed for fetching anime data, search results, etc.
+*	Jikan scraps web pages through a modular method, parses the data you require from them and returns it back as a PHP/JSON array.
+*	Therefore, no authentication is needed for fetching anime, manga, character, people, search result data.
 */
 
-namespace MAL {
+namespace Jikan {
 
-	class GET {
+	class Get {
 
-		public $last_error = "";
+/*
+	Base URLs for parsing types
+*/
 		public $types = array(
 			"anime" => "https://myanimelist.net/anime/",
 			"manga" => "https://myanimelist.net/manga/",
@@ -20,17 +22,28 @@ namespace MAL {
 			"character" => "https://myanimelist.net/character/"
 		);
 
+/*
+	Identifiers for Parsing Meta, Data & Type
+*/
 		public $link = false;
 		public $link_arr = false;
 		public $data = false;
-		protected $type = false;
+		public $type = false;
 
+/*
+	Identifiers for Parsing Algorithm
+*/
 		private $search = array();
 		private $line = false;
 		private $lineNo = false;
 		private $matches = array();
 
 
+/*
+	Method: anime
+	Parameter: Anime ID
+	Returns: $this
+*/
 		public function anime($id) {
 			$this->link = $this->types["anime"].$id;
 			$this->type = "anime";
@@ -39,7 +52,7 @@ namespace MAL {
 				$this->link_arr = @file($this->link);
 				array_walk($this->link_arr, array($this, 'trim'));
 			} else {
-				$this->log("Error: Could not access \"".$this->link."\"");
+				throw new Exception("Error: Could not access \"".$this->link."\"", 1);
 				return false;
 			}
 
@@ -48,7 +61,7 @@ namespace MAL {
 				$this->data = array();
 			}
 
-			$this->setSearch("link_canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
+			$this->setSearch("link-canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
 				return $this->matches[1];
 			});
 
@@ -350,6 +363,12 @@ namespace MAL {
 			return $this;
 		}
 
+
+/*
+	Method: manga
+	Parameter: Manga ID
+	Returns: $this
+*/
 		public function manga($id) {
 			$this->link = $this->types["manga"].$id;
 			$this->type = "manga";
@@ -358,7 +377,7 @@ namespace MAL {
 				$this->link_arr = @file($this->link);
 				array_walk($this->link_arr, array($this, 'trim'));
 			} else {
-				$this->log("Error: Could not access \"".$this->link."\"");
+				throw new Exception("Error: Could not access \"".$this->link."\"", 1);
 				return false;
 			}
 
@@ -367,7 +386,7 @@ namespace MAL {
 				$this->data = arary();
 			}
 
-			$this->setSearch("link_canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
+			$this->setSearch("link-canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
 				return $this->matches[1];
 			});
 
@@ -568,9 +587,7 @@ namespace MAL {
 
 				return $return;
 			});
-			//todo
-			//var_dump($this->search);
-			//die();
+
 
 			$this->data = array();
 
@@ -589,6 +606,12 @@ namespace MAL {
 			return $this;		
 		}
 
+
+/*
+	Method: character
+	Parameter: Character ID
+	Returns: $this
+*/
 		public function character($id) {
 			$this->link = $this->types["character"].$id;
 			$this->type = "character";
@@ -597,7 +620,7 @@ namespace MAL {
 				$this->link_arr = @file($this->link);
 				array_walk($this->link_arr, array($this, 'trim'));
 			} else {
-				$this->log("Error: Could not access \"".$this->link."\"");
+				throw new Exception("Error: Could not access \"".$this->link."\"", 1);
 				return false;
 			}
 
@@ -750,32 +773,298 @@ namespace MAL {
 			return $this;
 		}
 
-		public function person($id) {}
+
+/*
+	Method: person
+	Parameter: Person ID
+	Returns: $this
+*/
+		public function person($id) {
+			$this->link = $this->types["people"].$id;
+			$this->type = "person";
+
+			if ($this->link_exists($this->link)) {
+				$this->link_arr = @file($this->link);
+				array_walk($this->link_arr, array($this, 'trim'));
+			} else {
+				throw new Exception("Error: Could not access \"".$this->link."\"", 1);
+				return false;
+			}
+
+			if (!empty($this->data)) {
+				unset($this->data);
+				$this->data = arary();
+			}
+
+			$this->setSearch('link-canonical', '~<link rel="canonical" href="(.*)" />~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch('given-name', '~<div class="spaceit_pad"><span class="dark_text">Given name:</span> (.*)</div>~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch('family-name', '~<span class="dark_text">Family name:</span> (.*)<div class="spaceit_pad"><span class="dark_text">Alternate names:</span>~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch('alternate-names', '~<span class="dark_text">Alternate names:</span> (.*)</div><div class="spaceit_pad">~', function() {
+				$alternateNames = $this->matches[1];
+				if (strpos($alternateNames, ",")) {
+					$_alternativeNames = explode(",", $alternateNames);
+					foreach ($_alternativeNames as $key => &$value) {
+						$value = trim($value);
+					}
+				} else {
+					return $alternateNames;
+				}
+			});
+
+			$this->setSearch('birthday', '~<span class="dark_text">Birthday:</span> (.*)</div><span class="dark_text">Website:</span>~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch('website', '~<span class="dark_text">Website:</span> <a href="(.*)">(.*)</a>~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch('member-favorites', '~<div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> (.*)</div>~', function() {
+				return (int)str_replace(',', '', $this->matches[1]);
+			});
+
+			$this->setSearch('more', '~<div class="people-informantion-more js-people-informantion-more">([\s\S]*)</div>~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch('voice-acting-role', '~</div>Voice Acting Roles</div>~', function() {
+				$running = true;
+				$i = 1;
+				$voiceActingRoles = array();
+				while($running) {
+					$line = $this->link_arr[$this->lineNo+$i];
+					if (preg_match('~</span>Anime Staff Positions</div>~', $line)) {
+						$running = false;
+					}
+
+					if (preg_match("~<tr>~", $line)) {
+						$i++;
+						$animeMeta = array();
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $animeMeta);
+						$i++;
+						$animeName = array();
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo+$i], $animeName);
+						$i += 2;
+						$char = array();
+						preg_match('~<td valign="top" class="borderClass" align="right" nowrap><a href="(.*)">(.*)</a>&nbsp;<div class="spaceit_pad">(.*)&nbsp;</div></td>~', $this->link_arr[$this->lineNo+$i], $char);
+						$i++;
+						$charMeta = array();
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" alt="(.*)" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $charMeta);
+						$voiceActingRoles[] = array(
+							'anime' => array(
+								'name' => $animeName[2],
+								'link' => $animeMeta[1],
+								'image' => $animeMeta[2]
+							),
+							'character' => array(
+								'name' => $char[2],
+								'link' => $charMeta[1],
+								'image' => $charMeta[2],
+								'role' => $char[3]
+							),
+						);
+					}
+					$i++;
+				}
+				return $voiceActingRoles;
+			});
+
+			$this->setSearch('anime-staff-position', '~</span>Anime Staff Positions</div>~', function() {
+				$running = true;
+				$i = 1;
+				$animeStaffPositions = array();
+				while($running) {
+					$line = $this->link_arr[$this->lineNo+$i];
+					if (preg_match('~</span>Published Manga</div>~', $line)) {
+						$running = false;
+					}
+
+					if (preg_match("~<tr>~", $line)) {
+						$i++;
+						$animeMeta = array();
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $animeMeta);
+						$i++;
+						$animeName = array();
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo+$i], $animeName);
+						$i++;
+						$role = array();
+						preg_match('~<a href="(.*)" title="Quick add anime to my list" class="button_add">add</a> <small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $role);
+						$animeStaffPositions[] = array(
+							'anime' => array(
+								'name' => $animeName[2],
+								'link' => $animeMeta[1],
+								'image' => $animeMeta[2]
+							),
+							'role' => $role[2]
+						);
+					}
+					$i++;
+				}
+				return $animeStaffPositions;
+			});
+
+			$this->setSearch('published-manga', '~</span>Published Manga</div>~', function() {
+				$running = true;
+				$i = 1;
+				$publsihedManga = array();
+				while($running) {
+					$line = $this->link_arr[$this->lineNo+$i];
+					if (preg_match('~</table>~', $line)) {
+						$running = false;
+					}
+
+					if (preg_match("~<tr>~", $line)) {
+						$i++;
+						$mangaMeta = array();
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $mangaMeta);
+						$i++;
+						$mangaName = array();
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo+$i], $mangaName);
+						$i++;
+						$role = array();
+						preg_match('~<a href="(.*)" title="Quick add manga to my list" class="button_add">add</a> <small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $role);
+						$publsihedManga[] = array(
+							'manga' => array(
+								'name' => $mangaName[2],
+								'link' => $mangaMeta[1],
+								'image' => $mangaMeta[2]
+							),
+							'role' => $role[2]
+						);
+					}
+					$i++;
+				}
+				return $publsihedManga;
+			});
+
+			$this->data = array();
+
+			foreach ($this->link_arr as $lineNo => $line) {
+				$this->line = $line;
+				$this->lineNo = $lineNo;
+				
+				$this->find();
+			}
+
+			unset($this->matches);
+			$this->matches = array();
+
+			$this->data = (empty($this->data)) ? false : $this->data;
+
+			return $this;
+		}
 
 
+/*
+	Method: search
+	Parameters: $query <string>, $page <integer>
+	Return: boolean
+*/
+	public function search($query, $page = 1) {
+
+	}
+
+
+/*
+	Extended Chaining Methods
+	These are to be called/chained after the anime/manga/character/person method
+	Not all of these are supported by the parent methods
+		For example, the Characters Page doesn't have any 'videos' or 'episodes' so it can't return that data
+*/
+
+	/*
+		Child Method: videos
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime
+	*/
 		public function videos() {}
+	/*
+		Child Method: episodes
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime
+	*/
 		public function episodes() {}
+	/*
+		Child Method: reviews
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime, manga
+	*/
 		public function reviews() {}
+	/*
+		Child Method: recommendations
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime, manga
+	*/
 		public function recommendations() {}
+	/*
+		Child Method: recommendations
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime, manga
+	*/
 		public function stats() {}
-		public function characters() {}
+	/*
+		Child Method: stats
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime, manga
+	*/
+		public function characters_staff() {}
+	/*
+		Child Method: characters_staff
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime, manga
+	*/
+		public function pictures() {}
+	/*
+		Child Method: pictures
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime, manga, character, people
+	*/
+		public function more_info() {}
+	/*
+		Child Method: more_info
+		Parameter: None
+		Returns: $this
+		Parent Methods: anime
+	*/
+
+
+/*
+	Unplanned Features
+*/
 		public function news() {}
 		public function forum() {}
 		public function featured() {}
 		public function clubs() {}
-		public function pictures() {}
-		public function moreinfo() {}
 
-		public function return() {
-			return $this->data;
-		}
-
+/*
+	Utility Methods
+*/
 		public function json() {
 			if ($this->data !== false) {
 				return json_encode($this->data);
 			}
 		}
 
+/*
+	Object Methods
+*/
 		public function find() {
 			foreach ($this->search as $index => $arr) {
 				if (!$arr['found']) {
@@ -793,26 +1082,15 @@ namespace MAL {
 			$this->search[$index] = (!is_null($args)) ? array('regex'=>$regex, 'func'=>$func, 'args'=>$args) : array('regex'=>$regex, 'func'=>$func, 'args'=>false, 'found'=>false);
 		}
 
-		private function log($text) {
-			if (PHP_SAPI === 'cli') {
-				echo $text."\r";
-			}
-		}
-
 		private function link_exists($link) {
 			return (substr(get_headers($link)[0], 9, 3) == "200") ? true : false;
 		}
 		
-		private function trim(&$item, $key) {$item = trim($item);}
+		private function trim(&$item, $key) { $item = trim($item); }
 
 	}
 
 
-
-	/**
-	*	Tasks that require authentication. Acts as a wrapper using the official API.
-	*/
-	class AUTH {}
 
 }
 

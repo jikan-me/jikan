@@ -1,12 +1,14 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://img.shields.io/badge/build-passing-green.svg?style=flat)]() [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.3-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![build](https://img.shields.io/badge/build-passing-green.svg?style=flat)](https://travis-ci.org/irfan-dahir/jikan) [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.4-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
-## The REST API & Documentation is available at [https://jikan.me](Jikan.me)
+## The REST API & Documentation is available at [https://jikan.me](https://jikan.me)
 
-This PHP based API works through extracting data through scraping of data that the official API does not provide, such as Anime, Manga, Person, Character details. It goes even further to extend these details by scraping dedicated pages of Anime/Manga such as videos, reviews, stats, recommendations, etc. It also provides a wrapper for the original MAL API.
+This PHP based API works by parsing data through the scraping of web pages from MyAnimeList. It gives you a simple and easy GET based methods that can fetch Anime, Manga, People & Character details. That's just the pinnacle, be sure to check out the planned features to see what's yet to come.
 
-This is an alpha version and is in WIP.
+The reason of Jikan is quite simple. It's to cover what's lacking by the official API for developers.
+
+This is a Beta version and is in WIP.
 
 *More to follow!*
 
@@ -16,11 +18,20 @@ This is an alpha version and is in WIP.
 - Character **100%**
 - Person **0%**
 - Extended data for Anime/Manga/Characters/People **0%**
-- Official MAL Wrapper **0%**
+- Modular scraping method for extensions developers can add **100%**
 
-## What data does this scrap?
+## Planned Features
+- Fetch Anime + Manga Reviews, Recommendations, Stats, Characters, News, Pictures, etc
+- Search results w/ pagination
+- Command Line Usage
+- JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
+
+## Todo
+- Add the other page gets such as videos, reviews, recommendations, etc
+
+## What data can be returned?
 ### Anime
-- Canonical Name (for links)
+- Canonical Link
 - Title
 - Alternative Titles
 - Japanese/Kanji Title
@@ -31,11 +42,11 @@ This is an alpha version and is in WIP.
 - Aired
 - Premiered
 - Broadcast
-- Producers + Links to them
-- Licensors + Links to them
-- Studios + Links to them
+- Producers + Links
+- Licensors + Links
+- Studios + Links
 - Source
-- Genres + Links to them
+- Genres + Links
 - Duration
 - Rating
 - Score
@@ -43,53 +54,133 @@ This is an alpha version and is in WIP.
 - Popularity
 - Members
 - Favorites
-- Related Anime (types + links to them); e.g, Adaption + Adaption link, etc
+- Related Anime
+	- Name
+	- Link
+	- Type of Adaption
 
 ### Manga
-- Canonical Name (for links)
+- Canonical Link
 - Title
 - Alternative Title
 - Japanese/Kanji Title
-- Image link
+- Image
 - Synopsys
 - Volumes
 - Chapters
-- Published
-- Genres + Links to them
-- Authors + Links to them
-- Serialization + Links to them
+- Published Dates
+- Genres + Links
+- Authors + Links
+- Serialization + Links
 - Score
 - Ranked
 - Popularity
 - Members
 - Favorites
 - Related Manga
+	- Name
+	- Link
+	- Type of Adaption
 
 ### Characters
+- Canonical Link
 - Name
 - Japanese Name
 - Biography
 - Animeography
+	- Name
+	- Link
+	- Image
 - Mangaography
+	- Name
+	- Link
+	- Image
 - Voice Actors
+	- Name
+	- Link
+	- Image
+	- Language
 - Member Favorites
 
+### Person
+- Canonical Link
+- Given Name
+- Family Name
+- Alternative Names
+- Birthday
+- Website
+- Member favorites
+- More
+- Voice Acting Roles
+	- The Anime
+		- Name
+		- Link
+		- Image
+	- Character
+		- Name
+		- Link
+		- Role
+		- Image
+- Anime Staff Positions
+	- The Anime
+		- Name
+		- Link
+		- Image
+		- Role
+- Published Manga
+	- The Manga
+		- Name
+		- Link
+		- Image
+		- Role
 
-## Planned Features
-- Fetch Anime + Manga Reviews, Recommendations, Stats, Characters, News, Pictures, etc
-- Fetch Person Details
-- Search results w/ pagination
-- Authentication Tasks using Official API
-- Command Line Usage
-- JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
-
-## Todo
-- Fix synonyms breaking for certain anime/manga
-- Fix authors breaking for mangas
-- Add the other page gets such as videos, reviews, recommendations, etc
-- Make it more OOP
 
 ## Changelog
+### 0.1.4 alpha - May 16, 17
+- Jikan library is renamed from **mal-uapi.php** to **jikan.php**
+- Namespace changed from **MAL** to **Jikan**
+	```php
+	$jikan = new \Jikan\GET;
+	$jikan->anime(1);
+	$anime = $jikan->data;
+	```
+- Main class is changed from **GET** to **Get**
+- Completed person fetch
+- Added canonical link for Characters in the return data
+- Fixed parsing of related anime bug
+- Here's the data you can fetch from a person
+	- Canonical Link
+	- Given Name
+	- Family Name
+	- Alternative Names
+	- Birthday
+	- Website
+	- Member favorites
+	- More
+	- Voice Acting Roles
+		- The Anime
+			- Name
+			- Link
+			- Image
+		- Character
+			- Name
+			- Link
+			- Role
+			- Image
+	- Anime Staff Positions
+		- The Anime
+			- Name
+			- Link
+			- Image
+			- Role
+	- Published Manga
+		- The Manga
+			- Name
+			- Link
+			- Image
+			- Role
+- Replaced log method by thrown exception
+
 ### 0.1.3 alpha - May 15, 17
 - Completed character fetch data
 	- You can now fetch animeography, mangaography, voice actors and member favorites of that character

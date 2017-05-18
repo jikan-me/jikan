@@ -1056,8 +1056,6 @@ namespace Jikan {
 /*
 	Utility Methods
 */
-		public function pictures() {}
-		public function moreinfo() {}
 
 		public function json() {
 			if ($this->data !== false) {

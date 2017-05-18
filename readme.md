@@ -17,8 +17,8 @@ This is a Beta version and is in WIP.
 - Manga - **100%**
 - Character - **100%**
 - Person - **100%**
-- Extended data for Anime/Manga/Characters/People **0%**
-- Modular scraping method for extensions developers can add **100%**
+- Extended data for Anime/Manga/Characters/People - **0%**
+- Modular scraping method for extensions developers can add - **100%**
 
 ## Planned Features
 - Fetch Anime + Manga Reviews, Recommendations, Stats, Characters, News, Pictures, etc

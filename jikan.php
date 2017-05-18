@@ -383,7 +383,7 @@ namespace Jikan {
 
 			if (!empty($this->data)) {
 				unset($this->data);
-				$this->data = arary();
+				$this->data = array();
 			}
 
 			$this->setSearch("link-canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
@@ -626,7 +626,7 @@ namespace Jikan {
 
 			if (!empty($this->data)) {
 				unset($this->data);
-				$this->data = arary();
+				$this->data = array();
 			}
 
 			$this->setSearch("name", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function(){
@@ -793,7 +793,7 @@ namespace Jikan {
 
 			if (!empty($this->data)) {
 				unset($this->data);
-				$this->data = arary();
+				$this->data = array();
 			}
 
 			$this->setSearch('link-canonical', '~<link rel="canonical" href="(.*)" />~', function() {

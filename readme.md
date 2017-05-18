@@ -1,5 +1,4 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-<<<<<<< HEAD
 [![build](https://img.shields.io/badge/build-passing-green.svg?style=flat)](https://travis-ci.org/irfan-dahir/jikan) [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.4-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 =======
 [![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)]() [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.3-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 

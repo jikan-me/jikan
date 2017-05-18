@@ -1052,16 +1052,13 @@ namespace Jikan {
 		public function forum() {}
 		public function featured() {}
 		public function clubs() {}
-<<<<<<< HEAD:jikan.php
 
 /*
 	Utility Methods
 */
-=======
 		public function pictures() {}
 		public function moreinfo() {}
 
->>>>>>> origin/master:mal-uapi.php
 		public function json() {
 			if ($this->data !== false) {
 				return json_encode($this->data);

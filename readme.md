@@ -1,7 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://img.shields.io/badge/build-passing-green.svg?style=flat)](https://travis-ci.org/irfan-dahir/jikan) [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.4-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
-=======
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)]() [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.3-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)]() [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.4-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 >>>>>>> origin/master
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
@@ -16,10 +14,10 @@ This is a Beta version and is in WIP.
 *More to follow!*
 
 # Features
-- Anime  **100%**
-- Manga  **100%**
-- Character **100%**
-- Person **0%**
+- Anime - **100%**
+- Manga - **100%**
+- Character - **100%**
+- Person - **100%**
 - Extended data for Anime/Manga/Characters/People **0%**
 - Modular scraping method for extensions developers can add **100%**
 

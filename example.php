@@ -12,5 +12,4 @@ $firsts['character'] = $jikan->character(1)->data; // get the character with ID 
 $firsts['person'] = $jikan->person(1)->data; // get the person with ID 1 on MAL
 
 var_dump($firsts); // data dump
-
 ?>

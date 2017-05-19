@@ -724,8 +724,11 @@ namespace Jikan {
 				$i = 1;
 				$voiceActors = array();
 				while($running) {
-					$line = $this->link_arr[$this->lineNo+$i];
-					if (preg_match('~<h2><div class="floatRightHeader"><a href="(.*)">See More</a></div>Recent Featured Articles</h2>~', $line)) {
+					$line = $this->link_arr[$this->lineNo+$i]; // bugs
+					if (
+						preg_match('~<h2><div class="floatRightHeader">~', $line) ||
+						preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $line)
+						) {
 						$running = false;
 					}
 

@@ -17,17 +17,15 @@ This is a Beta version and is in WIP.
 - Manga - **100%**
 - Character - **100%**
 - Person - **100%**
+- User Anime/Manga List
 - Extended data for Anime/Manga/Characters/People - **0%**
 - Modular scraping method for extensions developers can add - **100%**
+- JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
 ## Planned Features
 - Fetch Anime + Manga Reviews, Recommendations, Stats, Characters, News, Pictures, etc
 - Search results w/ pagination
 - Command Line Usage
-- JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
-
-## Todo
-- Add the other page gets such as videos, reviews, recommendations, etc
 
 ## What data can be returned?
 ### Anime
@@ -136,6 +134,14 @@ This is a Beta version and is in WIP.
 
 
 ## Changelog
+### 0.1.5 alpha - May 21, 17
+- Added user anime/manga list fetch & parsed as JSON
+- A few more stuff can be parsed from the Anime/Manga pages
+	- Background
+	- External Links
+	- Opening Themes
+	- Ending Themes
+
 ### 0.1.4 alpha - May 16, 17
 - Jikan library is renamed from **mal-uapi.php** to **jikan.php**
 - Namespace changed from **MAL** to **Jikan**

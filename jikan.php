@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.1.4 alpha
+*	Jikan - MyAnimeList Unofficial API @version 0.1.5 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -13,13 +13,14 @@ namespace Jikan {
 	class Get {
 
 /*
-	Base URLs for parsing types
+	Base URLs for parsing
 */
 		public $types = array(
 			"anime" => "https://myanimelist.net/anime/",
 			"manga" => "https://myanimelist.net/manga/",
 			"people" => "https://myanimelist.net/people/",
-			"character" => "https://myanimelist.net/character/"
+			"character" => "https://myanimelist.net/character/",
+			"list" => "https://myanimelist.net/malappinfo.php"
 		);
 
 /*
@@ -346,6 +347,45 @@ namespace Jikan {
 				return $return;
 			});
 
+			$this->setSearch("background", '~</div>Background</h2>([\s\S]*)<div class="border_top"~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch("external-links", '~<h2>External Links</h2>~', function() {
+				$__links = array();
+				preg_match('~<div class="pb16">(.*)</div>~', $this->link_arr[$this->lineNo+1], $__links);
+				$_links = explode(",", $_links);
+				$links = array();
+				foreach ($_links as $key => $value) {
+					$arr = array();
+					preg_match('~<a href="(.*)" target="_blank">(.*)</a>~', $value);
+					$links[] = array(
+						'link' => $arr[1],
+						'name' => $arr[2]
+					);
+				}
+
+				return $links;
+			});
+
+			$this->setSearch("opening-theme", '~<div class="theme-songs js-theme-songs opnening">([\s\S]*)</div>~', function() {
+				$themes = explode('<span class="theme-song">', $this->matches[1]);
+				foreach ($themes as $key => &$value) {
+					$value = substr($value, 0, -11);
+				}
+				array_shift($themes);
+				return $themes;
+			});
+
+			$this->setSearch("ending-theme", '~<div class="theme-songs js-theme-songs ending">([\s\S]*)</div>~', function() {
+				$themes = explode('<span class="theme-song">', $this->matches[1]);
+				foreach ($themes as $key => &$value) {
+					$value = substr($value, 0, -11);
+				}
+				array_shift($themes);
+				return $themes;
+			});
+
 			$this->data = array();
 
 			foreach ($this->link_arr as $lineNo => $line) {
@@ -588,13 +628,33 @@ namespace Jikan {
 				return $return;
 			});
 
+			$this->setSearch("background", '~</div>Background</h2>([\s\S]*)<div class="border_top"~', function() {
+				return $this->matches[1];
+			});
+
+			$this->setSearch("external-links", '~<h2>External Links</h2><div class="pb16">(.*)</div>~', function() {
+				$__links = array();
+				preg_match('~<div class="pb16">(.*)</div>~', $this->matches[1], $__links);
+				$_links = explode(",", $_links);
+				$links = array();
+				foreach ($_links as $key => $value) {
+					$arr = array();
+					preg_match('~<a href="(.*)" target="_blank">(.*)</a>~', $value);
+					$links[] = array(
+						'link' => $arr[1],
+						'name' => $arr[2]
+					);
+				}
+
+				return $links;
+			});
 
 			$this->data = array();
 
 			foreach ($this->link_arr as $lineNo => $line) {
 				$this->line = $line;
 				$this->lineNo = $lineNo;
-				
+				echo htmlentities($this->line)."<br>";
 				$this->find();
 			}
 
@@ -972,10 +1032,31 @@ namespace Jikan {
 	Parameters: $query <string>, $page <integer>
 	Return: boolean
 */
-	public function search($query, $page = 1) {
+	public function search($type, $query, $page = 1) {
 
 	}
 
+/*
+	Method:
+*/
+	public function list($username, $type) {
+		if (!$type == 'anime' || !$type == 'manga') {
+			throw new Exception("Error: Invalid type request", 1);
+			return false;
+		}
+
+		if (!empty($this->data)) {
+			unset($this->data);
+			$this->data = array();
+		}
+
+		$this->link = $this->types["list"]."?u=".$username."&status=all&type=".$type;
+
+		$xml = simplexml_load_string(file_get_contents($this->link));
+		$json = json_encode($xml);
+		$this->data = json_decode($json, true);
+		return true;
+	}
 
 /*
 	Extended Chaining Methods

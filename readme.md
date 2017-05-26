@@ -13,13 +13,13 @@ This is a Beta version and is in WIP.
 *More to follow!*
 
 # Features
-- Anime - **100%**
-- Manga - **100%**
-- Character - **100%**
-- Person - **100%**
+- Anime
+- Manga
+- Character
+- Person
 - User Anime/Manga List
 - Extended data for Anime/Manga/Characters/People - **0%**
-- Modular scraping method for extensions developers can add - **100%**
+- Modular scraping method for extensions developers can add
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
 ## Planned Features
@@ -134,7 +134,11 @@ This is a Beta version and is in WIP.
 
 
 ## Changelog
-### 0.1.5 alpha - May 21, 17
+### 0.1.5 alpha - May 26, 17
+- Method **list** renamed to **user_list**
+	- Reason: Issues with PHP 5.6
+
+### 0.1.4.5 alpha - May 21, 17
 - Added user anime/manga list fetch & parsed as JSON
 - A few more stuff can be parsed from the Anime/Manga pages
 	- Background

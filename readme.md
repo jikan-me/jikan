@@ -1,5 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![coverage](https://img.shields.io/badge/coverage-60%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.2.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)

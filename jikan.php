@@ -1397,8 +1397,6 @@ namespace Jikan {
 			return $this;
 		}
 
-		private function getFind(){ return $this->last_find; }
-
 		private function setSearch($index, $regex, $func, $args=null, $merge=false) {
 			$args = is_null($args) ? false : $args;
 			$this->search[$index] = array(

@@ -54,7 +54,7 @@ namespace Jikan {
 	Parameter: Anime ID
 	Returns: $this
 */
-		public function anime($id=null) {
+		public function anime($id = null) {
 			if (is_null($this->link)) {
 				$this->link = $this->types["anime"].$id;
 				$this->type = "anime";
@@ -83,11 +83,11 @@ namespace Jikan {
 				$this->data = array();
 			}
 
-			$this->setSearch("link-canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
+			$this->setSearch("link-canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("title", "#<h1 class=\"h1\"><span itemprop=\"name\">(.*)<\/span><\/h1>#", function(){
+			$this->setSearch("title", "#<h1 class=\"h1\"><span itemprop=\"name\">(.*)<\/span><\/h1>#", function() {
 				return $this->matches[1];
 			});
 
@@ -95,57 +95,57 @@ namespace Jikan {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("synonyms", "#<span class=\"dark_text\">Synonyms:<\/span> (.*)#", function(){
+			$this->setSearch("synonyms", "#<span class=\"dark_text\">Synonyms:<\/span> (.*)#", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("japanese", "#<span class=\"dark_text\">Japanese:<\/span> (.*)#", function(){
+			$this->setSearch("japanese", "#<span class=\"dark_text\">Japanese:<\/span> (.*)#", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("image", "#<img src=\"(.*)\" alt=\"(.*)\" class=\"ac\" itemprop=\"image\">#", function(){
+			$this->setSearch("image", "#<img src=\"(.*)\" alt=\"(.*)\" class=\"ac\" itemprop=\"image\">#", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span> <a href=\"https://myanimelist.net/topanime.php?type=(.*)\">(.*)<\/a>#", function(){
+			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span> <a href=\"https://myanimelist.net/topanime.php?type=(.*)\">(.*)<\/a>#", function() {
 				return $this->matches[2];
 			});
 
-			$this->setSearch("episodes", "#<span class=\"dark_text\">Episodes:<\/span>#", function(){
-				return (int) $this->link_arr[$this->lineNo+1];
+			$this->setSearch("episodes", "#<span class=\"dark_text\">Episodes:<\/span>#", function() {
+				return (int) $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("status", "#<span class=\"dark_text\">Status:<\/span>#", function(){
-				return $this->link_arr[$this->lineNo+1];
+			$this->setSearch("status", "#<span class=\"dark_text\">Status:<\/span>#", function() {
+				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("aired", "#<span class=\"dark_text\">Aired:<\/span>#", function(){
-				return $this->link_arr[$this->lineNo+1];
+			$this->setSearch("aired", "#<span class=\"dark_text\">Aired:<\/span>#", function() {
+				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("premiered", "#<span class=\"dark_text\">Premiered:<\/span>#", function(){
+			$this->setSearch("premiered", "#<span class=\"dark_text\">Premiered:<\/span>#", function() {
 				$matches = array();
-				if (preg_match("/<a href=\"(.*)\">(.*)<\/a>/", $this->link_arr[$this->lineNo+1], $matches)) {
+				if (preg_match("/<a href=\"(.*)\">(.*)<\/a>/", $this->link_arr[$this->lineNo + 1], $matches)) {
 					return $matches[2];
 				} else { return false; }
 			});
 
-			$this->setSearch("broadcast", "#<span class=\"dark_text\">Broadcast:<\/span>#", function(){
-				return $this->link_arr[$this->lineNo+1];
+			$this->setSearch("broadcast", "#<span class=\"dark_text\">Broadcast:<\/span>#", function() {
+				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("producers", "#<span class=\"dark_text\">Producers:<\/span>#", function(){
+			$this->setSearch("producers", "#<span class=\"dark_text\">Producers:<\/span>#", function() {
 				$matches = array();
 				$return = array();
-				if (!preg_match("/None found/", $this->link_arr[$this->lineNo+1])) {
-					if (strpos($this->link_arr[$this->lineNo+1], ",")) {
-						$arr = explode("</a>,", $this->link_arr[$this->lineNo+1]);
+				if (!preg_match("/None found/", $this->link_arr[$this->lineNo + 1])) {
+					if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
+						$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
 						foreach ($arr as $key => $value) {
 							preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">([\s\S]*)(</a>|)#", $value, $matches);
 							$return[] = array($matches[1], $matches[3]);
 						}
 					} else {
-						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
 						$return = array($matches[1], $matches[3]);
 					}
 				} else {
@@ -155,18 +155,18 @@ namespace Jikan {
 				return $return;
 			});
 
-			$this->setSearch("licensors", "#<span class=\"dark_text\">Licensors:<\/span>#", function(){
+			$this->setSearch("licensors", "#<span class=\"dark_text\">Licensors:<\/span>#", function() {
 				$matches = array();
 				$return = array();
-				if (!preg_match("/None found/", $this->link_arr[$this->lineNo+1])) {
-					if (strpos($this->link_arr[$this->lineNo+1], ",")) {
-						$arr = explode("</a>,", $this->link_arr[$this->lineNo+1]);
+				if (!preg_match("/None found/", $this->link_arr[$this->lineNo + 1])) {
+					if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
+						$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
 						foreach ($arr as $key => $value) {
 							preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)(<\/a>|)#", $value, $matches);
 							$return[] = array($matches[1], $matches[3]);
 						}
 					} else {
-						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
 						$return = array($matches[1], $matches[3]);
 					}
 				} else {
@@ -176,18 +176,18 @@ namespace Jikan {
 				return $return;	
 			});
 
-			$this->setSearch("studios", "#<span class=\"dark_text\">Studios:<\/span>#", function(){
+			$this->setSearch("studios", "#<span class=\"dark_text\">Studios:<\/span>#", function() {
 				$matches = array();
 				$return = array();
-				if (!preg_match("/None found/", $this->link_arr[$this->lineNo+1])) {
-					if (strpos($this->link_arr[$this->lineNo+1], ",")) {
-						$arr = explode("</a>,", $this->link_arr[$this->lineNo+1]);
+				if (!preg_match("/None found/", $this->link_arr[$this->lineNo + 1])) {
+					if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
+						$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
 						foreach ($arr as $key => $value) {
 							preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)(<\/a>|)#", $value, $matches);
 							$return[] = array($matches[1], $matches[3]);
 						}
 					} else {
-						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
 						$return = array($matches[1], $matches[3]);
 					}
 				} else {
@@ -197,80 +197,80 @@ namespace Jikan {
 				return $return;	
 			});
 
-			$this->setSearch("source", "#<span class=\"dark_text\">Source:<\/span>#", function(){
-				return $this->link_arr[$this->lineNo+1];
+			$this->setSearch("source", "#<span class=\"dark_text\">Source:<\/span>#", function() {
+				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function(){
-				if (preg_match('~No genres have been added yet~', $this->link_arr[$this->lineNo+1])) {
+			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function() {
+				if (preg_match('~No genres have been added yet~', $this->link_arr[$this->lineNo + 1])) {
 					return array();
 				}
 				$return = array();
 				$matches = array();
-				if (strpos($this->link_arr[$this->lineNo+1], ",")) {
-					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+				if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo + 1]);
 					foreach ($arr as $key => $value) {
 						preg_match("#<a href=\"\/anime\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $value, $matches);
 						$return[] = array($matches[1], $matches[3]);
 					}
 				} else {
-					preg_match("#<a href=\"\/anime\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+					preg_match("#<a href=\"\/anime\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
 					$return = array($matches[1], $matches[3]);
 				}
 
 				return $return;
 			});
 
-			$this->setSearch("duration", "#<span class=\"dark_text\">Duration:<\/span>#", function(){
-				return $this->link_arr[$this->lineNo+1];
+			$this->setSearch("duration", "#<span class=\"dark_text\">Duration:<\/span>#", function() {
+				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("rating", "#<span class=\"dark_text\">Rating:<\/span>#", function(){
-				return $this->link_arr[$this->lineNo+1];
+			$this->setSearch("rating", "#<span class=\"dark_text\">Rating:<\/span>#", function() {
+				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("score", "#<span class=\"dark_text\">Score:<\/span>#", function(){
+			$this->setSearch("score", "#<span class=\"dark_text\">Score:<\/span>#", function() {
 				$matches = array();
-				preg_match('~<span(.*?)>(.*)</span><sup>1</sup> \(scored by <span(.*?)>(.*)</span> users\)~', $this->link_arr[$this->lineNo+1], $matches);
-				return array((float)$matches[2], (int) str_replace(",", "", $matches[4]));
+				preg_match('~<span(.*?)>(.*)</span><sup>1</sup> \(scored by <span(.*?)>(.*)</span> users\)~', $this->link_arr[$this->lineNo + 1], $matches);
+				return array((float) $matches[2], (int) str_replace(",", "", $matches[4]));
 			});
 
-			$this->setSearch("ranked", "#<span class=\"dark_text\">Ranked:<\/span>#", function(){
+			$this->setSearch("ranked", "#<span class=\"dark_text\">Ranked:<\/span>#", function() {
 				$matches = array();
-				if (!preg_match("/N\/A<sup>2<\/sup>/", $this->link_arr[$this->lineNo+1], $matches)) {
-					preg_match("/#(.*)<sup>2<\/sup>/", $this->link_arr[$this->lineNo+1], $matches);
+				if (!preg_match("/N\/A<sup>2<\/sup>/", $this->link_arr[$this->lineNo + 1], $matches)) {
+					preg_match("/#(.*)<sup>2<\/sup>/", $this->link_arr[$this->lineNo + 1], $matches);
 					return (int) $matches[1];
 				} else {
 					return -1;
 				}
 			});
 
-			$this->setSearch("popularity", "#<span class=\"dark_text\">Popularity:<\/span>#", function(){
+			$this->setSearch("popularity", "#<span class=\"dark_text\">Popularity:<\/span>#", function() {
 				$matches = array();
-				preg_match("/#(.*)/", $this->link_arr[$this->lineNo+1], $matches);
+				preg_match("/#(.*)/", $this->link_arr[$this->lineNo + 1], $matches);
 				return (int) $matches[1];				
 			});
 
-			$this->setSearch("members", "#<span class=\"dark_text\">Members:<\/span>#", function(){
-				return(int) str_replace(",", "", $this->link_arr[$this->lineNo+1]);
+			$this->setSearch("members", "#<span class=\"dark_text\">Members:<\/span>#", function() {
+				return(int) str_replace(",", "", $this->link_arr[$this->lineNo + 1]);
 			});
 
-			$this->setSearch("favorites", "#<span class=\"dark_text\">Favorites:<\/span>#", function(){
-				return (int) str_replace(",", "", $this->link_arr[$this->lineNo+1]);
+			$this->setSearch("favorites", "#<span class=\"dark_text\">Favorites:<\/span>#", function() {
+				return (int) str_replace(",", "", $this->link_arr[$this->lineNo + 1]);
 			});
 
 			$this->setSearch("synopsis", "%<meta property=\"og:description\" content=\"(.*)\">%", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("related", "~<table class=\"anime_detail_related_anime\"~", function(){
+			$this->setSearch("related", "~<table class=\"anime_detail_related_anime\"~", function() {
 				$return = array();
 				$matches = array();
 				// i'm sure there's a better way around this... x.x
 
 				$workingLine = $this->link_arr[$this->lineNo];
 				$workingLine = substr($workingLine, strpos($workingLine, "<table class=\"anime_detail_related_anime\""));
-				$workingLine = substr($workingLine, strpos($workingLine, "<tr>")+4);
+				$workingLine = substr($workingLine, strpos($workingLine, "<tr>") + 4);
 				$workingLine = substr($workingLine, 0, strpos($workingLine, "</table>"));
 
 				$workingLine = str_replace("</td>", "</td>,,,,", $workingLine);
@@ -278,7 +278,7 @@ namespace Jikan {
 
 				$title = "";
 				foreach ($workingLine as $key => $value) {
-					if (!empty($value)){
+					if (!empty($value)) {
 						$tmp = null;
 						preg_match("~<td.*?>(.*?)</td>~", $value, $tmp);
 						$working = $tmp[1];
@@ -314,10 +314,10 @@ namespace Jikan {
 					$string = $matches[1];
 					$i = 1;
 					while ($running) {
-						if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo + $i])) {
 							$running = false;
 						}
-						$string .= $this->link_arr[$this->lineNo+$i];
+						$string .= $this->link_arr[$this->lineNo + $i];
 						$i++;
 					}
 					$string = substr($string, 0, strpos($string, '<div class="border_top'));
@@ -384,11 +384,11 @@ namespace Jikan {
 				$this->data = array();
 			}
 
-			$this->setSearch("link-canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function(){
+			$this->setSearch("link-canonical", "/<link rel=\"canonical\" href=\"(.*)\" \/>/", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("title", "#<h1 class=\"h1\"><span itemprop=\"name\">(.*)<\/span><\/h1>#", function(){
+			$this->setSearch("title", "#<h1 class=\"h1\"><span itemprop=\"name\">(.*)<\/span><\/h1>#", function() {
 				return $this->matches[1];
 			});
 
@@ -400,79 +400,79 @@ namespace Jikan {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("synonyms", '#<span class=\"dark_text\">Synonyms:<\/span> (.*)</div><div class=\"spaceit_pad\"><span class=\"dark_text\">Japanese:</span>#', function(){
+			$this->setSearch("synonyms", '#<span class=\"dark_text\">Synonyms:<\/span> (.*)</div><div class=\"spaceit_pad\"><span class=\"dark_text\">Japanese:</span>#', function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("japanese", "#<span class=\"dark_text\">Japanese:<\/span>(.*?)<\/div>#", function(){
+			$this->setSearch("japanese", "#<span class=\"dark_text\">Japanese:<\/span>(.*?)<\/div>#", function() {
 				return trim($this->matches[1]);
 			});
 
-			$this->setSearch("image", "#<img src=\"(.*)\" alt=\"(.*)\" itemprop=\"image\" class=\"ac\">#", function(){
+			$this->setSearch("image", "#<img src=\"(.*)\" alt=\"(.*)\" itemprop=\"image\" class=\"ac\">#", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span> <a href=\"https://myanimelist.net/topmanga.php?type=(.*)\">(.*)<\/a>#", function(){
+			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span> <a href=\"https://myanimelist.net/topmanga.php?type=(.*)\">(.*)<\/a>#", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("volumes", "#<span class=\"dark_text\">Volumes:<\/span> (.*)$#", function(){
+			$this->setSearch("volumes", "#<span class=\"dark_text\">Volumes:<\/span> (.*)$#", function() {
 				return ($this->matches[1] != 'Unknown') ? (int) trim($this->matches[1]) : $this->matches[1];
 			});
 
-			$this->setSearch("chapters", "#<span class=\"dark_text\">Chapters:<\/span> (.*)$#", function(){
+			$this->setSearch("chapters", "#<span class=\"dark_text\">Chapters:<\/span> (.*)$#", function() {
 				return ($this->matches[1] != 'Unknown') ? (int) trim($this->matches[1]) : $this->matches[1];
 			});
 
-			$this->setSearch("published", "#<span class=\"dark_text\">Published:<\/span>(.*)<\/div>#", function(){
+			$this->setSearch("published", "#<span class=\"dark_text\">Published:<\/span>(.*)<\/div>#", function() {
 				return trim($this->matches[1]);
 			});
 
-			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function(){
+			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function() {
 				$return = array();
 				$matches = array();
-				if (strpos($this->link_arr[$this->lineNo+1], ",")) {
-					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+				if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo + 1]);
 					foreach ($arr as $key => $value) {
 						preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $value, $matches);
 						$return[] = array($matches[1], $matches[3]);
 					}
 				} else {
-					preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+					preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
 					$return = array($matches[1], $matches[3]);
 				}
 
 				return $return;
 			});
 
-			$this->setSearch("authors", "#<span class=\"dark_text\">Authors:<\/span>#", function(){
+			$this->setSearch("authors", "#<span class=\"dark_text\">Authors:<\/span>#", function() {
 				$return = array();
 				$matches = array();
-				if (strpos($this->link_arr[$this->lineNo+1], ">,")) {
-					$arr = explode(",", $this->link_arr[$this->lineNo+1]);
+				if (strpos($this->link_arr[$this->lineNo + 1], ">,")) {
+					$arr = explode(",", $this->link_arr[$this->lineNo + 1]);
 					foreach ($arr as $key => $value) {
 						preg_match("#<a href=\"(.*)\">(.*)<\/a>(.*?)<\/div>#", $value, $matches);
 						$return[] = array($matches[1], $matches[2], trim($matches[3]));
 					}
 				} else {
-					preg_match("#<a href=\"(.*)\">(.*)<\/a>(.*?)<\/div>#", $this->link_arr[$this->lineNo+1], $matches);
+					preg_match("#<a href=\"(.*)\">(.*)<\/a>(.*?)<\/div>#", $this->link_arr[$this->lineNo + 1], $matches);
 					$return = array($matches[1], $matches[2], trim($matches[3]));
 				}
 
 				return $return;
 			});
 
-			$this->setSearch("serialization", "#<span class=\"dark_text\">Serialization:<\/span>#", function(){
+			$this->setSearch("serialization", "#<span class=\"dark_text\">Serialization:<\/span>#", function() {
 				$return = array();
 				$matches = array();
-				if (strpos($this->link_arr[$this->lineNo+1], ">,")) {
-					$arr = explode("</a>,", $this->link_arr[$this->lineNo+1]);
+				if (strpos($this->link_arr[$this->lineNo + 1], ">,")) {
+					$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
 					foreach ($arr as $key => $value) {
 						preg_match("#<a href=\"(.*)\">(.*)(<\/a>|)#", $value, $matches);
 						$return[] = array($matches[1], $matches[2]);
 					}
 				} else {
-					preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo+1], $matches);
+					preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
 					$return = array($matches[1], $matches[2]);
 				}
 
@@ -480,21 +480,21 @@ namespace Jikan {
 			});
 
 
-			$this->setSearch("ranked", "~<span class=\"dark_text\">Ranked:<\/span> #(.*[[:alnum:]])<sup>~", function(){
+			$this->setSearch("ranked", "~<span class=\"dark_text\">Ranked:<\/span> #(.*[[:alnum:]])<sup>~", function() {
 				return ($this->matches[1] == "N/A" ? -1 : (int) $this->matches[1]);
 			});
 
 
-			$this->setSearch("popularity", "~<span class=\"dark_text\">Popularity:<\/span> #(.*[[:alnum:]])<\/div>~", function(){
+			$this->setSearch("popularity", "~<span class=\"dark_text\">Popularity:<\/span> #(.*[[:alnum:]])<\/div>~", function() {
 				return ($this->matches[1] == "N/A" ? -1 : (int) $this->matches[1]);
 			});
 
-			$this->setSearch("members", "#<span class=\"dark_text\">Members:<\/span>(.*)<\/div>#", function(){
+			$this->setSearch("members", "#<span class=\"dark_text\">Members:<\/span>(.*)<\/div>#", function() {
 				$this->matches[1] = str_replace(",", "", trim($this->matches[1]));
 				return (int) $this->matches[1];
 			});
 
-			$this->setSearch("favorites", "#<span class=\"dark_text\">Favorites:<\/span>(.*)<\div>#", function(){
+			$this->setSearch("favorites", "#<span class=\"dark_text\">Favorites:<\/span>(.*)<\div>#", function() {
 				return $this->matches[1];
 			});
 
@@ -503,14 +503,14 @@ namespace Jikan {
 			});
 
 
-			$this->setSearch("related", "~<table class=\"anime_detail_related_anime\"~", function(){
+			$this->setSearch("related", "~<table class=\"anime_detail_related_anime\"~", function() {
 				$return = array();
 				$matches = array();
 				// i'm sure there's a better way around this... x.x
 
 				$workingLine = $this->link_arr[$this->lineNo];
 				$workingLine = substr($workingLine, strpos($workingLine, "<table class=\"anime_detail_related_anime\""));
-				$workingLine = substr($workingLine, strpos($workingLine, "<tr>")+4);
+				$workingLine = substr($workingLine, strpos($workingLine, "<tr>") + 4);
 				$workingLine = substr($workingLine, 0, strpos($workingLine, "</table>"));
 
 				$workingLine = preg_replace('~<td.*?>~', '', $workingLine);
@@ -519,11 +519,11 @@ namespace Jikan {
 
 				$arr = array();
 				$workingLineCount = count($workingLine);
-				for ($i=0; $i <= $workingLineCount; $i++) {
+				for ($i = 0; $i <= $workingLineCount; $i++) {
 					if ($i % 2 == 0) {
 						if (!empty($workingLine[$i])) {
 							$title = $workingLine[$i];
-							$arr = explode("</a>,", $workingLine[$i+1]);
+							$arr = explode("</a>,", $workingLine[$i + 1]);
 							$newArr = array();
 							foreach ($arr as $key => $value) {
 								$filtered = array();
@@ -533,7 +533,7 @@ namespace Jikan {
 									'url' => $filtered[1]
 								);
 							}
-							$return[ $title ] = $newArr;
+							$return[$title] = $newArr;
 						}
 					}
 				}
@@ -551,10 +551,10 @@ namespace Jikan {
 					$string = $matches[1];
 					$i = 1;
 					while ($running) {
-						if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo + $i])) {
 							$running = false;
 						}
-						$string .= $this->link_arr[$this->lineNo+$i];
+						$string .= $this->link_arr[$this->lineNo + $i];
 						$i++;
 					}
 					$string = substr($string, 0, strpos($string, '<div class="border_top'));
@@ -602,15 +602,15 @@ namespace Jikan {
 				$this->data = array();
 			}
 
-			$this->setSearch("name", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function(){
+			$this->setSearch("name", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function() {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("name-japanese", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function(){
+			$this->setSearch("name-japanese", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function() {
 				return $this->matches[2];
 			});
 
-			$this->setSearch("about", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>([\s\S]*)~", function(){
+			$this->setSearch("about", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>([\s\S]*)~", function() {
 				$match = array();
 				$match[] = $this->matches[3];
 
@@ -641,7 +641,7 @@ namespace Jikan {
 				$i = 1;
 				$animeography = array();
 				while ($running) {
-					$line = $this->link_arr[$this->lineNo+$i];
+					$line = $this->link_arr[$this->lineNo + $i];
 					if (preg_match("~</table>~", $line)) {
 						$running = false;
 					}
@@ -649,10 +649,10 @@ namespace Jikan {
 					if (preg_match("~<tr>~", $line)) {
 						$i++;
 						$animeMeta = array();
-						preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $animeMeta);
+						preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo + $i], $animeMeta);
 						$i++;
 						$animeName = array();
-						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $animeName);
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $animeName);
 						$animeography[] = array(
 							'name' => $animeName[2],
 							'link' => $animeMeta[1],
@@ -669,7 +669,7 @@ namespace Jikan {
 				$i = 1;
 				$mangaography = array();
 				while ($running) {
-					$line = $this->link_arr[$this->lineNo+$i];
+					$line = $this->link_arr[$this->lineNo + $i];
 					if (preg_match("~</table>~", $line)) {
 						$running = false;
 					}
@@ -677,10 +677,10 @@ namespace Jikan {
 					if (preg_match("~<tr>~", $line)) {
 						$i++;
 						$mangaMeta = array();
-						preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $mangaMeta);
+						preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo + $i], $mangaMeta);
 						$i++;
 						$mangaName = array();
-						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $mangaName);
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $mangaName);
 						$mangaography[] = array(
 							'name' => $mangaName[2],
 							'link' => $mangaMeta[1],
@@ -696,8 +696,8 @@ namespace Jikan {
 				$running = true;
 				$i = 1;
 				$voiceActors = array();
-				while($running) {
-					$line = $this->link_arr[$this->lineNo+$i]; // bugs
+				while ($running) {
+					$line = $this->link_arr[$this->lineNo + $i]; // bugs
 					if (
 						preg_match('~<h2><div class="floatRightHeader">~', $line) ||
 						preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $line)
@@ -708,13 +708,13 @@ namespace Jikan {
 					if (preg_match("~<tr>~", $line)) {
 						$i++;
 						$personMeta = array();
-						preg_match('~<td class="borderClass" valign="top" width="25"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $personMeta);
+						preg_match('~<td class="borderClass" valign="top" width="25"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->link_arr[$this->lineNo + $i], $personMeta);
 						$i++;
 						$personName = array();
-						preg_match('~<td class="borderClass" valign="top"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $personName);
+						preg_match('~<td class="borderClass" valign="top"><a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $personName);
 						$i++;
 						$personType = array();
-						preg_match('~<div style="margin-top: 2px;"><small>(.*)</small></div>~', $this->link_arr[$this->lineNo+$i], $personType);
+						preg_match('~<div style="margin-top: 2px;"><small>(.*)</small></div>~', $this->link_arr[$this->lineNo + $i], $personType);
 						$voiceActors[] = array(
 							'name' => $personName[2],
 							'link' => $personMeta[1],
@@ -729,7 +729,7 @@ namespace Jikan {
 			});
 
 			$this->setSearch("member-favorites", "~Member Favorites: (.*)~", function() {
-				return (int)str_replace(',', '', trim($this->matches[1]));
+				return (int) str_replace(',', '', trim($this->matches[1]));
 			});
 
 			$this->data = array();
@@ -805,7 +805,7 @@ namespace Jikan {
 			});
 
 			$this->setSearch('member-favorites', '~<div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> (.*)</div>~', function() {
-				return (int)str_replace(',', '', $this->matches[1]);
+				return (int) str_replace(',', '', $this->matches[1]);
 			});
 
 			$this->setSearch('more', '~<div class="people-informantion-more js-people-informantion-more">([\s\S]*)</div>~', function() {
@@ -816,8 +816,8 @@ namespace Jikan {
 				$running = true;
 				$i = 1;
 				$voiceActingRoles = array();
-				while($running) {
-					$line = $this->link_arr[$this->lineNo+$i];
+				while ($running) {
+					$line = $this->link_arr[$this->lineNo + $i];
 					if (preg_match('~</span>Anime Staff Positions</div>~', $line)) {
 						$running = false;
 					}
@@ -825,16 +825,16 @@ namespace Jikan {
 					if (preg_match("~<tr>~", $line)) {
 						$i++;
 						$animeMeta = array();
-						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $animeMeta);
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo + $i], $animeMeta);
 						$i++;
 						$animeName = array();
-						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo+$i], $animeName);
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo + $i], $animeName);
 						$i += 2;
 						$char = array();
-						preg_match('~<td valign="top" class="borderClass" align="right" nowrap><a href="(.*)">(.*)</a>&nbsp;<div class="spaceit_pad">(.*)&nbsp;</div></td>~', $this->link_arr[$this->lineNo+$i], $char);
+						preg_match('~<td valign="top" class="borderClass" align="right" nowrap><a href="(.*)">(.*)</a>&nbsp;<div class="spaceit_pad">(.*)&nbsp;</div></td>~', $this->link_arr[$this->lineNo + $i], $char);
 						$i++;
 						$charMeta = array();
-						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" alt="(.*)" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $charMeta);
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" alt="(.*)" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo + $i], $charMeta);
 						$voiceActingRoles[] = array(
 							'anime' => array(
 								'name' => $animeName[2],
@@ -858,8 +858,8 @@ namespace Jikan {
 				$running = true;
 				$i = 1;
 				$animeStaffPositions = array();
-				while($running) {
-					$line = $this->link_arr[$this->lineNo+$i];
+				while ($running) {
+					$line = $this->link_arr[$this->lineNo + $i];
 					if (preg_match('~</span>Published Manga</div>~', $line)) {
 						$running = false;
 					}
@@ -867,13 +867,13 @@ namespace Jikan {
 					if (preg_match("~<tr>~", $line)) {
 						$i++;
 						$animeMeta = array();
-						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $animeMeta);
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo + $i], $animeMeta);
 						$i++;
 						$animeName = array();
-						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo+$i], $animeName);
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo + $i], $animeName);
 						$i++;
 						$role = array();
-						preg_match('~<a href="(.*)" title="Quick add anime to my list" class="button_add">add</a> <small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $role);
+						preg_match('~<a href="(.*)" title="Quick add anime to my list" class="button_add">add</a> <small>(.*)</small>~', $this->link_arr[$this->lineNo + $i], $role);
 						$animeStaffPositions[] = array(
 							'anime' => array(
 								'name' => $animeName[2],
@@ -892,8 +892,8 @@ namespace Jikan {
 				$running = true;
 				$i = 1;
 				$publsihedManga = array();
-				while($running) {
-					$line = $this->link_arr[$this->lineNo+$i];
+				while ($running) {
+					$line = $this->link_arr[$this->lineNo + $i];
 					if (preg_match('~</table>~', $line)) {
 						$running = false;
 					}
@@ -901,13 +901,13 @@ namespace Jikan {
 					if (preg_match("~<tr>~", $line)) {
 						$i++;
 						$mangaMeta = array();
-						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo+$i], $mangaMeta);
+						preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->link_arr[$this->lineNo + $i], $mangaMeta);
 						$i++;
 						$mangaName = array();
-						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo+$i], $mangaName);
+						preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->link_arr[$this->lineNo + $i], $mangaName);
 						$i++;
 						$role = array();
-						preg_match('~<a href="(.*)" title="Quick add manga to my list" class="button_add">add</a> <small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $role);
+						preg_match('~<a href="(.*)" title="Quick add manga to my list" class="button_add">add</a> <small>(.*)</small>~', $this->link_arr[$this->lineNo + $i], $role);
 						$publsihedManga[] = array(
 							'manga' => array(
 								'name' => $mangaName[2],
@@ -1046,12 +1046,12 @@ namespace Jikan {
 				}
 			}
 
-			$this->setSearch('episode', '~<table border="0" cellspacing="0" cellpadding="0" width="100%" class="mt8 episode_list js-watch-episode-list ascend">~', function(){
+			$this->setSearch('episode', '~<table border="0" cellspacing="0" cellpadding="0" width="100%" class="mt8 episode_list js-watch-episode-list ascend">~', function() {
 				$running = true;
 				$i = 1;
 				$episode = array();
 				while ($running) {
-					$line = $this->link_arr[$this->lineNo+$i];
+					$line = $this->link_arr[$this->lineNo + $i];
 					if (preg_match("~</table>~", $line)) {
 						$running = false;
 					}
@@ -1059,26 +1059,26 @@ namespace Jikan {
 					if (preg_match('~<tr class="episode-list-data">~', $line)) {
 						$i++;
 						$_episodeNo = array();
-						preg_match('~<td class="episode-number nowrap">(.*)</td>~', $this->link_arr[$this->lineNo+$i], $_episodeNo);
+						preg_match('~<td class="episode-number nowrap">(.*)</td>~', $this->link_arr[$this->lineNo + $i], $_episodeNo);
 						$i++;
 						$_episodeVideo = array();
-						preg_match('~<td class="episode-video nowrap"><a href="(.*)"><img src="(.*)" width="20" height="19" alt="(.*)"></a></td>~', $this->link_arr[$this->lineNo+$i], $_episodeVideo);
+						preg_match('~<td class="episode-video nowrap"><a href="(.*)"><img src="(.*)" width="20" height="19" alt="(.*)"></a></td>~', $this->link_arr[$this->lineNo + $i], $_episodeVideo);
 						$i++;
 						$_episodeTitle = array();
-						preg_match('~<td class="episode-title">(<span class="fl-r di-ib pr4 icon-episode-type-bg">Filler</span>|<span class="fl-r di-ib pr4 icon-episode-type-bg">Recap</span>|)<a href="(.*)" class="fl-l fw-b ">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $_episodeTitle);
+						preg_match('~<td class="episode-title">(<span class="fl-r di-ib pr4 icon-episode-type-bg">Filler</span>|<span class="fl-r di-ib pr4 icon-episode-type-bg">Recap</span>|)<a href="(.*)" class="fl-l fw-b ">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $_episodeTitle);
 						$filler = false;
 						$recap = false;
-						if (preg_match('~<span class="fl-r di-ib pr4 icon-episode-type-bg">Filler</span>~', $this->link_arr[$this->lineNo+$i])) {$filler = true;}
-						if (preg_match('~<span class="fl-r di-ib pr4 icon-episode-type-bg">Recap</span>~', $this->link_arr[$this->lineNo+$i])) {$recap = true;}
+						if (preg_match('~<span class="fl-r di-ib pr4 icon-episode-type-bg">Filler</span>~', $this->link_arr[$this->lineNo + $i])) {$filler = true; }
+						if (preg_match('~<span class="fl-r di-ib pr4 icon-episode-type-bg">Recap</span>~', $this->link_arr[$this->lineNo + $i])) {$recap = true; }
 						$i++;
 						$_episodeTitleAlt = array();
-						preg_match('~<br><span class="di-ib">(.*)&nbsp;(.*)</span>~', $this->link_arr[$this->lineNo+$i], $_episodeTitleAlt);
+						preg_match('~<br><span class="di-ib">(.*)&nbsp;(.*)</span>~', $this->link_arr[$this->lineNo + $i], $_episodeTitleAlt);
 						$i += 2;
 						$_episodeAired = array();
-						preg_match('~<td class="episode-aired nowrap">(.*)</td>~', $this->link_arr[$this->lineNo+$i], $_episodeAired);
+						preg_match('~<td class="episode-aired nowrap">(.*)</td>~', $this->link_arr[$this->lineNo + $i], $_episodeAired);
 						$i += 2;
 						$_episodeForum = array();
-						preg_match('~<a href="(.*)"><i class="fa fa-comments mr4"></i>Forum</a></td>~', $this->link_arr[$this->lineNo+$i], $_episodeForum);
+						preg_match('~<a href="(.*)"><i class="fa fa-comments mr4"></i>Forum</a></td>~', $this->link_arr[$this->lineNo + $i], $_episodeForum);
 
 						$titleJapanese = (!empty($_episodeTitleAlt)) ? $_episodeTitleAlt[1] : "";
 						$titleRomanji = (!empty($_episodeTitleAlt)) ? $_episodeTitleAlt[2] : "";
@@ -1193,46 +1193,46 @@ namespace Jikan {
 					$i = 0;
 					$characters = array();
 					while ($running) {
-						if (preg_match('~<a name="staff"></a>~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<a name="staff"></a>~', $this->link_arr[$this->lineNo + $i])) {
 							$running = false;
 						}
 
 						$character = array();
 
-						if (preg_match('~<td valign="top" width="27" class="ac borderClass (bgColor2|bgColor1)">~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<td valign="top" width="27" class="ac borderClass (bgColor2|bgColor1)">~', $this->link_arr[$this->lineNo + $i])) {
 							$i += 3;
 							$image = array();
-							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo+$i], $image);
+							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo + $i], $image);
 							$character['image'] = $image[3];
 
 							$i += 5;
 							$name = array();
-							preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $name);
+							preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $name);
 							$character['url'] = $name[1];
 							$character['name'] = $name[2];
 							$i += 2;
 							$role = array();
-							preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $role);
+							preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo + $i], $role);
 							$character['role'] = $role[1];
 
 
 							$running2 = true;
 							$character['voice-actor'] = array();
 							while ($running2) {
-								if (preg_match('~</table>~', $this->link_arr[$this->lineNo+$i])) {
+								if (preg_match('~</table>~', $this->link_arr[$this->lineNo + $i])) {
 									$running2 = false;
 								}
 
-								if (preg_match('~<td valign="top" align="right" style="padding: 0 4px;" nowrap="">~', $this->link_arr[$this->lineNo+$i])) {
+								if (preg_match('~<td valign="top" align="right" style="padding: 0 4px;" nowrap="">~', $this->link_arr[$this->lineNo + $i])) {
 									$i++;
 									$name = array();
-									preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $name);
+									preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $name);
 									$i++;
 									$role = array();
-									preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $role);
+									preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo + $i], $role);
 									$i += 5;
 									$image = array();
-									preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo+$i], $image);
+									preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo + $i], $image);
 
 									$character['voice-actor'][] = array(
 										'name' => $name[2],
@@ -1260,23 +1260,23 @@ namespace Jikan {
 					$staff = array();
 					while ($running) {
 						$person = array();
-						if (preg_match('~<div class="fl-l">~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<div class="fl-l">~', $this->link_arr[$this->lineNo + $i])) {
 							$running = false;
 						}
 
-						if (preg_match('~<table border="0" cellpadding="0" cellspacing="0" width="100%">~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<table border="0" cellpadding="0" cellspacing="0" width="100%">~', $this->link_arr[$this->lineNo + $i])) {
 							$i += 5;
 							$match = array();
-							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo+$i], $match);
+							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo + $i], $match);
 							$person['image'] = $match[3];
 							$i += 5;
 							$match = array();
-							preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $match);
+							preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $match);
 							$person['name'] = $match[2];
 							$person['url'] = $match[1];
 							$i += 2;
 							$match = array();
-							preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $match);
+							preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo + $i], $match);
 							$person['role'] = $match[1];
 
 							$staff[] = $person;
@@ -1294,26 +1294,26 @@ namespace Jikan {
 					$i = 0;
 					$characters = array();
 					while ($running) {
-						if (preg_match('~<div class="fl-r">~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<div class="fl-r">~', $this->link_arr[$this->lineNo + $i])) {
 							$running = false;
 						}
 
 						$character = array();
 
-						if (preg_match('~<td valign="top" width="27" class="ac borderClass (bgColor2|bgColor1)">~', $this->link_arr[$this->lineNo+$i])) {
+						if (preg_match('~<td valign="top" width="27" class="ac borderClass (bgColor2|bgColor1)">~', $this->link_arr[$this->lineNo + $i])) {
 							$i += 3;
 							$image = array();
-							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo+$i], $image);
+							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo + $i], $image);
 							$character['image'] = $image[3];
 
 							$i += 5;
 							$name = array();
-							preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo+$i], $name);
+							preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $name);
 							$character['url'] = $name[1];
 							$character['name'] = $name[2];
 							$i += 2;
 							$role = array();
-							preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo+$i], $role);
+							preg_match('~<small>(.*)</small>~', $this->link_arr[$this->lineNo + $i], $role);
 							$character['role'] = $role[1];
 							$characters[] = $character;
 						}
@@ -1397,6 +1397,11 @@ namespace Jikan {
 			return $this;
 		}
 
+		/**
+		 * @param string $index
+		 * @param string $regex
+		 * @param \Closure $func
+		 */
 		private function setSearch($index, $regex, $func, $args=null, $merge=false) {
 			$args = is_null($args) ? false : $args;
 			$this->search[$index] = array(

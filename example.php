@@ -4,15 +4,31 @@ require_once 'jikan.php';
 
 $jikan = new \Jikan\Get;
 
-$firsts = array();
+$anime = array();
+$manga = array();
+$myAnimeList = array();
 
-$jikan->anime(21); // get the anime with ID 1 on MAL
-//$firsts['manga'] = $jikan->manga(1)->data; // get the manga with ID 1 on MAL
-//$firsts['character'] = $jikan->character(1)->data; // get the character with ID 1 on MAL
-//$firsts['person'] = $jikan->person(1)->data; // get the person with ID 1 on MAL
+try {
+	// get anime
+	$jikan->anime(1)->characters_staff()->episodes();
+	$anime = $jikan->data;
 
-//$jikan->list('Nekomata1037', 'manga');
-var_dump($jikan->data);
+	// get manga
+	$manga = $jikan->manga(1)->characters_staff()->data;
 
-//var_dump($firsts); // data dump
+	// fetch my anime list
+	$myAnimeList = $jikan->list('Nekomata1037', 'anime')->data;
+	/*
+		Save it as JSON!
+		$jikan->json() will return $jikan->data as JSON
+
+		file_put_contents("nekomata1037.json", $jikan->json());
+	*/
+
+} catch (Exception $e) {
+	// catch any errors
+	echo $e->getMessage();
+}
+
+
 ?>

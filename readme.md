@@ -1,25 +1,25 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)]() [![coverage](https://img.shields.io/badge/coverage-50%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.1.4-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)]() [![coverage](https://img.shields.io/badge/coverage-60%25-yellow.svg?style=flat)]() [![version](https://img.shields.io/badge/ver-0.2.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
-## The REST API & Documentation is available at [https://jikan.me](https://jikan.me)
+## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
 
-This PHP based API works by parsing data through the scraping of web pages from MyAnimeList. It gives you a simple and easy GET based methods that can fetch Anime, Manga, People & Character details. That's just the pinnacle, be sure to check out the planned features to see what's yet to come.
+Jikan is an OOP based class written in PHP that scrapes and parses data out of MyAnimeList. It provides you an easy syntax that can fetch Anime, Manga, People, Character details and even user lists. It returns the data in an array and has a built-in method that converts it to JSON.
 
-The reason of Jikan is quite simple. It's to cover what's lacking by the official API for developers.
+The raison d'être for Jikan is to provide an easy API for being able to get stuff that the official API of MyAnimeList lacks.
+
+Jikan even has it's own REST API that responds in JSON. [Get Started](http://jikan.me)
 
 This is a Beta version and is in WIP.
 
-*More to follow!*
 
 # Features
-- Anime
-- Manga
+- Anime + Characters/Staff + Episodes
+- Manga + Characters/Staff
 - Character
 - Person
 - User Anime/Manga List
-- Extended data for Anime/Manga/Characters/People - **0%**
-- Modular scraping method for extensions developers can add
+- Modular scraping method for developers to extend the API
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
 ## Planned Features
@@ -27,116 +27,31 @@ This is a Beta version and is in WIP.
 - Search results w/ pagination
 - Command Line Usage
 
-## What data can be returned?
-### Anime
-- Canonical Link
-- Title
-- Alternative Titles
-- Japanese/Kanji Title
-- Image link
-- Synopsis
-- Episodes
-- Status
-- Aired
-- Premiered
-- Broadcast
-- Producers + Links
-- Licensors + Links
-- Studios + Links
-- Source
-- Genres + Links
-- Duration
-- Rating
-- Score
-- Ranked
-- Popularity
-- Members
-- Favorites
-- Related Anime
-	- Name
-	- Link
-	- Type of Adaption
-
-### Manga
-- Canonical Link
-- Title
-- Alternative Title
-- Japanese/Kanji Title
-- Image
-- Synopsys
-- Volumes
-- Chapters
-- Published Dates
-- Genres + Links
-- Authors + Links
-- Serialization + Links
-- Score
-- Ranked
-- Popularity
-- Members
-- Favorites
-- Related Manga
-	- Name
-	- Link
-	- Type of Adaption
-
-### Characters
-- Canonical Link
-- Name
-- Japanese Name
-- Biography
-- Animeography
-	- Name
-	- Link
-	- Image
-- Mangaography
-	- Name
-	- Link
-	- Image
-- Voice Actors
-	- Name
-	- Link
-	- Image
-	- Language
-- Member Favorites
-
-### Person
-- Canonical Link
-- Given Name
-- Family Name
-- Alternative Names
-- Birthday
-- Website
-- Member favorites
-- More
-- Voice Acting Roles
-	- The Anime
-		- Name
-		- Link
-		- Image
-	- Character
-		- Name
-		- Link
-		- Role
-		- Image
-- Anime Staff Positions
-	- The Anime
-		- Name
-		- Link
-		- Image
-		- Role
-- Published Manga
-	- The Manga
-		- Name
-		- Link
-		- Image
-		- Role
-
 
 ## Changelog
+### 0.2.1 alpha - June 1, 17
+- Added method `setParentFile($type, $value)` and `setChildFile($page, $value)`
+	- This method pre-sets links/file paths to the parent/child methods, if you don't want to pass ID params to them
+	- More info in the docs
+- Added extended method `episodes`
+	- Only works for the parent method `anime`
+	- Recursively makes requests if the episodes are more than 100 to fetch all episodes
+	- More info in the docs
+- Added extended method `characters_staff`
+	- Works for the parent methods; `anime` and `manga`
+	- More info in the docs
+- If premiered is unknown, it'll return an empty string
+- If ranking is N/A, it'll return -1
+- Refactored `related` for manga
+- Fixed bugs of related anime
+- Added `title-english` for anime/manga
+- Added 'status' for manga (e.g completed, publishing, etc)
+- For Mangas, `volumes` and `chapters` will return 'Unknown' if so otherwise it will return integers
+
 ### 0.1.5 alpha - May 26, 17
 - Method **list** renamed to **user_list**
 	- Reason: Issues with PHP 5.6
+- Fixed critical bugs
 
 ### 0.1.4.5 alpha - May 21, 17
 - Added user anime/manga list fetch & parsed as JSON

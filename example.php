@@ -17,7 +17,7 @@ try {
 	$manga = $jikan->manga(1)->characters_staff()->data;
 
 	// fetch my anime list
-	$myAnimeList = $jikan->list('Nekomata1037', 'anime')->data;
+	$myAnimeList = $jikan->user_list('Nekomata1037', 'anime')->data;
 	/*
 		Save it as JSON!
 		$jikan->json() will return $jikan->data as JSON

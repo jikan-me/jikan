@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.2.2 alpha
+*	Jikan - MyAnimeList Unofficial API @version 0.2.3 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -60,7 +60,7 @@ namespace Jikan {
 				$this->type = "anime";
 			}
 
-			if ($this->is_link($this->link)) {
+			if ($this->is_link2($this->link)) {
 				if ($this->link_exists($this->link)) {
 					$this->link_arr = @file($this->link);
 					array_walk($this->link_arr, array($this, 'trim'));
@@ -374,7 +374,7 @@ namespace Jikan {
 				$this->type = "manga";
 			}
 
-			if ($this->is_link($this->link)) {
+			if ($this->is_link2($this->link)) {
 				if ($this->link_exists($this->link)) {
 					$this->link_arr = @file($this->link);
 					array_walk($this->link_arr, array($this, 'trim'));
@@ -478,18 +478,20 @@ namespace Jikan {
 			$this->setSearch("serialization", "#<span class=\"dark_text\">Serialization:<\/span>#", function() {
 				$return = array();
 				$matches = array();
-				if (strpos($this->link_arr[$this->lineNo + 1], ">,")) {
-					$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
-					foreach ($arr as $key => $value) {
-						preg_match("#<a href=\"(.*)\">(.*)(<\/a>|)#", $value, $matches);
-						$return[] = array($matches[1], $matches[2]);
+				if (!preg_match("/None/", $this->link_arr[$this->lineNo + 1])) {
+					if (strpos($this->link_arr[$this->lineNo + 1], ">,")) {
+						$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
+						foreach ($arr as $key => $value) {
+							preg_match("#<a href=\"(.*)\">(.*)(<\/a>|)#", $value, $matches);
+							$return[] = array($matches[1], $matches[2]);
+						}
+					} else {
+						preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
+						$return = array($matches[1], $matches[2]);
 					}
-				} else {
-					preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-					$return = array($matches[1], $matches[2]);
 				}
-
 				return $return;
+
 			});
 
 
@@ -1032,7 +1034,7 @@ namespace Jikan {
 		private function episodesExtract() {
 			$this->link_arr = array();
 
-			if ($this->is_link($this->episodes)) {
+			if ($this->is_link2($this->episodes)) {
 				if ($this->link_exists($this->episodes)) {
 					$this->link_arr = @file($this->episodes);
 					array_walk($this->link_arr, array($this, 'trim'));
@@ -1177,9 +1179,9 @@ namespace Jikan {
 
 			$this->link_arr = array();
 
-			if ($this->is_link($this->characters_staff)) {
+			if ($this->is_link2($this->characters_staff)) {
 				if ($this->link_exists($this->characters_staff)) {
-					$this->link_arr = @file($this->characters_staff);
+					$this->link_arr = file($this->characters_staff);
 					array_walk($this->link_arr, array($this, 'trim'));
 				} else {
 					throw new \Exception("Could not access \"".$this->characters_staff."\"", 1);
@@ -1430,9 +1432,14 @@ namespace Jikan {
 			$this->search = array();
 		}
 
-		private function is_link($string) {
+		public function is_link($string) {
 			return (filter_var($string, FILTER_VALIDATE_URL) ? true : false);
 		}
+
+		public function is_link2($string) {
+			return preg_match('`^http(s)?://`', $string) ?  true : false;
+		}
+
 
 		private function link_exists($link) {
 			return (substr(get_headers($link)[0], 9, 3) == "200") ? true : false;

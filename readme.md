@@ -1,5 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.2-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.3-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
@@ -29,6 +29,13 @@ This is a Beta version and is in WIP.
 
 
 ## Changelog
+### 0.2.3 alpha - June 2, 17
+- Serialization will return empty array if there's none
+- Replaced `is_link` check with `is_link2`
+	- `is_link` uses the default php function `filter()` to validate URLS
+	- `filter()` returns false on some correct URLS that have UTF8 characters (which a lot of anime/manga do)
+	- `is_link2` simply checks for `http(s)://` via ReGex
+
 ### 0.2.2 alpha - June 2, 17
 - Fix manga override for `setParentFile`
 

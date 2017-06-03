@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.2.0 alpha
+*	Jikan - MyAnimeList Unofficial API @version 0.2.2 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -367,16 +367,29 @@ namespace Jikan {
 	Parameter: Manga ID
 	Returns: $this
 */
-		public function manga($id) {
-			$this->link = $this->types["manga"].$id;
-			$this->type = "manga";
+		public function manga($id=null) {
 
-			if ($this->link_exists($this->link)) {
-				$this->link_arr = @file($this->link);
-				array_walk($this->link_arr, array($this, 'trim'));
+			if (is_null($this->link)) {
+				$this->link = $this->types["manga"].$id;
+				$this->type = "manga";
+			}
+
+			if ($this->is_link($this->link)) {
+				if ($this->link_exists($this->link)) {
+					$this->link_arr = @file($this->link);
+					array_walk($this->link_arr, array($this, 'trim'));
+				} else {
+					throw new \Exception("Could not access \"".$this->link."\"", 1);
+					return false;
+				}
 			} else {
-				throw new \Exception("Could not access \"".$this->link."\"", 1);
-				return false;
+				if (file_exists($this->link)) {
+					$this->link_arr = @file($this->link);
+					array_walk($this->link_arr, array($this, 'trim'));
+				} else {
+					throw new \Exception("File not found \"".$this->link."\"", 1);
+					return false;					
+				}
 			}
 
 			if (!empty($this->data)) {

@@ -1,5 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.2-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
@@ -8,7 +8,7 @@ Jikan is an OOP based class written in PHP that scrapes and parses data out of M
 
 The raison d'être for Jikan is to provide an easy API for being able to get stuff that the official API of MyAnimeList lacks.
 
-Jikan even has it's own REST API that responds in JSON. [Get Started](http://jikan.me)
+Jikan even has it's own REST API that responds in JSON - [Get Started](http://jikan.me)
 
 This is a Beta version and is in WIP.
 
@@ -23,12 +23,15 @@ This is a Beta version and is in WIP.
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
 ## Planned Features
-- Fetch Anime + Manga Reviews, Recommendations, Stats, Characters, News, Pictures, etc
+- Fetch Anime + Manga Reviews, Recommendations, Stats, News, Pictures, etc
 - Search results w/ pagination
 - Command Line Usage
 
 
 ## Changelog
+### 0.2.2 alpha - June 2, 17
+- Fix manga override for `setParentFile`
+
 ### 0.2.1 alpha - June 1, 17
 - Added method `setParentFile($type, $value)` and `setChildFile($page, $value)`
 	- This method pre-sets links/file paths to the parent/child methods, if you don't want to pass ID params to them
@@ -47,6 +50,7 @@ This is a Beta version and is in WIP.
 - Added `title-english` for anime/manga
 - Added 'status' for manga (e.g completed, publishing, etc)
 - For Mangas, `volumes` and `chapters` will return 'Unknown' if so otherwise it will return integers
+- Following Semantic Versioning
 
 ### 0.1.5 alpha - May 26, 17
 - Method **list** renamed to **user_list**

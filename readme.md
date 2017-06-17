@@ -81,7 +81,6 @@ This is a Beta version and is in WIP.
 - Added user anime/manga list fetch & parsed as JSON
 - A few more stuff can be parsed from the Anime/Manga pages
 	- Background
-	- External Links
 	- Opening Themes
 	- Ending Themes
 

@@ -109,7 +109,7 @@ namespace Jikan {
 
 			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span>#", function() {
 				$matches = array();
-				preg_match('~<a href="(.*)">(.*?)</a></div>~', $this->link_arr[$this->lineNo+1], $matches);
+				preg_match('~<a href="(.*)">(.*?)</a></div>~', $this->link_arr[$this->lineNo + 1], $matches);
 				return $matches[2];
 			});
 
@@ -370,7 +370,7 @@ namespace Jikan {
 	Parameter: Manga ID
 	Returns: $this
 */
-		public function manga($id=null) {
+		public function manga($id = null) {
 
 			if (is_null($this->link)) {
 				$this->link = $this->types["manga"].$id;
@@ -448,7 +448,7 @@ namespace Jikan {
 				$return = array();
 				$matches = array();
 
-				if (!preg_match('`No genres have been added yet.`', $this->link_arr[$this->lineNo+1])) {
+				if (!preg_match('`No genres have been added yet.`', $this->link_arr[$this->lineNo + 1])) {
 					if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
 						$arr = explode(",", $this->link_arr[$this->lineNo + 1]);
 						foreach ($arr as $key => $value) {
@@ -472,12 +472,12 @@ namespace Jikan {
 
 				if (!preg_match("/None/", $this->link_arr[$this->lineNo + 1])) {
 					$_authors = array();
-					preg_match('`^(.*?)</div>`', trim($this->link_arr[$this->lineNo+1]), $_authors);
+					preg_match('`^(.*?)</div>`', trim($this->link_arr[$this->lineNo + 1]), $_authors);
 
 					$authors = explode("),", $_authors[1]);
 
 					foreach ($authors as $key => $value) {
-						if (!strpos($value, ')')) {$value .= ')';}
+						if (!strpos($value, ')')) {$value .= ')'; }
 						$break = array();
 						preg_match('`<a href=\"(.*)\">(.*)</a>`', $value, $break);
 						$return[] = array(
@@ -1429,7 +1429,7 @@ namespace Jikan {
 		}
 
 		public function setChildFile($page, $value) {
-			if (!property_exists('\Jikan\Get', $page)) {throw new \Exception("Invalid Extended Path", 1);}
+			if (!property_exists('\Jikan\Get', $page)) {throw new \Exception("Invalid Extended Path", 1); }
 			$this->{$page} = $value;
 			return $this;
 		}
@@ -1439,7 +1439,7 @@ namespace Jikan {
 		 * @param string $regex
 		 * @param \Closure $func
 		 */
-		private function setSearch($index, $regex, $func, $args=null, $merge=false) {
+		private function setSearch($index, $regex, $func, $args = null, $merge = false) {
 			$args = is_null($args) ? false : $args;
 			$this->search[$index] = array(
 				'regex' => $regex,
@@ -1459,7 +1459,7 @@ namespace Jikan {
 		}
 
 		public function is_link2($string) {
-			return preg_match('`^http(s)?://`', $string) ?  true : false;
+			return preg_match('`^http(s)?://`', $string) ? true : false;
 		}
 
 

@@ -29,10 +29,13 @@ This is a Beta version and is in WIP.
 
 
 ## Changelog
+### 0.2.5 beta - June 17, 17
+- Fixed `score` and `favorites` not showing up for manga
+- Fixed parsing issue for some `serialization`
+
 ### 0.2.4 beta - June 17, 17
 - Fixed anime/manga `type` fetch
 - Fixed parsing issue with some `licensors` names
-
 
 ### 0.2.3 alpha - June 2, 17
 - Serialization will return empty array if there's none

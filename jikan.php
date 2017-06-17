@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.2.4 alpha
+*	Jikan - MyAnimeList Unofficial API @version 0.2.5 beta
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -501,8 +501,8 @@ namespace Jikan {
 							$return[] = array($matches[1], $matches[2]);
 						}
 					} else {
-						preg_match("#<a href=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-						$return = array($matches[1], $matches[2]);
+						preg_match('/^<a.*?href=(["\'])(.*?)\1.*>(.*)<\/a>/', $this->link_arr[$this->lineNo + 1], $matches);
+						$return = array($matches[3], $matches[2]);
 					}
 				}
 				return $return;
@@ -514,6 +514,9 @@ namespace Jikan {
 				return ($this->matches[1] == "N/A" ? -1 : (int) $this->matches[1]);
 			});
 
+			$this->setSearch("score", '~<span class="dark_text">Score:</span> <span itemprop="ratingValue">(.*)</span><sup><small>1</small></sup> <small>\(scored by <span itemprop="ratingCount">(.*)</span> users\)</small>~', function() {
+				return array((float) $this->matches[1], (int) str_replace(",", "", $this->matches[2]));
+			});
 
 			$this->setSearch("popularity", "~<span class=\"dark_text\">Popularity:<\/span> #(.*[[:alnum:]])<\/div>~", function() {
 				return ($this->matches[1] == "N/A" ? -1 : (int) $this->matches[1]);
@@ -524,8 +527,8 @@ namespace Jikan {
 				return (int) $this->matches[1];
 			});
 
-			$this->setSearch("favorites", "#<span class=\"dark_text\">Favorites:<\/span>(.*)<\div>#", function() {
-				return $this->matches[1];
+			$this->setSearch("favorites", '~<div><span class="dark_text">Favorites:</span> (.*)</div>~', function() {
+				return (int) str_replace(",", "", trim($this->matches[1]));
 			});
 
 			$this->setSearch("synopsis", "%<meta property=\"og:description\" content=\"(.*)\">%", function() {

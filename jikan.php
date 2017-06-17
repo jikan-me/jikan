@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.2.3 alpha
+*	Jikan - MyAnimeList Unofficial API @version 0.2.4 alpha
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -107,8 +107,10 @@ namespace Jikan {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span> <a href=\"https://myanimelist.net/topanime.php?type=(.*)\">(.*)<\/a>#", function() {
-				return $this->matches[2];
+			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span>#", function() {
+				$matches = array();
+				preg_match('~<a href="(.*)">(.*?)</a></div>~', $this->link_arr[$this->lineNo+1], $matches);
+				return $matches[2];
 			});
 
 			$this->setSearch("episodes", "#<span class=\"dark_text\">Episodes:<\/span>#", function() {
@@ -163,10 +165,11 @@ namespace Jikan {
 						$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
 						foreach ($arr as $key => $value) {
 							preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)(<\/a>|)#", $value, $matches);
+							$matches[3] = trim(strip_tags($matches[3]));
 							$return[] = array($matches[1], $matches[3]);
 						}
 					} else {
-						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
+						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*?)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
 						$return = array($matches[1], $matches[3]);
 					}
 				} else {
@@ -425,8 +428,8 @@ namespace Jikan {
 				return $this->matches[1];
 			});
 
-			$this->setSearch("type", "#<span class=\"dark_text\">Type:<\/span> <a href=\"https://myanimelist.net/topmanga.php?type=(.*)\">(.*)<\/a>#", function() {
-				return $this->matches[1];
+			$this->setSearch("type", '~<span class="dark_text">Type:</span> <a href="(.*)">(.*?)</a></div>~', function() {
+				return $this->matches[2];
 			});
 
 			$this->setSearch("volumes", "#<span class=\"dark_text\">Volumes:<\/span> (.*)$#", function() {
@@ -441,35 +444,47 @@ namespace Jikan {
 				return trim($this->matches[1]);
 			});
 
-			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function() {
+			$this->setSearch("genre", "#<span class=\"dark_text\">Genres:<\/span>#", function() {
 				$return = array();
 				$matches = array();
-				if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
-					$arr = explode(",", $this->link_arr[$this->lineNo + 1]);
-					foreach ($arr as $key => $value) {
-						preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $value, $matches);
-						$return[] = array($matches[1], $matches[3]);
+
+				if (!preg_match('`No genres have been added yet.`', $this->link_arr[$this->lineNo+1])) {
+					if (strpos($this->link_arr[$this->lineNo + 1], ",")) {
+						$arr = explode(",", $this->link_arr[$this->lineNo + 1]);
+						foreach ($arr as $key => $value) {
+							preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $value, $matches);
+							$return[] = array($matches[1], $matches[3]);
+						}
+					} else {
+						preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
+						$return = array(
+							'name' => $matches[3], 
+							'url' => $matches[1]
+							);
 					}
-				} else {
-					preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-					$return = array($matches[1], $matches[3]);
 				}
 
 				return $return;
 			});
 
-			$this->setSearch("authors", "#<span class=\"dark_text\">Authors:<\/span>#", function() {
+			$this->setSearch("author", "#<span class=\"dark_text\">Authors:<\/span>#", function() {
 				$return = array();
-				$matches = array();
-				if (strpos($this->link_arr[$this->lineNo + 1], ">,")) {
-					$arr = explode(",", $this->link_arr[$this->lineNo + 1]);
-					foreach ($arr as $key => $value) {
-						preg_match("#<a href=\"(.*)\">(.*)<\/a>(.*?)<\/div>#", $value, $matches);
-						$return[] = array($matches[1], $matches[2], trim($matches[3]));
+
+				if (!preg_match("/None/", $this->link_arr[$this->lineNo + 1])) {
+					$_authors = array();
+					preg_match('`^(.*?)</div>`', trim($this->link_arr[$this->lineNo+1]), $_authors);
+
+					$authors = explode("),", $_authors[1]);
+
+					foreach ($authors as $key => $value) {
+						if (!strpos($value, ')')) {$value .= ')';}
+						$break = array();
+						preg_match('`<a href=\"(.*)\">(.*)</a>`', $value, $break);
+						$return[] = array(
+							'name' => $break[2],
+							'url' => $break[1]
+						);
 					}
-				} else {
-					preg_match("#<a href=\"(.*)\">(.*)<\/a>(.*?)<\/div>#", $this->link_arr[$this->lineNo + 1], $matches);
-					$return = array($matches[1], $matches[2], trim($matches[3]));
 				}
 
 				return $return;
@@ -558,23 +573,30 @@ namespace Jikan {
 
 			$this->setSearch("background", '~</div>Background</h2>~', function() {
 				$matches = array();
-				if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $matches)) {
-					return $matches[1];
-				} else {
-					preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $matches);
-					$running = true;
-					$string = $matches[1];
-					$i = 1;
-					while ($running) {
-						if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo + $i])) {
-							$running = false;
+
+				if (!preg_match('~No background information has been added to this title.~', $this->line)) {
+
+					if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $matches)) {
+						return $matches[1];
+					} else {
+						preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $matches);
+						$running = true;
+						$string = $matches[1];
+						$i = 1;
+						while ($running) {
+							if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo + $i])) {
+								$running = false;
+							}
+							$string .= $this->link_arr[$this->lineNo + $i];
+							$i++;
 						}
-						$string .= $this->link_arr[$this->lineNo + $i];
-						$i++;
+						$string = substr($string, 0, strpos($string, '<div class="border_top'));
+						return $string;
 					}
-					$string = substr($string, 0, strpos($string, '<div class="border_top'));
-					return $string;
+				} else {
+					return "";
 				}
+				
 			});
 
 

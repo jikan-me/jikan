@@ -24,6 +24,7 @@ try {
 
 		file_put_contents("nekomata1037.json", $jikan->json());
 	*/
+	$manga = $jikan->manga(1)->characters_staff()->data;
 
 } catch (Exception $e) {
 	// catch any errors

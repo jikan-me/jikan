@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.2.5 beta
+*	Jikan - MyAnimeList Unofficial API @version 0.2.6 beta
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -157,7 +157,7 @@ namespace Jikan {
 				return $return;
 			});
 
-			$this->setSearch("licensors", "#<span class=\"dark_text\">Licensors:<\/span>#", function() {
+			$this->setSearch("licensor", "#<span class=\"dark_text\">Licensors:<\/span>#", function() {
 				$matches = array();
 				$return = array();
 				if (!preg_match("/None found/", $this->link_arr[$this->lineNo + 1])) {
@@ -179,7 +179,7 @@ namespace Jikan {
 				return $return;	
 			});
 
-			$this->setSearch("studios", "#<span class=\"dark_text\">Studios:<\/span>#", function() {
+			$this->setSearch("studio", "#<span class=\"dark_text\">Studios:<\/span>#", function() {
 				$matches = array();
 				$return = array();
 				if (!preg_match("/None found/", $this->link_arr[$this->lineNo + 1])) {
@@ -204,7 +204,7 @@ namespace Jikan {
 				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("genres", "#<span class=\"dark_text\">Genres:<\/span>#", function() {
+			$this->setSearch("genre", "#<span class=\"dark_text\">Genres:<\/span>#", function() {
 				if (preg_match('~No genres have been added yet~', $this->link_arr[$this->lineNo + 1])) {
 					return array();
 				}

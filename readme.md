@@ -1,5 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.4-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-alpha-red.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.6-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
@@ -29,6 +29,13 @@ This is a Beta version and is in WIP.
 
 
 ## Changelog
+### 0.2.6 beta - June 21, 17
+- `licensors` to `licensor`
+- `authors` to `author`
+- `genres` to `genre`
+- `producers` to `producer`
+- `studios` to `studio`
+
 ### 0.2.5 beta - June 17, 17
 - Fixed `score` and `favorites` not showing up for manga
 - Fixed parsing issue for some `serialization`

@@ -136,7 +136,7 @@ namespace Jikan {
 				return $this->link_arr[$this->lineNo + 1];
 			});
 
-			$this->setSearch("producers", "#<span class=\"dark_text\">Producers:<\/span>#", function() {
+			$this->setSearch("producer", "#<span class=\"dark_text\">Producers:<\/span>#", function() {
 				$matches = array();
 				$return = array();
 				if (!preg_match("/None found/", $this->link_arr[$this->lineNo + 1])) {

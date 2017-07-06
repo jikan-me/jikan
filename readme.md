@@ -32,11 +32,11 @@ Check the [examples](https://github.com/irfan-dahir/jikan/examples) directory
 
 
 ## Changelog
-## 0.3.0 beta - June 28, 17
-- [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information
-- [Anime/Manga] Background returns as an empty string if there's nothing to parse
+### 0.3.0 beta - July 6, 17 [WIP]
+- [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information **[WIP]**
+- [Anime/Manga] Background returns as an empty string if there's nothing to parse **[WIP]**
 - [Anime/Manga] Characters & Staff to return only 1 display image instead of the 2 different sizes in one string
-- [Character/Person] Added picture parsing
+- [Character/Person] Added picture parsing **[WIP]**
 - [User list] Bug fixes
 - [REST] Added approproate HTTP header responses
 

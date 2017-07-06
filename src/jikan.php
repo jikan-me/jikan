@@ -783,6 +783,10 @@ namespace Jikan {
 				return (int) str_replace(',', '', trim($this->matches[1]));
 			});
 
+			$this->setSearch('image', '~<td width="225" class="borderClass" style="border-width: 0 1px 0 0;" valign="top"><div style="text-align: center;">(<a href="(.*)"><img src="(.*)" alt="(.*)"></a>|<a href="(.*)" class="btn-detail-add-picture"><i class="fa fa-plus-circle fs18 icon-plus-circle"></i><i class="fa fa-camera fs48"></i><br><span class="text">Add Picture</span></a></a>)</div>~', function() {
+				return $this->matches[3];
+			});
+
 			$this->data = array();
 
 			foreach ($this->link_arr as $lineNo => $line) {
@@ -972,6 +976,10 @@ namespace Jikan {
 					$i++;
 				}
 				return $publsihedManga;
+			});
+
+			$this->setSearch('image', '~<td width="225" class="borderClass" style="border-width: 0 1px 0 0;" valign="top"><div style="text-align: center; style="margin-bottom: 3px;">(<a href="(.*)"><img src="(.*)" alt="(.*)"></a>|<a href="(.*)" class="btn-detail-add-picture"><i class="fa fa-plus-circle fs18 icon-plus-circle"></i><i class="fa fa-camera fs48"></i><br><span class="text">Add Picture</span></a></a>)</div>~', function() {
+				return $this->matches[3];
 			});
 
 			$this->data = array();

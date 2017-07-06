@@ -28,7 +28,7 @@ This is a Beta version and is in WIP.
 - Command Line Usage
 
 ## Examples
-Check the [examples](https://github.com/irfan-dahir/jikan/examples) directory
+Check the [examples](https://github.com/irfan-dahir/jikan/tree/master/examples) directory
 
 
 ## Changelog

@@ -1,5 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.2.6-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.3.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me)
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
@@ -27,8 +27,19 @@ This is a Beta version and is in WIP.
 - Search results w/ pagination
 - Command Line Usage
 
+## Examples
+Check the [examples](https://github.com/irfan-dahir/jikan/examples) directory
+
 
 ## Changelog
+## 0.3.0 beta - June 28, 17
+- [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information
+- [Anime/Manga] Background returns as an empty string if there's nothing to parse
+- [Anime/Manga] Characters & Staff to return only 1 display image instead of the 2 different sizes in one string
+- [Character/Person] Added picture parsing
+- [User list] Bug fixes
+- [REST] Added approproate HTTP header responses
+
 ### 0.2.6 beta - June 21, 17
 - `licensors` to `licensor`
 - `authors` to `author`

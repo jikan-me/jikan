@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.2.6 beta
+*	Jikan - MyAnimeList Unofficial API @version 0.3.0 beta
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -65,6 +65,7 @@ namespace Jikan {
 					$this->link_arr = @file($this->link);
 					array_walk($this->link_arr, array($this, 'trim'));
 				} else {
+					http_response_code(404);
 					throw new \Exception("Could not access \"".$this->link."\"", 1);
 					return false;
 				}
@@ -307,24 +308,31 @@ namespace Jikan {
 				return $return;
 			});
 
+
 			$this->setSearch("background", '~</div>Background</h2>~', function() {
 				$matches = array();
-				if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $matches)) {
-					return $matches[1];
-				} else {
-					preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $matches);
-					$running = true;
-					$string = $matches[1];
-					$i = 1;
-					while ($running) {
-						if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo + $i])) {
-							$running = false;
+				if (!preg_match('~No background information has been added to this title.~', $this->line)) {
+
+					if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $matches)) {
+						return $matches[1];
+					} else {
+						preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $matches);
+						$running = true;
+						$string = $matches[1];
+						$i = 1;
+						while ($running) {
+							if (preg_match('~<div class="border_top"~', $this->link_arr[$this->lineNo + $i])) {
+								$running = false;
+							}
+							$string .= $this->link_arr[$this->lineNo + $i];
+							$i++;
 						}
-						$string .= $this->link_arr[$this->lineNo + $i];
-						$i++;
+						$string = substr($string, 0, strpos($string, '<div class="border_top'));
+						return $string;
 					}
-					$string = substr($string, 0, strpos($string, '<div class="border_top'));
-					return $string;
+					
+				} else {
+					return "";
 				}
 			});
 
@@ -382,6 +390,7 @@ namespace Jikan {
 					$this->link_arr = @file($this->link);
 					array_walk($this->link_arr, array($this, 'trim'));
 				} else {
+					http_response_code(404);
 					throw new \Exception("Could not access \"".$this->link."\"", 1);
 					return false;
 				}
@@ -633,6 +642,7 @@ namespace Jikan {
 				$this->link_arr = @file($this->link);
 				array_walk($this->link_arr, array($this, 'trim'));
 			} else {
+				http_response_code(404);
 				throw new \Exception("Could not access \"".$this->link."\"", 1);
 				return false;
 			}
@@ -649,6 +659,7 @@ namespace Jikan {
 			$this->setSearch("name-japanese", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function() {
 				return $this->matches[2];
 			});
+
 
 			$this->setSearch("about", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>([\s\S]*)~", function() {
 				$match = array();
@@ -803,6 +814,7 @@ namespace Jikan {
 				$this->link_arr = @file($this->link);
 				array_walk($this->link_arr, array($this, 'trim'));
 			} else {
+				http_response_code(404);
 				throw new \Exception("Could not access \"".$this->link."\"", 1);
 				return false;
 			}
@@ -1064,6 +1076,7 @@ namespace Jikan {
 					$this->link_arr = @file($this->episodes);
 					array_walk($this->link_arr, array($this, 'trim'));
 				} else {
+					http_response_code(404);
 					throw new \Exception("Could not access \"".$this->episodes."\"", 1);
 					return false;
 				}
@@ -1209,6 +1222,7 @@ namespace Jikan {
 					$this->link_arr = file($this->characters_staff);
 					array_walk($this->link_arr, array($this, 'trim'));
 				} else {
+					http_response_code(404);
 					throw new \Exception("Could not access \"".$this->characters_staff."\"", 1);
 					return false;
 				}
@@ -1243,7 +1257,7 @@ namespace Jikan {
 							$i += 3;
 							$image = array();
 							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo + $i], $image);
-							$character['image'] = $image[3];
+							$character['image'] = trim(substr(explode(",", $image[3])[1], 0, -3));
 
 							$i += 5;
 							$name = array();
@@ -1278,7 +1292,7 @@ namespace Jikan {
 										'name' => $name[2],
 										'url' => $name[1],
 										'role' => $role[1],
-										'image' => $image[3]
+										'image' => trim(substr(explode(",", $image[3])[1], 0, -3))
 									);
 								}
 
@@ -1308,7 +1322,7 @@ namespace Jikan {
 							$i += 5;
 							$match = array();
 							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo + $i], $match);
-							$person['image'] = $match[3];
+							$person['image'] = trim(substr(explode(",", $match[3])[1], 0, -3));
 							$i += 5;
 							$match = array();
 							preg_match('~<a href="(.*)">(.*)</a>~', $this->link_arr[$this->lineNo + $i], $match);
@@ -1344,7 +1358,7 @@ namespace Jikan {
 							$i += 3;
 							$image = array();
 							preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->link_arr[$this->lineNo + $i], $image);
-							$character['image'] = $image[3];
+							$character['image'] = trim(substr(explode(",", $image[3])[1], 0, -3));
 
 							$i += 5;
 							$name = array();
@@ -1464,7 +1478,6 @@ namespace Jikan {
 		public function is_link2($string) {
 			return preg_match('`^http(s)?://`', $string) ? true : false;
 		}
-
 
 		private function link_exists($link) {
 			return (substr(get_headers($link)[0], 9, 3) == "200") ? true : false;

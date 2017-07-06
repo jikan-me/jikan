@@ -3,4 +3,4 @@ php:
   - '5.6'
   - '7.0'
   - '7.1'
-script: php example.php
+script: php examples/anime.php && php examples/manga.php && examples/character.php && examples/person.php && examples/user_list.php

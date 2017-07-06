@@ -264,7 +264,7 @@ namespace Jikan {
 			});
 
 			$this->setSearch("synopsis", "%<meta property=\"og:description\" content=\"(.*)\">%", function() {
-				return $this->matches[1];
+				return strip_tags($this->matches[1]);
 			});
 
 			$this->setSearch("related", "~<table class=\"anime_detail_related_anime\"~", function() {
@@ -314,7 +314,7 @@ namespace Jikan {
 				if (!preg_match('~No background information has been added to this title.~', $this->line)) {
 
 					if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $matches)) {
-						return $matches[1];
+						return strip_tags($matches[1]);
 					} else {
 						preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $matches);
 						$running = true;
@@ -328,7 +328,7 @@ namespace Jikan {
 							$i++;
 						}
 						$string = substr($string, 0, strpos($string, '<div class="border_top'));
-						return $string;
+						return strip_tags($string);
 					}
 					
 				} else {
@@ -541,7 +541,7 @@ namespace Jikan {
 			});
 
 			$this->setSearch("synopsis", "%<meta property=\"og:description\" content=\"(.*)\">%", function() {
-				return $this->matches[1];
+				return strip_tags($this->matches[1]);
 			});
 
 
@@ -589,7 +589,7 @@ namespace Jikan {
 				if (!preg_match('~No background information has been added to this title.~', $this->line)) {
 
 					if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $matches)) {
-						return $matches[1];
+						return strip_tags($matches[1]);
 					} else {
 						preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $matches);
 						$running = true;
@@ -603,7 +603,7 @@ namespace Jikan {
 							$i++;
 						}
 						$string = substr($string, 0, strpos($string, '<div class="border_top'));
-						return $string;
+						return strip_tags($string);
 					}
 				} else {
 					return "";

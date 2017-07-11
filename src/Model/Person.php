@@ -2,8 +2,6 @@
 
 namespace Jikan\Model;
 
-use Jikan\Model\Model as Model;
-
 class Person extends Model
 {
 

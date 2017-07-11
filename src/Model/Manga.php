@@ -2,14 +2,11 @@
 
 namespace Jikan\Model;
 
-use Jikan\Model\Model as Model;
 
 class Manga extends Model
 {
 
 	public $link_canonical;
-
-	public $title;
 
 	public $title;
 
@@ -49,7 +46,7 @@ class Manga extends Model
 
 	public $genre = [];
 
-	public $author = []
+	public $author = [];
 
 	public $serialization = [];
 

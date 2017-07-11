@@ -2,7 +2,6 @@
 
 namespace Jikan\Model;
 
-use Jikan\Model\Model as Model;
 
 class Anime extends Model
 {

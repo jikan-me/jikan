@@ -2,20 +2,17 @@
 
 namespace Jikan\Get;
 
-use Jikan\Model\Anime as AnimeModel;
+use Jikan\Lib\Parser\AnimeParse;
 
-class Anime
+
+class Anime extends Get
 {
 
-	public $id;
-	public $model;
 
 
 	public function __construct($id) {
 		$this->id = $id;
-        $this->model = new AnimeModel();
-
-
+        $this->parser = new AnimeParse("t");
 
 		return $this;
 	}

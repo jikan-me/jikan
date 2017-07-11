@@ -10,6 +10,12 @@
 *	Jikan is in no way affiliated with MyAnimeList.
 */
 namespace Jikan;
+<<<<<<< HEAD:src/jikan.php
+=======
+
+
+
+>>>>>>> origin/dev:src/Jikan.php
 class Jikan
 {
 	public $Anime;

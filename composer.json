@@ -1,0 +1,16 @@
+{
+    "name": "irfan/jikan",
+    "description": "Jikan is an unofficial MyAnimeList API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nekomata",
+            "email": "irfan.dahir1037@gmail.com"
+        }
+    ],
+    "require": {},
+     "autoload": {
+        "psr-4": {"Jikan\\": "src"}
+    }
+}

@@ -1,6 +1,6 @@
 <?php
 
-require_once '../src/jikan.php';
+require_once '../src/Jikan.php';
 
 $jikan = new \Jikan\Get;
 

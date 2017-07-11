@@ -14,14 +14,16 @@ namespace Jikan;
 
 class Jikan
 {
-	
-	public $Anime;
-	public $Manga;
-	public $Character;
-	public $Person;
 
 	public function __construct() {
-		echo "ok";
+
+		return $this;
 	}
+
+	public function Anime($id) {
+	    return new Get\Anime($id);
+    }
+
+
 
 }

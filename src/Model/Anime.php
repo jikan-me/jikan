@@ -44,7 +44,7 @@ class Anime extends Model
 
 	public $background;
 
-	public $related = []
+	public $related = [];
 
 	public $premiered = [];
 

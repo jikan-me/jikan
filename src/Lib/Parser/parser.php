@@ -15,6 +15,11 @@ class Parser
 
 		$this->filePath = $filePath;
 
-	} 
+	}
+
+	public function parse() {
+
+    }
+
 
 }

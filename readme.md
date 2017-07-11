@@ -1,5 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-0.3.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)]() 
+[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-1.0.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)]() 
 [![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/irfan-dahir/jikan.svg)](http://isitmaintained.com/project/irfan-dahir/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/irfan-dahir/jikan.svg)](http://isitmaintained.com/project/irfan-dahir/jikan "Percentage of issues still open")
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
@@ -14,24 +14,34 @@ This is a Beta version and is in WIP.
 
 
 # Features
-- Anime + Characters/Staff + Episodes
-- Manga + Characters/Staff
-- Character
-- Person
-- User Anime/Manga List
+- Anime + Characters/Staff + Episodes Parsing
+- Manga + Characters/Staff Parsing
+- Character Parsing
+- Person Parsing
+- Search result parsing w/ pagination
+- User Anime/Manga List Parsing
 - Modular scraping method for developers to extend the API
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
 ## Planned Features
 - Fetch Anime + Manga Reviews, Recommendations, Stats, News, Pictures, etc
-- Search results w/ pagination
 - Command Line Usage
+- Use XPath instead of ReGex
 
 ## Examples
 Check the [examples](https://github.com/irfan-dahir/jikan/tree/master/examples) directory
 
 
 ## Changelog
+### 1.0.0 beta - July 11, 17
+- **[ADDED]** Composer
+- **Refactored** entire code base to meet with proper PSR compliants
+- **Search** result parsing with pagination support added
+- **[Person]** Name Parsing [#44](/../../issues/44)
+- **[Person]** Alternate name issue fixed [#47](/../../issues/47)
+- **[Anime/Manga]** Adaption contains html tags [#45](/../../issues/45)
+- **[Episodes]** Titles swapped fixed [#46](/../../issues/46)
+
 ### 0.3.0 beta - July 6, 17
 - [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information
 - [Anime/Manga] Background returns as an empty string if there's nothing to parse

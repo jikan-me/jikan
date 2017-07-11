@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 *	Jikan - MyAnimeList Unofficial API @version 1.0.0 beta
 *	Developed by Nekomata | irfandahir.com
@@ -10,31 +10,13 @@
 *	Jikan is in no way affiliated with MyAnimeList.
 */
 namespace Jikan;
-
-
-
-
-
-//use Jikan\Helper\Utils;
-//use Jikan\Lib\Parser;
-//
-//use Jikan\Get\Anime;
-//use Jikan\Get\Manga;
-//use Jikan\Get\Character;
-//use Jikan\Get\Person;
-//use Jikan\Get\UserList;
-
-
 class Jikan
 {
-
 	public $Anime;
 	public $Manga;
 	public $Character;
 	public $Person;
-
 	public function __construct() {
 		echo "ok";
 	}
-
 }

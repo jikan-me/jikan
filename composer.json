@@ -10,7 +10,11 @@
         }
     ],
     "require": {},
-     "autoload": {
-        "psr-4": {"Jikan\\": "src"}
+    "autoload": {
+        "psr-4": {
+            "Jikan\\": [
+                "src"
+            ]
+        }
     }
 }

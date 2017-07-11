@@ -4,7 +4,7 @@
 
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
-die("fdf");
+
 return array(
     'Jikan\\' => array($baseDir . '/src'),
 );

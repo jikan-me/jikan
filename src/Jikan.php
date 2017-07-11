@@ -11,6 +11,8 @@
 */
 namespace Jikan;
 
+require 'config.php';
+
 
 class Jikan
 {
@@ -24,6 +26,21 @@ class Jikan
 	    return new Get\Anime($id);
     }
 
+    public function Manga($id) {
+
+    }
+
+    public function Character($id) {
+
+    }
+
+    public function Person($id) {
+
+    }
+
+    public function UserList($id) {
+
+    }
 
 
 }

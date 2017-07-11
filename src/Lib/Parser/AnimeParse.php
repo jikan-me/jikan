@@ -8,4 +8,9 @@ use Jikan\Model\Anime as AnimeModel;
 class AnimeParse extends TemplateParse
 {
 
+    public function __construct()
+    {
+
+    }
+
 }

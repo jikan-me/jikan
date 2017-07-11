@@ -12,12 +12,21 @@ abstract class TemplateParse
     public $data;
     public $model;
 
-    public function parse() {
 
+    public function parse() {
         $this->model = new AnimeModel;
+    }
+
+    public function __construct($filePath)
+    {
+        $this->filePath = $filePath;
     }
 
     public function setPath($filePath) {
         $this->filePath = $filePath;
+    }
+
+    public function constructPath() {
+
     }
 }

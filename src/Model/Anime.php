@@ -20,7 +20,9 @@ class Anime extends Model
 
 	public $type;
 
-	public $episodes;
+    public $source;
+
+    public $episodes;
 
 	public $status;
 
@@ -31,6 +33,8 @@ class Anime extends Model
 	public $rating;
 
 	public $score;
+
+	public $scored_by;
 
 	public $rank;
 
@@ -55,8 +59,6 @@ class Anime extends Model
 	public $licensor = [];
 
 	public $studio = [];
-
-	public $source;
 
 	public $genre = [];
 

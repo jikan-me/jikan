@@ -17,13 +17,18 @@ require 'config.php';
 class Jikan
 {
 
+    public $response = [];
+
 	public function __construct() {
 
 		return $this;
 	}
 
-	public function Anime($id) {
-	    return new Get\Anime($id);
+	public function Anime(String $id=null, ...$extend) : Array {
+	    if (!empty($extend)) {
+            //return (new Get\Anime($id))->{implode("()->", $extend) . "()->response"};
+            return (new Get\Anime($id))->{implode('()->', $extend) . '()'}->response;
+        }
     }
 
     public function Manga($id) {

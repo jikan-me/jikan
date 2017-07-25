@@ -1,6 +1,6 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/irfan-dahir/jikan.svg?branch=master)](https://travis-ci.org/irfan-dahir/jikan) [![version](https://img.shields.io/badge/ver-1.0.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)]() 
-[![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/irfan-dahir/jikan.svg)](http://isitmaintained.com/project/irfan-dahir/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/irfan-dahir/jikan.svg)](http://isitmaintained.com/project/irfan-dahir/jikan "Percentage of issues still open")
+[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan) [![version](https://img.shields.io/badge/ver-1.0.0-blue.svg?style=flat)]() [![status](https://img.shields.io/badge/status-beta-blue.svg?style=flat)]() 
+[![REST API](https://img.shields.io/badge/jikan.me-available-brightgreen.svg?style=flat)](http://jikan.me) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open")
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
 
@@ -29,7 +29,7 @@ This is a Beta version and is in WIP.
 - Use XPath instead of ReGex
 
 ## Examples
-Check the [examples](https://github.com/irfan-dahir/jikan/tree/master/examples) directory
+Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) directory
 
 
 ## Changelog

@@ -199,10 +199,11 @@ class AnimeParse extends TemplateParse
                     } else {
                         $links = explode("</a>", $value);
                         foreach ($links as $key2 => $value2) {
-                            if (preg_match('~<a href="(.*)">(.*)(</a>|)~', $value2, $this->matches)) {
+                            if (preg_match('~<a href="(.*)/(.*)/(.*)">(.*)(</a>|)~', $value2, $this->matches)) {
                                 $return[$title][] = [
-                                    'url' => $this->matches[1],
-                                    'title' => strip_tags($this->matches[2])
+                                    'id' => (int) $this->matches[2],
+                                    'url' => BASE_URL . $this->matches[1] . '/' . $this->matches[2] . '/' . $this->matches[3],
+                                    'title' => strip_tags($this->matches[4])
                                 ];
                             }
                         }

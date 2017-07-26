@@ -26,7 +26,6 @@ This is a Beta version and is in WIP.
 ## Planned Features
 - Fetch Anime + Manga Reviews, Recommendations, Stats, News, Pictures, etc
 - Command Line Usage
-- Use XPath instead of ReGex
 
 ## Examples
 Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) directory
@@ -34,13 +33,13 @@ Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) dir
 
 ## Changelog
 ### 1.0.0 beta - July 11, 17
-- **[ADDED]** Composer
+- **Added** Composer
 - **Refactored** entire code base to meet with proper PSR compliants
-- **Search** result parsing with pagination support added
 - **[Person]** Name Parsing [#44](/../../issues/44)
 - **[Person]** Alternate name issue fixed [#47](/../../issues/47)
 - **[Anime/Manga]** Adaption contains html tags [#45](/../../issues/45)
 - **[Episodes]** Titles swapped fixed [#46](/../../issues/46)
+- **Fixed** Some responses showing HTML tags
 
 ### 0.3.0 beta - July 6, 17
 - [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information
@@ -48,7 +47,7 @@ Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) dir
 - [Anime/Manga] Characters & Staff to return only 1 display image instead of the 2 different sizes in one string
 - [Character/Person] Added picture parsing
 - [User list] Bug fixes
-- [REST] Added approproate HTTP header responses
+- [REST] Added appropriate HTTP header responses
 
 ### 0.2.6 beta - June 21, 17
 - `licensors` to `licensor`

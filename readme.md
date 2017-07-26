@@ -18,7 +18,6 @@ This is a Beta version and is in WIP.
 - Manga + Characters/Staff Parsing
 - Character Parsing
 - Person Parsing
-- Search result parsing w/ pagination
 - User Anime/Manga List Parsing
 - Modular scraping method for developers to extend the API
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)

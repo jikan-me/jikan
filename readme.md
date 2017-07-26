@@ -13,18 +13,28 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 This is a Beta version and is in WIP.
 
 
-# Features
-- Anime + Characters/Staff + Episodes Parsing
-- Manga + Characters/Staff Parsing
+# Responses
+- Anime Parsing
+    - Characters & Staff
+    - Episodes
+- Manga Parsing
+    - Characters
 - Character Parsing
-- Person Parsing
+- People Parsing
 - User Anime/Manga List Parsing
+    - Wrapper for the official API
 - Modular scraping method for developers to extend the API
 - JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
 ## Planned Features
-- Fetch Anime + Manga Reviews, Recommendations, Stats, News, Pictures, etc
+- Anime & Manga
+    - User Reviews
+    - Recommendations
+    - Stats
+    - News
+    - Pictures
 - Command Line Usage
+- [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Examples
 Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) directory
@@ -34,11 +44,16 @@ Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) dir
 ### 1.0.0 beta - July 11, 17
 - **Added** Composer
 - **Refactored** entire code base to meet with proper PSR compliants
-- **[Person]** Name Parsing [#44](/../../issues/44)
-- **[Person]** Alternate name issue fixed [#47](/../../issues/47)
-- **[Anime/Manga]** Adaption contains html tags [#45](/../../issues/45)
-- **[Episodes]** Titles swapped fixed [#46](/../../issues/46)
+- **[Person]** 
+    - Name Parsing [#44](/../../issues/44)
+    - Alternate name issue fixed [#47](/../../issues/47)
+- **[Anime/Manga]** 
+    - Adaption contains HTML tags [#45](/../../issues/45)
+    - Related anime/manga parse the ID now [#52](/../../issues/52)
+    - **[Episodes]** Romanji/Japanese titles swapped now fixed [#46](/../../issues/46)
 - **Fixed** Some responses showing HTML tags
+- **[Character]** Canonical Link parsing [#50](/../../issues/50)
+- **[User_List]** Appropriate HTTP Response headers
 
 ### 0.3.0 beta - July 6, 17
 - [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information

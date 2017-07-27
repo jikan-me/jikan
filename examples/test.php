@@ -4,7 +4,13 @@ require_once dirname(__DIR__) . "/vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
 
-var_dump($jikan->Anime(2167)['related']);
+$jikan->Anime(21, [EPISODES]);
+
+$animeData = $jikan->response;
+
+
+var_dump($animeData);
+
 
 //var_dump($jikan->response);
 //var_dump($jikan->response);

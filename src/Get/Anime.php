@@ -3,30 +3,56 @@
 namespace Jikan\Get;
 
 use Jikan\Lib\Parser\AnimeParse;
+use Jikan\Lib\Parser\AnimeEpisodeParse;
 
 
-class Anime extends Get implements \ArrayAccess
+class Anime extends Get
 {
 
+    private $validExtends = [CHARACTERS_STAFF, EPISODES];
 
-	public function __construct($id=null) {
+	public function __construct($id = null, $extend = null) {
 
-        $this->parser = new AnimeParse;
 
-        if (!is_null($id)) {
-            $this->id = $id;
+        if (is_null($id)) {
+            throw new \Exception('ID/Path not given');
+        }
+
+        $this->id = $id;
+
+        if (empty($extend)) {
+
+            $this->parser = new AnimeParse;
             $this->parser->setPath(BASE_URL . ANIME_ENDPOINT . $this->id);
             $this->parser->loadFile();
 
             $this->response = $this->parser->parse();
+
+	    } else {
+
+            if (count(array_intersect($extend, $this->validExtends)) == 0) {
+                throw new \Exception('Unsupported parse request');
+            }
+
+            $this->extend = $extend;
+            foreach ($this->extend as $key => $extend) {
+                $this->{$extend}();
+            }
+
         }
+
 
 
         return $this;
 	}
 
 	public function episodes() {
-        echo "episodes<br>";
+	    $this->parser = new AnimeEpisodeParse;
+        $this->parser->setPath(BASE_URL . ANIME_ENDPOINT . $this->id . '/_/episode');
+        $this->parser->loadFile();
+
+        $this->response = $this->parser->parse();
+
 	    return $this;
 	}
 
@@ -35,66 +61,4 @@ class Anime extends Get implements \ArrayAccess
 	    return $this;
 	}
 
-    /**
-     * Whether a offset exists
-     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
-     * @param mixed $offset <p>
-     * An offset to check for.
-     * </p>
-     * @return boolean true on success or false on failure.
-     * </p>
-     * <p>
-     * The return value will be casted to boolean if non-boolean was returned.
-     * @since 5.0.0
-     */
-    public function offsetExists($offset)
-    {
-
-        // TODO: Implement offsetExists() method.
-    }
-
-    /**
-     * Offset to retrieve
-     * @link http://php.net/manual/en/arrayaccess.offsetget.php
-     * @param mixed $offset <p>
-     * The offset to retrieve.
-     * </p>
-     * @return mixed Can return all value types.
-     * @since 5.0.0
-     */
-    public function offsetGet($offset)
-    {
-        // TODO: Implement offsetGet() method.
-    }
-
-    /**
-     * Offset to set
-     * @link http://php.net/manual/en/arrayaccess.offsetset.php
-     * @param mixed $offset <p>
-     * The offset to assign the value to.
-     * </p>
-     * @param mixed $value <p>
-     * The value to set.
-     * </p>
-     * @return void
-     * @since 5.0.0
-     */
-    public function offsetSet($offset, $value)
-    {
-        // TODO: Implement offsetSet() method.
-    }
-
-    /**
-     * Offset to unset
-     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
-     * @param mixed $offset <p>
-     * The offset to unset.
-     * </p>
-     * @return void
-     * @since 5.0.0
-     */
-    public function offsetUnset($offset)
-    {
-        // TODO: Implement offsetUnset() method.
-    }
 }

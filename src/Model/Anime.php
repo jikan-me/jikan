@@ -66,5 +66,7 @@ class Anime extends Model
 
 	public $ending_theme = [];
 
+	public $episode = [];
+
 
 }

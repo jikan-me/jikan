@@ -44,7 +44,7 @@ class AnimeParse extends TemplateParse
         });
 
         $this->addRule('episodes', '~<span class="dark_text">Episodes:</span>~', function() {
-            $this->model->set('episodes', $this->file[$this->lineNo + 1]);
+            $this->model->set('episodes', (int) $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('status', '~<span class="dark_text">Status:</span>~', function() {
@@ -175,7 +175,7 @@ class AnimeParse extends TemplateParse
         });
 
         $this->addRule('synopsis', '~<meta property="og:description" content="(.*)">~', function() {
-            $this->model->set('synopsis', $this->matches[1]);
+            $this->model->set('synopsis', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('related', '~<table class="anime_detail_related_anime"~', function() {
@@ -215,6 +215,52 @@ class AnimeParse extends TemplateParse
             $this->model->set('related', $return);
         });
 
+        $this->addRule('background', '~</div>Background</h2>~', function() {
+           if (!preg_match('~No background information has been added to this title.~', $this->line)) {
+               if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $this->matches)) {
+                   $this->model->set('background', htmlspecialchars_decode(strip_tags($this->matches[1])));
+               } else {
+                   preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $this->matches);
+                   $running = true;
+                   $string = $this->matches[1];
+                   $i = 1;
+
+                   while ($running) {
+                       if (preg_match('~<div class="border_top"~', $this->file[$this->lineNo + 1])) {
+                           $running = false;
+                       }
+
+                       $string .= $this->file[$this->lineNo + $i];
+                       $i++;
+                   }
+
+                   $string = substr($string, 0, strpos($string, '<div class="border_top'));
+
+                   $this->model->set('background', htmlspecialchars_decode(strip_tags($string)));
+               }
+           }
+        });
+
+        $this->addRule('opening_theme', '~<div class="theme-songs js-theme-songs opnening">([\s\S]*)</div>~', function() {
+           $themes = explode('<span class="theme-song">', $this->matches[1]);
+           foreach ($themes as $key => &$value) {
+               $value = htmlspecialchars_decode(substr($value, 0, -11));
+           }
+
+           array_shift($themes);
+           $this->model->set('opening_theme', $themes);
+        });
+
+        $this->addRule('ending_theme', '~<div class="theme-songs js-theme-songs ending">([\s\S]*)</div>~', function() {
+            $themes = explode('<span class="theme-song">', $this->matches[1]);
+            foreach ($themes as $key => &$value) {
+                $value = htmlspecialchars_decode(substr($value, 0, -11));
+            }
+
+            array_shift($themes);
+            $this->model->set('ending_theme', $themes);
+        });
+
 
 
         /*
@@ -228,7 +274,7 @@ class AnimeParse extends TemplateParse
             $this->find();
         }
 
-        return (array) $this->model;
+        return $this->model;
 
     }
 

@@ -9,5 +9,6 @@ abstract class Get
     public $model;
     public $parser;
     public $response;
+    public $extend;
 
 }

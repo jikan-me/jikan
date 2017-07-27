@@ -52,8 +52,10 @@ Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) dir
     - Related anime/manga parse the ID now [#52](/../../issues/52)
     - **[Episodes]** Romanji/Japanese titles swapped now fixed [#46](/../../issues/46)
 - **Fixed** Some responses showing HTML tags
+- HTML special characters are now decoded to Unicode
 - **[Character]** Canonical Link parsing [#50](/../../issues/50)
 - **[User_List]** Appropriate HTTP Response headers
+- **[Related/Producer/Licensor/Studio/Genre/]** Return the ***full*** URLs now. More info at [MIGRATION.md](https://github.com/jikan-me/jikan/tree/master/migration.md)
 
 ### 0.3.0 beta - July 6, 17
 - [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information

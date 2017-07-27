@@ -3,11 +3,11 @@
 namespace Jikan\Lib\Parser;
 
 use Jikan\Helper\Utils as Util;
-use Jikan\Model\Anime as AnimeModel;
 
 abstract class TemplateParse
 {
 
+    public $file;
     public $filePath;
     public $data;
     public $model;
@@ -48,7 +48,7 @@ abstract class TemplateParse
             if (!$value['found']) {
                 if (preg_match($value['regex'], $this->line, $this->matches)) {
                     if ($value['merge']) {
-                        $this->rules[ $index] = array_merge($this->rules[$index], ($value['args'] !== false) ? $value['callback'](...$value['args']) : $value['callback']());
+                        $this->rules[$index] = array_merge($this->rules[$index], ($value['args'] !== false) ? $value['callback'](...$value['args']) : $value['callback']());
                     } else {
                         $this->rules[$index] = ($value['args'] !== false) ? $value['callback'](...$value['args']) : $value['callback']();
                     }

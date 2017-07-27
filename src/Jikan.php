@@ -23,24 +23,45 @@ class Jikan
 		return $this;
 	}
 
-	public function Anime(String $id=null) {
-	    return (new Get\Anime($id))->response;
+	/*
+	 * Anime
+	 */
+	public function Anime(String $id = null, Array $extend = []) {
+	    $this->response = (array) (new Get\Anime($id, $extend))->response;
+
+	    return $this;
     }
 
+    /*
+     * Manga
+     */
     public function Manga($id) {
 
+        return $this;
     }
 
+    /*
+     * Character
+     */
     public function Character($id) {
 
+        return $this;
     }
 
+    /*
+     * Person
+     */
     public function Person($id) {
 
+        return $this;
     }
 
+    /*
+     * User List
+     */
     public function UserList($id) {
 
+        return $this;
     }
 
 

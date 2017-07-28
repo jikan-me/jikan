@@ -8,6 +8,6 @@ class AnimeEpisode extends Model
 
     public $episode = [];
 
-    public $last_page = 1;
+    public $episode_last_page = 1;
 
 }

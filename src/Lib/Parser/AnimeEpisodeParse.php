@@ -25,9 +25,9 @@ class AnimeEpisodeParse extends TemplateParse
 
 
         $this->addRule('last_page', '~<div class="pagination ac">(.*?)</div>~', function() {
-            preg_match_all('~<a class="link" href="(.*?)">(.*?)</a>~', $this->line, $this->matches);
+            preg_match_all('~<a class="link(|current)" href="(.*?)">(.*?)</a>~', $this->line, $this->matches);
 
-            $this->model->set('AnimeEpisode', 'last_page', ((int)substr($this->matches[1][count($this->matches)-1], -3))/100);
+            $this->model->set('AnimeEpisode', 'episode_last_page', ((int)substr(end($this->matches[2]), -3))/100);
         });
 
 

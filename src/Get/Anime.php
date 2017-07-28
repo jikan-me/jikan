@@ -27,7 +27,7 @@ class Anime extends Get
         $this->parser->loadFile();
 
         //$this->response = $this->parser->parse();
-        array_merge($this->response, $this->parser->parse());
+        $this->response = array_merge($this->response, $this->parser->parse());
 
         $this->canonical_path = $this->parser->model->get('Anime', 'link_canonical');
 
@@ -75,7 +75,7 @@ class Anime extends Get
         $this->parser->setPath($this->canonical_path.'/episode?offset='.(($page-1)*100));
         $this->parser->loadFile();
 
-        array_merge($this->response, $this->parser->parse());
+        $this->response = array_merge($this->response, $this->parser->parse());
 
         //array_merge($this->response, $this->parser->parse());
         //$this->response = $this->parser->parse();

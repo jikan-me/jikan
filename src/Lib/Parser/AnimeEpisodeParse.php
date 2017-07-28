@@ -30,6 +30,8 @@ class AnimeEpisodeParse extends TemplateParse
             $this->model->set('AnimeEpisode', 'episode_last_page', ((int)substr(end($this->matches[2]), -3))/100);
         });
 
+        http_resp
+
 
         $this->addRule('episode', '~<table border="0" cellspacing="0" cellpadding="0" width="100%" class="mt8 episode_list js-watch-episode-list ascend">~', function() {
             $running = true;

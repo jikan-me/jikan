@@ -9,6 +9,8 @@ use Jikan\Lib\Parser\AnimeEpisodeParse;
 class Anime extends Get
 {
 
+    public $canonical_path;
+
     private $validExtends = [CHARACTERS_STAFF, EPISODES];
 
 	public function __construct($id = null, $extend = null) {
@@ -20,45 +22,67 @@ class Anime extends Get
 
         $this->id = $id;
 
-        if (empty($extend)) {
+        $this->parser = new AnimeParse;
+        $this->parser->setPath(BASE_URL . ANIME_ENDPOINT . $this->id);
+        $this->parser->loadFile();
 
-            $this->parser = new AnimeParse;
-            $this->parser->setPath(BASE_URL . ANIME_ENDPOINT . $this->id);
-            $this->parser->loadFile();
+        //$this->response = $this->parser->parse();
+        array_merge($this->response, $this->parser->parse());
 
-            $this->response = $this->parser->parse();
+        $this->canonical_path = $this->parser->model->get('Anime', 'link_canonical');
 
-	    } else {
-
-            if (count(array_intersect($extend, $this->validExtends)) == 0) {
-                throw new \Exception('Unsupported parse request');
-            }
+        if (!empty($extend)) {
 
             $this->extend = $extend;
+
+
             foreach ($this->extend as $key => $extend) {
-                $this->{$extend}();
+
+                if (is_array($extend)) {
+
+                    if (!is_string(key($extend))) {
+                        throw new \Exception('No arguments set for extend');
+                    }
+
+                    $this->extend = key($extend);
+                    $this->extendArgs = current($extend);
+
+                    if (!in_array($this->extend, $this->validExtends)) {
+                        throw new \Exception('Unsupported parse request');
+                    }
+
+                    $this->{$this->extend}($this->extendArgs);
+                } else {
+                    $this->extend = $extend;
+
+                    if (!in_array($this->extend, $this->validExtends)) {
+                        throw new \Exception('Unsupported parse request');
+                    }
+
+                    $this->{$this->extend}($this->extendArgs);
+                }
             }
 
         }
 
-
-
-        return $this;
 	}
 
-	public function episodes() {
+	private function episodes($page=1) {
+	    $page = ($page < 1) ? $page = 1 : $page;
 	    $this->parser = new AnimeEpisodeParse;
-        $this->parser->setPath(BASE_URL . ANIME_ENDPOINT . $this->id . '/_/episode');
+	    //echo $this->canonical_path.'?offset='.(($page-1)*100);
+
+        $this->parser->setPath($this->canonical_path.'/episode?offset='.(($page-1)*100));
         $this->parser->loadFile();
 
-        $this->response = $this->parser->parse();
+        array_merge($this->response, $this->parser->parse());
 
-	    return $this;
+        //array_merge($this->response, $this->parser->parse());
+        //$this->response = $this->parser->parse();
+
 	}
 
-	public function charactersStaff() {
-        echo "charactersStaff<br>";
-	    return $this;
+	private function charactersStaff() {
 	}
 
 }

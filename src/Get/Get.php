@@ -8,7 +8,8 @@ abstract class Get
     public $path;
     public $model;
     public $parser;
-    public $response;
+    public $response = [];
     public $extend;
+    public $extendArgs;
 
 }

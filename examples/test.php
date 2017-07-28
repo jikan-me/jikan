@@ -4,17 +4,8 @@ require_once dirname(__DIR__) . "/vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
 
-$jikan->Anime(21, [EPISODES]);
-
-$animeData = $jikan->response;
+$jikan->Anime(21, [EPISODES, CHARACTERS_STAFF]);
 
 
-var_dump($animeData);
-
-
-//var_dump($jikan->response);
-//var_dump($jikan->response);
-
-
-
-//$jikan->Manga(1);
+echo "Response: ";
+var_dump($jikan->response);

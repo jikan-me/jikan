@@ -19,7 +19,6 @@ abstract class TemplateParse
 
     public function setPath($filePath) {
         $this->filePath = $filePath;
-        echo $this->filePath;
     }
 
     public function loadFile() {
@@ -36,7 +35,7 @@ abstract class TemplateParse
                 }
             }
             $this->file = @file($this->filePath);
-            array_walk($this->file, Util::class.'::trim');
+            array_walk($this->file, Util::class.'::trim'); // bystanders begone!
 
         } else {
             throw new \Exception("File path is null");
@@ -59,8 +58,8 @@ abstract class TemplateParse
         }
     }
 
-    public function addRule(string $index, string $regex, Callable $callback, $args = null, $merge = false) {
-        $args = $args ?? false;
+    public function addRule(String $index, String $regex, Callable $callback, $args = null, Bool $merge = false) {
+        $args = $args ?? false; // The reason you need PHP 7.1+
         $this->rules[$index] = [
             'regex' => $regex,
             'callback' => $callback,

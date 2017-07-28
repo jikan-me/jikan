@@ -8,6 +8,7 @@ class AnimeParse extends TemplateParse
 {
 
     public function parse() {
+
         $this->model = new AnimeModel;
 
         /*
@@ -15,54 +16,54 @@ class AnimeParse extends TemplateParse
          */
 
         $this->addRule('link_canonical', '~<link rel="canonical" href="(.*)" />~', function() {
-           $this->model->set('link_canonical', $this->matches[1]);
+           $this->model->set('Anime', 'link_canonical', $this->matches[1]);
         });
 
         $this->addRule('title', '~<h1 class="h1"><span itemprop="name">(.*)</span></h1>~', function() {
-           $this->model->set('title', $this->matches[1]);
+           $this->model->set('Anime', 'title', $this->matches[1]);
         });
 
         $this->addRule('title_english', '~<span class="dark_text">English:</span> (.*)~', function() {
-            $this->model->set('title_english', $this->matches[1]);
+            $this->model->set('Anime', 'title_english', $this->matches[1]);
         });
 
         $this->addRule('title_synonyms', '~<span class="dark_text">Synonyms:</span> (.*)~', function() {
-            $this->model->set('title_synonyms', $this->matches[1]);
+            $this->model->set('Anime', 'title_synonyms', $this->matches[1]);
         });
 
         $this->addRule('title_japanese', '~<span class="dark_text">Japanese:</span> (.*)~', function() {
-            $this->model->set('title_japanese', $this->matches[1]);
+            $this->model->set('Anime', 'title_japanese', $this->matches[1]);
         });
 
         $this->addRule('image_url', '~<img src="(.*)" alt="(.*)" class="ac" itemprop="image">~', function() {
-            $this->model->set('image_url', $this->matches[1]);
+            $this->model->set('Anime', 'image_url', $this->matches[1]);
         });
 
         $this->addRule('type', '~<span class="dark_text">Type:</span>~', function() {
             preg_match('~<a href="(.*)">(.*?)</a></div>~', $this->file[$this->lineNo + 1], $this->matches);
-            $this->model->set('type', $this->matches[2]);
+            $this->model->set('Anime', 'type', $this->matches[2]);
         });
 
         $this->addRule('episodes', '~<span class="dark_text">Episodes:</span>~', function() {
-            $this->model->set('episodes', (int) $this->file[$this->lineNo + 1]);
+            $this->model->set('Anime', 'episodes', (int) $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('status', '~<span class="dark_text">Status:</span>~', function() {
-            $this->model->set('status', $this->file[$this->lineNo + 1]);
+            $this->model->set('Anime', 'status', $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('aired', '~<span class="dark_text">Aired:</span>~', function() {
-            $this->model->set('aired', $this->file[$this->lineNo + 1]);
+            $this->model->set('Anime', 'aired', $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('premiered', '~<span class="dark_text">Premiered:</span>~', function() {
             if (preg_match('~<a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + 1], $this->matches)) {
-                $this->model->set('premiered', $this->matches[2]);
+                $this->model->set('Anime', 'premiered', $this->matches[2]);
             }
         });
 
         $this->addRule('broadcast', '~<span class="dark_text">Broadcast:</span>~', function() {
-            $this->model->set('broadcast', $this->file[$this->lineNo + 1]);
+            $this->model->set('Anime', 'broadcast', $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('producer', '~<span class="dark_text">Producers:</span>~', function() {
@@ -79,7 +80,7 @@ class AnimeParse extends TemplateParse
                 }
             }
 
-            $this->model->set('producer', $return);
+            $this->model->set('Anime', 'producer', $return);
         });
 
         $this->addRule('licensor', '~<span class="dark_text">Licensors:</span>~', function() {
@@ -96,7 +97,7 @@ class AnimeParse extends TemplateParse
                 }
             }
 
-            $this->model->set('licensor', $return);
+            $this->model->set('Anime', 'licensor', $return);
         });
 
         $this->addRule('studio', '~<span class="dark_text">Studios:</span>~', function() {
@@ -113,11 +114,11 @@ class AnimeParse extends TemplateParse
                 }
             }
 
-            $this->model->set('studio', $return);
+            $this->model->set('Anime', 'studio', $return);
         });
 
         $this->addRule('source', '~<span class="dark_text">Source:</span>~', function() {
-            $this->model->set('source', $this->file[$this->lineNo + 1]);
+            $this->model->set('Anime', 'source', $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('genre', '~<span class="dark_text">Genres:</span>~', function() {
@@ -134,48 +135,48 @@ class AnimeParse extends TemplateParse
                 }
             }
 
-            $this->model->set('genre', $return);
+            $this->model->set('Anime', 'genre', $return);
         });
 
         $this->addRule('duration', '~<span class="dark_text">Duration:</span>~', function() {
-           $this->model->set('duration', $this->file[$this->lineNo + 1]);
+           $this->model->set('Anime', 'duration', $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('rating', '~<span class="dark_text">Rating:</span>~', function() {
-           $this->model->set('rating', $this->file[$this->lineNo + 1]);
+           $this->model->set('Anime', 'rating', $this->file[$this->lineNo + 1]);
         });
 
         $this->addRule('score', '~<span class="dark_text">Score:</span>~', function(){
             preg_match('~<span(.*?)>(.*)</span><sup>1</sup> \(scored by <span(.*?)>(.*)</span> users\)~', $this->file[$this->lineNo + 1], $this->matches);
 
-            $this->model->set('score', (float) $this->matches[2]);
-            $this->model->set('scored_by', (int) str_replace(",", "", $this->matches[4]));
+            $this->model->set('Anime', 'score', (float) $this->matches[2]);
+            $this->model->set('Anime', 'scored_by', (int) str_replace(",", "", $this->matches[4]));
         });
 
         $this->addRule('rank', '~<span class="dark_text">Ranked:</span>~', function() {
            if (!preg_match('~N/A<sup>2</sup>~', $this->file[$this->lineNo + 1], $this->matches)) {
                preg_match('~#(.*)<sup>2</sup>~', $this->file[$this->lineNo + 1], $this->matches);
 
-               $this->model->set('rank', (int) $this->matches[1]);
+               $this->model->set('Anime', 'rank', (int) $this->matches[1]);
            }
         });
 
         $this->addRule('popularity', '~<span class="dark_text">Popularity:</span>~', function() {
            preg_match('~#(.*)~', $this->file[$this->lineNo + 1], $this->matches);
 
-           $this->model->set('popularity', (int) $this->matches[1]);
+           $this->model->set('Anime', 'popularity', (int) $this->matches[1]);
         });
 
         $this->addRule('members', '~<span class="dark_text">Members:</span>~', function() {
-           $this->model->set('members', (int) str_replace(",", "", $this->file[$this->lineNo + 1]));
+           $this->model->set('Anime', 'members', (int) str_replace(",", "", $this->file[$this->lineNo + 1]));
         });
 
         $this->addRule('favorites', '~<span class="dark_text">Favorites:</span>~', function() {
-            $this->model->set('favorites', (int) str_replace(",", "", $this->file[$this->lineNo + 1]));
+            $this->model->set('Anime', 'favorites', (int) str_replace(",", "", $this->file[$this->lineNo + 1]));
         });
 
         $this->addRule('synopsis', '~<meta property="og:description" content="(.*)">~', function() {
-            $this->model->set('synopsis', htmlspecialchars_decode($this->matches[1]));
+            $this->model->set('Anime', 'synopsis', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('related', '~<table class="anime_detail_related_anime"~', function() {
@@ -212,13 +213,13 @@ class AnimeParse extends TemplateParse
 
             }
 
-            $this->model->set('related', $return);
+            $this->model->set('Anime', 'related', $return);
         });
 
         $this->addRule('background', '~</div>Background</h2>~', function() {
            if (!preg_match('~No background information has been added to this title.~', $this->line)) {
                if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $this->matches)) {
-                   $this->model->set('background', htmlspecialchars_decode(strip_tags($this->matches[1])));
+                   $this->model->set('Anime', 'background', htmlspecialchars_decode(strip_tags($this->matches[1])));
                } else {
                    preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $this->matches);
                    $running = true;
@@ -236,7 +237,7 @@ class AnimeParse extends TemplateParse
 
                    $string = substr($string, 0, strpos($string, '<div class="border_top'));
 
-                   $this->model->set('background', htmlspecialchars_decode(strip_tags($string)));
+                   $this->model->set('Anime', 'background', htmlspecialchars_decode(strip_tags($string)));
                }
            }
         });
@@ -248,7 +249,7 @@ class AnimeParse extends TemplateParse
            }
 
            array_shift($themes);
-           $this->model->set('opening_theme', $themes);
+           $this->model->set('Anime', 'opening_theme', $themes);
         });
 
         $this->addRule('ending_theme', '~<div class="theme-songs js-theme-songs ending">([\s\S]*)</div>~', function() {
@@ -258,7 +259,7 @@ class AnimeParse extends TemplateParse
             }
 
             array_shift($themes);
-            $this->model->set('ending_theme', $themes);
+            $this->model->set('Anime', 'ending_theme', $themes);
         });
 
 
@@ -274,7 +275,7 @@ class AnimeParse extends TemplateParse
             $this->find();
         }
 
-        return $this->model;
+        return (array) $this->model;
 
     }
 

@@ -227,7 +227,7 @@ class AnimeParse extends TemplateParse
                    $i = 1;
 
                    while ($running) {
-                       if (preg_match('~<div class="border_top"~', $this->file[$this->lineNo + 1])) {
+                       if (preg_match('~<div class="border_top"~', $this->file[$this->lineNo + $i])) {
                            $running = false;
                        }
 
@@ -235,7 +235,7 @@ class AnimeParse extends TemplateParse
                        $i++;
                    }
 
-                   $string = substr($string, 0, strpos($string, '<div class="border_top'));
+                   $string = substr($string, 0, strpos($string, '<div class="border_top"'));
 
                    $this->model->set('Anime', 'background', htmlspecialchars_decode(strip_tags($string)));
                }

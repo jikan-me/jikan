@@ -1,19 +1,30 @@
 <?php
-
 namespace Jikan\Lib\Parser;
 
-use Jikan\Model\Manga as MangaModel;
+use Jikan\Model\MangaCharacter as MangaCharacterModel;
 
-class MangaParse extends TemplateParse
+class MangaCharacterParse extends TemplateParse
 {
 
-    public function parse() {
+    private $return = [];
 
-        $this->model = new MangaModel;
+    public function parse() : Array
+    {
+
+
+
+        $this->model = new MangaCharacterModel();
 
         /*
          * Rules
          */
+
+
+
+        $this->loadFile($this->filePath);
+
+
+        // rules
 
 
 
@@ -29,8 +40,5 @@ class MangaParse extends TemplateParse
         }
 
         return (array) $this->model;
-
     }
-
-
 }

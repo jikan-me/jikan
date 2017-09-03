@@ -6,5 +6,4 @@ $jikan = new Jikan\Jikan;
 
 $jikan->Anime(8536);
 
-
 var_dump($jikan->response);

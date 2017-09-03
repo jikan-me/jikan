@@ -86,14 +86,17 @@ class AnimeParse extends TemplateParse
         $this->addRule('licensor', '~<span class="dark_text">Licensors:</span>~', function() {
             $return = [];
             if (!preg_match('~None found~', $this->file[$this->lineNo + 1])) {
-                $array = explode(",", $this->file[$this->lineNo + 1]);
+                $array = explode("</a>", $this->file[$this->lineNo + 1]);
+                // licensors can contain commas, so we can't use that as delimiter. e.g; "NIS America, Inc." //anime/16067
 
                 foreach ($array as $key => $value) {
-                    preg_match('~<a href="/(.*)" title="(.*)">([\s\S]*)(</a>|)~', $value, $this->matches);
-                    $return[] = [
-                        'url' => BASE_URL . $this->matches[1],
-                        'name' => strip_tags($this->matches[2])
-                    ];
+                    if (preg_match('~<a href="/(.*)" title="(.*)">([\s\S]*)(</a>|)~', $value)) {
+                        preg_match('~<a href="/(.*)" title="(.*)">([\s\S]*)(</a>|)~', $value, $this->matches);
+                        $return[] = [
+                            'url' => BASE_URL . $this->matches[1],
+                            'name' => strip_tags($this->matches[2])
+                        ];
+                    }
                 }
             }
 

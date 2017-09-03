@@ -2,6 +2,7 @@
 
 namespace Jikan\Get;
 
+use Jikan\Lib\Parser\AnimeCharacterStaffParse;
 use Jikan\Lib\Parser\AnimeParse;
 use Jikan\Lib\Parser\AnimeEpisodeParse;
 
@@ -83,6 +84,12 @@ class Anime extends Get
 	}
 
 	private function charactersStaff() {
+	    $this->parser = new AnimeCharacterStaffParse;
+
+	    $this->parser->setPath($this->canonical_path.'/characters');
+	    $this->parser->loadFile();
+
+	    $this->response = array_merge($this->response, $this->parser->parse());
 	}
 
 }

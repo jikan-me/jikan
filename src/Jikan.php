@@ -35,7 +35,8 @@ class Jikan
     /*
      * Manga
      */
-    public function Manga($id) {
+    public function Manga(String $id = null, Array $extend = []) {
+        $this->response = (array) (new Get\Manga($id, $extend))->response;
 
         return $this;
     }

@@ -1,0 +1,68 @@
+<?php
+
+namespace Jikan\Get;
+
+use Jikan\Lib\Parser\CharacterParse;
+
+class Character extends Get
+{
+
+    public $canonical_path;
+
+    private $validExtends = [];
+
+    public function __construct($id = null, $extend = null) {
+
+
+        if (is_null($id)) {
+            throw new \Exception('ID/Path not given');
+        }
+
+        $this->id = $id;
+
+        $this->parser = new CharacterParse;
+        $this->parser->setPath(BASE_URL . CHARACTER_ENDPOINT . $this->id);
+        $this->parser->loadFile();
+
+        //$this->response = $this->parser->parse();
+        $this->response = array_merge($this->response, $this->parser->parse());
+
+        $this->canonical_path = $this->parser->model->get('Character', 'link_canonical');
+
+        if (!empty($extend)) {
+
+            $this->extend = $extend;
+
+
+            foreach ($this->extend as $key => $extend) {
+
+                if (is_array($extend)) {
+
+                    if (!is_string(key($extend))) {
+                        throw new \Exception('No arguments set for extend');
+                    }
+
+                    $this->extend = key($extend);
+                    $this->extendArgs = current($extend);
+
+                    if (!in_array($this->extend, $this->validExtends)) {
+                        throw new \Exception('Unsupported parse request');
+                    }
+
+                    $this->{$this->extend}($this->extendArgs);
+                } else {
+                    $this->extend = $extend;
+
+                    if (!in_array($this->extend, $this->validExtends)) {
+                        throw new \Exception('Unsupported parse request');
+                    }
+
+                    $this->{$this->extend}($this->extendArgs);
+                }
+            }
+
+        }
+
+    }
+
+}

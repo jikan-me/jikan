@@ -33,17 +33,17 @@ class MangaCharacterParse extends TemplateParse
 
                 if (preg_match('~<td valign="top" width="27" class="ac borderClass (bgColor2|bgColor1)">~', $this->file[$this->lineNo + $i])) {
                     $i += 3;
-                    $image = array();
+                    $image = [];
                     preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->file[$this->lineNo + $i], $image);
                     $character['image_url'] = trim(substr(explode(",", $image[3])[1], 0, -3));
 
                     $i += 5;
-                    $name = array();
+                    $name = [];
                     preg_match('~<a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $name);
                     $character['url'] = $name[1];
                     $character['name'] = $name[2];
                     $i += 2;
-                    $role = array();
+                    $role = [];
                     preg_match('~<small>(.*)</small>~', $this->file[$this->lineNo + $i], $role);
                     $character['role'] = $role[1];
                     $characters[] = $character;
@@ -57,9 +57,6 @@ class MangaCharacterParse extends TemplateParse
 
 
         $this->loadFile($this->filePath);
-
-
-        // rules
 
 
 

@@ -9,6 +9,7 @@
             "email": "irfan.dahir1037@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "psr-4": {

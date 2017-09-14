@@ -3,4 +3,4 @@ php:
   - '5.6'
   - '7.0'
   - '7.1'
-script: php test/test.php
+script: php examples/test.php

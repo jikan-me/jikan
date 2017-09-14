@@ -3,6 +3,7 @@
     "description": "Jikan is an unofficial MyAnimeList API",
     "type": "library",
     "license": "MIT",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Irfan",

@@ -4,5 +4,5 @@ php:
   - '7.0'
   - '7.1'
 install:
-  - composer require irfan/jikan
+  - composer require jikan-me/jikan
 script: php examples/test.php

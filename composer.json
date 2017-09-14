@@ -5,10 +5,11 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Nekomata",
+            "name": "Irfan",
             "email": "irfan.dahir1037@gmail.com"
         }
     ],
+    "minimum-stability": "master",
     "require": {},
     "autoload": {
         "psr-4": {

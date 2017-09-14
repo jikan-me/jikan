@@ -18,3 +18,8 @@ define( 'USER_LIST_ENDPOINT' , 'malappinfo.php');
 define( 'CHARACTERS_STAFF' , 'charactersStaff' );
 define( 'CHARACTERS' , 'characters' );
 define( 'EPISODES' , 'episodes' );
+
+define( 'ANIME' , 'anime' );
+define( 'MANGA' , 'manga' );
+define( 'CHARACTER' , 'character' );
+define( 'PERSON' , 'person' );

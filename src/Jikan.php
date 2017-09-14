@@ -44,7 +44,8 @@ class Jikan
     /*
      * Character
      */
-    public function Character($id) {
+    public function Character(String $id = null, Array $extend = []) {
+        $this->response = (array) (new Get\Character($id, $extend))->response;
 
         return $this;
     }
@@ -52,18 +53,18 @@ class Jikan
     /*
      * Person
      */
-    public function Person($id) {
+    public function Person(String $id = null, Array $extend = []) {
+        $this->resposne = (array) (new Get\Character($id, $extend))->response;
 
         return $this;
     }
 
     /*
-     * User List
+     * Search
      */
-    public function UserList($id) {
+    public function Search(String $query = null, String $type = ANIME, Array $extend = []) {
 
         return $this;
     }
-
 
 }

@@ -3,6 +3,6 @@ require_once dirname(__DIR__) . "/vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
 
-$jikan->Person(1);
+$jikan->Person(1868);
 
-var_dump($jikan->response['anime_staff_position']);
+var_dump($jikan->response['published_manga']);

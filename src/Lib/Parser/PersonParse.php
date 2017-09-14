@@ -154,7 +154,7 @@ class PersonParse extends TemplateParse
                 if (preg_match('~<tr>~', $line)) {
                     $i++;
                     $mangaMeta = [];
-                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $mangaMeta);
+                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $mangaMeta);
                     $i++;
                     $mangaName = [];
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->file[$this->lineNo + $i], $mangaName);
@@ -164,8 +164,8 @@ class PersonParse extends TemplateParse
                     $publsihedManga[] = [
                         'manga' => [
                             'name' => $mangaName[2],
-                            'link' => $mangaMeta[1],
-                            'image' => $mangaMeta[2]
+                            'url' => BASE_URL . $mangaMeta[1],
+                            'image_url' => $mangaMeta[2]
                         ],
                         'role' => $role[2]
                     ];

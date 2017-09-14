@@ -144,7 +144,7 @@ class CharacterParse extends TemplateParse
                 $i++;
             }
 
-            $this->model->set('Character', 'voice_actors', $voiceActors);
+            $this->model->set('Character', 'voice_actor', $voiceActors);
         });
 
         $this->addRule('member_favorites', '~Member Favorites: (.*)~', function() {

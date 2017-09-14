@@ -20,6 +20,6 @@ class Character extends Model
 
 	public $mangaography = [];
 
-	public $voice_actors = [];
+	public $voice_actor = [];
 
 }

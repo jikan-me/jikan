@@ -54,7 +54,7 @@ class Jikan
      * Person
      */
     public function Person(String $id = null, Array $extend = []) {
-        $this->resposne = (array) (new Get\Character($id, $extend))->response;
+        $this->response = (array) (new Get\Person($id, $extend))->response;
 
         return $this;
     }

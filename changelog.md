@@ -1,4 +1,9 @@
 ## Changelog
+
+### 1.0.1 stable - October 5, 17
+- **[Anime]**
+    - Fixed [#44](/../../issues/44)
+
 ### 1.0.0 beta - July 11, 17
 - **Added** Composer
 - **Refactored** entire code base to meet with proper PSR compliants

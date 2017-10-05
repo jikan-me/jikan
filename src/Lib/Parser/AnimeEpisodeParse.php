@@ -54,7 +54,7 @@ class AnimeEpisodeParse extends TemplateParse
                     $i++;
 
                     preg_match('~<td class="episode-title">(<span class="fl-r di-ib pr4 icon-episode-type-bg">Filler</span>|<span class="fl-r di-ib pr4 icon-episode-type-bg">Recap</span>|)<a href="(.*)" class="fl-l fw-b ">(.*)</a>~', $this->file[$this->lineNo + $i], $this->matches);
-                    $epMeta['title'] = $this->matches[2];
+                    $epMeta['title'] = $this->matches[3];
 
                     $epMeta['filler'] = preg_match('~<span class="fl-r di-ib pr4 icon-episode-type-bg">Filler</span>~', $this->file[$this->lineNo + $i]) ? true : false;
                     $epMeta['recap'] = preg_match('~<span class="fl-r di-ib pr4 icon-episode-type-bg">Recap</span>~', $this->file[$this->lineNo + $i]) ? true : false;

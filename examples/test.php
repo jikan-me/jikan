@@ -4,7 +4,7 @@ require_once dirname(__DIR__) . "/vendor/autoload.php";
 $jikan = new Jikan\Jikan;
 
 
-$jikan->Anime(1);
+$jikan->Anime(1, [EPISODES]);
 //$jikan->Anime(1, [EPISODES, CHARACTERS_STAFF]);
 //$jikan->Anime(21, [EPISODES=>2]);
 //$jikan->Manga(1);

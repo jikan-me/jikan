@@ -34,6 +34,10 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 - Command Line Usage
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
+## Changelog
+Read more about the changelog [here](https://github.com/jikan-me/jikan/tree/master/changelog.md)
+
+
 ## Examples
 Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) directory
 

@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.3.0 beta
+*	Jikan - MyAnimeList Unofficial API @version 0.3.1 beta
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -145,11 +145,11 @@ namespace Jikan {
 						$arr = explode("</a>,", $this->link_arr[$this->lineNo + 1]);
 						foreach ($arr as $key => $value) {
 							preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">([\s\S]*)(</a>|)#", $value, $matches);
-							$return[] = array($matches[1], $matches[3]);
+							$return[] = array($matches[1], trim(str_replace(["</a>", "</div>"], "", $matches[3])));
 						}
 					} else {
 						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-						$return = array($matches[1], $matches[3]);
+						$return[] = array($matches[1], trim(str_replace(["</a>", "</div>"], "", $matches[3])));
 					}
 				} else {
 					$return = false;
@@ -171,7 +171,7 @@ namespace Jikan {
 						}
 					} else {
 						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*?)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-						$return = array($matches[1], $matches[3]);
+						$return[] = array($matches[1], $matches[3]);
 					}
 				} else {
 					$return = false;
@@ -192,7 +192,7 @@ namespace Jikan {
 						}
 					} else {
 						preg_match("#<a href=\"\/anime\/producer\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-						$return = array($matches[1], $matches[3]);
+						$return[] = array($matches[1], $matches[3]);
 					}
 				} else {
 					$return = false;
@@ -219,7 +219,7 @@ namespace Jikan {
 					}
 				} else {
 					preg_match("#<a href=\"\/anime\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-					$return = array($matches[1], $matches[3]);
+					$return[] = array($matches[1], $matches[3]);
 				}
 
 				return $return;
@@ -292,19 +292,21 @@ namespace Jikan {
 								foreach ($working2 as $key2 => $value2) {
 									$tmp2 = null;
 									preg_match("~<a href=\"(.*)\">(.*)(</a>|)~", $value2, $tmp2);
-									$return[$title][] = array($tmp2[2], $tmp2[1]);									
+									$return[$title][] = array(
+										str_replace("</a>", "", $tmp2[2]), $tmp2[1]
+									);									
 								}
 							} else {
 								preg_match("~<a href=\"(.*)\">(.*)(</a>|)~", $working, $tmp);
-								$return[$title] = array($tmp[2], $tmp[1]);
+								$return[$title][] = array(
+									str_replace("</a>", "", $tmp2[2]), $tmp[1]
+								);
 							}
 						} else {
 							$title = str_replace(":", "", $working);
 						}
 					}
 				}
-
-
 				return $return;
 			});
 
@@ -466,7 +468,7 @@ namespace Jikan {
 						}
 					} else {
 						preg_match("#<a href=\"\/manga\/genre\/(.*)\" title=\"(.*)\">(.*)<\/a>#", $this->link_arr[$this->lineNo + 1], $matches);
-						$return = array(
+						$return[] = array(
 							'name' => $matches[3], 
 							'url' => $matches[1]
 							);
@@ -511,7 +513,7 @@ namespace Jikan {
 						}
 					} else {
 						preg_match('/^<a.*?href=(["\'])(.*?)\1.*>(.*)<\/a>/', $this->link_arr[$this->lineNo + 1], $matches);
-						$return = array($matches[3], $matches[2]);
+						$return[] = array($matches[3], $matches[2]);
 					}
 				}
 				return $return;
@@ -856,7 +858,7 @@ namespace Jikan {
 				return $this->matches[1];
 			});
 
-			$this->setSearch('website', '~<span class="dark_text">Website:</span> <a href="(.*)">(.*)</a>~', function() {
+			$this->setSearch('website', '~<span class="dark_text">Website:</span> <a href="(.*?)">(.*)</a>~', function() {
 				return $this->matches[1];
 			});
 

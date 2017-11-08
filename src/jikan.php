@@ -654,12 +654,12 @@ namespace Jikan {
 				$this->data = array();
 			}
 
-			$this->setSearch("name", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function() {
-				return $this->matches[1];
+			$this->setSearch("name", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) (<span style=\"font-weight: normal;\"><small>(.*)</small></span>|)</div>~", function() {
+				return trim($this->matches[1]);
 			});
 
 			$this->setSearch("name-japanese", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>~", function() {
-				return $this->matches[2];
+				return trim($this->matches[2]);
 			});
 
 

@@ -246,23 +246,13 @@ class AnimeParse extends TemplateParse
         });
 
         $this->addRule('opening_theme', '~<div class="theme-songs js-theme-songs opnening">([\s\S]*)</div>~', function() {
-           $themes = explode('<span class="theme-song">', $this->matches[1]);
-           foreach ($themes as $key => &$value) {
-               $value = htmlspecialchars_decode(substr($value, 0, -11));
-           }
-
-           array_shift($themes);
-           $this->model->set('Anime', 'opening_theme', $themes);
+            preg_match_all('~<span class="theme-song">(.*?)</span>~', $this->matches[1], $this->matches);
+           $this->model->set('Anime', 'opening_theme', $this->matches[1]);
         });
 
         $this->addRule('ending_theme', '~<div class="theme-songs js-theme-songs ending">([\s\S]*)</div>~', function() {
-            $themes = explode('<span class="theme-song">', $this->matches[1]);
-            foreach ($themes as $key => &$value) {
-                $value = htmlspecialchars_decode(substr($value, 0, -11));
-            }
-
-            array_shift($themes);
-            $this->model->set('Anime', 'ending_theme', $themes);
+            preg_match_all('~<span class="theme-song">(.*?)</span>~', $this->matches[1], $this->matches);
+            $this->model->set('Anime', 'ending_theme', $this->matches[1]);
         });
 
 

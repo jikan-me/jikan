@@ -46,7 +46,7 @@ class PersonParse extends TemplateParse
             $this->model->set('Person', 'birthday', $this->matches[1]);
         });
 
-        $this->addRule('website', '~<span class="dark_text">Website:</span> <a href="(.*)">(.*)</a>~', function() {
+        $this->addRule('website', '~<span class="dark_text">Website:</span> <a href="(.*?)">(.*)</a>~', function() {
 
             $this->model->set('Person', 'website', $this->matches[1]);
         });

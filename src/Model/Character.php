@@ -8,7 +8,9 @@ class Character extends Model
 
 	public $name;
 
-	public $name_japanese;
+	public $name_kanji;
+
+	public $nicknames;
 
 	public $about;
 

@@ -15,16 +15,19 @@ class CharacterParse extends TemplateParse
          * Rules
          */
 
-        $this->addRule('name', '~<div class="normal_header" style="height: 15px;">(.*) <span style="font-weight: normal;"><small>(.*)</small></span></div>~', function() {
+        $this->addRule('name', '~<div class="normal_header" style="height: 15px;">(.*) (<span style="font-weight: normal;"><small>(.*)</small></span>|)</div>~', function() {
 
-            $this->model->set('Character', 'name', $this->matches[1]);
+            $this->model->set('Character', 'name', trim($this->matches[1]));
+            if (!empty($this->matches[2])) {
+                $this->model->set('Character', 'name_kanji', $this->matches[3]);
+            }
         });
 
-        $this->addRule('name_japanese', '~<div class="normal_header" style="height: 15px;">(.*) <span style="font-weight: normal;"><small>(.*)</small></span></div>~', function() {
+        $this->addRule('nicknames', '~<div id="contentWrapper"><div><div class="header-right">~', function() {
+            preg_match('~<h1 class="h1">(.*)</h1>~', $this->file[$this->lineNo+1], $this->matches);
 
-            $this->model->set('Character', 'name_japanese', $this->matches[2]);
+            $this->model->set('Character', 'nicknames', trim($this->matches[1]));
         });
-
 
         $this->addRule('about', '~<div class="normal_header" style="height: 15px;">(.*) <span style="font-weight: normal;"><small>(.*)</small></span></div>([\s\S]*)~', function() {
             $match = [];

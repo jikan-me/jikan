@@ -1,10 +1,19 @@
 ## Changelog
 
+### 1.1.0 stable - November 9, 17
+- **[Character]** 
+	- Fixed name having whitespace appended to it
+	- Fixed name not showing up for characters without kanji names
+	- Rename name_japanese -> name_kanji (since that's what it actually is)
+	- Added `nicknames`: parses every name/nickname/etc as per the title of the content, refer to https://myanimelist.net/character/5
+- **[Person]** Fixed website malformed data
+- **[Anime]** Fixed *ALL* HTML malformed data in opening/ending songs
+
 ### 1.0.1 stable - October 5, 17
 - **[Anime]**
-    - Fixed [#44](/../../issues/44)
+    - Fixed [#65](/../../issues/65)
 
-### 1.0.0 beta - July 11, 17
+### 1.0.0 stable - July 11, 17
 - **Added** Composer
 - **Refactored** entire code base to meet with proper PSR compliants
 - **[Person]** 

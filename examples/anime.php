@@ -1,20 +1,12 @@
 <?php
+require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-require_once '../src/Jikan.php';
+$jikan = new Jikan\Jikan;
 
-$jikan = new \Jikan\Get;
 
-$anime = array();
+$jikan->Anime(21);
+//$jikan->Anime(1, [EPISODES, CHARACTERS_STAFF]); // get episodes + characters+staff
+//$jikan->Anime(21, [EPISODES=>2]); // get all the episodes from page 2 of the episode list
 
-try {
-	// get anime
-	$jikan->anime(1)->characters_staff()->episodes();
-	$anime = $jikan->data;
-
-} catch (Exception $e) {
-	// catch any errors
-	echo $e->getMessage();
-}
-
-var_dump($anime);
+var_dump($jikan->response);
 ?>

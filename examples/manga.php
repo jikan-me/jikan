@@ -1,18 +1,11 @@
 <?php
+require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-require_once '../src/Jikan.php';
+$jikan = new Jikan\Jikan;
 
-$jikan = new \Jikan\Get;
 
-$manga = array();
+$jikan->Manga(1);
+//$jikan->Manga(1, [CHARACTERS]); // get the characters too
 
-try {
-	// get manga
-	$manga = $jikan->manga(1)->characters_staff()->data;
-} catch (Exception $e) {
-	// catch any errors
-	echo $e->getMessage();
-}
-
-var_dump($manga);
+var_dump($jikan->response);
 ?>

@@ -1,18 +1,9 @@
 <?php
+require_once dirname(__DIR__) . "/vendor/autoload.php";
 
-require_once '../src/Jikan.php';
+$jikan = new Jikan\Jikan;
 
-$jikan = new \Jikan\Get;
+$jikan->Person(1);
 
-$person = array();
-
-try {
-	// get person
-	$person = $jikan->person(1)->data;
-} catch (Exception $e) {
-	// catch any errors
-	echo $e->getMessage();
-}
-
-var_dump($person);
+var_dump($jikan->response);
 ?>

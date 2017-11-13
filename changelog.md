@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.1.1 stable - November 13, 17
+- Added `mal_id` (integer) for items - Issue [#71](/../../issues/71)
+- **[Anime|Manga]** Related `id` -> `mal_id`
+- **[Fix]** Issue [#70](/../../issues/70)
+- **[Character]** Added `link_canonical`
+
 ### 1.1.0 stable - November 9, 17
 - **[Character]** 
 	- Fixed name having whitespace appended to it
@@ -28,6 +34,7 @@
 - **[Character]** Canonical Link parsing [#50](/../../issues/50)
 - **[User_List]** Appropriate HTTP Response headers
 - **[Related/Producer/Licensor/Studio/Genre/]** Return the ***full*** URLs now. More info at [MIGRATION.md](https://github.com/jikan-me/jikan/tree/master/migration.md)
+- Actually started following Semantic Versioning from here
 
 ### 0.3.0 beta - July 6, 17
 - [Anime/Manga] HTML Tags are now stripped out from Synopsis & Background information
@@ -191,3 +198,5 @@
 - You're now able to fetch manga details
 - Bug fixes
 
+### 0.0.0 alpha - Initial Release
+- You can fetch anime info

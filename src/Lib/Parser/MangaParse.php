@@ -17,6 +17,9 @@ class MangaParse extends TemplateParse
 
         $this->addRule('link_canonical', '~<link rel="canonical" href="(.*)" />~', function() {
             $this->model->set('Manga', 'link_canonical', $this->matches[1]);
+
+            preg_match('~myanimelist.net/(.+)/(.*)/~', $this->model->get('Manga', 'link_canonical'), $this->matches);
+            $this->model->set('Manga', 'mal_id', (int) $this->matches[2]);
         });
 
         $this->addRule('title', '~<h1 class="h1"><span itemprop="name">(.*)</span></h1>~', function(){
@@ -146,7 +149,7 @@ class MangaParse extends TemplateParse
                         foreach ($links as $key2 => $value2) {
                             if (preg_match('~<a href="/(.*)/(.*)/(.*)">(.*)(</a>|)~', $value2, $this->matches)) {
                                 $return[$title][] = [
-                                    'id' => (int) $this->matches[2],
+                                    'mal_id' => (int) $this->matches[2],
                                     'url' => BASE_URL . $this->matches[1] . '/' . $this->matches[2] . '/' . $this->matches[3],
                                     'title' => strip_tags($this->matches[4])
                                 ];

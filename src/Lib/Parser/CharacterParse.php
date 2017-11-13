@@ -15,6 +15,13 @@ class CharacterParse extends TemplateParse
          * Rules
          */
 
+        $this->addRule('link_canonical', '~<link rel="canonical" href="(.*)" />~', function() {
+           $this->model->set('Character', 'link_canonical', $this->matches[1]);
+
+            preg_match('~myanimelist.net/(.+)/(.*)/~', $this->model->get('Character', 'link_canonical'), $this->matches);
+            $this->model->set('Character', 'mal_id', (int) $this->matches[2]);
+        });
+
         $this->addRule('name', '~<div class="normal_header" style="height: 15px;">(.*) (<span style="font-weight: normal;"><small>(.*)</small></span>|)</div>~', function() {
 
             $this->model->set('Character', 'name', trim($this->matches[1]));

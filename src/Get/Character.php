@@ -30,37 +30,29 @@ class Character extends Get
         $this->canonical_path = $this->parser->model->get('Character', 'link_canonical');
 
         if (!empty($extend)) {
-
             $this->extend = $extend;
-
 
             foreach ($this->extend as $key => $extend) {
 
-                if (is_array($extend)) {
-
-                    if (!is_string(key($extend))) {
-                        throw new \Exception('No arguments set for extend');
-                    }
-
-                    $this->extend = key($extend);
-                    $this->extendArgs = current($extend);
+                if (is_string($key)) {
+                    $this->extend = $key;
+                    $this->extendArgs = $extend;
 
                     if (!in_array($this->extend, $this->validExtends)) {
                         throw new \Exception('Unsupported parse request');
                     }
 
                     $this->{$this->extend}($this->extendArgs);
-                } else {
+                } elseif (is_int($key)) {
                     $this->extend = $extend;
 
                     if (!in_array($this->extend, $this->validExtends)) {
                         throw new \Exception('Unsupported parse request');
                     }
 
-                    $this->{$this->extend}($this->extendArgs);
+                    $this->{$this->extend}();
                 }
             }
-
         }
 
     }

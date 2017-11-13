@@ -16,8 +16,10 @@ class PersonParse extends TemplateParse
          */
 
         $this->addRule('link_canonical', '~<link rel="canonical" href="(.*)" />~', function() {
-
             $this->model->set('Person', 'link_canonical', $this->matches[1]);
+
+            preg_match('~myanimelist.net/(.+)/(.*)/~', $this->model->get('Person', 'link_canonical'), $this->matches);
+            $this->model->set('Person', 'mal_id', (int) $this->matches[2]);
         });
 
         $this->addRule('given_name', '~<div class="spaceit_pad"><span class="dark_text">Given name:</span> (.*)</div>~', function() {

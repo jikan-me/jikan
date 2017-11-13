@@ -5,6 +5,8 @@ namespace Jikan\Model;
 class Person extends Model
 {
 
+	public $mal_id;
+
 	public $link_canonical;
 
 	public $given_name;

@@ -40,6 +40,8 @@ class MangaCharacterParse extends TemplateParse
                     $i += 5;
                     $name = [];
                     preg_match('~<a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $name);
+                    preg_match('~myanimelist.net/(.+)/(.*)/~', $name[1], $this->matches);
+                    $character['mal_id'] = (int) $this->matches[2];
                     $character['url'] = $name[1];
                     $character['name'] = $name[2];
                     $i += 2;

@@ -6,6 +6,10 @@ namespace Jikan\Model;
 class Character extends Model
 {
 
+	public $mal_id;
+
+	public $link_canonical;
+
 	public $name;
 
 	public $name_kanji;

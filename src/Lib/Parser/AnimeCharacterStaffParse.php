@@ -42,12 +42,16 @@ class AnimeCharacterStaffParse extends TemplateParse
                     $i += 5;
                     $name = array();
                     preg_match('~<a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $name);
+                    preg_match('~myanimelist.net/(.+)/(.*)/~', $name[1], $this->matches);
+                    $character['mal_id'] = (int) $this->matches[2];
                     $character['url'] = $name[1];
                     $character['name'] = $name[2];
+
                     $i += 2;
                     $role = array();
                     preg_match('~<small>(.*)</small>~', $this->file[$this->lineNo + $i], $role);
                     $character['role'] = $role[1];
+
 
 
                     $running2 = true;
@@ -68,7 +72,10 @@ class AnimeCharacterStaffParse extends TemplateParse
                             $image = array();
                             preg_match('~<img alt="(.*)" width="23" height="32" data-src="(.*)" data-srcset="(.*)" class="lazyload" />~', $this->file[$this->lineNo + $i], $image);
 
+                            preg_match('~myanimelist.net/(.+)/(.*)/~', $name[1], $this->matches);
+
                             $character['voice_actor'][] = array(
+                                'mal_id' => (int) $this->matches[2],
                                 'name' => $name[2],
                                 'url' => $name[1],
                                 'language' => $role[1],
@@ -106,8 +113,10 @@ class AnimeCharacterStaffParse extends TemplateParse
                     $i += 5;
                     $match = array();
                     preg_match('~<a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $match);
-                    $person['name'] = $match[2];
+                    preg_match('~myanimelist.net/(.+)/(.*)/~', $match[1], $this->matches);
+                    $person['mal_id'] = (int) $this->matches[2];
                     $person['url'] = $match[1];
+                    $person['name'] = $match[2];
                     $i += 2;
                     $match = array();
                     preg_match('~<small>(.*)</small>~', $this->file[$this->lineNo + $i], $match);

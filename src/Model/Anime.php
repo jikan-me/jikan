@@ -6,6 +6,8 @@ namespace Jikan\Model;
 class Anime extends Model
 {
 
+	public $mal_id;
+
 	public $link_canonical;
 
 	public $title;

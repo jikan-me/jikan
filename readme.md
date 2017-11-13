@@ -19,10 +19,8 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
     - Characters
 - Character Parsing
 - People Parsing
-- User Anime/Manga List Parsing
-    - Wrapper for the official API
 - Modular scraping method for developers to extend the API
-- JSON formats! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
+- JSON format! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
 ## Planned Features
 - Anime & Manga

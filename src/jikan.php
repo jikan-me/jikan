@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.3.1 beta
+*	Jikan - MyAnimeList Unofficial API @version 0.3.2 beta
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.

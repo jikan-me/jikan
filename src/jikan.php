@@ -753,7 +753,8 @@ namespace Jikan {
 					$line = $this->link_arr[$this->lineNo + $i]; // bugs
 					if (
 						preg_match('~<h2><div class="floatRightHeader">~', $line) ||
-						preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $line)
+						preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $line) ||
+						preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $this->file[$this->lineNo])
 						) {
 						$running = false;
 					}

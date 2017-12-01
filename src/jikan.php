@@ -663,7 +663,7 @@ namespace Jikan {
 			});
 
 
-			$this->setSearch("about", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>([\s\S]*)~", function() {
+			$this->setSearch("about", "~<div class=\"normal_header\" style=\"height: 15px;\">(.*) <span style=\"font-weight: normal;\"><small>(.*)</small></span></div>(.*?)<br />~", function() {
 				$match = array();
 				$match[] = $this->matches[3];
 

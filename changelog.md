@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.1.2 stable - December 1, 17
+- **[Character]**
+	- Fixed a critical bug which stopped parsing for characters without voice actors [#77](/../../issues/77)
+	- Fixed "about" giving malformed HTML data for characters without voice actors
+- **[Manga]** Fixed Score showing in pre v1.0.0 format - Issue [#73](/../../issues/73)
+- **[Person]**
+	- Parse Generic Name [#44](/../../issues/44)
+
 ### 1.1.1 stable - November 13, 17
 - Added `mal_id` (integer) for items - Issue [#71](/../../issues/71)
 - **[Anime|Manga]** Related `id` -> `mal_id`

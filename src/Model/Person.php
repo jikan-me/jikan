@@ -9,6 +9,8 @@ class Person extends Model
 
 	public $link_canonical;
 
+	public $name;
+
 	public $given_name;
 
 	public $family_name;

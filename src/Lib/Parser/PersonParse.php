@@ -22,6 +22,11 @@ class PersonParse extends TemplateParse
             $this->model->set('Person', 'mal_id', (int) $this->matches[2]);
         });
 
+        $this->addRule('name', '~<meta property="og:title" content="(.*?)">~', function() {
+
+            $this->model->set('Person', 'name', $this->matches[1]);
+        });
+
         $this->addRule('given_name', '~<div class="spaceit_pad"><span class="dark_text">Given name:</span> (.*)</div>~', function() {
 
             $this->model->set('Person', 'given_name', $this->matches[1]);

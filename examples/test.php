@@ -1,6 +1,8 @@
 <?php
 // ignore this
 
+error_reporting(E_ALL);
+
 require_once dirname(__DIR__) . "/vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
@@ -8,7 +10,7 @@ $jikan = new Jikan\Jikan;
 
 // todo mal_id in related anime
 
-$jikan->Anime(1);
+$jikan->Person(1000);
 var_dump($jikan->response);
 //$jikan->Manga(1);
 //var_dump($jikan->response['staff']);

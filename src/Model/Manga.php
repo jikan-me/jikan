@@ -34,6 +34,8 @@ class Manga extends Model
 
 	public $score;
 
+	public $scored_by;
+
 	public $popularity;
 
 	public $members;

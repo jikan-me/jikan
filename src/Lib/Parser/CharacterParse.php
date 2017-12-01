@@ -36,7 +36,7 @@ class CharacterParse extends TemplateParse
             $this->model->set('Character', 'nicknames', trim($this->matches[1]));
         });
 
-        $this->addRule('about', '~<div class="normal_header" style="height: 15px;">(.*) <span style="font-weight: normal;"><small>(.*)</small></span></div>([\s\S]*)~', function() {
+        $this->addRule('about', '~<div class="normal_header" style="height: 15px;">(.*) <span style="font-weight: normal;"><small>(.*)</small></span></div>(.*?)<br />~', function() {
             $match = [];
             $match[] = $this->matches[3];
 
@@ -129,7 +129,8 @@ class CharacterParse extends TemplateParse
                 $line = $this->file[$this->lineNo + $i]; // bugs
                 if (
                     preg_match('~<h2><div class="floatRightHeader">~', $line) ||
-                    preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $line)
+                    preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $line) ||
+                    preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $this->file[$this->lineNo])
                     ) {
                     $running = false;
                 }

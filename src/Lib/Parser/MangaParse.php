@@ -73,9 +73,9 @@ class MangaParse extends TemplateParse
         });
 
         $this->addRule('score', '~<span class="dark_text">Score:</span> <span itemprop="ratingValue">(.*)</span><sup><small>1</small></sup> <small>\(scored by <span itemprop="ratingCount">(.*)</span> users\)</small>~', function(){
-            $this->model->set('Manga', 'score',
-                [(float) $this->matches[1], (int) str_replace(",", "", $this->matches[2])]
-            );
+
+            $this->model->set('Anime', 'score', (float) $this->matches[1]);
+            $this->model->set('Anime', 'scored_by', (int) str_replace(",", "", $this->matches[2]));
         });
 
         $this->addRule('popularity', '~<span class=\"dark_text\">Popularity:<\/span> #(.*[[:alnum:]])<\/div>~', function(){

@@ -28,7 +28,11 @@ class Anime extends Model
 
 	public $status;
 
-	public $aired;
+	public $airing = false;
+
+	public $aired_string;
+	
+	public $aired = [];
 
 	public $duration;
 

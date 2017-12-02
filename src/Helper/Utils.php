@@ -5,6 +5,7 @@ namespace Jikan\Helper;
 
 class Utils
 {
+	
 	static public function isURL($url) {
 		// return (filter_var($this->filePath, FILTER_VALIDATE_URL) ? true : false);
 		return preg_match('`^http(s)?://`', $url) ? true : false;
@@ -16,7 +17,4 @@ class Utils
 
 	static public function trim(&$item, $key) { $item = trim($item); }
 
-	static public function t(){
-	    echo "T";
-    }
 }

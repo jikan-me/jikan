@@ -28,7 +28,11 @@ class Manga extends Model
 
 	public $chapters;
 
-	public $published;
+	public $publishing = false;
+
+	public $published_string;
+
+	public $published = [];
 
 	public $rank;
 

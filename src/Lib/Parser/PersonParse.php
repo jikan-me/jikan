@@ -53,9 +53,9 @@ class PersonParse extends TemplateParse
             $this->model->set('Person', 'birthday', $this->matches[1]);
         });
 
-        $this->addRule('website', '~<span class="dark_text">Website:</span> <a href="(.*?)">(.*)</a>~', function() {
+        $this->addRule('website_url', '~<span class="dark_text">Website:</span> <a href="(.*?)">(.*)</a>~', function() {
 
-            $this->model->set('Person', 'website', $this->matches[1]);
+            $this->model->set('Person', 'website_url', $this->matches[1]);
         });
 
         $this->addRule('member_favorites', '~<div class="spaceit_pad"><span class="dark_text">Member Favorites:</span> (.*)</div>~', function() {
@@ -65,9 +65,25 @@ class PersonParse extends TemplateParse
             );
         });
 
-        $this->addRule('more', '~<div class="people-informantion-more js-people-informantion-more">([\s\S]*)</div>~', function() {
+        $this->addRule('more', '~<div class="people-informantion-more js-people-informantion-more">(.*)?~', function() {
+            $more = str_replace("</div>", "", $this->matches[1]);
+            
+            $running = true;
+            $i = 0;
 
-            $this->model->set('Person', 'more', $this->matches[1]);
+            while ($running) {
+                $i++;
+                $line = $this->file[$this->lineNo + $i];
+                if (strpos($line, '</td>') !== false) {
+                    $running = false; break;
+                }
+
+                $more .= $line;
+            }
+
+            $this->model->set('Person', 'more', 
+                htmlspecialchars_decode(strip_tags(str_replace(["<br>", "<br />"], "\\n", $more)))
+            );
         });
 
         $this->addRule('voice_acting_role', '~</div>Voice Acting Roles</div>~', function() {

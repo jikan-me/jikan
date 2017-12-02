@@ -1,5 +1,19 @@
 ## Changelog
 
+### 1.2.0 stable - December 2, 17
+- **[Anime|Manga]** 
+	- Convert Dates to ISO Format - Enhancement [#72](/../../issues/72)
+	- `aired` will now be an array returning ISO 8601
+		- You can find the string version of the date, like before, in a new field; `aired_string`
+	- Decode HTML Special characters for synopsis/background/episode title strings - Enhancement [#74](/../../issues/74)
+	- In the related field, it now shows the relation item's type. - Feature [#75](/../../issues/75)
+	- Remmoved extra forward slash in the related item URL
+	- Added boolean field `airing` & `publishing` for anime & manga respectively
+	- **[Manga]** Removed extra whitespace for `title_japanese`
+- **[Person]** 
+	- Fixed `More` field not parsing - Issue [#61](/../../issues/61)
+	- Changed `website` to `website_url`
+
 ### 1.1.2 stable - December 1, 17
 - **[Character]**
 	- Fixed a critical bug which stopped parsing for characters without voice actors [#77](/../../issues/77)

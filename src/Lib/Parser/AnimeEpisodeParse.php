@@ -74,7 +74,7 @@ class AnimeEpisodeParse extends TemplateParse
 
                     $this->return[] = [
                         'id' => (int) $epMeta['id'],
-                        'title' => $epMeta['title'],
+                        'title' => htmlspecialchars_decode($epMeta['title']),
                         'title_japanese' => $epMeta['title_japanese'],
                         'title_romanji' => $epMeta['title_romanji'],
                         'aired' => $epMeta['aired'],

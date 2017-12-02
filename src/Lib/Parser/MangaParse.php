@@ -35,11 +35,14 @@ class MangaParse extends TemplateParse
         });
 
         $this->addRule('title_japanese', '~<span class="dark_text">Japanese:</span>(.*?)</div>~', function(){
-            $this->model->set('Manga', 'title_japanese', $this->matches[1]);
+            $this->model->set('Manga', 'title_japanese', trim($this->matches[1]));
         });
 
         $this->addRule('status', '~<div class="spaceit"><span class="dark_text">Status:</span> (.*)</div>~', function(){
             $this->model->set('Manga', 'status', $this->matches[1]);
+
+            if (strpos($this->model->get('Manga', 'status'), "Publishing") !== false)
+                $this->model->set('Manga', 'publishing', true);
         });
 
         $this->addRule('image_url', '~<img src="(.*)" alt="(.*)" itemprop="image" class="ac">~', function(){
@@ -63,7 +66,13 @@ class MangaParse extends TemplateParse
         });
 
         $this->addRule('published', '~<span class="dark_text">Published:</span>(.*)</div>~', function(){
-            $this->model->set('Manga', 'published', trim($this->matches[1]));
+            $this->model->set('Manga', 'published_string', trim($this->matches[1]));
+
+            preg_match('~(.*) to (.*)~', $this->model->get('Manga', 'published_string'), $this->matches);
+            $this->model->set('Manga', 'published', [
+                'from' => (strpos($this->matches[1], '?') !== false) ? null : date_format(date_create($this->matches[1]), 'o-m-d'),
+                'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
+            ]);   
         });
 
         $this->addRule('rank', '~<span class=\"dark_text\">Ranked:<\/span> #(.*[[:alnum:]])<sup>~', function(){
@@ -98,7 +107,7 @@ class MangaParse extends TemplateParse
 
         $this->addRule('synopsis', '~<meta property=\"og:description\" content=\"(.*)\">~', function(){
             $this->model->set('Manga', 'synopsis',
-                strip_tags($this->matches[1])
+                htmlspecialchars_decode(strip_tags($this->matches[1]))
             );
         });
 
@@ -150,6 +159,7 @@ class MangaParse extends TemplateParse
                             if (preg_match('~<a href="/(.*)/(.*)/(.*)">(.*)(</a>|)~', $value2, $this->matches)) {
                                 $return[$title][] = [
                                     'mal_id' => (int) $this->matches[2],
+                                    'type' => $this->matches[1],
                                     'url' => BASE_URL . $this->matches[1] . '/' . $this->matches[2] . '/' . $this->matches[3],
                                     'title' => strip_tags($this->matches[4])
                                 ];

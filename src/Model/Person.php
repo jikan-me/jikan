@@ -19,7 +19,7 @@ class Person extends Model
 
 	public $birthday;
 
-	public $website;
+	public $website_url;
 
 	public $member_favorites;
 

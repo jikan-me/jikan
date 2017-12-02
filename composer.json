@@ -9,6 +9,7 @@
             "email": "irfan@jikan.me"
         }
     ],
+    "minimum-stability": "dev",
     "require": {},
     "autoload": {
         "psr-4": {

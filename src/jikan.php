@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 0.3.2 beta
+*	Jikan - MyAnimeList Unofficial API @version 0.3.4 beta
 *	Developed by Nekomata | irfandahir.com
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -299,7 +299,7 @@ namespace Jikan {
 							} else {
 								preg_match("~<a href=\"(.*)\">(.*)(</a>|)~", $working, $tmp);
 								$return[$title][] = array(
-									str_replace("</a>", "", $tmp2[2]), $tmp[1]
+									str_replace("</a>", "", $tmp[2]), $tmp[1]
 								);
 							}
 						} else {

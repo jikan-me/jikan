@@ -8,6 +8,7 @@ require_once "../vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
 
+
 $jikan->Anime(21);
 sleep(5);
 $jikan->Anime(21, [EPISODES]);

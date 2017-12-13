@@ -32,7 +32,10 @@ class Anime extends Model
 
 	public $aired_string;
 	
-	public $aired = [];
+	public $aired = [
+		'from' => null,
+		'to' => null
+	];
 
 	public $duration;
 

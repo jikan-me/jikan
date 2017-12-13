@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.2.1 stable - December 13, 17
+- **[Anime|Manga]**
+	- Fixed parsing bug for anime and manga that only have one `aired` and `published` date.
+
 ### 1.2.0 stable - December 2, 17
 - **[Anime|Manga]** 
 	- Convert Dates to ISO Format - Enhancement [#72](/../../issues/72)

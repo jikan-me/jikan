@@ -68,11 +68,20 @@ class MangaParse extends TemplateParse
         $this->addRule('published', '~<span class="dark_text">Published:</span>(.*)</div>~', function(){
             $this->model->set('Manga', 'published_string', trim($this->matches[1]));
 
-            preg_match('~(.*) to (.*)~', $this->model->get('Manga', 'published_string'), $this->matches);
-            $this->model->set('Manga', 'published', [
-                'from' => (strpos($this->matches[1], '?') !== false) ? null : date_format(date_create($this->matches[1]), 'o-m-d'),
-                'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
-            ]);   
+            if (!empty($this->model->get('Manga', 'published_string'))) {
+                if (strpos($this->model->get('Manga', 'published_string'), 'to')) {
+                    preg_match('~(.*) to (.*)~', $this->model->get('Manga', 'published_string'), $this->matches);
+                    $this->model->set('Manga', 'published', [
+                        'from' => (strpos($this->matches[1], '?') !== false) ? null : date_format(date_create($this->matches[1]), 'o-m-d'),
+                        'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
+                    ]);
+                } else {
+                    $this->model->set('Manga', 'published', [
+                        'from' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d'),
+                        'to' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d')
+                    ]);
+                }
+            }
         });
 
         $this->addRule('rank', '~<span class=\"dark_text\">Ranked:<\/span> #(.*[[:alnum:]])<sup>~', function(){
@@ -83,8 +92,8 @@ class MangaParse extends TemplateParse
 
         $this->addRule('score', '~<span class="dark_text">Score:</span> <span itemprop="ratingValue">(.*)</span><sup><small>1</small></sup> <small>\(scored by <span itemprop="ratingCount">(.*)</span> users\)</small>~', function(){
 
-            $this->model->set('Anime', 'score', (float) $this->matches[1]);
-            $this->model->set('Anime', 'scored_by', (int) str_replace(",", "", $this->matches[2]));
+            $this->model->set('Manga', 'score', (float) $this->matches[1]);
+            $this->model->set('Manga', 'scored_by', (int) str_replace(",", "", $this->matches[2]));
         });
 
         $this->addRule('popularity', '~<span class=\"dark_text\">Popularity:<\/span> #(.*[[:alnum:]])<\/div>~', function(){

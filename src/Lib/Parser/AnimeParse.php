@@ -61,11 +61,21 @@ class AnimeParse extends TemplateParse
         $this->addRule('aired', '~<span class="dark_text">Aired:</span>~', function() {
             $this->model->set('Anime', 'aired_string', $this->file[$this->lineNo + 1]);
 
-            preg_match('~(.*) to (.*)~', $this->model->get('Anime', 'aired_string'), $this->matches);
-            $this->model->set('Anime', 'aired', [
-                'from' => (strpos($this->matches[1], '?') !== false) ? null : date_format(date_create($this->matches[1]), 'o-m-d'),
-                'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
-            ]);
+
+            if (!empty($this->model->get('Anime', 'aired_string'))) {
+                if (strpos($this->model->get('Anime', 'aired_string'), 'to')) {
+                    preg_match('~(.*) to (.*)~', $this->model->get('Anime', 'aired_string'), $this->matches);
+                    $this->model->set('Anime', 'aired', [
+                        'from' => (strpos($this->matches[1], '?') !== false) ? null : date_format(date_create($this->matches[1]), 'o-m-d'),
+                        'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
+                    ]);
+                } else {
+                    $this->model->set('Anime', 'aired', [
+                        'from' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d'),
+                        'to' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d')
+                    ]);
+                }
+            }
         });
 
         $this->addRule('premiered', '~<span class="dark_text">Premiered:</span>~', function() {

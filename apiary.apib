@@ -2,24 +2,43 @@ FORMAT: 1A
 HOST: https://api.jikan.me/
 
 # Jikan
+[Jikan](https://jikan.me) is an **Unofficial** MyAnimeList REST-ful API. 
+It's built on the Lumen microframework and uses Redis for cache management.
 
-Jikan is an unofficial MyAnimeList PHP/REST API that covers the critical features which the official API lacks.
+It is powered by [JikanPHP](https://github.com/jikan-me/jikan/) for parsing the data from MyAnimeList.
 
-The old docs are available [here](https://jikan.me/old-docs)
 
 
 Base URL: `http://api.jikan.me/`
 
 Base URL (SSL): `https://api.jikan.me/`
 
-# Rate Limiting
+
+
+The old docs for **v1.X** are available [here](https://jikan.me/old-docs).
+
+## Links
+- [Website](https://jikan.me)
+- [About](https://jikan.me/about)
+- [Projects/Apps using Jikan](https://jikan.me/showcase)
+
+
+- [JikanPHP - Source](https://github.com/jikan-me/jikan/)
+- [JikanPy - Wrapper](https://github.com/AWConant/jikanpy)
+
+
+# Information
+## Rate Limiting
 To maintain bandwidth, there's a rate-limiting of 5,000 requests per IP per day and 2 concurrent requests per second.
 
 Per Day: **2,000**
 
 Concurrent: **2**/second
 
-# Allowed HTTP(s) requests
+## Additional
+- Responses are cached for 3 days.
+
+## Allowed HTTP(s) requests
 <pre>
 GET: All requests are done via GET
 </pre>
@@ -43,14 +62,18 @@ Here's a list of errors you can get and what you could do to over come them.
 ### Invalid extended request / Unsupported parse request
 Check each method for their proper extended requests. For example `/episodes` may exist for anime, but it doesn't exist for manga.
 ### MyAnimeList Rate Limiting reached
-Jikan has made too many requests to Jikan and there's a rate limit in effect from them. This only lasts for a few seconds.
+Jikan has made too many requests to MyAnimeList and there's a rate limit in effect from their side. This only lasts for a few seconds.
 If you're making API calls in bulk, I suggest adding a delay between each request.
 
-You won't face this issue if there's enough cache laying around.
+You won't face this issue if there's enough cache lying around.
 ### ID/Path not given
 This message comes from JikanPHP, the core of the REST API. Which pretty much translates to "You haven't provided any anime/manga/character/person `ID` to request.
 
 If you get any other error, it's most likely a PHP error from JikanPHP itself. Please file an [issue](https://github.com/jikan-me/jikan/issues) on the GitHub repo.
+
+# Disclaimer
+- Jikan is in no way affiliated with MyAnimeList.
+- Jikan is a **free**, open-source API. Use it responsibly.
 
 ## Anime [/anime/{id}/{request}/{parameter}]
 A single anime object with all its details

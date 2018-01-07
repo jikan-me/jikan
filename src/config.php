@@ -15,10 +15,11 @@ define( 'USER_LIST_ENDPOINT' , 'malappinfo.php');
 /*
  * Extend Flags
  */
-define( 'CHARACTERS_STAFF' , 'charactersStaff' );
-define( 'CHARACTERS' , 'characters' );
-define( 'EPISODES' , 'episodes' );
-define( 'NEWS' , 'news' );
+define( 'CHARACTERS_STAFF' 	, 	'charactersStaff' );
+define( 'CHARACTERS' 		, 	'characters' );
+define( 'EPISODES' 			, 	'episodes' );
+define( 'NEWS' 				, 	'news' );
+define( 'VIDEOS' 			, 	'videos' );
 
 define( 'ANIME' , 'anime' );
 define( 'MANGA' , 'manga' );

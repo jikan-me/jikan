@@ -14,6 +14,7 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 - Anime Parsing
     - Characters & Staff
     - Episodes
+    - News
 - Manga Parsing
     - Characters
 - Character Parsing
@@ -26,7 +27,6 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
     - User Reviews
     - Recommendations
     - Stats
-    - News
     - Pictures
 - Command Line Usage
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)

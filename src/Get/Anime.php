@@ -5,6 +5,7 @@ namespace Jikan\Get;
 use Jikan\Lib\Parser\AnimeCharacterStaffParse;
 use Jikan\Lib\Parser\AnimeParse;
 use Jikan\Lib\Parser\AnimeEpisodeParse;
+use Jikan\Lib\Parser\AnimeNewsParse;
 
 
 class Anime extends Get
@@ -12,7 +13,7 @@ class Anime extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS_STAFF, EPISODES];
+    private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS];
 
 	public function __construct($id = null, $extend = null) {
 
@@ -85,5 +86,14 @@ class Anime extends Get
 
 	    $this->response = array_merge($this->response, $this->parser->parse());
 	}
+
+    private function news() {
+        $this->parser = new AnimeNewsParse;
+
+        $this->parser->setPath($this->canonical_path.'/news');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
 
 }

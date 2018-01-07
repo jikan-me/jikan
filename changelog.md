@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.2.2 stable - January 7, 18
+- **[Anime|Manga]**
+	- Add News Parsing
+
 ### 1.2.1 stable - December 13, 17
 - **[Anime|Manga]**
 	- Fixed parsing bug for anime and manga that only have one `aired` and `published` date.

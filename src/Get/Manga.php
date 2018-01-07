@@ -2,6 +2,7 @@
 
 namespace Jikan\Get;
 
+use Jikan\Lib\Parser\MangaNewsParse;
 use Jikan\Lib\Parser\MangaCharacterParse;
 use Jikan\Lib\Parser\MangaParse;
 
@@ -11,7 +12,7 @@ class Manga extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS];
+    private $validExtends = [CHARACTERS, NEWS];
 
     public function __construct($id = null, $extend = null) {
 
@@ -64,6 +65,15 @@ class Manga extends Get
         $this->parser = new MangaCharacterParse;
 
         $this->parser->setPath($this->canonical_path.'/characters');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
+
+    private function news() {
+        $this->parser = new MangaNewsParse;
+
+        $this->parser->setPath($this->canonical_path.'/news');
         $this->parser->loadFile();
 
         $this->response = array_merge($this->response, $this->parser->parse());

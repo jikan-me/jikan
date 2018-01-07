@@ -1,6 +1,6 @@
 ## Changelog
 
-### 1.2.2 stable - January 7, 18
+### 1.3.0 stable - January 7, 18
 - **[Anime|Manga]**
 	- Add News Parsing
 

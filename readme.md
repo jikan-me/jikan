@@ -17,6 +17,7 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
     - News
 - Manga Parsing
     - Characters
+    - News
 - Character Parsing
 - People Parsing
 - Modular scraping method for developers to extend the API

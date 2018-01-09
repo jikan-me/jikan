@@ -8,7 +8,7 @@ require_once "../vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
 
-$jikan->Anime(1000, [NEWS]);
+$jikan->Anime(1000);
 
 var_dump($jikan->response);
 

@@ -1,8 +1,9 @@
 ## Changelog
 
-### 1.4.1 stable - January 9, 18
+### 1.4.2 stable - January 9, 18
 - **[Anime]**
-	- Fix News without image not parsing - [#83](/../../issues/83)
+	- Fix News without image not parsing - 1.4.1 [#83](/../../issues/83)
+	- Fix Manga parsing not converting correctly to ISO for some published dates - 1.4.2 [#89](/../../issues/89)
 
 ### 1.4.0 stable - January 7, 18
 - **[Anime|Manga]**

@@ -62,7 +62,7 @@ class AnimeParse extends TemplateParse
             $this->model->set('Anime', 'aired_string', $this->file[$this->lineNo + 1]);
 
 
-            if (!empty($this->model->get('Anime', 'aired_string'))) {
+            if (!empty($this->model->get('Anime', 'aired_string')) && $this->model->get('Anime', 'aired_string') != 'Not available') {
                 if (strpos($this->model->get('Anime', 'aired_string'), 'to')) {
                     preg_match('~(.*) to (.*)~', $this->model->get('Anime', 'aired_string'), $this->matches);
                     $this->model->set('Anime', 'aired', [
@@ -75,6 +75,11 @@ class AnimeParse extends TemplateParse
                         'to' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d')
                     ]);
                 }
+            } else {
+                $this->model->set('Anime', 'aired', [
+                    'from' => null,
+                    'to' => null
+                ]);
             }
         });
 

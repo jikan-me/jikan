@@ -68,7 +68,7 @@ class MangaParse extends TemplateParse
         $this->addRule('published', '~<span class="dark_text">Published:</span>(.*)</div>~', function(){
             $this->model->set('Manga', 'published_string', trim($this->matches[1]));
 
-            if (!empty($this->model->get('Manga', 'published_string'))) {
+            if (!empty($this->model->get('Manga', 'published_string')) && $this->model->get('Manga', 'published_string') != 'Not available') {
                 if (strpos($this->model->get('Manga', 'published_string'), 'to')) {
                     preg_match('~(.*) to (.*)~', $this->model->get('Manga', 'published_string'), $this->matches);
                     $this->model->set('Manga', 'published', [
@@ -81,6 +81,11 @@ class MangaParse extends TemplateParse
                         'to' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d')
                     ]);
                 }
+            } else {
+                $this->model->set('Manga', 'published', [
+                    'from' => null,
+                    'to' => null
+                ]);
             }
         });
 

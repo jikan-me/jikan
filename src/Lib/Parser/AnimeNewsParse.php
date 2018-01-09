@@ -35,14 +35,14 @@ class AnimeNewsParse extends TemplateParse
                     $running = false;
                 }
 
-                if (preg_match('~<div class="clearfix"><div class="picSurround fl-l mr8 ml3 mt4"><a href="/(.*)" class="image-link"><img src="(.*)" data-src="(.*)" data-srcset="(.*)" alt="(.*)" width="50" height="78" class="lazyload"></a></div><p class="spaceit"><a href="/(.*)"><strong>(.*)</strong></a></p>~', $line, $this->matches)) {
-                    //$news['url'] = BASE_URL . $this->matches[1];
+                if (preg_match('~<div class="clearfix">(<div class="picSurround fl-l mr8 ml3 mt4"><a href="/(.*)" class="image-link"><img src="(.*)" data-src="(.*)" data-srcset="(.*)" alt="(.*)" width="50" height="78" class="lazyload"></a></div>|)<p class="spaceit"><a href="/(.*)"><strong>(.*)</strong></a></p>~', $line, $this->matches)) {
+
                     $tmp = [
                         'url' => BASE_URL . $this->matches[6],
-                        'image_url' => trim(substr(explode(",", $this->matches[4])[1], 0, -3)),
+                        'image_url' => !empty($this->matches[5]) ? trim(substr(explode(",", $this->matches[5])[1], 0, -3)) : null,
                         'forum_url' => null,
                         'comments' => 0,
-                        'title' => $this->matches[5],
+                        'title' => $this->matches[8],
                         'date' => null,
                         'author_url' => null,
                         'author' => null

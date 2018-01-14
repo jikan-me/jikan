@@ -76,7 +76,7 @@ class CharacterParse extends TemplateParse
                 if (preg_match('~<tr>~', $line)) {
                     $i++;
                     $this->matches = [];
-                    preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="/(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $animeMeta);
+                    preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $animeMeta);
                     $i++;
                     $animeName = [];
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $animeName);
@@ -105,7 +105,7 @@ class CharacterParse extends TemplateParse
                 if (preg_match('~<tr>~', $line)) {
                     $i++;
                     $mangaMeta = array();
-                    preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="/(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $mangaMeta);
+                    preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $mangaMeta);
                     $i++;
                     $mangaName = array();
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $mangaName);
@@ -138,7 +138,7 @@ class CharacterParse extends TemplateParse
                 if (preg_match('~<tr>~', $line)) {
                     $i++;
                     $personMeta = [];
-                    preg_match('~<td class="borderClass" valign="top" width="25"><div class="picSurround"><a href="/(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $personMeta);
+                    preg_match('~<td class="borderClass" valign="top" width="25"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $personMeta);
                     $i++;
                     $personName = [];
                     preg_match('~<td class="borderClass" valign="top"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $personName);

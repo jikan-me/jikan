@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.4.3 stable - January 14, 18
+- **[Character|Person]**
+	- Fix of changes in format of image links which were causing the parser to break. [#92](/../../issues/92)
+
 ### 1.4.2 stable - January 9, 18
 - **[Anime]**
 	- Fix News without image not parsing - 1.4.1 [#83](/../../issues/83)

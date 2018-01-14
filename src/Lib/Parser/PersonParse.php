@@ -99,7 +99,7 @@ class PersonParse extends TemplateParse
                 if (preg_match('~<tr>~', $line)) {
                     $i++;
                     $animeMeta = [];
-                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $animeMeta);
+                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $animeMeta);
                     $i++;
                     $animeName = [];
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->file[$this->lineNo + $i], $animeName);
@@ -108,7 +108,7 @@ class PersonParse extends TemplateParse
                     preg_match('~<td valign="top" class="borderClass" align="right" nowrap><a href="(.*)">(.*)</a>&nbsp;<div class="spaceit_pad">(.*)&nbsp;</div></td>~', $this->file[$this->lineNo + $i], $char);
                     $i++;
                     $charMeta = [];
-                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/(.*)"><img data-src="(.*)" border="0" alt="(.*)" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $charMeta);
+                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" alt="(.*)" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $charMeta);
                     $voiceActingRoles[] = [
                         'anime' => [
                             'name' => $animeName[2],
@@ -142,7 +142,7 @@ class PersonParse extends TemplateParse
                 if (preg_match('~<tr>~', $line)) {
                     $i++;
                     $animeMeta = [];
-                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $animeMeta);
+                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $animeMeta);
                     $i++;
                     $animeName = [];
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->file[$this->lineNo + $i], $animeName);
@@ -177,7 +177,7 @@ class PersonParse extends TemplateParse
                 if (preg_match('~<tr>~', $line)) {
                     $i++;
                     $mangaMeta = [];
-                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="/(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $mangaMeta);
+                    preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $mangaMeta);
                     $i++;
                     $mangaName = [];
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a><div class="spaceit_pad">~', $this->file[$this->lineNo + $i], $mangaName);

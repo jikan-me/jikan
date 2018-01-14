@@ -82,7 +82,7 @@ class CharacterParse extends TemplateParse
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $animeName);
                     $animeography[] = [
                         'name' => $animeName[2],
-                        'url' => BASE_URL . $animeMeta[1],
+                        'url' => $animeMeta[1],
                         'image_url' => $animeMeta[2]
                     ];
                 }
@@ -111,7 +111,7 @@ class CharacterParse extends TemplateParse
                     preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $mangaName);
                     $mangaography[] = [
                         'name' => $mangaName[2],
-                        'url' => BASE_URL . $mangaMeta[1],
+                        'url' => $mangaMeta[1],
                         'image_url' => $mangaMeta[2]
                     ];
                 }
@@ -147,7 +147,7 @@ class CharacterParse extends TemplateParse
                     preg_match('~<div style="margin-top: 2px;"><small>(.*)</small></div>~', $this->file[$this->lineNo + $i], $personType);
                     $voiceActors[] = [
                         'name' => $personName[2],
-                        'url' => BASE_URL . $personMeta[1],
+                        'url' => $personMeta[1],
                         'image_url' => $personMeta[2],
                         'language' => $personType[1]
                     ];

@@ -8,7 +8,7 @@ require_once "../vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
 
-$jikan->Person(1);
+$jikan->Character(1);
 
 var_dump($jikan->response);
 

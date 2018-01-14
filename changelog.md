@@ -1,8 +1,9 @@
 ## Changelog
 
-### 1.4.3 stable - January 14, 18
+### 1.4.4 stable - January 14, 18
 - **[Character|Person]**
-	- Fix of changes in format of image links which were causing the parser to break. [#92](/../../issues/92)
+	- Fix of changes in format of image links which were causing the parser to break. - 1.4.3 [#92](/../../issues/92)
+	- Fix for base url duplication - [#93](/../../issues/93)
 
 ### 1.4.2 stable - January 9, 18
 - **[Anime]**

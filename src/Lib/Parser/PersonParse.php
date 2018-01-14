@@ -112,12 +112,12 @@ class PersonParse extends TemplateParse
                     $voiceActingRoles[] = [
                         'anime' => [
                             'name' => $animeName[2],
-                            'url' => BASE_URL . $animeMeta[1],
+                            'url' => $animeMeta[1],
                             'image_url' => $animeMeta[2]
                         ],
                         'character' => [
                             'name' => $char[2],
-                            'url' => BASE_URL . $charMeta[1],
+                            'url' => $charMeta[1],
                             'image_url' => $charMeta[2],
                             'role' => $char[3]
                         ],
@@ -152,7 +152,7 @@ class PersonParse extends TemplateParse
                     $animeStaffPositions[] = [
                         'anime' => [
                             'name' => $animeName[2],
-                            'url' => BASE_URL . $animeMeta[1],
+                            'url' => $animeMeta[1],
                             'image_url' => $animeMeta[2]
                         ],
                         'role' => $role[2]
@@ -187,7 +187,7 @@ class PersonParse extends TemplateParse
                     $publsihedManga[] = [
                         'manga' => [
                             'name' => $mangaName[2],
-                            'url' => BASE_URL . $mangaMeta[1],
+                            'url' => $mangaMeta[1],
                             'image_url' => $mangaMeta[2]
                         ],
                         'role' => $role[2]

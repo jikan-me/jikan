@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.4.5 stable - January 21, 18
+- **[Anime]**
+	- Music type anime parsing broken due to HTML change
+
 ### 1.4.4 stable - January 14, 18
 - **[Character|Person]**
 	- Fix of changes in format of image links which were causing the parser to break. - 1.4.3 [#92](/../../issues/92)

@@ -43,8 +43,8 @@ class AnimeParse extends TemplateParse
         });
 
         $this->addRule('type', '~<span class="dark_text">Type:</span>~', function() {
-            preg_match('~<a href="(.*)">(.*?)</a></div>~', $this->file[$this->lineNo + 1], $this->matches);
-            $this->model->set('Anime', 'type', $this->matches[2]);
+            preg_match('~(<a href="(.*)">(.*?)</a>|(.*))</div>~', $this->file[$this->lineNo + 1], $this->matches);
+            $this->model->set('Anime', 'type', (empty($this->matches[3]) ? $this->matches[4] : $this->matches[3]));
         });
 
         $this->addRule('episodes', '~<span class="dark_text">Episodes:</span>~', function() {

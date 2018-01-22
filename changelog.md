@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.4.6 stable - January 23, 18
+- **[Core]**
+	- Load files for parsing locally. e.g `$jikan->Anime('file/to/anime-1.html')` **Extend requests will load from MAL**
+	- Prepare for header responses
+
 ### 1.4.5 stable - January 21, 18
 - **[Anime]**
 	- Music type anime parsing broken due to HTML change

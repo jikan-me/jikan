@@ -26,7 +26,11 @@ class Anime extends Get
         $this->id = $id;
 
         $this->parser = new AnimeParse;
-        $this->parser->setPath(BASE_URL . ANIME_ENDPOINT . $this->id);
+        $this->parser->setPath(
+            (
+                is_int($this->id) || ctype_digit($this->id)    
+            ) ? BASE_URL . ANIME_ENDPOINT . $this->id : $this->id
+        );
         $this->parser->loadFile();
 
         //$this->response = $this->parser->parse();

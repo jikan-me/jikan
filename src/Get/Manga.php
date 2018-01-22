@@ -24,7 +24,11 @@ class Manga extends Get
         $this->id = $id;
 
         $this->parser = new MangaParse;
-        $this->parser->setPath(BASE_URL . MANGA_ENDPOINT . $this->id);
+        $this->parser->setPath(
+            (
+                is_int($this->id) || ctype_digit($this->id)    
+            ) ? BASE_URL . MANGA_ENDPOINT . $this->id : $this->id
+        );
         $this->parser->loadFile();
 
         //$this->response = $this->parser->parse();

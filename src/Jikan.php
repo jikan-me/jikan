@@ -17,6 +17,7 @@ require 'config.php';
 class Jikan
 {
 
+    public $headers = [];
     public $response = [];
 
 	public function __construct() {

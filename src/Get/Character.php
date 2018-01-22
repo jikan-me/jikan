@@ -21,7 +21,11 @@ class Character extends Get
         $this->id = $id;
 
         $this->parser = new CharacterParse;
-        $this->parser->setPath(BASE_URL . CHARACTER_ENDPOINT . $this->id);
+        $this->parser->setPath(
+            (
+                is_int($this->id) || ctype_digit($this->id)    
+            ) ? BASE_URL . CHARACTER_ENDPOINT . $this->id : $this->id
+        );
         $this->parser->loadFile();
 
         //$this->response = $this->parser->parse();

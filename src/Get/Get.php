@@ -5,6 +5,7 @@ namespace Jikan\Get;
 abstract class Get
 {
     public $id;
+    public $query;
     public $path;
     public $model;
     public $parser;

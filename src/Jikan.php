@@ -63,7 +63,8 @@ class Jikan
     /*
      * Search
      */
-    public function Search(String $query = null, String $type = ANIME, Array $extend = []) {
+    public function Search(String $query = null, String $type = ANIME, $page = 1) {
+        $this->response = (array) (new Get\Search($query, $type, $page))->response;
 
         return $this;
     }

@@ -1,5 +1,5 @@
 # Jikan - The Unofficial MyAnimelist PHP API
-[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=dev) [![stable](https://img.shields.io/badge/stable-1.4.4-blue.svg?style=flat)]() [![REST](https://img.shields.io/badge/REST-online-brightgreen.svg?style=flat)](https://jikan.me) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open")
+[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=dev) [![stable](https://img.shields.io/badge/stable-1.5.0-blue.svg?style=flat)]() [![REST](https://img.shields.io/badge/REST-online-brightgreen.svg?style=flat)](https://jikan.me) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open")
 
 ## The REST API & Documentation is available at [https://jikan.me](http://jikan.me)
 
@@ -20,6 +20,7 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
     - News
 - Character Parsing
 - People Parsing
+- Search (Anime/Manga/Character/Person)
 - Modular scraping method for developers to extend the API
 - JSON format! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 

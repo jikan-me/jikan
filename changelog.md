@@ -1,9 +1,12 @@
 ## Changelog
 
-### 1.4.6 stable - January 23, 18
-- **[Core]**
+
+### 1.5.0 stable - January 23, 18
+- **[Core]** 1.4.6
 	- Load files for parsing locally. e.g `$jikan->Anime('file/to/anime-1.html')` **Extend requests will load from MAL**
 	- Prepare for header responses
+- **[Search]**
+	- Add Anime search functionality w/ pagination support. e.g `$jikan->Search('query', ANIME)`, `$jikan->Search('query', ANIME, 2) // page 2`
 
 ### 1.4.5 stable - January 21, 18
 - **[Anime]**

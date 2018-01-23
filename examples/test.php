@@ -8,8 +8,15 @@ require_once "../vendor/autoload.php";
 
 $jikan = new Jikan\Jikan;
 
-$jikan->Anime('../../mal_data/anime-21-main.html');
+$time_start = microtime(true);
 
+$jikan->Search('Code', ANIME);
+
+$time_end = microtime(true);
+$execution_time = ($time_end - $time_start);
+
+//execution time of the script
+echo '<b>Total Execution Time:</b> '.$execution_time.' s';
 
 var_dump($jikan->response);
 

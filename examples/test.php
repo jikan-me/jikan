@@ -9,21 +9,17 @@ require_once "../vendor/autoload.php";
 $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
-
-$jikan->Search('shou', CHARACTER);
-
+// add extracted ID
+// add extracted ID
+// add extracted ID
+//$jikan->Search('Code', ANIME); // add extracted ID
+$jikan->Character(1);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 
 //execution time of the script
 echo '<b>Total Execution Time:</b> '.$execution_time.' s';
 
-foreach ($jikan->response['result'] as $key => $value) {
-	var_dump($value);
-}
-
-
-die;
 var_dump($jikan->response);
 
 //$jikan->Anime(21);

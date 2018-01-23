@@ -32,10 +32,10 @@ class Search extends Get
                 $link .= 'manga.php?q=' . $this->query . ($page > 1 ? '&show=' . ($page-1)*50 : '' ) . '&c[]=a&c[]=b&c[]=c&c[]=f';
                 break;
             case CHARACTER:
-                $link .= 'character.php?q=' . $this->query . ($page > 1 ? '&show=' . ($page-1)*50 : '' ) . '&c[]=a&c[]=b&c[]=c&c[]=f';
+                $link .= 'character.php?q=' . $this->query . ($page > 1 ? '&show=' . ($page-1)*50 : '' );
                 break;
             case PERSON:
-                $link .= 'people.php?q=' . $this->query . ($page > 1 ? '&show=' . ($page-1)*50 : '' ) . '&c[]=a&c[]=b&c[]=c&c[]=f';
+                $link .= 'people.php?q=' . $this->query . ($page > 1 ? '&show=' . ($page-1)*50 : '' );
                 break;
             
             default:

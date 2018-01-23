@@ -6,11 +6,13 @@ use Jikan\Model\Search as SearchModel;
 class SearchParse extends TemplateParse
 {
 
+    private $type;
     private $return = [];
 
     public function parse($type = ANIME) : Array
     {
 
+        $this->type = $type;
         $this->model = new SearchModel();
 
         /*
@@ -19,7 +21,7 @@ class SearchParse extends TemplateParse
 
 
         switch ($type) {
-            case ANIME:
+            case ANIME || MANGA: 
 
                 $this->addRule('result', '~<div class="js-categories-seasonal js-block-list list">~', function() {
                     $i = 1;
@@ -31,7 +33,6 @@ class SearchParse extends TemplateParse
                             'title' => null,
                             'description' => null,
                             'type' => null,
-                            'episodes' => null,
                             'score' => null
                         ];
                         $line = $this->file[$this->lineNo + $i];
@@ -53,7 +54,7 @@ class SearchParse extends TemplateParse
                             $result['title'] = $this->matches[1];
 
 
-                            $i += 8;
+                            ($this->type == ANIME ? $i += 8 : $i += 10);
 
                             if (preg_match('~<div class="pt4">(.*?)(.?|<a href=".{1,}">read more.</a>)</div>~', $this->file[$this->lineNo + $i], $this->matches)) {
                                 $result['description'] = htmlspecialchars_decode($this->matches[1]);
@@ -62,7 +63,7 @@ class SearchParse extends TemplateParse
                             $i += 2;
                             $result['type'] = trim($this->file[$this->lineNo + $i]);
                             $i += 2;
-                            $result['episodes'] = (int) trim($this->file[$this->lineNo + $i]);
+                            $result[($this->type == ANIME ? 'episodes' : 'volumes')] = (int) trim($this->file[$this->lineNo + $i]);
                             $i += 2;
                             $result['score'] = (float) trim($this->file[$this->lineNo + $i]);
                             $i += 2;
@@ -84,8 +85,6 @@ class SearchParse extends TemplateParse
                     $this->model->set('Search', 'result_last_page', (int) end($this->matches[2]));
                 });
 
-                break;
-            case MANGA:
                 break;
             case CHARACTER:
                 break;

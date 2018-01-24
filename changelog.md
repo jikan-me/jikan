@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.5.5 stable - January 24, 18
+- **[Search]**
+	- Character Search: `nickname` field to `nicknames` since there can be multiple - 1.5.4
+	- Add `id` to Anime results 1.5.4
+	- Add Person/People search functionality w/ pagination support. e.g `$jikan->Search('query', PEOPLE)` `$jikan->Search('query', PERSON)` (`PEOPLE` is an alias of `PERSON`) - 1.5.5
+
 
 ### 1.5.3 stable - January 23, 18
 - **[Core]** 1.4.6

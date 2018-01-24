@@ -29,6 +29,7 @@ class SearchParse extends TemplateParse
                     $results = [];
                     while (true) {
                         $result = [
+                            'id' => null,
                             'url' => null,
                             'image_url' => null,
                             'title' => null,
@@ -45,7 +46,8 @@ class SearchParse extends TemplateParse
                         if (preg_match('~^<td class="borderClass bgColor(0?|1?)" valign="top" width="50">$~', $line)) {
                             $i += 2;
 
-                            preg_match('~<a class="hoverinfo_trigger" href="(.*)" id="(.*)" rel="(.*)">~', $this->file[$this->lineNo + $i], $this->matches);
+                            preg_match('~<a class="hoverinfo_trigger" href="((.*)/(.*)/(.*))" id="(.*)" rel="(.*)">~', $this->file[$this->lineNo + $i], $this->matches);
+                            $result['id'] = (int) $this->matches[3];
                             $result['url'] = $this->matches[1];
 
                             $i++;
@@ -88,6 +90,7 @@ class SearchParse extends TemplateParse
 
                 break;
             case CHARACTER:
+                            var_dump($this->matches);
                 $this->addRule('result', '~<td class="normal_header" colspan="4">Search Results</td>~', function() {
                     $i = 0;
                     $results = [];
@@ -96,7 +99,7 @@ class SearchParse extends TemplateParse
                             'url' => null,
                             'image_url' => null,
                             'name' => null,
-                            'nickname' => null,
+                            'nicknames' => null,
                             'anime' => [],
                             'manga' => []
                         ];
@@ -116,8 +119,8 @@ class SearchParse extends TemplateParse
                             preg_match('~<a href="(.*)">(.*?)</a>(<br /><small>(.*)</small>|)~', $this->file[$this->lineNo + $i], $this->matches);
                             $result['name'] = $this->matches[2];
                             (isset($this->matches[4]) && !empty($this->matches[4])) ?
-                                $result['nickname'] = str_replace(['(', ')'], '', trim($this->matches[4]))
-                            : $result['nickname'] = null ;
+                                $result['nicknames'] = str_replace(['(', ')'], '', trim($this->matches[4]))
+                            : $result['nicknames'] = null ;
 
                             $i += 2;
                             // :uh: i give up finding a pattern here, let's just do it the nasty way
@@ -174,6 +177,51 @@ class SearchParse extends TemplateParse
                 });
                 break;
             case PERSON:
+               $this->addRule('result', '~<td class="normal_header" colspan="4">Search Results</td>~', function() {
+                    $i = 0;
+                    $results = [];
+                    while (true) {
+                        $result = [
+                            'id' => null,
+                            'url' => null,
+                            'image_url' => null,
+                            'name' => null,
+                            'nicknames' => null,
+                        ];
+                        $line = $this->file[$this->lineNo + $i];
+
+                        if (preg_match('~</table>~', $line)) {
+                            break;
+                        }
+
+                        if (preg_match('~<td class="borderClass" width="25"><div class="picSurround"><a href="(/(.*)/(.*)/(.*))"><img src="(.*)"></a></div></td>~', $line, $this->matches)) {
+
+                            $result['id'] = (int) $this->matches[3];
+                            $result['url'] = BASE_URL . $this->matches[1];
+                            $result['image_url'] = $this->matches[5];
+
+                            $i++;
+                            preg_match('~<td class="borderClass"><a href="(.*)">(.*)</a>(<br><small>(.*)</small></td>|)~', $this->file[$this->lineNo + $i], $this->matches);
+                            $result['name'] = $this->matches[2];
+                            (isset($this->matches[4]) && !empty($this->matches[4])) ?
+                                $result['nicknames'] = str_replace(['(', ')'], '', trim($this->matches[4]))
+                            : $result['nicknames'] = null ;
+
+                            $results[] = $result;
+                        }
+
+                        $i++;
+                    }
+
+                    $this->model->set('Search', 'result', $results);
+                });
+
+
+                $this->addRule('result_last_page', '~<div class="spaceit" style="text-align: right;">~', function() {
+                    preg_match_all('~<a href="(.*?)">(.*?)</a>~', $this->line, $this->matches);
+
+                    $this->model->set('Search', 'result_last_page', (int) end($this->matches[2]));
+                });
                 break;
         }
 

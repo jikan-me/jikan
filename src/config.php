@@ -25,3 +25,4 @@ define( 'ANIME' , 'anime' );
 define( 'MANGA' , 'manga' );
 define( 'CHARACTER' , 'character' );
 define( 'PERSON' , 'person' );
+define( 'PEOPLE', 'person'); // alias

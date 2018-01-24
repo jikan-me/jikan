@@ -9,11 +9,8 @@ require_once "../vendor/autoload.php";
 $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
-// add extracted ID
-// add extracted ID
-// add extracted ID
-//$jikan->Search('Code', ANIME); // add extracted ID
-$jikan->Character(1);
+//$jikan->Search('Code', ANIME);
+$jikan->Search('shou', PEOPLE, 2);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

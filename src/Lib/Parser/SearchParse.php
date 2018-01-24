@@ -90,7 +90,6 @@ class SearchParse extends TemplateParse
 
                 break;
             case CHARACTER:
-                            var_dump($this->matches);
                 $this->addRule('result', '~<td class="normal_header" colspan="4">Search Results</td>~', function() {
                     $i = 0;
                     $results = [];

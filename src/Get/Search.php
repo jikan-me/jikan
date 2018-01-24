@@ -13,7 +13,7 @@ class Search extends Get
 
 
         if (is_null($query)) {
-            throw new \Exception('No query provided');
+            throw new \Exception('No query given');
         }
 
         $this->query = $query;

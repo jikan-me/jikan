@@ -15,6 +15,7 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
     - Characters & Staff
     - Episodes
     - News
+    - Videos/PV/Episodes
 - Manga Parsing
     - Characters
     - News

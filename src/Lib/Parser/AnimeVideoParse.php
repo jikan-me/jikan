@@ -30,9 +30,10 @@ class AnimeVideoParse extends TemplateParse
             $episode = [];
             if (!empty($this->matches)) {
                 foreach ($this->matches[1] as $key => $value) {
-                    preg_match('~<a class="video-list di-ib po-r" href="/(.*)"><img class="thumbs lazyload" src="(.*)" data-src="(.*)" width="320" height="320" data-pin-no-hover="true" data-title="(.*)" data-video-id="(.*)" data-anime-id="(.*)"><div class="info-container clearfix"><span class="title">(.*)<span class=" ml4"></span><br><span class="episode-title" title="(.*)">(.*)</span></span>~', $value, $this->matches);
+                    preg_match('~<a class="video-list di-ib po-r" href="(.*)"><img class="thumbs lazyload" src="(.*)" data-src="(.*)" width="320" height="320" data-pin-no-hover="true" data-title="(.*)" data-video-id="(.*)" data-anime-id="(.*)"><div class="info-container clearfix"><span class="title">(.*)<span class=" ml4"></span><br><span class="episode-title" title="(.*)">(.*)</span></span>~', $value, $this->matches);
+
                     $episode[] = [
-                        'url' => BASE_URL . $this->matches[1],
+                        'url' => $this->matches[1],
                         'image_url' => $this->matches[3],
                         'episode' => $this->matches[7],
                         'title' => $this->matches[8]

@@ -10,7 +10,7 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 //$jikan->Search('Code', ANIME);
-$jikan->Search('shou', PEOPLE, 2);
+$jikan->Anime(1, [VIDEOS]);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

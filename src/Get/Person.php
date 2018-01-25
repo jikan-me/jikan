@@ -28,7 +28,7 @@ class Person extends Get
         );
         $this->parser->loadFile();
 
-        //$this->response = $this->parser->parse();
+        $this->response['code'] = $this->parser->status;
         $this->response = array_merge($this->response, $this->parser->parse());
 
         $this->canonical_path = $this->parser->model->get('Person', 'link_canonical');

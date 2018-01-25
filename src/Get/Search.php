@@ -46,6 +46,7 @@ class Search extends Get
         $this->parser->setPath($link);
         $this->parser->loadFile();
 
+        $this->response['code'] = $this->parser->status;
         $this->response = array_merge($this->response, $this->parser->parse($type));
     }
 

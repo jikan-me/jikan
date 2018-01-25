@@ -20,10 +20,6 @@ class MangaNewsParse extends TemplateParse
          */
 
 
-
-        $this->loadFile($this->filePath);
-
-
         $this->addRule('news', '~<h2 class="mb8">News</h2>~', function() {
             $running = true;
             $i = 0;

@@ -2,9 +2,10 @@
 
 namespace Jikan\Get;
 
-use Jikan\Lib\Parser\MangaNewsParse;
-use Jikan\Lib\Parser\MangaCharacterParse;
 use Jikan\Lib\Parser\MangaParse;
+use Jikan\Lib\Parser\MangaCharacterParse;
+use Jikan\Lib\Parser\MangaNewsParse;
+use Jikan\Lib\Parser\MangaStatsParse;
 
 
 class Manga extends Get
@@ -12,7 +13,7 @@ class Manga extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS, NEWS];
+    private $validExtends = [CHARACTERS, NEWS, STATS];
 
     public function __construct($id = null, $extend = null) {
 
@@ -31,7 +32,7 @@ class Manga extends Get
         );
         $this->parser->loadFile();
 
-        //$this->response = $this->parser->parse();
+        $this->response['code'] = $this->parser->status;
         $this->response = array_merge($this->response, $this->parser->parse());
 
         $this->canonical_path = $this->parser->model->get('Manga', 'link_canonical');
@@ -78,6 +79,15 @@ class Manga extends Get
         $this->parser = new MangaNewsParse;
 
         $this->parser->setPath($this->canonical_path.'/news');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
+
+    private function stats() {
+        $this->parser = new MangaStatsParse;
+
+        $this->parser->setPath($this->canonical_path.'/stats');
         $this->parser->loadFile();
 
         $this->response = array_merge($this->response, $this->parser->parse());

@@ -17,18 +17,24 @@ require 'config.php';
 class Jikan
 {
 
-    public $headers = [];
+    public $status = 200;
     public $response = [];
 
 	public function __construct() {
 		return $this;
 	}
 
+    private function setStatus() {
+        $this->status = $this->response['code'];
+        unset($this->response['code']);
+    }
+
 	/*
 	 * Anime
 	 */
 	public function Anime(String $id = null, Array $extend = []) {
 	    $this->response = (array) (new Get\Anime($id, $extend))->response;
+        $this->setStatus();
 
 	    return $this;
     }
@@ -38,6 +44,7 @@ class Jikan
      */
     public function Manga(String $id = null, Array $extend = []) {
         $this->response = (array) (new Get\Manga($id, $extend))->response;
+        $this->setStatus();
 
         return $this;
     }
@@ -47,6 +54,7 @@ class Jikan
      */
     public function Character(String $id = null, Array $extend = []) {
         $this->response = (array) (new Get\Character($id, $extend))->response;
+        $this->setStatus();
 
         return $this;
     }
@@ -56,6 +64,7 @@ class Jikan
      */
     public function Person(String $id = null, Array $extend = []) {
         $this->response = (array) (new Get\Person($id, $extend))->response;
+        $this->setStatus();
 
         return $this;
     }
@@ -65,6 +74,7 @@ class Jikan
      */
     public function Search(String $query = null, String $type = ANIME, $page = 1) {
         $this->response = (array) (new Get\Search($query, $type, $page))->response;
+        $this->setStatus();
 
         return $this;
     }

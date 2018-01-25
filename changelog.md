@@ -1,5 +1,14 @@
 ## Changelog
 
+### 1.6.2 stable - January 26, 18
+- **[Anime|Manga]**
+	- Add stats parsing - 1.6.0
+- **[Core]**	
+	- Fixed an impactful bug which had the parser requesting the page *twice* in some extend cases (was i drunk coding this part?!) - 1.6.1
+		- Was doubling chances of rate limiting
+		- Slowing down the script 2x
+	- Add accurate header response by MAL (429 means 429) - Core fix for [#91](/../../issues/91)
+
 ### 1.5.8 stable - January 25, 18
 - **[CORE]**
 	- Change error message 'ID/Path not given' -> 'No ID/Path given'

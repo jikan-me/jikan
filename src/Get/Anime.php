@@ -7,6 +7,7 @@ use Jikan\Lib\Parser\AnimeCharacterStaffParse;
 use Jikan\Lib\Parser\AnimeEpisodeParse;
 use Jikan\Lib\Parser\AnimeNewsParse;
 use Jikan\Lib\Parser\AnimeVideoParse;
+use Jikan\Lib\Parser\AnimeStatsParse;
 
 
 class Anime extends Get
@@ -14,7 +15,7 @@ class Anime extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS];
+    private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS];
 
 	public function __construct($id = null, $extend = null) {
 
@@ -33,7 +34,7 @@ class Anime extends Get
         );
         $this->parser->loadFile();
 
-        //$this->response = $this->parser->parse();
+        $this->response['code'] = $this->parser->status;
         $this->response = array_merge($this->response, $this->parser->parse());
 
         $this->canonical_path = $this->parser->model->get('Anime', 'link_canonical');
@@ -78,9 +79,6 @@ class Anime extends Get
 
         $this->response = array_merge($this->response, $this->parser->parse());
 
-        //array_merge($this->response, $this->parser->parse());
-        //$this->response = $this->parser->parse();
-
 	}
 
 	private function charactersStaff() {
@@ -110,4 +108,12 @@ class Anime extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
+    private function stats() {
+        $this->parser = new AnimeStatsParse;
+
+        $this->parser->setPath($this->canonical_path.'/stats');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
 }

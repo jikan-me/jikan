@@ -7,6 +7,7 @@ use Jikan\Helper\Utils as Util;
 abstract class TemplateParse
 {
 
+    public $status;
     public $file;
     public $filePath;
     public $data;
@@ -21,12 +22,18 @@ abstract class TemplateParse
         $this->filePath = $filePath;
     }
 
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
     public function loadFile() {
         if (!is_null($this->filePath)) {
 
             if (Util::isURL($this->filePath)) {
-                if (!Util::existsURL($this->filePath)) {
-                    http_response_code(404);
+                $this->setStatus(Util::getStatus($this->filePath));
+
+                if (!Util::existsURL($this->status)) {
+                    http_response_code($this->status);
                     throw new \Exception("File does not exist");
                 }
             } else {

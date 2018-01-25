@@ -20,6 +20,7 @@ define( 'CHARACTERS' , 'characters' );
 define( 'EPISODES' , 'episodes' );
 define( 'NEWS' , 'news' );
 define( 'VIDEOS' , 'videos' );
+define( 'STATS', 'stats' );
 
 define( 'ANIME' , 'anime' );
 define( 'MANGA' , 'manga' );

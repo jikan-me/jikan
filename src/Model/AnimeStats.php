@@ -18,6 +18,6 @@ class AnimeStats extends Model
 
 	public $total;
 
-	public $score = [];
+	public $score_stats = [];
 
 }

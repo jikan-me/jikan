@@ -11,17 +11,11 @@ class AnimeEpisodeParse extends TemplateParse
     public function parse() : Array
     {
 
-
-
         $this->model = new AnimeEpisodeModel;
 
         /*
          * Rules
          */
-
-
-
-        $this->loadFile($this->filePath);
 
 
         $this->addRule('last_page', '~<div class="pagination ac">(.*?)</div>~', function() {

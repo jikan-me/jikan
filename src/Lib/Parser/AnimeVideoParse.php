@@ -21,8 +21,6 @@ class AnimeVideoParse extends TemplateParse
 
 
 
-        $this->loadFile($this->filePath);
-            
         $this->addRule('episode', '~<h2 class="mt0 pt0 clearfix">~', function() {
             $parsingLine = $this->file[$this->lineNo + 10];
             preg_match_all('~<div class="video-list-outer">(.*?)</div>~', $parsingLine, $this->matches);

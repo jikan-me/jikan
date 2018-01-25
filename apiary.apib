@@ -34,7 +34,8 @@ Per Day: **2,000**
 Concurrent: **2**/second
 
 ## Additional
-- Responses are cached for 3 days.
+- Anime/Manga/Character/Person Responses are cached for 3 days.
+- Search Queries are cached for 6 hours
 
 ## Allowed HTTP(s) requests
 <pre>
@@ -59,15 +60,25 @@ Here's a list of errors you can get and what you could do to over come them.
 
 ### Invalid extended request / Unsupported parse request
 Check each method for their proper extended requests. For example `/episodes` may exist for anime, but it doesn't exist for manga.
+
 ### MyAnimeList Rate Limiting reached
 Jikan has made too many requests to MyAnimeList and there's a rate limit in effect from their side. This only lasts for a few seconds.
 If you're making API calls in bulk, I suggest adding a delay between each request.
 
-You won't face this issue if there's enough cache lying around.
-### ID/Path not given
+### Invalid or incomplete endpoint
+The endpoint you requested either does not exist or you did not make a proper request.
+
+You wo  n't face this issue if there's enough cache lying around.
+### No ID/Path given
 This message comes from JikanPHP, the core of the REST API. Which pretty much translates to "You haven't provided any anime/manga/character/person `ID` to request.
 
 If you get any other error, it's most likely a PHP error from JikanPHP itself. Please file an [issue](https://github.com/jikan-me/jikan/issues) on the GitHub repo.
+
+### Bad Search Request
+You most likely made an invalid search request. Either the type or query is empty. Or perhaps both.
+
+### Server Error
+Something happened on the our side, open an [issue](https://github.com/jikan-me/jikan/issues).
 
 # Disclaimer
 - Jikan is in no way affiliated with MyAnimeList.

@@ -15,7 +15,7 @@ class Character extends Get
 
 
         if (is_null($id)) {
-            throw new \Exception('ID/Path not given');
+            throw new \Exception('No ID/Path Given');
         }
 
         $this->id = $id;

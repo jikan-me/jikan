@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.5.7 stable - January 25, 18
+- **[CORE]**
+	- Change error message 'ID/Path not given' -> 'No ID/Path given' - 1.5.7
+	- Change error message 'No query given' -> 'No Query Given' - 1.5.7
+
 ### 1.5.6 stable - January 24, 18
 - **[Search]**
 	- Character Search: `nickname` field to `nicknames` since there can be multiple - 1.5.4

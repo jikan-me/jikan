@@ -81,13 +81,6 @@ class SearchParse extends TemplateParse
                     $this->model->set('Search', 'result', $results);
                 });
 
-
-                $this->addRule('result_last_page', '~<div class="spaceit" style="text-align: right;">~', function() {
-                    preg_match_all('~<a href="(.*?)">(.*?)</a>~', $this->line, $this->matches);
-
-                    $this->model->set('Search', 'result_last_page', (int) end($this->matches[2]));
-                });
-
                 break;
             case CHARACTER:
                 $this->addRule('result', '~<td class="normal_header" colspan="4">Search Results</td>~', function() {
@@ -168,12 +161,6 @@ class SearchParse extends TemplateParse
                     $this->model->set('Search', 'result', $results);
                 });
 
-
-                $this->addRule('result_last_page', '~<div class="spaceit" style="text-align: right;">~', function() {
-                    preg_match_all('~<a href="(.*?)">(.*?)</a>~', $this->line, $this->matches);
-
-                    $this->model->set('Search', 'result_last_page', (int) end($this->matches[2]));
-                });
                 break;
             case PERSON:
                $this->addRule('result', '~<td class="normal_header" colspan="4">Search Results</td>~', function() {
@@ -215,15 +202,17 @@ class SearchParse extends TemplateParse
                     $this->model->set('Search', 'result', $results);
                 });
 
-
-                $this->addRule('result_last_page', '~<div class="spaceit" style="text-align: right;">~', function() {
-                    preg_match_all('~<a href="(.*?)">(.*?)</a>~', $this->line, $this->matches);
-
-                    $this->model->set('Search', 'result_last_page', (int) end($this->matches[2]));
-                });
                 break;
         }
 
+
+        $this->addRule('result_last_page', '~<div class="spaceit" style="text-align: right;">~', function() {
+            preg_match_all('~<a href="(.*?)">(.*?)</a>~', $this->line, $this->matches);
+
+            if (!empty($this->matches[2])) {
+                $this->model->set('Search', 'result_last_page', (int) end($this->matches[2]));
+            }
+        });
 
         $this->loadFile($this->filePath);
 

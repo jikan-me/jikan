@@ -10,7 +10,7 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 //$jikan->Search('Code', ANIME);
-$jikan->Search('Sawashiro', PEOPLE);
+$jikan->Person(9834); //9834
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

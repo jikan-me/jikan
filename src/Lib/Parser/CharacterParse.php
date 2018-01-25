@@ -79,9 +79,11 @@ class CharacterParse extends TemplateParse
                     preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $animeMeta);
                     $i++;
                     $animeName = [];
-                    preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $animeName);
+                    preg_match('~<td valign="top" class="borderClass"><a href="((.*)/(.*)/(.*)/(.*))">(.*)</a>~', $this->file[$this->lineNo + $i], $animeName);
+
                     $animeography[] = [
-                        'name' => $animeName[2],
+                        'mal_id' => (int) $animeName[4],
+                        'name' => $animeName[6],
                         'url' => $animeMeta[1],
                         'image_url' => $animeMeta[2]
                     ];
@@ -108,9 +110,11 @@ class CharacterParse extends TemplateParse
                     preg_match('~<td width="25" class="borderClass" valign="top"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $mangaMeta);
                     $i++;
                     $mangaName = array();
-                    preg_match('~<td valign="top" class="borderClass"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $mangaName);
+                    preg_match('~<td valign="top" class="borderClass"><a href="((.*)/(.*)/(.*)/(.*))">(.*)</a>~', $this->file[$this->lineNo + $i], $mangaName);
+
                     $mangaography[] = [
-                        'name' => $mangaName[2],
+                        'mal_id' => (int) $mangaName[4],
+                        'name' => $mangaName[6],
                         'url' => $mangaMeta[1],
                         'image_url' => $mangaMeta[2]
                     ];
@@ -141,12 +145,14 @@ class CharacterParse extends TemplateParse
                     preg_match('~<td class="borderClass" valign="top" width="25"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div></td>~', $this->file[$this->lineNo + $i], $personMeta);
                     $i++;
                     $personName = [];
-                    preg_match('~<td class="borderClass" valign="top"><a href="(.*)">(.*)</a>~', $this->file[$this->lineNo + $i], $personName);
+                    preg_match('~<td class="borderClass" valign="top"><a href="((.*)/(.*)/(.*)/(.*))">(.*)</a>~', $this->file[$this->lineNo + $i], $personName);
                     $i++;
                     $personType = [];
                     preg_match('~<div style="margin-top: 2px;"><small>(.*)</small></div>~', $this->file[$this->lineNo + $i], $personType);
+
                     $voiceActors[] = [
-                        'name' => $personName[2],
+                        'mal_id' => (int) $personName[4],
+                        'name' => $personName[6],
                         'url' => $personMeta[1],
                         'image_url' => $personMeta[2],
                         'language' => $personType[1]

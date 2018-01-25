@@ -1,11 +1,13 @@
 ## Changelog
 
-### 1.5.7 stable - January 25, 18
+### 1.5.8 stable - January 25, 18
 - **[CORE]**
 	- Change error message 'ID/Path not given' -> 'No ID/Path given'
 	- Change error message 'No query given' -> 'No Query Given'
 - **[SEARCH]**
 	- Fix `result_last_page` showing 0 on single page results - 1.5.7
+- **[Schema]**
+	- Add more `mal_id` & clean up html codes - 1.5.8
 
 ### 1.5.6 stable - January 24, 18
 - **[Search]**

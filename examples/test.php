@@ -9,8 +9,7 @@ require_once "../vendor/autoload.php";
 $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
-//$jikan->Search('Code', ANIME);
-$jikan->Anime(21, [STATS]); //9834
+$jikan->Manga(1);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

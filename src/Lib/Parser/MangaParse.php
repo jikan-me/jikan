@@ -76,10 +76,17 @@ class MangaParse extends TemplateParse
                         'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
                     ]);
                 } else {
-                    $this->model->set('Manga', 'published', [
-                        'from' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d'),
-                        'to' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d')
-                    ]);
+                    if (preg_match('~^[0-9]{4}$~', $this->model->get('Manga', 'published_string'))) {
+                        $this->model->set('Manga', 'published_string', [
+                            'from' => null,
+                            'to' => null
+                        ]);                            
+                    } else {
+                        $this->model->set('Manga', 'published', [
+                            'from' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d'),
+                            'to' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d')
+                        ]);
+                    }
                 }
             } else {
                 $this->model->set('Manga', 'published', [

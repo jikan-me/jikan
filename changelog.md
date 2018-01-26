@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.6.3 stable - January 27, 18
+- **[Anime|Manga]**
+	- Fix for [#98](/../../issues/98)
+		- Return null for ISO8601 of aired_string that only has year
+
 ### 1.6.2 stable - January 26, 18
 - **[Anime|Manga]**
 	- Add stats parsing - 1.6.0

@@ -16,7 +16,7 @@ class AnimeParse extends TemplateParse
          */
 
         $this->addRule('link_canonical', '~<link rel="canonical" href="(.*)" />~', function() {
-           $this->model->set('Anime', 'link_canonical', $this->matches[1]);
+            $this->model->set('Anime', 'link_canonical', $this->matches[1]);
 
             preg_match('~myanimelist.net/(.+)/(.*)/~', $this->model->get('Anime', 'link_canonical'), $this->matches);
             $this->model->set('Anime', 'mal_id', (int) $this->matches[2]);
@@ -70,10 +70,18 @@ class AnimeParse extends TemplateParse
                         'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
                     ]);
                 } else {
-                    $this->model->set('Anime', 'aired', [
-                        'from' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d'),
-                        'to' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d')
-                    ]);
+
+                    if (preg_match('~^[0-9]{4}$~', $this->model->get('Anime', 'aired_string'))) {
+                        $this->model->set('Anime', 'aired', [
+                            'from' => null,
+                            'to' => null
+                        ]);                            
+                    } else {
+                        $this->model->set('Anime', 'aired', [
+                            'from' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d'),
+                            'to' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d')
+                        ]);
+                    }
                 }
             } else {
                 $this->model->set('Anime', 'aired', [

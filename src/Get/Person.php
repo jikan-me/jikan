@@ -3,13 +3,14 @@
 namespace Jikan\Get;
 
 use Jikan\Lib\Parser\PersonParse;
+use Jikan\Lib\Parser\PersonPicturesParse;
 
 class Person extends Get
 {
 
     public $canonical_path;
 
-    private $validExtends = [];
+    private $validExtends = [PICTURES];
 
     public function __construct($id = null, $extend = null) {
 
@@ -60,6 +61,15 @@ class Person extends Get
             }
         }
 
+    }
+
+    private function pictures() {
+        $this->parser = new PersonPicturesParse;
+
+        $this->parser->setPath($this->canonical_path.'/pictures');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
     }
 
 }

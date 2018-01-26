@@ -21,6 +21,7 @@ define( 'EPISODES' , 'episodes' );
 define( 'NEWS' , 'news' );
 define( 'VIDEOS' , 'videos' );
 define( 'STATS', 'stats' );
+define( 'PICTURES', 'pictures' );
 
 define( 'ANIME' , 'anime' );
 define( 'MANGA' , 'manga' );

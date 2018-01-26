@@ -6,6 +6,7 @@ use Jikan\Lib\Parser\MangaParse;
 use Jikan\Lib\Parser\MangaCharacterParse;
 use Jikan\Lib\Parser\MangaNewsParse;
 use Jikan\Lib\Parser\MangaStatsParse;
+use Jikan\Lib\Parser\MangaPicturesParse;
 
 
 class Manga extends Get
@@ -13,7 +14,7 @@ class Manga extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS, NEWS, STATS];
+    private $validExtends = [CHARACTERS, NEWS, STATS, PICTURES];
 
     public function __construct($id = null, $extend = null) {
 
@@ -88,6 +89,15 @@ class Manga extends Get
         $this->parser = new MangaStatsParse;
 
         $this->parser->setPath($this->canonical_path.'/stats');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
+
+    private function pictures() {
+        $this->parser = new MangaPicturesParse;
+
+        $this->parser->setPath($this->canonical_path.'/pics');
         $this->parser->loadFile();
 
         $this->response = array_merge($this->response, $this->parser->parse());

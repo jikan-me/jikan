@@ -26,7 +26,6 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 - Search (AnimeManga/Character/Person)
     - Pagination Support
     - No.# of pages
-- User Profile
 - Modular scraping method for developers to extend the API
 - JSON format! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
@@ -40,6 +39,7 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 - Most Favorited
     - Characters
     - People
+- User Profile
 - Command Line Usage
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 

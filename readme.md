@@ -10,7 +10,7 @@ The raison d'être for Jikan is to provide an easy API for being able to get stu
 Jikan even has it's own REST API that responds in JSON - [Get Started](http://jikan.me)
 
 
-# Responses
+# Features
 - Anime Parsing
     - Characters & Staff
     - Episodes
@@ -20,10 +20,13 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
     - Characters
     - News
 - Character Parsing
+    - Pictures
 - People Parsing
+    - Pictures
 - Search (AnimeManga/Character/Person)
     - Pagination Support
     - No.# of pages
+- User Profile
 - Modular scraping method for developers to extend the API
 - JSON format! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
@@ -31,8 +34,12 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 - Anime & Manga
     - User Reviews
     - Recommendations
-    - Stats
-    - Pictures
+- Top
+    - Anime
+    - Manga
+- Most Favorited
+    - Characters
+    - People
 - Command Line Usage
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
@@ -41,7 +48,6 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 
 ## Changelog
 Read more about the changelog [here](https://github.com/jikan-me/jikan/tree/master/changelog.md)
-
 
 ## Examples
 Check the [examples](https://github.com/jikan-me/jikan/tree/master/examples) directory

@@ -23,7 +23,7 @@ abstract class TemplateParse
     }
 
     public function setStatus($status) {
-        $this->status = $status;
+        $this->status = (int) $status;
     }
 
     public function loadFile() {
@@ -31,9 +31,14 @@ abstract class TemplateParse
 
             if (Util::isURL($this->filePath)) {
                 $this->setStatus(Util::getStatus($this->filePath));
-
                 if (!Util::existsURL($this->status)) {
+
                     http_response_code($this->status);
+
+                    if ($this->status == 429) {
+                        throw new \Exception("MyAnimeList Rate Limit reached; Try again later");
+                    }
+
                     throw new \Exception("File does not exist");
                 }
             } else {
@@ -41,8 +46,14 @@ abstract class TemplateParse
                     throw new \Exception("File does not exist");
                 }
             }
+
             $this->file = @file($this->filePath);
-            array_walk($this->file, Util::class.'::trim'); // bystanders begone!
+            
+            if (!is_bool($this->file)) {
+                array_walk($this->file, Util::class.'::trim'); // bystanders begone!
+            } else {
+                throw new \Exception("Could not parse file; MAL Rate Limit reached or MAL is down");
+            }
 
         } else {
             throw new \Exception("File path is null");

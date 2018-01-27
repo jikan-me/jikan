@@ -1,11 +1,13 @@
 ## Changelog
 
-### 1.7.0 stable - January 27, 18
+### 1.7.1 stable - January 27, 18
 - **[Anime|Manga]**
 	- Fix for [#98](/../../issues/98) - 1.6.3
 		- Return null for ISO8601 of aired_string that only has year
-- **[Anime|Manga|Character|Person]**
+- **[Anime|Manga|Character|Person]** 1.7.0
 	- Add gallery page parsing
+- `unknown search type` -> `invalid search type`
+- fixed anime pictures parsing
 
 ### 1.6.2 stable - January 26, 18
 - **[Anime|Manga]**

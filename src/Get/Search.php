@@ -39,7 +39,7 @@ class Search extends Get
                 break;
             
             default:
-                throw new \Exception('Unknown search type \"'.$type.'\"');
+                throw new \Exception('Invalid Search Type');
                 break;
         }
 

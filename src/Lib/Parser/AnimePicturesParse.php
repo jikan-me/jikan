@@ -34,7 +34,7 @@ class AnimePicturesParse extends TemplateParse
                         'image', 
                         array_merge(
                             $this->model->get('AnimePictures', 'image'),
-                            (is_array($this->matches[4]) ? $this->matches[4] : [$this->matches[4]])
+                            (is_array($this->matches[3]) ? $this->matches[3] : [$this->matches[3]])
                         )
                     );
                 }

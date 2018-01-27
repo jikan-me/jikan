@@ -9,7 +9,7 @@ require_once "../vendor/autoload.php";
 $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
-$jikan->Person(1, [PICTURES]);
+$jikan->Anime(1, [PICTURES]);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

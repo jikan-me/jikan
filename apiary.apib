@@ -22,7 +22,8 @@ Base URL (SSL): `https://api.jikan.me/`
 
 
 - [JikanPHP - Source](https://github.com/jikan-me/jikan/)
-- [JikanPy - Wrapper](https://github.com/AWConant/jikanpy)
+- [JikanPy - Wrapper](https://github.com/AWConant/jikanpy) by Andrew Conant
+- [Jikan.rb - Wrapper](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 
 
 # Information
@@ -68,7 +69,7 @@ If you're making API calls in bulk, I suggest adding a delay between each reques
 ### Invalid or incomplete endpoint
 The endpoint you requested either does not exist or you did not make a proper request.
 
-You wo  n't face this issue if there's enough cache lying around.
+You won't face this issue if there's enough cache lying around.
 ### No ID/Path given
 This message comes from JikanPHP, the core of the REST API. Which pretty much translates to "You haven't provided any anime/manga/character/person `ID` to request.
 
@@ -109,7 +110,7 @@ The episodes page on MyAnimeList get paginated after 100 episodes. If there's an
 - `/anime/1/episodes/2` // Returns 2nd page if there's any
 
 
-### Anime API Endpoint [GET]
+### Anime Request Examples [GET]
 
 + Parameters
     + id (required, Number, `1`) ... Returns the Anime details from that the ID
@@ -136,7 +137,7 @@ A single manga object with all its details
 ### Example Calls
 - `/manga/1/characters` // Returns the list of characters and staff
 
-### Manga API Endpoint [GET]
+### Manga Request Examples [GET]
 
 + Parameters
     + id (required, Number, `1`) ... Returns the Character details from that the ID
@@ -155,7 +156,7 @@ A single person object with all its details
 | ------------- | ------------- | ------------- |
 | pictures | N/A | Pictures related to the item |
 
-### Person API Endpoint [GET]
+### Person Request Examples [GET]
 
 + Parameters
     + id (required, Number, `1`) ... Returns the Person details from that the ID
@@ -174,7 +175,7 @@ A single character object with all its details
 | ------------- | ------------- | ------------- |
 | pictures | N/A | Pictures related to the item |
 
-### Character API Endpoint [GET]
+### Character Request Examples [GET]
 
 
 + Parameters
@@ -190,6 +191,7 @@ A single character object with all its details
         
 ## Search [/search/{type}/{query}/{page}]
 Search result object related to the query
+**NOTE: MyAnimeList only processes queries with a minimum of 3 letters**
 ### Parameters
 | Parameter  | Argument | Description |
 | ------------- | ------------- | ------------- |
@@ -198,7 +200,7 @@ Search result object related to the query
 | page | INTEGER | Page number of the results |
 
 
-### Search API Endpoint [GET]
+### Search Request Examples [GET]
 
 
 + Parameters

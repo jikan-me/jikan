@@ -44,6 +44,7 @@ Jikan even has it's own REST API that responds in JSON - [Get Started](http://ji
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Wrappers
+- **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant
 
 ## Changelog

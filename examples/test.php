@@ -9,7 +9,9 @@ require_once "../vendor/autoload.php";
 $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
-$jikan->Anime(1, [PICTURES]);
+//$jikan->Search('Code%20Geass', ANIME);
+//$jikan->Anime(1, [PICTURES]);
+$jikan->Manga(1);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

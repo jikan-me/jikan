@@ -66,20 +66,21 @@ class AnimeParse extends TemplateParse
                 if (strpos($this->model->get('Anime', 'aired_string'), 'to')) {
                     preg_match('~(.*) to (.*)~', $this->model->get('Anime', 'aired_string'), $this->matches);
                     $this->model->set('Anime', 'aired', [
-                        'from' => (strpos($this->matches[1], '?') !== false) ? null : date_format(date_create($this->matches[1]), 'o-m-d'),
-                        'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
+                        'from' => (strpos($this->matches[1], '?') !== false) ? null : @date_format(date_create($this->matches[1]), 'o-m-d'),
+                        'to' => (strpos($this->matches[2], '?') !== false) ? null : @date_format(date_create($this->matches[2]), 'o-m-d')
                     ]);
                 } else {
 
-                    if (preg_match('~^[0-9]{4}$~', $this->model->get('Anime', 'aired_string'))) {
+                    if (preg_match('~^[0-9]{4}$~', $this->model->get('Anime', 'aired_string')) ||
+                        preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $this->model->get('Anime', 'aired_string'))) {
                         $this->model->set('Anime', 'aired', [
                             'from' => null,
                             'to' => null
                         ]);                            
                     } else {
                         $this->model->set('Anime', 'aired', [
-                            'from' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d'),
-                            'to' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d')
+                            'from' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : @date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d'),
+                            'to' => (strpos($this->model->get('Anime', 'aired_string'), '?') !== false) ? null : @date_format(date_create($this->model->get('Anime', 'aired_string')), 'o-m-d')
                         ]);
                     }
                 }

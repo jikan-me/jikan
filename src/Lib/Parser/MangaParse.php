@@ -27,15 +27,15 @@ class MangaParse extends TemplateParse
         });
 
         $this->addRule('title_english', '~<span class="dark_text">English:</span> (.*?)</div>~', function(){
-            $this->model->set('Manga', 'title_english', $this->matches[1]);
+            $this->model->set('Manga', 'title_english', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('title_synonyms', '~<span class="dark_text">Synonyms:</span> (.*)</div><div class="spaceit_pad"><span class="dark_text">Japanese:</span>~', function(){
-            $this->model->set('Manga', 'title_synonyms', $this->matches[1]);
+            $this->model->set('Manga', 'title_synonyms', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('title_japanese', '~<span class="dark_text">Japanese:</span>(.*?)</div>~', function(){
-            $this->model->set('Manga', 'title_japanese', trim($this->matches[1]));
+            $this->model->set('Manga', 'title_japanese', htmlspecialchars_decode(trim($this->matches[1])));
         });
 
         $this->addRule('status', '~<div class="spaceit"><span class="dark_text">Status:</span> (.*)</div>~', function(){
@@ -72,8 +72,8 @@ class MangaParse extends TemplateParse
                 if (strpos($this->model->get('Manga', 'published_string'), 'to')) {
                     preg_match('~(.*) to (.*)~', $this->model->get('Manga', 'published_string'), $this->matches);
                     $this->model->set('Manga', 'published', [
-                        'from' => (strpos($this->matches[1], '?') !== false) ? null : date_format(date_create($this->matches[1]), 'o-m-d'),
-                        'to' => (strpos($this->matches[2], '?') !== false) ? null : date_format(date_create($this->matches[2]), 'o-m-d')
+                        'from' => (strpos($this->matches[1], '?') !== false) ? null : @date_format(date_create($this->matches[1]), 'o-m-d'),
+                        'to' => (strpos($this->matches[2], '?') !== false) ? null : @date_format(date_create($this->matches[2]), 'o-m-d')
                     ]);
                 } else {
                     if (preg_match('~^[0-9]{4}$~', $this->model->get('Manga', 'published_string'))) {
@@ -83,8 +83,8 @@ class MangaParse extends TemplateParse
                         ]);                            
                     } else {
                         $this->model->set('Manga', 'published', [
-                            'from' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d'),
-                            'to' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d')
+                            'from' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : @date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d'),
+                            'to' => (strpos($this->model->get('Manga', 'published_string'), '?') !== false) ? null : @date_format(date_create($this->model->get('Manga', 'published_string')), 'o-m-d')
                         ]);
                     }
                 }
@@ -104,9 +104,20 @@ class MangaParse extends TemplateParse
 
         $this->addRule('score', '~<span class="dark_text">Score:</span> <span itemprop="ratingValue">(.*)</span><sup><small>1</small></sup> <small>\(scored by <span itemprop="ratingCount">(.*)</span> users\)</small>~', function(){
 
-            $this->model->set('Manga', 'score', (float) $this->matches[1]);
-            $this->model->set('Manga', 'scored_by', (int) str_replace(",", "", $this->matches[2]));
+            if (is_null($this->model->get('Manga', 'score'))) {
+                $this->model->set('Manga', 'score', (float) $this->matches[1]);
+                $this->model->set('Manga', 'scored_by', (int) str_replace(",", "", $this->matches[2]));
+            }
         });
+
+        $this->addRule('score2', '~<div class="po-r js-statistics-info di-ib" data-id="info1"><span class="dark_text">Score:</span> (.*)<sup><small>1</small></sup> <small>\(scored by (.*) users\)</small>~', function() {
+
+            if (is_null($this->model->get('Manga', 'score'))) {
+                $this->model->set('Manga', 'score', (float) $this->matches[1]);
+                $this->model->set('Manga', 'scored_by', (int) str_replace(",", "", $this->matches[2]));
+            }
+        });
+
 
         $this->addRule('popularity', '~<span class=\"dark_text\">Popularity:<\/span> #(.*[[:alnum:]])<\/div>~', function(){
             $this->model->set('Manga', 'popularity',

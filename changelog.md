@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.7.2 stable - February 25, 18
+- Fix [#99](/../../issues/99)
+- Fix [#102](/../../issues/102)
+- Fix [#103](/../../issues/103)
+
 ### 1.7.1 stable - January 27, 18
 - **[Anime|Manga]**
 	- Fix for [#98](/../../issues/98) - 1.6.3

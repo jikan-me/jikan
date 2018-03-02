@@ -7,6 +7,7 @@ use Jikan\Lib\Parser\MangaCharacterParse;
 use Jikan\Lib\Parser\MangaNewsParse;
 use Jikan\Lib\Parser\MangaStatsParse;
 use Jikan\Lib\Parser\MangaPicturesParse;
+use Jikan\Lib\Parser\MangaForumParse;
 
 
 class Manga extends Get

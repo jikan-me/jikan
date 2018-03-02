@@ -9,6 +9,7 @@ use Jikan\Lib\Parser\AnimeNewsParse;
 use Jikan\Lib\Parser\AnimeVideoParse;
 use Jikan\Lib\Parser\AnimeStatsParse;
 use Jikan\Lib\Parser\AnimePicturesParse;
+use Jikan\Lib\Parser\AnimeForumParse;
 
 
 class Anime extends Get

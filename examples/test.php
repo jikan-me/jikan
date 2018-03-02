@@ -2,6 +2,7 @@
 // ignore this
 
 error_reporting(E_ALL);
+ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 
 //require_once dirname(__DIR__) . "/vendor/autoload.php"; 
 require_once "../vendor/autoload.php";
@@ -11,7 +12,7 @@ $jikan = new Jikan\Jikan;
 $time_start = microtime(true);
 //$jikan->Search('Code%20Geass', ANIME);
 //$jikan->Anime(1, [PICTURES]);
-$jikan->Manga(1);
+$jikan->Manga(1, [FORUM]);
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

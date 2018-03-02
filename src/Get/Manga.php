@@ -14,7 +14,7 @@ class Manga extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS, NEWS, STATS, PICTURES];
+    private $validExtends = [CHARACTERS, NEWS, STATS, PICTURES, FORUM];
 
     public function __construct($id = null, $extend = null) {
 
@@ -98,6 +98,15 @@ class Manga extends Get
         $this->parser = new MangaPicturesParse;
 
         $this->parser->setPath($this->canonical_path.'/pics');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
+
+    private function forum() {
+        $this->parser = new MangaForumParse;
+
+        $this->parser->setPath($this->canonical_path.'/forum');
         $this->parser->loadFile();
 
         $this->response = array_merge($this->response, $this->parser->parse());

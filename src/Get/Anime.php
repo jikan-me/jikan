@@ -16,7 +16,7 @@ class Anime extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS, PICTURES];
+    private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS, PICTURES, FORUM];
 
 	public function __construct($id = null, $extend = null) {
 
@@ -126,4 +126,15 @@ class Anime extends Get
 
         $this->response = array_merge($this->response, $this->parser->parse());
     }
+
+    private function forum() {
+        $this->parser = new AnimeForumParse;
+
+        $this->parser->setPath($this->canonical_path.'/forum');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
+
+
 }

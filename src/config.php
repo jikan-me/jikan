@@ -20,8 +20,10 @@ define( 'CHARACTERS' , 'characters' );
 define( 'EPISODES' , 'episodes' );
 define( 'NEWS' , 'news' );
 define( 'VIDEOS' , 'videos' );
-define( 'STATS', 'stats' );
-define( 'PICTURES', 'pictures' );
+define( 'STATS' , 'stats' );
+define( 'PICTURES' , 'pictures' );
+define( 'FORUM' , 'forum' );
+define( 'MORE_INFO' , 'moreInfo' );
 
 define( 'ANIME' , 'anime' );
 define( 'MANGA' , 'manga' );

@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.11.0 stable - March 4, 18
+- Add **Seasonal Anime** parsing [#87](/../../issues/87) - 1.10.0
+- Add **Airing Anime Schedule** parsing [#104](/../../issues/104)
+
 ### 1.9.0 stable - March 3, 18
 - **[Anime|Manga]**
 	- Add extended data "forum topics" parsing [#19](/../../issues/19) - 1.8.0 

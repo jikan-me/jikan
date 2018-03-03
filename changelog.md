@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.9.0 stable - March 3, 18
+- **[Anime|Manga]**
+	- Add extended data "forum topics" parsing [#19](/../../issues/19) - 1.8.0 
+	- Add extended data "more_info" parsing [#17](/../../issues/17)
+
 ### 1.7.2 stable - February 25, 18
 - Fix [#99](/../../issues/99)
 - Fix [#102](/../../issues/102)

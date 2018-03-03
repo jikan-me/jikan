@@ -10,6 +10,7 @@ use Jikan\Lib\Parser\AnimeVideoParse;
 use Jikan\Lib\Parser\AnimeStatsParse;
 use Jikan\Lib\Parser\AnimePicturesParse;
 use Jikan\Lib\Parser\AnimeForumParse;
+use Jikan\Lib\Parser\AnimeMoreInfoParse;
 
 
 class Anime extends Get
@@ -17,7 +18,7 @@ class Anime extends Get
 
     public $canonical_path;
 
-    private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS, PICTURES, FORUM];
+    private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS, PICTURES, FORUM, MORE_INFO];
 
 	public function __construct($id = null, $extend = null) {
 
@@ -132,6 +133,15 @@ class Anime extends Get
         $this->parser = new AnimeForumParse;
 
         $this->parser->setPath($this->canonical_path.'/forum');
+        $this->parser->loadFile();
+
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
+
+    private function moreInfo() {
+        $this->parser = new AnimeMoreInfoParse;
+
+        $this->parser->setPath($this->canonical_path.'/moreinfo');
         $this->parser->loadFile();
 
         $this->response = array_merge($this->response, $this->parser->parse());

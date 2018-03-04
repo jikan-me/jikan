@@ -20,8 +20,6 @@ class Seasonal extends Get
             $link .= '/' . $year . '/' . $season;
         }
 
-        var_dump($link);
-
 
         $this->parser->setPath($link);
         $this->parser->loadFile();

@@ -44,9 +44,11 @@ class SeasonalParse extends TemplateParse
                         'airing_start' => null,
                         'score' => null,
                         'members' => null,
-                        'r18_plus' => false,
+                        'kids' => false,
+                        'r18_plus' => false
                     ];
 
+                    $anime['kids'] = strpos($this->matches[1], 'kids') ? true : false;
                     $anime['r18_plus'] = strpos($this->matches[1], 'r18') ? true : false;
 
                     $i += 3;
@@ -98,11 +100,52 @@ class SeasonalParse extends TemplateParse
                         $anime['image_url'] = trim(substr(explode(",", $this->matches[5])[1], 0, -3));
                     }
 
-                    while(!strpos($this->file[$this->lineNo + $i], '<div class="synopsis js-synopsis">')){$i++;} // haxing MAL's inconsistencies
+                    while (!preg_match('~<div class="synopsis js-synopsis">~', $this->file[$this->lineNo + $i])){$i++;} // haxing MAL's inconsistencies
 
-                    echo htmlentities($this->file[$this->lineNo + $i]) . "<br><br>";
+                    $i++;
+                    $synopsis = "";
+                    if (preg_match('~<span class="preline">~', $this->file[$this->lineNo + $i])) {
+
+                        while (true) {
+                            if (preg_match('~<p class="licensors"~', $this->file[$this->lineNo + $i])) {
+                                break;
+                            }
+
+                            $synopsis .= $this->file[$this->lineNo + $i];
+
+                            $i++;
+                        }
+
+
+                        $anime['synopsis'] = trim(htmlspecialchars_decode(strip_tags($synopsis)));
+                    }
+
+                    if (preg_match('~<p class="licensors" data-licensors="(.*?)"></p>~', $this->file[$this->lineNo + $i], $this->matches)) {
+                        $licensors = explode(',', $this->matches[1]);
+                        foreach ($licensors as $key => $value) {
+                            $value = trim($value);
+
+                            if (!empty($value)) {
+                                $anime['licensor'][] = $value;
+                            }
+                        }
+                    }
+
+                    while (!preg_match('~<span class="remain-time">~', $this->file[$this->lineNo + $i])){$i++;} // haxing MAL's inconsistencies
+
+                    $i++;
+                    $anime['airing_start'] = trim(strip_tags($this->file[$this->lineNo + $i]));
+
+                    while (!preg_match('~<span class="member fl-r" title="Members">~', $this->file[$this->lineNo + $i])){$i++;} // haxing MAL's inconsistencies
+                    $i++;
+                    $anime['members'] = (int) trim(str_replace(',', '', $this->file[$this->lineNo + $i]));
+
+                    while (!preg_match('~<span class="score" title="Score">~', $this->file[$this->lineNo + $i])){$i++;} // haxing MAL's inconsistencies
+                    $i++;
+                    $anime['score'] = trim($this->file[$this->lineNo + $i]) == 'N/A' ? null : (float) trim($this->file[$this->lineNo + $i]);
 
                     $seasonal[] = $anime;
+
                 }
 
                 $i++;

@@ -214,9 +214,6 @@ class SearchParse extends TemplateParse
             }
         });
 
-        $this->loadFile($this->filePath);
-
-
         /*
          * Parsing
          */

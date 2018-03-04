@@ -1,8 +1,11 @@
 ## Changelog
 
-### 1.11.0 stable - March 4, 18
+### 1.11.2 stable - March 4, 18
 - Add **Seasonal Anime** parsing [#87](/../../issues/87) - 1.10.0
-- Add **Airing Anime Schedule** parsing [#104](/../../issues/104)
+- Add **Airing Anime Schedule** parsing [#104](/../../issues/104) - 1.11.0
+- Fixed a bug which slowed down the fetch for some parses - 1.11.1
+- **[Search]**
+	- Added urlencode() by default to query strings - 1.11.2
 
 ### 1.9.0 stable - March 3, 18
 - **[Anime|Manga]**

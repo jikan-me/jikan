@@ -131,15 +131,6 @@ class AnimeCharacterStaffParse extends TemplateParse
             $this->model->set('AnimeCharacterStaff', 'staff', $staff);
         });
 
-
-
-        $this->loadFile($this->filePath);
-
-
-        // rules
-
-
-
         /*
          * Parsing
          */

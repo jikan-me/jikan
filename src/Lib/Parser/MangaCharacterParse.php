@@ -58,10 +58,6 @@ class MangaCharacterParse extends TemplateParse
         });
 
 
-        $this->loadFile($this->filePath);
-
-
-
         /*
          * Parsing
          */

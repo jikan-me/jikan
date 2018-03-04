@@ -6,6 +6,6 @@ namespace Jikan\Model;
 class Schedule extends Model
 {
 
-	$schedule = [];
+	public $schedule = [];
 
 }

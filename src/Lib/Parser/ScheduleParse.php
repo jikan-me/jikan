@@ -18,13 +18,57 @@ class ScheduleParse extends TemplateParse
          * Rules
          */
 
-        $this->addRule('seasonal', '~<div class="js-categories-seasonal">~', function() {
+        $this->addRule('monday', '~<div class="anime-header">Monday</div>~', function() {
+            $this->model->set('Schedule', 'monday', $this->parseTo('<div class="anime-header">Tuesday</div>'));
+        });
 
+        $this->addRule('tuesday', '~<div class="anime-header">Tuesday</div>~', function() {
+            $this->model->set('Schedule', 'tuesday', $this->parseTo('<div class="anime-header">Wednesday</div>'));
+        });
+
+        $this->addRule('wednesday', '~<div class="anime-header">Wednesday</div>~', function() {
+            $this->model->set('Schedule', 'wednesday', $this->parseTo('<div class="anime-header">Thursday</div>'));
+        });
+
+        $this->addRule('thursday', '~<div class="anime-header">Thursday</div>~', function() {
+            $this->model->set('Schedule', 'thursday', $this->parseTo('<div class="anime-header">Friday</div>'));
+        });
+
+        $this->addRule('friday', '~<div class="anime-header">Friday</div>~', function() {
+            $this->model->set('Schedule', 'friday', $this->parseTo('<div class="anime-header">Saturday</div>'));
+        });
+
+        $this->addRule('saturday', '~<div class="anime-header">Saturday</div>~', function() {
+            $this->model->set('Schedule', 'saturday', $this->parseTo('<div class="anime-header">Sunday</div>'));
+        });
+
+        $this->addRule('sunday', '~<div class="anime-header">Sunday</div>~', function() {
+            $this->model->set('Schedule', 'sunday', $this->parseTo('<div class="mauto clearfix pt24"'));
+        });
+
+
+
+        /*
+         * Parsing
+         */
+
+        foreach ($this->file as $lineNo => $line) {
+            $this->line = $line;
+            $this->lineNo = $lineNo;
+
+            $this->find();
+        }
+
+        return (array) $this->model;
+    }
+
+
+    private function parseTo($next) {
             $i = 1;
             $seasonal = [];
 
             while (true) {
-                if (preg_match('~<div class="mauto clearfix pt24"~', $this->file[$this->lineNo + $i])) {
+                if (preg_match('~'.$next.'~', $this->file[$this->lineNo + $i])) {
                     break;
                 }
 
@@ -150,22 +194,6 @@ class ScheduleParse extends TemplateParse
 
                 $i++;
             }
-
-
-            $this->model->set('Schedule', 'schedule', $schedule);
-        });
-
-        /*
-         * Parsing
-         */
-
-        foreach ($this->file as $lineNo => $line) {
-            $this->line = $line;
-            $this->lineNo = $lineNo;
-
-            $this->find();
-        }
-
-        return (array) $this->model;
+        return $seasonal;
     }
 }

@@ -12,7 +12,7 @@ $jikan = new Jikan\Jikan;
 $time_start = microtime(true);
 //$jikan->Search('Code%20Geass', ANIME);
 //$jikan->Anime(1, [PICTURES]);
-$jikan->Seasonal();
+$jikan->Schedule();
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

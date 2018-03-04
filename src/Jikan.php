@@ -86,7 +86,7 @@ class Jikan
      * Seasonal Anime
      */
     public function Seasonal(String $season = null, String $year = null) {
-        $this->response = (array) (new Get\Seasonal($season, $year))->response['season'];
+        $this->response = (array) (new Get\Seasonal($season, $year))->response;
         $this->setStatus();
 
         return $this;
@@ -97,7 +97,7 @@ class Jikan
      * Anime Schedule For Current Season
      */
     public function Schedule() {
-        $this->response = (array) (new Get\Seasonal())->response['schedule'];
+        $this->response = (array) (new Get\Seasonal())->response;
         $this->setStatus();
 
         return $this;

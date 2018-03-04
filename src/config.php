@@ -30,3 +30,8 @@ define( 'MANGA' , 'manga' );
 define( 'CHARACTER' , 'character' );
 define( 'PERSON' , 'person' );
 define( 'PEOPLE', 'person'); // alias
+
+define( 'WINTER' , 'winter' );
+define( 'SPRING' , 'spring' );
+define( 'SUMMER' , 'summer' );
+define( 'FALL' , 'fall' );

@@ -1,14 +1,17 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API @version 1.4.X stable
-*	Developed by Nekomata | irfandahir.com
+*	Jikan - MyAnimeList Unofficial API
+*	Developed by Irfan | irfan.dahir.co
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
 *	Jikan scraps web pages through a modular method, parses the data you require from MAL and returns it back as a PHP/JSON array/object.
-*	Therefore, no authentication is needed for fetching anime, manga, character, people data.
+*   Jikan parses the data MAL web pages and returns it as a PHP Array
+*	No authentication is needed for utilizing this library.
 *
-*	Jikan is in no way affiliated with MyAnimeList.
+*	Jikan is NOT affiliated with MyAnimeList.
+*   This library does not perform any rate limitations, so use it responsibly.
 */
+
 namespace Jikan;
 
 require 'config.php';
@@ -74,6 +77,27 @@ class Jikan
      */
     public function Search(String $query = null, String $type = ANIME, $page = 1) {
         $this->response = (array) (new Get\Search($query, $type, $page))->response;
+        $this->setStatus();
+
+        return $this;
+    }
+
+    /*
+     * Seasonal Anime
+     */
+    public function Seasonal(String $season = null, String $year = null) {
+        $this->response = (array) (new Get\Seasonal($season, $year))->response;
+        $this->setStatus();
+
+        return $this;
+    }
+
+
+    /*
+     * Anime Schedule For Current Season
+     */
+    public function Schedule() {
+        $this->response = (array) (new Get\Seasonal())->response;
         $this->setStatus();
 
         return $this;

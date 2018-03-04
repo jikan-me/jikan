@@ -16,7 +16,7 @@ class Search extends Get
             throw new \Exception('No Query Given');
         }
 
-        $this->query = $query;
+        $this->query = urlencode($query);
 
         $this->parser = new SearchParse;
 

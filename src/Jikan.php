@@ -97,7 +97,7 @@ class Jikan
      * Anime Schedule For Current Season
      */
     public function Schedule() {
-        $this->response = (array) (new Get\Seasonal())->response;
+        $this->response = (array) (new Get\Schedule())->response;
         $this->setStatus();
 
         return $this;

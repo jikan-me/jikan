@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.12.0 stable - March 22, 18
+- Add advanced search options - [#97](/../../issues/97)
+	- This includes a query builder, `SearchConfig` in `Jikan/Helper/`
+
 ### 1.11.2 stable - March 4, 18
 - Add **Seasonal Anime** parsing [#87](/../../issues/87) - 1.10.0
 - Add **Airing Anime Schedule** parsing [#104](/../../issues/104) - 1.11.0

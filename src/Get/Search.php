@@ -9,8 +9,7 @@ class Search extends Get
 
     private $validExtends = [];
 
-    public function __construct($query = null, $type = ANIME, $page = 1) {
-
+    public function __construct($query = null, $type = ANIME, $page = 1, $config = null) {
 
         if (is_null($query)) {
             throw new \Exception('No Query Given');
@@ -20,9 +19,7 @@ class Search extends Get
 
         $this->parser = new SearchParse;
 
-
         $link = BASE_URL;
-
 
         switch ($type) {
             case ANIME:
@@ -41,6 +38,12 @@ class Search extends Get
             default:
                 throw new \Exception('Invalid Search Type');
                 break;
+        }
+
+        if (!is_null($config)) {
+            if ($type == ANIME || $type == MANGA) {
+                $link .= "&".$config->build();
+            }
         }
 
         $this->parser->setPath($link);

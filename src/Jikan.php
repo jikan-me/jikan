@@ -17,6 +17,8 @@ namespace Jikan;
 require 'config.php';
 
 
+use Jikan\Helper\SearchConfig as SearchConfig;
+
 class Jikan
 {
 
@@ -75,8 +77,8 @@ class Jikan
     /*
      * Search
      */
-    public function Search(String $query = null, String $type = ANIME, $page = 1) {
-        $this->response = (array) (new Get\Search($query, $type, $page))->response;
+    public function Search(String $query = null, String $type = ANIME, $page = 1, SearchConfig $config = null) {
+        $this->response = (array) (new Get\Search($query, $type, $page, $config))->response;
         $this->setStatus();
 
         return $this;

@@ -87,7 +87,7 @@ class Jikan
     /*
      * Seasonal Anime
      */
-    public function Seasonal(String $season = null, String $year = null) {
+    public function Seasonal(String $season = null, int $year = null) {
         $this->response = (array) (new Get\Seasonal($season, $year))->response;
         $this->setStatus();
 

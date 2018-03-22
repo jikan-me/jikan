@@ -11,16 +11,8 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 
-$config = new Jikan\Helper\SearchConfig(ANIME);
-$config->setRated(RX);
+$jikan->Schedule();
 
-
-echo $config->build();
-var_dump($config);
-
-$jikan->Search('ABC', ANIME, 1, $config);
-//$jikan->Anime(1, [PICTURES]);
-//$jikan->Schedule();
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 

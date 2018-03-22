@@ -10,6 +10,15 @@ require_once "../vendor/autoload.php";
 $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
+
+$config = new Jikan\Helper\SearchConfig(ANIME);
+$config->setType(TYPE_SPECIAL);
+$config->setGenre([ACTION, ADVENTURE]);
+
+echo $config->build();
+
+var_dump($config);
+
 $jikan->Search('Code Geass', ANIME);
 //$jikan->Anime(1, [PICTURES]);
 //$jikan->Schedule();

@@ -64,7 +64,7 @@ define('PARODY', 20);
 define('SAMURAI', 21);
 define('ROMANCE', 22);
 define('SCHOOL', 23);
-define('SCIFI', 24);
+define('SCI_FI', 24);
 define('SHOUJO', 25);
 define('SHOUJO_AI', 26);
 define('SHOUNEN', 27);

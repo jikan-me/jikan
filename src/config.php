@@ -86,20 +86,20 @@ define('SEINEN', 42);
 define('JOSEI', 43);
 
 // Type
-define('TV', 1);
-define('OVA', 2);
-define('MOVIE', 3);
-define('SPECIAL', 4);
-define('ONA', 5);
-define('MUSIC', 6);
+define('TYPE_TV', 1);
+define('TYPE_OVA', 2);
+define('TYPE_MOVIE', 3);
+define('TYPE_SPECIAL', 4);
+define('TYPE_ONA', 5);
+define('TYPE_MUSIC', 6);
 
-define('MANGA', 1);
-define('NOVEL', 2);
-define('ONE_SHOT', 3);
-define('DOUJINSHI', 4);
-define('MANHWA', 5);
-define('MANHUA', 6);
-define('OEL', 7);
+define('TYPE_MANGA', 1);
+define('TYPE_NOVEL', 2);
+define('TYPE_ONE_SHOT', 3);
+define('TYPE_DOUJINSHI', 4);
+define('TYPE_MANHWA', 5);
+define('TYPE_MANHUA', 6);
+define('TYPE_OEL', 7);
 
 // Status
 define('AIRING', 1);

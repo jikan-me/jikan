@@ -21,8 +21,8 @@ class SearchConfig {
 	const $validGenre = [ACTION, ADVENTURE, CARS, COMEDY, DEMENTIA, DEMONS, MYSTERY, DRAMA, ECCHI, FANTASY, GAME, HENTAI, HISTORICAL, HORROR, KIDS, MAGIC, MARTIAL_ARTS, MECHA, MUSIC, PARODY, SAMURAI, ROMANCE, SCHOOL, SCI_FI, SHOUJO, SHOUJO_AI, SHOUNEN, SHOUNEN_AI, SPACE, SPORTS, SUPER_POWER, VAMPIRE, YAOI, YURI, HAREM, SLICE_OF_LIFE, SUPERNATURAL, MILITARY, POLICE, PSYCHOLOGICAL, THRILLER, SEINEN, JOSEI];
 
 	public function __construct($type) {
-		$this->type = $type;
-		
+		$this->type = in_array($type, $validTypes) ? $type : throw new Exception("Failed to build Search Config, unsupported type. (Supported: ANIME, MANGA)");
+
 		return $this;
 	}
 

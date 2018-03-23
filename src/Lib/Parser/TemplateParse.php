@@ -33,10 +33,11 @@ abstract class TemplateParse
                 $this->setStatus(Util::getStatus($this->filePath));
                 if (!Util::existsURL($this->status)) {
 
+
                     http_response_code($this->status);
 
                     if ($this->status == 429) {
-                        throw new \Exception("MyAnimeList Rate Limit reached; Try again later");
+                        throw new \Exception("MyAnimeList Rate Limit reached");
                     }
 
                     throw new \Exception("File does not exist");
@@ -52,7 +53,7 @@ abstract class TemplateParse
             if (!is_bool($this->file)) {
                 array_walk($this->file, Util::class.'::trim'); // bystanders begone!
             } else {
-                throw new \Exception("Could not parse file; MAL Rate Limit reached or MAL is down");
+                throw new \Exception("MyAnimeList Rate Limit reached");
             }
 
         } else {

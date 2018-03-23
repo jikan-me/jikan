@@ -9,7 +9,7 @@ class SearchParse extends TemplateParse
     private $type;
     private $return = [];
 
-    public function parse($type = ANIME) : Array
+    public function parse($type = ANIME, $status) : Array
     {
 
         $this->type = $type;
@@ -20,16 +20,70 @@ class SearchParse extends TemplateParse
          * Rules
          */
 
-
         switch ($type) {
             case ANIME:
             case MANGA:
+
+                $this->addRule('title', '~<meta property="og:type" content="video.tv_show">~', function() {
+                    $results = [];
+                    $result = [
+                        'mal_id' => null,
+                        'url' => null,
+                        'image_url' => null,
+                        'title' => null,
+                        'description' => null,
+                        'type' => null,
+                        'score' => null
+                    ];
+
+                    $i = 0;
+                    while(true) {
+                        $line = $this->file[$this->lineNo + $i];
+                        if (preg_match('~<div class="clearfix mauto mt16"~', $line)) {
+                            break;
+                        }
+
+                        if (preg_match('~<meta property="og:title" content="(.*?)">~', $line, $this->matches)) {
+                            $result['title'] = $this->matches[1];
+                        }
+
+                        if (preg_match('~<meta property="og:image" content="(.*?)">~', $line, $this->matches)) {
+                            $result['image_url'] = $this->matches[1];
+                        }
+
+                        if (preg_match('~<meta property="og:url" content="(.*?)">~', $line, $this->matches)) {
+                            $result['url'] = $this->matches[1];
+                            preg_match('~https://myanimelist.net/(anime|manga)/(.*)/(.*)~', $this->matches[1], $this->matches);
+                            $result['mal_id'] = (int) $this->matches[2];
+                        }
+
+                        if (preg_match('~<meta property="og:description" content="(.*?)">~', $line, $this->matches)) {
+                            $result['description'] = $this->matches[1];
+                        }
+
+                        if (preg_match('~<span class="dark_text">Type:</span>~', $line)) {
+                            preg_match('~(<a href="(.*)">(.*?)</a>|(.*))</div>~', $this->file[$this->lineNo + $i + 1], $this->matches);
+                            $result['type'] = (empty($this->matches[3]) ? $this->matches[4] : $this->matches[3]);
+                        }
+
+                        if (preg_match('~<span class="dark_text">Score:</span>~', $line)) {
+                            preg_match('~<span(.*?)>(.*)</span><sup>1</sup> \(scored by <span(.*?)>(.*)</span> users\)~', $this->file[$this->lineNo + $i + 1], $this->matches);
+                            $result['score'] = (float) $this->matches[2];
+                        }
+
+                        $i++;
+                    }
+
+                    $results[] = $result;
+                    $this->model->set('Search', 'result', $results);
+                });
+
                 $this->addRule('result', '~<div class="js-categories-seasonal js-block-list list">~', function() {
                     $i = 1;
                     $results = [];
                     while (true) {
                         $result = [
-                            'id' => null,
+                            'mal_id' => null,
                             'url' => null,
                             'image_url' => null,
                             'title' => null,
@@ -47,7 +101,7 @@ class SearchParse extends TemplateParse
                             $i += 2;
 
                             preg_match('~<a class="hoverinfo_trigger" href="((.*)/(.*)/(.*))" id="(.*)" rel="(.*)">~', $this->file[$this->lineNo + $i], $this->matches);
-                            $result['id'] = (int) $this->matches[3];
+                            $result['mal_id'] = (int) $this->matches[3];
                             $result['url'] = $this->matches[1];
 
                             $i++;
@@ -88,6 +142,7 @@ class SearchParse extends TemplateParse
                     $results = [];
                     while (true) {
                         $result = [
+                            'mal_id' => null,
                             'url' => null,
                             'image_url' => null,
                             'name' => null,
@@ -101,10 +156,11 @@ class SearchParse extends TemplateParse
                             break;
                         }
 
-                        if (preg_match('~<td class="borderClass bgColor(1?|2?)" width="30"><div class="picSurround"><a href="(.*)"><img src="(.*)" border="0"></a></div>~', $line, $this->matches)) {
+                        if (preg_match('~<td class="borderClass bgColor(1?|2?)" width="30"><div class="picSurround"><a href="((.*)/(.*)/(.*))"><img src="(.*)" border="0"></a></div>~', $line, $this->matches)) {
 
+                            $result['mal_id'] = (int) $this->matches[4];
                             $result['url'] = $this->matches[2];
-                            $result['image_url'] = $this->matches[3];
+                            $result['image_url'] = $this->matches[6];
 
                             $i += 3;
 
@@ -127,11 +183,13 @@ class SearchParse extends TemplateParse
                                     $_anime = explode(',', $this->matches[2]);
                                     foreach ($_anime as $key => &$value) {
                                         preg_match('~<a href="(/(.*)/(.*)/(.*))">(.*)</a>~', $value, $value);
-                                        $result['anime'][] = [
-                                            'id' => (int) $value[3],
-                                            'url' => $value[1],
-                                            'title' => $value[5],
-                                        ];
+                                        if (!empty($value[5])) {
+                                            $result['anime'][] = [
+                                                'mal_id' => (int) $value[3],
+                                                'url' => BASE_URL . substr($value[1], 1),
+                                                'title' => $value[5],
+                                            ];
+                                        }
                                     }
 
                                 }
@@ -140,11 +198,13 @@ class SearchParse extends TemplateParse
                                     $_anime = explode(',', $this->matches[3]);
                                     foreach ($_anime as $key => &$value) {
                                         preg_match('~<a href="(/(.*)/(.*)/(.*))">(.*)</a>~', $value, $value);
-                                        $result['manga'][] = [
-                                            'id' => (int) $value[3],
-                                            'url' => $value[1],
-                                            'title' => $value[5],
-                                        ];
+                                        if (!empty($value[5])) {
+                                            $result['manga'][] = [
+                                                'mal_id' => (int) $value[3],
+                                                'url' => BASE_URL . substr($value[1], 1),
+                                                'title' => $value[5],
+                                            ];
+                                        }
                                     }
                                 }
 
@@ -168,7 +228,7 @@ class SearchParse extends TemplateParse
                     $results = [];
                     while (true) {
                         $result = [
-                            'id' => null,
+                            'mal_id' => null,
                             'url' => null,
                             'image_url' => null,
                             'name' => null,
@@ -182,7 +242,7 @@ class SearchParse extends TemplateParse
 
                         if (preg_match('~<td class="borderClass" width="25"><div class="picSurround"><a href="(/(.*)/(.*)/(.*))"><img src="(.*)"></a></div></td>~', $line, $this->matches)) {
 
-                            $result['id'] = (int) $this->matches[3];
+                            $result['mal_id'] = (int) $this->matches[3];
                             $result['url'] = BASE_URL . $this->matches[1];
                             $result['image_url'] = $this->matches[5];
 

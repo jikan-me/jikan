@@ -5,7 +5,7 @@ namespace Jikan\Helper;
 class SearchConfig {
 
 	private $type;
-	private $subtype = 0;
+	private $subType = 0;
 	private $score = 0;
 	private $status = 0;
 	private $rated = 0;

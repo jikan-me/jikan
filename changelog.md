@@ -1,5 +1,19 @@
 ## Changelog
 
+### 1.13.1 stable - March 23, 18
+- **[Search]**
+	- Changed `id` to `mal_id` for Anime & Manga results
+	- Added `mal_id` for Character results
+	- Added full URL path for Anime & Manga results in Character search
+	- Removed empty Manga/Anime from Character Search
+	- Fix [#111](/../../issues/111) - 1.13.1
+
+### 1.12.1 stable - March 22, 18
+- Add advanced search options - [#97](/../../issues/97) - 1.12.0
+	- This includes a query builder, `SearchConfig` in `Jikan/Helper/`
+- **[Seasonal]**
+	- Change `year` argument from String Type to Integer - 1.12.1
+
 ### 1.11.2 stable - March 4, 18
 - Add **Seasonal Anime** parsing [#87](/../../issues/87) - 1.10.0
 - Add **Airing Anime Schedule** parsing [#104](/../../issues/104) - 1.11.0

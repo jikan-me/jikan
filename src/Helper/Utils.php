@@ -12,7 +12,7 @@ class Utils
 	}
 
 	static public function existsURL($status) {
-		return ($status == 200) ? true : false;
+		return ($status == 200 || $status == 303) ? true : false;
 	}
 
 	static public function getStatus($url) {

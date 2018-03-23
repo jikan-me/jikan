@@ -50,7 +50,7 @@ class Search extends Get
         $this->parser->loadFile();
 
         $this->response['code'] = $this->parser->status;
-        $this->response = array_merge($this->response, $this->parser->parse($type));
+        $this->response = array_merge($this->response, $this->parser->parse($type, $this->parser->status));
     }
 
 }

@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.13.0 stable - March 23, 18
+- **[Search]**
+	- Changed `id` to `mal_id` for Anime & Manga results
+	- Added `mal_id` for Character results
+	- Added full URL path for Anime & Manga results in Character search
+	- Removed empty Manga/Anime from Character Search
+
 ### 1.12.1 stable - March 22, 18
 - Add advanced search options - [#97](/../../issues/97) - 1.12.0
 	- This includes a query builder, `SearchConfig` in `Jikan/Helper/`

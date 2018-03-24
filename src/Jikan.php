@@ -94,12 +94,21 @@ class Jikan
         return $this;
     }
 
-
     /*
      * Anime Schedule For Current Season
      */
     public function Schedule() {
         $this->response = (array) (new Get\Schedule())->response;
+        $this->setStatus();
+
+        return $this;
+    }
+
+    /*
+     * Top Anime/Manga
+     */
+    public function Top(String $type, int $page, String $subtype = null) {
+        $this->response = (array) (new Get\Top($type, $page, $subtype))->response;
         $this->setStatus();
 
         return $this;

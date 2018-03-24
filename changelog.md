@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.15.0 stable - March 24, 18
+- **[Top]**
+	- Add Top for Anime & Manga w/ pagination support
+	- Subtypes also supported
+		- Airing, Upcoming, TV, Movies, OVA, Specials, Popular, Favorited
+		- Manga, Novels, Oneshot, Doujinshi, Manhwa, Manhua, Popular, Favorited
+
 ### 1.13.1 stable - March 23, 18
 - **[Search]**
 	- Changed `id` to `mal_id` for Anime & Manga results

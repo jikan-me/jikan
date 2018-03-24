@@ -118,3 +118,26 @@ define('R17', 4); // Violence & Profanity
 define('R', 5); // Mild Nudity
 define('RX', 6); // Hentai
 
+/*
+ * Top Anime/Manga
+ */
+
+// Anime
+define('TOP_AIRING', 'airing');
+define('TOP_UPCOMING', 'upcoming');
+define('TOP_TV', 'tv');
+define('TOP_MOVIE', 'movie');
+define('TOP_OVA', 'ova');
+define('TOP_SPECIAL', 'special');
+
+// Manga
+define('TOP_MANGA', 'manga');
+define('TOP_NOVEL', 'novels');
+define('TOP_ONE_SHOT', 'oneshots');
+define('TOP_DOUJINSHI', 'doujin');
+define('TOP_MANHWA', 'manhwa');
+define('TOP_MANHUA', 'manhua');
+
+// Both
+define('TOP_POPULARITY', 'bypopularity');
+define('TOP_FAVORITE', 'favorite');

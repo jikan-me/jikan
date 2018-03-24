@@ -11,9 +11,7 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 
-$config = new Jikan\Helper\SearchConfig(ANIME);
-$config->setScore(8);
-$jikan->Search('Code Geass', ANIME, 1, $config);
+$jikan->Top(MANGA, 1, TOP_FAVORITE);
 
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);

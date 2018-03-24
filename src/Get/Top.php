@@ -14,11 +14,13 @@ class Top extends Get
     public function __construct($type, $page = 1, $subtype = null) {
 
         if (!in_array($type, self::VALID_TYPES)) {
-            throw new Exception("Argument #1 Unsupported (Supported: ANIME, MANGA)");
+            throw new \Exception("Argument #1 Unsupported (Supported: ANIME, MANGA)");
         }
 
-        if (!in_array($subtype, self::VALID_SUBTYPES)) {
-            throw new Exception("Unsupported type. Refer to src/config.php for valid constants");
+        if (!is_null($subtype)) {
+            if (!in_array($subtype, self::VALID_SUBTYPES)) {
+                throw new \Exception("Unsupported type. Refer to src/config.php for valid constants");
+            }
         }
 
         $this->parser = new TopParse;
@@ -31,10 +33,11 @@ class Top extends Get
 
 
         $this->parser->setPath($link);
+
         $this->parser->loadFile();
 
         $this->response['code'] = $this->parser->status;
-        $this->response = array_merge($this->response, $this->parser->parse());
+        $this->response = array_merge($this->response, $this->parser->parse($type));
     }
 
 }

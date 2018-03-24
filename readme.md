@@ -42,17 +42,15 @@ Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.
     - No.# of pages
 - Seasonal Anime (Season + Year)
 - Anime Scheduling (for current season)
-
-- Modular scraping method for developers to extend the API
-- JSON format! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
-
-## Planned Features
-- Anime & Manga
-    - User Reviews
-    - Recommendations
 - Top
     - Anime
     - Manga
+    - Sub Type & Pagination Support
+
+- Modular scraping methods for developers to easily extend the API
+- JSON format! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
+
+## Planned Features
 - Most Favorited
     - Characters
     - People
@@ -65,14 +63,14 @@ Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant
 
 ## Changelog
-### 1.13.1 stable - March 23, 18
-- **[Search]**
-    - Changed `id` to `mal_id` for Anime & Manga results
-    - Added `mal_id` for Character results
-    - Added full URL path for Anime & Manga results in Character search
-    - Removed empty Manga/Anime from Character Search
-    - Fix [#111](/../../issues/111) - 1.13.1
-    - 
+### 1.15.0 stable - March 24, 18
+- **[Top]**
+    - Add Top for Anime & Manga w/ pagination support
+    - Subtypes also supported
+        - Airing, Upcoming, TV, Movies, OVA, Specials, Popular, Favorited
+        - Manga, Novels, Oneshot, Doujinshi, Manhwa, Manhua, Popular, Favorited
+
+
 [Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)
 
 ### Examples: [PHP](https://github.com/jikan-me/jikan/tree/master/examples)

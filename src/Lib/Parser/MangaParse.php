@@ -23,7 +23,7 @@ class MangaParse extends TemplateParse
         });
 
         $this->addRule('title', '~<h1 class="h1"><span itemprop="name">(.*)</span></h1>~', function(){
-            $this->model->set('Manga', 'title', $this->matches[1]);
+            $this->model->set('Manga', 'title', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('title_english', '~<span class="dark_text">English:</span> (.*?)</div>~', function(){

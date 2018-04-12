@@ -24,7 +24,7 @@ class SearchParse extends TemplateParse
             case ANIME:
             case MANGA:
 
-                $this->addRule('title', '~<meta property="og:type" content="video.tv_show">~', function() {
+                $this->addRule('title', '~<meta property="og:type" content="(books.book|video.tv_show)">~', function() {
                     $results = [];
                     $result = [
                         'mal_id' => null,
@@ -223,6 +223,46 @@ class SearchParse extends TemplateParse
 
                 break;
             case PERSON:
+
+                $this->addRule('title', '~<meta property="og:type" content="article">~', function() {
+                    $results = [];
+                    $result = [
+                        'mal_id' => null,
+                        'url' => null,
+                        'image_url' => null,
+                        'name' => null,
+                        'nicknames' => null,
+                    ];
+
+                    $i = 0;
+                    while(true) {
+                        $line = $this->file[$this->lineNo + $i];
+                        if (preg_match('~<div class="mauto clearfix pt24"~', $line)) {
+                            break;
+                        }
+
+                        if (preg_match('~<meta property="og:title" content="(.*?)">~', $line, $this->matches)) {
+                            $result['name'] = trim($this->matches[1]);
+                        }
+
+                        if (preg_match('~<meta property="og:image" content="(.*?)">~', $line, $this->matches)) {
+                            $result['image_url'] = $this->matches[1];
+                        }
+
+                        if (preg_match('~<meta property="og:url" content="(.*?)">~', $line, $this->matches)) {
+                            $result['url'] = $this->matches[1];
+                            preg_match('~https://myanimelist.net/people/(.*)/(.*)~', $this->matches[1], $this->matches);
+                            $result['mal_id'] = (int) $this->matches[2];
+                        }
+
+
+                        $i++;
+                    }
+
+                    $results[] = $result;
+                    $this->model->set('Search', 'result', $results);
+                });
+
                $this->addRule('result', '~<td class="normal_header" colspan="4">Search Results</td>~', function() {
                     $i = 0;
                     $results = [];

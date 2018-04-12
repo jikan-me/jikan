@@ -9,12 +9,14 @@ Jikan is an OOP based, **dependency free**, PHP library with easy-to-use syntax 
 
 The raison d'être for Jikan is to allow developers to easily get stuff from the website without having to depend on the official MyAnimeList API (which lacks Jikan's functions), unstable APIs, or side tracking your own application to create parsers.
 
-PHP Documentation - [Get Started](https://jikan.me/docs)
+### Composer
+`composer require jikan-me/jikan`
+PHP Documentation - [Get Started](https://jikan.moe/docs)
 
-## [JikanREST API v2.1](https://jikan.docs.apiary.io) [![REST PHP](https://img.shields.io/badge/JikanPHP-1.7.1-blue.svg?style=flat)](https://jikan.me)
+## [JikanREST API v2.1](https://jikan.docs.apiary.io) [![REST PHP](https://img.shields.io/badge/JikanPHP-1.7.1-blue.svg?style=flat)](https://jikan.moe)
 Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.apiary.io)
 
-[See which apps are using JikanREST](https://jikan.me/showcase)
+[See which apps are using JikanREST](https://jikan.moe/showcase)
 
 # Features
 - Anime Parsing
@@ -63,11 +65,9 @@ Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant
 
 ## Changelog
-### 1.15.2 stable - April 8, 18
-- **[Anime|Manga]**
-    - Decode html characters from titles and other various strings - [#121](/../../issues/121) - 1.15.1
-- **[Character]**
-    - Fix `about` not returning for some characters - [#118](/../../issues/118)
+### 1.15.3 stable - April 13, 18
+- **[Search]**
+    - **[People]** Fix single item results not showing due to MAL redirecting the page - [#120](/../../issues/120)
 
 
 [Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)

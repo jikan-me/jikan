@@ -11,7 +11,9 @@ The raison d'être for Jikan is to allow developers to easily get stuff from the
 
 ### Composer
 `composer require jikan-me/jikan`
+
 PHP Documentation - [Get Started](https://jikan.moe/docs)
+
 
 ## [JikanREST API v2.1](https://jikan.docs.apiary.io) [![REST PHP](https://img.shields.io/badge/JikanPHP-1.7.1-blue.svg?style=flat)](https://jikan.moe)
 Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.apiary.io)

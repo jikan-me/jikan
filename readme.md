@@ -1,6 +1,6 @@
 
 # Jikan - The Unofficial MyAnimelist PHP API 
-[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.0-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
+[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.3-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
 
 
 
@@ -9,12 +9,14 @@ Jikan is an OOP based, **dependency free**, PHP library with easy-to-use syntax 
 
 The raison d'être for Jikan is to allow developers to easily get stuff from the website without having to depend on the official MyAnimeList API (which lacks Jikan's functions), unstable APIs, or side tracking your own application to create parsers.
 
-PHP Documentation - [Get Started](https://jikan.me/docs)
+### Composer
+`composer require jikan-me/jikan`
+PHP Documentation - [Get Started](https://jikan.moe/docs)
 
-## [JikanREST API v2.1](https://jikan.docs.apiary.io) [![REST PHP](https://img.shields.io/badge/JikanPHP-1.7.1-blue.svg?style=flat)](https://jikan.me)
+## [JikanREST API v2.1](https://jikan.docs.apiary.io) [![REST PHP](https://img.shields.io/badge/JikanPHP-1.7.1-blue.svg?style=flat)](https://jikan.moe)
 Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.apiary.io)
 
-[See which apps are using JikanREST](https://jikan.me/showcase)
+[See which apps are using JikanREST](https://jikan.moe/showcase)
 
 # Features
 - Anime Parsing
@@ -63,12 +65,9 @@ Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant
 
 ## Changelog
-### 1.15.0 stable - March 24, 18
-- **[Top]**
-    - Add Top for Anime & Manga w/ pagination support
-    - Subtypes also supported
-        - Airing, Upcoming, TV, Movies, OVA, Specials, Popular, Favorited
-        - Manga, Novels, Oneshot, Doujinshi, Manhwa, Manhua, Popular, Favorited
+### 1.15.3 stable - April 13, 18
+- **[Search]**
+    - **[People]** Fix single item results not showing due to MAL redirecting the page - [#120](/../../issues/120)
 
 
 [Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)

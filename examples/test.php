@@ -11,13 +11,13 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 
-$jikan->Top(MANGA, 1, TOP_FAVORITE);
+$jikan->Search("supercell", PEOPLE);
 
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
 
 //execution time of the script
-echo '<b>Total Execution Time:</b> '.$execution_time.' s';
+echo '<b>Total Execution Time:</b> '.$execution_time.' s<br><br>';
 
 var_dump($jikan->response);
 

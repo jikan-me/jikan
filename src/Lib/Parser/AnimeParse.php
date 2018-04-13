@@ -23,19 +23,19 @@ class AnimeParse extends TemplateParse
         });
 
         $this->addRule('title', '~<h1 class="h1"><span itemprop="name">(.*)</span></h1>~', function() {
-           $this->model->set('Anime', 'title', $this->matches[1]);
+           $this->model->set('Anime', 'title', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('title_english', '~<span class="dark_text">English:</span> (.*)~', function() {
-            $this->model->set('Anime', 'title_english', $this->matches[1]);
+            $this->model->set('Anime', 'title_english', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('title_synonyms', '~<span class="dark_text">Synonyms:</span> (.*)~', function() {
-            $this->model->set('Anime', 'title_synonyms', $this->matches[1]);
+            $this->model->set('Anime', 'title_synonyms', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('title_japanese', '~<span class="dark_text">Japanese:</span> (.*)~', function() {
-            $this->model->set('Anime', 'title_japanese', $this->matches[1]);
+            $this->model->set('Anime', 'title_japanese', htmlspecialchars_decode($this->matches[1]));
         });
 
         $this->addRule('image_url', '~<img src="(.*)" alt="(.*)" class="ac" itemprop="image">~', function() {
@@ -247,7 +247,7 @@ class AnimeParse extends TemplateParse
                                     'mal_id' => (int) $this->matches[2],
                                     'type' => preg_match('~/(.*)~', $this->matches[1], $_type) ? $_type[1] : null,
                                     'url' => BASE_URL . substr($this->matches[1], 1) . '/' . $this->matches[2] . '/' . $this->matches[3],
-                                    'title' => strip_tags($this->matches[4])
+                                    'title' => htmlspecialchars_decode(strip_tags($this->matches[4]))
                                 ];
                             }
                         }

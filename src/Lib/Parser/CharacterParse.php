@@ -36,9 +36,9 @@ class CharacterParse extends TemplateParse
             $this->model->set('Character', 'nicknames', trim($this->matches[1]));
         });
 
-        $this->addRule('about', '~<div class="normal_header" style="height: 15px;">(.*) <span style="font-weight: normal;"><small>(.*)</small></span></div>(.*?)<br />~', function() {
+        $this->addRule('about', '~<div class="normal_header" style="height: 15px;">(.*) (<span style="font-weight: normal;"><small>(.*)</small></span>|)</div>(.*?)<br />~', function() {
             $match = [];
-            $match[] = $this->matches[3];
+            $match[] = $this->matches[4];
 
             $finding = true;
             $i = $this->lineNo;

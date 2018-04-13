@@ -1,5 +1,15 @@
 ## Changelog
 
+### 1.15.3 stable - April 13, 18
+- **[Search]**
+	- **[People]** Fix single item results not showing due to MAL redirecting the page - [#120](/../../issues/120)
+
+### 1.15.2 stable - April 8, 18
+- **[Anime|Manga]**
+	- Decode html characters from titles and other various strings - [#121](/../../issues/121) - 1.15.1
+- **[Character]**
+	- Fix `about` not returning for some characters - [#118](/../../issues/118)
+
 ### 1.15.0 stable - March 24, 18
 - **[Top]**
 	- Add Top for Anime & Manga w/ pagination support

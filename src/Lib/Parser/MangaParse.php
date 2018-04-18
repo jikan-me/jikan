@@ -247,16 +247,19 @@ class MangaParse extends TemplateParse
         $this->addRule('serialization', '~<span class="dark_text">Serialization:</span>~', function(){
             $return = [];
             if (!preg_match('~None~', $this->file[$this->lineNo + 1])) {
-                $array = explode(",", $this->file[$this->lineNo + 1]);
+                $array = explode("</a>", $this->file[$this->lineNo + 1]);
+
 
                 foreach ($array as $key => $value) {
                     //preg_match('~<a href="/(.*)" title="(.*)">([\s\S]*)(</a>|)~', $value, $this->matches);
-                    preg_match('~<a href="/(.*)" title="(.*)">(.*)</a>~', $value, $this->matches);
+                    preg_match('~<a href="/(.*)" title="(.*)">(.*)(</a>|)~', $value, $this->matches);
 
-                    $return[] = [
-                        'url' => BASE_URL . $this->matches[1],
-                        'name' => strip_tags($this->matches[2])
-                    ];
+                    if (!empty($this->matches)) {
+                        $return[] = [
+                            'url' => BASE_URL . $this->matches[1],
+                            'name' => strip_tags($this->matches[2])
+                        ];
+                    }
                 }
             }
 

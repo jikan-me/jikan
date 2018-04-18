@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.15.5 stable - April 18, 18
+- **[Manga]** Fix parsing bug with some serialization names - [#131](/../../issues/131) - 1.15.4
+- **[Anime]** Fix parsing bug with some studio names - [#129](/../../issues/129)
+
 ### 1.15.3 stable - April 13, 18
 - **[Search]**
 	- **[People]** Fix single item results not showing due to MAL redirecting the page - [#120](/../../issues/120)

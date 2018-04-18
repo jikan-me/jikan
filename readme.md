@@ -1,6 +1,6 @@
 
 # Jikan - The Unofficial MyAnimelist PHP API 
-[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.3-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
+[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.5-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
 
 
 
@@ -67,9 +67,9 @@ Jikan even has it's own RESTful API service! - [Get Started](https://jikan.docs.
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant
 
 ## Changelog
-### 1.15.3 stable - April 13, 18
-- **[Search]**
-    - **[People]** Fix single item results not showing due to MAL redirecting the page - [#120](/../../issues/120)
+### 1.15.5 stable - April 18, 18
+- **[Manga]** Fix parsing bug with some serialization names - [#131](/../../issues/131) - 1.15.4
+- **[Anime]** Fix parsing bug with some studio names - [#129](/../../issues/129)
 
 
 [Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)

@@ -11,7 +11,7 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 
-$jikan->Search("supercell", PEOPLE);
+$jikan->Anime(34851);
 
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);

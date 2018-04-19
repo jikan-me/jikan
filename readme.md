@@ -3,6 +3,8 @@
 [![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.5-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
 
 
+# THE REST API IS MOVING TO JIKAN.MOE
+If you're still using `jikan.me`, change it to `jikan.moe` **asap**. `jikan.me` will be discontinued on its' expiry - May 12th.
 
 
 Jikan is an OOP based, **dependency free**, PHP library with easy-to-use syntax that scrapes and parses data from MyAnimeList back to you.

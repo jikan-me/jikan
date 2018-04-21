@@ -37,7 +37,7 @@ class Jikan
 	/*
 	 * Anime
 	 */
-	public function Anime(String $id = null, Array $extend = []) {
+	public function Anime($id = null, Array $extend = []) {
 	    $this->response = (array) (new Get\Anime($id, $extend))->response;
         $this->setStatus();
 
@@ -47,7 +47,7 @@ class Jikan
     /*
      * Manga
      */
-    public function Manga(String $id = null, Array $extend = []) {
+    public function Manga($id = null, Array $extend = []) {
         $this->response = (array) (new Get\Manga($id, $extend))->response;
         $this->setStatus();
 
@@ -57,7 +57,7 @@ class Jikan
     /*
      * Character
      */
-    public function Character(String $id = null, Array $extend = []) {
+    public function Character($id = null, Array $extend = []) {
         $this->response = (array) (new Get\Character($id, $extend))->response;
         $this->setStatus();
 
@@ -67,7 +67,7 @@ class Jikan
     /*
      * Person
      */
-    public function Person(String $id = null, Array $extend = []) {
+    public function Person($id = null, Array $extend = []) {
         $this->response = (array) (new Get\Person($id, $extend))->response;
         $this->setStatus();
 

@@ -33,15 +33,17 @@ Base URL (SSL): `https://api.jikan.moe/`
 
 # Information
 ## Rate Limiting
-To maintain bandwidth, there's a rate-limiting of 5,000 requests per IP per day and 2 concurrent requests per second.
+To maintain bandwidth, there's a rate-limiting of 5,000 requests per IP per day.
 
 Per Day: **5,000**
 
-_If you're using the API for bulk requests, use a **5 second delay** between each request!_
+**Note:** As of REST 2.2, cached requests are no longer throttled! This means the rate limit counter won't increase for requests that are already cached!
+
+_If you're using the API for bulk requests, please be respectful of other API users and use a **5 second delay** between each request!_
 
 ## Additional
 - Anime/Manga/Character/Person Responses are cached for 3 days.
-- Search Queries are cached for 6 hours
+- Search Queries, Top, Schedule, Season endpoints are cached for 6 hours
 
 ## Allowed HTTP(s) requests
 <pre>
@@ -314,7 +316,7 @@ Such as the most requested endpoints for a specific period, or just status on th
 | type | `anime` `manga` `characters` `people` `search` `top` `schedule` `season`  | This is only for the `requests` endpoint |
 | period  | `today` `weekly` `monthly` | This is only for the `requests` endpoint |
 
-### Top Request Example+Schema [GET]
+### Meta Request Example+Schema [GET]
 
 + Parameters
     + request (required, String, `requests`) ... 

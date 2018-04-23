@@ -103,6 +103,8 @@ A single anime object with all its details
 | pictures | N/A | Pictures related to the item |
 | videos | N/A | PV & episodes (if any) related to the item |
 | stats | N/A | Statistical information related to the item |
+| forum | N/A | Forum topics related to the item |
+| moreinfo | N/A | More info related to the item |
 
 **Remarks:** The field `episode_last_page` will tell you the last page of the paginated episodes list.
 
@@ -115,7 +117,7 @@ The episodes page on MyAnimeList get paginated after 100 episodes. If there's an
 - `/anime/1/episodes/2` // Returns 2nd page if there's any
 
 
-### Anime Request Examples [GET]
+### Anime Request Example+Schema [GET]
 
 + Parameters
     + id (required, Number, `1`) ... Returns the Anime details from that the ID
@@ -138,11 +140,13 @@ A single manga object with all its details
 | news | N/A | News related to the item |
 | pictures | N/A | Pictures related to the item |
 | stats | N/A | Statistical information related to the item |
+| forum | N/A | Forum topics related to the item |
+| moreinfo | N/A | More info related to the item |
 
 ### Example Calls
 - `/manga/1/characters` // Returns the list of characters and staff
 
-### Manga Request Examples [GET]
+### Manga Request Example+Schema [GET]
 
 + Parameters
     + id (required, Number, `1`) ... Returns the Character details from that the ID
@@ -161,7 +165,7 @@ A single person object with all its details
 | ------------- | ------------- | ------------- |
 | pictures | N/A | Pictures related to the item |
 
-### Person Request Examples [GET]
+### Person Request Example+Schema [GET]
 
 + Parameters
     + id (required, Number, `1`) ... Returns the Person details from that the ID
@@ -180,7 +184,7 @@ A single character object with all its details
 | ------------- | ------------- | ------------- |
 | pictures | N/A | Pictures related to the item |
 
-### Character Request Examples [GET]
+### Character Request Example+Schema [GET]
 
 
 + Parameters
@@ -205,8 +209,20 @@ Search result object related to the query
 | query | STRING | Query you want to search |
 | page | INTEGER | Page number of the results |
 
+### Advanced Search Parameters
+**Note:** These are search filters which have to be passed as GET `key=value`
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| type | `tv` `ova` `movie` `special` `ona` `music` `manga` `novel` `oneshot` `doujin` `manhwa` `manhua` | Filter type of results |
+| status | `airing` `completed` `complete` (alias) `tba` `upcoming` (alias) | Filter status of results |
+| rated | `g` `pg` `pg13` `r17` `r` `rx` | Filter age rating of results - [View Meaning](#) |
+| genre | INTEGER : 1-43 | These values reflect the genre IDs of MyAnimeList - [View Values](https://github.com/jikan-me/jikan/wiki/Genre-Constants) |
+| score | FLOAT : 0.0-10.0 | Filter score of results |
+| start_date | ISO8601 | Filter start date of results |
+| end_date | ISO8601 | Filter end date of results |
+| genre_exclude | boolean : 0/1 | To exlude/include the `genre` you added in your request |
 
-### Search Request Examples [GET]
+### Search Request Example+Schema [GET]
 
 
 + Parameters
@@ -214,6 +230,97 @@ Search result object related to the query
     + query (required, String, `Code`) ... Search query
     + page (optional, Integer, `1`) ... Page of the results
    
++ Response 200 (application/json)
+
+        [
+ 
+        ]
+        
+
+## Season [/season/{year}/{season}]
+Anime of the specified season
+
+**Note:** Both parameters are required.
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| year | Integer: Year | Specify the year |
+| season | `summer`, `spring`, `fall`, `winter` | Specify the season |
+
+### Season Request Example+Schema [GET]
+
++ Parameters
+    + year (required, Integer, `2018`) ... Returns anime of the year
+    + season (required, String, `winter`) ... Returns anime of the season
+
++ Response 200 (application/json)
+
+        [
+ 
+        ]
+        
+## Schedule [/schedule/{day}]
+Anime of the specified season
+
+**Note:** If you don't pass the `day` parameter, it'll return the schedule for **all** days of the week
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| day (optional) | `monday` `tuesday` `wednesday` `thursday` `friday` `saturday` `sunday` | Anime scheduled for that specific day |
+
+### Schedule Request Example+Schema [GET]
+
++ Parameters
+    + day (optional, String, `monday`) ... Returns scheduled anime of that specific day
+    
++ Response 200 (application/json)
+
+        [
+ 
+        ]
+        
+## Top [/top/{type}/{page}/{subtype}]
+Top items (e.g anime, manga) on MyAnimeList
+
+**Note:** `subtype` returns a filtered top list of a type `type` item. For example, the top Anime (type) movies (subtype)
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| type | `anime` `manga` | Top items of this type |
+| page (optional) | INTEGER | The Top page on MyAnimeList is paginated offers 50 items per page |
+| subtype (optional) | **Anime:** `airing` `upcoming` `tv` `movie` `ova` `special` **Manga:** `manga` `novels` `oneshots` `doujin` `manhwa` `manhua` **Both:** `bypopularity` `favorite` |
+
+### Top Request Example+Schema [GET]
+
++ Parameters
+    + type (required, String, `anime`) ... Returns top items of this type
+    + page (optional, Integer, `1`) ... Pagination support
+    + subtype (optional, String, `upcoming`) ... Returns top items of this type filtered by their subtypes
+    
++ Response 200 (application/json)
+
+        [
+ 
+        ]
+        
+## Meta [/meta/{request}/{type}/{period}]
+Requests related to meta information regarding the Jikan REST Instance.
+Such as the most requested endpoints for a specific period, or just status on the REST API.
+
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| request | `requests` `status` | |
+| type | `anime` `manga` `characters` `people` `search` `top` `schedule` `season`  | This is only for the `requests` endpoint |
+| period  | `today` `weekly` `monthly` | This is only for the `requests` endpoint |
+
+### Top Request Example+Schema [GET]
+
++ Parameters
+    + request (required, String, `requests`) ... 
+    + type (required, String, `anime`) ... 
+    + period (required, String, `today`) ... 
+
 + Response 200 (application/json)
 
         [

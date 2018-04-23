@@ -39,7 +39,7 @@ Per Day: **5,000**
 
 **Note:** As of REST 2.2, cached requests are no longer throttled! This means the rate limit counter won't increase for requests that are already cached!
 
-_If you're using the API for bulk requests, please be respectful of other API users and use a **5 second delay** between each request!_
+_If you're using the API for bulk requests (i.e you decide to make your own database >.>), please be respectful of other API users and use a **5 second delay** between each request!_
 
 ## Additional
 - Anime/Manga/Character/Person Responses are cached for 3 days.
@@ -87,6 +87,10 @@ You most likely made an invalid search request. Either the type or query is empt
 
 ### Server Error
 Something happened on the our side, open an [issue](https://github.com/jikan-me/jikan/issues).
+
+### File does not exist
+The page that Jikan tried to parse on MyAnimeList does not exist and returns a 404.
+This usually happens with item IDs that are non-existent. For example https://myanimelist.net/anime/4 (the anime with this ID does not exist)
 
 # Disclaimer
 - Jikan is in no way affiliated with MyAnimeList.

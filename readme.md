@@ -1,10 +1,10 @@
 ![Jikan](http://i.imgur.com/ctoJ3Jp.png)
 
-# UPDATE - THE REST API IS MOVING TO JIKAN.MOE
-If you're still using `jikan.me`, change it to `jikan.moe` **asap**. `jikan.me` will be discontinued on its' expiry - May 12th.
-
 # Jikan - The Unofficial MyAnimeList.net PHP API
 [![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.5-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
+
+
+Jikan is a **depenency free**, PHP API with easy-to-use syntax that scrapes and parses requests from [MyAnimeList.net](https://myanimelist.net).
 
 The raison d'être of Jikan is to help developers easily get the data they need for their apps and projects without having to depend on the lackluster official API, unstable APIs, or sidetracking their projects to develop parsers.
 
@@ -77,7 +77,7 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 
-### Usage 
+## Usage 
 - [PHP](https://github.com/jikan-me/jikan/tree/master/examples)
 - [Ruby](https://github.com/jikan-me/jikan.rb#usage)
 - [Python](https://github.com/jikan-me/jikanpy#jikanpy)

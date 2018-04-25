@@ -4,11 +4,11 @@
 [![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.5-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
 
 
-Jikan is a **depenency free**, PHP API with easy-to-use syntax which scrapes and parses requests from [MyAnimeList.net](https://myanimelist.net).
+Jikan is a **depenency free**, PHP API with easy-to-use syntax that scrapes and parses requests from [MyAnimeList.net](https://myanimelist.net).
 
-The raison d'être of Jikan is to help developers easily get the data they need for their apps and projects without having to dependo n the lackluster official API, unstable APIs, or sidetracking their projects to develop parsers.
+The raison d'être of Jikan is to help developers easily get the data they need for their apps and projects without having to depend on the lackluster official API, unstable APIs, or sidetracking their projects to develop parsers.
 
-The word `Jikan` literally translates to `Time` in Japanese (**時間**). And that's what this API saves you. ;)
+The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And that's what this API saves you of. ;)
 
 ### Getting Started
 1. `composer require jikan-me/jikan`
@@ -48,6 +48,7 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - People Parsing
     - Pictures
 - Search (Anime/Manga/Character/Person)
+    - Filters (Advanced Search)
     - Pagination Support
     - No.# of pages
 - Seasonal Anime (Season + Year)
@@ -55,12 +56,12 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - Top
     - Anime
     - Manga
-    - Sub Type & Pagination Support
+    - Sub Types & Pagination Support
 
 - Modular scraping methods for developers to easily extend the API
 - JSON format! ლ( ͡⎚ ͜ʖ ͡⎚ ლ)
 
-## Planned Features
+## Roadmap
 - Most Favorited
     - Characters
     - People
@@ -74,9 +75,12 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - **[Anime]** Fix parsing bug with some studio names - [#129](/../../issues/129)
 
 
-[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)
+**[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 
-### Examples: [PHP](https://github.com/jikan-me/jikan/tree/master/examples)
+### Usage 
+- [PHP](https://github.com/jikan-me/jikan/tree/master/examples)
+- [Ruby](https://github.com/jikan-me/jikan.rb#usage)
+- [Python](https://github.com/jikan-me/jikanpy#jikanpy)
 
 ## Contributions
 I would like to thank these 3 for graciously hosting Jikan REST for free!

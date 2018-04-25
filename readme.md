@@ -26,7 +26,7 @@ If you don't want to handle PHP, you're in luck! Jikan has it's own RESTful API 
 
 Contributions to Jikan by making wrappers in programming languages of your choice are much appreciated! Do let me know if you've made one and I'll include it here.
 
-# Features
+## Features
 - Anime Parsing
     - Characters & Staff
     - Episodes

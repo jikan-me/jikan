@@ -84,6 +84,8 @@ define('PSYCHOLOGICAL', 40);
 define('THRILLER', 41);
 define('SEINEN', 42);
 define('JOSEI', 43);
+define('DOUJINSHI', 43);
+define('GENDER_BENDER', 44);
 
 // Type
 define('TYPE_TV', 1);

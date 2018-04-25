@@ -19,7 +19,7 @@ $execution_time = ($time_end - $time_start);
 //execution time of the script
 echo '<b>Total Execution Time:</b> '.$execution_time.' s<br><br>';
 
-var_dump($jikan->response);
+var_export($jikan->response);
 
 //$jikan->Anime(21);
 //sleep(5);

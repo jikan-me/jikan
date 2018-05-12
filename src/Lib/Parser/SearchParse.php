@@ -252,7 +252,7 @@ class SearchParse extends TemplateParse
                         if (preg_match('~<meta property="og:url" content="(.*?)">~', $line, $this->matches)) {
                             $result['url'] = $this->matches[1];
                             preg_match('~https://myanimelist.net/people/(.*)/(.*)~', $this->matches[1], $this->matches);
-                            $result['mal_id'] = (int) $this->matches[2];
+                            $result['mal_id'] = (int) $this->matches[1];
                         }
 
 

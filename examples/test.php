@@ -1,6 +1,5 @@
 <?php
 // ignore this
-
 error_reporting(E_ALL);
 ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 
@@ -11,7 +10,7 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 
-$jikan->Anime(34851);
+$jikan->Search('sawashiro_miyuki', PEOPLE);
 
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
@@ -19,7 +18,7 @@ $execution_time = ($time_end - $time_start);
 //execution time of the script
 echo '<b>Total Execution Time:</b> '.$execution_time.' s<br><br>';
 
-var_export($jikan->response);
+var_dump($jikan->response);
 
 //$jikan->Anime(21);
 //sleep(5);

@@ -72,9 +72,8 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Changelog
-### 1.15.5 stable - April 18, 18
-- **[Manga]** Fix parsing bug with some serialization names - [#131](/../../issues/131) - 1.15.4
-- **[Anime]** Fix parsing bug with some studio names - [#129](/../../issues/129)
+### 1.15.6 stable - May 12, 18
+- **[Search]** Bug fix for [#139](/../../issues/139)
 
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**

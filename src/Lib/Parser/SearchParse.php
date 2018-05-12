@@ -179,19 +179,21 @@ class SearchParse extends TemplateParse
                                 ) 
                             {
 
+
                                 if (isset($this->matches[2])) {
                                     $_anime = explode(',', $this->matches[2]);
                                     foreach ($_anime as $key => &$value) {
                                         preg_match('~<a href="(/(.*)/(.*)/(.*))">(.*)</a>~', $value, $value);
                                         if (!empty($value[5])) {
-                                            $result['anime'][] = [
-                                                'mal_id' => (int) $value[3],
-                                                'url' => BASE_URL . substr($value[1], 1),
-                                                'title' => $value[5],
-                                            ];
+                                            if ($value[2] == 'anime' || $value[2] == 'manga') {
+                                                $result[$value[2]][] = [
+                                                    'mal_id' => (int) $value[3],
+                                                    'url' => BASE_URL . substr($value[1], 1),
+                                                    'title' => htmlspecialchars_decode($value[5])
+                                                ];
+                                            }
                                         }
                                     }
-
                                 }
 
                                 if (isset($this->matches[3])) {
@@ -199,11 +201,13 @@ class SearchParse extends TemplateParse
                                     foreach ($_anime as $key => &$value) {
                                         preg_match('~<a href="(/(.*)/(.*)/(.*))">(.*)</a>~', $value, $value);
                                         if (!empty($value[5])) {
-                                            $result['manga'][] = [
-                                                'mal_id' => (int) $value[3],
-                                                'url' => BASE_URL . substr($value[1], 1),
-                                                'title' => $value[5],
-                                            ];
+                                            if ($value[2] == 'anime' || $value[2] == 'manga') {
+                                                $result[$value[2]][] = [
+                                                    'mal_id' => (int) $value[3],
+                                                    'url' => BASE_URL . substr($value[1], 1),
+                                                    'title' => htmlspecialchars_decode($value[5])
+                                                ];
+                                            }
                                         }
                                     }
                                 }

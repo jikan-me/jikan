@@ -29,20 +29,19 @@ Base URL (SSL): `https://api.jikan.moe/`
 - [JikanPHP - Source](https://github.com/jikan-me/jikan/)
 - [JikanPy - Wrapper](https://github.com/AWConant/jikanpy) by Andrew Conant
 - [Jikan.rb - Wrapper](https://github.com/Zerocchi/jikan.rb) by Zerocchi
+- [Jikan.Net - Wrapper](https://github.com/Ervie/jikan.net) by Ervie
 
 
 # Information
 ## Rate Limiting
-To maintain bandwidth, there's a rate-limiting of 5,000 requests per IP per day.
-
-Per Day: **5,000**
+To prevent abuse & rate limit blocks from MyAnimeList, there's a rate-limiting of **5,000** requests per IP per 24 hours.
 
 **Note:** As of REST 2.2, cached requests are no longer throttled! This means the rate limit counter won't increase for requests that are already cached!
 
 _If you're using the API for bulk requests (i.e you decide to make your own database >.>), please be respectful of other API users and use a **5 second delay** between each request!_
 
 ## Additional
-- Anime/Manga/Character/Person Responses are cached for 3 days.
+- Anime/Manga/Character/Person Responses are cached for 72 hours (3 days).
 - Search Queries, Top, Schedule, Season endpoints are cached for 6 hours
 
 ## Allowed HTTP(s) requests
@@ -55,8 +54,7 @@ GET: All requests are done via GET
 - 400 `Bad Request` - You've made an invalid request or to an invalid endpoint.
 - 404 `Not Found` - The ID you requested doesn't exist
 - 405 `Method Not Allowed` - requested method is not supported for resource.
-- 429 `Too Many Requests` - You've either hit your daily limit, concurrent limit or Jikan has hit the rate limit from MyAnimeList
-
+- 429 `Too Many Requests` - You've either hit your daily limit or Jikan has hit the rate limit from MyAnimeList
 
 # Errors
 If you get an error response, it'll be within the `error` field. Here's an example:

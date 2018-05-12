@@ -23,8 +23,9 @@ If you don't want to handle PHP, you're in luck! Jikan has it's own RESTful API 
 **[See which apps are using JikanREST](https://jikan.moe/showcase)**
 
 ## Wrappers
-- **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
+- **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant
+- **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 
 Contributions to Jikan by making wrappers in programming languages of your choice are much appreciated! Do let me know if you've made one and I'll include it here.
 
@@ -83,6 +84,7 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [PHP](https://github.com/jikan-me/jikan/tree/master/examples)
 - [Ruby](https://github.com/jikan-me/jikan.rb#usage)
 - [Python](https://github.com/jikan-me/jikanpy#jikanpy)
+- [.NET](https://github.com/Ervie/jikan.net/wiki)
 
 ## Contributions
 I would like to thank these 3 for graciously hosting Jikan REST for free!

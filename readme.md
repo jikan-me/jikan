@@ -72,9 +72,10 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Changelog
-### 1.15.6 stable - May 12, 18
-- **[Search]** Bug fix for [#139](/../../issues/139)
-
+### 1.15.8 stable - May 12, 18
+- **[Search]** Bug fix for [#139](/../../issues/139) - 1.15.6
+- **[Search]** Bug fix for [#138](/../../issues/138) - 1.15.7
+- **[Search]** HTML special character decode for some titles
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 

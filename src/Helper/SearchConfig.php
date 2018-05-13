@@ -48,7 +48,7 @@ class SearchConfig {
 		$query .= "&em=".$this->endDate[1];
 		$query .= "&ed=".$this->endDate[2];
 		// Genre Include
-		$query .= "&gx=".($this->genreInclude ? "1" : "0");
+		$query .= "&gx=".($this->genreInclude ? "0" : "1");
 		// Genre
 		if (!empty($this->genre)) {
 			foreach ($this->genre as $key => $genre) {

@@ -39,11 +39,11 @@ class SearchConfig {
 		$query .= "&status=".$this->status;
 		// Rated
 		$query .= "&r=".$this->rated;
-		// Start Date
+		// Start Date ISO8601
 		$query .= "&sy=".$this->startDate[0];
 		$query .= "&sm=".$this->startDate[1];
 		$query .= "&sd=".$this->startDate[2];
-		// End Date
+		// End Date ISO8601
 		$query .= "&ey=".$this->endDate[0];
 		$query .= "&em=".$this->endDate[1];
 		$query .= "&ed=".$this->endDate[2];

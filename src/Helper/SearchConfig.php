@@ -9,8 +9,8 @@ class SearchConfig {
 	private $score = 0;
 	private $status = 0;
 	private $rated = 0;
-	private $startDate = [];
-	private $endDate = [];
+	private $startDate = [0,0,0];
+	private $endDate = [0,0,0];
 	private $genreInclude = true; // Exclude = false
 	private $genre = [];
 
@@ -40,17 +40,13 @@ class SearchConfig {
 		// Rated
 		$query .= "&r=".$this->rated;
 		// Start Date
-		if (!empty($this->startDate)) {
-			$query .= "&sd=".$this->startDate[0];
-			$query .= "&sm=".$this->startDate[1];
-			$query .= "&sy=".$this->startDate[2];
-		}
+		$query .= "&sy=".$this->startDate[0];
+		$query .= "&sm=".$this->startDate[1];
+		$query .= "&sd=".$this->startDate[2];
 		// End Date
-		if (!empty($this->endDate)) {
-			$query .= "&ed=".$this->endDate[0];
-			$query .= "&em=".$this->endDate[1];
-			$query .= "&ey=".$this->endDate[2];
-		}
+		$query .= "&ey=".$this->endDate[0];
+		$query .= "&em=".$this->endDate[1];
+		$query .= "&ed=".$this->endDate[2];
 		// Genre Include
 		$query .= "&gx=".($this->genreInclude ? "0" : "1");
 		// Genre
@@ -87,14 +83,14 @@ class SearchConfig {
 		return $this;
 	}
 
-	public function setStartDate($day, $month, $year) {
-		$this->startDate = [$day, $month, $year];
+	public function setStartDate($year, $month, $day) {
+		$this->startDate = [$year, $month, $day];
 
 		return $this;
 	}
 
-	public function setEndDate($day, $month, $year) {
-		$this->endDate = [$day, $month, $year];
+	public function setEndDate($year, $month, $day) {
+		$this->endDate = [$year, $month, $day];
 
 		return $this;
 	}

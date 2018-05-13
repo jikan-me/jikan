@@ -105,9 +105,9 @@ class SearchConfig {
 		return $this;
 	}
 
-	public function setGenre($genre) {
+	public function setGenre(...$genre) {
 		if (is_array($genre)) {
-			$this->genre = array_unique(array_merge($this->genre, $genre));
+			$this->genre = !empty($genre) ? array_unique(array_merge($this->genre, $genre)) : [];
 		} else {
 			$this->genre[] = $genre;
 			$this->genre = array_unique($this->genre);

@@ -3,6 +3,7 @@
 namespace Jikan\Get;
 
 use Jikan\Lib\Parser\SearchParse;
+use Jikan\Helper\SearchConfig as SearchConfig;
 
 class Search extends Get
 {

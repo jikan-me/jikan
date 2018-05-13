@@ -40,13 +40,13 @@ class SearchConfig {
 		// Rated
 		$query .= "&r=".$this->rated;
 		// Start Date ISO8601
-		$query .= "&sy=".$this->startDate[0];
+		$query .= "&sd=".$this->startDate[0];
 		$query .= "&sm=".$this->startDate[1];
-		$query .= "&sd=".$this->startDate[2];
+		$query .= "&sy=".$this->startDate[2];
 		// End Date ISO8601
-		$query .= "&ey=".$this->endDate[0];
+		$query .= "&ed=".$this->endDate[0];
 		$query .= "&em=".$this->endDate[1];
-		$query .= "&ed=".$this->endDate[2];
+		$query .= "&ey=".$this->endDate[2];
 		// Genre Include
 		$query .= "&gx=".($this->genreInclude ? "0" : "1");
 		// Genre
@@ -83,14 +83,22 @@ class SearchConfig {
 		return $this;
 	}
 
-	public function setStartDate($year, $month, $day) {
-		$this->startDate = [$year, $month, $day];
+	public function setStartDate($day, $month, $year) {
+		$this->startDate = [
+			ltrim((string)$year, '0'), 
+			ltrim((string)$month, '0'), 
+			ltrim((string)$day, '0')
+		];
 
 		return $this;
 	}
 
-	public function setEndDate($year, $month, $day) {
-		$this->endDate = [$year, $month, $day];
+	public function setEndDate($day, $month, $year) {
+		$this->endDate = [
+			ltrim((string)$year, '0'), 
+			ltrim((string)$month, '0'), 
+			ltrim((string)$day, '0')
+		];
 
 		return $this;
 	}

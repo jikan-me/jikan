@@ -10,7 +10,14 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 
-$jikan->Search('kirumi', CHARACTER);
+$config = new Jikan\Helper\SearchConfig(ANIME);
+
+$config->setGenre(1, 2);
+$config->setStartDate("2015", "01", "01");
+$config->setEndDate("2016", "05", "05");
+$config->setGenreInclude(false);
+
+$jikan->Search('Bleach', ANIME, 1, $config);
 
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);

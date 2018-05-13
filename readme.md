@@ -1,7 +1,7 @@
 ![Jikan](http://i.imgur.com/ctoJ3Jp.png)
 
 # Jikan - The Unofficial MyAnimeList.net PHP API
-[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.8-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
+[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.9-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
 
 
 Jikan is a **depenency free**, PHP API with easy-to-use syntax that scrapes and parses requests from [MyAnimeList.net](https://myanimelist.net).
@@ -15,7 +15,7 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 2. [Documentation](https://jikan.moe/docs)
 
 
-## Jikan REST API [![REST PHP](https://img.shields.io/badge/JikanPHP-1.15.8-blue.svg?style=flat)](https://jikan.moe)
+## Jikan REST API [![REST PHP](https://img.shields.io/badge/JikanPHP-1.15.9-blue.svg?style=flat)](https://jikan.moe)
 If you don't want to handle PHP, you're in luck! Jikan has it's own RESTful API service (CORS enabled + JSON response) hosted by [Hibiki](https://github.com/assintates)
 
 **[REST DOCUMENTATION](https://jikan.docs.apiary.io)**
@@ -73,10 +73,12 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Changelog
-### 1.15.8 stable - May 12, 18
-- **[Search]** Bug fix for [#139](/../../issues/139) - 1.15.6
-- **[Search]** Bug fix for [#138](/../../issues/138) - 1.15.7
-- **[Search]** HTML special character decode for some titles
+### 1.15.9 stable - May 14, 18
+- **[Search]** 
+    - Bug fix for `genre`, `genreInclude`, `startDate` & `endDate`
+- **[SearchConfig]** `Jikan\Helpers\SearchConfig`
+    - `setGenre` now no longer takes an array for multiple genres, but rather Variadic arguments.
+        e.g `setGenre(1, 18)`
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 

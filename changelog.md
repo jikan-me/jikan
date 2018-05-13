@@ -1,9 +1,17 @@
 ## Changelog
 
+### 1.15.9 stable - May 14, 18
+- **[Search]** 
+	- Bug fix for `genre`, `genreInclude`, `startDate` & `endDate`
+- **[SearchConfig]** `Jikan\Helpers\SearchConfig`
+	- `setGenre` now no longer takes an array for multiple genres, but rather Variadic arguments.
+		e.g `setGenre(1, 18)`
+
 ### 1.15.8 stable - May 12, 18
-- **[Search]** Bug fix for [#139](/../../issues/139) - 1.15.6
-- **[Search]** Bug fix for [#138](/../../issues/138) - 1.15.7
-- **[Search]** HTML special character decode for some titles
+- **[Search]** 
+	- Bug fix for [#139](/../../issues/139) - 1.15.6
+	- Bug fix for [#138](/../../issues/138) - 1.15.7
+	- HTML special character decode for some titles
 
 ### 1.15.5 stable - April 18, 18
 - **[Manga]** Fix parsing bug with some serialization names - [#131](/../../issues/131) - 1.15.4

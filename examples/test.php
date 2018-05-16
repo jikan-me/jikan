@@ -10,14 +10,7 @@ $jikan = new Jikan\Jikan;
 
 $time_start = microtime(true);
 
-$config = new Jikan\Helper\SearchConfig(ANIME);
-
-$config->setGenre(1, 2);
-$config->setStartDate("2015", "01", "01");
-$config->setEndDate("2016", "05", "05");
-$config->setGenreInclude(false);
-
-$jikan->Search('Bleach', ANIME, 1, $config);
+$jikan->Seasonal();
 
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
@@ -25,10 +18,10 @@ $execution_time = ($time_end - $time_start);
 //execution time of the script
 echo '<b>Total Execution Time:</b> '.$execution_time.' s<br><br>';
 
-//var_dump();
-foreach ($jikan->response['result'] as $key => $value) {
+var_dump($jikan->response['season']);
+/*foreach ($jikan->response['result'] as $key => $value) {
 	var_dump($value);
-}
+}*/
 
 //$jikan->Anime(21);
 //sleep(5);

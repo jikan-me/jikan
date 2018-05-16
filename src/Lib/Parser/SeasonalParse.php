@@ -35,6 +35,7 @@ class SeasonalParse extends TemplateParse
                         'url' => null,
                         'title' => null,
                         'image_url' => null,
+                        'type' => null,
                         'synopsis' => null,
                         'producer' => [],
                         'licensor' => [],
@@ -45,7 +46,8 @@ class SeasonalParse extends TemplateParse
                         'score' => null,
                         'members' => null,
                         'kids' => false,
-                        'r18_plus' => false
+                        'r18_plus' => false,
+                        'continued' => false
                     ];
 
                     $anime['kids'] = strpos($this->matches[1], 'kids') ? true : false;
@@ -131,8 +133,12 @@ class SeasonalParse extends TemplateParse
                         }
                     }
 
-                    while (!preg_match('~<span class="remain-time">~', $this->file[$this->lineNo + $i])){$i++;} // haxing MAL's inconsistencies
+                    while (!preg_match('~<div class="info">~', $this->file[$this->lineNo + $i])){$i++;} // haxing MAL's inconsistencies
+                    $i++;
+                    $type = $this->file[$this->lineNo + $i];
+                    $anime['type'] = trim(str_replace('-', '', $type));
 
+                    while (!preg_match('~<span class="remain-time">~', $this->file[$this->lineNo + $i])){$i++;} // haxing MAL's inconsistencies
                     $i++;
                     $anime['airing_start'] = trim(strip_tags($this->file[$this->lineNo + $i]));
 

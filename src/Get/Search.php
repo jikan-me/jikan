@@ -9,14 +9,17 @@ class Search extends Get
 {
 
     private $validExtends = [];
+    private $validNullQueries = [ANIME, MANGA];
 
     public function __construct($query = null, $type = ANIME, $page = 1, $config = null) {
 
-        if (is_null($query)) {
-            throw new \Exception('No Query Given');
+        if (!in_array($type, $this->validNullQueries)) {
+            if (is_null($query)) {
+                throw new \Exception('No Query Given');
+            }
         }
 
-        $this->query = urlencode($query);
+        $this->query = is_null($query) ? "" : urlencode($query);
 
         $this->parser = new SearchParse;
 

@@ -84,18 +84,18 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 
 ## Usage 
-- [PHP](https://github.com/jikan-me/jikan/tree/master/examples)
-- [Ruby](https://github.com/jikan-me/jikan.rb#usage)
-- [Python](https://github.com/jikan-me/jikanpy#jikanpy)
 - [.NET](https://github.com/Ervie/jikan.net/wiki)
+- [PHP](https://github.com/jikan-me/jikan/tree/master/examples)
+- [Python](https://github.com/jikan-me/jikanpy#jikanpy)
+- [Ruby](https://github.com/jikan-me/jikan.rb#usage)
 
 ## Contributions
 I would like to thank these 3 for graciously hosting Jikan REST for free!
-* [Assintates](https://twitter.com/Assintates)
+* [Hibiki](https://twitter.com/Assintates)
 * [Sif](https://myanimelist.net/profile/ArtoriasMoreder)
 * [BroHosting](https://brohosting.eu)
 
 ## DISCLAIMER
 - Jikan is in no way affiliated with MyAnimeList. 
 - I am not responsible for what you do with this library, so use it responsibly as per MyAnimeList's [TOS](https://myanimelist.net/about/terms_of_use)
-- Use the REST API responsibly, bulk data downloading is only allowed under conditions. (Refer to the REST docs)
+- Use the REST API responsibly, bulk requesting data for building your own database/datasets is only allowed under conditions. [Read More](https://jikan.docs.apiary.io/#introduction/information/rate-limiting)

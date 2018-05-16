@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.15.12 stable - May 16, 18
+- **[Seasonal]**
+	- Add `type` for anime item type (e.g "TV", "Movie", etc) - 1.15.10
+	- Add boolean `continued` for whether the TV show has been continuing from last season - 1.15.11
+- **[Search]**
+	- Add support for `NULL` queries. Read more at issue [#142](/../../issues/142)
+		- Only supported for `ANIME` and `MANGA` type searches
+
 ### 1.15.9 stable - May 14, 18
 - **[Search]** 
 	- Bug fix for `genre`, `genreInclude`, `startDate` & `endDate`

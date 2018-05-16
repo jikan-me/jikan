@@ -22,11 +22,15 @@ class SeasonalParse extends TemplateParse
 
             $i = 1;
             $seasonal = [];
+            $continued = false;
 
             while (true) {
                 if (preg_match('~<div class="mauto clearfix pt24"~', $this->file[$this->lineNo + $i])) {
                     break;
                 }
+
+                if (preg_match('~<div class="anime-header">TV \(Continuing\)</div>~', $this->file[$this->lineNo + $i])) {$continued = true;}
+                if (preg_match('~<div class="anime-header">ONA</div>~', $this->file[$this->lineNo + $i])) {$continued = false;}
 
                 if (preg_match('~<div class="seasonal-anime (.*?)"~', $this->file[$this->lineNo + $i], $this->matches)) {
 
@@ -52,6 +56,7 @@ class SeasonalParse extends TemplateParse
 
                     $anime['kids'] = strpos($this->matches[1], 'kids') ? true : false;
                     $anime['r18_plus'] = strpos($this->matches[1], 'r18') ? true : false;
+                    $anime['continued'] = $continued;
 
                     $i += 3;
                     preg_match('~<a href="(https://myanimelist.net/anime/(.*)/(.*))" class="link-title">(.*)</a>~', $this->file[$this->lineNo + $i], $this->matches);

@@ -18,10 +18,10 @@ $execution_time = ($time_end - $time_start);
 //execution time of the script
 echo '<b>Total Execution Time:</b> '.$execution_time.' s<br><br>';
 
-var_dump($jikan->response['season']);
-/*foreach ($jikan->response['result'] as $key => $value) {
+// var_dump($jikan->response['season']);
+foreach ($jikan->response['season'] as $key => $value) {
 	var_dump($value);
-}*/
+}
 
 //$jikan->Anime(21);
 //sleep(5);

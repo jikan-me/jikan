@@ -80,12 +80,15 @@ class CharacterParse extends TemplateParse
                     $i++;
                     $animeName = [];
                     preg_match('~<td valign="top" class="borderClass"><a href="((.*)/(.*)/(.*)/(.*))">(.*)</a>~', $this->file[$this->lineNo + $i], $animeName);
+                    $i++;
+                    preg_match('~<small>(.*)</small>~', $this->file[$this->lineNo + $i], $this->matches);
 
                     $animeography[] = [
                         'mal_id' => (int) $animeName[4],
                         'name' => $animeName[6],
                         'url' => $animeMeta[1],
-                        'image_url' => $animeMeta[2]
+                        'image_url' => $animeMeta[2],
+                        'role' => $this->matches[1]
                     ];
                 }
                 $i++;
@@ -111,12 +114,15 @@ class CharacterParse extends TemplateParse
                     $i++;
                     $mangaName = array();
                     preg_match('~<td valign="top" class="borderClass"><a href="((.*)/(.*)/(.*)/(.*))">(.*)</a>~', $this->file[$this->lineNo + $i], $mangaName);
+                    $i++;
+                    preg_match('~<small>(.*)</small>~', $this->file[$this->lineNo + $i], $this->matches);
 
                     $mangaography[] = [
                         'mal_id' => (int) $mangaName[4],
                         'name' => $mangaName[6],
                         'url' => $mangaMeta[1],
-                        'image_url' => $mangaMeta[2]
+                        'image_url' => $mangaMeta[2],
+                        'role' => $this->matches[1]
                     ];
                 }
                 $i++;

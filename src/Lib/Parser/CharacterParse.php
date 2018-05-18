@@ -58,7 +58,7 @@ class CharacterParse extends TemplateParse
             $about = str_replace('<div class="spoiler"><input type="button" class="button show_button" onClick="this.nextSibling.style.display=\'inline-block\';this.style.display=\'none\';" data-showname="Show spoiler" data-hidename="Hide spoiler" value="Show spoiler"><span class="spoiler_content" style="display:none"><input type="button" class="button hide_button" onClick="this.parentNode.style.display=\'none\';this.parentNode.parentNode.childNodes[0].style.display=\'inline-block\';" value="Hide spoiler">', '', $about);
             $about = str_replace('<br>', '', $about);
             $about = str_replace('</span></div>', '', $about);
-            $about = htmlspecialchars_decode($about);
+            $about = htmlspecialchars_decode($about, ENT_QUOTES);
             
             $this->model->set('Character', 'about', $about);
         });

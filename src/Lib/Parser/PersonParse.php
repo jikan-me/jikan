@@ -109,6 +109,7 @@ class PersonParse extends TemplateParse
                     $i++;
                     $charMeta = [];
                     preg_match('~<td valign="top" class="borderClass" width="25"><div class="picSurround"><a href="(.*)"><img data-src="(.*)" border="0" alt="(.*)" width="23" class="lazyload"></a></div></td>~', $this->file[$this->lineNo + $i], $charMeta);
+
                     $voiceActingRoles[] = [
                         'anime' => [
                             'mal_id' => (int) $animeName[4],
@@ -121,7 +122,7 @@ class PersonParse extends TemplateParse
                             'name' => $char[6],
                             'url' => $charMeta[1],
                             'image_url' => $charMeta[2],
-                            'role' => htmlspecialchars_decode($char[3])
+                            'role' => htmlspecialchars_decode($char[7])
                         ],
                     ];
                 }

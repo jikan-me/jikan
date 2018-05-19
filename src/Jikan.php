@@ -14,7 +14,7 @@
 
 namespace Jikan;
 
-require 'config.php';
+require __DIR__ . '/config.php'; 
 
 
 use Jikan\Helper\SearchConfig as SearchConfig;

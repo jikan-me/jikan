@@ -22,6 +22,11 @@ If you don't want to handle PHP, you're in luck! Jikan has it's own RESTful API 
 
 **[See which apps are using JikanREST](https://jikan.moe/showcase)**
 
+### Warning
+If your use of the API is **NOT** for an app/bot/etc that makes consistent amount of requests but **rather** for the sake of making bulk requests, keep in mind to have a **3-4 second delay between requets** otherwise **your IP will be blacklisted**.
+
+Remember, you're not the only one using the API. Be responsible.
+
 ## Wrappers
 - **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant

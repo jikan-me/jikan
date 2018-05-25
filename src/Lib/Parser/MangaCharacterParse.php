@@ -25,7 +25,7 @@ class MangaCharacterParse extends TemplateParse
             $i = 0;
             $characters = [];
             while ($running) {
-                if (preg_match('~<div class="fl-r">~', $this->file[$this->lineNo + $i])) {
+                if (preg_match('~<div style="clear:both;"></div>~', $this->file[$this->lineNo + $i])) {
                     $running = false;
                 }
 

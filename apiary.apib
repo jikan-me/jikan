@@ -38,7 +38,8 @@ To prevent abuse & rate limit blocks from MyAnimeList, there's a rate-limiting o
 
 **Note:** As of REST 2.2, cached requests are no longer throttled! This means the rate limit counter won't increase for requests that are already cached!
 
-_If you're using the API for bulk requests (i.e you decide to make your own database >.>), please be respectful of other API users and use a **5 second delay** between each request!_
+### Bulk Requests
+This API serves as a purpose for apps/bots/etc that make consistent amount of requests. **If you're using the API for making bulk requests, keep a 3 second delay between each request. Abuse of the API will result in an IP ban.**
 
 ## Additional
 - Anime/Manga/Character/Person Responses are cached for 72 hours (3 days).

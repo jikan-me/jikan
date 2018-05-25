@@ -103,5 +103,7 @@ I would like to thank these 3 for graciously hosting Jikan REST for free!
 - I am not responsible for what you do with this library, so use it responsibly as per MyAnimeList's [TOS](https://myanimelist.net/about/terms_of_use)
 - Use the REST API responsibly, bulk requesting data for building your own database/datasets is only allowed under conditions. [Read More](https://jikan.docs.apiary.io/#introduction/information/rate-limiting)
 
-## [Donate](https://liberapay.com/Nekomata)
+## [Donate](https://liberapay.com/Nekomata/donate)
 If you liked the service, feel free to donate!
+
+[![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Nekomata/donate "Donate using Liberapay")

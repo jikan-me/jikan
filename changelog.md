@@ -1,5 +1,11 @@
 ## Changelog
 
+### 1.15.14 stable - May 26, 18
+- **[Anime, Manga, Extended]**
+	- Fix Some parsing methods were not parsing correctly [#148](/../../issues/148)
+- **[Person]**
+	- Add information about roles [#146](/../../issues/146)
+
 ### 1.15.12 stable - May 16, 18
 - **[Seasonal]**
 	- Add `type` for anime item type (e.g "TV", "Movie", etc) - 1.15.10

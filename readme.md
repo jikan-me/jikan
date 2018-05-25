@@ -78,13 +78,11 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Changelog
-### 1.15.12 stable - May 16, 18
-- **[Seasonal]**
-    - Add `type` for anime item type (e.g "TV", "Movie", etc) - 1.15.10
-    - Add boolean `continued` for whether the TV show has been continuing from last season - 1.15.11
-- **[Search]**
-    - Add support for `NULL` queries. Read more at issue [#142](/../../issues/142)
-        - Only supported for `ANIME` and `MANGA` type searches
+### 1.15.14 stable - May 26, 18
+- **[Anime, Manga, Extended]**
+    - Fix Some parsing methods were not parsing correctly [#148](/../../issues/148)
+- **[Person]**
+    - Add information about roles [#146](/../../issues/146)
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 
@@ -104,3 +102,6 @@ I would like to thank these 3 for graciously hosting Jikan REST for free!
 - Jikan is in no way affiliated with MyAnimeList. 
 - I am not responsible for what you do with this library, so use it responsibly as per MyAnimeList's [TOS](https://myanimelist.net/about/terms_of_use)
 - Use the REST API responsibly, bulk requesting data for building your own database/datasets is only allowed under conditions. [Read More](https://jikan.docs.apiary.io/#introduction/information/rate-limiting)
+
+## [Donate](https://liberapay.com/Nekomata)
+If you liked the service, feel free to donate!

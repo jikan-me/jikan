@@ -101,7 +101,7 @@ class AnimeCharacterStaffParse extends TemplateParse
             $staff = array();
             while ($running) {
                 $person = array();
-                if (preg_match('~<div class="fl-l">~', $this->file[$this->lineNo + $i])) {
+                if (preg_match('~<div style="clear:both;"></div>~', $this->file[$this->lineNo + $i])) {
                     $running = false;
                 }
 

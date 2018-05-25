@@ -273,12 +273,13 @@ class AnimeParse extends TemplateParse
                    $i = 1;
 
                    while ($running) {
-                        if (preg_match('~<div class="border_top"~', $this->file[$this->lineNo + $i])) {
+                        if (
+                            preg_match('~<div class="border_top"~', $this->file[$this->lineNo + $i]) ||
+                            preg_match('~</td></tr><tr><td class="pb24">~', $this->file[$this->lineNo + $i]) )
+                        {
                             $running = false;
                         }
-                        if (preg_match('~</td></tr><tr><td class="pb24">~', $this->file[$this->lineNo + $i])) {
-                            $running = false;
-                        }
+                        
                        $string .= $this->file[$this->lineNo + $i];
                        $i++;
                    }

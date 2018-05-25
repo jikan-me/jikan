@@ -154,14 +154,24 @@ class MangaParse extends TemplateParse
                     $i = 1;
 
                     while ($running) {
-                        if (preg_match('~<div class="border_top"~', $this->file[$this->lineNo + $i])) {
+                        if (
+                            preg_match('~<div class="border_top"~', $this->file[$this->lineNo + $i]) ||
+                            preg_match('~</td></tr><tr><td class="pb24">~', $this->file[$this->lineNo + $i]) )
+                        {
                             $running = false;
                         }
 
                         $string .= $this->file[$this->lineNo + $i];
                         $i++;
                     }
-                    $string = substr($string, 0, strpos($string, '<div class="border_top'));
+
+                    if (strpos($string, '</td></tr><tr><td class="pb24">')) {
+                        $string = substr($string, 0, strpos($string, '</td></tr><tr><td class="pb24">'));
+                    }
+                    if (strpos($string, '<div class="border_top"')) {
+                        $string = substr($string, 0, strpos($string, '<div class="border_top"'));
+                    }
+
                     $this->model->set('Manga', 'background', htmlspecialchars_decode(strip_tags($string)));
                 }
             }

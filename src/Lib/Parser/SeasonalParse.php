@@ -18,6 +18,12 @@ class SeasonalParse extends TemplateParse
          * Rules
          */
 
+        $this->addRule('season_meta', '~<meta property="og:title" content="(.*) - Anime - MyAnimeList.net ">~', function() {
+            $season_meta = explode(" ", trim($this->matches[1]));
+            $this->model->set('Seasonal', 'season_name', $season_meta[0]);
+            $this->model->set('Seasonal', 'season_year', (int) $season_meta[1]);
+        });
+
         $this->addRule('seasonal', '~<div class="js-categories-seasonal">~', function() {
 
             $i = 1;

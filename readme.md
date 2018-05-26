@@ -1,7 +1,7 @@
 ![Jikan](http://i.imgur.com/ctoJ3Jp.png)
 
 # Jikan - The Unofficial MyAnimeList.net PHP API
-[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.12-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
+[![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/badge/jikanPHP-v1.15.15-blue.svg?style=flat)]()  [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() 
 
 
 Jikan is a **depenency free**, PHP API with easy-to-use syntax that scrapes and parses requests from [MyAnimeList.net](https://myanimelist.net).
@@ -83,6 +83,8 @@ Contributions to Jikan by making wrappers in programming languages of your choic
     - Fix Some parsing methods were not parsing correctly [#148](/../../issues/148)
 - **[Person]**
     - Add information about roles [#146](/../../issues/146)
+- **[Seasonal]**
+    - Add `season_name` and `season_year` data
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 
@@ -104,6 +106,6 @@ I would like to thank these 3 for graciously hosting Jikan REST for free!
 - Use the REST API responsibly, bulk requesting data for building your own database/datasets is only allowed under conditions. [Read More](https://jikan.docs.apiary.io/#introduction/information/rate-limiting)
 
 ## [Donate](https://liberapay.com/Nekomata/donate)
-If you liked the service, please feel free to donate!
+If you found this useful, please feel free to donate to help with development!
 
 [![Donate](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/Nekomata/donate "Donate using Liberapay")

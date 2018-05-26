@@ -5,6 +5,8 @@
 	- Fix Some parsing methods were not parsing correctly [#148](/../../issues/148)
 - **[Person]**
 	- Add information about roles [#146](/../../issues/146)
+- **[Seasonal]**
+	- Add `season_name` and `season_year` data
 
 ### 1.15.12 stable - May 16, 18
 - **[Seasonal]**

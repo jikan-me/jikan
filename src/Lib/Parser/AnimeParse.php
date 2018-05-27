@@ -270,7 +270,7 @@ class AnimeParse extends TemplateParse
                    preg_match('~</div>Background</h2>([\s\S]*)~', $this->line, $this->matches);
                    $running = true;
                    $string = $this->matches[1];
-                   $i = 1;
+                   $i = 0;
 
                    while ($running) {
                         if (

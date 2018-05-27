@@ -24,7 +24,7 @@ class MangaPicturesParse extends TemplateParse
 
             while(true) {
                 $line = $this->file[$this->lineNo + $i];
-                if (preg_match('~<div class="fl-l">~', $line)) {
+                if (preg_match('~<div style="clear:both;"></div>~', $line)) {
                     break;
                 }
 

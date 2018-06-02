@@ -37,7 +37,7 @@ class Jikan
 	/*
 	 * Anime
 	 */
-	public function Anime(String $id = null, Array $extend = []) {
+	public function Anime($id = null, Array $extend = []) {
 	    $this->response = (array) (new Get\Anime($id, $extend))->response;
         $this->setStatus();
 
@@ -47,7 +47,7 @@ class Jikan
     /*
      * Manga
      */
-    public function Manga(String $id = null, Array $extend = []) {
+    public function Manga($id = null, Array $extend = []) {
         $this->response = (array) (new Get\Manga($id, $extend))->response;
         $this->setStatus();
 
@@ -57,7 +57,7 @@ class Jikan
     /*
      * Character
      */
-    public function Character(String $id = null, Array $extend = []) {
+    public function Character($id = null, Array $extend = []) {
         $this->response = (array) (new Get\Character($id, $extend))->response;
         $this->setStatus();
 
@@ -67,7 +67,7 @@ class Jikan
     /*
      * Person
      */
-    public function Person(String $id = null, Array $extend = []) {
+    public function Person($id = null, Array $extend = []) {
         $this->response = (array) (new Get\Person($id, $extend))->response;
         $this->setStatus();
 
@@ -77,7 +77,7 @@ class Jikan
     /*
      * Search
      */
-    public function Search(String $query = null, String $type = ANIME, $page = 1, SearchConfig $config = null) {
+    public function Search(string $query = null, string $type = ANIME, int $page = 1, SearchConfig $config = null) {
         $this->response = (array) (new Get\Search($query, $type, $page, $config))->response;
         $this->setStatus();
 
@@ -87,7 +87,7 @@ class Jikan
     /*
      * Seasonal Anime
      */
-    public function Seasonal(String $season = null, int $year = null) {
+    public function Seasonal(string $season = null, int $year = null) {
         $this->response = (array) (new Get\Seasonal($season, $year))->response;
         $this->setStatus();
 
@@ -107,7 +107,7 @@ class Jikan
     /*
      * Top Anime/Manga
      */
-    public function Top(String $type, int $page, String $subtype = null) {
+    public function Top(string $type, int $page, string $subtype = null) {
         $this->response = (array) (new Get\Top($type, $page, $subtype))->response;
         $this->setStatus();
 

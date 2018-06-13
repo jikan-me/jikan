@@ -143,3 +143,21 @@ define('TOP_MANHUA', 'manhua');
 // Both
 define('TOP_POPULARITY', 'bypopularity');
 define('TOP_FAVORITE', 'favorite');
+
+/*
+ * User
+ */
+define('USER_PROFILE', 'user_profile');
+define('USER_HISTORY', 'user_history');
+define('USER_FRIENDS', 'user_friends');
+
+/*
+ * User List
+ */
+define('USER_LIST_ALL', 'user_list_all');
+define('USER_LIST_WATCHING', 'user_list_watching');
+define('USER_LIST_COMPLETED', 'user_list_completed');
+define('USER_LIST_ONHOLD', 'user_list_onhold');
+define('USER_LIST_DROPPED', 'user_list_dropped');
+define('USER_LIST_PLAN_TO_WATCH', 'user_list_plan_to_watch');
+define('USER_LIST_PTW', 'user_list_plan_to_watch');

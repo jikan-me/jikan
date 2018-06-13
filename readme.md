@@ -29,7 +29,7 @@ Remember, you're not the only one using the API. Be responsible.
 
 ## Wrappers
 - **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
-- **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant
+- **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant & Abhinav Kasamsetty
 - **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 
 Contributions to Jikan by making wrappers in programming languages of your choice are much appreciated! Do let me know if you've made one and I'll include it here.

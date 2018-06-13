@@ -114,4 +114,15 @@ class Jikan
         return $this;
     }
 
+    /*
+     * User List
+     * 
+     */
+/*    public function UserList(string $username, string $type, int $status = null) {
+        $this->response = (array) (new Get\User($username, $type, $status))->response;
+        $this->setStatus();
+
+        return $this;
+    }*/
+
 }

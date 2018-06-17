@@ -218,6 +218,8 @@ Search result object related to the query
 **Note:** These are search filters which have to be passed as GET `key=value`
 | Parameter  | Argument | Description |
 | ------------- | ------------- | ------------- |
+| q | STRING | For UTF8 characters, percentage encoded and queries including back slashes |
+| page | INTEGER | Page number |
 | type | `tv` `ova` `movie` `special` `ona` `music` `manga` `novel` `oneshot` `doujin` `manhwa` `manhua` | Filter type of results |
 | status | `airing` `completed` `complete` (alias) `tba` `upcoming` (alias) | Filter status of results |
 | rated | `g` `pg` `pg13` `r17` `r` `rx` | Filter age rating of results - [View Meaning](https://jikan.moe/docs#advanced-search-rating-constants) |
@@ -226,6 +228,15 @@ Search result object related to the query
 | start_date | ISO8601 | Filter start date of results |
 | end_date | ISO8601 | Filter end date of results |
 | genre_exclude | boolean : 0/1 | To exlude/include the `genre` you added in your request |
+
+#### Examples
+`https://api.jikan.moe/search/manga/Grand%20Blue/1`
+`https://api.jikan.moe/search/manga?q=Grand%20Blue&page=1`
+
+The first way won't work due to the back slash in "Fate/Zero". It's encouraged to use the the GET method below for all queries since it responds more accurately for UTF8 characters and percentage encoding.
+
+`https://api.jikan.moe/search/anime?q=Fate/Zero&page=1`
+
 
 ### Search Request Example+Schema [GET]
 

@@ -58,7 +58,7 @@ class SearchParse extends TemplateParse
                         }
 
                         if (preg_match('~<meta property="og:description" content="(.*?)">~', $line, $this->matches)) {
-                            $result['description'] = $this->matches[1];
+                            $result['description'] = utf8_encode(trim($this->matches[1]));
                         }
 
                         if (preg_match('~<span class="dark_text">Type:</span>~', $line)) {

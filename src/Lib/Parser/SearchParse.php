@@ -58,7 +58,7 @@ class SearchParse extends TemplateParse
                         }
 
                         if (preg_match('~<meta property="og:description" content="(.*?)">~', $line, $this->matches)) {
-                            $result['description'] = utf8_encode(trim($this->matches[1]));
+                            $result['description'] = $this->matches[1];
                         }
 
                         if (preg_match('~<span class="dark_text">Type:</span>~', $line)) {
@@ -114,7 +114,7 @@ class SearchParse extends TemplateParse
                             ($this->type == ANIME ? $i += 8 : $i += 10);
 
                             if (preg_match('~<div class="pt4">(.*?)(.?|<a href=".{1,}">read more.</a>)</div>~', $this->file[$this->lineNo + $i], $this->matches)) {
-                                $result['description'] = htmlspecialchars_decode($this->matches[1]);
+                                $result['description'] = utf8_encode(trim(htmlspecialchars_decode($this->matches[1], ENT_QUOTES)));
                             }
 
                             $i += 2;

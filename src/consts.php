@@ -13,7 +13,7 @@ define( 'USER_LIST_ENDPOINT' , 'malappinfo.php');
 
 
 /*
- * Extend Flags
+ * Request
  */
 define( 'CHARACTERS_STAFF' , 'charactersStaff' );
 define( 'CHARACTERS' , 'characters' );
@@ -31,61 +31,61 @@ define( 'CHARACTER' , 'character' );
 define( 'PERSON' , 'person' );
 define( 'PEOPLE', 'person'); // alias
 
-define( 'WINTER' , 'winter' );
-define( 'SPRING' , 'spring' );
-define( 'SUMMER' , 'summer' );
-define( 'FALL' , 'fall' );
+define( 'SEASON_WINTER' , 'winter' );
+define( 'SEASON_SPRING' , 'spring' );
+define( 'SEASON_SUMMER' , 'summer' );
+define( 'SEASON_FALL' , 'fall' );
 
 /*
  * Search
  */
 
 // GENRE
-define('ACTION', 1);
-define('ADVENTURE', 2);
-define('CARS', 3);
-define('COMEDY', 4);
-define('DEMENTIA', 5);
-define('DEMONS', 6);
-define('MYSTERY', 7);
-define('DRAMA', 8);
-define('ECCHI', 9);
-define('FANTASY', 10);
-define('GAME', 11);
-define('HENTAI', 12);
-define('HISTORICAL', 13);
-define('HORROR', 14);
-define('KIDS', 15);
-define('MAGIC', 16);
-define('MARTIAL_ARTS', 17);
-define('MECHA', 18);
-define('MUSIC', 19);
-define('PARODY', 20);
-define('SAMURAI', 21);
-define('ROMANCE', 22);
-define('SCHOOL', 23);
-define('SCI_FI', 24);
-define('SHOUJO', 25);
-define('SHOUJO_AI', 26);
-define('SHOUNEN', 27);
-define('SHOUNEN_AI', 28);
-define('SPACE', 29);
-define('SPORTS', 30);
-define('SUPER_POWER', 31);
-define('VAMPIRE', 32);
-define('YAOI', 33);
-define('YURI', 34);
-define('HAREM', 35);
-define('SLICE_OF_LIFE', 36);
-define('SUPERNATURAL', 37);
-define('MILITARY', 38);
-define('POLICE', 39);
-define('PSYCHOLOGICAL', 40);
-define('THRILLER', 41);
-define('SEINEN', 42);
-define('JOSEI', 43);
-define('DOUJINSHI', 43);
-define('GENDER_BENDER', 44);
+define('GENRE_ACTION', 1);
+define('GENRE_ADVENTURE', 2);
+define('GENRE_CARS', 3);
+define('GENRE_COMEDY', 4);
+define('GENRE_DEMENTIA', 5);
+define('GENRE_DEMONS', 6);
+define('GENRE_MYSTERY', 7);
+define('GENRE_DRAMA', 8);
+define('GENRE_ECCHI', 9);
+define('GENRE_FANTASY', 10);
+define('GENRE_GAME', 11);
+define('GENRE_HENTAI', 12);
+define('GENRE_HISTORICAL', 13);
+define('GENRE_HORROR', 14);
+define('GENRE_KIDS', 15);
+define('GENRE_MAGIC', 16);
+define('GENRE_MARTIAL_ARTS', 17);
+define('GENRE_MECHA', 18);
+define('GENRE_MUSIC', 19);
+define('GENRE_PARODY', 20);
+define('GENRE_SAMURAI', 21);
+define('GENRE_ROMANCE', 22);
+define('GENRE_SCHOOL', 23);
+define('GENRE_SCI_FI', 24);
+define('GENRE_SHOUJO', 25);
+define('GENRE_SHOUJO_AI', 26);
+define('GENRE_SHOUNEN', 27);
+define('GENRE_SHOUNEN_AI', 28);
+define('GENRE_SPACE', 29);
+define('GENRE_SPORTS', 30);
+define('GENRE_SUPER_POWER', 31);
+define('GENRE_VAMPIRE', 32);
+define('GENRE_YAOI', 33);
+define('GENRE_YURI', 34);
+define('GENRE_HAREM', 35);
+define('GENRE_SLICE_OF_LIFE', 36);
+define('GENRE_SUPERNATURAL', 37);
+define('GENRE_MILITARY', 38);
+define('GENRE_POLICE', 39);
+define('GENRE_PSYCHOLOGICAL', 40);
+define('GENRE_THRILLER', 41);
+define('GENRE_SEINEN', 42);
+define('GENRE_JOSEI', 43);
+define('GENRE_DOUJINSHI', 43);
+define('GENRE_GENDER_BENDER', 44);
 
 // Type
 define('TYPE_TV', 1);
@@ -104,21 +104,21 @@ define('TYPE_MANHUA', 6);
 define('TYPE_OEL', 7);
 
 // Status
-define('AIRING', 1);
-define('FINISHED_AIRING', 2);
-define('TO_BE_AIRED', 3);
+define('STATUS_AIRING', 1);
+define('STATUS_FINISHED_AIRING', 2);
+define('STATUS_TO_BE_AIRED', 3);
 
-define('PUBLISHING', 1);
-define('FINISHED_PUBLISHING', 2);
-define('TO_BE_PUBLISHED', 3);
+define('STATUS_PUBLISHING', 1);
+define('STATUS_FINISHED_PUBLISHING', 2);
+define('STATUS_TO_BE_PUBLISHED', 3);
 
 // Rating
-define('G', 1); //  All Ages
-define('PG', 2); // Children
-define('PG13', 2); // Teens 13 or older
-define('R17', 4); // Violence & Profanity
-define('R', 5); // Mild Nudity
-define('RX', 6); // Hentai
+define('RATING_G', 1); //  All Ages
+define('RATING_PG', 2); // Children
+define('RATING_PG13', 2); // Teens 13 or older
+define('RATING_R17', 4); // Violence & Profanity
+define('RATING_R', 5); // Mild Nudity
+define('RATING_RX', 6); // Hentai
 
 /*
  * Top Anime/Manga

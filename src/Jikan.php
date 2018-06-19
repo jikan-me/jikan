@@ -1,6 +1,6 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API
+*	Jikan - MyAnimeList Unofficial API v2
 *	Developed by Irfan | irfan.dahir.co
 *	
 *	This is an unofficial MAL API that provides the features that the official one lacks.
@@ -14,115 +14,30 @@
 
 namespace Jikan;
 
-require __DIR__ . '/config.php'; 
+require __DIR__ . '/consts.php'; 
 
 
 use Jikan\Helper\SearchConfig as SearchConfig;
 
+use Jikan\Request\Anime\Anime as AnimeRequest;
+use Jikan\Request\Manga\Manga as MangaRequest;
+use Jikan\Request\Person\Person as PersonRequest;
+use Jikan\Request\Character\Character as CharacterRequest;
+
 class Jikan
 {
-
-    public $status = 200;
-    public $response = [];
-
-	public function __construct() {
-		return $this;
-	}
-
-    private function setStatus() {
-        $this->status = $this->response['code'];
-        unset($this->response['code']);
-    }
+    public $response;
+    private $request;
 
 	/*
 	 * Anime
 	 */
-	public function Anime($id = null, Array $extend = []) {
-	    $this->response = (array) (new Get\Anime($id, $extend))->response;
-        $this->setStatus();
-
-	    return $this;
-    }
-
-    /*
-     * Manga
-     */
-    public function Manga($id = null, Array $extend = []) {
-        $this->response = (array) (new Get\Manga($id, $extend))->response;
-        $this->setStatus();
+    public function Anime(AnimeRequest $request) {
+        $this->request = $request;
+        $this->response = (new Get\Anime($this->request))->response;
 
         return $this;
     }
 
-    /*
-     * Character
-     */
-    public function Character($id = null, Array $extend = []) {
-        $this->response = (array) (new Get\Character($id, $extend))->response;
-        $this->setStatus();
-
-        return $this;
-    }
-
-    /*
-     * Person
-     */
-    public function Person($id = null, Array $extend = []) {
-        $this->response = (array) (new Get\Person($id, $extend))->response;
-        $this->setStatus();
-
-        return $this;
-    }
-
-    /*
-     * Search
-     */
-    public function Search(string $query = null, string $type = ANIME, int $page = 1, SearchConfig $config = null) {
-        $this->response = (array) (new Get\Search($query, $type, $page, $config))->response;
-        $this->setStatus();
-
-        return $this;
-    }
-
-    /*
-     * Seasonal Anime
-     */
-    public function Seasonal(string $season = null, int $year = null) {
-        $this->response = (array) (new Get\Seasonal($season, $year))->response;
-        $this->setStatus();
-
-        return $this;
-    }
-
-    /*
-     * Anime Schedule For Current Season
-     */
-    public function Schedule() {
-        $this->response = (array) (new Get\Schedule())->response;
-        $this->setStatus();
-
-        return $this;
-    }
-
-    /*
-     * Top Anime/Manga
-     */
-    public function Top(string $type, int $page, string $subtype = null) {
-        $this->response = (array) (new Get\Top($type, $page, $subtype))->response;
-        $this->setStatus();
-
-        return $this;
-    }
-
-    /*
-     * User List
-     * 
-     */
-/*    public function UserList(string $username, string $type, int $status = null) {
-        $this->response = (array) (new Get\User($username, $type, $status))->response;
-        $this->setStatus();
-
-        return $this;
-    }*/
 
 }

@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "irfan-dahir/skraypar": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "Jikan\\": [

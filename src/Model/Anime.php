@@ -3,7 +3,7 @@
 namespace Jikan\Model;
 
 
-class Anime extends Model
+class Anime extends \Jikan\Abstracts\Model
 {
 
 	public $mal_id;

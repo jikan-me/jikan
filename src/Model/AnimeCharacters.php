@@ -3,8 +3,12 @@
 namespace Jikan\Model;
 
 
-class AnimeCharacterStaff extends Model
+class AnimeCharacters extends Model
 {
+
+	public $mal_id;
+
+	public $link_canonical;
 
     public $character = [];
 

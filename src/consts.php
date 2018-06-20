@@ -25,11 +25,11 @@ define( 'PICTURES' , 'pics' );
 define( 'FORUM' , 'forum' );
 define( 'MORE_INFO' , 'moreinfo' );
 
-define( 'ANIME' , 'anime' );
-define( 'MANGA' , 'manga' );
-define( 'CHARACTER' , 'character' );
-define( 'PERSON' , 'person' );
-define( 'PEOPLE', 'person'); // alias
+define( 'ANIME' , 'Anime' );
+define( 'MANGA' , 'Manga' );
+define( 'CHARACTER' , 'Character' );
+define( 'PERSON' , 'Person' );
+define( 'PEOPLE', 'Person'); // alias
 
 define( 'SEASON_WINTER' , 'winter' );
 define( 'SEASON_SPRING' , 'spring' );

@@ -35,7 +35,7 @@ class Jikan
     public function Anime(\Jikan\Request\Anime $request) {
         $this->request = $request;
         $this->response = (new Get\Anime($this->request))->response;
-
+        
         return $this;
     }
 

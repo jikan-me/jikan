@@ -15,10 +15,16 @@ class Anime
 
 		$this->parser = new AnimeParser;
 		$this->parser->setPath($request->getPath());
-		//$this->parser->loadFile();
-		//$this->parser->loadRules();
+		$this->parser->loadFile();
+		$this->parser->loadRules();
 
-		//$this->parser->parse();
+		$this->parser->parse();
+
+		return $this->response = [
+			'status' => $this->parser->status,
+			'response' => $this->parser->model
+		];
+
 	}
 
 }

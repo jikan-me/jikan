@@ -8,6 +8,8 @@ use Jikan\Requests as Requests;
 class Anime extends Requests
 {
 
+	private $request;
+
 	private const VALID_REQUEST = [ANIME, CHARACTERS_STAFF, ARTICLES, EPISODES, MORE_INFO, NEWS, PICTURES, VIDEOS, TOPICS, STATS];
 	private const PATH = BASE_URL . ANIME_ENDPOINT;
 
@@ -15,6 +17,8 @@ class Anime extends Requests
 		if (!in_array($request, self::VALID_REQUEST)) {
 			throw new UnsupportedRequestException();
 		}
+
+		$this->request = $request;
 	}
 
 	public function getPath() {
@@ -23,10 +27,13 @@ class Anime extends Requests
 		}
 
 		if (!is_null($this->id)) {
-			return self::PATH . $this->id;
+			return self::PATH . $this->id . (!$this->request == ANIME ? '_/' . $this->request : '');
 		}
 
 		return $this->path;
 	}
 
+	public function getRequest() {
+		return $request;
+	}
 }

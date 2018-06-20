@@ -32,7 +32,7 @@ class Jikan
 	/*
 	 * Anime
 	 */
-    public function Anime(AnimeRequest $request) {
+    public function Anime(\Jikan\Request\Anime\Anime $request) {
         $this->request = $request;
         $this->response = (new Get\Anime($this->request))->response;
 

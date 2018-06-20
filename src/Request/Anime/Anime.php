@@ -3,34 +3,33 @@
 namespace Jikan\Request\Anime;
 
 use Jikan\Exception;
-use Jikan\Requests as Requests;
 
-class Anime extends Requests
+class Anime extends \Jikan\Abstracts\Requests
 {
 
 	private $request;
 
-	private const VALID_REQUEST = [ANIME, CHARACTERS_STAFF, ARTICLES, EPISODES, MORE_INFO, NEWS, PICTURES, VIDEOS, TOPICS, STATS];
+	private const VALID_REQUESTS = [ANIME, CHARACTERS_STAFF];
 	private const PATH = BASE_URL . ANIME_ENDPOINT;
 
 	public function __construct($request = ANIME) {
-		if (!in_array($request, self::VALID_REQUEST)) {
+		if (!in_array($request, self::VALID_REQUESTS)) {
 			throw new UnsupportedRequestException();
 		}
 
 		$this->request = $request;
 	}
 
-	public function getPath() {
-		if (is_null($this->path) && is_null($this->id)) {
+	public function getPath() : string {
+		if (is_null(parent::getPath()) && is_null($this->getID())) {
 			throw new EmptyRequestException();
 		}
 
-		if (!is_null($this->id)) {
-			return self::PATH . $this->id . (!$this->request == ANIME ? '_/' . $this->request : '');
+		if (!is_null($this->getID())) {
+			return self::PATH . parent::getID() . (!$this->request == ANIME ? '_/' . $this->request : '');
 		}
 
-		return $this->path;
+		return parent::getPath();
 	}
 
 	public function getRequest() {

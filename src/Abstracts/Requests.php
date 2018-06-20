@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Abstract;
+namespace Jikan\Abstracts;
 
 abstract class Requests
 {
@@ -10,17 +10,21 @@ abstract class Requests
 
 	public function setPath(string $path) {
 		$this->path = $path;
+
+		return $this;
 	}
 
 	public function setID(int $id) {
 		$this->id = $id;
+
+		return $this;
 	}
 
-	public function getPath() : string {
+	public function getPath() {
 		return $this->path;
 	}
 
-	public function getID() : int {
+	public function getID() {
 		return $this->id;
 	}
 }

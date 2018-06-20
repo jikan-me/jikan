@@ -8,9 +8,10 @@ class Anime extends \Jikan\Abstracts\Requests
 {
 
 	public $model;
+	public $response;
+	public $parser;
 
 	private $request;
-	private $parser;
 	private const VALID_REQUESTS = [ANIME, CHARACTERS_STAFF];
 	private const PATH = BASE_URL . ANIME_ENDPOINT;
 

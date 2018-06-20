@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Request\Character;
+namespace Jikan\Request;
 
 class Character extends Requests
 {

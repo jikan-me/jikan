@@ -2,7 +2,7 @@
 
 namespace Jikan\Get;
 
-use Jikan\Request\Anime\Anime as AnimeRequest;
+use Jikan\Request\Anime as AnimeRequest;
 use Jikan\Model\Anime as AnimeModel;
 use Jikan\Parser\Anime as AnimeParser;
 
@@ -12,8 +12,6 @@ class Anime
 	public $response;
 
 	public function __construct(AnimeRequest &$request) {
-
-		var_dump($request->getPath());
 
 		$this->parser = new AnimeParser;
 		$this->parser->setPath($request->getPath());

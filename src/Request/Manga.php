@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Request\Manga;
+namespace Jikan\Request;
 
 class Manga extends Requests
 {

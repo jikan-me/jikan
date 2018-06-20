@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Request\Person;
+namespace Jikan\Request;
 
 class Person extends Requests
 {

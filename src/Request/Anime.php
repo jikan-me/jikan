@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Request\Anime;
+namespace Jikan\Request;
 
 use \Jikan\Exception as Exception;
 

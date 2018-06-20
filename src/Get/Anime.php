@@ -12,7 +12,12 @@ class Anime
 
 	public function __construct(AnimeRequest &$request) : AnimeModel {
 
-		$this->parser = new 
+		$this->parser = new AnimeParser;
+		$this->parser->setPath($request->getPath());
+		$this->parser->loadFile();
+		$this->parser->loadRules();
+
+		$this->parser->parse();
 	}
 
 }

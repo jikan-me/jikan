@@ -2,7 +2,7 @@
 
 namespace Jikan\Request\Anime;
 
-use Jikan\Exception;
+use \Jikan\Exception\UnsupportedRequestException as UnsupportedRequestException; 
 
 class Anime extends \Jikan\Abstracts\Requests
 {
@@ -14,7 +14,7 @@ class Anime extends \Jikan\Abstracts\Requests
 
 	public function __construct($request = ANIME) {
 		if (!in_array($request, self::VALID_REQUESTS)) {
-			throw new UnsupportedRequestException();
+			throw new \Jikan\Exception\UnsupportedRequestException();
 		}
 
 		$this->request = $request;
@@ -22,7 +22,7 @@ class Anime extends \Jikan\Abstracts\Requests
 
 	public function getPath() : string {
 		if (is_null(parent::getPath()) && is_null($this->getID())) {
-			throw new EmptyRequestException();
+			throw new \Jikan\Exception\EmptyRequestException();
 		}
 
 		if (!is_null($this->getID())) {

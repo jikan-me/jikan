@@ -15,15 +15,15 @@ define( 'USER_LIST_ENDPOINT' , 'malappinfo.php');
 /*
  * Request
  */
-define( 'CHARACTERS_STAFF' , 'charactersStaff' );
+define( 'CHARACTERS_STAFF' , 'characters' );
 define( 'CHARACTERS' , 'characters' );
-define( 'EPISODES' , 'episodes' );
+define( 'EPISODES' , 'episode' );
 define( 'NEWS' , 'news' );
-define( 'VIDEOS' , 'videos' );
+define( 'VIDEOS' , 'video' );
 define( 'STATS' , 'stats' );
-define( 'PICTURES' , 'pictures' );
+define( 'PICTURES' , 'pics' );
 define( 'FORUM' , 'forum' );
-define( 'MORE_INFO' , 'moreInfo' );
+define( 'MORE_INFO' , 'moreinfo' );
 
 define( 'ANIME' , 'anime' );
 define( 'MANGA' , 'manga' );

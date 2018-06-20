@@ -13,7 +13,7 @@ class Anime
 
 	public function __construct(AnimeRequest &$request) {
 
-		$this->parser = new AnimeParser;
+		$this->parser = new AnimeParser($request->model);
 		$this->parser->setPath($request->getPath());
 		$this->parser->loadFile();
 		$this->parser->loadRules();
@@ -22,7 +22,7 @@ class Anime
 
 		return $this->response = [
 			'status' => $this->parser->status,
-			'response' => $this->parser->model
+			'response' => (array) $this->parser->model
 		];
 
 	}

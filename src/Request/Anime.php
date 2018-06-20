@@ -7,8 +7,10 @@ use \Jikan\Exception as Exception;
 class Anime extends \Jikan\Abstracts\Requests
 {
 
-	private $request;
+	public $model;
 
+	private $request;
+	private $parser;
 	private const VALID_REQUESTS = [ANIME, CHARACTERS_STAFF];
 	private const PATH = BASE_URL . ANIME_ENDPOINT;
 
@@ -17,6 +19,11 @@ class Anime extends \Jikan\Abstracts\Requests
 			throw new Exception\UnsupportedRequestException();
 		}
 
+		$model = '\\Jikan\\Model\\' . ANIME . ucfirst($request);
+		$parser = '\\Jikan\\Parser\\' . ANIME . ucfirst($request);
+		
+		$this->model = new $model;
+		$this->parser = new $parser($this->model);
 		$this->request = $request;
 	}
 

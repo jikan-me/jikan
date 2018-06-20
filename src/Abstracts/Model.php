@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Abstract;
+namespace Jikan\Abstracts;
 
 abstract class Model
 {

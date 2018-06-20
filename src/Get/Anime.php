@@ -9,6 +9,7 @@ use Jikan\Parser\Anime as AnimeParser;
 class Anime
 {
 	public $parser;
+	public $response;
 
 	public function __construct(AnimeRequest &$request) {
 

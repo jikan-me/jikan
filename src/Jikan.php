@@ -16,25 +16,27 @@ namespace Jikan;
 
 require __DIR__ . '/consts.php'; 
 
-
-use Jikan\Helper\SearchConfig as SearchConfig;
-
-use Jikan\Request\Anime\Anime as AnimeRequest;
-use Jikan\Request\Manga\Manga as MangaRequest;
-use Jikan\Request\Person\Person as PersonRequest;
-use Jikan\Request\Character\Character as CharacterRequest;
-
 class Jikan
 {
     public $response;
     public $request;
 
-	/*
-	 * Anime
-	 */
+    /*
+     * Anime
+     */
     public function Anime(\Jikan\Request\Anime $request) {
         $this->request = $request;
-        $this->response = new Get\Anime($this->request);
+        $this->response = new \Jikan\Get\Anime($this->request);
+
+        return $this;
+    }
+
+    /*
+     * Manga
+     */
+    public function Manga(\Jikan\Request\Manga $request) {
+        $this->request = $request;
+        $this->response = new \Jikan\Get\Manga($this->request);
 
         return $this;
     }

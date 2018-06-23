@@ -11,8 +11,8 @@ Bleeding edge, re-write of the Jikan PHP API. Focusing on speed, stability and c
 - [X] **Core**
 - [X] Modal Class
 - Data Response enhancement methods [#147](/../../issues/147), [#153](/../../issues/153)
-	- [ ] HTML quotes
-	- [ ] Trims
+	- [X] HTML quotes
+	- [X] Trims
 	- [ ] UTF8 Encodes
 	- [ ] Null for empty
 

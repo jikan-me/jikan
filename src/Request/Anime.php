@@ -20,9 +20,9 @@ class Anime extends \Jikan\Abstracts\Requests
 			throw new Exception\UnsupportedRequestException();
 		}
 
-		$model = '\\Jikan\\Model\\' . ANIME . ucfirst($request);
-		$parser = '\\Jikan\\Parser\\' . ANIME . ucfirst($request);
-		
+		$model = '\\Jikan\\Model\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
+		$parser = '\\Jikan\\Parser\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
+
 		$this->model = new $model;
 		$this->parser = new $parser($this->model);
 		$this->request = $request;

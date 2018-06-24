@@ -26,6 +26,5 @@ class JikanTest extends TestCase
     {
         $anime = $this->jikan->Anime(new \Jikan\Request\AnimeRequest(21));
         self::assertInstanceOf(\Jikan\Model\Anime::class, $anime);
-        self::assertEquals('One Piece', $anime->getTitle());
     }
 }

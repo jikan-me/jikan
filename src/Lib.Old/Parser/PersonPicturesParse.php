@@ -1,24 +1,16 @@
 <?php
-
 namespace Jikan\Lib\Parser;
 
 use Jikan\Model\PersonPictures as PersonPicturesModel;
 
-/**
- * Class PersonPicturesParse
- *
- * @package Jikan\Lib\Parser
- */
 class PersonPicturesParse extends TemplateParse
 {
 
     private $return = [];
 
-    /**
-     * @return array
-     */
-    public function parse(): array
+    public function parse() : Array
     {
+
 
 
         $this->model = new PersonPicturesModel;
@@ -27,37 +19,29 @@ class PersonPicturesParse extends TemplateParse
          * Rules
          */
 
-        $this->addRule(
-            'images',
-            '~<h2 class="mb8">~',
-            function () {
-                $i = 0;
+        $this->addRule('images', '~<h2 class="mb8">~', function() {
+            $i = 0;
 
-                while (true) {
-                    $line = $this->file[$this->lineNo + $i];
-                    if (preg_match('~<div style="clear:both;"></div>~', $line)) {
-                        break;
-                    }
-
-                    if (preg_match_all(
-                        '~<div class="picSurround"><a href="(.*?)" title="(.*?)" class="js-picture-gallery" rel="(.*?)"><img src="(.*?)" alt="(.*?)"></a></div>~',
-                        $line,
-                        $this->matches
-                    )) {
-                        $this->model->set(
-                            'PersonPictures',
-                            'image',
-                            array_merge(
-                                $this->model->get('PersonPictures', 'image'),
-                                (is_array($this->matches[4]) ? $this->matches[4] : [$this->matches[4]])
-                            )
-                        );
-                    }
-
-                    $i++;
+            while(true) {
+                $line = $this->file[$this->lineNo + $i];
+                if (preg_match('~<div style="clear:both;"></div>~', $line)) {
+                    break;
                 }
+
+                if (preg_match_all('~<div class="picSurround"><a href="(.*?)" title="(.*?)" class="js-picture-gallery" rel="(.*?)"><img src="(.*?)" alt="(.*?)"></a></div>~', $line, $this->matches)) {
+                    $this->model->set(
+                        'PersonPictures', 
+                        'image', 
+                        array_merge(
+                            $this->model->get('PersonPictures', 'image'),
+                            (is_array($this->matches[4]) ? $this->matches[4] : [$this->matches[4]])
+                        )
+                    );
+                }
+
+                $i++;
             }
-        );
+        });
 
 
         /*
@@ -71,6 +55,6 @@ class PersonPicturesParse extends TemplateParse
             $this->find();
         }
 
-        return (array)$this->model;
+        return (array) $this->model;
     }
 }

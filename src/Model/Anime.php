@@ -196,6 +196,7 @@ class Anime
         $instance->title_english = $parser->getAnimeTitleEnglish();
         $instance->title_synonyms = $parser->getAnimeTitleSynonyms();
         $instance->title_japanese = $parser->getAnimeTitleJapanese();
+        $instance->typ = $parser->getAnimeType();
 
         return $instance;
     }

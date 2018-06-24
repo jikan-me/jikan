@@ -87,4 +87,16 @@ class AnimeParserTest extends TestCase
             $this->parser->getAnimeSynopsis()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_type()
+    {
+        self::assertEquals(
+            'TV',
+            $this->parser->getAnimeType()
+        );
+    }
 }

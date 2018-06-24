@@ -116,4 +116,20 @@ class Anime
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeType(): string
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Type:"]');
+            
+        if ($title->count() > 0) {
+            return JString::cleanse(
+                str_replace($title->text(), '', $title->parents()->text())
+            );
+        }
+    }
 }

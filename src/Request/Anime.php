@@ -22,12 +22,18 @@ class Anime extends \Jikan\Abstracts\Requests
 			throw new Exception\UnsupportedRequestException();
 		}
 
-		var_dump($helper);
-		// if (!is_null($helper) && $helper instanceof \Jikan\Abstracts\Helper && in_array(strtolower($helper::class), self::VALID_HELPERS)) {
-		// 	$this->helper = $helper;
 
-		// 	var_dump($this->helper);
-		// }
+		if (
+			!is_null($helper) 
+			&& $helper instanceof \Jikan\Abstracts\Helper 
+			&& in_array(strtolower((new \ReflectionClass($helper))->getShortName()), self::VALID_HELPERS)
+			) 
+		{
+			$this->helper = $helper;
+
+			var_dump($this->helper);
+		}
+
 
 		die;
 

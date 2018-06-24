@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Jikan\Jikan;
 
 /**
  * Class AnimeParserTest
@@ -11,6 +12,7 @@ class AnimeParserTest extends TestCase
      * @var \Jikan\Parser\Anime
      */
     private $parser;
+    private $anime;
 
     public function setUp()
     {
@@ -18,6 +20,13 @@ class AnimeParserTest extends TestCase
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime($crawler);
+
+        $jikan = new Jikan();
+        $this->anime = $jikan->Anime(
+            $request
+        );
+
+
     }
 
     /**
@@ -120,7 +129,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             true,
-            $this->parser->getAnimeEpisodesUnknown()
+            $this->anime->getEpisodesUnknown()
         );
     }
 
@@ -144,7 +153,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             true,
-            $this->parser->getAnimeAiring()
+            $this->anime->isAiring()
         );
     }
 }

@@ -11,5 +11,6 @@ class AnimeEpisodes extends \Skraypar\Skraypar
 	}
 
     public function loadRules() {
+
     }
 }

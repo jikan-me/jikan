@@ -6,11 +6,11 @@ $jikan = new Jikan\Jikan;
 
 
 try {
-	$foo = (new Jikan\Helper\Episodes)->setPage(2);
-	var_dump($foo);
-	die;
 	$jikan->Anime(
-		(new \Jikan\Request\Anime(EPISODES, $foo ))->setID(21)
+		(new \Jikan\Request\Anime(
+			EPISODES, 
+			(new Jikan\Helper\Episodes(1)) // page 1
+		))->setID(21)
 	);
 
 	var_dump($jikan->response);

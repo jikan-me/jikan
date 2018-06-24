@@ -5,7 +5,10 @@ namespace Jikan\Helper;
 class Episodes extends \Jikan\Abstracts\Helper
 {
 
-	public function __construct() {
+	public function __construct($page) {
+		if (!is_null($page)) {
+			$this->setPage($page);
+		}
 	}
 
 	public function setPage(int $page) {

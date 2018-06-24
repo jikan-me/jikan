@@ -13,8 +13,8 @@ Bleeding edge, re-write of the Jikan PHP API. Focusing on speed, stability and c
 - Data Response enhancement methods [#147](/../../issues/147), [#153](/../../issues/153)
 	- [X] HTML quotes
 	- [X] Trims
-	- [ ] UTF8 Encodes
-	- [ ] Null for empty
+	- [X] UTF8 Encodes
+	- [X] Null for empty
 
 ### Phase 2
 - Anime

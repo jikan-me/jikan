@@ -2,23 +2,51 @@
 
 namespace Jikan\Helper;
 
-
+/**
+ * Class Utils
+ *
+ * @package Jikan\Helper
+ */
 class Utils
 {
-	
-	static public function isURL($url) {
-		// return (filter_var($this->filePath, FILTER_VALIDATE_URL) ? true : false);
-		return preg_match('`^http(s)?://`', $url) ? true : false;
-	}
 
-	static public function existsURL($status) {
-		return ($status == 200 || $status == 303) ? true : false;
-	}
+    /**
+     * @param $url
+     *
+     * @return bool
+     */
+    public static function isURL($url): bool
+    {
+        // return (filter_var($this->filePath, FILTER_VALIDATE_URL) ? true : false);
+        return preg_match('`^http(s)?://`', $url) ? true : false;
+    }
 
-	static public function getStatus($url) {
-		return substr(get_headers($url)[0], 9, 3);
-	}
+    /**
+     * @param $status
+     *
+     * @return bool
+     */
+    public static function existsURL($status): bool
+    {
+        return ($status == 200 || $status == 303);
+    }
 
-	static public function trim(&$item, $key) { $item = trim($item); }
+    /**
+     * @param $url
+     *
+     * @return bool|string
+     */
+    public static function getStatus($url)
+    {
+        return substr(get_headers($url)[0], 9, 3);
+    }
 
+    /**
+     * @param $item
+     * @param $key
+     */
+    public static function trim(&$item, $key)
+    {
+        $item = trim($item);
+    }
 }

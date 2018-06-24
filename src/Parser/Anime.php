@@ -336,14 +336,59 @@ class Anime extends \Skraypar\Skraypar
 
             $this->model->set('Anime', 'related', $return);
         });
+        /*
+         * Background
+         */
+        $this->addRule('background', '~</div>Background</h2>~', function() {
+			if (!preg_match('~No background information has been added to this title.~', $this->line)) {
+				if (preg_match('~</div>Background</h2>([\s\S]*)<div class="border_top~', $this->line, $this->matches)) {
+					$this->model->set('Anime', 'background', 
+						JString::cleanse($this->matches[1])
+					);
+               	} else {
 
+					$background = (new \Skraypar\Iterator(
+						$this->file, 
+						$this->lineNo
+                   	))->setBreakpointPattern([
+						'~<div class="border_top"~',
+						'~</td></tr><tr><td class="pb24">~'
+                  	]);
+
+                  	$background->setIteratorCallable(function() use (&$background, &$string) {
+                  		$string .= $background->getLine();
+                   	})->parse(true);
+
+
+                    if (strpos($string, '</td></tr><tr><td class="pb24">')) {
+                        $string = substr($string, 0, strpos($string, '</td></tr><tr><td class="pb24">'));
+                    }
+                    if (strpos($string, '<div class="border_top"')) {
+                        $string = substr($string, 0, strpos($string, '<div class="border_top"'));
+                    }
+
+                    $string = substr($string, strpos($string, 'Background</h2>') + strlen('Background</h2>'));
+
+                    echo JString::cleanse($string);
+
+                	$this->model->set('Anime', 'background', 
+                		JString::cleanse($string)
+                	);
+               }
+           }
+        });        
+        /*
+         * Opening Themes
+         */
         $this->addRule('opening_theme', '~<div class="theme-songs js-theme-songs opnening">([\s\S]*)</div>~', function() {
             preg_match_all('~<span class="theme-song">(.*?)</span>~', $this->matches[1], $this->matches);
             foreach ($this->matches[1] as $key => &$value) { $value = JString::cleanse($value); }
            
             $this->model->set('Anime', 'opening_theme', $this->matches[1]);
         });
-
+        /*
+         * Ending Themes
+         */
         $this->addRule('ending_theme', '~<div class="theme-songs js-theme-songs ending">([\s\S]*)</div>~', function() {
             preg_match_all('~<span class="theme-song">(.*?)</span>~', $this->matches[1], $this->matches);
             foreach ($this->matches[1] as $key => &$value) { $value = JString::cleanse($value); }

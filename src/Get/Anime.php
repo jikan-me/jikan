@@ -5,22 +5,23 @@ namespace Jikan\Get;
 use Jikan\Request\Anime as AnimeRequest;
 use Jikan\Model\Anime as AnimeModel;
 use Jikan\Parser\Anime as AnimeParser;
+use Goutte\Client;
 
 class Anime
 {
-    public $parser;
     public $response;
 
-    public function __construct(AnimeRequest $request)
+    public function __construct(AnimeRequest &$request)
     {
-        $request->parser->setPath($request->getPath());
-        $request->parser->loadRules();
-        $request->parser->loadFile();
-        $request->parser->parse();
+
+		$request->client = new AnimeParser;
+		$request->crawler = $request->client->request('GET', $request->getPath());
+		$data = $request->crawler->filterXpath('//meta[@name=\'description\']')->extract(['content'])[0];
+
 
         return $this->response = [
-            'status'   => $request->parser->status,
-            'response' => (array)$request->parser->model,
+            'status'   => $request->client->getResponse()->getStatus(),
+            'response' => (array) $request->parser->model,
         ];
     }
 

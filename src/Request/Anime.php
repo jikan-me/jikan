@@ -9,7 +9,9 @@ class Anime extends \Jikan\Abstracts\Requests
 
 	public $model;
 	public $response;
-	public $parser;
+
+	public $client;
+	public $crawler;
 
 	private $request;
 	private $helper;
@@ -32,10 +34,8 @@ class Anime extends \Jikan\Abstracts\Requests
 		}
 
 		$model = '\\Jikan\\Model\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
-		$parser = '\\Jikan\\Parser\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
 
 		$this->model = new $model;
-		$this->parser = new $parser($this->model);
 		$this->request = $request;
 	}
 

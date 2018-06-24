@@ -26,7 +26,7 @@ class Jikan
      */
     public function Anime(\Jikan\Request\Anime $request) {
         $this->request = $request;
-        $this->response = (new \Jikan\Get\Anime($this->request))->response;
+        $this->response = (new \Jikan\Parser\Anime($this->request))->response;
 
         return $this;
     }

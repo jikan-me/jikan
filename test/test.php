@@ -8,7 +8,6 @@ $jikan = new Jikan\Jikan;
 try {
 	$jikan->Anime(
 		(new \Jikan\Request\Anime(
-			CHARACTERS_STAFF 
 		))->setID(21)
 	);
 

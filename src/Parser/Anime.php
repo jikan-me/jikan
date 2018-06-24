@@ -3,6 +3,7 @@
 namespace Jikan\Parser;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Jikan\Helper\JString;
 
 class Anime
 {
@@ -58,7 +59,7 @@ class Anime
      */
     public function getAnimeSynopsis():string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0];
+        return JString::cleanse($this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0]);
     }
 
     /**
@@ -66,7 +67,7 @@ class Anime
      */
     public function getAnimeTitleEnglish():string
     {
-        var_dump($this->crawler->filterXPath('//*[@id="content"]/table/tbody/tr/td[1]/div/div[6]/text()')->extract(['content']));
+        //var_dump($this->crawler->filterXPath('//*[@id="content"]/table/tbody/tr/td[1]/div/div[6]/text()')->extract(['content']));
         return ""; // whitebox
     }
 }

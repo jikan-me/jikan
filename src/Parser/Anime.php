@@ -334,35 +334,21 @@ class Anime extends \Skraypar\Skraypar
             	}
             }
 
-            var_dump($return);
-            die;
-
-
-            $title = '';
-            foreach ($related as $key => $value) {
-
-                if (!empty($value)) {
-                    if (preg_match('~<td nowrap="" valign="top" class="ar fw-n borderClass">(.*)</td>~', $value, $this->matches)) {
-                        $title = str_replace(":", "", $this->matches[1]);
-                        $return[$title] = [];
-                    } else {
-                        $links = explode("</a>", $value);
-                        foreach ($links as $key2 => $value2) {
-                            if (preg_match('~<a href="(.*)/(.*)/(.*)">(.*)(</a>|)~', $value2, $this->matches)) {
-                                $return[$title][] = [
-                                    'mal_id' => (int) $this->matches[2],
-                                    'type' => preg_match('~/(.*)~', $this->matches[1], $_type) ? $_type[1] : null,
-                                    'url' => BASE_URL . substr($this->matches[1], 1) . '/' . $this->matches[2] . '/' . $this->matches[3],
-                                    'title' => htmlspecialchars_decode(strip_tags($this->matches[4]))
-                                ];
-                            }
-                        }
-                    }
-                }
-
-            }
-
             $this->model->set('Anime', 'related', $return);
-        }); 
+        });
+
+        $this->addRule('opening_theme', '~<div class="theme-songs js-theme-songs opnening">([\s\S]*)</div>~', function() {
+            preg_match_all('~<span class="theme-song">(.*?)</span>~', $this->matches[1], $this->matches);
+            foreach ($this->matches[1] as $key => &$value) { $value = JString::cleanse($value); }
+           
+            $this->model->set('Anime', 'opening_theme', $this->matches[1]);
+        });
+
+        $this->addRule('ending_theme', '~<div class="theme-songs js-theme-songs ending">([\s\S]*)</div>~', function() {
+            preg_match_all('~<span class="theme-song">(.*?)</span>~', $this->matches[1], $this->matches);
+            foreach ($this->matches[1] as $key => &$value) { $value = JString::cleanse($value); }
+            
+            $this->model->set('Anime', 'ending_theme', $this->matches[1]);
+        });
 	}
 }

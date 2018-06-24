@@ -3,6 +3,7 @@
 namespace Jikan\Lib\Parser;
 
 use Jikan\Helper\Utils as Util;
+use Jikan\Jikan;
 
 abstract class TemplateParse
 {
@@ -27,38 +28,19 @@ abstract class TemplateParse
     }
 
     public function loadFile() {
-        if (!is_null($this->filePath)) {
-
-            if (Util::isURL($this->filePath)) {
-                $this->setStatus(Util::getStatus($this->filePath));
-                if (!Util::existsURL($this->status)) {
-
-
-                    http_response_code($this->status);
-
-                    if ($this->status == 429) {
-                        throw new \Exception("MyAnimeList Rate Limit reached");
-                    }
-
-                    throw new \Exception("File does not exist");
-                }
-            } else {
-                if (!file_exists($this->filePath)) {
-                    throw new \Exception("File does not exist");
-                }
-            }
-
-            $this->file = @file($this->filePath);
-            
-            if (!is_bool($this->file)) {
-                array_walk($this->file, Util::class.'::trim'); // bystanders begone!
-            } else {
-                throw new \Exception("MyAnimeList Rate Limit reached");
-            }
-
-        } else {
+        if (is_null($this->filePath)) {
             throw new \Exception("File path is null");
         }
+        $response = Jikan::$guzzle->get($this->filePath);
+        if($response->getStatusCode() === 429) {
+            throw new \Exception("MyAnimeList Rate Limit reached");
+        }
+        if($response->getStatusCode() !== 200) {
+            throw new \Exception("File does not exist");
+        }
+        $this->file = (string) $response->getBody();
+        $this->file = explode(PHP_EOL, $this->file);
+        array_walk($this->file, Util::class.'::trim'); // bystanders begone!
     }
 
     public function find() {

@@ -14,9 +14,10 @@
 
 namespace Jikan;
 
-require __DIR__ . '/config.php'; 
+require __DIR__ . '/config.php';
 
-
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Jikan\Helper\SearchConfig as SearchConfig;
 
 class Jikan
@@ -25,9 +26,14 @@ class Jikan
     public $status = 200;
     public $response = [];
 
-	public function __construct() {
-		return $this;
-	}
+    /**
+     * @var ClientInterface|Client
+     */
+    public static $guzzle;
+
+    public function __construct(ClientInterface $client = null) {
+        self::$guzzle = $client ?? new Client();
+    }
 
     private function setStatus() {
         $this->status = $this->response['code'];

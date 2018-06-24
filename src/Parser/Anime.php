@@ -100,4 +100,20 @@ class Anime
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeTitleJapanese(): string
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Japanese:"]');
+            
+        if ($title->count() > 0) {
+            return JString::cleanse(
+                str_replace($title->text(), '', $title->parents()->text())
+            );
+        }
+    }
 }

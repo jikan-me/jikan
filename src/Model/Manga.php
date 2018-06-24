@@ -2,60 +2,63 @@
 
 namespace Jikan\Model;
 
-
+/**
+ * Class Manga
+ *
+ * @package Jikan\Model
+ */
 class Manga extends Model
 {
 
-	public $mal_id;
-	
-	public $link_canonical;
+    public $mal_id;
 
-	public $title;
+    public $link_canonical;
 
-	public $title_english;
+    public $title;
 
-	public $title_synonyms;
+    public $title_english;
 
-	public $title_japanese;
+    public $title_synonyms;
 
-	public $status;
+    public $title_japanese;
 
-	public $image_url;
+    public $status;
 
-	public $type;
+    public $image_url;
 
-	public $volumes;
+    public $type;
 
-	public $chapters;
+    public $volumes;
 
-	public $publishing = false;
+    public $chapters;
 
-	public $published_string;
+    public $publishing = false;
 
-	public $published = [];
+    public $published_string;
 
-	public $rank;
+    public $published = [];
 
-	public $score;
+    public $rank;
 
-	public $scored_by;
+    public $score;
 
-	public $popularity;
+    public $scored_by;
 
-	public $members;
+    public $popularity;
 
-	public $favorites;
+    public $members;
 
-	public $synopsis;
+    public $favorites;
 
-	public $background;
-	
-	public $related = [];
+    public $synopsis;
 
-	public $genre = [];
+    public $background;
 
-	public $author = [];
+    public $related = [];
 
-	public $serialization = [];
+    public $genre = [];
 
+    public $author = [];
+
+    public $serialization = [];
 }

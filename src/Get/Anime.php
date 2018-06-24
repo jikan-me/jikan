@@ -3,29 +3,34 @@
 namespace Jikan\Get;
 
 use Jikan\Request\Anime as AnimeRequest;
-use Jikan\Model\Anime as AnimeModel;
-use Jikan\Parser\Anime as AnimeParser;
 
+/**
+ * Class Anime
+ *
+ * @package Jikan\Get
+ */
 class Anime
 {
-	public $parser;
-	public $response;
+    public $parser;
+    public $response;
 
-	public function __construct(AnimeRequest &$request) {
+    /**
+     * Anime constructor.
+     *
+     * @param AnimeRequest $request
+     */
+    public function __construct(AnimeRequest $request)
+    {
 
-		var_dump($request->getPath());
-		die;
+        $request->parser->setPath($request->getPath());
+        $request->parser->loadRules();
+        $request->parser->loadFile();
+        $request->parser->parse();
 
-		$request->parser->setPath($request->getPath());
-		$request->parser->loadRules();
-		$request->parser->loadFile();
-		$request->parser->parse();
-
-		return $this->response = [
-			'status' => $request->parser->status,
-			'response' => (array) $request->parser->model
-		];
-
-	}
+        return $this->response = [
+            'status'   => $request->parser->status,
+            'response' => (array)$request->parser->model,
+        ];
+    }
 
 }

@@ -2,6 +2,11 @@
 
 namespace Jikan\Get;
 
+/**
+ * Class Get
+ *
+ * @package Jikan\Get
+ */
 abstract class Get
 {
     public $id;
@@ -13,5 +18,4 @@ abstract class Get
     public $response = [];
     public $extend;
     public $extendArgs;
-
 }

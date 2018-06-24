@@ -2,35 +2,39 @@
 
 namespace Jikan\Model;
 
+/**
+ * Class Person
+ *
+ * @package Jikan\Model
+ */
 class Person extends Model
 {
 
-	public $mal_id;
+    public $mal_id;
 
-	public $link_canonical;
+    public $link_canonical;
 
-	public $name;
+    public $name;
 
-	public $given_name;
+    public $given_name;
 
-	public $family_name;
+    public $family_name;
 
-	public $alternate_name;
+    public $alternate_name;
 
-	public $birthday;
+    public $birthday;
 
-	public $website_url;
+    public $website_url;
 
-	public $member_favorites;
+    public $member_favorites;
 
-	public $more;
+    public $more;
 
-	public $image_url;
+    public $image_url;
 
-	public $voice_acting_role = [];
+    public $voice_acting_role = [];
 
-	public $anime_staff_position = [];
+    public $anime_staff_position = [];
 
-	public $published_manga = [];
-
+    public $published_manga = [];
 }

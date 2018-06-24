@@ -1,0 +1,13 @@
+parameters:
+    git_dir: .
+    bin_dir: ./vendor/bin
+    tasks:
+#        phpcs:
+#            standard: "PSR2"
+#            ignore_patterns:
+#                - "test/*.php"
+        git_blacklist:
+            keywords:
+                - "\\)\\s?:\\s?void"
+        phpunit: ~
+        phplint: ~

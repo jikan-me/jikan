@@ -2,22 +2,25 @@
 
 namespace Jikan\Model;
 
-
+/**
+ * Class AnimeStats
+ *
+ * @package Jikan\Model
+ */
 class AnimeStats extends Model
 {
 
-	public $watching;
+    public $watching;
 
-	public $completed;
+    public $completed;
 
-	public $on_hold;
+    public $on_hold;
 
-	public $dropped;
+    public $dropped;
 
-	public $plan_to_watch;
+    public $plan_to_watch;
 
-	public $total;
+    public $total;
 
-	public $score_stats = [];
-
+    public $score_stats = [];
 }

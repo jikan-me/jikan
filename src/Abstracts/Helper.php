@@ -2,22 +2,48 @@
 
 namespace Jikan\Abstracts;
 
+/**
+ * Class Helper
+ *
+ * @package Jikan\Abstracts
+ */
 abstract class Helper extends \Jikan\Abstracts\Container
 {
 
-	public function __construct() {
-		return $this;
-	}
+    /**
+     * Helper constructor.
+     */
+    public function __construct()
+    {
+        return $this;
+    }
 
-	public function set($key, $value) {
-		$this->offsetSet($key, $value);
-		return $this;
-	}
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return $this
+     */
+    public function set($key, $value)
+    {
+        $this->offsetSet($key, $value);
 
-	public function get($key) {
-		return $this->offsetGet($key);
-	}
+        return $this;
+    }
 
-	abstract public function build();
+    /**
+     * @param $key
+     *
+     * @return mixed|null
+     */
+    public function get($key)
+    {
+        return $this->offsetGet($key);
+    }
+
+    /**
+     * @return mixed
+     */
+    abstract public function build();
 
 }

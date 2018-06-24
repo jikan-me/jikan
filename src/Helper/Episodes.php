@@ -12,7 +12,7 @@ class Episodes extends \Jikan\Abstracts\Helper
 	}
 
 	public function setPage(int $page) {
-		$this->offsetSet('p', $page);
+		$this->offsetSet('offset', ($page - 1) * 100);
 	}
 
 	public function build() {

@@ -45,7 +45,7 @@ class Anime extends \Jikan\Abstracts\Requests
 		}
 
 		if (!is_null($this->getID())) {
-			return self::PATH . parent::getID() . ($this->request !== ANIME ? '/_/' . $this->request : '');
+			return self::PATH . parent::getID() . ($this->request !== ANIME ? '/_/' . $this->request : '') . (is_null($this->helper) ?: '?' . $this->helper->build());
 		}
 
 		return parent::getPath();

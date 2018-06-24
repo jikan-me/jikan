@@ -32,4 +32,5 @@ class Anime
             'response' => (array)$request->parser->model,
         ];
     }
+
 }

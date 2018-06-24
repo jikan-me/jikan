@@ -4,31 +4,59 @@ namespace Jikan\Get;
 
 use Jikan\Lib\Parser\TopParse;
 
+/**
+ * Class Top
+ *
+ * @package Jikan\Get
+ */
 class Top extends Get
 {
 
-    private $validExtends = [];
     const VALID_TYPES = [ANIME, MANGA];
-    const VALID_SUBTYPES = [TOP_AIRING, TOP_UPCOMING, TOP_TV, TOP_MOVIE, TOP_OVA, TOP_SPECIAL, TOP_MANGA, TOP_NOVEL, TOP_ONE_SHOT, TOP_DOUJINSHI, TOP_MANHWA, TOP_MANHUA, TOP_POPULARITY, TOP_FAVORITE];
+    const VALID_SUBTYPES = [
+        TOP_AIRING,
+        TOP_UPCOMING,
+        TOP_TV,
+        TOP_MOVIE,
+        TOP_OVA,
+        TOP_SPECIAL,
+        TOP_MANGA,
+        TOP_NOVEL,
+        TOP_ONE_SHOT,
+        TOP_DOUJINSHI,
+        TOP_MANHWA,
+        TOP_MANHUA,
+        TOP_POPULARITY,
+        TOP_FAVORITE,
+    ];
+    private $validExtends = [];
 
-    public function __construct($type, $page = 1, $subtype = null) {
+    /**
+     * Top constructor.
+     *
+     * @param      $type
+     * @param int  $page
+     * @param null $subtype
+     *
+     * @throws \Exception
+     */
+    public function __construct($type, $page = 1, $subtype = null)
+    {
 
         if (!in_array($type, self::VALID_TYPES)) {
-            throw new \Exception("Argument #1 Unsupported (Supported: ANIME, MANGA)");
+            throw new \Exception('Argument #1 Unsupported (Supported: ANIME, MANGA)');
         }
 
-        if (!is_null($subtype)) {
-            if (!in_array($subtype, self::VALID_SUBTYPES)) {
-                throw new \Exception("Unsupported type. Refer to src/config.php for valid constants");
-            }
+        if (!is_null($subtype) && !in_array($subtype, self::VALID_SUBTYPES)) {
+            throw new \Exception('Unsupported type. Refer to src/config.php for valid constants');
         }
 
         $this->parser = new TopParse;
 
-        $link = BASE_URL . 'top'.$type.'.php?limit=' . ($page-1)*50;
+        $link = BASE_URL.'top'.$type.'.php?limit='.($page - 1) * 50;
 
         if (!is_null($subtype)) {
-            $link .= '&type=' . $subtype;
+            $link .= '&type='.$subtype;
         }
 
 
@@ -39,5 +67,4 @@ class Top extends Get
         $this->response['code'] = $this->parser->status;
         $this->response = array_merge($this->response, $this->parser->parse($type));
     }
-
 }

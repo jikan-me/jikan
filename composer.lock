@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b4e2ffb457f37d629a6ec9b72fd0d9c85f3dfe2c"
+                "reference": "003757426cdd50fbad1c34cdbcc8a55f70a4fe8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b4e2ffb457f37d629a6ec9b72fd0d9c85f3dfe2c",
-                "reference": "b4e2ffb457f37d629a6ec9b72fd0d9c85f3dfe2c",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/003757426cdd50fbad1c34cdbcc8a55f70a4fe8b",
+                "reference": "003757426cdd50fbad1c34cdbcc8a55f70a4fe8b",
                 "shasum": ""
             },
             "require": {
@@ -69,7 +69,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-06-14T22:09:16+00:00"
+            "time": "2018-06-23T21:34:47+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -194,12 +194,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/irfan-dahir/skraypar.git",
-                "reference": "ec8fb1277f13876944d50f6b2941d8f613a36185"
+                "reference": "1e5b95697d648e787b2a3d761ed06fa174b89c0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/irfan-dahir/skraypar/zipball/ec8fb1277f13876944d50f6b2941d8f613a36185",
-                "reference": "ec8fb1277f13876944d50f6b2941d8f613a36185",
+                "url": "https://api.github.com/repos/irfan-dahir/skraypar/zipball/1e5b95697d648e787b2a3d761ed06fa174b89c0f",
+                "reference": "1e5b95697d648e787b2a3d761ed06fa174b89c0f",
                 "shasum": ""
             },
             "require": {
@@ -224,7 +224,7 @@
                 }
             ],
             "description": "Scraper with pattern parsing",
-            "time": "2018-05-29T03:04:56+00:00"
+            "time": "2018-06-24T03:32:05+00:00"
         },
         {
             "name": "psr/http-message",

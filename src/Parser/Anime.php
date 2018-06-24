@@ -132,4 +132,50 @@ class Anime
             );
         }
     }
+
+    /**
+     * @return int
+     */
+    public function getAnimeEpisodes(): int
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Episodes:"]');
+            
+        if ($title->count() > 0) {
+            return (str_replace($title->text(), '', $title->parents()->text()) == 'Unknown') ? 0 : (int) str_replace($title->text(), '', $title->parents()->text());
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAnimeEpisodesUnknown(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeStatus(): string
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Status:"]');
+            
+        if ($title->count() > 0) {
+            return JString::cleanse(
+                str_replace($title->text(), '', $title->parents()->text())
+            );
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function getAnimeAiring(): bool
+    {
+        return true;
+    }
 }

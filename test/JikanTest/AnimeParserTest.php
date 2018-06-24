@@ -99,4 +99,52 @@ class AnimeParserTest extends TestCase
             $this->parser->getAnimeType()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_episodes()
+    {
+        self::assertEquals(
+            0,
+            $this->parser->getAnimeEpisodes()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_episodes_unknown()
+    {
+        self::assertEquals(
+            true,
+            $this->parser->getAnimeEpisodesUnknown()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_status()
+    {
+        self::assertEquals(
+            'Currently Airing',
+            $this->parser->getAnimeStatus()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_airing()
+    {
+        self::assertEquals(
+            true,
+            $this->parser->getAnimeAiring()
+        );
+    }
 }

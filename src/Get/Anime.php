@@ -13,6 +13,9 @@ class Anime
 
 	public function __construct(AnimeRequest &$request) {
 
+		var_dump($request->getPath());
+		die;
+
 		$request->parser->setPath($request->getPath());
 		$request->parser->loadRules();
 		$request->parser->loadFile();

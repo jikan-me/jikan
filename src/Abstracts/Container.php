@@ -7,11 +7,6 @@ abstract class Container implements \ArrayAccess
 	
 	public $container = [];
 
-
-	public function __construct(array $array) {
-		$this->container = $array;
-	}
-
 	public function offsetSet($offset, $value) {
 		if (is_null($offset)) {
 			$this->Container[] = $value;

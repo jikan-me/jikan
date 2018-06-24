@@ -2,39 +2,25 @@
 
 namespace Jikan\Helper;
 
-/**
- * Class Episodes
- *
- * @package Jikan\Helper
- */
 class Episodes extends \Jikan\Abstracts\Helper
 {
 
-    /**
-     * Episodes constructor.
-     */
-    public function __construct()
-    {
-    }
+	public function __construct($page) {
+		if (!is_null($page)) {
+			$this->setPage($page);
+		}
+	}
 
-    /**
-     * @param int $page
-     */
-    public function setPage(int $page)
-    {
-        $this->offsetSet('p', $page);
-    }
+	public function setPage(int $page) {
+		$this->offsetSet('p', $page);
+	}
 
-    /**
-     * @return string
-     */
-    public function build()
-    {
-        $query = "";
-        foreach ($this->container as $key => $value) {
-            $query .= $key."=".$value."&";
-        }
+	public function build() {
+		$query = "";
+		foreach ($this->container as $key => $value) {
+			$query .= $key . "=" . $value . "&";
+		}
 
-        return $query;
-    }
+		return $query;
+	}
 }

@@ -2,68 +2,62 @@
 
 namespace Jikan\Request;
 
-use Jikan\Abstracts\Requests;
-use Jikan\Exception;
+use Jikan\Exception as Exception;
 
-/**
- * Class Anime
- *
- * @package Jikan\Request
- */
-class Anime extends Requests
+class Anime extends \Jikan\Abstracts\Requests
 {
 
-    const VALID_REQUESTS = [ANIME, CHARACTERS_STAFF];
-    const PATH = BASE_URL.ANIME_ENDPOINT;
-    public $model;
-    public $response;
-    public $parser;
-    private $request;
+	public $model;
+	public $response;
+	public $parser;
 
-    /**
-     * Anime constructor.
-     *
-     * @param string $request
-     *
-     * @throws Exception\UnsupportedRequestException
-     */
-    public function __construct($request = ANIME)
-    {
-        if (!in_array($request, self::VALID_REQUESTS)) {
-            throw new Exception\UnsupportedRequestException();
-        }
+	private $request;
+	private $helper;
+	private const VALID_REQUESTS = [ANIME, CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS, PICTURES, FORUM, MORE_INFO];
+	private const VALID_HELPERS = [EPISODES];
+	private const PATH = BASE_URL . ANIME_ENDPOINT;
 
-        $request = $request === ANIME ? '' : $request;
-        $model = '\\Jikan\\Model\\'.ANIME.ucfirst($request);
-        $parser = '\\Jikan\\Parser\\'.ANIME.ucfirst($request);
+	public function __construct($request = ANIME, $helper) {
+		if (!in_array($request, self::VALID_REQUESTS)) {
+			throw new Exception\UnsupportedRequestException();
+		}
 
-        $this->model = new $model;
-        $this->parser = new $parser($this->model);
-        $this->request = $request;
-    }
+		if (
+			!is_null($helper) 
+			&& $helper instanceof \Jikan\Abstracts\Helper 
+			&& in_array(strtolower((new \ReflectionClass($helper))->getShortName()), self::VALID_HELPERS)
+			) 
+		{
+			$this->helper = $helper;
+		}
 
-    /**
-     * @return string
-     * @throws Exception\EmptyRequestException
-     */
-    public function getPath(): string
-    {
-        if (is_null(parent::getPath()) && is_null($this->getID())) {
-            throw new Exception\EmptyRequestException();
-        }
+		$model = '\\Jikan\\Model\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
+		$parser = '\\Jikan\\Parser\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
 
-        if (!is_null($this->getID())) {
-            return self::PATH.parent::getID().($this->request !== ANIME ? '/_/'.$this->request : '');
-        }
+		$this->model = new $model;
+		$this->parser = new $parser($this->model);
+		$this->request = $request;
+	}
 
-        return parent::getPath();
-    }
+	public function getPath() : string {
+		if (is_null(parent::getPath()) && is_null($this->getID())) {
+			throw new Exception\EmptyRequestException();
+		}
 
-    /**
-     * @return mixed
-     */
-    public function getRequest()
-    {
-        return $this->request;
-    }
+		if (!is_null($this->getID())) {
+			return self::PATH . parent::getID() . ($this->request !== ANIME ? '/_/' . $this->request : '');
+		}
+
+		return parent::getPath();
+	}
+
+	public function getRequest() {
+		return $request;
+	}
+
+	public function setRequestArgs($key, $value) {
+		if (array_key_exists($this->request, self::REQUEST_VALUES)) {
+			$this->requestArgs = $value;
+		}
+	}
 }

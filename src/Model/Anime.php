@@ -57,9 +57,14 @@ class Anime
     private $source;
 
     /**
-     * @var string
+     * @var int
      */
     private $episodes;
+
+    /**
+     * @var bool
+     */
+    private $episodes_unknown;
 
     /**
      * @var string
@@ -198,7 +203,9 @@ class Anime
         $instance->title_japanese = $parser->getAnimeTitleJapanese();
         $instance->type = $parser->getAnimeType();
         $instance->episodes = $parser->getAnimeEpisodes();
-        $instance->episodes_unknown = $parser->getAnimeEpisodesUnknown();
+        $instance->episodes_unknown =$instance->episodes == 0 ? true : false;
+        $instance->status = $parser->getAnimeStatus();
+        $instance->airing = $instance->status == 'Currently Airing' ? true : false;
 
         return $instance;
     }
@@ -281,6 +288,14 @@ class Anime
     public function getEpisodes(): string
     {
         return $this->episodes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEpisodesUnknown(): string
+    {
+        return $this->episodes_unknown;
     }
 
     /**

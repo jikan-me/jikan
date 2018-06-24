@@ -148,15 +148,6 @@ class Anime
     }
 
     /**
-     * @return bool
-     */
-    public function getAnimeEpisodesUnknown(): bool
-    {
-        //return self::getModel()->episodes;
-        return true;
-    }
-
-    /**
      * @return string
      */
     public function getAnimeStatus(): string
@@ -170,13 +161,5 @@ class Anime
                 str_replace($title->text(), '', $title->parents()->text())
             );
         }
-    }
-
-    /**
-     * @return bool
-     */
-    public function getAnimeAiring(): bool
-    {
-        return true;
     }
 }

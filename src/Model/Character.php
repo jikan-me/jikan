@@ -2,30 +2,33 @@
 
 namespace Jikan\Model;
 
-
+/**
+ * Class Character
+ *
+ * @package Jikan\Model
+ */
 class Character extends Model
 {
 
-	public $mal_id;
+    public $mal_id;
 
-	public $link_canonical;
+    public $link_canonical;
 
-	public $name;
+    public $name;
 
-	public $name_kanji;
+    public $name_kanji;
 
-	public $nicknames;
+    public $nicknames;
 
-	public $about;
+    public $about;
 
-	public $member_favorites;
+    public $member_favorites;
 
-	public $image_url;
+    public $image_url;
 
-	public $animeography = [];
+    public $animeography = [];
 
-	public $mangaography = [];
+    public $mangaography = [];
 
-	public $voice_actor = [];
-
+    public $voice_actor = [];
 }

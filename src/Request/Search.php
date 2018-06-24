@@ -2,7 +2,12 @@
 
 namespace Jikan\Request;
 
+/**
+ * Class Search
+ *
+ * @package Jikan\Request
+ */
 class Search extends Requests
 {
-	
+
 }

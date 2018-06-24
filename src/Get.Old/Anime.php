@@ -2,17 +2,21 @@
 
 namespace Jikan\Get;
 
-use Jikan\Lib\Parser\AnimeParse;
 use Jikan\Lib\Parser\AnimeCharacterStaffParse;
 use Jikan\Lib\Parser\AnimeEpisodeParse;
-use Jikan\Lib\Parser\AnimeNewsParse;
-use Jikan\Lib\Parser\AnimeVideoParse;
-use Jikan\Lib\Parser\AnimeStatsParse;
-use Jikan\Lib\Parser\AnimePicturesParse;
 use Jikan\Lib\Parser\AnimeForumParse;
 use Jikan\Lib\Parser\AnimeMoreInfoParse;
+use Jikan\Lib\Parser\AnimeNewsParse;
+use Jikan\Lib\Parser\AnimeParse;
+use Jikan\Lib\Parser\AnimePicturesParse;
+use Jikan\Lib\Parser\AnimeStatsParse;
+use Jikan\Lib\Parser\AnimeVideoParse;
 
-
+/**
+ * Class Anime
+ *
+ * @package Jikan\Get
+ */
 class Anime extends Get
 {
 
@@ -20,7 +24,16 @@ class Anime extends Get
 
     private $validExtends = [CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS, PICTURES, FORUM, MORE_INFO];
 
-	public function __construct($id = null, $extend = null) {
+    /**
+     * Anime constructor.
+     *
+     * @param null $id
+     * @param null $extend
+     *
+     * @throws \Exception
+     */
+    public function __construct($id = null, $extend = null)
+    {
 
 
         if (is_null($id)) {
@@ -32,8 +45,8 @@ class Anime extends Get
         $this->parser = new AnimeParse;
         $this->parser->setPath(
             (
-                is_int($this->id) || ctype_digit($this->id)    
-            ) ? BASE_URL . ANIME_ENDPOINT . $this->id : $this->id
+                is_int($this->id) || ctype_digit($this->id)
+            ) ? BASE_URL.ANIME_ENDPOINT.$this->id : $this->id
         );
         $this->parser->loadFile();
 
@@ -43,12 +56,10 @@ class Anime extends Get
         $this->canonical_path = $this->parser->model->get('Anime', 'link_canonical');
 
 
-
         if (!empty($extend)) {
             $this->extend = $extend;
 
             foreach ($this->extend as $key => $extend) {
-
                 if (is_string($key)) {
                     $this->extend = $key;
                     $this->extendArgs = $extend;
@@ -69,31 +80,35 @@ class Anime extends Get
                 }
             }
         }
+    }
 
-	}
+    /**
+     * @param int $page
+     */
+    private function episodes($page = 1)
+    {
+        $page = ($page < 1) ? $page = 1 : $page;
+        $this->parser = new AnimeEpisodeParse;
+        //echo $this->canonical_path.'?offset='.(($page-1)*100);
 
-	private function episodes($page=1) {
-	    $page = ($page < 1) ? $page = 1 : $page;
-	    $this->parser = new AnimeEpisodeParse;
-	    //echo $this->canonical_path.'?offset='.(($page-1)*100);
-
-        $this->parser->setPath($this->canonical_path.'/episode?offset='.(($page-1)*100));
+        $this->parser->setPath($this->canonical_path.'/episode?offset='.(($page - 1) * 100));
         $this->parser->loadFile();
 
         $this->response = array_merge($this->response, $this->parser->parse());
+    }
 
-	}
+    private function charactersStaff()
+    {
+        $this->parser = new AnimeCharacterStaffParse;
 
-	private function charactersStaff() {
-	    $this->parser = new AnimeCharacterStaffParse;
+        $this->parser->setPath($this->canonical_path.'/characters');
+        $this->parser->loadFile();
 
-	    $this->parser->setPath($this->canonical_path.'/characters');
-	    $this->parser->loadFile();
+        $this->response = array_merge($this->response, $this->parser->parse());
+    }
 
-	    $this->response = array_merge($this->response, $this->parser->parse());
-	}
-
-    private function news() {
+    private function news()
+    {
         $this->parser = new AnimeNewsParse;
 
         $this->parser->setPath($this->canonical_path.'/news');
@@ -102,7 +117,8 @@ class Anime extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function videos() {
+    private function videos()
+    {
         $this->parser = new AnimeVideoParse;
 
         $this->parser->setPath($this->canonical_path.'/video');
@@ -111,7 +127,8 @@ class Anime extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function stats() {
+    private function stats()
+    {
         $this->parser = new AnimeStatsParse;
 
         $this->parser->setPath($this->canonical_path.'/stats');
@@ -120,7 +137,8 @@ class Anime extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function pictures() {
+    private function pictures()
+    {
         $this->parser = new AnimePicturesParse;
 
         $this->parser->setPath($this->canonical_path.'/pics');
@@ -129,7 +147,8 @@ class Anime extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function forum() {
+    private function forum()
+    {
         $this->parser = new AnimeForumParse;
 
         $this->parser->setPath($this->canonical_path.'/forum');
@@ -138,7 +157,8 @@ class Anime extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function moreInfo() {
+    private function moreInfo()
+    {
         $this->parser = new AnimeMoreInfoParse;
 
         $this->parser->setPath($this->canonical_path.'/moreinfo');
@@ -146,6 +166,4 @@ class Anime extends Get
 
         $this->response = array_merge($this->response, $this->parser->parse());
     }
-
-
 }

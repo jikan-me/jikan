@@ -1,16 +1,24 @@
 <?php
+
 namespace Jikan\Lib\Parser;
 
 use Jikan\Model\AnimePictures as AnimePicturesModel;
 
+/**
+ * Class AnimePicturesParse
+ *
+ * @package Jikan\Lib\Parser
+ */
 class AnimePicturesParse extends TemplateParse
 {
 
     private $return = [];
 
-    public function parse() : Array
+    /**
+     * @return array
+     */
+    public function parse(): array
     {
-
 
 
         $this->model = new AnimePicturesModel;
@@ -19,29 +27,37 @@ class AnimePicturesParse extends TemplateParse
          * Rules
          */
 
-        $this->addRule('images', '~<h2 class="mb8">~', function() {
-            $i = 1;
+        $this->addRule(
+            'images',
+            '~<h2 class="mb8">~',
+            function () {
+                $i = 1;
 
-            while(true) {
-                $line = $this->file[$this->lineNo + $i];
-                if (preg_match('~<div style="clear:both;"></div>~', $line)) {
-                    break;
+                while (true) {
+                    $line = $this->file[$this->lineNo + $i];
+                    if (preg_match('~<div style="clear:both;"></div>~', $line)) {
+                        break;
+                    }
+
+                    if (preg_match_all(
+                        '~<div class="picSurround"><a href="(.*?)" title="(.*?)" class="js-picture-gallery" rel="gallery-anime"><img src="(.*?)" alt="(.*?)" border="0"></a></div>~',
+                        $line,
+                        $this->matches
+                    )) {
+                        $this->model->set(
+                            'AnimePictures',
+                            'image',
+                            array_merge(
+                                $this->model->get('AnimePictures', 'image'),
+                                (is_array($this->matches[3]) ? $this->matches[3] : [$this->matches[3]])
+                            )
+                        );
+                    }
+
+                    $i++;
                 }
-
-                if (preg_match_all('~<div class="picSurround"><a href="(.*?)" title="(.*?)" class="js-picture-gallery" rel="gallery-anime"><img src="(.*?)" alt="(.*?)" border="0"></a></div>~', $line, $this->matches)) {
-                    $this->model->set(
-                        'AnimePictures', 
-                        'image', 
-                        array_merge(
-                            $this->model->get('AnimePictures', 'image'),
-                            (is_array($this->matches[3]) ? $this->matches[3] : [$this->matches[3]])
-                        )
-                    );
-                }
-
-                $i++;
             }
-        });
+        );
 
 
         /*
@@ -55,6 +71,6 @@ class AnimePicturesParse extends TemplateParse
             $this->find();
         }
 
-        return (array) $this->model;
+        return (array)$this->model;
     }
 }

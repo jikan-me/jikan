@@ -3,38 +3,38 @@
 /*
  * URL & Endpoints
  */
-define( 'BASE_URL' , 'https://myanimelist.net/' );
+define('BASE_URL', 'https://myanimelist.net/');
 
-define( 'ANIME_ENDPOINT' , 'anime/' );
-define( 'MANGA_ENDPOINT' , 'manga/' );
-define( 'PEOPLE_ENDPOINT' , 'people/' );
-define( 'CHARACTER_ENDPOINT' , 'character/' );
-define( 'USER_LIST_ENDPOINT' , 'malappinfo.php');
+define('ANIME_ENDPOINT', 'anime/');
+define('MANGA_ENDPOINT', 'manga/');
+define('PEOPLE_ENDPOINT', 'people/');
+define('CHARACTER_ENDPOINT', 'character/');
+define('USER_LIST_ENDPOINT', 'malappinfo.php');
 
 
 /*
  * Request
  */
-define( 'CHARACTERS_STAFF' , 'characters' );
-define( 'CHARACTERS' , 'characters' );
-define( 'EPISODES' , 'episodes' );
-define( 'NEWS' , 'news' );
-define( 'VIDEOS' , 'video' );
-define( 'STATS' , 'stats' );
-define( 'PICTURES' , 'pics' );
-define( 'FORUM' , 'forum' );
-define( 'MORE_INFO' , 'moreinfo' );
+define('CHARACTERS_STAFF', 'characters');
+define('CHARACTERS', 'characters');
+define('EPISODES', 'episode');
+define('NEWS', 'news');
+define('VIDEOS', 'video');
+define('STATS', 'stats');
+define('PICTURES', 'pics');
+define('FORUM', 'forum');
+define('MORE_INFO', 'moreinfo');
 
-define( 'ANIME' , 'Anime' );
-define( 'MANGA' , 'Manga' );
-define( 'CHARACTER' , 'Character' );
-define( 'PERSON' , 'Person' );
-define( 'PEOPLE', 'Person'); // alias
+define('ANIME', 'Anime');
+define('MANGA', 'Manga');
+define('CHARACTER', 'Character');
+define('PERSON', 'Person');
+define('PEOPLE', 'Person'); // alias
 
-define( 'SEASON_WINTER' , 'winter' );
-define( 'SEASON_SPRING' , 'spring' );
-define( 'SEASON_SUMMER' , 'summer' );
-define( 'SEASON_FALL' , 'fall' );
+define('SEASON_WINTER', 'winter');
+define('SEASON_SPRING', 'spring');
+define('SEASON_SUMMER', 'summer');
+define('SEASON_FALL', 'fall');
 
 /*
  * Search

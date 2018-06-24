@@ -75,10 +75,29 @@ class Anime
     public function getAnimeTitleEnglish(): string
     {
         $title = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[1]/div')
-            ->filter('.spaceit_pad')
-            ->text();
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="English:"]');
+            
+        if ($title->count() > 0) {
+            return JString::cleanse(
+                str_replace($title->text(), '', $title->parents()->text())
+            );
+        }
+    }
 
-        return trim($title);
+    /**
+     * @return string
+     */
+    public function getAnimeTitleSynonyms(): string
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Synonyms:"]');
+            
+        if ($title->count() > 0) {
+            return JString::cleanse(
+                str_replace($title->text(), '', $title->parents()->text())
+            );
+        }
     }
 }

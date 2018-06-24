@@ -35,8 +35,16 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_title_english()
     {
-        self:self::markTestSkipped('Fix this');
         self::assertEquals('One Piece', $this->parser->getAnimeTitleEnglish());
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_title_synonyms()
+    {
+        self::assertEquals('OP', $this->parser->getAnimeTitleSynonyms());
     }
 
     /**
@@ -59,7 +67,6 @@ class AnimeParserTest extends TestCase
             $this->parser->getAnimeImageURL()
         );
     }
-
     /**
      * @test
      * @vcr AnimeParserTest.yaml

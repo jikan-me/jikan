@@ -9,7 +9,7 @@ abstract class Container implements \ArrayAccess
 
 	public function offsetSet($offset, $value) {
 		if (is_null($offset)) {
-			$this->Container[] = $value;
+			$this->container[] = $value;
 		} else {
 			$this->container[$offset] = $value;
 		}

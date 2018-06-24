@@ -5,6 +5,11 @@ namespace Jikan\Get;
 use Jikan\Lib\Parser\PersonParse;
 use Jikan\Lib\Parser\PersonPicturesParse;
 
+/**
+ * Class Person
+ *
+ * @package Jikan\Get
+ */
 class Person extends Get
 {
 
@@ -12,7 +17,16 @@ class Person extends Get
 
     private $validExtends = [PICTURES];
 
-    public function __construct($id = null, $extend = null) {
+    /**
+     * Person constructor.
+     *
+     * @param null $id
+     * @param null $extend
+     *
+     * @throws \Exception
+     */
+    public function __construct($id = null, $extend = null)
+    {
 
 
         if (is_null($id)) {
@@ -24,8 +38,8 @@ class Person extends Get
         $this->parser = new PersonParse;
         $this->parser->setPath(
             (
-                is_int($this->id) || ctype_digit($this->id)    
-            ) ? BASE_URL . PEOPLE_ENDPOINT . $this->id : $this->id
+                is_int($this->id) || ctype_digit($this->id)
+            ) ? BASE_URL.PEOPLE_ENDPOINT.$this->id : $this->id
         );
         $this->parser->loadFile();
 
@@ -39,7 +53,6 @@ class Person extends Get
             $this->extend = $extend;
 
             foreach ($this->extend as $key => $extend) {
-
                 if (is_string($key)) {
                     $this->extend = $key;
                     $this->extendArgs = $extend;
@@ -60,10 +73,10 @@ class Person extends Get
                 }
             }
         }
-
     }
 
-    private function pictures() {
+    private function pictures()
+    {
         $this->parser = new PersonPicturesParse;
 
         $this->parser->setPath($this->canonical_path.'/pictures');
@@ -71,5 +84,4 @@ class Person extends Get
 
         $this->response = array_merge($this->response, $this->parser->parse());
     }
-
 }

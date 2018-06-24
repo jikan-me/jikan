@@ -1,9 +1,24 @@
 language: php
-php:
-  - '7.0'
-  - '7.1'
-  - '7.2'
 
-before_script: 
-  - composer install
-script: php travis.php
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 7.0
+    - php: 7.1
+    - php: 7.2
+  fast_finish: true
+
+before_install:
+  - composer selfupdate
+  - composer global require hirak/prestissimo
+
+install:
+  - if [ "$DEPENDENCIES" != "low" ]; then travis_retry composer update --no-progress --profile --prefer-dist --no-scripts --no-interaction; fi;
+  - if [ "$DEPENDENCIES" == "low" ]; then travis_retry composer update --no-progress --profile --prefer-lowest --no-scripts --no-interaction; fi;
+  - composer show
+
+script:
+   - ./vendor/bin/grumphp run

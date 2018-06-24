@@ -150,25 +150,219 @@ class Anime extends \Skraypar\Skraypar
             	JString::cleanse($this->file[$this->lineNo + 1])
             );
         });
-
+        /*
+         * Producers
+         */
         $this->addRule('producer', '~<span class="dark_text">Producers:</span>~', function() {
-            $return = [];
-            if (!preg_match('~None found~', $this->file[$this->lineNo + 1])) {
-                $array = explode("</a>", $this->file[$this->lineNo + 1]);
-                // producers can contain commas, so we can't use that as delimiter. e.g; "Kanetsu Co., LTD." //anime/16067/anime/32951
-
-                foreach ($array as $key => $value) {
-                    if (preg_match('~<a href="/(.*)" title="(.*)">([\s\S]*)(</a>|)~', $value)) {
-                        preg_match('~<a href="/(.*)" title="(.*)">([\s\S]*)(</a>|)~', $value, $this->matches);
-                        $return[] = [
-                            'url' => BASE_URL . $this->matches[1],
-                            'name' => strip_tags($this->matches[2])
-                        ];
-                    }
-                }
-            }
+        	$return = [];
+        	if (!strpos($this->file[$this->lineNo + 1], 'None found')) {
+	        	preg_match_all('~<a href="(.*?)" title="(.*?)">(.*?)</a>~', $this->file[$this->lineNo + 1], $this->matches);
+	
+	        	foreach ($this->matches[1] as $key => $value) {
+	        		if (!empty($value)) {
+	        			$return[] = [
+	        				'url' => BASE_URL . substr($value, 1),
+	        				'name' => JString::cleanse($this->matches[3][$key])
+	        			];
+	        		}
+	        	}
+        	}
 
             $this->model->set('Anime', 'producer', $return);
         });
+        /*
+         * Licensors
+         */
+        $this->addRule('licensor', '~<span class="dark_text">Licensors:</span>~', function() {
+        	$return = [];
+        	if (!strpos($this->file[$this->lineNo + 1], 'None found')) {
+	        	preg_match_all('~<a href="(.*?)" title="(.*?)">(.*?)</a>~', $this->file[$this->lineNo + 1], $this->matches);
+	
+	        	foreach ($this->matches[1] as $key => $value) {
+	        		if (!empty($value)) {
+	        			$return[] = [
+	        				'url' => BASE_URL . substr($value, 1),
+	        				'name' => JString::cleanse($this->matches[3][$key])
+	        			];
+	        		}
+	        	}
+        	}
+
+            $this->model->set('Anime', 'licensor', $return);
+        });
+        /*
+         * Studios
+         */
+        $this->addRule('studio', '~<span class="dark_text">Studios:</span>~', function() {
+        	$return = [];
+        	if (!strpos($this->file[$this->lineNo + 1], 'None found')) {
+	        	preg_match_all('~<a href="(.*?)" title="(.*?)">(.*?)</a>~', $this->file[$this->lineNo + 1], $this->matches);
+	
+	        	foreach ($this->matches[1] as $key => $value) {
+	        		if (!empty($value)) {
+	        			$return[] = [
+	        				'url' => BASE_URL . substr($value, 1),
+	        				'name' => JString::cleanse($this->matches[3][$key])
+	        			];
+	        		}
+	        	}
+        	}
+
+            $this->model->set('Anime', 'studio', $return);
+        });
+        /*
+         * Source
+         */
+        $this->addRule('source', '~<span class="dark_text">Source:</span>~', function() {
+            $this->model->set('Anime', 'source', 
+            	JString::cleanse($this->file[$this->lineNo + 1])
+            );
+        });
+        /*
+         * Genres
+         */
+        $this->addRule('genre', '~<span class="dark_text">Genres:</span>~', function() {
+        	$return = [];
+        	if (!strpos($this->file[$this->lineNo + 1], 'None found')) {
+	        	preg_match_all('~<a href="(.*?)" title="(.*?)">(.*?)</a>~', $this->file[$this->lineNo + 1], $this->matches);
+	
+	        	foreach ($this->matches[1] as $key => $value) {
+	        		if (!empty($value)) {
+	        			$return[] = [
+	        				'url' => BASE_URL . substr($value, 1),
+	        				'name' => JString::cleanse($this->matches[3][$key])
+	        			];
+	        		}
+	        	}
+        	}
+
+            $this->model->set('Anime', 'genre', $return);
+        });
+        /*
+         * Duration
+         */
+        $this->addRule('duration', '~<span class="dark_text">Duration:</span>~', function() {
+			$this->model->set('Anime', 'duration', 
+				JString::cleanse($this->file[$this->lineNo + 1])
+			);
+        });
+        /*
+         * Rating
+         */
+        $this->addRule('rating', '~<span class="dark_text">Rating:</span>~', function() {
+			$this->model->set('Anime', 'rating', 
+				JString::cleanse($this->file[$this->lineNo + 1])
+			);
+        });
+        /*
+         * Score
+         */
+        $this->addRule('score', '~<span class="dark_text">Score:</span>~', function(){
+            preg_match('~<span(.*?)>(.*)</span><sup>1</sup> \(scored by <span(.*?)>(.*)</span> users\)~', $this->file[$this->lineNo + 1], $this->matches);
+
+            $this->model->set('Anime', 'score', (float) $this->matches[2]);
+            $this->model->set('Anime', 'scored_by', (int) str_replace(",", "", $this->matches[4]));
+        });
+        /*
+         * Rank
+         */
+        $this->addRule('rank', '~<span class="dark_text">Ranked:</span>~', function() {
+           if (!preg_match('~N/A<sup>2</sup>~', $this->file[$this->lineNo + 1], $this->matches)) {
+               preg_match('~#(.*)<sup>2</sup>~', $this->file[$this->lineNo + 1], $this->matches);
+
+               $this->model->set('Anime', 'rank', (int) $this->matches[1]);
+           }
+        });
+        /*
+         * Popularity
+         */
+        $this->addRule('popularity', '~<span class="dark_text">Popularity:</span>~', function() {
+           preg_match('~#(.*)~', $this->file[$this->lineNo + 1], $this->matches);
+
+           $this->model->set('Anime', 'popularity', (int) $this->matches[1]);
+        });
+        /*
+         * Members
+         */
+        $this->addRule('members', '~<span class="dark_text">Members:</span>~', function() {
+           $this->model->set('Anime', 'members', (int) str_replace(",", "", $this->file[$this->lineNo + 1]));
+        });
+        /*
+         * Favorites
+         */
+        $this->addRule('favorites', '~<span class="dark_text">Favorites:</span>~', function() {
+            $this->model->set('Anime', 'favorites', (int) str_replace(",", "", $this->file[$this->lineNo + 1]));
+        });
+        /*
+         * Synopsis
+         */
+        $this->addRule('synopsis', '~<meta property="og:description" content="(.*)">~', function() {
+            $this->model->set('Anime', 'synopsis', 
+            	JString::cleanse($this->matches[1])
+            );
+        });
+        /*
+         * Related
+         */
+        $this->addRule('related', '~<table class="anime_detail_related_anime"~', function() {
+            $return = [];
+
+            
+            $line = $this->file[$this->lineNo];
+            $line = substr($line, strpos($line, '<td nowrap="" valign="top" class="ar fw-n borderClass">'));
+            $line = explode('<td nowrap="" valign="top" class="ar fw-n borderClass">', $line);
+            foreach ($line as $key => $value) {
+            	if (!empty($value)) {
+		            preg_match_all('~(.*?)</td>(.*?)</td>(|</table>)~', $value, $this->matches);
+		            $title = substr($this->matches[1][0], 0, -1);
+		            if (!isset($return[$title])){
+		            	$return[$title] = [];
+		            }
+
+	        		preg_match_all('~<a href="(/(.*?)/(.*?)/(.*?))">(.*?)</a>~', $this->matches[2][0], $this->matches);
+
+	        		foreach ($this->matches[1] as $key => $value) {
+	        			if (!empty($value)) {
+			        		$return[$title][] = [
+			        			'mal_id' => (int) $this->matches[3][$key],
+			        			'type' => $this->matches[2][$key],
+			        			'url' => BASE_URL . substr($this->matches[1][$key], 1),
+			        			'title' => $this->matches[5][$key]
+			        		];
+	        			}
+	        		}
+            	}
+            }
+
+            var_dump($return);
+            die;
+
+
+            $title = '';
+            foreach ($related as $key => $value) {
+
+                if (!empty($value)) {
+                    if (preg_match('~<td nowrap="" valign="top" class="ar fw-n borderClass">(.*)</td>~', $value, $this->matches)) {
+                        $title = str_replace(":", "", $this->matches[1]);
+                        $return[$title] = [];
+                    } else {
+                        $links = explode("</a>", $value);
+                        foreach ($links as $key2 => $value2) {
+                            if (preg_match('~<a href="(.*)/(.*)/(.*)">(.*)(</a>|)~', $value2, $this->matches)) {
+                                $return[$title][] = [
+                                    'mal_id' => (int) $this->matches[2],
+                                    'type' => preg_match('~/(.*)~', $this->matches[1], $_type) ? $_type[1] : null,
+                                    'url' => BASE_URL . substr($this->matches[1], 1) . '/' . $this->matches[2] . '/' . $this->matches[3],
+                                    'title' => htmlspecialchars_decode(strip_tags($this->matches[4]))
+                                ];
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            $this->model->set('Anime', 'related', $return);
+        }); 
 	}
 }

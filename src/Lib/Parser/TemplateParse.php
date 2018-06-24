@@ -2,8 +2,8 @@
 
 namespace Jikan\Lib\Parser;
 
-use GuzzleHttp\Client;
 use Jikan\Helper\Utils as Util;
+use Jikan\Jikan;
 
 abstract class TemplateParse
 {
@@ -31,8 +31,7 @@ abstract class TemplateParse
         if (is_null($this->filePath)) {
             throw new \Exception("File path is null");
         }
-        $guzzle = new Client(); // TODO inject it so middlewares are possible
-        $response = $guzzle->get($this->filePath);
+        $response = Jikan::$guzzle->get($this->filePath);
         if($response->getStatusCode() === 429) {
             throw new \Exception("MyAnimeList Rate Limit reached");
         }

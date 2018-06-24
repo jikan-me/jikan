@@ -7,7 +7,7 @@ use Jikan\Exception as Exception;
 class Anime extends \Jikan\Abstracts\Requests
 {
 
-	public $model;$
+	public $model;
 	public $response;
 	public $parser;
 
@@ -17,14 +17,19 @@ class Anime extends \Jikan\Abstracts\Requests
 	private const VALID_HELPERS = [EPISODES];
 	private const PATH = BASE_URL . ANIME_ENDPOINT;
 
-	public function __construct($request = ANIME, $helper = null) {
+	public function __construct($request = ANIME, $helper) {
 		if (!in_array($request, self::VALID_REQUESTS)) {
 			throw new Exception\UnsupportedRequestException();
 		}
 
-		if (!is_null($helper) && $helper instanceof \Jikan\Abstracts\Helper && in_array(strtolower($helper::class), self::VALID_HELPERS)) {
-			$this->helper = $helper;
-		}
+		var_dump($helper);
+		// if (!is_null($helper) && $helper instanceof \Jikan\Abstracts\Helper && in_array(strtolower($helper::class), self::VALID_HELPERS)) {
+		// 	$this->helper = $helper;
+
+		// 	var_dump($this->helper);
+		// }
+
+		die;
 
 		$model = '\\Jikan\\Model\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
 		$parser = '\\Jikan\\Parser\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));

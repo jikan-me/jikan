@@ -19,7 +19,7 @@ Bleeding edge, re-write of the Jikan PHP API. Focusing on speed, stability and c
 ### Phase 2
 - Anime
 	- [X] Main
-	- [ ] Characters & Staff
+	- [X] Characters & Staff
 	- [ ] Episodes
 	- [ ] News
 	- [ ] Videos

@@ -22,7 +22,6 @@ class Anime extends \Jikan\Abstracts\Requests
 			throw new Exception\UnsupportedRequestException();
 		}
 
-
 		if (
 			!is_null($helper) 
 			&& $helper instanceof \Jikan\Abstracts\Helper 
@@ -30,12 +29,7 @@ class Anime extends \Jikan\Abstracts\Requests
 			) 
 		{
 			$this->helper = $helper;
-
-			var_dump($this->helper);
 		}
-
-
-		die;
 
 		$model = '\\Jikan\\Model\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
 		$parser = '\\Jikan\\Parser\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));

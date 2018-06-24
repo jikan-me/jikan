@@ -2,7 +2,7 @@
 
 namespace Jikan\Parser;
 
-class AnimeEpisodes extends \Skraypar\Skraypar
+class AnimeEpisode extends \Skraypar\Skraypar
 {
 	public $model;
 

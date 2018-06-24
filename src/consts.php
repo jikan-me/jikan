@@ -17,7 +17,7 @@ define( 'USER_LIST_ENDPOINT' , 'malappinfo.php');
  */
 define( 'CHARACTERS_STAFF' , 'characters' );
 define( 'CHARACTERS' , 'characters' );
-define( 'EPISODES' , 'episodes' );
+define( 'EPISODES' , 'episode' );
 define( 'NEWS' , 'news' );
 define( 'VIDEOS' , 'video' );
 define( 'STATS' , 'stats' );

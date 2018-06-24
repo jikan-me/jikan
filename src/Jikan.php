@@ -26,7 +26,7 @@ class Jikan
      */
     public function Anime(\Jikan\Request\Anime $request) {
         $this->request = $request;
-        $this->response = new \Jikan\Get\Anime($this->request);
+        $this->response = (new \Jikan\Get\Anime($this->request))->response;
 
         return $this;
     }
@@ -36,7 +36,7 @@ class Jikan
      */
     public function Manga(\Jikan\Request\Manga $request) {
         $this->request = $request;
-        $this->response = new \Jikan\Get\Manga($this->request);
+        $this->response = (new \Jikan\Get\Manga($this->request))->response;
 
         return $this;
     }

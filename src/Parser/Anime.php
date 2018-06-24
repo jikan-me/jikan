@@ -26,27 +26,6 @@ class Anime
      */
     public function getModel(): \Jikan\Model\Anime
     {
-//        $model->set(
-//            'Anime',
-//            'title',
-//            $this->crawler->filterXPath('//meta[@property=\'og:title\']')->extract(['content'])[0]
-//        );
-//        $model->set(
-//            'Anime',
-//            'image_url',
-//            $this->crawler->filterXPath('//meta[@property=\'og:image\']')->extract(['content'])[0]
-//        );
-//        $model->set(
-//            'Anime',
-//            'link_canonical',
-//            $this->crawler->filterXPath('//meta[@property=\'og:url\']')->extract(['content'])[0]
-//        );
-//        $model->set(
-//            'Anime',
-//            'synopsis',
-//            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0]
-//        );
-
         return \Jikan\Model\Anime::fromParser($this);
     }
 
@@ -56,5 +35,38 @@ class Anime
     public function getAnimeTitle():string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->extract(['content'])[0];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeURL():string
+    {
+        return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->extract(['content'])[0];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeImageURL():string
+    {
+        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->extract(['content'])[0];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeSynopsis():string
+    {
+        return $this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeTitleEnglish():string
+    {
+        var_dump($this->crawler->filterXPath('//*[@id="content"]/table/tbody/tr/td[1]/div/div[6]/text()')->extract(['content']));
+        return ""; // whitebox
     }
 }

@@ -190,6 +190,10 @@ class Anime
     {
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();
+        $instance->link_canonical = $parser->getAnimeURL();
+        $instance->image_url = $parser->getAnimeImageURL();
+        $instance->synopsis = $parser->getAnimeSynopsis();
+        $instance->title_english = $parser->getAnimeTitleEnglish();
 
         return $instance;
     }

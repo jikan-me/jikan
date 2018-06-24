@@ -19,8 +19,6 @@ class MalClient
      * MalClient constructor.
      *
      * @param GuzzleClient|null $guzzle
-     *
-     * @internal param \Goutte\Client $ghoutte
      */
     public function __construct(GuzzleClient $guzzle = null)
     {

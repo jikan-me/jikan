@@ -152,7 +152,7 @@ class Anime
      */
     public function getAnimeEpisodesUnknown(): bool
     {
-        return true;
+        return self::getModel()->episodes;
     }
 
     /**

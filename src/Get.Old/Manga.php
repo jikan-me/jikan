@@ -2,19 +2,15 @@
 
 namespace Jikan\Get;
 
+use Jikan\Lib\Parser\MangaParse;
 use Jikan\Lib\Parser\MangaCharacterParse;
+use Jikan\Lib\Parser\MangaNewsParse;
+use Jikan\Lib\Parser\MangaStatsParse;
+use Jikan\Lib\Parser\MangaPicturesParse;
 use Jikan\Lib\Parser\MangaForumParse;
 use Jikan\Lib\Parser\MangaMoreInfoParse;
-use Jikan\Lib\Parser\MangaNewsParse;
-use Jikan\Lib\Parser\MangaParse;
-use Jikan\Lib\Parser\MangaPicturesParse;
-use Jikan\Lib\Parser\MangaStatsParse;
 
-/**
- * Class Manga
- *
- * @package Jikan\Get
- */
+
 class Manga extends Get
 {
 
@@ -22,16 +18,7 @@ class Manga extends Get
 
     private $validExtends = [CHARACTERS, NEWS, STATS, PICTURES, FORUM, MORE_INFO];
 
-    /**
-     * Manga constructor.
-     *
-     * @param null $id
-     * @param null $extend
-     *
-     * @throws \Exception
-     */
-    public function __construct($id = null, $extend = null)
-    {
+    public function __construct($id = null, $extend = null) {
 
 
         if (is_null($id)) {
@@ -43,8 +30,8 @@ class Manga extends Get
         $this->parser = new MangaParse;
         $this->parser->setPath(
             (
-                is_int($this->id) || ctype_digit($this->id)
-            ) ? BASE_URL.MANGA_ENDPOINT.$this->id : $this->id
+                is_int($this->id) || ctype_digit($this->id)    
+            ) ? BASE_URL . MANGA_ENDPOINT . $this->id : $this->id
         );
         $this->parser->loadFile();
 
@@ -58,6 +45,7 @@ class Manga extends Get
             $this->extend = $extend;
 
             foreach ($this->extend as $key => $extend) {
+
                 if (is_string($key)) {
                     $this->extend = $key;
                     $this->extendArgs = $extend;
@@ -78,10 +66,10 @@ class Manga extends Get
                 }
             }
         }
+
     }
 
-    private function characters()
-    {
+    private function characters() {
         $this->parser = new MangaCharacterParse;
 
         $this->parser->setPath($this->canonical_path.'/characters');
@@ -90,8 +78,7 @@ class Manga extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function news()
-    {
+    private function news() {
         $this->parser = new MangaNewsParse;
 
         $this->parser->setPath($this->canonical_path.'/news');
@@ -100,8 +87,7 @@ class Manga extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function stats()
-    {
+    private function stats() {
         $this->parser = new MangaStatsParse;
 
         $this->parser->setPath($this->canonical_path.'/stats');
@@ -110,8 +96,7 @@ class Manga extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function pictures()
-    {
+    private function pictures() {
         $this->parser = new MangaPicturesParse;
 
         $this->parser->setPath($this->canonical_path.'/pics');
@@ -120,8 +105,7 @@ class Manga extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function forum()
-    {
+    private function forum() {
         $this->parser = new MangaForumParse;
 
         $this->parser->setPath($this->canonical_path.'/forum');
@@ -130,8 +114,7 @@ class Manga extends Get
         $this->response = array_merge($this->response, $this->parser->parse());
     }
 
-    private function moreInfo()
-    {
+    private function moreInfo() {
         $this->parser = new MangaMoreInfoParse;
 
         $this->parser->setPath($this->canonical_path.'/moreinfo');
@@ -139,4 +122,5 @@ class Manga extends Get
 
         $this->response = array_merge($this->response, $this->parser->parse());
     }
+
 }

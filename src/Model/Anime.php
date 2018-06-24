@@ -2,80 +2,77 @@
 
 namespace Jikan\Model;
 
-/**
- * Class Anime
- *
- * @package Jikan\Model
- */
+
 class Anime extends \Jikan\Abstracts\Model
 {
 
-    public $mal_id;
+	public $mal_id;
 
-    public $link_canonical;
+	public $link_canonical;
 
-    public $title;
+	public $title;
 
-    public $title_english;
+	public $title_english;
 
-    public $title_japanese;
+	public $title_japanese;
 
-    public $title_synonyms;
+	public $title_synonyms;
 
-    public $image_url;
+	public $image_url;
 
-    public $type;
+	public $type;
 
     public $source;
 
     public $episodes;
 
-    public $status;
+	public $status;
 
-    public $airing = false;
+	public $airing = false;
 
-    public $aired_string;
+	public $aired_string;
+	
+	public $aired = [
+		'from' => null,
+		'to' => null
+	];
 
-    public $aired = [
-        'from' => null,
-        'to'   => null,
-    ];
+	public $duration;
 
-    public $duration;
+	public $rating;
 
-    public $rating;
+	public $score;
 
-    public $score;
+	public $scored_by;
 
-    public $scored_by;
+	public $rank;
 
-    public $rank;
+	public $popularity;
 
-    public $popularity;
+	public $members;
 
-    public $members;
+	public $favorites;
 
-    public $favorites;
+	public $synopsis;
 
-    public $synopsis;
+	public $background;
 
-    public $background;
+	public $premiered;
 
-    public $premiered;
+	public $broadcast;
 
-    public $broadcast;
+	public $related = [];
 
-    public $related = [];
+	public $producer = [];
 
-    public $producer = [];
+	public $licensor = [];
 
-    public $licensor = [];
+	public $studio = [];
 
-    public $studio = [];
+	public $genre = [];
 
-    public $genre = [];
+	public $opening_theme = [];
 
-    public $opening_theme = [];
+	public $ending_theme = [];
 
-    public $ending_theme = [];
 }

@@ -2,48 +2,29 @@
 
 namespace Jikan\Abstracts;
 
-/**
- * Class Requests
- *
- * @package Jikan\Abstracts
- */
 abstract class Requests
 {
 
-    private $path;
-    private $id;
+	private $path;
+	private $id;
 
-    public function getPath()
-    {
-        return $this->path;
-    }
+	public function setPath(string $path) {
+		$this->path = $path;
 
-    /**
-     * @param string $path
-     *
-     * @return $this
-     */
-    public function setPath(string $path)
-    {
-        $this->path = $path;
+		return $this;
+	}
 
-        return $this;
-    }
+	public function setID(int $id) {
+		$this->id = $id;
 
-    public function getID()
-    {
-        return $this->id;
-    }
+		return $this;
+	}
 
-    /**
-     * @param int $id
-     *
-     * @return $this
-     */
-    public function setID(int $id)
-    {
-        $this->id = $id;
+	public function getPath() {
+		return $this->path;
+	}
 
-        return $this;
-    }
+	public function getID() {
+		return $this->id;
+	}
 }

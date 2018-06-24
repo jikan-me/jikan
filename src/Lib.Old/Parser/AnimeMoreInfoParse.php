@@ -1,24 +1,16 @@
 <?php
-
 namespace Jikan\Lib\Parser;
 
 use Jikan\Model\AnimeMoreInfo as AnimeMoreInfoModel;
 
-/**
- * Class AnimeMoreInfoParse
- *
- * @package Jikan\Lib\Parser
- */
 class AnimeMoreInfoParse extends TemplateParse
 {
 
     private $return = [];
 
-    /**
-     * @return array
-     */
-    public function parse(): array
+    public function parse() : Array
     {
+
 
 
         $this->model = new AnimeMoreInfoModel;
@@ -27,37 +19,28 @@ class AnimeMoreInfoParse extends TemplateParse
          * Rules
          */
 
-        $this->addRule(
-            'moreinfo',
-            '~<h2 class="mb8">More Info</h2>~',
-            function () {
-                $i = 0;
-                $capture = '';
+        $this->addRule('moreinfo', '~<h2 class="mb8">More Info</h2>~', function() {
+            $i = 0;
+            $capture = "";
 
-                while (true) {
-                    if (preg_match('~<div class="mauto clearfix pt24"~', $this->file[$this->lineNo + $i])) {
-                        $capture .= $this->file[$this->lineNo + $i];
-                        break;
-                    }
-
+            while(true) {
+                if (preg_match('~<div class="mauto clearfix pt24"~', $this->file[$this->lineNo + $i])) {
                     $capture .= $this->file[$this->lineNo + $i];
-
-                    $i++;
+                    break;
                 }
 
+                $capture .= $this->file[$this->lineNo + $i];
 
-                $capture = trim(
-                    str_replace(
-                        ['<h2 class="mb8">More Info</h2>', '<div class="mauto clearfix pt24" style="width:760px;">'],
-                        '',
-                        $capture
-                    )
-                );
-                $capture = strip_tags(str_replace(['<br>', '<br />', '<br/>'], '\n', $capture));
-
-                $this->model->set('AnimeMoreInfo', 'more_info', $capture);
+                $i++;
             }
-        );
+
+
+            $capture = trim(str_replace(['<h2 class="mb8">More Info</h2>', '<div class="mauto clearfix pt24" style="width:760px;">'], '', $capture));
+            $capture = strip_tags(str_replace(['<br>', '<br />', '<br/>'], '\n', $capture));
+
+            $this->model->set('AnimeMoreInfo', 'more_info', $capture);
+
+        });
 
         /*
          * Parsing
@@ -70,6 +53,6 @@ class AnimeMoreInfoParse extends TemplateParse
             $this->find();
         }
 
-        return (array)$this->model;
+        return (array) $this->model;
     }
 }

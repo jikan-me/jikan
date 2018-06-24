@@ -5,11 +5,6 @@ namespace Jikan\Get;
 use Jikan\Lib\Parser\CharacterParse;
 use Jikan\Lib\Parser\CharacterPicturesParse;
 
-/**
- * Class Character
- *
- * @package Jikan\Get
- */
 class Character extends Get
 {
 
@@ -17,16 +12,7 @@ class Character extends Get
 
     private $validExtends = [PICTURES];
 
-    /**
-     * Character constructor.
-     *
-     * @param null $id
-     * @param null $extend
-     *
-     * @throws \Exception
-     */
-    public function __construct($id = null, $extend = null)
-    {
+    public function __construct($id = null, $extend = null) {
 
 
         if (is_null($id)) {
@@ -38,8 +24,8 @@ class Character extends Get
         $this->parser = new CharacterParse;
         $this->parser->setPath(
             (
-                is_int($this->id) || ctype_digit($this->id)
-            ) ? BASE_URL.CHARACTER_ENDPOINT.$this->id : $this->id
+                is_int($this->id) || ctype_digit($this->id)    
+            ) ? BASE_URL . CHARACTER_ENDPOINT . $this->id : $this->id
         );
         $this->parser->loadFile();
 
@@ -52,6 +38,7 @@ class Character extends Get
             $this->extend = $extend;
 
             foreach ($this->extend as $key => $extend) {
+
                 if (is_string($key)) {
                     $this->extend = $key;
                     $this->extendArgs = $extend;
@@ -72,10 +59,10 @@ class Character extends Get
                 }
             }
         }
+
     }
 
-    private function pictures()
-    {
+    private function pictures() {
         $this->parser = new CharacterPicturesParse;
 
         $this->parser->setPath($this->canonical_path.'/pictures');
@@ -83,4 +70,5 @@ class Character extends Get
 
         $this->response = array_merge($this->response, $this->parser->parse());
     }
+
 }

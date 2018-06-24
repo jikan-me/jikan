@@ -4,32 +4,20 @@ namespace Jikan\Get;
 
 use Jikan\Lib\Parser\SeasonalParse;
 
-/**
- * Class Seasonal
- *
- * @package Jikan\Get
- */
 class Seasonal extends Get
 {
 
     private $validExtends = [];
 
-    /**
-     * Seasonal constructor.
-     *
-     * @param null $season
-     * @param null $year
-     */
-    public function __construct($season = null, $year = null)
-    {
+    public function __construct($season = null, $year = null) {
 
 
         $this->parser = new SeasonalParse;
 
-        $link = BASE_URL.'anime/season';
+        $link = BASE_URL . 'anime/season';
 
         if (!is_null($season) && !is_null($year)) {
-            $link .= '/'.$year.'/'.$season;
+            $link .= '/' . $year . '/' . $season;
         }
 
 
@@ -39,4 +27,5 @@ class Seasonal extends Get
         $this->response['code'] = $this->parser->status;
         $this->response = array_merge($this->response, $this->parser->parse());
     }
+
 }

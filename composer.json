@@ -9,9 +9,8 @@
             "email": "irfan@jikan.moe"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
-        "php": "^7.0",
         "irfan-dahir/skraypar": "dev-master"
     },
     "autoload": {
@@ -22,12 +21,5 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.3",
-        "php-vcr/php-vcr": "~1.3.2",
-        "php-vcr/phpunit-testlistener-vcr": "^3.0",
-        "squizlabs/php_codesniffer": "^3.3",
-        "phpro/grumphp": "^0.14.1",
-        "jakub-onderka/php-parallel-lint": "^1.0",
-        "doctrine/collections": "^1.5"
     }
 }

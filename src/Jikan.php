@@ -14,9 +14,9 @@
 
 namespace Jikan;
 
-use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Model\Anime;
+use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\AnimeRequest;
 
 require __DIR__.'/consts.php';
@@ -37,7 +37,7 @@ class Jikan
      */
     public function __construct(GuzzleClient $guzzle = null)
     {
-        $this->myanimelist = new \MalClient($guzzle);
+        $this->myanimelist = new MalClient($guzzle);
     }
 
     /**

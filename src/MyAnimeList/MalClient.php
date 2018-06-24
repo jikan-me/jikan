@@ -1,9 +1,12 @@
 <?php
 
+namespace Jikan\MyAnimeList;
 
+use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Model\Anime;
-use Jikan\Request\AnimeRequest;
+use Jikan\Request;
+use Jikan\Parser;
 
 /**
  * Class MalClient
@@ -11,7 +14,7 @@ use Jikan\Request\AnimeRequest;
 class MalClient
 {
     /**
-     * @var \Goutte\Client
+     * @var Client
      */
     private $ghoutte;
 
@@ -22,21 +25,21 @@ class MalClient
      */
     public function __construct(GuzzleClient $guzzle = null)
     {
-        $this->ghoutte = new \Goutte\Client();
+        $this->ghoutte = new Client();
         if ($guzzle !== null) {
             $this->ghoutte->setClient($guzzle);
         }
     }
 
     /**
-     * @param AnimeRequest $request
+     * @param Request\AnimeRequest $request
      *
      * @return Anime
      */
-    public function getAnime(AnimeRequest $request): Anime
+    public function getAnime(Request\AnimeRequest $request): Anime
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new \Jikan\Parser\Anime($crawler);
+        $parser = new Parser\Anime($crawler);
 
         return $parser->getModel();
     }

@@ -2,9 +2,14 @@
 
 namespace Jikan\Parser;
 
-use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Helper\JString;
+use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class Anime
+ *
+ * @package Jikan\Parser
+ */
 class Anime
 {
     /**
@@ -33,7 +38,7 @@ class Anime
     /**
      * @return string
      */
-    public function getAnimeTitle():string
+    public function getAnimeTitle(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->extract(['content'])[0];
     }
@@ -41,7 +46,7 @@ class Anime
     /**
      * @return string
      */
-    public function getAnimeURL():string
+    public function getAnimeURL(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->extract(['content'])[0];
     }
@@ -49,7 +54,7 @@ class Anime
     /**
      * @return string
      */
-    public function getAnimeImageURL():string
+    public function getAnimeImageURL(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->extract(['content'])[0];
     }
@@ -57,17 +62,23 @@ class Anime
     /**
      * @return string
      */
-    public function getAnimeSynopsis():string
+    public function getAnimeSynopsis(): string
     {
-        return JString::cleanse($this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0]);
+        return JString::cleanse(
+            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0]
+        );
     }
 
     /**
      * @return string
      */
-    public function getAnimeTitleEnglish():string
+    public function getAnimeTitleEnglish(): string
     {
-        //var_dump($this->crawler->filterXPath('//*[@id="content"]/table/tbody/tr/td[1]/div/div[6]/text()')->extract(['content']));
-        return ""; // whitebox
+        $title = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[1]/div')
+            ->filter('.spaceit_pad')
+            ->text();
+
+        return trim($title);
     }
 }

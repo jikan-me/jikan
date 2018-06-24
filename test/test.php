@@ -8,8 +8,7 @@ $jikan = new Jikan\Jikan;
 try {
 	$jikan->Anime(
 		(new \Jikan\Request\Anime(
-			EPISODES, 
-			(new Jikan\Helper\Episodes(1)) // page 1
+			CHARACTERS_STAFF 
 		))->setID(21)
 	);
 

@@ -17,7 +17,7 @@ class Anime extends \Jikan\Abstracts\Requests
 	private const VALID_HELPERS = [EPISODES];
 	private const PATH = BASE_URL . ANIME_ENDPOINT;
 
-	public function __construct($request = ANIME, $helper) {
+	public function __construct($request = ANIME, $helper = null) {
 		if (!in_array($request, self::VALID_REQUESTS)) {
 			throw new Exception\UnsupportedRequestException();
 		}
@@ -45,7 +45,9 @@ class Anime extends \Jikan\Abstracts\Requests
 		}
 
 		if (!is_null($this->getID())) {
-			return self::PATH . parent::getID() . ($this->request !== ANIME ? '/_/' . $this->request : '') . (is_null($this->helper) ?: '?' . $this->helper->build());
+			// Helpers are WIP
+			// return self::PATH . parent::getID() . ($this->request !== ANIME ? '/_/' . $this->request : '') . (is_null($this->helper) ?: '?' . $this->helper->build());
+			return self::PATH . parent::getID() . ($this->request !== ANIME ? '/_/' . $this->request : '');
 		}
 
 		return parent::getPath();

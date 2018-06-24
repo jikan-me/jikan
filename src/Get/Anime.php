@@ -8,24 +8,20 @@ use Jikan\Parser\Anime as AnimeParser;
 
 class Anime
 {
-	public $parser;
-	public $response;
+    public $parser;
+    public $response;
 
-	public function __construct(AnimeRequest &$request) {
+    public function __construct(AnimeRequest $request)
+    {
+        $request->parser->setPath($request->getPath());
+        $request->parser->loadRules();
+        $request->parser->loadFile();
+        $request->parser->parse();
 
-		var_dump($request->getPath());
-		die;
-
-		$request->parser->setPath($request->getPath());
-		$request->parser->loadRules();
-		$request->parser->loadFile();
-		$request->parser->parse();
-
-		return $this->response = [
-			'status' => $request->parser->status,
-			'response' => (array) $request->parser->model
-		];
-
-	}
+        return $this->response = [
+            'status'   => $request->parser->status,
+            'response' => (array)$request->parser->model,
+        ];
+    }
 
 }

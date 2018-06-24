@@ -5,26 +5,30 @@ namespace Jikan\Abstracts;
 abstract class Requests
 {
 
-	private $path;
-	private $id;
+    protected $id;
+    private $path;
 
-	public function setPath(string $path) {
-		$this->path = $path;
+    public function getPath()
+    {
+        return $this->path;
+    }
 
-		return $this;
-	}
+    public function setPath(string $path)
+    {
+        $this->path = $path;
 
-	public function setID(int $id) {
-		$this->id = $id;
+        return $this;
+    }
 
-		return $this;
-	}
+    public function getID()
+    {
+        return $this->id;
+    }
 
-	public function getPath() {
-		return $this->path;
-	}
+    public function setID(int $id)
+    {
+        $this->id = $id;
 
-	public function getID() {
-		return $this->id;
-	}
+        return $this;
+    }
 }

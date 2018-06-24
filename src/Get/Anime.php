@@ -2,7 +2,7 @@
 
 namespace Jikan\Get;
 
-use Jikan\Request\Anime as AnimeRequest;
+use Jikan\Request\AnimeRequest as AnimeRequest;
 use Jikan\Model\Anime as AnimeModel;
 use Jikan\Parser\Anime as AnimeParser;
 use Goutte\Client;

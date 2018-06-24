@@ -7,7 +7,7 @@ $jikan = new Jikan\Jikan;
 
 try {
 	$jikan->Anime(
-		(new \Jikan\Request\Anime(
+		(new \Jikan\Request\AnimeRequest(
 		))->setID(21)
 	);
 

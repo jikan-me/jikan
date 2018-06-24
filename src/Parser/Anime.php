@@ -2,37 +2,59 @@
 
 namespace Jikan\Parser;
 
-use Jikan\Helper\JString as JString;
-use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 class Anime
 {
-	public $model;
-	public $response;
+    /**
+     * @var Crawler
+     */
+    private $crawler;
 
-    public function __construct(\Jikan\Request\Anime &$request)
+    /**
+     * Anime constructor.
+     *
+     * @param Crawler $crawler
+     */
+    public function __construct(Crawler $crawler)
     {
+        $this->crawler = $crawler;
+    }
 
-		$request->client = new Client;
-		$request->crawler = $request->client->request('GET', $request->getPath());
+    /**
+     * @return \Jikan\Model\Anime
+     */
+    public function getModel(): \Jikan\Model\Anime
+    {
+//        $model->set(
+//            'Anime',
+//            'title',
+//            $this->crawler->filterXPath('//meta[@property=\'og:title\']')->extract(['content'])[0]
+//        );
+//        $model->set(
+//            'Anime',
+//            'image_url',
+//            $this->crawler->filterXPath('//meta[@property=\'og:image\']')->extract(['content'])[0]
+//        );
+//        $model->set(
+//            'Anime',
+//            'link_canonical',
+//            $this->crawler->filterXPath('//meta[@property=\'og:url\']')->extract(['content'])[0]
+//        );
+//        $model->set(
+//            'Anime',
+//            'synopsis',
+//            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0]
+//        );
 
-		$request->model->set('Anime', 'title', 
-			$request->crawler->filterXpath('//meta[@property=\'og:title\']')->extract(['content'])[0]
-		);
-		$request->model->set('Anime', 'image_url', 
-			$request->crawler->filterXpath('//meta[@property=\'og:image\']')->extract(['content'])[0]
-		);
-		$request->model->set('Anime', 'link_canonical', 
-			$request->crawler->filterXpath('//meta[@property=\'og:url\']')->extract(['content'])[0]
-		);
-		$request->model->set('Anime', 'synopsis', 
-			$request->crawler->filterXpath('//meta[@property=\'og:description\']')->extract(['content'])[0]
-		);
+        return \Jikan\Model\Anime::fromParser($this);
+    }
 
-
-        return $this->response = [
-            'status'   => $request->client->getResponse()->getStatus(),
-            'response' => (array) $request->model,
-        ];
+    /**
+     * @return string
+     */
+    public function getAnimeTitle():string
+    {
+        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->extract(['content'])[0];
     }
 }

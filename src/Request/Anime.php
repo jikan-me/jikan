@@ -2,22 +2,28 @@
 
 namespace Jikan\Request;
 
-use \Jikan\Exception as Exception;
+use Jikan\Exception as Exception;
 
 class Anime extends \Jikan\Abstracts\Requests
 {
 
-	public $model;
+	public $model;$
 	public $response;
 	public $parser;
 
 	private $request;
-	private const VALID_REQUESTS = [ANIME, CHARACTERS_STAFF];
+	private $helper;
+	private const VALID_REQUESTS = [ANIME, CHARACTERS_STAFF, EPISODES, NEWS, VIDEOS, STATS, PICTURES, FORUM, MORE_INFO];
+	private const VALID_HELPERS = [EPISODES];
 	private const PATH = BASE_URL . ANIME_ENDPOINT;
 
-	public function __construct($request = ANIME) {
+	public function __construct($request = ANIME, $helper = null) {
 		if (!in_array($request, self::VALID_REQUESTS)) {
 			throw new Exception\UnsupportedRequestException();
+		}
+
+		if (!is_null($helper) && $helper instanceof \Jikan\Abstracts\Helper && in_array(strtolower($helper::class), self::VALID_HELPERS)) {
+			$this->helper = $helper;
 		}
 
 		$model = '\\Jikan\\Model\\' . ($request == ANIME ? ANIME : ANIME . ucfirst($request));
@@ -42,5 +48,11 @@ class Anime extends \Jikan\Abstracts\Requests
 
 	public function getRequest() {
 		return $request;
+	}
+
+	public function setRequestArgs($key, $value) {
+		if (array_key_exists($this->request, self::REQUEST_VALUES)) {
+			$this->requestArgs = $value;
+		}
 	}
 }

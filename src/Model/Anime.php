@@ -191,7 +191,7 @@ class Anime
      *
      * @return Anime
      */
-    public static function fromParser(\Jikan\Parser\Anime $parser)
+    public static function fromParser(\Jikan\Parser\Anime $parser): Anime
     {
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();
@@ -203,9 +203,9 @@ class Anime
         $instance->title_japanese = $parser->getAnimeTitleJapanese();
         $instance->type = $parser->getAnimeType();
         $instance->episodes = $parser->getAnimeEpisodes();
-        $instance->episodes_unknown =$instance->episodes == 0 ? true : false;
+        $instance->episodes_unknown = $instance->episodes === 0;
         $instance->status = $parser->getAnimeStatus();
-        $instance->airing = $instance->status == 'Currently Airing' ? true : false;
+        $instance->airing = $instance->status === 'Currently Airing';
 
         return $instance;
     }

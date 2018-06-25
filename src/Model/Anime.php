@@ -256,6 +256,9 @@ class Anime
         }
         $instance->scored_by = (int) str_replace(',', '', $matches[2]);
         $instance->rank = (int) $parser->getAnimeRank();
+        $instance->popularity = (int) $parser->getAnimePopularity();
+        $instance->members = (int) $parser->getAnimeMembers();
+        $instance->favorites = (int) $parser->getAnimeFavorites();
 
 
 

@@ -414,4 +414,58 @@ class Anime implements ParserInterface
 
         return $ranked !== 'N/A' ? $ranked : null;
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimePopularity(): ?string
+    {
+        $popularity = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Popularity:"]');
+        
+        if (!$popularity->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            str_replace([$popularity->text(), '#'], '', $popularity->parents()->text())
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeMembers(): ?string
+    {
+        $member = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Members:"]');
+        
+        if (!$member->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            str_replace([$member->text(), ','], '', $member->parents()->text())
+        );
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeFavorites(): ?string
+    {
+        $favorite = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Members:"]');
+        
+        if (!$favorite->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            str_replace([$favorite->text(), ','], '', $favorite->parents()->text())
+        );
+    }
 }

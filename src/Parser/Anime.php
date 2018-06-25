@@ -458,7 +458,7 @@ class Anime implements ParserInterface
     {
         $favorite = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Members:"]');
+            ->filterXPath('//span[text()="Favorites:"]');
         
         if (!$favorite->count()) {
             return null;

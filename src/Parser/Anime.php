@@ -131,15 +131,15 @@ class Anime implements ParserInterface
      */
     public function getAnimeType(): ?string
     {
-        $title = $this->crawler
+        $type = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Type:"]');
-        if (!$title->count()) {
+        if (!$type->count()) {
             return null;
         }
 
         return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
+            str_replace($type->text(), '', $type->parents()->text())
         );
     }
 
@@ -149,18 +149,18 @@ class Anime implements ParserInterface
      */
     public function getAnimeEpisodes(): ?int
     {
-        $title = $this->crawler
+        $episodes = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Episodes:"]');
 
-        if (!$title->count()) {
+        if (!$episodes->count()) {
             return null;
         }
 
-        return (str_replace($title->text(), '', $title->parents()->text()) === 'Unknown') ? 0 : (int)str_replace(
-            $title->text(),
+        return (str_replace($episodes->text(), '', $episodes->parents()->text()) === 'Unknown') ? 0 : (int)str_replace(
+            $episodes->text(),
             '',
-            $title->parents()->text()
+            $episodes->parents()->text()
         );
     }
 
@@ -170,15 +170,15 @@ class Anime implements ParserInterface
      */
     public function getAnimeStatus(): ?string
     {
-        $title = $this->crawler
+        $status = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Status:"]');
-        if (!$title->count()) {
+        if (!$status->count()) {
             return null;
         }
 
         return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
+            str_replace($status->text(), '', $status->parents()->text())
         );
     }
 
@@ -187,13 +187,13 @@ class Anime implements ParserInterface
      */
     public function getAnimeAiredString(): string
     {
-        $title = $this->crawler
+        $aired = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Aired:"]');
             
-        if ($title->count() > 0) {
+        if ($aired->count() > 0) {
             return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
+                str_replace($aired->text(), '', $aired->parents()->text())
             );
         }
     }
@@ -203,13 +203,13 @@ class Anime implements ParserInterface
      */
     public function getAnimePremiered(): string
     {
-        $title = $this->crawler
+        $aired = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Premiered:"]');
             
-        if ($title->count() > 0) {
+        if ($aired->count() > 0) {
             return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
+                str_replace($aired->text(), '', $aired->parents()->text())
             );
         }
     }
@@ -219,13 +219,13 @@ class Anime implements ParserInterface
      */
     public function getAnimeBroadcast(): string
     {
-        $title = $this->crawler
+        $broadcast = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Broadcast:"]');
             
-        if ($title->count() > 0) {
+        if ($broadcast->count() > 0) {
             return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
+                str_replace($broadcast->text(), '', $broadcast->parents()->text())
             );
         }
     }
@@ -235,13 +235,13 @@ class Anime implements ParserInterface
      */
     public function getAnimeProducer(): array
     {
-        $title = $this->crawler
+        $producer = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Producers:"]');
 
         $producers = [];
-        if (strpos($title->parents()->text(), 'None found') === false && $title->count() > 0) {
-            $producers = $title->parents()->first()->filter('a')->each(function($node) {
+        if (strpos($producer->parents()->text(), 'None found') === false && $producer->count() > 0) {
+            $producers = $producer->parents()->first()->filter('a')->each(function($node) {
                 return [
                     'url' => BASE_URL . substr($node->attr('href'), 1),
                     'name' => $node->text()

@@ -254,11 +254,11 @@ class Anime
         if ($matches[1] !== 'N/A') {
             $instance->score = (float) $matches[1];
         }
-        $instance->scored_by = (int) str_replace(',', '', $matches[2]);
-        $instance->rank = (int) $parser->getAnimeRank();
-        $instance->popularity = (int) $parser->getAnimePopularity();
-        $instance->members = (int) $parser->getAnimeMembers();
-        $instance->favorites = (int) $parser->getAnimeFavorites();
+        $instance->scored_by = str_replace(',', '', $matches[2]);
+        $instance->rank = $parser->getAnimeRank();
+        $instance->popularity = $parser->getAnimePopularity();
+        $instance->members = $parser->getAnimeMembers();
+        $instance->favorites = $parser->getAnimeFavorites();
 
 
 

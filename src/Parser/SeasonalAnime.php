@@ -56,7 +56,7 @@ class SeasonalAnime implements ParserInterface
     public function getEpisodes(): ?int
     {
 
-        $eps = $this->crawler->filterXPath( '//div[contains(@class, "eps")]')->text();
+        $eps = $this->crawler->filterXPath('//div[contains(@class, "eps")]')->text();
         $eps = JString::cleanse($eps);
         str_replace(' eps', '', $eps);
 
@@ -229,7 +229,7 @@ class SeasonalAnime implements ParserInterface
     public function isContinuing(): bool
     {
         return strpos(
-                $this->crawler->parents()->html(),
+                $this->crawler->parents()->text(),
                 '(Continuing)'
             ) !== false;
     }

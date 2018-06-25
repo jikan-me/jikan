@@ -232,4 +232,25 @@ class AnimeParserTest extends TestCase
             $this->anime->getProducer()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_licensor()
+    {
+        self::assertEquals(
+            [
+                [
+                    'url' => 'https://myanimelist.net/anime/producer/102/Funimation',
+                    'name' => 'Funimation'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/producer/252/4Kids_Entertainment',
+                    'name' => '4Kids Entertainment'
+                ]
+            ],
+            $this->anime->getLicensor()
+        );
+    }
 }

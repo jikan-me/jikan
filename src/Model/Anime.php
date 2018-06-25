@@ -242,6 +242,7 @@ class Anime
         $instance->premiered = $parser->getAnimePremiered();
         $instance->broadcast = $parser->getAnimeBroadcast();
         $instance->producer = $parser->getAnimeProducer();
+        $instance->licensor = $parser->getAnimeLicensor();
 
 
         return $instance;

@@ -260,6 +260,7 @@ class Anime
         $instance->members = $parser->getAnimeMembers();
         $instance->favorites = $parser->getAnimeFavorites();
         $instance->related = $parser->getAnimeRelated();
+        $instance->background = $parser->getAnimeBackground();
 
 
 

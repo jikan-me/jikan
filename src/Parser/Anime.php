@@ -505,4 +505,24 @@ class Anime implements ParserInterface
 
         return $related;
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeBackground(): ?string
+    {
+        $background = $this->crawler
+            ->filter('span[itemprop="description"]')->parents()->html();
+        preg_match('~Background</h2>(.*?)<div~s', $background, $matches);
+
+        if (empty($matches)) {
+            return null;
+        }
+
+        if (preg_match('~No background information has been added to this title~', $matches[1])) {
+            return null;
+        }
+
+        return JString::cleanse($matches[1]);
+    }
 }

@@ -245,6 +245,7 @@ class Anime
         $instance->licensor = $parser->getAnimeLicensor();
         $instance->studio = $parser->getAnimeStudio();
         $instance->source = $parser->getAnimeSource();
+        $instance->genre = $parser->getAnimeGenre();
 
 
         return $instance;

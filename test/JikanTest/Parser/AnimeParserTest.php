@@ -282,4 +282,46 @@ class AnimeParserTest extends TestCase
             $this->anime->getSource()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_genre()
+    {
+        self::assertEquals(
+            [
+                [
+                    'url' => 'https://myanimelist.net/anime/genre/1/Action',
+                    'name' => 'Action'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/genre/2/Adventure',
+                    'name' => 'Adventure'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/genre/4/Comedy',
+                    'name' => 'Comedy'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/genre/31/Super_Power',
+                    'name' => 'Super Power'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/genre/8/Drama',
+                    'name' => 'Drama'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/genre/10/Fantasy',
+                    'name' => 'Fantasy'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/genre/27/Shounen',
+                    'name' => 'Shounen'
+                ],
+
+            ],
+            $this->anime->getGenre()
+        );
+    }
 }

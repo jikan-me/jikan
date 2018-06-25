@@ -308,4 +308,25 @@ class Anime implements ParserInterface
             );
         }
     }
+
+    /**
+     * @return array
+     */
+    public function getAnimeGenre(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Genres:"]');
+
+        $genres = [];
+        if (strpos($genre->parents()->text(), 'No genres have been added yet') === false && $genre->count() > 0) {
+            $genres = $genre->parents()->first()->filter('a')->each(function($node) {
+                return [
+                    'url' => BASE_URL . substr($node->attr('href'), 1),
+                    'name' => $node->text()
+                ];
+            });
+        }
+        return $genres;
+    }
 }

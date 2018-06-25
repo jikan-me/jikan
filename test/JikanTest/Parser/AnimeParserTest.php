@@ -427,7 +427,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_related()
     {
-        $this->markTestSkipped('Add unit test for this');
+        $this->markTestSkipped('Todo');
         self::assertEquals(
             [],
             $this->anime->getRelated()
@@ -443,6 +443,32 @@ class AnimeParserTest extends TestCase
         self::assertEquals(
             'Several anime-original arcs have been adapted into light novels, and the series has inspired 40 video games as of 2016.',
             $this->anime->getBackground()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_opening()
+    {
+        $this->markTestSkipped('Todo');
+        self::assertEquals(
+            [],
+            $this->anime->getOpeningTheme()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_ending()
+    {
+        $this->markTestSkipped('Todo');
+        self::assertEquals(
+            [],
+            $this->anime->getEndingTheme()
         );
     }
 }

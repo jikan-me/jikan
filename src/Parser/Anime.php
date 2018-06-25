@@ -70,16 +70,16 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeTitleEnglish(): string
+    public function getAnimeTitleEnglish(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="English:"]');
         if (!$title->count()) {
-            return '';
+            return null;
         }
 
         return JString::cleanse(
@@ -89,16 +89,16 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeTitleSynonyms(): string
+    public function getAnimeTitleSynonyms(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Synonyms:"]');
         if (!$title->count()) {
-            return '';
+            return null;
         }
 
         return JString::cleanse(
@@ -108,16 +108,16 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeTitleJapanese(): string
+    public function getAnimeTitleJapanese(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Japanese:"]');
         if (!$title->count()) {
-            return '';
+            return null;
         }
 
         return JString::cleanse(
@@ -126,16 +126,16 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeType(): string
+    public function getAnimeType(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Type:"]');
         if (!$title->count()) {
-            return '';
+            return null;
         }
 
         return JString::cleanse(
@@ -144,17 +144,17 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeEpisodes(): int
+    public function getAnimeEpisodes(): ?int
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Episodes:"]');
 
         if (!$title->count()) {
-            return '';
+            return null;
         }
 
         return (str_replace($title->text(), '', $title->parents()->text()) === 'Unknown') ? 0 : (int)str_replace(
@@ -165,16 +165,16 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeStatus(): string
+    public function getAnimeStatus(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Status:"]');
         if (!$title->count()) {
-            return '';
+            return null;
         }
 
         return JString::cleanse(

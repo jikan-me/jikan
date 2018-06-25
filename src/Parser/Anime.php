@@ -229,4 +229,25 @@ class Anime implements ParserInterface
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeProducer(): array
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Producers:"]');
+
+        $producers = [];
+        if (strpos($title->parents()->text(), 'None found') === false && $title->count() > 0) {
+            $producers = $title->parents()->first()->filter('a')->each(function($node) {
+                return [
+                    'url' => BASE_URL . substr($node->attr('href'), 1),
+                    'name' => $node->text()
+                ];
+            });
+        }
+        return $producers;
+    }
 }

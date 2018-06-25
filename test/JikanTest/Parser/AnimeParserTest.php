@@ -207,4 +207,29 @@ class AnimeParserTest extends TestCase
             $this->anime->getBroadcast()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_producer()
+    {
+        self::assertEquals(
+            [
+                [
+                    'url' => 'https://myanimelist.net/anime/producer/169/Fuji_TV',
+                    'name' => 'Fuji TV'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/producer/416/TAP',
+                    'name' => 'TAP'
+                ],
+                [
+                    'url' => 'https://myanimelist.net/anime/producer/1365/Shueisha',
+                    'name' => 'Shueisha'
+                ],
+            ],
+            $this->anime->getProducer()
+        );
+    }
 }

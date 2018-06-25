@@ -1,4 +1,4 @@
-q<?php
+<?php
 
 namespace Jikan\Lib\Parser;
 

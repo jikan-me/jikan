@@ -393,9 +393,9 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getAnimeRank(): ?string
+    public function getAnimeRank(): ?int
     {
         $rank = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
@@ -416,9 +416,9 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getAnimePopularity(): ?string
+    public function getAnimePopularity(): ?int
     {
         $popularity = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
@@ -434,9 +434,9 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getAnimeMembers(): ?string
+    public function getAnimeMembers(): ?int
     {
         $member = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
@@ -452,9 +452,9 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getAnimeFavorites(): ?string
+    public function getAnimeFavorites(): ?int
     {
         $favorite = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
@@ -468,4 +468,5 @@ class Anime implements ParserInterface
             str_replace([$favorite->text(), ','], '', $favorite->parents()->text())
         );
     }
+
 }

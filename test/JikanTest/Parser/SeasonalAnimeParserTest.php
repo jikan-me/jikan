@@ -218,11 +218,11 @@ class SeasonalAnimeParserTest extends TestCase
      * @test
      * @vcr SeasonalParserTest.yaml
      */
-    public function it_gets_continueing()
+    public function it_gets_continuing()
     {
         self::assertEquals('One Piece', $this->springParser->getTitle());
-        self::assertTrue($this->springParser->isContinueing());
+        self::assertTrue($this->springParser->isContinuing());
         self::assertEquals('Boku no Hero Academia 3rd Season', $this->parser->getTitle());
-        self::assertFalse($this->parser->isContinueing());
+        self::assertFalse($this->parser->isContinuing());
     }
 }

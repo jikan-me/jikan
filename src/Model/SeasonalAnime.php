@@ -122,7 +122,7 @@ class SeasonalAnime extends Model
         $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
         $instance->kids = $parser->isKids();
-        $instance->continueing = $parser->isContinueing();
+        $instance->continueing = $parser->isContinuing();
 
         return $instance;
     }

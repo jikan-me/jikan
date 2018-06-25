@@ -225,11 +225,10 @@ class SeasonalAnime implements ParserInterface
     /**
      * @return bool
      */
-    public function isContinueing(): bool
+    public function isContinuing(): bool
     {
-        $txt =  $this->crawler->parents()->filter('div.anime-header')->text();
         return strpos(
-               $txt,
+                $this->crawler->parents()->html(),
                 '(Continuing)'
             ) !== false;
     }

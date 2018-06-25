@@ -1,4 +1,4 @@
-<?php
+q<?php
 
 namespace Jikan\Lib\Parser;
 
@@ -47,7 +47,7 @@ class SeasonalParse extends TemplateParse
                 $continued = false;
 
                 while (true) {
-                    if (preg_match('~<div class="mauto clearfix pt24"~', $this->file[$this->lineNo + $i])) {
+                    if (preg_match('~<div style="clear:both;"></div>~', $this->file[$this->lineNo + $i])) {
                         break;
                     }
 

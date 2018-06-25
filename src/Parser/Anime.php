@@ -525,4 +525,34 @@ class Anime implements ParserInterface
 
         return JString::cleanse($matches[1]);
     }
+
+    /**
+     * @return array
+     */
+    public function getAnimeOpeningTheme(): array
+    {
+        $opening = [];
+        $op = $this->crawler
+            ->filter('div[class="theme-songs js-theme-songs opnening"] span');
+        foreach ($op as $node) {
+            $opening[] = $node->nodeValue;
+        }
+
+        return $opening;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAnimeEndingTheme(): array
+    {
+        $ending = [];
+        $ed = $this->crawler
+            ->filter('div[class="theme-songs js-theme-songs ending"] span');
+        foreach ($ed as $node) {
+            $ending[] = $node->nodeValue;
+        }
+
+        return $ending;
+    }
 }

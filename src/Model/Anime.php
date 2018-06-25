@@ -261,6 +261,8 @@ class Anime
         $instance->favorites = $parser->getAnimeFavorites();
         $instance->related = $parser->getAnimeRelated();
         $instance->background = $parser->getAnimeBackground();
+        $instance->opening_theme = $parser->getAnimeOpeningTheme();
+        $instance->ending_theme = $parser->getAnimeEndingTheme();
 
 
 

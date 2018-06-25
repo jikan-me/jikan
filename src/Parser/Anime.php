@@ -302,17 +302,19 @@ class Anime implements ParserInterface
     /**
      * @return string
      */
-    public function getAnimeSource(): string
+    public function getAnimeSource(): ?string
     {
         $source = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Source:"]');
             
-        if ($source->count() > 0) {
-            return JString::cleanse(
-                str_replace($source->text(), '', $source->parents()->text())
-            );
+        if (!$source->count()) {
+            return null;
         }
+
+        return JString::cleanse(
+            str_replace($source->text(), '', $source->parents()->text())
+        );
     }
 
     /**
@@ -339,49 +341,55 @@ class Anime implements ParserInterface
     /**
      * @return string
      */
-    public function getAnimeDuration(): string
+    public function getAnimeDuration(): ?string
     {
         $duration = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Duration:"]');
             
-        if ($duration->count() > 0) {
-            return JString::cleanse(
-                str_replace('.', '',
-                    str_replace($duration->text(), '', $duration->parents()->text())
-                )
-            );
+        if (!$duration->count()) {
+            return null;
         }
+
+        return JString::cleanse(
+            str_replace('.', '',
+                str_replace($duration->text(), '', $duration->parents()->text())
+            )
+        );
     }
 
     /**
      * @return string
      */
-    public function getAnimeRating(): string
+    public function getAnimeRating(): ?string
     {
         $rating = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Rating:"]');
             
-        if ($rating->count() > 0) {
-            return JString::cleanse(
-                str_replace($rating->text(), '', $rating->parents()->text())
-            );
+        if (!$rating->count()) {
+            return null;
         }
+
+        return JString::cleanse(
+            str_replace($rating->text(), '', $rating->parents()->text())
+        );
     }
 
     /**
      * @return string
      */
-    public function getAnimeScore(): string
+    public function getAnimeScore(): ?string
     {
         $score = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Score:"]');
 
-        if ($score->count() > 0) {
-            return explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0];
+        if (!$score->count()) {
+            return null;
         }
+        
+        return explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0];
     }
 
     /**
@@ -393,15 +401,17 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Ranked:"]');
 
-        if ($rank->count() > 0) {
-            $ranked = str_replace('#', '',
-                substr(
-                    explode(PHP_EOL, trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
-                    0, -1
-                )
-            );
-
-            return $ranked !== 'N/A' ? $ranked : null;
+        if (!$rank->count()) {
+            return null;
         }
+            
+        $ranked = str_replace('#', '',
+            substr(
+                explode(PHP_EOL, trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
+                0, -1
+            )
+        );
+
+        return $ranked !== 'N/A' ? $ranked : null;
     }
 }

@@ -368,7 +368,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_scored_by()
     {
         self::assertEquals(
-            428730,
+            428737,
             $this->anime->getScoredBy()
         );
     }
@@ -404,7 +404,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_members()
     {
         self::assertEquals(
-            729880,
+            729892,
             $this->anime->getMembers()
         );
     }
@@ -416,7 +416,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_favorites()
     {
         self::assertEquals(
-            70459,
+            70460,
             $this->anime->getFavorites()
         );
     }
@@ -431,6 +431,18 @@ class AnimeParserTest extends TestCase
         self::assertEquals(
             [],
             $this->anime->getRelated()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_background()
+    {
+        self::assertEquals(
+            'Several anime-original arcs have been adapted into light novels, and the series has inspired 40 video games as of 2016.',
+            $this->anime->getBackground()
         );
     }
 }

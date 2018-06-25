@@ -329,4 +329,22 @@ class Anime implements ParserInterface
         }
         return $genres;
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeDuration(): string
+    {
+        $duration = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Duration:"]');
+            
+        if ($duration->count() > 0) {
+            return JString::cleanse(
+                str_replace('.', '',
+                    str_replace($duration->text(), '', $duration->parents()->text())
+                )
+            );
+        }
+    }
 }

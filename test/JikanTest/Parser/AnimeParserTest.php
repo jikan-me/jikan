@@ -324,4 +324,16 @@ class AnimeParserTest extends TestCase
             $this->anime->getGenre()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_duration()
+    {
+        self::assertEquals(
+            '24 min',
+            $this->anime->getDuration()
+        );
+    }
 }

@@ -206,7 +206,39 @@ class Anime
         $instance->episodes_unknown = $instance->episodes === 0;
         $instance->status = $parser->getAnimeStatus();
         $instance->airing = $instance->status === 'Currently Airing';
+        $instance->aired_string = $parser->getAnimeAiredString();
 
+        if (!empty($instance->aired_string) && $instance->aired_string != 'Not available') {
+            if (strpos($instance->aired_string, 'to')) {
+                preg_match('~(.*) to (.*)~', $instance->aired_string, $matches);
+                $instance->aired = [
+                    'from' => (strpos($matches[1], '?') !== false) ? null : @date_format(date_create($matches[1]), 'o-m-d'),
+                    'to' => (strpos($matches[2], '?') !== false) ? null : @date_format(date_create($matches[2]), 'o-m-d')
+                ];
+            } else {
+                if (
+                    preg_match('~^[0-9]{4}$~', $instance->aired_string)
+                    || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->aired_string)
+                    ) 
+                {
+                    $instance->aired = [
+                        'from' => null,
+                        'to' => null
+                    ];
+                } else {
+                    $instance->aired = [
+                        'from' => (strpos($instance->aired_string, '?') !== false) ? null : @date_format(date_create($instance->aired_string), 'o-m-d'),
+                        'to' => (strpos($instance->aired_string, '?') !== false) ? null : @date_format(date_create($instance->aired_string), 'o-m-d')
+                    ];
+                }
+            }
+        } else {
+            $instance->aired = [
+                'from' => null,
+                'to' => null
+            ];
+        }
+        
         return $instance;
     }
 

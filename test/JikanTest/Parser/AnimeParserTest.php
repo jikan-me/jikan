@@ -156,4 +156,31 @@ class AnimeParserTest extends TestCase
             $this->anime->isAiring()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_aired_string()
+    {
+        self::assertEquals(
+            "Oct 20, 1999 to ?",
+            $this->anime->getAiredString()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_aired()
+    {
+        self::assertEquals(
+            [
+                'from' => '1999-10-20',
+                'to' => null
+            ],
+            $this->anime->getAired()
+        );
+    }
 }

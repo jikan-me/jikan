@@ -181,4 +181,20 @@ class Anime implements ParserInterface
             str_replace($title->text(), '', $title->parents()->text())
         );
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeAiredString(): string
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Aired:"]');
+            
+        if ($title->count() > 0) {
+            return JString::cleanse(
+                str_replace($title->text(), '', $title->parents()->text())
+            );
+        }
+    }
 }

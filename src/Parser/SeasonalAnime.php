@@ -25,6 +25,8 @@ class SeasonalAnime implements ParserInterface
 
     /**
      * @return Model\SeasonalAnime
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\SeasonalAnime
     {
@@ -144,6 +146,7 @@ class SeasonalAnime implements ParserInterface
 
     /**
      * @return string
+     * @throws \RuntimeException
      */
     public function getAnimeUrl(): string
     {
@@ -152,6 +155,7 @@ class SeasonalAnime implements ParserInterface
 
     /**
      * @return int
+     * @throws \RuntimeException
      */
     public function getAnimeId(): int
     {
@@ -162,6 +166,7 @@ class SeasonalAnime implements ParserInterface
 
     /**
      * @return string
+     * @throws \RuntimeException
      */
     public function getAnimeImage(): string
     {
@@ -170,6 +175,8 @@ class SeasonalAnime implements ParserInterface
 
     /**
      * @return float|null
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getAnimeScore(): ?float
     {
@@ -183,6 +190,7 @@ class SeasonalAnime implements ParserInterface
 
     /**
      * @return null|string
+     * @throws \RuntimeException
      */
     public function getLicensors(): ?string
     {

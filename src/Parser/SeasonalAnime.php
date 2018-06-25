@@ -40,7 +40,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getStudio(): ?string
     {
-        $node = $this->crawler->filter('span.producer > a');
+        $node = $this->crawler->filterXPath('//span[contains(@class, "producer")]/a');
         if (!$node->count()) {
             return null;
         }
@@ -55,7 +55,8 @@ class SeasonalAnime implements ParserInterface
      */
     public function getEpisodes(): ?int
     {
-        $eps = $this->crawler->filter('div.eps > a')->text();
+
+        $eps = $this->crawler->filterXPath( '//div[contains(@class, "eps")]')->text();
         $eps = JString::cleanse($eps);
         str_replace(' eps', '', $eps);
 
@@ -69,7 +70,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getSource(): string
     {
-        return $this->crawler->filter('span.source')->text();
+        return $this->crawler->filterXPath('//span[contains(@class, "source")]')->text();
     }
 
     /**
@@ -79,7 +80,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getGenres(): array
     {
-        return $this->crawler->filter('span.genre > a')
+        return $this->crawler->filterXPath('//span[contains(@class, "genre")]/a')
             ->each(
                 function (Crawler $crawler) {
                     return $crawler->text();
@@ -94,7 +95,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getTitle(): string
     {
-        return $this->crawler->filter('p.title-text > a')->text();
+        return $this->crawler->filterXPath('//p[contains(@class,"title-text")]/a')->text();
     }
 
     /**
@@ -104,7 +105,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getDescription(): string
     {
-        return $this->crawler->filter('div.synopsis > span')->text();
+        return $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/span')->text();
     }
 
     /**
@@ -114,7 +115,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getType(): string
     {
-        $text = $this->crawler->filter('div.info')->text();
+        $text = $this->crawler->filterXPath('//div[contains(@class, "info")]')->text();
         $text = JString::cleanse($text);
         preg_match('/^([\w\.]+)/', $text, $matches);
 
@@ -128,7 +129,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getAirDates(): string
     {
-        return JString::cleanse($this->crawler->filter('span.remain-time')->text());
+        return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text());
     }
 
     /**
@@ -138,7 +139,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getMembers(): int
     {
-        $count = $this->crawler->filter('div.scormem > span')->text();
+        $count = $this->crawler->filterXPath('//div[contains(@class, "scormem")]/span')->text();
         $count = JString::cleanse($count);
 
         return (int)str_replace(',', '', $count);
@@ -150,7 +151,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getAnimeUrl(): string
     {
-        return $this->crawler->filter('div.title > p > a')->extract(['href'])[0];
+        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->extract(['href'])[0];
     }
 
     /**
@@ -170,7 +171,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getAnimeImage(): string
     {
-        return $this->crawler->filter('div.image > img')->extract(['src'])[0];
+        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->extract(['src'])[0];
     }
 
     /**
@@ -180,7 +181,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getAnimeScore(): ?float
     {
-        $score = JString::cleanse($this->crawler->filter('span.score')->text());
+        $score = JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "score")]')->text());
         if ($score === 'N/A') {
             return null;
         }
@@ -194,7 +195,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getLicensors(): ?string
     {
-        $licensors = $this->crawler->filter('p.licensors');
+        $licensors = $this->crawler->filterXPath('//p[contains(@class, "licensors")]');
         if (!$licensors->count()) {
             return null;
         }

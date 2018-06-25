@@ -108,4 +108,14 @@ class JikanTest extends TestCase
         $response = $this->jikan->Character(1);
         self::assertNotNull($response);
     }
+
+    /**
+     * @test
+     * @vcr JikanTest_it_gets_seasonal.yaml
+     */
+    public function it_gets_seasonal()
+    {
+        $response = $this->jikan->Seasonal(SPRING, 2018);
+        self::assertNotNull($response);
+    }
 }

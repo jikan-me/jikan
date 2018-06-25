@@ -247,6 +247,7 @@ class Anime
         $instance->source = $parser->getAnimeSource();
         $instance->genre = $parser->getAnimeGenre();
         $instance->duration = $parser->getAnimeDuration();
+        $instance->rating = $parser->getAnimeRating();
 
 
         return $instance;

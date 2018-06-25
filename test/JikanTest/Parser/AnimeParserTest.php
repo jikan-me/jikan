@@ -336,4 +336,16 @@ class AnimeParserTest extends TestCase
             $this->anime->getDuration()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_rating()
+    {
+        self::assertEquals(
+            'PG-13 - Teens 13 or older',
+            $this->anime->getRating()
+        );
+    }
 }

@@ -347,4 +347,20 @@ class Anime implements ParserInterface
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeRating(): string
+    {
+        $duration = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Rating:"]');
+            
+        if ($duration->count() > 0) {
+            return JString::cleanse(
+                str_replace($duration->text(), '', $duration->parents()->text())
+            );
+        }
+    }
 }

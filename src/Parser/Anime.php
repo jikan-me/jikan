@@ -231,7 +231,7 @@ class Anime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getAnimeProducer(): array
     {

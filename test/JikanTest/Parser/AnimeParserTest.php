@@ -384,4 +384,40 @@ class AnimeParserTest extends TestCase
             $this->anime->getRank()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_popularity()
+    {
+        self::assertEquals(
+            37,
+            $this->anime->getPopularity()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_members()
+    {
+        self::assertEquals(
+            729880,
+            $this->anime->getMembers()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_favorites()
+    {
+        self::assertEquals(
+            70459,
+            $this->anime->getFavorites()
+        );
+    }
 }

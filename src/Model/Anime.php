@@ -255,6 +255,7 @@ class Anime
             $instance->score = (float) $matches[1];
         }
         $instance->scored_by = (int) str_replace(',', '', $matches[2]);
+        $instance->rank = (int) $parser->getAnimeRank();
 
 
 

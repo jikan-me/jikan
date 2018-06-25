@@ -383,4 +383,25 @@ class Anime implements ParserInterface
             return explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0];
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeRank(): ?string
+    {
+        $rank = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Ranked:"]');
+
+        if ($rank->count() > 0) {
+            $ranked = str_replace('#', '',
+                substr(
+                    explode(PHP_EOL, trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
+                    0, -1
+                )
+            );
+
+            return $ranked !== 'N/A' ? $ranked : null;
+        }
+    }
 }

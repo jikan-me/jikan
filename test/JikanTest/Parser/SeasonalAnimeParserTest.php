@@ -27,15 +27,25 @@ class SeasonalAnimeParserTest extends TestCase
      */
     private $parserR18;
 
+    /**
+     * @var \Jikan\Parser\SeasonalAnime
+     */
+    private $springParser;
+
     public function setUp()
     {
-        $request = new \Jikan\Request\Seasonal(2018, 'summer');
         $client = new \Goutte\Client();
+        $request = new \Jikan\Request\Seasonal(2018, 'spring');
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime')->first());
         $this->parser2 = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime')->eq(2));
         $this->parserKids = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime.kids')->first());
         $this->parserR18 = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime.r18')->first());
+        $this->springParser = new \Jikan\Parser\SeasonalAnime(
+            $crawler->filter(
+                '#content > div.js-categories-seasonal > div:nth-child(2) > div:nth-child(2)'
+            )->first()
+        );
     }
 
     /**
@@ -44,8 +54,8 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_studio()
     {
-        self::assertEquals('Wit Studio', $this->parser->getStudio());
-        self::assertEquals('Production I.G', $this->parser2->getStudio());
+        self::assertEquals('Bones', $this->parser->getStudio());
+        self::assertEquals('Pierrot Plus', $this->parser2->getStudio());
     }
 
     /**
@@ -54,8 +64,8 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_episodes()
     {
-        self::assertEquals(null, $this->parser->getEpisodes());
-        self::assertEquals(6, $this->parser2->getEpisodes());
+        self::assertEquals(25, $this->parser->getEpisodes());
+        self::assertEquals(12, $this->parser2->getEpisodes());
     }
 
     /**
@@ -65,7 +75,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_source()
     {
         self::assertEquals('Manga', $this->parser->getSource());
-        self::assertEquals('Original', $this->parser2->getSource());
+        self::assertEquals('Manga', $this->parser2->getSource());
     }
 
     /**
@@ -76,12 +86,10 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $genres = $this->parser->getGenres();
         self::assertContains('Action', $genres);
-        self::assertContains('Military', $genres);
-        self::assertContains('Mystery', $genres);
-        self::assertContains('Super Power', $genres);
-        self::assertContains('Drama', $genres);
-        self::assertContains('Fantasy', $genres);
+        self::assertContains('Comedy', $genres);
+        self::assertContains('School', $genres);
         self::assertContains('Shounen', $genres);
+        self::assertContains('Super Power', $genres);
     }
 
     /**
@@ -90,7 +98,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_title()
     {
-        self::assertEquals('Shingeki no Kyojin Season 3', $this->parser->getTitle());
+        self::assertEquals('Boku no Hero Academia 3rd Season', $this->parser->getTitle());
     }
 
     /**
@@ -99,7 +107,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_description()
     {
-        self::assertEquals('Third season of the Shingeki no Kyojin anime series.', $this->parser->getDescription());
+        self::assertEquals('Third season of Boku no Hero Academia.', $this->parser->getDescription());
     }
 
     /**
@@ -117,7 +125,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_air_dates()
     {
-        self::assertEquals('Jul 23, 2018, 00:35 (JST)', $this->parser->getAirDates());
+        self::assertEquals('Apr 7, 2018, 17:30 (JST)', $this->parser->getAirDates());
     }
 
     /**
@@ -126,7 +134,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_air_members()
     {
-        self::assertEquals(188048, $this->parser->getMembers());
+        self::assertEquals(326216, $this->parser->getMembers());
     }
 
     /**
@@ -135,7 +143,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_id()
     {
-        self::assertEquals(35760, $this->parser->getAnimeId());
+        self::assertEquals(36456, $this->parser->getAnimeId());
     }
 
     /**
@@ -145,7 +153,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_anime_url()
     {
         self::assertEquals(
-            'https://myanimelist.net/anime/35760/Shingeki_no_Kyojin_Season_3',
+            'https://myanimelist.net/anime/36456/Boku_no_Hero_Academia_3rd_Season',
             $this->parser->getAnimeUrl()
         );
     }
@@ -157,7 +165,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_anime_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/167x242/images/anime/1173/92110.jpg?s=70b575afb92a6f8eada3d5c38488727b',
+            'https://myanimelist.cdn-dena.com/r/167x242/images/anime/1319/92084.jpg?s=174e33772872a964b6c8b7668b46c2c5',
             $this->parser->getAnimeImage()
         );
     }
@@ -169,10 +177,9 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_anime_score()
     {
         self::assertEquals(
-            7.57,
+            7.61,
             $this->parser2->getAnimeScore()
         );
-        self::assertNull($this->parser->getAnimeScore());
     }
 
     /**
@@ -205,5 +212,17 @@ class SeasonalAnimeParserTest extends TestCase
     {
         self::assertFalse($this->parser->isKids());
         self::assertTrue($this->parserKids->isKids());
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_continueing()
+    {
+        self::assertEquals('One Piece', $this->springParser->getTitle());
+        self::assertTrue($this->springParser->isContinueing());
+        self::assertEquals('Boku no Hero Academia 3rd Season', $this->parser->getTitle());
+        self::assertFalse($this->parser->isContinueing());
     }
 }

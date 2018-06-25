@@ -221,4 +221,16 @@ class SeasonalAnime implements ParserInterface
 
         return \in_array('kids', $classes, true);
     }
+
+    /**
+     * @return bool
+     */
+    public function isContinueing(): bool
+    {
+        $txt =  $this->crawler->parents()->filter('div.anime-header')->text();
+        return strpos(
+               $txt,
+                '(Continuing)'
+            ) !== false;
+    }
 }

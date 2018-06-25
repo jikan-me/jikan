@@ -49,7 +49,7 @@ class Seasonal implements ParserInterface
      */
     public function getSeason(): string
     {
-        $season = $this->crawler->filterXPath('//*[@id="content"]/div[2]/div[1]/ul/li[4]/a')->text();
+        $season = $this->crawler->filter('div.navi-seasonal a.on')->text();
 
         return JString::cleanse($season);
     }

@@ -92,6 +92,11 @@ class SeasonalAnime extends Model
     private $kids;
 
     /**
+     * @var bool
+     */
+    private $continueing;
+
+    /**
      * @param Parser\SeasonalAnime $parser
      *
      * @return SeasonalAnime
@@ -117,6 +122,7 @@ class SeasonalAnime extends Model
         $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
         $instance->kids = $parser->isKids();
+        $instance->continueing = $parser->isContinueing();
 
         return $instance;
     }
@@ -247,5 +253,13 @@ class SeasonalAnime extends Model
     public function isKids(): bool
     {
         return $this->kids;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isContinueing(): bool
+    {
+        return $this->continueing;
     }
 }

@@ -253,4 +253,33 @@ class AnimeParserTest extends TestCase
             $this->anime->getLicensor()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_studio()
+    {
+        self::assertEquals(
+            [
+                [
+                    'url' => 'https://myanimelist.net/anime/producer/18/Toei_Animation',
+                    'name' => 'Toei Animation'
+                ]
+            ],
+            $this->anime->getStudio()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_source()
+    {
+        self::assertEquals(
+            'Manga',
+            $this->anime->getSource()
+        );
+    }
 }

@@ -271,4 +271,41 @@ class Anime implements ParserInterface
         }
         return $licensors;
     }
+
+    /**
+     * @return array
+     */
+    public function getAnimeStudio(): array
+    {
+        $studio = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Studios:"]');
+
+        $studios = [];
+        if (strpos($studio->parents()->text(), 'None found') === false && $studio->count() > 0) {
+            $studios = $studio->parents()->first()->filter('a')->each(function($node) {
+                return [
+                    'url' => BASE_URL . substr($node->attr('href'), 1),
+                    'name' => $node->text()
+                ];
+            });
+        }
+        return $studios;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeSource(): string
+    {
+        $source = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Source:"]');
+            
+        if ($source->count() > 0) {
+            return JString::cleanse(
+                str_replace($source->text(), '', $source->parents()->text())
+            );
+        }
+    }
 }

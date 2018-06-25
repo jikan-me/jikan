@@ -243,6 +243,8 @@ class Anime
         $instance->broadcast = $parser->getAnimeBroadcast();
         $instance->producer = $parser->getAnimeProducer();
         $instance->licensor = $parser->getAnimeLicensor();
+        $instance->studio = $parser->getAnimeStudio();
+        $instance->source = $parser->getAnimeSource();
 
 
         return $instance;

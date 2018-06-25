@@ -183,4 +183,16 @@ class AnimeParserTest extends TestCase
             $this->anime->getAired()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_premiered()
+    {
+        self::assertEquals(
+            "Fall 1999",
+            $this->anime->getPremiered()
+        );
+    }
 }

@@ -238,7 +238,10 @@ class Anime
                 'to' => null
             ];
         }
-        
+
+        $instance->premiered = $parser->getAnimePremiered();
+
+
         return $instance;
     }
 

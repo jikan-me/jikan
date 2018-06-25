@@ -259,6 +259,7 @@ class Anime
         $instance->popularity = $parser->getAnimePopularity();
         $instance->members = $parser->getAnimeMembers();
         $instance->favorites = $parser->getAnimeFavorites();
+        $instance->related = $parser->getAnimeRelated();
 
 
 

@@ -420,4 +420,17 @@ class AnimeParserTest extends TestCase
             $this->anime->getFavorites()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_related()
+    {
+        $this->markTestSkipped('Add unit test for this');
+        self::assertEquals(
+            [],
+            $this->anime->getRelated()
+        );
+    }
 }

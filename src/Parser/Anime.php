@@ -469,4 +469,40 @@ class Anime implements ParserInterface
         );
     }
 
+    /**
+     * @return array
+     */
+    public function getAnimeRelated(): array
+    {
+        $related = [];
+        $relatedNode = $this->crawler
+            ->filter('table.anime_detail_related_anime')
+            ->filter('tr')->each(function($tr) {
+                return $tr->each(function($td) {
+                    $related = [];
+                    $relationType = substr($td->filter('td')->first()->text(), 0, -1);
+                    $relationNodes = $td->filter('td')->last();
+                    
+                    $related[$relationType] = $relationNodes->filter('a')->each(function($node) {
+                        $url = BASE_URL . substr($node->attr('href'), 1);
+                        preg_match('~https://myanimelist.net/(.*)/(.*)/(.*)~', $url, $matches);
+
+                        return [
+                            'mal_id' => (int) $matches[2],
+                            'type' => $matches[1],
+                            'url' => $url,
+                            'title' => $node->text()
+                        ];
+                    });
+
+                    return $related;
+                })[0];
+            });
+
+        foreach ($relatedNode as $node) {
+            $related = array_merge($related, $node);
+        }
+
+        return $related;
+    }
 }

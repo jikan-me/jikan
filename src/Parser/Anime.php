@@ -10,7 +10,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser
  */
-class Anime
+class Anime implements ParserInterface
 {
     /**
      * @var Crawler
@@ -71,95 +71,114 @@ class Anime
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeTitleEnglish(): string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="English:"]');
-            
-        if ($title->count() > 0) {
-            return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
-            );
+        if (!$title->count()) {
+            return '';
         }
+
+        return JString::cleanse(
+            str_replace($title->text(), '', $title->parents()->text())
+        );
+
     }
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeTitleSynonyms(): string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Synonyms:"]');
-            
-        if ($title->count() > 0) {
-            return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
-            );
+        if (!$title->count()) {
+            return '';
         }
+
+        return JString::cleanse(
+            str_replace($title->text(), '', $title->parents()->text())
+        );
+
     }
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeTitleJapanese(): string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Japanese:"]');
-            
-        if ($title->count() > 0) {
-            return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
-            );
+        if (!$title->count()) {
+            return '';
         }
+
+        return JString::cleanse(
+            str_replace($title->text(), '', $title->parents()->text())
+        );
     }
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeType(): string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Type:"]');
-            
-        if ($title->count() > 0) {
-            return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
-            );
+        if (!$title->count()) {
+            return '';
         }
+
+        return JString::cleanse(
+            str_replace($title->text(), '', $title->parents()->text())
+        );
     }
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getAnimeEpisodes(): int
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Episodes:"]');
-            
-        if ($title->count() > 0) {
-            return (str_replace($title->text(), '', $title->parents()->text()) == 'Unknown') ? 0 : (int) str_replace($title->text(), '', $title->parents()->text());
+
+        if (!$title->count()) {
+            return '';
         }
+
+        return (str_replace($title->text(), '', $title->parents()->text()) === 'Unknown') ? 0 : (int)str_replace(
+            $title->text(),
+            '',
+            $title->parents()->text()
+        );
     }
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeStatus(): string
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Status:"]');
-            
-        if ($title->count() > 0) {
-            return JString::cleanse(
-                str_replace($title->text(), '', $title->parents()->text())
-            );
+        if (!$title->count()) {
+            return '';
         }
+
+        return JString::cleanse(
+            str_replace($title->text(), '', $title->parents()->text())
+        );
     }
 }

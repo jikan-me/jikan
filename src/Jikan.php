@@ -15,8 +15,8 @@
 namespace Jikan;
 
 use GuzzleHttp\Client as GuzzleClient;
-use Jikan\MyAnimeList\MalClient;
 use Jikan\Model;
+use Jikan\MyAnimeList\MalClient;
 use Jikan\Request;
 
 require __DIR__.'/consts.php';
@@ -28,7 +28,6 @@ require __DIR__.'/consts.php';
  */
 class Jikan
 {
-
     /**
      * @var MalClient
      */
@@ -52,6 +51,16 @@ class Jikan
     public function Anime(Request\Anime $request): Model\Anime
     {
         return $this->myanimelist->getAnime($request);
+    }
+
+    /**
+     * @param Request\Seasonal $request
+     *
+     * @return Model\Seasonal
+     */
+    public function getSeasonal(Request\Seasonal $request): Model\Seasonal
+    {
+        return $this->myanimelist->getSeasonal($request);
     }
 
     /**

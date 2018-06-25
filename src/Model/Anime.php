@@ -249,6 +249,14 @@ class Anime
         $instance->duration = $parser->getAnimeDuration();
         $instance->rating = $parser->getAnimeRating();
 
+        $scoreString = $parser->getAnimeScore();
+        preg_match('~(.*)1 \(scored by (.*) users\)~', $scoreString, $matches);
+        if ($matches[1] !== 'N/A') {
+            $instance->score = (float) $matches[1];
+        }
+        $instance->scored_by = (int) str_replace(',', '', $matches[2]);
+
+
 
         return $instance;
     }

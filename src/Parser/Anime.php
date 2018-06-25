@@ -185,49 +185,55 @@ class Anime implements ParserInterface
     /**
      * @return string
      */
-    public function getAnimeAiredString(): string
+    public function getAnimeAiredString(): ?string
     {
         $aired = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Aired:"]');
-            
-        if ($aired->count() > 0) {
-            return JString::cleanse(
-                str_replace($aired->text(), '', $aired->parents()->text())
-            );
+
+        if (!$aired->count()) {
+            return null;
         }
+            
+        return JString::cleanse(
+            str_replace($aired->text(), '', $aired->parents()->text())
+        );
     }
 
     /**
      * @return string
      */
-    public function getAnimePremiered(): string
+    public function getAnimePremiered(): ?string
     {
-        $aired = $this->crawler
+        $premiered = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Premiered:"]');
-            
-        if ($aired->count() > 0) {
-            return JString::cleanse(
-                str_replace($aired->text(), '', $aired->parents()->text())
-            );
+        
+        if (!$premiered->count()) {
+            return null;
         }
+
+        return JString::cleanse(
+            str_replace($premiered->text(), '', $premiered->parents()->text())
+        );
     }
 
     /**
      * @return string
      */
-    public function getAnimeBroadcast(): string
+    public function getAnimeBroadcast(): ?string
     {
         $broadcast = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Broadcast:"]');
             
-        if ($broadcast->count() > 0) {
-            return JString::cleanse(
-                str_replace($broadcast->text(), '', $broadcast->parents()->text())
-            );
+        if (!$broadcast->count()) {
+            return null;
         }
+        
+        return JString::cleanse(
+            str_replace($broadcast->text(), '', $broadcast->parents()->text())
+        );
     }
 
     /**
@@ -364,4 +370,17 @@ class Anime implements ParserInterface
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getAnimeScore(): string
+    {
+        $score = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Score:"]');
+
+        if ($score->count() > 0) {
+            return explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0];
+        }
+    }
 }

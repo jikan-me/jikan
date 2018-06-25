@@ -348,4 +348,28 @@ class AnimeParserTest extends TestCase
             $this->anime->getRating()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_score()
+    {
+        self::assertEquals(
+            8.54,
+            $this->anime->getScore()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_scored_by()
+    {
+        self::assertEquals(
+            428730,
+            $this->anime->getScoredBy()
+        );
+    }
 }

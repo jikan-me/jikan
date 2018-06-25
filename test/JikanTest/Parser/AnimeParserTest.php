@@ -195,4 +195,16 @@ class AnimeParserTest extends TestCase
             $this->anime->getPremiered()
         );
     }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_broadcast()
+    {
+        self::assertEquals(
+            "Sundays at 09:30 (JST)",
+            $this->anime->getBroadcast()
+        );
+    }
 }

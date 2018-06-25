@@ -213,4 +213,20 @@ class Anime implements ParserInterface
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeBroadcast(): string
+    {
+        $title = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Broadcast:"]');
+            
+        if ($title->count() > 0) {
+            return JString::cleanse(
+                str_replace($title->text(), '', $title->parents()->text())
+            );
+        }
+    }
 }

@@ -240,6 +240,7 @@ class Anime
         }
 
         $instance->premiered = $parser->getAnimePremiered();
+        $instance->broadcast = $parser->getAnimeBroadcast();
 
 
         return $instance;

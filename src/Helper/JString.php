@@ -18,7 +18,9 @@ class JString
     {
         return trim(
             htmlspecialchars_decode(
-                strip_tags($string),
+                strip_tags(
+                    str_replace(['<br>', '<br/>', '<br />'], '\n', $string)
+                ),
                 ENT_QUOTES
             )
         );

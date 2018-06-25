@@ -85,6 +85,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_genres()
     {
         $genres = $this->parser->getGenres();
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $genres);
         self::assertContains('Action', $genres);
         self::assertContains('Comedy', $genres);
         self::assertContains('School', $genres);

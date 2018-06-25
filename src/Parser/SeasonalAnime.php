@@ -83,7 +83,7 @@ class SeasonalAnime implements ParserInterface
         return $this->crawler->filterXPath('//span[contains(@class, "genre")]/a')
             ->each(
                 function (Crawler $crawler) {
-                    return $crawler->text();
+                    return (new MalUrlParser($crawler))->getModel();
                 }
             );
     }

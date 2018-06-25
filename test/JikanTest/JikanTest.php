@@ -24,7 +24,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_anime()
     {
-        $anime = $this->jikan->Anime(new \Jikan\Request\AnimeRequest(21));
+        $anime = $this->jikan->Anime(new \Jikan\Request\Anime(21));
         self::assertInstanceOf(\Jikan\Model\Anime::class, $anime);
     }
 }

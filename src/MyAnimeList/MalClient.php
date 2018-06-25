@@ -32,11 +32,11 @@ class MalClient
     }
 
     /**
-     * @param Request\AnimeRequest $request
+     * @param Request\Anime $request
      *
      * @return Anime
      */
-    public function getAnime(Request\AnimeRequest $request): Anime
+    public function getAnime(Request\Anime $request): Anime
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime($crawler);

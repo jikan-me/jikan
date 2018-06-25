@@ -15,9 +15,9 @@
 namespace Jikan;
 
 use GuzzleHttp\Client as GuzzleClient;
-use Jikan\Model\Anime;
 use Jikan\MyAnimeList\MalClient;
-use Jikan\Request\AnimeRequest;
+use Jikan\Model;
+use Jikan\Request;
 
 require __DIR__.'/consts.php';
 
@@ -28,6 +28,10 @@ require __DIR__.'/consts.php';
  */
 class Jikan
 {
+
+    /**
+     * @var MalClient
+     */
     private $myanimelist;
 
     /**
@@ -41,25 +45,22 @@ class Jikan
     }
 
     /**
-     * @param Request\AnimeRequest $request
+     * @param Request\Anime $request
      *
-     * @return Anime
+     * @return Model\Anime
      */
-    public function Anime(AnimeRequest $request): Anime
+    public function Anime(Request\Anime $request): Model\Anime
     {
         return $this->myanimelist->getAnime($request);
     }
 
-    /*
-     * Manga
+    /**
+     * @param Request\Manga $request
+     *
+     * @return Model\Manga
      */
-    public function Manga(\Jikan\Request\Manga $request)
+    public function Manga(Request\Manga $request): Model\Manga
     {
-        $this->request = $request;
-        $this->response = (new \Jikan\Get\Manga($this->request))->response;
-
-        return $this;
+        //return $this->myanimelist->getManga($request);
     }
-
-
 }

@@ -16,7 +16,7 @@ class AnimeParserTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\AnimeRequest(21);
+        $request = new \Jikan\Request\Anime(21);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime($crawler);

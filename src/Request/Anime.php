@@ -7,7 +7,7 @@ namespace Jikan\Request;
  *
  * @package Jikan\Request
  */
-class AnimeRequest implements RequestInterface
+class Anime implements RequestInterface
 {
     /**
      * @var bool
@@ -30,7 +30,7 @@ class AnimeRequest implements RequestInterface
     }
 
     /**
-     * @return AnimeRequest
+     * @return Anime
      */
     public function withCharacters(): self
     {

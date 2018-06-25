@@ -19,7 +19,7 @@ class SeasonalAnime extends Model
     /**
      * @var string
      */
-    private $description;
+    private $synopsis;
 
     /**
      * @var string
@@ -29,7 +29,7 @@ class SeasonalAnime extends Model
     /**
      * @var string
      */
-    private $airDates;
+    private $airingStart;
 
     /**
      * @var int|null
@@ -54,7 +54,42 @@ class SeasonalAnime extends Model
     /**
      * @var string
      */
-    private $studio;
+    private $producer;
+
+    /**
+     * @var string
+     */
+    private $imageUrl;
+
+    /**
+     * @var string
+     */
+    private $malId;
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var float|null
+     */
+    private $score;
+
+    /**
+     * @var string
+     */
+    private $licensors;
+
+    /**
+     * @var bool
+     */
+    private $r18;
+
+    /**
+     * @var bool
+     */
+    private $kids;
 
     /**
      * @param Parser\SeasonalAnime $parser
@@ -67,14 +102,21 @@ class SeasonalAnime extends Model
     {
         $instance = new self();
         $instance->title = $parser->getTitle();
-        $instance->description = $parser->getDescription();
+        $instance->synopsis = $parser->getDescription();
         $instance->type = $parser->getType();
-        $instance->airDates = $parser->getAirDates();
+        $instance->airingStart = $parser->getAirDates();
         $instance->episodes = $parser->getEpisodes();
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
         $instance->source = $parser->getSource();
-        $instance->studio = $parser->getStudio();
+        $instance->producer = $parser->getStudio();
+        $instance->imageUrl = $parser->getAnimeImage();
+        $instance->malId = $parser->getAnimeId();
+        $instance->url = $parser->getAnimeUrl();
+        $instance->score = $parser->getAnimeScore();
+        $instance->licensors = $parser->getLicensors();
+        $instance->r18 = $parser->isR18();
+        $instance->kids = $parser->isKids();
 
         return $instance;
     }
@@ -90,9 +132,9 @@ class SeasonalAnime extends Model
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getSynopsis(): string
     {
-        return $this->description;
+        return $this->synopsis;
     }
 
     /**
@@ -106,9 +148,9 @@ class SeasonalAnime extends Model
     /**
      * @return string
      */
-    public function getAirDates(): string
+    public function getAiringStart(): string
     {
-        return $this->airDates;
+        return $this->airingStart;
     }
 
     /**
@@ -146,8 +188,64 @@ class SeasonalAnime extends Model
     /**
      * @return string
      */
-    public function getStudio(): string
+    public function getProducer(): string
     {
-        return $this->studio;
+        return $this->producer;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMalId(): string
+    {
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getScore(): ?float
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLicensors(): string
+    {
+        return $this->licensors;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isR18(): bool
+    {
+        return $this->r18;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isKids(): bool
+    {
+        return $this->kids;
     }
 }

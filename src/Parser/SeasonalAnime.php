@@ -141,4 +141,76 @@ class SeasonalAnime implements ParserInterface
 
         return (int)str_replace(',', '', $count);
     }
+
+    /**
+     * @return string
+     */
+    public function getAnimeUrl(): string
+    {
+        return $this->crawler->filter('div.title > p > a')->extract(['href'])[0];
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnimeId(): int
+    {
+        preg_match('#https?://myanimelist.net/anime/(\d+)#', $this->getAnimeUrl(), $matches);
+
+        return (int)$matches[1];
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnimeImage(): string
+    {
+        return $this->crawler->filter('div.image > img')->extract(['src'])[0];
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getAnimeScore(): ?float
+    {
+        $score = JString::cleanse($this->crawler->filter('span.score')->text());
+        if ($score === 'N/A') {
+            return null;
+        }
+
+        return (float)$score;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getLicensors(): ?string
+    {
+        $licensors = $this->crawler->filter('p.licensors');
+        if (!$licensors->count()) {
+            return null;
+        }
+
+        return trim(JString::cleanse($licensors->extract(['data-licensors'])[0]), ',');
+    }
+
+    /**
+     * @return bool
+     */
+    public function isR18(): bool
+    {
+        $classes = explode(' ', $this->crawler->extract(['class'])[0]);
+
+        return \in_array('r18', $classes, true);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isKids(): bool
+    {
+        $classes = explode(' ', $this->crawler->extract(['class'])[0]);
+
+        return \in_array('kids', $classes, true);
+    }
 }

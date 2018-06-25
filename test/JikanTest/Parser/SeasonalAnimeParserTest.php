@@ -17,6 +17,16 @@ class SeasonalAnimeParserTest extends TestCase
      */
     private $parser2;
 
+    /**
+     * @var \Jikan\Parser\SeasonalAnime
+     */
+    private $parserKids;
+
+    /**
+     * @var \Jikan\Parser\SeasonalAnime
+     */
+    private $parserR18;
+
     public function setUp()
     {
         $request = new \Jikan\Request\Seasonal(2018, 'summer');
@@ -24,6 +34,8 @@ class SeasonalAnimeParserTest extends TestCase
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime')->first());
         $this->parser2 = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime')->eq(2));
+        $this->parserKids = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime.kids')->first());
+        $this->parserR18 = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime.r18')->first());
     }
 
     /**
@@ -115,5 +127,83 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_air_members()
     {
         self::assertEquals(188048, $this->parser->getMembers());
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_the_anime_id()
+    {
+        self::assertEquals(35760, $this->parser->getAnimeId());
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_the_anime_url()
+    {
+        self::assertEquals(
+            'https://myanimelist.net/anime/35760/Shingeki_no_Kyojin_Season_3',
+            $this->parser->getAnimeUrl()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_the_anime_image()
+    {
+        self::assertEquals(
+            'https://myanimelist.cdn-dena.com/r/167x242/images/anime/1173/92110.jpg?s=70b575afb92a6f8eada3d5c38488727b',
+            $this->parser->getAnimeImage()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_the_anime_score()
+    {
+        self::assertEquals(
+            7.57,
+            $this->parser2->getAnimeScore()
+        );
+        self::assertNull($this->parser->getAnimeScore());
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_the_anime_licensor()
+    {
+        self::assertEquals(
+            'Funimation',
+            $this->parser->getLicensors()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_the_r18_rating()
+    {
+        self::assertFalse($this->parser->isR18());
+        self::assertTrue($this->parserR18->isR18());
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_the_kids_rating()
+    {
+        self::assertFalse($this->parser->isKids());
+        self::assertTrue($this->parserKids->isKids());
     }
 }

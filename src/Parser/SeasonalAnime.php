@@ -34,18 +34,18 @@ class SeasonalAnime implements ParserInterface
     }
 
     /**
-     * @return string|null
+     * @return Model\MalUrl|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getStudio(): ?string
+    public function getStudio(): ?Model\MalUrl
     {
         $node = $this->crawler->filterXPath('//span[contains(@class, "producer")]/a');
         if (!$node->count()) {
             return null;
         }
 
-        return $node->text();
+        return (new MalUrlParser($node))->getModel();
     }
 
     /**
@@ -74,7 +74,7 @@ class SeasonalAnime implements ParserInterface
     }
 
     /**
-     * @return array
+     * @return array|Model\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

@@ -42,7 +42,7 @@ class SeasonalAnime extends Model
     private $members;
 
     /**
-     * @var array
+     * @var array|MalUrl[]
      */
     private $genres;
 
@@ -52,7 +52,7 @@ class SeasonalAnime extends Model
     private $source;
 
     /**
-     * @var string|null
+     * @var MalUrl|null
      */
     private $producer;
 
@@ -176,7 +176,7 @@ class SeasonalAnime extends Model
     }
 
     /**
-     * @return array
+     * @return array|MalUrl[]
      */
     public function getGenres(): array
     {
@@ -194,7 +194,7 @@ class SeasonalAnime extends Model
     /**
      * @return string|null
      */
-    public function getProducer(): ?string
+    public function getProducer(): ?MalUrl
     {
         return $this->producer;
     }

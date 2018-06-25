@@ -353,14 +353,15 @@ class Anime implements ParserInterface
      */
     public function getAnimeRating(): string
     {
-        $duration = $this->crawler
+        $rating = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Rating:"]');
             
-        if ($duration->count() > 0) {
+        if ($rating->count() > 0) {
             return JString::cleanse(
-                str_replace($duration->text(), '', $duration->parents()->text())
+                str_replace($rating->text(), '', $rating->parents()->text())
             );
         }
     }
+
 }

@@ -34,15 +34,15 @@ class SeasonalAnime implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getStudio(): string
+    public function getStudio(): ?string
     {
         $node = $this->crawler->filter('span.producer > a');
         if (!$node->count()) {
-            return '';
+            return null;
         }
 
         return $node->text();

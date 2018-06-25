@@ -34,7 +34,7 @@ class SeasonalParserTest extends TestCase
      * @test
      * @vcr SeasonalParserTest.yaml
      */
-    public function it_gets_the_animes()
+    public function it_gets_the_anime()
     {
         $anime = $this->parser->getSeasonalAnime();
         self::assertCount(91, $anime);

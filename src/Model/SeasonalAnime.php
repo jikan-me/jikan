@@ -52,7 +52,7 @@ class SeasonalAnime extends Model
     private $source;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $producer;
 
@@ -77,7 +77,7 @@ class SeasonalAnime extends Model
     private $score;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $licensors;
 
@@ -186,9 +186,9 @@ class SeasonalAnime extends Model
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getProducer(): string
+    public function getProducer(): ?string
     {
         return $this->producer;
     }
@@ -226,9 +226,9 @@ class SeasonalAnime extends Model
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLicensors(): string
+    public function getLicensors(): ?string
     {
         return $this->licensors;
     }

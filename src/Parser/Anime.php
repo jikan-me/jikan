@@ -256,16 +256,15 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Producers:"]');
 
-        $producers = [];
         if (strpos($producer->parents()->text(), 'None found') === false && $producer->count() > 0) {
-            $producers = $producer->parents()->first()->filter('a')->each(function($node) {
-                return [
-                    'url' => BASE_URL . substr($node->attr('href'), 1),
-                    'name' => $node->text()
-                ];
-            });
+            return $producer->parents()->first()->filter('a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
         }
-        return $producers;
+
+        return []; // If `None found`
     }
 
     /**
@@ -277,16 +276,15 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Licensors:"]');
 
-        $licensors = [];
         if (strpos($licensor->parents()->text(), 'None found') === false && $licensor->count() > 0) {
-            $licensors = $licensor->parents()->first()->filter('a')->each(function($node) {
-                return [
-                    'url' => BASE_URL . substr($node->attr('href'), 1),
-                    'name' => $node->text()
-                ];
-            });
+            return $licensor->parents()->first()->filter('a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
         }
-        return $licensors;
+
+        return []; // If `None found`
     }
 
     /**
@@ -298,16 +296,15 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Studios:"]');
 
-        $studios = [];
         if (strpos($studio->parents()->text(), 'None found') === false && $studio->count() > 0) {
-            $studios = $studio->parents()->first()->filter('a')->each(function($node) {
-                return [
-                    'url' => BASE_URL . substr($node->attr('href'), 1),
-                    'name' => $node->text()
-                ];
-            });
+            return $studio->parents()->first()->filter('a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
         }
-        return $studios;
+
+        return []; // If `None found`
     }
 
     /**
@@ -337,16 +334,15 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Genres:"]');
 
-        $genres = [];
         if (strpos($genre->parents()->text(), 'No genres have been added yet') === false && $genre->count() > 0) {
-            $genres = $genre->parents()->first()->filter('a')->each(function($node) {
-                return [
-                    'url' => BASE_URL . substr($node->attr('href'), 1),
-                    'name' => $node->text()
-                ];
-            });
+            return $genre->parents()->first()->filter('a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
         }
-        return $genres;
+
+        return []; // If `No genres have been added yet`
     }
 
     /**

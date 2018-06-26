@@ -114,7 +114,7 @@ class SeasonalAnime extends Model
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
         $instance->source = $parser->getSource();
-        $instance->producer = $parser->getStudio();
+        $instance->producer = $parser->getProducer();
         $instance->imageUrl = $parser->getAnimeImage();
         $instance->malId = $parser->getAnimeId();
         $instance->url = $parser->getAnimeUrl();
@@ -194,7 +194,7 @@ class SeasonalAnime extends Model
     /**
      * @return string|null
      */
-    public function getProducer(): ?MalUrl
+    public function getProducer(): array
     {
         return $this->producer;
     }

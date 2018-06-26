@@ -2,7 +2,6 @@
 
 namespace Jikan\Model;
 
-
 /**
  * Class Anime
  *

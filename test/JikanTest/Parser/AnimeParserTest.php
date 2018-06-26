@@ -12,6 +12,10 @@ class AnimeParserTest extends TestCase
      * @var \Jikan\Parser\Anime
      */
     private $parser;
+
+    /**
+     * @var \Jikan\Model\Anime
+     */
     private $anime;
 
     public function setUp()

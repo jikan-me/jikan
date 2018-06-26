@@ -54,12 +54,18 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_producer()
     {
-        $this->markTestSkipped('please review');
-        self::assertEquals('Bones', $this->parser->getProducer());
-        self::assertEquals('https://myanimelist.net/anime/producer/4/Bones', $this->parser->getProducer()->getUrl());
-        //self::assertInstanceOf(Array, $this->parser->getProducer());
-        self::assertEquals('Pierrot Plus', $this->parser2->getProducer());
-        self::assertEquals('https://myanimelist.net/anime/producer/1129/Pierrot_Plus', $this->parser2->getProducer()->getUrl());
+        $producer = $this->parser->getProducer();
+        self::assertCount(1, $producer);
+        self::assertContainsOnly(\Jikan\Model\MalUrl::class, $producer);
+        $producer = $producer[0];
+        self::assertEquals('Bones', $producer);
+        self::assertEquals('https://myanimelist.net/anime/producer/4/Bones', $producer->getUrl());
+
+        $producer = $this->parser2->getProducer();
+        self::assertCount(2, $producer);
+        self::assertContainsOnly(\Jikan\Model\MalUrl::class, $producer);
+        self::assertContains('Pierrot Plus', $producer);
+        self::assertContains('Studio Pierrot', $producer);
     }
 
     /**
@@ -193,10 +199,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_licensor()
     {
-        self::assertEquals(
-            'Funimation',
-            $this->parser->getLicensors()
-        );
+        self::assertCount(1, $this->parser->getLicensors());
     }
 
     /**

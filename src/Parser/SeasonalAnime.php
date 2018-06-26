@@ -6,6 +6,11 @@ use Jikan\Helper\JString;
 use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class SeasonalAnime
+ *
+ * @package Jikan\Parser
+ */
 class SeasonalAnime implements ParserInterface
 {
     /**
@@ -34,22 +39,19 @@ class SeasonalAnime implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl|null
+     * @return Model\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getProducer(): array
     {
-        $node = $this->crawler->filterXPath('//span[contains(@class, "producer")]/a');
-        if (!$node->count()) {
-            return [];
-        }
-
-        return $node->each(
-            function (Crawler $crawler) {
-               return (new MalUrlParser($crawler))->getModel();
-            }
-        );
+        return $this->crawler
+            ->filterXPath('//span[contains(@class, "producer")]/a')
+            ->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
     }
 
     /**
@@ -150,15 +152,6 @@ class SeasonalAnime implements ParserInterface
     }
 
     /**
-     * @return string
-     * @throws \RuntimeException
-     */
-    public function getAnimeUrl(): string
-    {
-        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->extract(['href'])[0];
-    }
-
-    /**
      * @return int
      * @throws \RuntimeException
      */
@@ -167,6 +160,15 @@ class SeasonalAnime implements ParserInterface
         preg_match('#https?://myanimelist.net/anime/(\d+)#', $this->getAnimeUrl(), $matches);
 
         return (int)$matches[1];
+    }
+
+    /**
+     * @return string
+     * @throws \RuntimeException
+     */
+    public function getAnimeUrl(): string
+    {
+        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->extract(['href'])[0];
     }
 
     /**
@@ -194,17 +196,19 @@ class SeasonalAnime implements ParserInterface
     }
 
     /**
-     * @return null|string
+     * @return null|string[]
      * @throws \RuntimeException
      */
-    public function getLicensors(): ?string
+    public function getLicensors(): ?array
     {
         $licensors = $this->crawler->filterXPath('//p[contains(@class, "licensors")]');
         if (!$licensors->count()) {
             return null;
         }
+        $licensors = JString::cleanse($licensors->extract(['data-licensors'])[0]);
+        $licensors = explode(',', $licensors);
 
-        return trim(JString::cleanse($licensors->extract(['data-licensors'])[0]), ',');
+        return array_filter($licensors);
     }
 
     /**

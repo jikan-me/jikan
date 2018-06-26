@@ -25,8 +25,6 @@ class AnimeParserTest extends TestCase
         $this->anime = $jikan->Anime(
             $request
         );
-
-
     }
 
     /**

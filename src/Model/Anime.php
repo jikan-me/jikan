@@ -19,7 +19,7 @@ class Anime
     /**
      * @var string
      */
-    private $link_canonical;
+    private $url;
 
     /**
      * @var string
@@ -195,7 +195,7 @@ class Anime
     {
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();
-        $instance->link_canonical = $parser->getAnimeURL();
+        $instance->url = $parser->getAnimeURL();
         $instance->image_url = $parser->getAnimeImageURL();
         $instance->synopsis = $parser->getAnimeSynopsis();
         $instance->title_english = $parser->getAnimeTitleEnglish();
@@ -280,9 +280,9 @@ class Anime
     /**
      * @return string
      */
-    public function getLinkCanonical(): string
+    public function getUrl(): string
     {
-        return $this->link_canonical;
+        return $this->url;
     }
 
     /**

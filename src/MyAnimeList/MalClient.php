@@ -45,6 +45,19 @@ class MalClient
     }
 
     /**
+     * @param Request\Manga $request
+     *
+     * @return Model\Manga
+     */
+    public function getManga(Request\Manga $request): Model\Manga
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Manga($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
      * @param Request\Character $request
      *
      * @return Model\Character

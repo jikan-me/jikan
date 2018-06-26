@@ -57,7 +57,7 @@ class AnimeCard
     protected $producer;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $imageUrl;
 
@@ -203,9 +203,9 @@ class AnimeCard
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         return $this->imageUrl;
     }

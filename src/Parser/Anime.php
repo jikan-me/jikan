@@ -41,7 +41,7 @@ class Anime implements ParserInterface
      */
     public function getAnimeId(): int
     {
-        preg_match('#https?://myanimelist.net/anime/(\d+)#', $this->getAnimeUrl(), $matches);
+        preg_match('#https?://myanimelist.net/anime/(\d+)#', $this->getAnimeURL(), $matches);
 
         return (int)$matches[1];
     }
@@ -49,17 +49,17 @@ class Anime implements ParserInterface
     /**
      * @return string
      */
-    public function getAnimeTitle(): string
+    public function getAnimeURL(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->extract(['content'])[0];
+        return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->attr('content');
     }
 
     /**
      * @return string
      */
-    public function getAnimeURL(): string
+    public function getAnimeTitle(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->extract(['content'])[0];
+        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content');
     }
 
     /**
@@ -67,7 +67,7 @@ class Anime implements ParserInterface
      */
     public function getAnimeImageURL(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->extract(['content'])[0];
+        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content');
     }
 
     /**
@@ -76,7 +76,7 @@ class Anime implements ParserInterface
     public function getAnimeSynopsis(): string
     {
         return JString::cleanse(
-            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0]
+            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
         );
     }
 
@@ -205,7 +205,7 @@ class Anime implements ParserInterface
         if (!$aired->count()) {
             return null;
         }
-            
+
         return JString::cleanse(
             str_replace($aired->text(), '', $aired->parents()->text())
         );
@@ -219,7 +219,7 @@ class Anime implements ParserInterface
         $premiered = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Premiered:"]');
-        
+
         if (!$premiered->count()) {
             return null;
         }
@@ -237,11 +237,11 @@ class Anime implements ParserInterface
         $broadcast = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Broadcast:"]');
-            
+
         if (!$broadcast->count()) {
             return null;
         }
-        
+
         return JString::cleanse(
             str_replace($broadcast->text(), '', $broadcast->parents()->text())
         );
@@ -315,7 +315,7 @@ class Anime implements ParserInterface
         $source = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Source:"]');
-            
+
         if (!$source->count()) {
             return null;
         }
@@ -353,13 +353,15 @@ class Anime implements ParserInterface
         $duration = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Duration:"]');
-            
+
         if (!$duration->count()) {
             return null;
         }
 
         return JString::cleanse(
-            str_replace('.', '',
+            str_replace(
+                '.',
+                '',
                 str_replace($duration->text(), '', $duration->parents()->text())
             )
         );
@@ -373,7 +375,7 @@ class Anime implements ParserInterface
         $rating = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Rating:"]');
-            
+
         if (!$rating->count()) {
             return null;
         }
@@ -395,7 +397,7 @@ class Anime implements ParserInterface
         if (!$score->count()) {
             return null;
         }
-        
+
         return explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0];
     }
 
@@ -411,11 +413,14 @@ class Anime implements ParserInterface
         if (!$rank->count()) {
             return null;
         }
-            
-        $ranked = str_replace('#', '',
+
+        $ranked = str_replace(
+            '#',
+            '',
             substr(
                 explode(PHP_EOL, trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
-                0, -1
+                0,
+                -1
             )
         );
 
@@ -430,7 +435,7 @@ class Anime implements ParserInterface
         $popularity = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Popularity:"]');
-        
+
         if (!$popularity->count()) {
             return null;
         }
@@ -448,7 +453,7 @@ class Anime implements ParserInterface
         $member = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Members:"]');
-        
+
         if (!$member->count()) {
             return null;
         }
@@ -466,7 +471,7 @@ class Anime implements ParserInterface
         $favorite = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Favorites:"]');
-        
+
         if (!$favorite->count()) {
             return null;
         }
@@ -484,27 +489,33 @@ class Anime implements ParserInterface
         $related = [];
         $relatedNode = $this->crawler
             ->filter('table.anime_detail_related_anime')
-            ->filter('tr')->each(function($tr) {
-                return $tr->each(function($td) {
-                    $related = [];
-                    $relationType = substr($td->filter('td')->first()->text(), 0, -1);
-                    $relationNodes = $td->filter('td')->last();
-                    
-                    $related[$relationType] = $relationNodes->filter('a')->each(function($node) {
-                        $url = BASE_URL . substr($node->attr('href'), 1);
-                        preg_match('~https://myanimelist.net/(.*)/(.*)/(.*)~', $url, $matches);
+            ->filter('tr')->each(
+                function ($tr) {
+                    return $tr->each(
+                        function ($td) {
+                            $related = [];
+                            $relationType = substr($td->filter('td')->first()->text(), 0, -1);
+                            $relationNodes = $td->filter('td')->last();
 
-                        return [
-                            'mal_id' => (int) $matches[2],
-                            'type' => $matches[1],
-                            'url' => $url,
-                            'title' => $node->text()
-                        ];
-                    });
+                            $related[$relationType] = $relationNodes->filter('a')->each(
+                                function ($node) {
+                                    $url = BASE_URL.substr($node->attr('href'), 1);
+                                    preg_match('~https://myanimelist.net/(.*)/(.*)/(.*)~', $url, $matches);
 
-                    return $related;
-                })[0];
-            });
+                                    return [
+                                        'mal_id' => (int)$matches[2],
+                                        'type'   => $matches[1],
+                                        'url'    => $url,
+                                        'title'  => $node->text(),
+                                    ];
+                                }
+                            );
+
+                            return $related;
+                        }
+                    )[0];
+                }
+            );
 
         foreach ($relatedNode as $node) {
             $related = array_merge($related, $node);

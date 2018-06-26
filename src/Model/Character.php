@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Parser;
+
 /**
  * Class Character
  *
@@ -12,12 +14,12 @@ class Character
     /**
      * @var int
      */
-    public $mal_id;
+    public $malId;
 
     /**
      * @var string
      */
-    public $link_canonical;
+    public $linkCanonical;
 
     /**
      * @var string
@@ -27,7 +29,7 @@ class Character
     /**
      * @var string
      */
-    public $name_kanji;
+    public $nameKanji;
 
     /**
      * @var array
@@ -42,12 +44,12 @@ class Character
     /**
      * @var int
      */
-    public $member_favorites;
+    public $memberFavorites;
 
     /**
      * @var string
      */
-    public $image_url;
+    public $imageUrl;
 
     /**
      * @var array
@@ -64,4 +66,15 @@ class Character
      */
     public $voice_actor = [];
 
+    /**
+     * @param Parser\Character $parser
+     *
+     * @return Character
+     */
+    public static function fromParser(Parser\Character $parser): self
+    {
+        $instance = new self();
+
+        return $instance;
+    }
 }

@@ -168,16 +168,16 @@ class AnimeCard implements ParserInterface
      */
     public function getAnimeUrl(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->extract(['href'])[0];
+        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      */
-    public function getAnimeImage(): string
+    public function getAnimeImage(): ?string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->extract(['src'])[0];
+        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
     }
 
     /**
@@ -205,7 +205,7 @@ class AnimeCard implements ParserInterface
         if (!$licensors->count()) {
             return null;
         }
-        $licensors = JString::cleanse($licensors->extract(['data-licensors'])[0]);
+        $licensors = JString::cleanse($licensors->attr('data-licensors'));
         $licensors = explode(',', $licensors);
 
         return array_filter($licensors);
@@ -216,7 +216,7 @@ class AnimeCard implements ParserInterface
      */
     public function isR18(): bool
     {
-        $classes = explode(' ', $this->crawler->extract(['class'])[0]);
+        $classes = explode(' ', $this->crawler->attr('class'));
 
         return \in_array('r18', $classes, true);
     }
@@ -226,7 +226,7 @@ class AnimeCard implements ParserInterface
      */
     public function isKids(): bool
     {
-        $classes = explode(' ', $this->crawler->extract(['class'])[0]);
+        $classes = explode(' ', $this->crawler->attr('class'));
 
         return \in_array('kids', $classes, true);
     }

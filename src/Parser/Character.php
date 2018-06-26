@@ -32,6 +32,24 @@ class Character implements ParserInterface
      */
     public function getModel(): Model\Character
     {
-        // TODO: Implement getModel() method.
+        return Model\Character::fromParser($this);
+    }
+
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        preg_match('#https://myanimelist.net/character/(\d+)#', $this->crawler->getUri(), $ids);
+
+        return (int)$ids[1];
+    }
+
+    /**
+     * @return string
+     */
+    public function getCharacterLink(): string
+    {
+        return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
     }
 }

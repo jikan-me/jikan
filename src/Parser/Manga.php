@@ -51,7 +51,7 @@ class Manga implements ParserInterface
      */
     public function getMangaTitle(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->extract(['content'])[0];
+        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content');
     }
 
     /**
@@ -59,7 +59,7 @@ class Manga implements ParserInterface
      */
     public function getMangaURL(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->extract(['content'])[0];
+        return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->attr('content');
     }
 
     /**
@@ -67,7 +67,7 @@ class Manga implements ParserInterface
      */
     public function getMangaImageURL(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->extract(['content'])[0];
+        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content');
     }
 
     /**
@@ -76,7 +76,7 @@ class Manga implements ParserInterface
     public function getMangaSynopsis(): string
     {
         return JString::cleanse(
-            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->extract(['content'])[0]
+            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
         );
     }
 

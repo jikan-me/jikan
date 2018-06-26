@@ -29,7 +29,7 @@ class MalUrlParser
     {
         return new MalUrl(
             $this->crawler->text(),
-            'https://myanimelist.net'.$this->crawler->extract(['href'])[0]
+            'https://myanimelist.net'.$this->crawler->attr('href')
         );
     }
 }

@@ -14,7 +14,7 @@ class SeasonalAnime extends AnimeCard
     /**
      * @var bool
      */
-    private $continueing;
+    private $continuing;
 
     /**
      * @param Parser\AnimeCard $parser
@@ -27,7 +27,7 @@ class SeasonalAnime extends AnimeCard
     {
         $instance = new self();
         parent::setProperties($parser, $instance);
-        $instance->continueing = $parser->isContinuing();
+        $instance->continuing = $parser->isContinuing();
 
         return $instance;
     }
@@ -35,8 +35,8 @@ class SeasonalAnime extends AnimeCard
     /**
      * @return bool
      */
-    public function isContinueing(): bool
+    public function isContinuing(): bool
     {
-        return $this->continueing;
+        return $this->continuing;
     }
 }

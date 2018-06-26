@@ -196,6 +196,8 @@ class Anime
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();
         $instance->url = $parser->getAnimeURL();
+        $instance->mal_id = $parser->getAnimeID();
+
         $instance->image_url = $parser->getAnimeImageURL();
         $instance->synopsis = $parser->getAnimeSynopsis();
         $instance->title_english = $parser->getAnimeTitleEnglish();

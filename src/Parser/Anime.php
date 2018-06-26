@@ -36,6 +36,17 @@ class Anime implements ParserInterface
     }
 
     /**
+     * @return int
+     * @throws \RuntimeException
+     */
+    public function getAnimeId(): int
+    {
+        preg_match('#https?://myanimelist.net/anime/(\d+)#', $this->getAnimeUrl(), $matches);
+
+        return (int)$matches[1];
+    }
+
+    /**
      * @return string
      */
     public function getAnimeTitle(): string

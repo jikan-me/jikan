@@ -31,6 +31,25 @@ class AnimeParserTest extends TestCase
      * @test
      * @vcr AnimeParserTest.yaml
      */
+    public function it_gets_the_anime_mal_id()
+    {
+        self::assertEquals(21, $this->parser->getAnimeID());
+    }
+
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_anime_url()
+    {
+        self::assertEquals('https://myanimelist.net/anime/21/One_Piece', $this->parser->getAnimeURL());
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
     public function it_gets_the_anime_title()
     {
         self::assertEquals('One Piece', $this->parser->getAnimeTitle());
@@ -61,15 +80,6 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_title_japanese()
     {
         self::assertEquals('ONE PIECE', $this->parser->getAnimeTitleJapanese());
-    }
-
-    /**
-     * @test
-     * @vcr AnimeParserTest.yaml
-     */
-    public function it_gets_the_anime_url()
-    {
-        self::assertEquals('https://myanimelist.net/anime/21/One_Piece', $this->parser->getAnimeURL());
     }
 
     /**

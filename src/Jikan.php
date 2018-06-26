@@ -54,6 +54,16 @@ class Jikan
     }
 
     /**
+     * @param Request\Manga $request
+     *
+     * @return Model\Manga
+     */
+    public function Manga(Request\Manga $request): Model\Manga
+    {
+        return $this->myanimelist->getManga($request);
+    }
+
+    /**
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal
@@ -63,13 +73,4 @@ class Jikan
         return $this->myanimelist->getSeasonal($request);
     }
 
-    /**
-     * @param Request\Manga $request
-     *
-     * @return Model\Manga
-     */
-    public function Manga(Request\Manga $request): Model\Manga
-    {
-        //return $this->myanimelist->getManga($request);
-    }
 }

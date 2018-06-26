@@ -7,11 +7,11 @@ use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class SeasonalAnime
+ * Class AnimeCard
  *
  * @package Jikan\Parser
  */
-class SeasonalAnime implements ParserInterface
+class AnimeCard implements ParserInterface
 {
     /**
      * @var Crawler
@@ -19,7 +19,7 @@ class SeasonalAnime implements ParserInterface
     private $crawler;
 
     /**
-     * SeasonalAnime constructor.
+     * AnimeCard constructor.
      *
      * @param Crawler $crawler
      */
@@ -35,7 +35,7 @@ class SeasonalAnime implements ParserInterface
      */
     public function getModel(): Model\SeasonalAnime
     {
-        return Model\SeasonalAnime::fromParser($this);
+        return Model\SeasonalAnime::parseSeasonalAnime($this);
     }
 
     /**

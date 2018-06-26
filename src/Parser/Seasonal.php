@@ -38,7 +38,7 @@ class Seasonal implements ParserInterface
             ->filter('div.seasonal-anime')
             ->each(
                 function (Crawler $animeCrawler) {
-                    return (new SeasonalAnime($animeCrawler))->getModel();
+                    return (new AnimeCard($animeCrawler))->getModel();
                 }
             );
     }

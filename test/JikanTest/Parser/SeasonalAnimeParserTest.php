@@ -8,27 +8,27 @@ use PHPUnit\Framework\TestCase;
 class SeasonalAnimeParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\SeasonalAnime
+     * @var \Jikan\Parser\AnimeCard
      */
     private $parser;
 
     /**
-     * @var \Jikan\Parser\SeasonalAnime
+     * @var \Jikan\Parser\AnimeCard
      */
     private $parser2;
 
     /**
-     * @var \Jikan\Parser\SeasonalAnime
+     * @var \Jikan\Parser\AnimeCard
      */
     private $parserKids;
 
     /**
-     * @var \Jikan\Parser\SeasonalAnime
+     * @var \Jikan\Parser\AnimeCard
      */
     private $parserR18;
 
     /**
-     * @var \Jikan\Parser\SeasonalAnime
+     * @var \Jikan\Parser\AnimeCard
      */
     private $springParser;
 
@@ -37,11 +37,11 @@ class SeasonalAnimeParserTest extends TestCase
         $client = new \Goutte\Client();
         $request = new \Jikan\Request\Seasonal(2018, 'spring');
         $crawler = $client->request('GET', $request->getPath());
-        $this->parser = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime')->first());
-        $this->parser2 = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime')->eq(2));
-        $this->parserKids = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime.kids')->first());
-        $this->parserR18 = new \Jikan\Parser\SeasonalAnime($crawler->filter('div.seasonal-anime.r18')->first());
-        $this->springParser = new \Jikan\Parser\SeasonalAnime(
+        $this->parser = new \Jikan\Parser\AnimeCard($crawler->filter('div.seasonal-anime')->first());
+        $this->parser2 = new \Jikan\Parser\AnimeCard($crawler->filter('div.seasonal-anime')->eq(2));
+        $this->parserKids = new \Jikan\Parser\AnimeCard($crawler->filter('div.seasonal-anime.kids')->first());
+        $this->parserR18 = new \Jikan\Parser\AnimeCard($crawler->filter('div.seasonal-anime.r18')->first());
+        $this->springParser = new \Jikan\Parser\AnimeCard(
             $crawler->filter(
                 '#content > div.js-categories-seasonal > div:nth-child(2) > div:nth-child(2)'
             )->first()

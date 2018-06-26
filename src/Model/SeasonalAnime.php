@@ -5,7 +5,7 @@ namespace Jikan\Model;
 use Jikan\Parser;
 
 /**
- * Class AnimeCard
+ * Class SeasonalAnime
  *
  * @package Jikan\Model
  */
@@ -15,7 +15,6 @@ class SeasonalAnime extends AnimeCard
      * @var bool
      */
     private $continueing;
-    /** @noinspection ReturnTypeCanBeDeclaredInspection */
 
     /**
      * @param Parser\AnimeCard $parser

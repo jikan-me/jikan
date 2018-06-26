@@ -92,8 +92,6 @@ class AnimeCard
     protected $kids;
 
     /**
-     * NOTE: Don't use php return for the child classes
-     *
      * @param Parser\AnimeCard $parser
      *
      * @return AnimeCard

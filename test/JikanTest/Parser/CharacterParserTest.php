@@ -14,7 +14,7 @@ class CharacterParserTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\Character(2);
+        $request = new \Jikan\Request\Character(116281);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Character($crawler);
@@ -26,7 +26,7 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_mal_id()
     {
-        self::assertEquals(2, $this->parser->getMalId());
+        self::assertEquals(116281, $this->parser->getMalId());
     }
 
     /**
@@ -35,6 +35,47 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_character_url()
     {
-        self::assertEquals('https://myanimelist.net/character/2/Faye_Valentine', $this->parser->getCharacterLink());
+        self::assertEquals('https://myanimelist.net/character/116281/Momonga', $this->parser->getCharacterUrl());
+    }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_name()
+    {
+        self::assertEquals('Momonga', $this->parser->getName());
+    }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_name_in_kanji()
+    {
+        self::assertEquals('Momonga  (モモンガ)', $this->parser->getNameKanji());
+    }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_nicknames()
+    {
+        $aliases = $this->parser->getNameNicknames();
+        self::assertCount(2, $aliases);
+        self::assertContains('Momon', $aliases);
+        self::assertContains('Ainz Ooal Gown', $aliases);
+    }
+
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_about()
+    {
+        self::assertContains('He is the guild master of Ainz Ooal Gown and regarded',$this->parser->getAbout());
+        self::assertContains('(Source: Overlord Wikia)',$this->parser->getAbout());
     }
 }

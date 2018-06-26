@@ -2,6 +2,8 @@
 
 namespace Jikan\Parser;
 
+use Jikan\Helper\JString;
+use Jikan\Helper\Parser;
 use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -47,9 +49,59 @@ class Character implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
-    public function getCharacterLink(): string
+    public function getCharacterUrl(): string
     {
         return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getName(): string
+    {
+        return $this->crawler->filterXPath('//meta[@property="og:title"]')->attr('content');
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getNameKanji(): string
+    {
+        return $this->crawler->filterXPath('//div[contains(@class,"breadcrumb")]')->nextAll()->first()->text();
+    }
+
+    /**
+     * @return string[]
+     * @throws \InvalidArgumentException
+     */
+    public function getNameNicknames(): array
+    {
+        $aliases = preg_replace(
+            '/^.*"(.*)".*$/',
+            '$1',
+            $this->crawler->filterXPath('//h1')->text(),
+            -1,
+            $count
+        );
+        if (!$count) {
+            return [];
+        }
+
+        return explode(', ', $aliases);
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getAbout(): string
+    {
+        $crawler = Parser::removeChildNodes(clone $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]'));
+
+        return JString::cleanse($crawler->text());
     }
 }

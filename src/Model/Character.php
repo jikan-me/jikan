@@ -19,7 +19,7 @@ class Character
     /**
      * @var string
      */
-    public $linkCanonical;
+    public $characterUrl;
 
     /**
      * @var string

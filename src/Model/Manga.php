@@ -224,7 +224,7 @@ class Manga extends Model
      */
     public function isVolumesUnknown(): bool
     {
-        return $this->volumes;
+        return $this->volumes_unknown;
 	}
 
     /**
@@ -240,7 +240,7 @@ class Manga extends Model
      */
     public function isChaptersUnknown(): bool
     {
-        return $this->chapters;
+        return $this->chapters_unknown;
 	}
 	
     /**

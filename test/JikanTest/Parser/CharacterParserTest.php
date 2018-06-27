@@ -53,7 +53,7 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_name_in_kanji()
     {
-        self::assertEquals('Momonga  (モモンガ)', $this->parser->getNameKanji());
+        self::assertEquals('モモンガ', $this->parser->getNameKanji());
     }
 
     /**

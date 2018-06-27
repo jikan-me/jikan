@@ -4,6 +4,7 @@ namespace Jikan\Parser;
 
 use Jikan\Helper\JString;
 use Symfony\Component\DomCrawler\Crawler;
+use Jikan\Helper\Parser;
 
 /**
  * Class Manga
@@ -238,12 +239,12 @@ class Manga implements ParserInterface
      */
     public function getMangaAuthors(): array
     {
-        $studio = $this->crawler
+        $author = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Authors:"]');
 
-        if (strpos($studio->parents()->text(), 'None found') === false && $studio->count() > 0) {
-            return $studio->parents()->first()->filter('a')->each(
+        if (strpos($author->parents()->text(), 'None found') === false && $author->count() > 0) {
+            return $author->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -295,38 +296,37 @@ class Manga implements ParserInterface
 
 
     /**
-     * @return string
+     * @return float
      */
-    public function getMangaRating(): ?string
-    {
-        $rating = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Rating:"]');
-            
-        if (!$rating->count()) {
-            return null;
-        }
-
-        return JString::cleanse(
-            str_replace($rating->text(), '', $rating->parents()->text())
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public function getMangaScore(): ?string
+    public function getMangaScore(): ?float
     {
         $score = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Score:"]');
+            ->filter('span[itemprop="ratingValue"]');
 
         if (!$score->count()) {
             return null;
         }
+
+        if (strpos($score->text(), 'N/A')) {
+            return null;
+        }
         
-        var_dump(explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0]);
-        return null;
+        return (float) $score->text();
+    }
+
+    /**
+     * @return int
+     */
+    public function getMangaScoredBy(): ?int
+    {
+        $scoredBy = $this->crawler
+            ->filter('span[itemprop="ratingCount"]');
+
+        if (!$scoredBy->count()) {
+            return null;
+        }
+
+        return (int) $scoredBy->text();
     }
 
     /**
@@ -341,15 +341,15 @@ class Manga implements ParserInterface
         if (!$rank->count()) {
             return null;
         }
-            
-        $ranked = str_replace('#', '',
-            substr(
-                explode(PHP_EOL, trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
-                0, -1
+
+        $rank = Parser::removeChildNodes($rank->parents());
+        $ranked = trim(
+            str_replace('#', '',
+                $rank->text()
             )
         );
 
-        return $ranked !== 'N/A' ? $ranked : null;
+        return $ranked !== 'N/A' ? (int) $ranked : null;
     }
 
     /**

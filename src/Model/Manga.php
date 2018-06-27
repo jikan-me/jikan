@@ -89,13 +89,13 @@ class Manga extends Model
         $instance->chapters_unknown = $instance->chapters === 0;
         $instance->volumes_unknown = $instance->volumes === 0;
         $instance->status = $parser->getMangaStatus();
-        $instance->published = $instance->status === 'Publishing';
+        $instance->publishing = $instance->status === 'Publishing';
         $instance->published_string = $parser->getMangaPublishedString();
 
         if (!empty($instance->published_string) && $instance->published_string != 'Not available') {
             if (strpos($instance->published_string, 'to')) {
                 preg_match('~(.*) to (.*)~', $instance->published_string, $matches);
-                $instance->aired = [
+                $instance->published = [
                     'from' => (strpos($matches[1], '?') !== false) ? null : @date_format(date_create($matches[1]), 'o-m-d'),
                     'to' => (strpos($matches[2], '?') !== false) ? null : @date_format(date_create($matches[2]), 'o-m-d')
                 ];
@@ -105,40 +105,35 @@ class Manga extends Model
                     || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->published_string)
                     ) 
                 {
-                    $instance->aired = [
+                    $instance->published = [
                         'from' => null,
                         'to' => null
                     ];
                 } else {
-                    $instance->aired = [
+                    $instance->published = [
                         'from' => (strpos($instance->published_string, '?') !== false) ? null : @date_format(date_create($instance->published_string), 'o-m-d'),
                         'to' => (strpos($instance->published_string, '?') !== false) ? null : @date_format(date_create($instance->published_string), 'o-m-d')
                     ];
                 }
             }
         } else {
-            $instance->aired = [
+            $instance->published = [
                 'from' => null,
                 'to' => null
             ];
         }
 
         $instance->genre = $parser->getMangaGenre();
-        $instance->rating = $parser->getMangaRating();
-
-		$scoreString = $parser->getMangaScore();
-		var_dump($scoreString);
-        preg_match('~(.*)1 \(scored by (.*) users\)~', $scoreString, $matches);
-        if ($matches[1] !== 'N/A') {
-            $instance->score = (float) $matches[1];
-        }
-        $instance->scored_by = str_replace(',', '', $matches[2]);
+        $instance->score = $parser->getMangaScore();
+        $instance->scored_by = $parser->getMangaScoredBy();
         $instance->rank = $parser->getMangaRank();
         $instance->popularity = $parser->getMangaPopularity();
         $instance->members = $parser->getMangaMembers();
         $instance->favorites = $parser->getMangaFavorites();
         $instance->related = $parser->getMangaRelated();
         $instance->background = $parser->getMangaBackground();
+        $instance->author = $parser->getMangaAuthors();
+        $instance->serialization = $parser->getMangaSerialization();
 
         return $instance;
 	}

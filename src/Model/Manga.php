@@ -6,35 +6,35 @@ namespace Jikan\Model;
 class Manga extends Model
 {
 
-	private $mal_id;
+	private $malId;
 	
 	private $url;
 
 	private $title;
 
-	private $title_english;
+	private $titleEnglish;
 
-	private $title_synonyms;
+	private $titleSynonyms;
 
-	private $title_japanese;
+	private $titleJapanese;
 
 	private $status;
 
-	private $image_url;
+	private $imageUrl;
 
 	private $type;
 
 	private $volumes;
 
-	private $volumes_unknown;
+	private $volumesUnknown;
 
 	private $chapters;
 
-	private $chapters_unknown;
+	private $chaptersUnknown;
 
 	private $publishing = false;
 
-	private $published_string;
+	private $publishedString;
 
 	private $published = [];
 
@@ -42,7 +42,7 @@ class Manga extends Model
 
 	private $score;
 
-	private $scored_by;
+	private $scoredBy;
 
 	private $popularity;
 
@@ -76,33 +76,33 @@ class Manga extends Model
 
         $instance->title = $parser->getMangaTitle();
         $instance->url = $parser->getMangaURL();
-        $instance->mal_id = $parser->getMangaID();
+        $instance->malId = $parser->getMangaID();
 
-        $instance->image_url = $parser->getMangaImageURL();
+        $instance->imageUrl = $parser->getMangaImageURL();
         $instance->synopsis = $parser->getMangaSynopsis();
-        $instance->title_english = $parser->getMangaTitleEnglish();
-        $instance->title_synonyms = $parser->getMangaTitleSynonyms();
-        $instance->title_japanese = $parser->getMangaTitleJapanese();
+        $instance->titleEnglish = $parser->getMangaTitleEnglish();
+        $instance->titleSynonyms = $parser->getMangaTitleSynonyms();
+        $instance->titleJapanese = $parser->getMangaTitleJapanese();
         $instance->type = $parser->getMangaType();
         $instance->chapters = $parser->getMangaChapters();
         $instance->volumes = $parser->getMangaVolumes();
-        $instance->chapters_unknown = $instance->chapters === 0;
-        $instance->volumes_unknown = $instance->volumes === 0;
+        $instance->chaptersUnknown = $instance->chapters === 0;
+        $instance->volumesUnknown = $instance->volumes === 0;
         $instance->status = $parser->getMangaStatus();
         $instance->publishing = $instance->status === 'Publishing';
-        $instance->published_string = $parser->getMangaPublishedString();
+        $instance->publishedString = $parser->getMangaPublishedString();
 
-        if (!empty($instance->published_string) && $instance->published_string != 'Not available') {
-            if (strpos($instance->published_string, 'to')) {
-                preg_match('~(.*) to (.*)~', $instance->published_string, $matches);
+        if (!empty($instance->publishedString) && $instance->publishedString != 'Not available') {
+            if (strpos($instance->publishedString, 'to')) {
+                preg_match('~(.*) to (.*)~', $instance->publishedString, $matches);
                 $instance->published = [
                     'from' => (strpos($matches[1], '?') !== false) ? null : @date_format(date_create($matches[1]), 'o-m-d'),
                     'to' => (strpos($matches[2], '?') !== false) ? null : @date_format(date_create($matches[2]), 'o-m-d')
                 ];
             } else {
                 if (
-                    preg_match('~^[0-9]{4}$~', $instance->published_string)
-                    || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->published_string)
+                    preg_match('~^[0-9]{4}$~', $instance->publishedString)
+                    || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->publishedString)
                     ) 
                 {
                     $instance->published = [
@@ -111,8 +111,8 @@ class Manga extends Model
                     ];
                 } else {
                     $instance->published = [
-                        'from' => (strpos($instance->published_string, '?') !== false) ? null : @date_format(date_create($instance->published_string), 'o-m-d'),
-                        'to' => (strpos($instance->published_string, '?') !== false) ? null : @date_format(date_create($instance->published_string), 'o-m-d')
+                        'from' => (strpos($instance->publishedString, '?') !== false) ? null : @date_format(date_create($instance->publishedString), 'o-m-d'),
+                        'to' => (strpos($instance->publishedString, '?') !== false) ? null : @date_format(date_create($instance->publishedString), 'o-m-d')
                     ];
                 }
             }
@@ -125,7 +125,7 @@ class Manga extends Model
 
         $instance->genre = $parser->getMangaGenre();
         $instance->score = $parser->getMangaScore();
-        $instance->scored_by = $parser->getMangaScoredBy();
+        $instance->scoredBy = $parser->getMangaScoredBy();
         $instance->rank = $parser->getMangaRank();
         $instance->popularity = $parser->getMangaPopularity();
         $instance->members = $parser->getMangaMembers();
@@ -143,7 +143,7 @@ class Manga extends Model
      */
     public function getMalId(): int
     {
-        return $this->mal_id;
+        return $this->malId;
     }
 
     /**
@@ -167,7 +167,7 @@ class Manga extends Model
      */
     public function getTitleEnglish(): string
     {
-        return $this->title_english;
+        return $this->titleEnglish;
     }
 
     /**
@@ -175,7 +175,7 @@ class Manga extends Model
      */
     public function getTitleJapanese(): string
     {
-        return $this->title_japanese;
+        return $this->titleJapanese;
     }
 
     /**
@@ -183,7 +183,7 @@ class Manga extends Model
      */
     public function getTitleSynonyms(): string
     {
-        return $this->title_synonyms;
+        return $this->titleSynonyms;
 	}
 	
     /**
@@ -199,7 +199,7 @@ class Manga extends Model
      */
     public function getImageUrl(): string
     {
-        return $this->image_url;
+        return $this->imageUrl;
 	}
 	
     /**
@@ -224,7 +224,7 @@ class Manga extends Model
      */
     public function isVolumesUnknown(): bool
     {
-        return $this->volumes_unknown;
+        return $this->volumesUnknown;
 	}
 
     /**
@@ -240,7 +240,7 @@ class Manga extends Model
      */
     public function isChaptersUnknown(): bool
     {
-        return $this->chapters_unknown;
+        return $this->chaptersUnknown;
 	}
 	
     /**
@@ -256,7 +256,7 @@ class Manga extends Model
      */
     public function getPublishedString(): string
     {
-        return $this->published_string;
+        return $this->publishedString;
     }
 
     /**
@@ -281,7 +281,7 @@ class Manga extends Model
      */
     public function getScoredBy(): string
     {
-        return $this->scored_by;
+        return $this->scoredBy;
     }
 
     /**

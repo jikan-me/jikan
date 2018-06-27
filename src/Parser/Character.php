@@ -73,7 +73,9 @@ class Character implements ParserInterface
      */
     public function getNameKanji(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class,"breadcrumb")]')->nextAll()->first()->text();
+        return str_replace(['(', ')'], '',
+            $this->crawler->filterXPath('//div[contains(@class,"breadcrumb")]')->nextAll()->filter('small')->text()
+        );
     }
 
     /**

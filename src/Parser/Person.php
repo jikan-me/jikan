@@ -44,7 +44,7 @@ class Person implements ParserInterface
      */
     public function getPersonId(): int
     {
-        preg_match('#https?://myanimelist.net/Person/(\d+)#', $this->getPersonURL(), $matches);
+        preg_match('#https?://myanimelist.net/people/(\d+)#', $this->getPersonURL(), $matches);
 
         return (int)$matches[1];
     }
@@ -60,7 +60,7 @@ class Person implements ParserInterface
     /**
      * @return string
      */
-    public function getPersonTitle(): string
+    public function getPersonName(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content');
     }
@@ -74,13 +74,148 @@ class Person implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
+     * @throws \InvalidArgumentException
      */
-    public function getPersonSynopsis(): string
+    public function getPersonGivenName(): ?string
     {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Given name:"]');
+            
+        if (!$node->count()) {
+            return null;
+        }
+
         return JString::cleanse(
-            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
+            str_replace($node->text(), '', $node->parents()->text())
         );
     }
 
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonFamilyName(): ?string
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Family name:"]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        // MAL screwed up the HTML here
+        preg_match('~Family name:(.*?)(Alternate names|Birthday|Website|Member Favorites|More)~', $node->parents()->text(), $matches);
+
+        if (empty($matches)) {
+            return null;
+        }
+
+        $familyName = JString::cleanse($matches[1]);
+
+        if (empty($familyName)) { // MAL has it empty at some places
+            return null;
+        }
+
+        return $familyName;
+    }
+
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonAlternateNames(): ?string
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Alternate names:"]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            str_replace($node->text(), '', $node->parents()->text())
+        );
+    }
+
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonWebsite(): ?string
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Website:"]');
+
+
+        $website = $node->nextAll()->filter('a');
+
+        if (!$website->count()) {
+            return null;
+        }
+
+        // MAL returns an empty `<a href="http://"></a>` when there's no website
+        if (empty($website->text())) {
+            return null;
+        }
+
+
+        return $website->attr('href');
+    }
+
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonFavorites(): ?string
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Website:"]');
+        $node = Parser::removeChildNodes($node->parents());
+        var_dump($node);
+        die;
+
+
+        $website = $node->nextAll()->filter('a');
+
+        if (!$website->count()) {
+            return null;
+        }
+
+        // MAL returns an empty `<a href="http://"></a>` when there's no website
+        if (empty($website->text())) {
+            return null;
+        }
+
+
+        return $website->attr('href');
+    }
+
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonAbout(): ?string
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filter('.people-informantion-more');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        if (empty($node->text())) {
+            return null;
+        }
+
+        return JString::cleanse(
+            $node->html()
+        );
+    }
 }

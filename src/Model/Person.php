@@ -19,13 +19,13 @@ class Person extends Model
 
 	public $familyName;
 
-	public $alternateName;
+	public $alternateNames;
 
 	public $birthday;
 
 	public $memberFavorites;
 
-	public $more;
+	public $about;
 
 	public $voiceActingRole = [];
 
@@ -42,6 +42,18 @@ class Person extends Model
     public static function fromParser(\Jikan\Parser\Person $parser): self
     {
         $instance = new self();
+
+        $instance->malId = $parser->getPersonId();
+        $instance->url = $parser->getPersonUrl();
+        $instance->imageUrl = $parser->getPersonImageUrl();
+        // $instance->websiteUrl = $parser->getPersonWebsiteUrl();
+        $instance->name = $parser->getPersonName();
+        $instance->givenName = $parser->getPersonGivenName();
+        $instance->familyName = $parser->getPersonFamilyName();
+        $instance->alternateNames = $parser->getPersonAlternateNames();
+        $instance->website = $parser->getPersonWebsite();
+        $instance->about = $parser->getPersonAbout();
+        $instance->memberFavorites = $parser->getPersonFavorites();
 
         return $instance;
     }
@@ -106,9 +118,9 @@ class Person extends Model
     /**
      * @return string
      */
-    public function getAlternateName(): string
+    public function getAlternateNames(): string
     {
-        return $this->alternateName;
+        return $this->alternateNames;
 	}
 
     /**
@@ -130,9 +142,9 @@ class Person extends Model
     /**
      * @return string
      */
-    public function getMore(): string
+    public function getAbout(): string
     {
-        return $this->more;
+        return $this->about;
 	}
 
     /**

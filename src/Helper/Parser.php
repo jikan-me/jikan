@@ -21,6 +21,7 @@ class Parser
      */
     public static function removeChildNodes(Crawler $crawler): Crawler
     {
+        $crawler = clone $crawler;
         $crawler->children()->each(
             function (Crawler $crawler) {
                 $node = $crawler->getNode(0);

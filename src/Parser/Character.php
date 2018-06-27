@@ -100,8 +100,30 @@ class Character implements ParserInterface
      */
     public function getAbout(): string
     {
-        $crawler = Parser::removeChildNodes(clone $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]'));
+        $crawler = Parser::removeChildNodes($this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]'));
 
         return JString::cleanse($crawler->text());
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getMemberFavorites(): int
+    {
+        $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[1]');
+        $crawler = Parser::removeChildNodes($crawler);
+
+        return (int)preg_replace('/\D/', '', $crawler->text());
+    }
+
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getImage(): string
+    {
+        return $this->crawler->filterXPath('//meta[@property="og:image"]')->attr('content');
     }
 }

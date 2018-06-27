@@ -68,14 +68,34 @@ class CharacterParserTest extends TestCase
         self::assertContains('Ainz Ooal Gown', $aliases);
     }
 
-
     /**
      * @test
      * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_about()
     {
-        self::assertContains('He is the guild master of Ainz Ooal Gown and regarded',$this->parser->getAbout());
-        self::assertContains('(Source: Overlord Wikia)',$this->parser->getAbout());
+        self::assertContains('He is the guild master of Ainz Ooal Gown and regarded', $this->parser->getAbout());
+        self::assertContains('(Source: Overlord Wikia)', $this->parser->getAbout());
+    }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_member_favorites()
+    {
+        self::assertEquals(3750, $this->parser->getMemberFavorites());
+    }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_image()
+    {
+        self::assertEquals(
+            'https://myanimelist.cdn-dena.com/images/characters/3/288006.jpg',
+            $this->parser->getImage()
+        );
     }
 }

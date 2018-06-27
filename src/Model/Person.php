@@ -39,7 +39,7 @@ class Person extends Model
      *
      * @return Person
      */
-    public static function fromParser(Parser\Person $parser): self
+    public static function fromParser(\Jikan\Parser\Person $parser): self
     {
         $instance = new self();
 

@@ -325,7 +325,8 @@ class Manga implements ParserInterface
             return null;
         }
         
-        return explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0];
+        var_dump(explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0]);
+        return null;
     }
 
     /**

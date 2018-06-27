@@ -126,7 +126,8 @@ class Manga extends Model
         $instance->genre = $parser->getMangaGenre();
         $instance->rating = $parser->getMangaRating();
 
-        $scoreString = $parser->getMangaScore();
+		$scoreString = $parser->getMangaScore();
+		var_dump($scoreString);
         preg_match('~(.*)1 \(scored by (.*) users\)~', $scoreString, $matches);
         if ($matches[1] !== 'N/A') {
             $instance->score = (float) $matches[1];

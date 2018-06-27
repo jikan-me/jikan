@@ -98,4 +98,26 @@ class CharacterParserTest extends TestCase
             $this->parser->getImage()
         );
     }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_animeography()
+    {
+        $animeography = $this->parser->getAnimeography();
+        self::assertCount(9, $animeography);
+        self::assertContainsOnly(\Jikan\Model\Animeography::class, $animeography);
+    }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_mangaography()
+    {
+        $manaography = $this->parser->getMangaography();
+        self::assertCount(2, $manaography);
+        self::assertContainsOnly(\Jikan\Model\Mangaography::class, $manaography);
+    }
 }

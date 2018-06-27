@@ -236,9 +236,6 @@ class AnimeCard implements ParserInterface
      */
     public function isContinuing(): bool
     {
-        return strpos(
-                $this->crawler->parents()->text(),
-                '(Continuing)'
-            ) !== false;
+        return strpos($this->crawler->parents()->text(), '(Continuing)') !== false;
     }
 }

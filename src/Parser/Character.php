@@ -117,7 +117,6 @@ class Character implements ParserInterface
         return (int)preg_replace('/\D/', '', $crawler->text());
     }
 
-
     /**
      * @return string
      * @throws \InvalidArgumentException
@@ -125,5 +124,35 @@ class Character implements ParserInterface
     public function getImage(): string
     {
         return $this->crawler->filterXPath('//meta[@property="og:image"]')->attr('content');
+    }
+
+    /**
+     * @return Model\Animeography[]
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeography(): array
+    {
+        return $this->crawler
+            ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[1]/tr')
+            ->each(
+                function (Crawler $c) {
+                    return (new Animeography($c))->getModel();
+                }
+            );
+    }
+
+    /**
+     * @return Model\Mangaography[]
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaography(): array
+    {
+        return $this->crawler
+            ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[2]/tr')
+            ->each(
+                function (Crawler $c) {
+                    return (new Mangaography($c))->getModel();
+                }
+            );
     }
 }

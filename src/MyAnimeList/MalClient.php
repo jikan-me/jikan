@@ -71,6 +71,19 @@ class MalClient
     }
 
     /**
+     * @param Request\Person $request
+     *
+     * @return Model\Person
+     */
+    public function getPerson(Request\Person $request): Model\Person
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Person($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal

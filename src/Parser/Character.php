@@ -44,9 +44,7 @@ class Character implements ParserInterface
      */
     public function getMalId(): int
     {
-        preg_match('#https://myanimelist.net/character/(\d+)#', $this->crawler->getUri(), $ids);
-
-        return (int)$ids[1];
+        return Parser::idFromUrl($this->getCharacterUrl());
     }
 
     /**
@@ -73,9 +71,11 @@ class Character implements ParserInterface
      */
     public function getNameKanji(): string
     {
-        return str_replace(['(', ')'], '',
-            $this->crawler->filterXPath('//div[contains(@class,"breadcrumb")]')->nextAll()->filter('small')->text()
-        );
+        $kanji = $this->crawler->filterXPath('//div[contains(@class,"breadcrumb")]')
+            ->nextAll()->filter('small')
+            ->text();
+
+        return str_replace(['(', ')'], '', $kanji);
     }
 
     /**

@@ -31,6 +31,8 @@ class Character implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\Character
     {
@@ -152,6 +154,21 @@ class Character implements ParserInterface
             ->each(
                 function (Crawler $c) {
                     return (new Mangaography($c))->getModel();
+                }
+            );
+    }
+
+    /**
+     * @return Model\VoiceActor[]
+     * @throws \InvalidArgumentException
+     */
+    public function getVoiceActors(): array
+    {
+        return $this->crawler
+            ->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')
+            ->each(
+                function (Crawler $c) {
+                    return (new VoiceActor($c))->getModel();
                 }
             );
     }

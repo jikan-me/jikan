@@ -2,14 +2,16 @@
 
 namespace Jikan\Parser;
 
+use Jikan\Helper;
+use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Ography
+ * Class VoiceActor
  *
  * @package Jikan\Parser
  */
-abstract class Ography
+class VoiceActor implements ParserInterface
 {
     /**
      * @var Crawler
@@ -17,7 +19,7 @@ abstract class Ography
     private $crawler;
 
     /**
-     * Animeograpy constructor.
+     * VoiceActor constructor.
      *
      * @param Crawler $crawler
      */
@@ -27,12 +29,14 @@ abstract class Ography
     }
 
     /**
-     * @return int
+     * Return the model
+     *
+     * @return Model\VoiceActor
      * @throws \InvalidArgumentException
      */
-    public function getMalId(): int
+    public function getModel(): Model\VoiceActor
     {
-        return (int)preg_replace('#https://myanimelist.net/\w+/(\d+).*#', '$1', $this->getUrl());
+        return Model\VoiceActor::fromParser($this);
     }
 
     /**
@@ -41,16 +45,25 @@ abstract class Ography
      */
     public function getUrl(): string
     {
-        return $this->crawler->filterXPath('//td/a')->attr('href');
+        return $this->crawler->filterXPath('//td[2]/a')->attr('href');
     }
 
     /**
-     * @return string
+     * @return int
      * @throws \InvalidArgumentException
      */
-    public function getName(): string
+    public function getMalId(): int
     {
-        return $this->crawler->filterXPath('//td/a')->text();
+        return Helper\Parser::idFromUrl($this->getUrl());
+    }
+
+    /**
+     * @return Model\MalUrl
+     * @throws \InvalidArgumentException
+     */
+    public function getPerson(): Model\MalUrl
+    {
+        return (new MalUrlParser($this->crawler->filterXPath('//td[2]/a')))->getModel();
     }
 
     /**
@@ -59,14 +72,14 @@ abstract class Ography
      */
     public function getImage(): string
     {
-        return $this->crawler->filterXPath('//img')->attr('src');
+        return $this->crawler->filterXPath('//td[1]/div/a/img')->attr('src');
     }
 
     /**
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getRole(): string
+    public function getLanguage(): string
     {
         return $this->crawler->filterXPath('//small')->last()->text();
     }

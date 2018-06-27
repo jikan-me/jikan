@@ -120,4 +120,19 @@ class CharacterParserTest extends TestCase
         self::assertCount(2, $manaography);
         self::assertContainsOnly(\Jikan\Model\Mangaography::class, $manaography);
     }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_the_voice_actors()
+    {
+        $voiceActors = $this->parser->getVoiceActors();
+        self::assertCount(4, $voiceActors);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\VoiceActor::class, $voiceActors);
+        self::assertContains('Hino, Satoshi', $voiceActors);
+        self::assertContains('Mendiant, Charles', $voiceActors);
+        self::assertContains('Kaminski, Stefan', $voiceActors);
+        self::assertContains('Guerrero, Chris', $voiceActors);
+    }
 }

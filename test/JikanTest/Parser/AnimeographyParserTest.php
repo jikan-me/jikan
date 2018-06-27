@@ -65,9 +65,6 @@ class AnimeographyParserTest extends TestCase
      */
     public function it_gets_the_role()
     {
-        self::assertEquals(
-            'Main',
-            $this->parser->getRole()
-        );
+        self::assertEquals('Main',$this->parser->getRole());
     }
 }

@@ -49,4 +49,17 @@ class JikanTest extends TestCase
         self::assertCount(234, $seasonal->getAnime());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\SeasonalAnime::class, $seasonal->getAnime());
     }
+
+    /**
+     * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_characters()
+    {
+        $character = $this->jikan->Character(new \Jikan\Request\Character(116281));
+        self::assertInstanceOf(\Jikan\Model\Character::class, $character);
+        self::assertCount(9, $character->getAnimeography());
+        self::assertCount(2, $character->getMangaography());
+        self::assertCount(4, $character->getVoiceActors());
+    }
 }

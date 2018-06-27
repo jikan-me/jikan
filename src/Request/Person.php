@@ -31,6 +31,6 @@ class Person implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/person/%s', $this->personId);
+        return sprintf('https://myanimelist.net/people/%s', $this->personId);
     }
 }

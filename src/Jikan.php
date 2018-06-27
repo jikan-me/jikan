@@ -64,6 +64,16 @@ class Jikan
     }
 
     /**
+     * @param Request\Character $request
+     *
+     * @return Model\Character
+     */
+    public function Character(Request\Character $request): Model\Character
+    {
+        return $this->myanimelist->getCharacter($request);
+    }
+
+    /**
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal

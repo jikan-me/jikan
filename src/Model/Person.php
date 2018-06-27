@@ -5,32 +5,32 @@ namespace Jikan\Model;
 class Person extends Model
 {
 
-	public $mal_id;
+	public $malId;
 
-	public $link_canonical;
+	public $url;
 
 	public $name;
 
-	public $given_name;
+	public $givenName;
 
-	public $family_name;
+	public $familyName;
 
-	public $alternate_name;
+	public $alternateName;
 
 	public $birthday;
 
-	public $website_url;
+	public $websiteUrl;
 
-	public $member_favorites;
+	public $memberFavorites;
 
 	public $more;
 
-	public $image_url;
+	public $imageUrl;
 
-	public $voice_acting_role = [];
+	public $voiceActingRole = [];
 
-	public $anime_staff_position = [];
+	public $animeStaffPosition = [];
 
-	public $published_manga = [];
+	public $publishedManga = [];
 
 }

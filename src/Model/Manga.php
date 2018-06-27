@@ -217,12 +217,28 @@ class Manga extends Model
     public function getVolumes(): int
     {
         return $this->volumes;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isVolumesUnknown(): bool
+    {
+        return $this->volumes;
 	}
 
     /**
      * @return int
      */
     public function getChapters(): int
+    {
+        return $this->chapters;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function isChaptersUnknown(): bool
     {
         return $this->chapters;
 	}

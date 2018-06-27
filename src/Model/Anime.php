@@ -13,7 +13,7 @@ class Anime
     /**
      * @var int
      */
-    private $mal_id;
+    private $malId;
 
     /**
      * @var string
@@ -28,22 +28,22 @@ class Anime
     /**
      * @var string
      */
-    private $title_english;
+    private $titleEnglish;
 
     /**
      * @var string
      */
-    private $title_japanese;
+    private $titleJapanese;
 
     /**
      * @var string
      */
-    private $title_synonyms;
+    private $titleSynonyms;
 
     /**
      * @var string
      */
-    private $image_url;
+    private $imageUrl;
 
     /**
      * @var string
@@ -63,7 +63,7 @@ class Anime
     /**
      * @var bool
      */
-    private $episodes_unknown;
+    private $episodesUnknown;
 
     /**
      * @var string
@@ -78,7 +78,7 @@ class Anime
     /**
      * @var string
      */
-    private $aired_string;
+    private $airedString;
 
     /**
      * @var array
@@ -106,7 +106,7 @@ class Anime
     /**
      * @var string
      */
-    private $scored_by;
+    private $scoredBy;
 
     /**
      * @var string
@@ -176,12 +176,12 @@ class Anime
     /**
      * @var array
      */
-    private $opening_theme = [];
+    private $openingTheme = [];
 
     /**
      * @var array
      */
-    private $ending_theme = [];
+    private $endingTheme = [];
 
     /**
      * Create an instance from an Anime parser
@@ -195,31 +195,31 @@ class Anime
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();
         $instance->url = $parser->getAnimeURL();
-        $instance->mal_id = $parser->getAnimeID();
+        $instance->malId = $parser->getAnimeID();
 
-        $instance->image_url = $parser->getAnimeImageURL();
+        $instance->imageUrl = $parser->getAnimeImageURL();
         $instance->synopsis = $parser->getAnimeSynopsis();
-        $instance->title_english = $parser->getAnimeTitleEnglish();
-        $instance->title_synonyms = $parser->getAnimeTitleSynonyms();
-        $instance->title_japanese = $parser->getAnimeTitleJapanese();
+        $instance->titleEnglish = $parser->getAnimeTitleEnglish();
+        $instance->titleSynonyms = $parser->getAnimeTitleSynonyms();
+        $instance->titleJapanese = $parser->getAnimeTitleJapanese();
         $instance->type = $parser->getAnimeType();
         $instance->episodes = $parser->getAnimeEpisodes();
-        $instance->episodes_unknown = $instance->episodes === 0;
+        $instance->episodesUnknown = $instance->episodes === 0;
         $instance->status = $parser->getAnimeStatus();
         $instance->airing = $instance->status === 'Currently Airing';
-        $instance->aired_string = $parser->getAnimeAiredString();
+        $instance->airedString = $parser->getAnimeAiredString();
 
-        if (!empty($instance->aired_string) && $instance->aired_string != 'Not available') {
-            if (strpos($instance->aired_string, 'to')) {
-                preg_match('~(.*) to (.*)~', $instance->aired_string, $matches);
+        if (!empty($instance->airedString) && $instance->airedString != 'Not available') {
+            if (strpos($instance->airedString, 'to')) {
+                preg_match('~(.*) to (.*)~', $instance->airedString, $matches);
                 $instance->aired = [
                     'from' => (strpos($matches[1], '?') !== false) ? null : @date_format(date_create($matches[1]), 'o-m-d'),
                     'to' => (strpos($matches[2], '?') !== false) ? null : @date_format(date_create($matches[2]), 'o-m-d')
                 ];
             } else {
                 if (
-                    preg_match('~^[0-9]{4}$~', $instance->aired_string)
-                    || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->aired_string)
+                    preg_match('~^[0-9]{4}$~', $instance->airedString)
+                    || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->airedString)
                     ) 
                 {
                     $instance->aired = [
@@ -228,8 +228,8 @@ class Anime
                     ];
                 } else {
                     $instance->aired = [
-                        'from' => (strpos($instance->aired_string, '?') !== false) ? null : @date_format(date_create($instance->aired_string), 'o-m-d'),
-                        'to' => (strpos($instance->aired_string, '?') !== false) ? null : @date_format(date_create($instance->aired_string), 'o-m-d')
+                        'from' => (strpos($instance->airedString, '?') !== false) ? null : @date_format(date_create($instance->airedString), 'o-m-d'),
+                        'to' => (strpos($instance->airedString, '?') !== false) ? null : @date_format(date_create($instance->airedString), 'o-m-d')
                     ];
                 }
             }
@@ -255,15 +255,15 @@ class Anime
         if ($matches[1] !== 'N/A') {
             $instance->score = (float) $matches[1];
         }
-        $instance->scored_by = str_replace(',', '', $matches[2]);
+        $instance->scoredBy = str_replace(',', '', $matches[2]);
         $instance->rank = $parser->getAnimeRank();
         $instance->popularity = $parser->getAnimePopularity();
         $instance->members = $parser->getAnimeMembers();
         $instance->favorites = $parser->getAnimeFavorites();
         $instance->related = $parser->getAnimeRelated();
         $instance->background = $parser->getAnimeBackground();
-        $instance->opening_theme = $parser->getAnimeOpeningTheme();
-        $instance->ending_theme = $parser->getAnimeEndingTheme();
+        $instance->openingTheme = $parser->getAnimeOpeningTheme();
+        $instance->endingTheme = $parser->getAnimeEndingTheme();
 
 
 
@@ -275,7 +275,7 @@ class Anime
      */
     public function getMalId(): int
     {
-        return $this->mal_id;
+        return $this->malId;
     }
 
     /**
@@ -299,7 +299,7 @@ class Anime
      */
     public function getTitleEnglish(): string
     {
-        return $this->title_english;
+        return $this->titleEnglish;
     }
 
     /**
@@ -307,7 +307,7 @@ class Anime
      */
     public function getTitleJapanese(): string
     {
-        return $this->title_japanese;
+        return $this->titleJapanese;
     }
 
     /**
@@ -315,7 +315,7 @@ class Anime
      */
     public function getTitleSynonyms(): string
     {
-        return $this->title_synonyms;
+        return $this->titleSynonyms;
     }
 
     /**
@@ -323,7 +323,7 @@ class Anime
      */
     public function getImageUrl(): string
     {
-        return $this->image_url;
+        return $this->imageUrl;
     }
 
     /**
@@ -355,7 +355,7 @@ class Anime
      */
     public function getEpisodesUnknown(): string
     {
-        return $this->episodes_unknown;
+        return $this->episodesUnknown;
     }
 
     /**
@@ -379,7 +379,7 @@ class Anime
      */
     public function getAiredString(): string
     {
-        return $this->aired_string;
+        return $this->airedString;
     }
 
     /**
@@ -419,7 +419,7 @@ class Anime
      */
     public function getScoredBy(): string
     {
-        return $this->scored_by;
+        return $this->scoredBy;
     }
 
     /**
@@ -531,7 +531,7 @@ class Anime
      */
     public function getOpeningTheme(): array
     {
-        return $this->opening_theme;
+        return $this->openingTheme;
     }
 
     /**
@@ -539,6 +539,6 @@ class Anime
      */
     public function getEndingTheme(): array
     {
-        return $this->ending_theme;
+        return $this->endingTheme;
     }
 }

@@ -30,6 +30,16 @@ class JikanTest extends TestCase
 
     /**
      * @test
+     * @vcr JikanTest_it_gets_manga.yaml
+     */
+    public function it_gets_manga()
+    {
+        $manga = $this->jikan->Manga(new \Jikan\Request\Manga(11));
+        self::assertInstanceOf(\Jikan\Model\Manga::class, $manga);
+    }
+
+    /**
+     * @test
      * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_seasonal_anime()

@@ -161,17 +161,17 @@ class Anime
     /**
      * @var array
      */
-    private $licensor = [];
+    private $licensors = [];
 
     /**
      * @var array
      */
-    private $studio = [];
+    private $studios = [];
 
     /**
      * @var array
      */
-    private $genre = [];
+    private $genres = [];
 
     /**
      * @var array
@@ -243,10 +243,10 @@ class Anime
         $instance->premiered = $parser->getAnimePremiered();
         $instance->broadcast = $parser->getAnimeBroadcast();
         $instance->producer = $parser->getAnimeProducer();
-        $instance->licensor = $parser->getAnimeLicensor();
-        $instance->studio = $parser->getAnimeStudio();
+        $instance->licensors = $parser->getAnimeLicensor();
+        $instance->studios = $parser->getAnimeStudio();
         $instance->source = $parser->getAnimeSource();
-        $instance->genre = $parser->getAnimeGenre();
+        $instance->genres = $parser->getAnimeGenre();
         $instance->duration = $parser->getAnimeDuration();
         $instance->rating = $parser->getAnimeRating();
 
@@ -497,7 +497,7 @@ class Anime
     /**
      * @return array
      */
-    public function getProducer(): array
+    public function getProducers(): array
     {
         return $this->producer;
     }
@@ -505,25 +505,25 @@ class Anime
     /**
      * @return array
      */
-    public function getLicensor(): array
+    public function getLicensors(): array
     {
-        return $this->licensor;
+        return $this->licensors;
     }
 
     /**
      * @return array
      */
-    public function getStudio(): array
+    public function getStudios(): array
     {
-        return $this->studio;
+        return $this->studios;
     }
 
     /**
      * @return array
      */
-    public function getGenre(): array
+    public function getGenres(): array
     {
-        return $this->genre;
+        return $this->genres;
     }
 
     /**

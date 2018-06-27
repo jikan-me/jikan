@@ -1,7 +1,7 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use Jikan\Jikan;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class AnimeParserTest
@@ -97,6 +97,7 @@ class AnimeParserTest extends TestCase
             $this->parser->getAnimeImageURL()
         );
     }
+
     /**
      * @test
      * @vcr AnimeParserTest.yaml
@@ -190,7 +191,7 @@ class AnimeParserTest extends TestCase
         self::assertEquals(
             [
                 'from' => '1999-10-20',
-                'to' => null
+                'to'   => null,
             ],
             $this->anime->getAired()
         );
@@ -226,24 +227,12 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_producer()
     {
-        $this->markTestSkipped('need to review');
-        self::assertEquals(
-            [
-                [
-                    'url' => 'https://myanimelist.net/anime/producer/169/Fuji_TV',
-                    'name' => 'Fuji TV'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/producer/416/TAP',
-                    'name' => 'TAP'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/producer/1365/Shueisha',
-                    'name' => 'Shueisha'
-                ],
-            ],
-            $this->anime->getProducer()
-        );
+        $producers = $this->anime->getProducers();
+        self::assertCount(3, $producers);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $producers);
+        self::assertContains('Fuji TV', $producers);
+        self::assertContains('TAP', $producers);
+        self::assertContains('Shueisha', $producers);
     }
 
     /**
@@ -252,20 +241,11 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_licensor()
     {
-        $this->markTestSkipped('need to review');
-        self::assertEquals(
-            [
-                [
-                    'url' => 'https://myanimelist.net/anime/producer/102/Funimation',
-                    'name' => 'Funimation'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/producer/252/4Kids_Entertainment',
-                    'name' => '4Kids Entertainment'
-                ]
-            ],
-            $this->anime->getLicensor()
-        );
+        $licensors = $this->anime->getLicensors();
+        self::assertCount(2, $licensors);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $licensors);
+        self::assertContains('Funimation', $licensors);
+        self::assertContains('4Kids Entertainment', $licensors);
     }
 
     /**
@@ -274,16 +254,10 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_studio()
     {
-        $this->markTestSkipped('need to review');
-        self::assertEquals(
-            [
-                [
-                    'url' => 'https://myanimelist.net/anime/producer/18/Toei_Animation',
-                    'name' => 'Toei Animation'
-                ]
-            ],
-            $this->anime->getStudio()
-        );
+        $studios = $this->anime->getStudios();
+        self::assertCount(1, $studios);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $studios);
+        self::assertContains('Toei Animation', $studios);
     }
 
     /**
@@ -304,41 +278,16 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_genre()
     {
-        $this->markTestSkipped('need to review');
-        self::assertEquals(
-            [
-                [
-                    'url' => 'https://myanimelist.net/anime/genre/1/Action',
-                    'name' => 'Action'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/genre/2/Adventure',
-                    'name' => 'Adventure'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/genre/4/Comedy',
-                    'name' => 'Comedy'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/genre/31/Super_Power',
-                    'name' => 'Super Power'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/genre/8/Drama',
-                    'name' => 'Drama'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/genre/10/Fantasy',
-                    'name' => 'Fantasy'
-                ],
-                [
-                    'url' => 'https://myanimelist.net/anime/genre/27/Shounen',
-                    'name' => 'Shounen'
-                ],
-
-            ],
-            $this->anime->getGenre()
-        );
+        $genres = $this->anime->getGenres();
+        self::assertCount(7, $genres);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $genres);
+        self::assertContains('Action', $genres);
+        self::assertContains('Adventure', $genres);
+        self::assertContains('Comedy', $genres);
+        self::assertContains('Super Power', $genres);
+        self::assertContains('Drama', $genres);
+        self::assertContains('Fantasy', $genres);
+        self::assertContains('Shounen', $genres);
     }
 
     /**

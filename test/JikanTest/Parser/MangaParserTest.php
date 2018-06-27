@@ -226,24 +226,10 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_authors()
     {
-        $this->markTestSkipped('need to review');
-        self::assertEquals(
-            [
-                [
-                    'url' => 'https://mymangalist.net/manga/producer/169/Fuji_TV',
-                    'name' => 'Fuji TV'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/producer/416/TAP',
-                    'name' => 'TAP'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/producer/1365/Shueisha',
-                    'name' => 'Shueisha'
-                ],
-            ],
-            $this->manga->getAuthors()
-        );
+        $authors = $this->manga->getAuthors();
+        self::assertCount(1, $authors);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $authors);
+        self::assertContains('Kishimoto, Masashi', $authors);
     }
 
     /**
@@ -252,20 +238,10 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_serialization()
     {
-        $this->markTestSkipped('need to review');
-        self::assertEquals(
-            [
-                [
-                    'url' => 'https://mymangalist.net/manga/producer/102/Funimation',
-                    'name' => 'Funimation'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/producer/252/4Kids_Entertainment',
-                    'name' => '4Kids Entertainment'
-                ]
-            ],
-            $this->manga->getSerialization()
-        );
+        $serializations = $this->manga->getSerializations();
+        self::assertCount(1, $serializations);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $serializations);
+        self::assertContains('Shounen Jump (Weekly)', $serializations);
     }
 
     /**
@@ -274,41 +250,14 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_genre()
     {
-        $this->markTestSkipped('need to review');
-        self::assertEquals(
-            [
-                [
-                    'url' => 'https://mymangalist.net/manga/genre/1/Action',
-                    'name' => 'Action'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/genre/2/Adventure',
-                    'name' => 'Adventure'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/genre/4/Comedy',
-                    'name' => 'Comedy'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/genre/31/Super_Power',
-                    'name' => 'Super Power'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/genre/8/Drama',
-                    'name' => 'Drama'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/genre/10/Fantasy',
-                    'name' => 'Fantasy'
-                ],
-                [
-                    'url' => 'https://mymangalist.net/manga/genre/27/Shounen',
-                    'name' => 'Shounen'
-                ],
-
-            ],
-            $this->manga->getGenre()
-        );
+        $genres = $this->manga->getGenres();
+        self::assertCount(5, $genres);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $genres);
+        self::assertContains('Action', $genres);
+        self::assertContains('Adventure', $genres);
+        self::assertContains('Martial Arts', $genres);
+        self::assertContains('Shounen', $genres);
+        self::assertContains('Super Power', $genres);
     }
 
 
@@ -403,9 +352,12 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_background()
     {
-        $this->markTestSkipped('Review');
-        self::assertEquals(
-            "Naruto has sold over 220 million copies worldwide as of 2015, making it the 4th highest grossing manga series of all time. It was nominated for the 19th Tezuka Osamu Cultural Prize in 2014, and in the same year Masashi Kishimoto was awarded Rookie of the Year in the media fine arts category by Japan's Agency for Cultural Affairs.\n\n Numerous databooks, artbooks, novels, and fanbooks on the series have been released. Eight summary volumes featuring unaltered color pages, larger dimensions, and exclusive interviews, covering the first part of the series were released between November 7, 2008 and April 10, 2009.\n\n The series was published in English by VIZ Media under the Shonen Jump imprint from August 16, 2003 to October 6, 2015. In the last four months of 2007, the campaign titled \"Naruto Nation\" was launched, in which three volumes were published each month so that US releases would be closer to Japan's, the same practice was done in February through April of 2009 this time titled \"Generation Ninja.\" A 3-in-1 omnibus edition has also been released since May 3, 2011. A box set containing volumes 1-27 was released on August 6, 2008, another one containing volumes 28-48 on July 7, 2015, and the final box set with volumes 49-72 on January 5, 2016. It was also published in Brazilian Portuguese by Panini Comics/Planet Manga from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.",
+        self::assertContains(
+            'Naruto has sold over 220 million copies worldwide as of 2015, making it the 4th highest grossing',
+            $this->manga->getBackground()
+        );
+        self::assertContains(
+            ' Comics/Planet Manga from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.',
             $this->manga->getBackground()
         );
     }

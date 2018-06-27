@@ -56,11 +56,11 @@ class Manga extends Model
 	
 	private $related = [];
 
-	private $genre = [];
+	private $genres = [];
 
 	private $author = [];
 
-	private $serialization = [];
+	private $serializations = [];
 
 
 	/**
@@ -123,7 +123,7 @@ class Manga extends Model
             ];
         }
 
-        $instance->genre = $parser->getMangaGenre();
+        $instance->genres = $parser->getMangaGenre();
         $instance->score = $parser->getMangaScore();
         $instance->scoredBy = $parser->getMangaScoredBy();
         $instance->rank = $parser->getMangaRank();
@@ -133,7 +133,7 @@ class Manga extends Model
         $instance->related = $parser->getMangaRelated();
         $instance->background = $parser->getMangaBackground();
         $instance->author = $parser->getMangaAuthors();
-        $instance->serialization = $parser->getMangaSerialization();
+        $instance->serializations = $parser->getMangaSerialization();
 
         return $instance;
 	}
@@ -343,15 +343,15 @@ class Manga extends Model
     /**
      * @return array
      */
-    public function getGenre(): array
+    public function getGenres(): array
     {
-        return $this->genre;
+        return $this->genres;
 	}
 	
     /**
      * @return array
      */
-    public function getAuthor(): array
+    public function getAuthors(): array
     {
         return $this->author;
 	}
@@ -359,8 +359,8 @@ class Manga extends Model
     /**
      * @return array
      */
-    public function getSerialization(): array
+    public function getSerializations(): array
     {
-        return $this->serialization;
+        return $this->serializations;
     }
 }

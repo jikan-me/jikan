@@ -128,4 +128,16 @@ class UserProfile
         
         return (new AnimeStats($this->crawler))->getModel();
     }
+
+    /**
+     * @return \Jikan\Model\MangaStats
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaStats(): \Jikan\Model\MangaStats
+    {
+        $this->crawler
+            ->filterXPath('//div[@class=\'stats anime\']');
+        
+        return (new MangaStats($this->crawler))->getModel();
+    }
 }

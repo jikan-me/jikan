@@ -11,8 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "fabpot/goutte": "^3.2",
-        "3f/converter": "dev-master"
+        "fabpot/goutte": "^3.2"
     },
     "autoload": {
         "psr-4": {

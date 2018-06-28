@@ -72,4 +72,50 @@ class ProfileParserTest extends TestCase
     {
         self::assertEquals('Male', $this->parser->getGender());
     }
+
+    /**
+     * @test
+     * @vcr ProfileParserTest.yaml
+     */
+    public function it_gets_the_birthday()
+    {
+        self::assertEquals(null, $this->parser->getBirthday());
+    }
+
+    /**
+     * @test
+     * @vcr ProfileParserTest.yaml
+     */
+    public function it_gets_the_location()
+    {
+        self::assertEquals('101', $this->parser->getLocation());
+    }
+
+    /**
+     * @test
+     * @vcr ProfileParserTest.yaml
+     */
+    public function it_gets_the_anime_stats()
+    {
+        self::assertInstanceOf(\Jikan\Model\AnimeStats::class, $this->parser->getAnimeStats());
+    }
+
+    /**
+     * @test
+     * @vcr ProfileParserTest.yaml
+     */
+    public function it_gets_the_manga_stats()
+    {
+        self::assertInstanceOf(\Jikan\Model\MangaStats::class, $this->parser->getMangaStats());
+    }
+
+    /**
+     * @test
+     * @vcr ProfileParserTest.yaml
+     */
+    public function it_gets_the_favorites()
+    {
+        $this->markTestSkipped('Not yet added');
+    }
+    
 }

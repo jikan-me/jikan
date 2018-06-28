@@ -40,6 +40,19 @@ class JikanTest extends TestCase
 
     /**
      * @test
+     * @vcr CharacterParserTest.yaml
+     */
+    public function it_gets_characters()
+    {
+        $character = $this->jikan->Character(new \Jikan\Request\Character(116281));
+        self::assertInstanceOf(\Jikan\Model\Character::class, $character);
+        self::assertCount(9, $character->getAnimeography());
+        self::assertCount(2, $character->getMangaography());
+        self::assertCount(4, $character->getVoiceActors());
+    }
+
+    /**
+     * @test
      * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_seasonal_anime()
@@ -52,14 +65,13 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
+     * @vcr SeasonalParserTest.yaml
      */
-    public function it_gets_characters()
+    public function it_gets_user_profile()
     {
-        $character = $this->jikan->Character(new \Jikan\Request\Character(116281));
-        self::assertInstanceOf(\Jikan\Model\Character::class, $character);
-        self::assertCount(9, $character->getAnimeography());
-        self::assertCount(2, $character->getMangaography());
-        self::assertCount(4, $character->getVoiceActors());
+        $user = $this->jikan->UserProfile(new \Jikan\Request\UserProfile('sandshark'));
+        self::assertInstanceOf(\Jikan\Model\UserProfile::class, $user);
+        self::assertInstanceOf(\Jikan\Model\AnimeStats::class, $user->getAnimeStats());
+        self::assertInstanceOf(\Jikan\Model\MangaStats::class, $user->getMangaStats());
     }
 }

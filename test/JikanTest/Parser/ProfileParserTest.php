@@ -16,7 +16,7 @@ class ProfileParserTest extends TestCase
     {
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/sandshark');
-        $this->parser = new \Jikan\Parser\Profile($crawler);
+        $this->parser = new \Jikan\Parser\UserProfile($crawler);
     }
 
     /**

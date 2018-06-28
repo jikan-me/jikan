@@ -84,6 +84,16 @@ class Jikan
     }
 
     /**
+     * @param Request\User $request
+     *
+     * @return Model\User
+     */
+    public function User(Request\User $request): Model\User
+    {
+        return $this->myanimelist->getUser($request);
+    }
+
+    /**
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal

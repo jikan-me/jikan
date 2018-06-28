@@ -45,4 +45,14 @@ class JString
     {
         return empty($string) ? null : $string;
     }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    public static function BR2BB(string $string) : string
+    {
+        return str_replace(['<br>', '<br/>', '<br />'], '[br]', $string);
+    }
 }

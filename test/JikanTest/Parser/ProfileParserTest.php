@@ -43,7 +43,7 @@ class ProfileParserTest extends TestCase
      */
     public function it_gets_the_image()
     {
-        self::assertEquals('https://myanimelist.cdn-dena.com/images/userimages/3600201.jpg', $this->parser->getImage());
+        self::assertEquals('https://myanimelist.cdn-dena.com/images/userimages/3600201.jpg', $this->parser->getImageUrl());
     }
 
     /**

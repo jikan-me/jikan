@@ -5,7 +5,7 @@ namespace Jikan\Parser;
 use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
 
-class Profile
+class UserProfile
 {
     /**
      * @var Crawler
@@ -25,9 +25,9 @@ class Profile
     /**
      * Return the model
      */
-    public function getModel(): Model\Profile
+    public function getModel(): Model\UserProfile
     {
-        return Model\Profile::fromParser($this);
+        return Model\UserProfile::fromParser($this);
     }
 
     /**

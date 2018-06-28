@@ -52,7 +52,7 @@ class UserProfile
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getImage(): string
+    public function getImageUrl(): string
     {
         return $this->crawler->filterXPath('//div[contains(@class, "user-image")]/img')->attr('src');
     }

@@ -20,6 +20,16 @@ class UserProfile
     /**
      * @var string
      */
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $image_url;
+
+    /**
+     * @var string
+     */
     private $lastOnline;
 
     /**
@@ -170,6 +180,12 @@ class UserProfile
     public static function fromParser(Parser\UserProfile $parser): self
     {
         $instance = new self();
+        $instance->name = $parser->getUsername();
+        $instance->url = $parser->getProfileUrl();
+        $instance->image_url = $parser->getImageUrl();
+        $instance->joined = $parser->getJoinDate();
+        $instance->lastOnline = $parser->getLastOnline();
+        $instance->gender = $parser->getGender();
 
         return $instance;
     }

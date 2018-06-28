@@ -117,5 +117,17 @@ class ProfileParserTest extends TestCase
     {
         $this->markTestSkipped('Not yet added');
     }
+
+    /**
+     * @test
+     * @vcr MangaParserTest.yaml
+     */
+    public function it_gets_the_about()
+    {
+        self::assertEquals(
+            null,
+            $this->parser->getAbout()
+        );
+    }
     
 }

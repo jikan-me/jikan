@@ -209,4 +209,49 @@ class Person implements ParserInterface
             $node->html()
         );
     }
+
+    // /**
+    //  * @return Model\Animeography[]
+    //  * @throws \InvalidArgumentException
+    //  */
+    // public function getPersonVoiceActingRole(): array
+    // {
+    //     return $this->crawler
+    //         ->filterXPath('//div[contains(text(), \'Voice Acting Roles\')]/../table[1]/tr')
+    //         ->each(
+    //             function (Crawler $c) {
+    //                 return (new VoiceActingRole($c))->getModel();
+    //             }
+    //         );
+    // }
+
+    // /**
+    //  * @return Model\Mangaography[]
+    //  * @throws \InvalidArgumentException
+    //  */
+    // public function getPersonAnimeStaffPositions(): array
+    // {
+    //     return $this->crawler
+    //         ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[2]/tr')
+    //         ->each(
+    //             function (Crawler $c) {
+    //                 return (new Mangaography($c))->getModel();
+    //             }
+    //         );
+    // }
+
+    // /**
+    //  * @return Model\VoiceActor[]
+    //  * @throws \InvalidArgumentException
+    //  */
+    // public function getPersonPublishedManga(): array
+    // {
+    //     return $this->crawler
+    //         ->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')
+    //         ->each(
+    //             function (Crawler $c) {
+    //                 return (new VoiceActor($c))->getModel();
+    //             }
+    //         );
+    // }
 }

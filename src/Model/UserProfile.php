@@ -5,19 +5,20 @@ namespace Jikan\Model;
 use Jikan\Parser;
 
 /**
- * Class Profile
+ * Class UserProfile
  *
  * @package Jikan\Model
  */
-class Profile
+class UserProfile
 {
 
+
     /**
-     * @param Parser\Profile $parser
+     * @param Parser\UserProfile $parser
      *
-     * @return Profile
+     * @return UserProfile
      */
-    public static function fromParser(Parser\Profile $parser): self
+    public static function fromParser(Parser\UserProfile $parser): self
     {
         $instance = new self();
 

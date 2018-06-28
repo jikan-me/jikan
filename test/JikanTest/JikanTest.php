@@ -44,7 +44,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_seasonal_anime()
     {
-        $seasonal = $this->jikan->getSeasonal(new \Jikan\Request\Seasonal(2018, 'spring'));
+        $seasonal = $this->jikan->Seasonal(new \Jikan\Request\Seasonal(2018, 'spring'));
         self::assertInstanceOf(\Jikan\Model\Seasonal::class, $seasonal);
         self::assertCount(234, $seasonal->getAnime());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\SeasonalAnime::class, $seasonal->getAnime());

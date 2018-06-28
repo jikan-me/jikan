@@ -98,7 +98,7 @@ class Jikan
      *
      * @return Model\Seasonal
      */
-    public function getSeasonal(Request\Seasonal $request): Model\Seasonal
+    public function Seasonal(Request\Seasonal $request): Model\Seasonal
     {
         return $this->myanimelist->getSeasonal($request);
     }

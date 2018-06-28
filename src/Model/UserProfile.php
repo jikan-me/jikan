@@ -53,17 +53,6 @@ class UserProfile
     private $joined;
 
     /**
-     * @var string
-     */    
-    private $animeListUrl;
-
-    /**
-     * @var string
-     */
-    private $mangaListUrl;
-
-
-    /**
      * @var \Jikan\Model\AnimeStats
      */
     private $animeStats;
@@ -141,20 +130,6 @@ class UserProfile
     public function getJoined() : string {
         return $this->joined;
     } 
-
-    /**
-     * @return string
-     */    
-    public function getAnimeListUrl() : string {
-        return $this->animeListUrl;
-    } 
-
-    /**
-     * @return string
-     */
-    public function getMangaListUrl() : string {
-        return $this->mangaListUrl;
-    }
 
     /**
      * @return \Jikan\Model\AnimeStats

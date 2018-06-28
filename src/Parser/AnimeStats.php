@@ -43,7 +43,7 @@ class AnimeStats
     public function getDaysWatched(): ?float
     {
         $node = $this->crawler
-            ->filterXPath('//div[@class=\'di-tc al pl8 fs12 fw-b\']');
+            ->filterXPath('//div[@class=\'di-tc al pl8 fs12 fw-b\'][1]');
 
         if (!$node->count()) {
             return null;
@@ -59,7 +59,7 @@ class AnimeStats
     public function getMeanScore(): ?float
     {
         $node = $this->crawler
-            ->filterXPath('//div[@class=\'di-tc ar pr8 fs12 fw-b\']');
+            ->filterXPath('//div[@class=\'di-tc ar pr8 fs12 fw-b\'][1]');
 
         if (!$node->count()) {
             return null;

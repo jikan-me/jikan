@@ -168,32 +168,23 @@ class Person implements ParserInterface
     }
 
     /**
-     * @return string|null
+     * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getPersonFavorites(): ?string
+    public function getPersonFavorites(): ?int
     {
         $node = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Website:"]');
-        $node = Parser::removeChildNodes($node->parents());
-        var_dump($node);
-        die;
+            ->filterXPath('//span[text()="Member Favorites:"]');
 
 
-        $website = $node->nextAll()->filter('a');
-
-        if (!$website->count()) {
+        if (!$node->count()) {
             return null;
         }
 
-        // MAL returns an empty `<a href="http://"></a>` when there's no website
-        if (empty($website->text())) {
-            return null;
-        }
-
-
-        return $website->attr('href');
+        return (int) JString::cleanse(
+            str_replace([$node->text(), ','], '', $node->parents()->text())
+        );
     }
 
     /**
@@ -218,4 +209,49 @@ class Person implements ParserInterface
             $node->html()
         );
     }
+
+    // /**
+    //  * @return Model\Animeography[]
+    //  * @throws \InvalidArgumentException
+    //  */
+    // public function getPersonVoiceActingRole(): array
+    // {
+    //     return $this->crawler
+    //         ->filterXPath('//div[contains(text(), \'Voice Acting Roles\')]/../table[1]/tr')
+    //         ->each(
+    //             function (Crawler $c) {
+    //                 return (new VoiceActingRole($c))->getModel();
+    //             }
+    //         );
+    // }
+
+    // /**
+    //  * @return Model\Mangaography[]
+    //  * @throws \InvalidArgumentException
+    //  */
+    // public function getPersonAnimeStaffPositions(): array
+    // {
+    //     return $this->crawler
+    //         ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[2]/tr')
+    //         ->each(
+    //             function (Crawler $c) {
+    //                 return (new Mangaography($c))->getModel();
+    //             }
+    //         );
+    // }
+
+    // /**
+    //  * @return Model\VoiceActor[]
+    //  * @throws \InvalidArgumentException
+    //  */
+    // public function getPersonPublishedManga(): array
+    // {
+    //     return $this->crawler
+    //         ->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')
+    //         ->each(
+    //             function (Crawler $c) {
+    //                 return (new VoiceActor($c))->getModel();
+    //             }
+    //         );
+    // }
 }

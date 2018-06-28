@@ -46,14 +46,14 @@ class Person extends Model
         $instance->malId = $parser->getPersonId();
         $instance->url = $parser->getPersonUrl();
         $instance->imageUrl = $parser->getPersonImageUrl();
-        // $instance->websiteUrl = $parser->getPersonWebsiteUrl();
         $instance->name = $parser->getPersonName();
         $instance->givenName = $parser->getPersonGivenName();
         $instance->familyName = $parser->getPersonFamilyName();
         $instance->alternateNames = $parser->getPersonAlternateNames();
-        $instance->website = $parser->getPersonWebsite();
+        $instance->websiteUrl = $parser->getPersonWebsite();
         $instance->about = $parser->getPersonAbout();
         $instance->memberFavorites = $parser->getPersonFavorites();
+        // $instance->voiceActingRole = $parser->getPersonVoiceActingRole();
 
         return $instance;
     }
@@ -150,7 +150,7 @@ class Person extends Model
     /**
      * @return array
      */
-    public function getVoiceActingRole(): array
+    public function getVoiceActingRoles(): array
     {
         return $this->voiceActingRole;
 	}
@@ -158,7 +158,7 @@ class Person extends Model
     /**
      * @return array
      */
-    public function getAnimeStaffPosition(): array
+    public function getAnimeStaffPositions(): array
     {
         return $this->animeStaffPosition;
 	}

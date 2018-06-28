@@ -84,6 +84,19 @@ class MalClient
     }
 
     /**
+     * @param Request\UserProfile $request
+     *
+     * @return Model\UserProfile
+     */
+    public function getUserProfile(Request\UserProfile $request): Model\UserProfile
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\UserProfile($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal

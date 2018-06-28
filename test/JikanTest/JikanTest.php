@@ -40,18 +40,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
-     */
-    public function it_gets_seasonal_anime()
-    {
-        $seasonal = $this->jikan->getSeasonal(new \Jikan\Request\Seasonal(2018, 'spring'));
-        self::assertInstanceOf(\Jikan\Model\Seasonal::class, $seasonal);
-        self::assertCount(234, $seasonal->getAnime());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\SeasonalAnime::class, $seasonal->getAnime());
-    }
-
-    /**
-     * @test
      * @vcr CharacterParserTest.yaml
      */
     public function it_gets_characters()
@@ -61,5 +49,29 @@ class JikanTest extends TestCase
         self::assertCount(9, $character->getAnimeography());
         self::assertCount(2, $character->getMangaography());
         self::assertCount(4, $character->getVoiceActors());
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_seasonal_anime()
+    {
+        $seasonal = $this->jikan->Seasonal(new \Jikan\Request\Seasonal(2018, 'spring'));
+        self::assertInstanceOf(\Jikan\Model\Seasonal::class, $seasonal);
+        self::assertCount(234, $seasonal->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\SeasonalAnime::class, $seasonal->getAnime());
+    }
+
+    /**
+     * @test
+     * @vcr SeasonalParserTest.yaml
+     */
+    public function it_gets_user_profile()
+    {
+        $user = $this->jikan->UserProfile(new \Jikan\Request\UserProfile('sandshark'));
+        self::assertInstanceOf(\Jikan\Model\UserProfile::class, $user);
+        self::assertInstanceOf(\Jikan\Model\AnimeStats::class, $user->getAnimeStats());
+        self::assertInstanceOf(\Jikan\Model\MangaStats::class, $user->getMangaStats());
     }
 }

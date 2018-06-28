@@ -84,11 +84,21 @@ class Jikan
     }
 
     /**
+     * @param Request\UserProfile $request
+     *
+     * @return Model\UserProfile
+     */
+    public function UserProfile(Request\UserProfile $request): Model\UserProfile
+    {
+        return $this->myanimelist->getUserProfile($request);
+    }
+
+    /**
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal
      */
-    public function getSeasonal(Request\Seasonal $request): Model\Seasonal
+    public function Seasonal(Request\Seasonal $request): Model\Seasonal
     {
         return $this->myanimelist->getSeasonal($request);
     }

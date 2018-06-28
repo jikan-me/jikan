@@ -65,56 +65,6 @@ class UserProfile
     /**
      * @var int
      */
-    private $animeDaysWatched;
-
-    /**
-     * @var float
-     */
-    private $animeMeanScore;
-
-    /**
-     * @var int
-     */
-    private $animeWatching;
-
-    /**
-     * @var int
-     */
-    private $animeCompleted;
-
-    /**
-     * @var int
-     */
-    private $animeOnHold;
-
-    /**
-     * @var int
-     */
-    private $animeDropped;
-
-    /**
-     * @var int
-     */
-    private $animePlanToWatch;
-
-    /**
-     * @var int
-     */
-    private $animeTotalEntries;
-
-    /**
-     * @var int
-     */
-    private $animeRewatched;
-
-    /**
-     * @var int
-     */
-    private $animeEpisodesWatched;
-
-    /**
-     * @var int
-     */
     private $mangaDaysRead;
 
     /**
@@ -186,6 +136,9 @@ class UserProfile
         $instance->joined = $parser->getJoinDate();
         $instance->lastOnline = $parser->getLastOnline();
         $instance->gender = $parser->getGender();
+        $instance->birthday = $parser->getBirthday();
+        $instance->location = $parser->getLocation();
+        $instance->animeStats = $parser->getAnimeStats();
 
         return $instance;
     }
@@ -244,77 +197,7 @@ class UserProfile
      */
     public function getMangaListUrl() : string {
         return $this->mangaListUrl;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeDaysWatched() : int {
-        return $this->animeDaysWatched;
-    } 
-
-    /**
-     * @return float
-     */
-    public function getAnimeMeanScore() : float {
-        return $this->animeMeanScore;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeWatching() : int {
-        return $this->animeWatching;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeCompleted() : int {
-        return $this->animeCompleted;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeOnHold() : int {
-        return $this->animeOnHold;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeDropped() : int {
-        return $this->animeDropped;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimePlanToWatch() : int {
-        return $this->animePlanToWatch;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeTotalEntries() : int {
-        return $this->animeTotalEntries;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeRewatched() : int {
-        return $this->animeRewatched;
-    } 
-
-    /**
-     * @return int
-     */
-    public function getAnimeEpisodesWatched() : int {
-        return $this->animeEpisodesWatched;
-    } 
+    }
 
     /**
      * @return int

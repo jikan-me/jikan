@@ -88,4 +88,44 @@ class UserProfile
 
         return $gender->text();
     }
+
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getBirthday(): ?string
+    {
+        $gender = $this->crawler->filterXPath('//span[contains(text(), \'Birthday\')]/following-sibling::span');
+        if (!$gender->count()) {
+            return null;
+        }
+
+        return $gender->text();
+    }
+
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getLocation(): ?string
+    {
+        $gender = $this->crawler->filterXPath('//span[contains(text(), \'Location\')]/following-sibling::span');
+        if (!$gender->count()) {
+            return null;
+        }
+
+        return $gender->text();
+    }
+
+    /**
+     * @return \Jikan\Model\AnimeStats
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeStats(): \Jikan\Model\AnimeStats
+    {
+        $this->crawler
+            ->filterXPath('//div[@class=\'stats anime\']');
+        
+        return (new AnimeStats($this->crawler))->getModel();
+    }
 }

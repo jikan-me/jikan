@@ -69,6 +69,7 @@ class Character implements ParserInterface
 
     /**
      * @return string
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getNameKanji(): string

@@ -4,7 +4,6 @@ namespace Jikan\Parser;
 
 use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
-use Converter\HTMLConverter;
 use Jikan\Helper\JString;
 
 class UserProfile
@@ -156,10 +155,8 @@ class UserProfile
             return null;
         }
 
-        return JString::cleanse(
-            (new HTMLConverter(
-                JString::BR2BB($about->html())
-            ))->toBBCode()
+        return trim(
+            $about->html()
         );
     }
 }

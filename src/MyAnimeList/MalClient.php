@@ -88,7 +88,7 @@ class MalClient
      *
      * @return Model\UserProfile
      */
-    public function getUserProfile(Request\User $request): Model\UserProfile
+    public function getUserProfile(Request\UserProfile $request): Model\UserProfile
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\UserProfile($crawler);

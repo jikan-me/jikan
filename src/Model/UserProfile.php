@@ -68,6 +68,11 @@ class UserProfile
     private $favorite;
 
     /**
+     * @var string
+     */
+    private $about;
+
+    /**
      * @param Parser\UserProfile $parser
      *
      * @return UserProfile
@@ -85,6 +90,7 @@ class UserProfile
         $instance->location = $parser->getLocation();
         $instance->animeStats = $parser->getAnimeStats();
         $instance->mangaStats = $parser->getMangaStats();
+        $instance->about = $parser->getAbout();
 
         return $instance;
     }
@@ -150,5 +156,12 @@ class UserProfile
      */
     public function getFavorites() : array {
         return $this->favorite;
+    } 
+
+    /**
+     * @return string
+     */
+    public function getAbout() : string {
+        return $this->about;
     } 
 }

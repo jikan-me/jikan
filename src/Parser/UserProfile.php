@@ -4,6 +4,8 @@ namespace Jikan\Parser;
 
 use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
+use Converter\HTMLConverter;
+use Jikan\Helper\JString;
 
 class UserProfile
 {
@@ -139,5 +141,25 @@ class UserProfile
             ->filterXPath('//div[@class=\'stats anime\']');
         
         return (new MangaStats($this->crawler))->getModel();
+    }
+
+    /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getAbout(): ?string
+    {
+        $about = $this->crawler->filterXPath('//div[@class=\'profile-about-user js-truncate-inner\']/table/tr/td/div');
+
+        
+        if (!$about->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            (new HTMLConverter(
+                JString::BR2BB($about->html())
+            ))->toBBCode()
+        );
     }
 }

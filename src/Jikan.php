@@ -84,13 +84,13 @@ class Jikan
     }
 
     /**
-     * @param Request\User $request
+     * @param Request\UserProfile $request
      *
-     * @return Model\User
+     * @return Model\UserProfile
      */
-    public function User(Request\User $request): Model\User
+    public function UserProfile(Request\UserProfile $request): Model\UserProfile
     {
-        return $this->myanimelist->getUser($request);
+        return $this->myanimelist->getUserProfile($request);
     }
 
     /**

@@ -84,14 +84,14 @@ class MalClient
     }
 
     /**
-     * @param Request\User $request
+     * @param Request\UserProfile $request
      *
-     * @return Model\User
+     * @return Model\UserProfile
      */
-    public function getUser(Request\User $request): Model\User
+    public function getUserProfile(Request\User $request): Model\UserProfile
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\User($crawler);
+        $parser = new Parser\UserProfile($crawler);
 
         return $parser->getModel();
     }

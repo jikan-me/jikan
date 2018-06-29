@@ -81,12 +81,9 @@ class Anime
     private $airedString;
 
     /**
-     * @var array
+     * @var Aired
      */
-    private $aired = [
-        'from' => null,
-        'to'   => null,
-    ];
+    private $aired;
 
     /**
      * @var string
@@ -195,8 +192,7 @@ class Anime
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();
         $instance->url = $parser->getAnimeURL();
-        $instance->malId = $parser->getAnimeID();
-
+        $instance->malId = $parser->getAnimeId();
         $instance->imageUrl = $parser->getAnimeImageURL();
         $instance->synopsis = $parser->getAnimeSynopsis();
         $instance->titleEnglish = $parser->getAnimeTitleEnglish();
@@ -208,38 +204,7 @@ class Anime
         $instance->status = $parser->getAnimeStatus();
         $instance->airing = $instance->status === 'Currently Airing';
         $instance->airedString = $parser->getAnimeAiredString();
-
-        if (!empty($instance->airedString) && $instance->airedString != 'Not available') {
-            if (strpos($instance->airedString, 'to')) {
-                preg_match('~(.*) to (.*)~', $instance->airedString, $matches);
-                $instance->aired = [
-                    'from' => (strpos($matches[1], '?') !== false) ? null : @date_format(date_create($matches[1]), 'o-m-d'),
-                    'to' => (strpos($matches[2], '?') !== false) ? null : @date_format(date_create($matches[2]), 'o-m-d')
-                ];
-            } else {
-                if (
-                    preg_match('~^[0-9]{4}$~', $instance->airedString)
-                    || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->airedString)
-                    ) 
-                {
-                    $instance->aired = [
-                        'from' => null,
-                        'to' => null
-                    ];
-                } else {
-                    $instance->aired = [
-                        'from' => (strpos($instance->airedString, '?') !== false) ? null : @date_format(date_create($instance->airedString), 'o-m-d'),
-                        'to' => (strpos($instance->airedString, '?') !== false) ? null : @date_format(date_create($instance->airedString), 'o-m-d')
-                    ];
-                }
-            }
-        } else {
-            $instance->aired = [
-                'from' => null,
-                'to' => null
-            ];
-        }
-
+        $instance->aired = $parser->getAired();
         $instance->premiered = $parser->getAnimePremiered();
         $instance->broadcast = $parser->getAnimeBroadcast();
         $instance->producer = $parser->getAnimeProducer();
@@ -383,9 +348,9 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return Aired
      */
-    public function getAired(): array
+    public function getAired(): Aired
     {
         return $this->aired;
     }

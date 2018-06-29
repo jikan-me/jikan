@@ -4,6 +4,7 @@ namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Model\Aired;
 use Jikan\Model\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
@@ -197,25 +198,6 @@ class AnimeParser implements ParserInterface
 
         return JString::cleanse(
             str_replace($status->text(), '', $status->parents()->text())
-        );
-    }
-
-    /**
-     * @return string
-     * @throws \InvalidArgumentException
-     */
-    public function getAnimeAiredString(): ?string
-    {
-        $aired = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Aired:"]');
-
-        if (!$aired->count()) {
-            return null;
-        }
-
-        return JString::cleanse(
-            str_replace($aired->text(), '', $aired->parents()->text())
         );
     }
 
@@ -564,5 +546,54 @@ class AnimeParser implements ParserInterface
                 $this->crawler->filter('div[class="theme-songs js-theme-songs ending"]')->text()
             )
         );
+    }
+
+    /**
+     * @return Aired
+     */
+    public function getAired(): Aired
+    {
+        return new Aired($this->getAiredFrom(), $this->getAiredUntil());
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    private function getAiredFrom(): ?\DateTimeImmutable
+    {
+        $aired = $this->getAnimeAiredString();
+        if ($aired === 'Not available') {
+            return null;
+        }
+        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
+            $aired = explode(' to ', $aired)[0];
+        }
+
+        return \DateTimeImmutable::createFromFormat('M d, Y', $aired);
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeAiredString(): ?string
+    {
+        $aired = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..')->text();
+        $aired = explode(PHP_EOL, trim($aired))[1];
+
+        return trim($aired);
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    private function getAiredUntil(): ?\DateTimeImmutable
+    {
+        $aired = $this->getAnimeAiredString();
+        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
+            return null;
+        }
+
+        return \DateTimeImmutable::createFromFormat('M d, Y', explode(' to ', $aired)[1]);
     }
 }

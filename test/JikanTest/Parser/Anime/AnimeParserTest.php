@@ -180,7 +180,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_aired_string()
     {
         self::assertEquals(
-            "Oct 20, 1999 to ?",
+            'Oct 20, 1999 to ?',
             $this->anime->getAiredString()
         );
     }
@@ -191,13 +191,10 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_aired()
     {
-        self::assertEquals(
-            [
-                'from' => '1999-10-20',
-                'to'   => null,
-            ],
-            $this->anime->getAired()
-        );
+        $aired = $this->anime->getAired();
+        self::assertInstanceOf(\DateTimeImmutable::class, $aired->getFrom());
+        self::assertEquals('1999-10-20', $aired->getFrom()->format('Y-m-d'));
+        self::assertNull($aired->getUntil());
     }
 
     /**
@@ -206,7 +203,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_premiered()
     {
-        self::assertEquals("Fall 1999",$this->anime->getPremiered());
+        self::assertEquals("Fall 1999", $this->anime->getPremiered());
     }
 
     /**

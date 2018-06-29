@@ -480,18 +480,12 @@ class MangaParser implements ParserInterface
      */
     public function getMangaBackground(): ?string
     {
-        $background = $this->crawler
-            ->filter('span[itemprop="description"]')->parents()->html();
-        preg_match('~Background</h2>(.*?)<div~s', $background, $matches);
-
-        if (empty($matches)) {
+        $background = Parser::removeChildNodes($this->crawler->filterXPath('//span[@itemprop="description"]/..'));
+        $background = $background->text();
+        if (preg_match('~No background information has been added to this title~', $background)) {
             return null;
         }
 
-        if (preg_match('~No background information has been added to this title~', $matches[1])) {
-            return null;
-        }
-
-        return JString::cleanse($matches[1]);
+        return JString::cleanse($background);
     }
 }

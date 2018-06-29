@@ -63,7 +63,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_last_online()
     {
-        self::assertEquals('Now', $this->parser->getLastOnline());
+        self::assertEquals('Yesterday, 6:37 AM', $this->parser->getLastOnline());
     }
 
     /**

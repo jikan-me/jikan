@@ -119,7 +119,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_type()
     {
         self::assertEquals(
-            'MangaParser',
+            'Manga',
             $this->parser->getMangaType()
         );
     }
@@ -283,7 +283,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_scored_by()
     {
         self::assertEquals(
-            177621,
+            177655,
             $this->manga->getScoredBy()
         );
     }
@@ -295,7 +295,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_rank()
     {
         self::assertEquals(
-            707,
+            706,
             $this->manga->getRank()
         );
     }
@@ -319,7 +319,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_members()
     {
         self::assertEquals(
-            258846,
+            258896,
             $this->manga->getMembers()
         );
     }
@@ -331,7 +331,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_favorites()
     {
         self::assertEquals(
-            39959,
+            39966,
             $this->manga->getFavorites()
         );
     }
@@ -355,13 +355,14 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_background()
     {
+        $background = $this->manga->getBackground();
         self::assertContains(
             'Naruto has sold over 220 million copies worldwide as of 2015, making it the 4th highest grossing',
-            $this->manga->getBackground()
+            $background
         );
         self::assertContains(
-            ' Comics/Planet MangaParser from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.',
-            $this->manga->getBackground()
+            ' Comics/Planet Manga from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.',
+            $background
         );
     }
 

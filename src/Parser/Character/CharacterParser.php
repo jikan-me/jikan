@@ -139,7 +139,7 @@ class CharacterParser implements ParserInterface
     public function getAnimeography(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(text(), \'AnimeographyParser\')]/../table[1]/tr')
+            ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[1]/tr')
             ->each(
                 function (Crawler $c) {
                     return (new AnimeographyParser($c))->getModel();
@@ -154,7 +154,7 @@ class CharacterParser implements ParserInterface
     public function getMangaography(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(text(), \'AnimeographyParser\')]/../table[2]/tr')
+            ->filterXPath('//div[contains(text(), \'Mangaography\')]/../table[2]/tr')
             ->each(
                 function (Crawler $c) {
                     return (new MangaographyParser($c))->getModel();

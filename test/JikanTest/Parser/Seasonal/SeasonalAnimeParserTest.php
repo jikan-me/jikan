@@ -87,8 +87,8 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_source()
     {
-        self::assertEquals('MangaParser', $this->parser->getSource());
-        self::assertEquals('MangaParser', $this->parser2->getSource());
+        self::assertEquals('Manga', $this->parser->getSource());
+        self::assertEquals('Manga', $this->parser2->getSource());
     }
 
     /**
@@ -148,7 +148,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_air_members()
     {
-        self::assertEquals(326216, $this->parser->getMembers());
+        self::assertEquals(329324, $this->parser->getMembers());
     }
 
     /**
@@ -191,7 +191,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_anime_score()
     {
         self::assertEquals(
-            7.61,
+            7.57,
             $this->parser2->getAnimeScore()
         );
     }

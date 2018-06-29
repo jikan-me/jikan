@@ -269,7 +269,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_source()
     {
         self::assertEquals(
-            'MangaParser',
+            'Manga',
             $this->anime->getSource()
         );
     }
@@ -335,7 +335,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_scored_by()
     {
         self::assertEquals(
-            428737,
+            428921,
             $this->anime->getScoredBy()
         );
     }
@@ -371,7 +371,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_members()
     {
         self::assertEquals(
-            729892,
+            730240,
             $this->anime->getMembers()
         );
     }
@@ -383,7 +383,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_favorites()
     {
         self::assertEquals(
-            70460,
+            70500,
             $this->anime->getFavorites()
         );
     }

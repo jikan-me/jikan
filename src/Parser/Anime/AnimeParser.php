@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
+use Jikan\Helper\Parser;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -557,19 +558,13 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeBackground(): ?string
     {
-        $background = $this->crawler
-            ->filter('span[itemprop="description"]')->parents()->html();
-        preg_match('~Background</h2>(.*?)<div~s', $background, $matches);
-
-        if (empty($matches)) {
+        $background = Parser::removeChildNodes($this->crawler->filterXPath('//span[@itemprop="description"]/..'));
+        $background = $background->text();
+        if (preg_match('~No background information has been added to this title~', $background)) {
             return null;
         }
 
-        if (preg_match('~No background information has been added to this title~', $matches[1])) {
-            return null;
-        }
-
-        return JString::cleanse($matches[1]);
+        return JString::cleanse($background);
     }
 
     /**

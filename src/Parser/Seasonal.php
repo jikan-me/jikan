@@ -4,6 +4,7 @@ namespace Jikan\Parser;
 
 use Jikan\Helper\JString;
 use Jikan\Model;
+use Jikan\Parser\Common\AnimeCard;
 use Symfony\Component\DomCrawler\Crawler;
 
 class Seasonal implements ParserInterface

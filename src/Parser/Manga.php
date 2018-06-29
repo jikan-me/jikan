@@ -3,6 +3,7 @@
 namespace Jikan\Parser;
 
 use Jikan\Helper\JString;
+use Jikan\Parser\Common\MalUrlParser;
 use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Helper\Parser;
 
@@ -38,17 +39,19 @@ class Manga implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getMangaId(): int
     {
-        preg_match('#https?://myanimelist.net/manga/(\d+)#', $this->getMangaUrl(), $matches);
+        preg_match('#https?://myanimelist.net/manga/(\d+)#', $this->getMangaURL(), $matches);
 
         return (int)$matches[1];
     }
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getMangaTitle(): string
     {
@@ -57,6 +60,7 @@ class Manga implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getMangaURL(): string
     {
@@ -65,6 +69,7 @@ class Manga implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getMangaImageURL(): string
     {
@@ -73,6 +78,7 @@ class Manga implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getMangaSynopsis(): string
     {
@@ -217,6 +223,7 @@ class Manga implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getMangaPublishedString(): ?string
     {
@@ -236,6 +243,8 @@ class Manga implements ParserInterface
 
     /**
      * @return array
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getMangaAuthors(): array
     {
@@ -256,6 +265,8 @@ class Manga implements ParserInterface
 
     /**
      * @return array
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getMangaSerialization(): array
     {
@@ -276,6 +287,8 @@ class Manga implements ParserInterface
 
     /**
      * @return array
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getMangaGenre(): array
     {
@@ -297,6 +310,8 @@ class Manga implements ParserInterface
 
     /**
      * @return float
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getMangaScore(): ?float
     {
@@ -316,6 +331,8 @@ class Manga implements ParserInterface
 
     /**
      * @return int
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getMangaScoredBy(): ?int
     {
@@ -331,6 +348,7 @@ class Manga implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMangaRank(): ?int
     {
@@ -354,6 +372,7 @@ class Manga implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMangaPopularity(): ?int
     {
@@ -372,6 +391,7 @@ class Manga implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMangaMembers(): ?int
     {
@@ -390,6 +410,7 @@ class Manga implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMangaFavorites(): ?int
     {
@@ -408,6 +429,7 @@ class Manga implements ParserInterface
 
     /**
      * @return array
+     * @throws \RuntimeException
      */
     public function getMangaRelated(): array
     {
@@ -445,6 +467,8 @@ class Manga implements ParserInterface
 
     /**
      * @return string
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getMangaBackground(): ?string
     {

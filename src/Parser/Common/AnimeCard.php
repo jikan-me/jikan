@@ -1,9 +1,10 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Common;
 
 use Jikan\Helper\JString;
 use Jikan\Model;
+use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**

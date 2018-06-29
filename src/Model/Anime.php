@@ -186,11 +186,11 @@ class Anime
     /**
      * Create an instance from an Anime parser
      *
-     * @param \Jikan\Parser\Anime $parser
+     * @param \Jikan\Parser\Anime\Anime $parser
      *
      * @return Anime
      */
-    public static function fromParser(\Jikan\Parser\Anime $parser): Anime
+    public static function fromParser(\Jikan\Parser\Anime\Anime $parser): Anime
     {
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();

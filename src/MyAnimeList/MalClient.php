@@ -39,7 +39,7 @@ class MalClient
     public function getAnime(Request\Anime $request): Model\Anime
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Anime($crawler);
+        $parser = new Parser\Anime\Anime($crawler);
 
         return $parser->getModel();
     }

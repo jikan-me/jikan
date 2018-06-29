@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Common;
 
 use Jikan\Model\MalUrl;
 use Symfony\Component\DomCrawler\Crawler;
@@ -24,6 +24,7 @@ class MalUrlParser
 
     /**
      * @return MalUrl
+     * @throws \InvalidArgumentException
      */
     public function getModel(): MalUrl
     {

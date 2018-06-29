@@ -17,13 +17,13 @@ class SeasonalAnime extends AnimeCard
     private $continuing;
 
     /**
-     * @param Parser\AnimeCard $parser
+     * @param Parser\Common\AnimeCard $parser
      *
      * @return SeasonalAnime
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function parseSeasonalAnime(Parser\AnimeCard $parser): SeasonalAnime
+    public static function parseSeasonalAnime(Parser\Common\AnimeCard $parser): SeasonalAnime
     {
         $instance = new self();
         parent::setProperties($parser, $instance);

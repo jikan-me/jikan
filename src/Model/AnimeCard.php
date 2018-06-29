@@ -92,13 +92,13 @@ class AnimeCard
     protected $kids;
 
     /**
-     * @param Parser\AnimeCard $parser
+     * @param Parser\Common\AnimeCard $parser
      *
      * @return AnimeCard
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function parseAnimeCard(Parser\AnimeCard $parser): AnimeCard
+    public static function parseAnimeCard(Parser\Common\AnimeCard $parser): AnimeCard
     {
         $instance = new self();
         self::setProperties($parser, $instance);
@@ -107,10 +107,10 @@ class AnimeCard
     }
 
     /**
-     * @param Parser\AnimeCard $parser
+     * @param Parser\Common\AnimeCard $parser
      * @param AnimeCard        $instance
      */
-    protected static function setProperties(Parser\AnimeCard $parser, $instance): void
+    protected static function setProperties(Parser\Common\AnimeCard $parser, $instance): void
     {
         $instance->title = $parser->getTitle();
         $instance->synopsis = $parser->getDescription();

@@ -1,8 +1,10 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
+use Jikan\Parser\Common\MalUrlParser;
+use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**

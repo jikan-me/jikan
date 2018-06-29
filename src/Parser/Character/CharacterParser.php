@@ -1,18 +1,19 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Character;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
+use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Character
+ * Class CharacterParser
  *
  * @package Jikan\Parser
  */
-class Character implements ParserInterface
+class CharacterParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -20,7 +21,7 @@ class Character implements ParserInterface
     private $crawler;
 
     /**
-     * Anime constructor.
+     * AnimeParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -138,10 +139,10 @@ class Character implements ParserInterface
     public function getAnimeography(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[1]/tr')
+            ->filterXPath('//div[contains(text(), \'AnimeographyParser\')]/../table[1]/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new Animeography($c))->getModel();
+                    return (new AnimeographyParser($c))->getModel();
                 }
             );
     }
@@ -153,10 +154,10 @@ class Character implements ParserInterface
     public function getMangaography(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(text(), \'Animeography\')]/../table[2]/tr')
+            ->filterXPath('//div[contains(text(), \'AnimeographyParser\')]/../table[2]/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new Mangaography($c))->getModel();
+                    return (new MangaographyParser($c))->getModel();
                 }
             );
     }
@@ -171,7 +172,7 @@ class Character implements ParserInterface
             ->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')
             ->each(
                 function (Crawler $c) {
-                    return (new VoiceActor($c))->getModel();
+                    return (new VoiceActorParser($c))->getModel();
                 }
             );
     }

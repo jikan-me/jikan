@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser;
+use Jikan\Parser\Seasonal\SeasonalParser;
 
 /**
  * Class Seasonal
@@ -23,11 +23,11 @@ class Seasonal extends Model
     public $anime = [];
 
     /**
-     * @param Parser\Seasonal $parser
+     * @param SeasonalParser
      *
      * @return Seasonal
      */
-    public static function fromParser(Parser\Seasonal $parser): self
+    public static function fromParser(SeasonalParser $parser): self
     {
         $instance = new self();
         $instance->season = $parser->getSeason();

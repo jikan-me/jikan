@@ -3,18 +3,18 @@
 namespace Jikan\Model;
 
 /**
- * Class Mangaography
+ * Class MangaographyParser
  *
  * @package Jikan\Model
  */
 class Mangaography extends Ography
 {
     /**
-     * @param \Jikan\Parser\Mangaography $parser
+     * @param \Jikan\Parser\Character\MangaographyParser $parser
      *
      * @return Mangaography
      */
-    public static function fromParser(\Jikan\Parser\Mangaography $parser): Mangaography
+    public static function fromParser(\Jikan\Parser\Character\MangaographyParser $parser): Mangaography
     {
         $instance = new self();
         parent::setProperties($parser, $instance);

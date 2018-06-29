@@ -1,5 +1,7 @@
 <?php
 
+namespace JikanTest\Parser\Anime;
+
 use Jikan\Jikan;
 use PHPUnit\Framework\TestCase;
 
@@ -9,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class AnimeParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Anime
+     * @var \Jikan\Parser\Anime\AnimeParser
      */
     private $parser;
 
@@ -23,7 +25,7 @@ class AnimeParserTest extends TestCase
         $request = new \Jikan\Request\Anime(21);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
-        $this->parser = new \Jikan\Parser\Anime\Anime($crawler);
+        $this->parser = new \Jikan\Parser\Anime\AnimeParser($crawler);
 
         $jikan = new Jikan();
         $this->anime = $jikan->Anime(
@@ -267,7 +269,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_source()
     {
         self::assertEquals(
-            'Manga',
+            'MangaParser',
             $this->anime->getSource()
         );
     }

@@ -8,11 +8,11 @@ use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeCard
+ * Class AnimeCardParser
  *
  * @package Jikan\Parser
  */
-class AnimeCard implements ParserInterface
+class AnimeCardParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -20,7 +20,7 @@ class AnimeCard implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeCard constructor.
+     * AnimeCardParser constructor.
      *
      * @param Crawler $crawler
      */

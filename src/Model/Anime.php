@@ -3,7 +3,7 @@
 namespace Jikan\Model;
 
 /**
- * Class Anime
+ * Class AnimeParser
  *
  * @package Jikan\Model
  */
@@ -184,13 +184,13 @@ class Anime
     private $endingTheme = [];
 
     /**
-     * Create an instance from an Anime parser
+     * Create an instance from an AnimeParser parser
      *
-     * @param \Jikan\Parser\Anime\Anime $parser
+     * @param \Jikan\Parser\Anime\AnimeParser $parser
      *
      * @return Anime
      */
-    public static function fromParser(\Jikan\Parser\Anime\Anime $parser): Anime
+    public static function fromParser(\Jikan\Parser\Anime\AnimeParser $parser): Anime
     {
         $instance = new self();
         $instance->title = $parser->getAnimeTitle();

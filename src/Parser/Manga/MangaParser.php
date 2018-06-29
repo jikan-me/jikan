@@ -1,18 +1,19 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Manga;
 
 use Jikan\Helper\JString;
-use Jikan\Parser\Common\MalUrlParser;
-use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Helper\Parser;
+use Jikan\Parser\Common\MalUrlParser;
+use Jikan\Parser\ParserInterface;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Manga
+ * Class MangaParser
  *
  * @package Jikan\Parser
  */
-class Manga implements ParserInterface
+class MangaParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -20,7 +21,7 @@ class Manga implements ParserInterface
     private $crawler;
 
     /**
-     * Manga constructor.
+     * MangaParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -53,18 +54,18 @@ class Manga implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getMangaTitle(): string
+    public function getMangaURL(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content');
+        return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->attr('content');
     }
 
     /**
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getMangaURL(): string
+    public function getMangaTitle(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->attr('content');
+        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content');
     }
 
     /**
@@ -103,7 +104,6 @@ class Manga implements ParserInterface
         return JString::cleanse(
             str_replace($title->text(), '', $title->parents()->text())
         );
-
     }
 
     /**
@@ -122,7 +122,6 @@ class Manga implements ParserInterface
         return JString::cleanse(
             str_replace($title->text(), '', $title->parents()->text())
         );
-
     }
 
     /**
@@ -234,7 +233,7 @@ class Manga implements ParserInterface
         if (!$aired->count()) {
             return null;
         }
-            
+
         return JString::cleanse(
             str_replace($aired->text(), '', $aired->parents()->text())
         );
@@ -252,7 +251,7 @@ class Manga implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Authors:"]');
 
-        if (strpos($author->parents()->text(), 'None found') === false && $author->count() > 0) {
+        if ($author->count() && strpos($author->parents()->text(), 'None found') === false) {
             return $author->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -274,7 +273,7 @@ class Manga implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Serialization:"]');
 
-        if (strpos($studio->parents()->text(), 'None found') === false && $studio->count() > 0) {
+        if ($studio->count() && strpos($studio->parents()->text(), 'None found') === false) {
             return $studio->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -296,7 +295,7 @@ class Manga implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Genres:"]');
 
-        if (strpos($genre->parents()->text(), 'No genres have been added yet') === false && $genre->count() > 0) {
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
             return $genre->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -325,8 +324,8 @@ class Manga implements ParserInterface
         if (strpos($score->text(), 'N/A')) {
             return null;
         }
-        
-        return (float) $score->text();
+
+        return (float)$score->text();
     }
 
     /**
@@ -343,7 +342,7 @@ class Manga implements ParserInterface
             return null;
         }
 
-        return (int) $scoredBy->text();
+        return (int)$scoredBy->text();
     }
 
     /**
@@ -362,12 +361,14 @@ class Manga implements ParserInterface
 
         $rank = Parser::removeChildNodes($rank->parents());
         $ranked = trim(
-            str_replace('#', '',
+            str_replace(
+                '#',
+                '',
                 $rank->text()
             )
         );
 
-        return $ranked !== 'N/A' ? (int) $ranked : null;
+        return $ranked !== 'N/A' ? (int)$ranked : null;
     }
 
     /**
@@ -379,7 +380,7 @@ class Manga implements ParserInterface
         $popularity = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Popularity:"]');
-        
+
         if (!$popularity->count()) {
             return null;
         }
@@ -398,7 +399,7 @@ class Manga implements ParserInterface
         $member = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Members:"]');
-        
+
         if (!$member->count()) {
             return null;
         }
@@ -417,7 +418,7 @@ class Manga implements ParserInterface
         $favorite = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Favorites:"]');
-        
+
         if (!$favorite->count()) {
             return null;
         }
@@ -430,33 +431,40 @@ class Manga implements ParserInterface
     /**
      * @return array
      * @throws \RuntimeException
+     * @todo Create related manga sub parser
      */
     public function getMangaRelated(): array
     {
         $related = [];
         $relatedNode = $this->crawler
             ->filter('table.anime_detail_related_anime')
-            ->filter('tr')->each(function($tr) {
-                return $tr->each(function($td) {
-                    $related = [];
-                    $relationType = substr($td->filter('td')->first()->text(), 0, -1);
-                    $relationNodes = $td->filter('td')->last();
-                    
-                    $related[$relationType] = $relationNodes->filter('a')->each(function($node) {
-                        $url = BASE_URL . substr($node->attr('href'), 1);
-                        preg_match('~https://myanimelist.net/(.*)/(.*)/(.*)~', $url, $matches);
+            ->filter('tr')->each(
+                function ($tr) {
+                    return $tr->each(
+                        function ($td) {
+                            $related = [];
+                            $relationType = substr($td->filter('td')->first()->text(), 0, -1);
+                            $relationNodes = $td->filter('td')->last();
 
-                        return [
-                            'mal_id' => (int) $matches[2],
-                            'type' => $matches[1],
-                            'url' => $url,
-                            'title' => $node->text()
-                        ];
-                    });
+                            $related[$relationType] = $relationNodes->filter('a')->each(
+                                function ($node) {
+                                    $url = BASE_URL.substr($node->attr('href'), 1);
+                                    preg_match('~https://myanimelist.net/(.*)/(.*)/(.*)~', $url, $matches);
 
-                    return $related;
-                })[0];
-            });
+                                    return [
+                                        'mal_id' => (int)$matches[2],
+                                        'type'   => $matches[1],
+                                        'url'    => $url,
+                                        'title'  => $node->text(),
+                                    ];
+                                }
+                            );
+
+                            return $related;
+                        }
+                    )[0];
+                }
+            );
 
         foreach ($relatedNode as $node) {
             $related = array_merge($related, $node);
@@ -486,5 +494,4 @@ class Manga implements ParserInterface
 
         return JString::cleanse($matches[1]);
     }
-
 }

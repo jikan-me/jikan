@@ -1,12 +1,16 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\UserProfile;
 
 use Jikan\Model;
 use Symfony\Component\DomCrawler\Crawler;
-use Jikan\Helper\JString;
 
-class UserProfile
+/**
+ * Class UserProfileParser
+ *
+ * @package Jikan\Parser
+ */
+class UserProfileParser
 {
     /**
      * @var Crawler
@@ -14,7 +18,7 @@ class UserProfile
     private $crawler;
 
     /**
-     * Person constructor.
+     * PersonParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -35,18 +39,18 @@ class UserProfile
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getProfileUrl(): string
+    public function getUsername(): string
     {
-        return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
+        return (string )preg_replace('#.*/(\w+)$#', '$1', $this->getProfileUrl());
     }
 
     /**
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getUsername(): string
+    public function getProfileUrl(): string
     {
-        return (string )preg_replace('#.*/(\w+)$#', '$1', $this->getProfileUrl());
+        return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
     }
 
     /**
@@ -126,8 +130,8 @@ class UserProfile
     {
         $this->crawler
             ->filterXPath('//div[@class=\'stats anime\']');
-        
-        return (new AnimeStats($this->crawler))->getModel();
+
+        return (new AnimeStatsParser($this->crawler))->getModel();
     }
 
     /**
@@ -138,8 +142,8 @@ class UserProfile
     {
         $this->crawler
             ->filterXPath('//div[@class=\'stats anime\']');
-        
-        return (new MangaStats($this->crawler))->getModel();
+
+        return (new MangaStatsParser($this->crawler))->getModel();
     }
 
     /**
@@ -150,7 +154,7 @@ class UserProfile
     {
         $about = $this->crawler->filterXPath('//div[@class=\'profile-about-user js-truncate-inner\']/table/tr/td/div');
 
-        
+
         if (!$about->count()) {
             return null;
         }

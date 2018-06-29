@@ -1,18 +1,19 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Character;
 
 use Jikan\Helper;
 use Jikan\Model;
 use Jikan\Parser\Common\MalUrlParser;
+use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class VoiceActor
+ * Class VoiceActorParser
  *
  * @package Jikan\Parser
  */
-class VoiceActor implements ParserInterface
+class VoiceActorParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -20,7 +21,7 @@ class VoiceActor implements ParserInterface
     private $crawler;
 
     /**
-     * VoiceActor constructor.
+     * VoiceActorParser constructor.
      *
      * @param Crawler $crawler
      */

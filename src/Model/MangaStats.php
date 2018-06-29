@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Parser\UserProfile\MangaStatsParser;
+
 /**
  * Class MangaStats
  *
@@ -9,7 +11,62 @@ namespace Jikan\Model;
  */
 class MangaStats
 {
-     /**
+    /**
+     * @var
+     */
+    private $mangaVolumesRead;
+
+    /**
+     * @var
+     */
+    private $mangaChaptersRead;
+
+    /**
+     * @var
+     */
+    private $mangaReread;
+
+    /**
+     * @var
+     */
+    private $mangaTotalEntries;
+
+    /**
+     * @var
+     */
+    private $mangaPlanToRead;
+
+    /**
+     * @var
+     */
+    private $mangaDropped;
+
+    /**
+     * @var
+     */
+    private $mangaOnHold;
+
+    /**
+     * @var
+     */
+    private $mangaCompleted;
+
+    /**
+     * @var
+     */
+    private $mangaReading;
+
+    /**
+     * @var
+     */
+    private $mangaMeanScore;
+
+    /**
+     * @var
+     */
+    private $mangaDaysRead;
+
+    /**
      * @var float
      */
     private $daysRead;
@@ -65,11 +122,11 @@ class MangaStats
     private $volumesRead;
 
     /**
-     * @param Parser\MangaStats $parser
+     * @param MangaStatsParser
      *
      * @return MangaStats
      */
-    public static function fromParser(\Jikan\Parser\MangaStats $parser): self
+    public static function fromParser(MangaStatsParser $parser): self
     {
         $instance = new self();
         $instance->daysRead = $parser->getDaysRead();
@@ -90,77 +147,88 @@ class MangaStats
     /**
      * @return float
      */
-    public function getMangaDaysRead() : float {
+    public function getMangaDaysRead(): float
+    {
         return $this->mangaDaysRead;
-    } 
+    }
 
     /**
      * @return float
      */
-    public function getMangaMeanScore() : float {
+    public function getMangaMeanScore(): float
+    {
         return $this->mangaMeanScore;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaReading() : int {
+    public function getMangaReading(): int
+    {
         return $this->mangaReading;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaCompleted() : int {
+    public function getMangaCompleted(): int
+    {
         return $this->mangaCompleted;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaOnHold() : int {
+    public function getMangaOnHold(): int
+    {
         return $this->mangaOnHold;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaDropped() : int {
+    public function getMangaDropped(): int
+    {
         return $this->mangaDropped;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaPlanToRead() : int {
+    public function getMangaPlanToRead(): int
+    {
         return $this->mangaPlanToRead;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaTotalEntries() : int {
+    public function getMangaTotalEntries(): int
+    {
         return $this->mangaTotalEntries;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaReread() : int {
+    public function getMangaReread(): int
+    {
         return $this->mangaReread;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaChaptersRead() : int {
+    public function getMangaChaptersRead(): int
+    {
         return $this->mangaChaptersRead;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getMangaVolumesRead() : int {
+    public function getMangaVolumesRead(): int
+    {
         return $this->mangaVolumesRead;
     }
 }

@@ -64,13 +64,13 @@ class Manga extends Model
 
 
 	/**
-     * Create an instance from an Manga parser
+     * Create an instance from an MangaParser parser
      *
-     * @param \Jikan\Parser\Manga $parser
+     * @param \Jikan\Parser\MangaParser $parser
      *
      * @return Manga
      */
-    public static function fromParser(\Jikan\Parser\Manga $parser): Manga
+    public static function fromParser(\Jikan\Parser\Manga\MangaParser $parser): Manga
     {
         $instance = new self();
 

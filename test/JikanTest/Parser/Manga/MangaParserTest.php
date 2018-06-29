@@ -1,7 +1,9 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace JikanTest\Parser\Manga;
+
 use Jikan\Jikan;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class MangaParserTest
@@ -9,7 +11,7 @@ use Jikan\Jikan;
 class MangaParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Manga
+     * @var \Jikan\Parser\Manga\MangaParser
      */
     private $parser;
 
@@ -23,7 +25,7 @@ class MangaParserTest extends TestCase
         $request = new \Jikan\Request\Manga(11);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
-        $this->parser = new \Jikan\Parser\Manga($crawler);
+        $this->parser = new \Jikan\Parser\Manga\MangaParser($crawler);
 
         $jikan = new Jikan();
         $this->manga = $jikan->Manga(
@@ -97,6 +99,7 @@ class MangaParserTest extends TestCase
             $this->parser->getMangaImageURL()
         );
     }
+
     /**
      * @test
      * @vcr MangaParserTest.yaml
@@ -116,7 +119,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_type()
     {
         self::assertEquals(
-            'Manga',
+            'MangaParser',
             $this->parser->getMangaType()
         );
     }
@@ -214,7 +217,7 @@ class MangaParserTest extends TestCase
         self::assertEquals(
             [
                 'from' => '1999-09-21',
-                'to' => '2014-11-10'
+                'to'   => '2014-11-10',
             ],
             $this->manga->getPublished()
         );
@@ -357,7 +360,7 @@ class MangaParserTest extends TestCase
             $this->manga->getBackground()
         );
         self::assertContains(
-            ' Comics/Planet Manga from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.',
+            ' Comics/Planet MangaParser from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.',
             $this->manga->getBackground()
         );
     }

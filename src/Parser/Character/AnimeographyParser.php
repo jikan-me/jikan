@@ -1,15 +1,16 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Character;
 
 use Jikan\Model;
+use Jikan\Parser\ParserInterface;
 
 /**
- * Class Animeography
+ * Class AnimeographyParser
  *
  * @package Jikan\Parser
  */
-class Animeography extends Ography implements ParserInterface
+class AnimeographyParser extends OgraphyParser implements ParserInterface
 {
     /**
      * Return the model

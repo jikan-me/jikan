@@ -5,7 +5,7 @@ namespace Jikan\Model;
 use Jikan\Parser;
 
 /**
- * Class AnimeCard
+ * Class AnimeCardParser
  *
  * @package Jikan\Model
  */
@@ -92,13 +92,13 @@ class AnimeCard
     protected $kids;
 
     /**
-     * @param Parser\Common\AnimeCard $parser
+     * @param Parser\Common\AnimeCardParser $parser
      *
      * @return AnimeCard
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function parseAnimeCard(Parser\Common\AnimeCard $parser): AnimeCard
+    public static function parseAnimeCard(Parser\Common\AnimeCardParser $parser): AnimeCard
     {
         $instance = new self();
         self::setProperties($parser, $instance);
@@ -107,10 +107,10 @@ class AnimeCard
     }
 
     /**
-     * @param Parser\Common\AnimeCard $parser
-     * @param AnimeCard        $instance
+     * @param Parser\Common\AnimeCardParser $parser
+     * @param AnimeCard                     $instance
      */
-    protected static function setProperties(Parser\Common\AnimeCard $parser, $instance): void
+    protected static function setProperties(Parser\Common\AnimeCardParser $parser, $instance): void
     {
         $instance->title = $parser->getTitle();
         $instance->synopsis = $parser->getDescription();

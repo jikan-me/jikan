@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser;
+use Jikan\Parser\UserProfile\UserProfileParser;
 
 /**
  * Class UserProfile
@@ -49,7 +49,7 @@ class UserProfile
 
     /**
      * @var string
-     */ 
+     */
     private $joined;
 
     /**
@@ -73,11 +73,11 @@ class UserProfile
     private $about;
 
     /**
-     * @param Parser\UserProfile $parser
+     * @param UserProfileParser
      *
      * @return UserProfile
      */
-    public static function fromParser(Parser\UserProfile $parser): self
+    public static function fromParser(UserProfileParser $parser): self
     {
         $instance = new self();
         $instance->name = $parser->getUsername();
@@ -98,70 +98,80 @@ class UserProfile
     /**
      * @return string
      */
-    public function getName() : string {
+    public function getName(): string
+    {
         return $this->name;
-    } 
+    }
 
     /**
      * @return string
      */
-    public function getLastOnline() : string {
+    public function getLastOnline(): string
+    {
         return $this->lastOnline;
-    } 
+    }
 
     /**
      * @return string
      */
-    public function getGender() : string {
+    public function getGender(): string
+    {
         return $this->gender;
-    } 
+    }
 
     /**
      * @return string
      */
-    public function getBirthday() : string {
+    public function getBirthday(): string
+    {
         return $this->birthday;
-    } 
+    }
 
     /**
      * @return string
      */
-    public function getLocation() : string {
+    public function getLocation(): string
+    {
         return $this->location;
-    } 
+    }
 
     /**
      * @return string
-     */ 
-    public function getJoined() : string {
+     */
+    public function getJoined(): string
+    {
         return $this->joined;
-    } 
+    }
 
     /**
      * @return \Jikan\Model\AnimeStats
      */
-    public function getAnimeStats() : \Jikan\Model\AnimeStats {
+    public function getAnimeStats(): \Jikan\Model\AnimeStats
+    {
         return $this->animeStats;
     }
 
     /**
      * @return \Jikan\Model\MangaStats
      */
-    public function getMangaStats() : \Jikan\Model\MangaStats {
+    public function getMangaStats(): \Jikan\Model\MangaStats
+    {
         return $this->mangaStats;
     }
 
     /**
      * @return array
      */
-    public function getFavorites() : array {
+    public function getFavorites(): array
+    {
         return $this->favorite;
-    } 
+    }
 
     /**
      * @return string
      */
-    public function getAbout() : string {
+    public function getAbout(): string
+    {
         return $this->about;
-    } 
+    }
 }

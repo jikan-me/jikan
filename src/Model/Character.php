@@ -5,7 +5,7 @@ namespace Jikan\Model;
 use Jikan\Parser;
 
 /**
- * Class Character
+ * Class CharacterParser
  *
  * @package Jikan\Model
  */
@@ -67,12 +67,11 @@ class Character
     public $voiceActors = [];
 
     /**
-     * @param Parser\Character $parser
+     * @param Parser\Character\CharacterParser $parser
      *
      * @return Character
-     * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\Character $parser): self
+    public static function fromParser(Parser\Character\CharacterParser $parser): self
     {
         $instance = new self();
         $instance->animeography = $parser->getAnimeography();

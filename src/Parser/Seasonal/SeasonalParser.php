@@ -1,13 +1,19 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Seasonal;
 
 use Jikan\Helper\JString;
 use Jikan\Model;
-use Jikan\Parser\Common\AnimeCard;
+use Jikan\Parser\Common\AnimeCardParser;
+use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
-class Seasonal implements ParserInterface
+/**
+ * Class SeasonalParser
+ *
+ * @package Jikan\Parser
+ */
+class SeasonalParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -15,7 +21,7 @@ class Seasonal implements ParserInterface
     private $crawler;
 
     /**
-     * Seasonal constructor.
+     * SeasonalParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -24,6 +30,9 @@ class Seasonal implements ParserInterface
         $this->crawler = $crawler;
     }
 
+    /**
+     * @return Model\Seasonal
+     */
     public function getModel(): Model\Seasonal
     {
         return Model\Seasonal::fromParser($this);
@@ -39,7 +48,7 @@ class Seasonal implements ParserInterface
             ->filter('div.seasonal-anime')
             ->each(
                 function (Crawler $animeCrawler) {
-                    return (new AnimeCard($animeCrawler))->getModel();
+                    return (new AnimeCardParser($animeCrawler))->getModel();
                 }
             );
     }

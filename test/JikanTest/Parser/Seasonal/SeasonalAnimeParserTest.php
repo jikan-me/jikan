@@ -1,5 +1,8 @@
 <?php
 
+namespace JikanTest\Parser\Seasonal;
+
+use Jikan\Parser\Common\AnimeCardParser;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -8,27 +11,27 @@ use PHPUnit\Framework\TestCase;
 class SeasonalAnimeParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Common\AnimeCard
+     * @var AnimeCardParser
      */
     private $parser;
 
     /**
-     * @var \Jikan\Parser\Common\AnimeCard
+     * @var AnimeCardParser
      */
     private $parser2;
 
     /**
-     * @var \Jikan\Parser\Common\AnimeCard
+     * @var AnimeCardParser
      */
     private $parserKids;
 
     /**
-     * @var \Jikan\Parser\Common\AnimeCard
+     * @var AnimeCardParser
      */
     private $parserR18;
 
     /**
-     * @var \Jikan\Parser\Common\AnimeCard
+     * @var AnimeCardParser
      */
     private $springParser;
 
@@ -37,11 +40,11 @@ class SeasonalAnimeParserTest extends TestCase
         $client = new \Goutte\Client();
         $request = new \Jikan\Request\Seasonal(2018, 'spring');
         $crawler = $client->request('GET', $request->getPath());
-        $this->parser = new \Jikan\Parser\Common\AnimeCard($crawler->filter('div.seasonal-anime')->first());
-        $this->parser2 = new \Jikan\Parser\Common\AnimeCard($crawler->filter('div.seasonal-anime')->eq(2));
-        $this->parserKids = new \Jikan\Parser\Common\AnimeCard($crawler->filter('div.seasonal-anime.kids')->first());
-        $this->parserR18 = new \Jikan\Parser\Common\AnimeCard($crawler->filter('div.seasonal-anime.r18')->first());
-        $this->springParser = new \Jikan\Parser\Common\AnimeCard(
+        $this->parser = new AnimeCardParser($crawler->filter('div.seasonal-anime')->first());
+        $this->parser2 = new AnimeCardParser($crawler->filter('div.seasonal-anime')->eq(2));
+        $this->parserKids = new AnimeCardParser($crawler->filter('div.seasonal-anime.kids')->first());
+        $this->parserR18 = new AnimeCardParser($crawler->filter('div.seasonal-anime.r18')->first());
+        $this->springParser = new AnimeCardParser(
             $crawler->filter(
                 '#content > div.js-categories-seasonal > div:nth-child(2) > div:nth-child(2)'
             )->first()
@@ -84,8 +87,8 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_source()
     {
-        self::assertEquals('Manga', $this->parser->getSource());
-        self::assertEquals('Manga', $this->parser2->getSource());
+        self::assertEquals('MangaParser', $this->parser->getSource());
+        self::assertEquals('MangaParser', $this->parser2->getSource());
     }
 
     /**

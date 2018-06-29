@@ -34,18 +34,20 @@ class VoiceActor
      */
     private $language;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name->getName();
     }
 
     /**
-     * @param \Jikan\Parser\VoiceActor $parser
+     * @param \Jikan\Parser\Character\VoiceActorParser $parser
      *
      * @return VoiceActor
-     * @throws \InvalidArgumentException
      */
-    public static function fromParser(\Jikan\Parser\VoiceActor $parser): VoiceActor
+    public static function fromParser(\Jikan\Parser\Character\VoiceActorParser $parser): VoiceActor
     {
         $instance = new self();
         $instance->malId = $parser->getMalId();

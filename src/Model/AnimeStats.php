@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Parser\UserProfile\AnimeStatsParser;
+
 /**
  * Class AnimeStats
  *
@@ -60,11 +62,11 @@ class AnimeStats
     private $episodesWatched;
 
     /**
-     * @param Parser\AnimeStats $parser
+     * @param AnimeStatsParser $parser
      *
      * @return AnimeStats
      */
-    public static function fromParser(\Jikan\Parser\AnimeStats $parser): self
+    public static function fromParser(AnimeStatsParser $parser): self
     {
         $instance = new self();
         $instance->daysWatched = $parser->getDaysWatched();
@@ -85,70 +87,80 @@ class AnimeStats
     /**
      * @return float
      */
-    public function getDaysWatched() : float {
+    public function getDaysWatched(): float
+    {
         return $this->daysWatched;
-    } 
+    }
 
     /**
      * @return float
      */
-    public function getMeanScore() : float {
+    public function getMeanScore(): float
+    {
         return $this->meanScore;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getWatching() : int {
+    public function getWatching(): int
+    {
         return $this->watching;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getCompleted() : int {
+    public function getCompleted(): int
+    {
         return $this->completed;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getOnHold() : int {
+    public function getOnHold(): int
+    {
         return $this->onHold;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getDropped() : int {
+    public function getDropped(): int
+    {
         return $this->dropped;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getPlanToWatch() : int {
+    public function getPlanToWatch(): int
+    {
         return $this->planToWatch;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getTotalEntries() : int {
+    public function getTotalEntries(): int
+    {
         return $this->totalEntries;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getRewatched() : int {
+    public function getRewatched(): int
+    {
         return $this->rewatched;
-    } 
+    }
 
     /**
      * @return int
      */
-    public function getEpisodesWatched() : int {
+    public function getEpisodesWatched(): int
+    {
         return $this->episodesWatched;
-    } 
+    }
 }

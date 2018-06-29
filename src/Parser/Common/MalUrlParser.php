@@ -5,6 +5,11 @@ namespace Jikan\Parser\Common;
 use Jikan\Model\MalUrl;
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class MalUrlParser
+ *
+ * @package Jikan\Parser\Common
+ */
 class MalUrlParser
 {
     /**

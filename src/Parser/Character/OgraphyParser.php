@@ -1,15 +1,15 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Character;
 
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Ography
+ * Class OgraphyParser
  *
  * @package Jikan\Parser
  */
-abstract class Ography
+abstract class OgraphyParser
 {
     /**
      * @var Crawler

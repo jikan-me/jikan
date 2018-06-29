@@ -1,18 +1,18 @@
 <?php
 
-namespace Jikan\Parser;
+namespace Jikan\Parser\Person;
 
 use Jikan\Helper\JString;
-use Jikan\Helper\Parser;
 use Jikan\Model;
+use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Person
+ * Class PersonParser
  *
  * @package Jikan\Parser
  */
-class Person implements ParserInterface
+class PersonParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -20,7 +20,7 @@ class Person implements ParserInterface
     private $crawler;
 
     /**
-     * Person constructor.
+     * PersonParser constructor.
      *
      * @param Crawler $crawler
      */

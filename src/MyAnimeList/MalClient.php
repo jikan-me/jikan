@@ -39,7 +39,7 @@ class MalClient
     public function getAnime(Request\Anime $request): Model\Anime
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Anime\Anime($crawler);
+        $parser = new Parser\Anime\AnimeParser($crawler);
 
         return $parser->getModel();
     }
@@ -52,7 +52,7 @@ class MalClient
     public function getManga(Request\Manga $request): Model\Manga
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Manga($crawler);
+        $parser = new Parser\Manga\MangaParser($crawler);
 
         return $parser->getModel();
     }
@@ -65,7 +65,7 @@ class MalClient
     public function getCharacter(Request\Character $request): Model\Character
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Character($crawler);
+        $parser = new Parser\Character\CharacterParser($crawler);
 
         return $parser->getModel();
     }
@@ -78,7 +78,7 @@ class MalClient
     public function getPerson(Request\Person $request): Model\Person
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Person($crawler);
+        $parser = new Parser\Person\PersonParser($crawler);
 
         return $parser->getModel();
     }
@@ -91,7 +91,7 @@ class MalClient
     public function getUserProfile(Request\UserProfile $request): Model\UserProfile
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\UserProfile($crawler);
+        $parser = new Parser\UserProfile\UserProfileParser($crawler);
 
         return $parser->getModel();
     }
@@ -104,7 +104,7 @@ class MalClient
     public function getSeasonal(Request\Seasonal $request): Model\Seasonal
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Seasonal($crawler);
+        $parser = new Parser\Seasonal\SeasonalParser($crawler);
 
         return $parser->getModel();
     }

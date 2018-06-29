@@ -1,11 +1,13 @@
 <?php
 
+namespace JikanTest\Parser\UserProfile;
+
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class ProfileParserTest
  */
-class ProfileParserTest extends TestCase
+class UserProfileParserTest extends TestCase
 {
     /**
      * @var \Jikan\Parser\Profile
@@ -16,7 +18,7 @@ class ProfileParserTest extends TestCase
     {
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/sandshark');
-        $this->parser = new \Jikan\Parser\UserProfile($crawler);
+        $this->parser = new \Jikan\Parser\UserProfile\UserProfileParser($crawler);
     }
 
     /**

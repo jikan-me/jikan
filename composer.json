@@ -20,6 +20,13 @@
             ]
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Jikan\\": [
+                "test/JikanTest"
+            ]
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "^6.3",
         "php-vcr/php-vcr": "~1.3.2",

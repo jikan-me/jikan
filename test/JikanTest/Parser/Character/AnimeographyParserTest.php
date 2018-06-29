@@ -1,5 +1,7 @@
 <?php
 
+namespace JikanTest\Parser\Character;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -8,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class AnimeographyParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Animeography
+     * @var \Jikan\Parser\Character\AnimeographyParser
      */
     private $parser;
 
@@ -16,8 +18,8 @@ class AnimeographyParserTest extends TestCase
     {
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/character/116281');
-        $crawler = $crawler->filterXPath('//div[contains(text(), \'Animeography\')]/../table/tr')->first();
-        $this->parser = new \Jikan\Parser\Animeography($crawler);
+        $crawler = $crawler->filterXPath('//div[contains(text(), \'AnimeographyParser\')]/../table/tr')->first();
+        $this->parser = new \Jikan\Parser\Character\AnimeographyParser($crawler);
     }
 
     /**

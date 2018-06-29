@@ -8,11 +8,11 @@ use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class Anime
+ * Class AnimeParser
  *
  * @package Jikan\Parser
  */
-class Anime implements ParserInterface
+class AnimeParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -20,7 +20,7 @@ class Anime implements ParserInterface
     private $crawler;
 
     /**
-     * Anime constructor.
+     * AnimeParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -103,7 +103,6 @@ class Anime implements ParserInterface
         return JString::cleanse(
             str_replace($title->text(), '', $title->parents()->text())
         );
-
     }
 
     /**
@@ -122,7 +121,6 @@ class Anime implements ParserInterface
         return JString::cleanse(
             str_replace($title->text(), '', $title->parents()->text())
         );
-
     }
 
     /**

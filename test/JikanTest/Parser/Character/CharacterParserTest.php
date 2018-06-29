@@ -1,5 +1,7 @@
 <?php
 
+namespace JikanTest\Parser\Character;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -8,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class CharacterParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Character
+     * @var \Jikan\Parser\Character\CharacterParser
      */
     private $parser;
 
@@ -17,7 +19,7 @@ class CharacterParserTest extends TestCase
         $request = new \Jikan\Request\Character(116281);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
-        $this->parser = new \Jikan\Parser\Character($crawler);
+        $this->parser = new \Jikan\Parser\Character\CharacterParser($crawler);
     }
 
     /**

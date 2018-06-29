@@ -1,5 +1,7 @@
 <?php
 
+namespace JikanTest\Parser\Character;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -8,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class VoiceActorParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\VoiceActor
+     * @var \Jikan\Parser\Character\VoiceActorParser
      */
     private $parser;
 
@@ -17,7 +19,7 @@ class VoiceActorParserTest extends TestCase
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/character/116281');
         $crawler = $crawler->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')->first();
-        $this->parser = new \Jikan\Parser\VoiceActor($crawler);
+        $this->parser = new \Jikan\Parser\Character\VoiceActorParser($crawler);
     }
 
     /**
@@ -56,7 +58,10 @@ class VoiceActorParserTest extends TestCase
      */
     public function it_gets_the_image()
     {
-        self::assertEquals('https://myanimelist.cdn-dena.com/images/voiceactors/3/18359v.jpg', $this->parser->getImage());
+        self::assertEquals(
+            'https://myanimelist.cdn-dena.com/images/voiceactors/3/18359v.jpg',
+            $this->parser->getImage()
+        );
     }
 
     /**

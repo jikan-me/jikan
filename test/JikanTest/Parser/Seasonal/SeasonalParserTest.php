@@ -1,7 +1,8 @@
 <?php
 
+namespace JikanTest\Parser\Seasonal;
+
 use PHPUnit\Framework\TestCase;
-use Jikan\Jikan;
 
 /**
  * Class SeasonalParserTest
@@ -9,7 +10,7 @@ use Jikan\Jikan;
 class SeasonalParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Seasonal
+     * @var \Jikan\Parser\Seasonal\SeasonalParser
      */
     private $springParser;
 
@@ -18,7 +19,7 @@ class SeasonalParserTest extends TestCase
         $client = new \Goutte\Client();
         $request = new \Jikan\Request\Seasonal(2018, 'spring');
         $crawler = $client->request('GET', $request->getPath());
-        $this->springParser = new \Jikan\Parser\Seasonal($crawler);
+        $this->springParser = new \Jikan\Parser\Seasonal\SeasonalParser($crawler);
     }
 
     /**

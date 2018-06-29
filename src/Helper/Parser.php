@@ -47,4 +47,21 @@ class Parser
     {
         return (int)preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
     }
+
+    /**
+     * @param string $date
+     *
+     * @return \DateTimeImmutable|null
+     */
+    public static function parseDate(string $date): ?\DateTimeImmutable
+    {
+        if (preg_match('/^\d{4}$/', $date)) {
+            return \DateTimeImmutable::createFromFormat('Y-m-d', $date.'-01-01');
+        }
+        try {
+            return new \DateTimeImmutable($date);
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
 }

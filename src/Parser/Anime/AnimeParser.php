@@ -568,12 +568,7 @@ class AnimeParser implements ParserInterface
         if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
             $aired = explode(' to ', $aired)[0];
         }
-
-        try {
-            return new \DateTimeImmutable($aired);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return Parser::parseDate($aired);
     }
 
     /**
@@ -598,10 +593,6 @@ class AnimeParser implements ParserInterface
             return null;
         }
 
-        try {
-            return new \DateTimeImmutable(explode(' to ', $aired)[1]);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return Parser::parseDate(explode(' to ', $aired)[1]);
     }
 }

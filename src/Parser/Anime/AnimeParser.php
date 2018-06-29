@@ -569,7 +569,11 @@ class AnimeParser implements ParserInterface
             $aired = explode(' to ', $aired)[0];
         }
 
-        return \DateTimeImmutable::createFromFormat('M d, Y', $aired);
+        try {
+            return new \DateTimeImmutable($aired);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**
@@ -594,6 +598,10 @@ class AnimeParser implements ParserInterface
             return null;
         }
 
-        return \DateTimeImmutable::createFromFormat('M d, Y', explode(' to ', $aired)[1]);
+        try {
+            return new \DateTimeImmutable(explode(' to ', $aired)[1]);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }

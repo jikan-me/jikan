@@ -26,7 +26,6 @@ class Parser
         $crawler->children()->each(
             function (Crawler $crawler) {
                 $node = $crawler->getNode(0);
-                $bdg = $node->nodeName;
                 if ($node === null || $node->nodeType === 3 || \in_array($node->nodeName, self::ALLOWED_NODES, true)) {
                     return;
                 }

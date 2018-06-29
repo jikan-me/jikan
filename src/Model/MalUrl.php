@@ -2,6 +2,11 @@
 
 namespace Jikan\Model;
 
+/**
+ * Class MalUrl
+ *
+ * @package Jikan\Model
+ */
 class MalUrl
 {
     /**
@@ -14,11 +19,6 @@ class MalUrl
      */
     private $url;
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
     /**
      * Genre constructor.
      *
@@ -29,6 +29,14 @@ class MalUrl
     {
         $this->name = $name;
         $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**

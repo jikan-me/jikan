@@ -4,6 +4,7 @@ namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Model\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -507,48 +508,18 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      * @throws \RuntimeException
-     * @todo use a sub parser for this
      */
     public function getAnimeRelated(): array
     {
-        $related = [];
-        $relatedNode = $this->crawler
-            ->filter('table.anime_detail_related_anime')
-            ->filter('tr')->each(
-                function ($tr) {
-                    return $tr->each(
-                        function ($td) {
-                            $related = [];
-                            $relationType = substr($td->filter('td')->first()->text(), 0, -1);
-                            $relationNodes = $td->filter('td')->last();
-
-                            $related[$relationType] = $relationNodes->filter('a')->each(
-                                function ($node) {
-                                    $url = BASE_URL.substr($node->attr('href'), 1);
-                                    preg_match('~https://myanimelist.net/(.*)/(.*)/(.*)~', $url, $matches);
-
-                                    return [
-                                        'mal_id' => (int)$matches[2],
-                                        'type'   => $matches[1],
-                                        'url'    => $url,
-                                        'title'  => $node->text(),
-                                    ];
-                                }
-                            );
-
-                            return $related;
-                        }
-                    )[0];
+        return $this->crawler
+            ->filter('table.anime_detail_related_anime td a')
+            ->each(
+                function (Crawler $c) {
+                    return (new MalUrlParser($c))->getModel();
                 }
             );
-
-        foreach ($relatedNode as $node) {
-            $related = array_merge($related, $node);
-        }
-
-        return $related;
     }
 
     /**
@@ -573,14 +544,12 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeOpeningTheme(): array
     {
-        $opening = [];
-        $op = $this->crawler
-            ->filter('div[class="theme-songs js-theme-songs opnening"] span');
-        foreach ($op as $node) {
-            $opening[] = $node->nodeValue;
-        }
-
-        return $opening;
+        return array_filter(
+            preg_split(
+                '/\s?#\d+:\s/m',
+                $this->crawler->filter('div[class="theme-songs js-theme-songs opnening"]')->text()
+            )
+        );
     }
 
     /**
@@ -589,13 +558,11 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeEndingTheme(): array
     {
-        $ending = [];
-        $ed = $this->crawler
-            ->filter('div[class="theme-songs js-theme-songs ending"] span');
-        foreach ($ed as $node) {
-            $ending[] = $node->nodeValue;
-        }
-
-        return $ending;
+        return array_filter(
+            preg_split(
+                '/\s?#\d+:\s/m',
+                $this->crawler->filter('div[class="theme-songs js-theme-songs ending"]')->text()
+            )
+        );
     }
 }

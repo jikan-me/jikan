@@ -3,6 +3,7 @@
 namespace JikanTest\Parser\Anime;
 
 use Jikan\Jikan;
+use Jikan\Model\MalUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -205,10 +206,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_premiered()
     {
-        self::assertEquals(
-            "Fall 1999",
-            $this->anime->getPremiered()
-        );
+        self::assertEquals("Fall 1999",$this->anime->getPremiered());
     }
 
     /**
@@ -217,10 +215,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_broadcast()
     {
-        self::assertEquals(
-            "Sundays at 09:30 (JST)",
-            $this->anime->getBroadcast()
-        );
+        self::assertEquals("Sundays at 09:30 (JST)", $this->anime->getBroadcast());
     }
 
     /**
@@ -268,10 +263,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_source()
     {
-        self::assertEquals(
-            'Manga',
-            $this->anime->getSource()
-        );
+        self::assertEquals('Manga', $this->anime->getSource());
     }
 
     /**
@@ -394,11 +386,9 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_related()
     {
-        $this->markTestSkipped('Todo');
-        self::assertEquals(
-            [],
-            $this->anime->getRelated()
-        );
+        $related = $this->anime->getRelated();
+        self::assertCount(45, $related);
+        self::assertContainsOnly(MalUrl::class, $related);
     }
 
     /**
@@ -419,11 +409,10 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_opening()
     {
-        $this->markTestSkipped('Todo');
-        self::assertEquals(
-            [],
-            $this->anime->getOpeningTheme()
-        );
+        $ops = $this->anime->getOpeningTheme();
+        self::assertCount(19, $ops);
+        self::assertContains('"We Are! (ウィーアー!)" by Hiroshi Kitadani (eps 1-47)', $ops);
+        self::assertContains('"We Are (ウィーアー! 〜10周年Ver.〜)" by TVXQ (eps 373-394)', $ops);
     }
 
     /**
@@ -432,10 +421,9 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_ending()
     {
-        $this->markTestSkipped('Todo');
-        self::assertEquals(
-            [],
-            $this->anime->getEndingTheme()
-        );
+        $eds = $this->anime->getEndingTheme();
+        self::assertCount(21, $eds);
+        self::assertContains('"memories" by Maki Otsuki (eps 1-30)', $eds);
+        self::assertContains('"We go! (ウィーゴー!)" by Hiroshi Kitadani (eps 542, 590)', $eds);
     }
 }

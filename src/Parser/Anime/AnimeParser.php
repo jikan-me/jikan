@@ -47,9 +47,7 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeId(): int
     {
-        preg_match('#https?://myanimelist.net/anime/(\d+)#', $this->getAnimeURL(), $matches);
-
-        return (int)$matches[1];
+        return Parser::idFromUrl($this->getAnimeURL());
     }
 
     /**
@@ -97,7 +95,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeTitleEnglish(): ?string
     {
         $title = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="English:"]');
         if (!$title->count()) {
             return null;
@@ -115,7 +112,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeTitleSynonyms(): ?string
     {
         $title = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Synonyms:"]');
         if (!$title->count()) {
             return null;
@@ -133,7 +129,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeTitleJapanese(): ?string
     {
         $title = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Japanese:"]');
         if (!$title->count()) {
             return null;
@@ -151,7 +146,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeType(): ?string
     {
         $type = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Type:"]');
         if (!$type->count()) {
             return null;
@@ -169,7 +163,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeEpisodes(): ?int
     {
         $episodes = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Episodes:"]');
 
         if (!$episodes->count()) {
@@ -190,7 +183,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeStatus(): ?string
     {
         $status = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Status:"]');
         if (!$status->count()) {
             return null;
@@ -208,7 +200,6 @@ class AnimeParser implements ParserInterface
     public function getAnimePremiered(): ?string
     {
         $premiered = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Premiered:"]');
 
         if (!$premiered->count()) {
@@ -227,7 +218,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeBroadcast(): ?string
     {
         $broadcast = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Broadcast:"]');
 
         if (!$broadcast->count()) {
@@ -247,11 +237,10 @@ class AnimeParser implements ParserInterface
     public function getAnimeProducer(): array
     {
         $producer = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Producers:"]');
 
         if ($producer->count() && strpos($producer->parents()->text(), 'None found') === false) {
-            return $producer->parents()->first()->filter('a')->each(
+            return $producer->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -269,11 +258,10 @@ class AnimeParser implements ParserInterface
     public function getAnimeLicensor(): array
     {
         $licensor = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Licensors:"]');
 
         if ($licensor->count() && strpos($licensor->parents()->text(), 'None found') === false) {
-            return $licensor->parents()->first()->filter('a')->each(
+            return $licensor->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -290,12 +278,10 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeStudio(): array
     {
-        $studio = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Studios:"]');
+        $studio = $this->crawler->filterXPath('//span[text()="Studios:"]');
 
         if ($studio->count() && strpos($studio->parents()->text(), 'None found') === false) {
-            return $studio->parents()->first()->filter('a')->each(
+            return $studio->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -312,7 +298,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeSource(): ?string
     {
         $source = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Source:"]');
 
         if (!$source->count()) {
@@ -332,11 +317,10 @@ class AnimeParser implements ParserInterface
     public function getAnimeGenre(): array
     {
         $genre = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Genres:"]');
 
         if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filter('a')->each(
+            return $genre->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -353,7 +337,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeDuration(): ?string
     {
         $duration = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Duration:"]');
 
         if (!$duration->count()) {
@@ -376,7 +359,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeRating(): ?string
     {
         $rating = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Rating:"]');
 
         if (!$rating->count()) {
@@ -412,7 +394,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeRank(): ?int
     {
         $rank = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Ranked:"]');
 
         if (!$rank->count()) {
@@ -439,7 +420,6 @@ class AnimeParser implements ParserInterface
     public function getAnimePopularity(): ?int
     {
         $popularity = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Popularity:"]');
 
         if (!$popularity->count()) {
@@ -458,7 +438,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeMembers(): ?int
     {
         $member = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Members:"]');
 
         if (!$member->count()) {
@@ -477,7 +456,6 @@ class AnimeParser implements ParserInterface
     public function getAnimeFavorites(): ?int
     {
         $favorite = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Favorites:"]');
 
         if (!$favorite->count()) {
@@ -496,7 +474,7 @@ class AnimeParser implements ParserInterface
     public function getAnimeRelated(): array
     {
         return $this->crawler
-            ->filter('table.anime_detail_related_anime td a')
+            ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr/td/a')
             ->each(
                 function (Crawler $c) {
                     return (new MalUrlParser($c))->getModel();
@@ -529,7 +507,7 @@ class AnimeParser implements ParserInterface
         return array_filter(
             preg_split(
                 '/\s?#\d+:\s/m',
-                $this->crawler->filter('div[class="theme-songs js-theme-songs opnening"]')->text()
+                $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]')->text()
             )
         );
     }
@@ -543,7 +521,7 @@ class AnimeParser implements ParserInterface
         return array_filter(
             preg_split(
                 '/\s?#\d+:\s/m',
-                $this->crawler->filter('div[class="theme-songs js-theme-songs ending"]')->text()
+                $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]')->text()
             )
         );
     }

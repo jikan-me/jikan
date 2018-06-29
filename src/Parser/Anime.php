@@ -37,6 +37,7 @@ class Anime implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getAnimeId(): int
@@ -48,6 +49,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeURL(): string
     {
@@ -56,6 +58,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeTitle(): string
     {
@@ -64,6 +67,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeImageURL(): string
     {
@@ -72,6 +76,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeSynopsis(): string
     {
@@ -195,6 +200,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeAiredString(): ?string
     {
@@ -213,6 +219,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimePremiered(): ?string
     {
@@ -231,6 +238,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeBroadcast(): ?string
     {
@@ -249,6 +257,8 @@ class Anime implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function getAnimeProducer(): array
     {
@@ -256,7 +266,7 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Producers:"]');
 
-        if (strpos($producer->parents()->text(), 'None found') === false && $producer->count() > 0) {
+        if ($producer->count() && strpos($producer->parents()->text(), 'None found') === false) {
             return $producer->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -269,6 +279,8 @@ class Anime implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function getAnimeLicensor(): array
     {
@@ -276,7 +288,7 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Licensors:"]');
 
-        if (strpos($licensor->parents()->text(), 'None found') === false && $licensor->count() > 0) {
+        if ($licensor->count() && strpos($licensor->parents()->text(), 'None found') === false) {
             return $licensor->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -289,6 +301,8 @@ class Anime implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function getAnimeStudio(): array
     {
@@ -296,7 +310,7 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Studios:"]');
 
-        if (strpos($studio->parents()->text(), 'None found') === false && $studio->count() > 0) {
+        if ($studio->count() && strpos($studio->parents()->text(), 'None found') === false) {
             return $studio->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -309,6 +323,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeSource(): ?string
     {
@@ -327,6 +342,8 @@ class Anime implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function getAnimeGenre(): array
     {
@@ -334,7 +351,7 @@ class Anime implements ParserInterface
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Genres:"]');
 
-        if (strpos($genre->parents()->text(), 'No genres have been added yet') === false && $genre->count() > 0) {
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
             return $genre->parents()->first()->filter('a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -347,6 +364,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeDuration(): ?string
     {
@@ -369,6 +387,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeRating(): ?string
     {
@@ -387,6 +406,7 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeScore(): ?string
     {
@@ -403,6 +423,7 @@ class Anime implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getAnimeRank(): ?int
     {
@@ -429,6 +450,7 @@ class Anime implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getAnimePopularity(): ?int
     {
@@ -447,6 +469,7 @@ class Anime implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getAnimeMembers(): ?int
     {
@@ -465,6 +488,7 @@ class Anime implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getAnimeFavorites(): ?int
     {
@@ -483,6 +507,8 @@ class Anime implements ParserInterface
 
     /**
      * @return array
+     * @throws \RuntimeException
+     * @todo use a sub parser for this
      */
     public function getAnimeRelated(): array
     {
@@ -526,6 +552,8 @@ class Anime implements ParserInterface
 
     /**
      * @return string
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getAnimeBackground(): ?string
     {
@@ -546,6 +574,7 @@ class Anime implements ParserInterface
 
     /**
      * @return array
+     * @throws \RuntimeException
      */
     public function getAnimeOpeningTheme(): array
     {
@@ -561,6 +590,7 @@ class Anime implements ParserInterface
 
     /**
      * @return array
+     * @throws \RuntimeException
      */
     public function getAnimeEndingTheme(): array
     {

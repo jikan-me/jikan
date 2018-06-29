@@ -553,22 +553,7 @@ class AnimeParser implements ParserInterface
      */
     public function getAired(): Aired
     {
-        return new Aired($this->getAiredFrom(), $this->getAiredUntil());
-    }
-
-    /**
-     * @return \DateTimeImmutable|null
-     */
-    private function getAiredFrom(): ?\DateTimeImmutable
-    {
-        $aired = $this->getAnimeAiredString();
-        if ($aired === 'Not available') {
-            return null;
-        }
-        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
-            $aired = explode(' to ', $aired)[0];
-        }
-        return Parser::parseDate($aired);
+        return new Aired($this->getAnimeAiredString());
     }
 
     /**
@@ -581,18 +566,5 @@ class AnimeParser implements ParserInterface
         $aired = explode(PHP_EOL, trim($aired))[1];
 
         return trim($aired);
-    }
-
-    /**
-     * @return \DateTimeImmutable|null
-     */
-    private function getAiredUntil(): ?\DateTimeImmutable
-    {
-        $aired = $this->getAnimeAiredString();
-        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
-            return null;
-        }
-
-        return Parser::parseDate(explode(' to ', $aired)[1]);
     }
 }

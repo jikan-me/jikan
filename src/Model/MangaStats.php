@@ -122,11 +122,11 @@ class MangaStats
     private $volumesRead;
 
     /**
-     * @param MangaStatsParser
+     * @param MangaStatsParser $parser
      *
      * @return MangaStats
      */
-    public static function fromParser(MangaStatsParser $parser): self
+    public static function fromParser(MangaStatsParser $parser): MangaStats
     {
         $instance = new self();
         $instance->daysRead = $parser->getDaysRead();

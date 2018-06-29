@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Helper\Parser;
+
 /**
  * Class Aired
  *
@@ -10,25 +12,18 @@ namespace Jikan\Model;
 class Aired
 {
     /**
-     * @var \DateTimeImmutable|null
+     * @var string
      */
-    private $from;
-
-    /**
-     * @var \DateTimeImmutable|null
-     */
-    private $until;
+    private $aired;
 
     /**
      * Aired constructor.
      *
-     * @param \DateTimeImmutable|null $from
-     * @param \DateTimeImmutable|null $until
+     * @param string $aired
      */
-    public function __construct(?\DateTimeImmutable $from, ?\DateTimeImmutable $until)
+    public function __construct(string $aired)
     {
-        $this->from = $from;
-        $this->until = $until;
+        $this->aired = $aired;
     }
 
     /**
@@ -36,7 +31,15 @@ class Aired
      */
     public function getFrom(): ?\DateTimeImmutable
     {
-        return $this->from;
+        $aired = $this->aired;
+        if ($aired === 'Not available') {
+            return null;
+        }
+        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
+            $aired = explode(' to ', $aired)[0];
+        }
+
+        return Parser::parseDate($aired);
     }
 
     /**
@@ -44,6 +47,11 @@ class Aired
      */
     public function getUntil(): ?\DateTimeImmutable
     {
-        return $this->until;
+        $aired = $this->aired;
+        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
+            return null;
+        }
+
+        return Parser::parseDate(explode(' to ', $aired)[1]);
     }
 }

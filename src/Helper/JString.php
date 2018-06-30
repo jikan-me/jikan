@@ -22,7 +22,8 @@ class JString
                     str_replace(['<br>', '<br/>', '<br />'], '\n', $string)
                 ),
                 ENT_QUOTES
-            )
+            ),
+            chr(0xC2).chr(0xA0)
         );
     }
 }

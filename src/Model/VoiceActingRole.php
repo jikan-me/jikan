@@ -3,7 +3,7 @@
 namespace Jikan\Model;
 
 /**
- * Class VoiceActorRole
+ * Class VoiceActingRole
  *
  * @package Jikan\Model
  */

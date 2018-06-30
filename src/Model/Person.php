@@ -35,11 +35,11 @@ class Person extends Model
 
 
     /**
-     * @param Parser\Person $parser
+     * @param Parser\PersonParser $parser
      *
      * @return Person
      */
-    public static function fromParser(\Jikan\Parser\Person $parser): self
+    public static function fromParser(\Jikan\Parser\Person\PersonParser $parser): self
     {
         $instance = new self();
 
@@ -53,7 +53,7 @@ class Person extends Model
         $instance->websiteUrl = $parser->getPersonWebsite();
         $instance->about = $parser->getPersonAbout();
         $instance->memberFavorites = $parser->getPersonFavorites();
-        // $instance->voiceActingRole = $parser->getPersonVoiceActingRole();
+        $instance->voiceActingRole = $parser->getPersonVoiceActingRole();
 
         return $instance;
     }

@@ -190,47 +190,40 @@ class Anime
     public static function fromParser(\Jikan\Parser\Anime\AnimeParser $parser): Anime
     {
         $instance = new self();
-        $instance->title = $parser->getAnimeTitle();
-        $instance->url = $parser->getAnimeURL();
-        $instance->malId = $parser->getAnimeId();
-        $instance->imageUrl = $parser->getAnimeImageURL();
-        $instance->synopsis = $parser->getAnimeSynopsis();
-        $instance->titleEnglish = $parser->getAnimeTitleEnglish();
-        $instance->titleSynonyms = $parser->getAnimeTitleSynonyms();
-        $instance->titleJapanese = $parser->getAnimeTitleJapanese();
-        $instance->type = $parser->getAnimeType();
-        $instance->episodes = $parser->getAnimeEpisodes();
+        $instance->title = $parser->getTitle();
+        $instance->url = $parser->getURL();
+        $instance->malId = $parser->getId();
+        $instance->imageUrl = $parser->getImageURL();
+        $instance->synopsis = $parser->getSynopsis();
+        $instance->titleEnglish = $parser->getTitleEnglish();
+        $instance->titleSynonyms = $parser->getTitleSynonyms();
+        $instance->titleJapanese = $parser->getTitleJapanese();
+        $instance->type = $parser->getType();
+        $instance->episodes = $parser->getEpisodes();
         $instance->episodesUnknown = $instance->episodes === 0;
-        $instance->status = $parser->getAnimeStatus();
+        $instance->status = $parser->getStatus();
         $instance->airing = $instance->status === 'Currently Airing';
         $instance->airedString = $parser->getAnimeAiredString();
         $instance->aired = $parser->getAired();
-        $instance->premiered = $parser->getAnimePremiered();
-        $instance->broadcast = $parser->getAnimeBroadcast();
-        $instance->producer = $parser->getAnimeProducer();
-        $instance->licensors = $parser->getAnimeLicensor();
-        $instance->studios = $parser->getAnimeStudio();
-        $instance->source = $parser->getAnimeSource();
-        $instance->genres = $parser->getAnimeGenre();
-        $instance->duration = $parser->getAnimeDuration();
-        $instance->rating = $parser->getAnimeRating();
-
-        $scoreString = $parser->getAnimeScore();
-        preg_match('~(.*)1 \(scored by (.*) users\)~', $scoreString, $matches);
-        if ($matches[1] !== 'N/A') {
-            $instance->score = (float) $matches[1];
-        }
-        $instance->scoredBy = str_replace(',', '', $matches[2]);
-        $instance->rank = $parser->getAnimeRank();
-        $instance->popularity = $parser->getAnimePopularity();
-        $instance->members = $parser->getAnimeMembers();
-        $instance->favorites = $parser->getAnimeFavorites();
-        $instance->related = $parser->getAnimeRelated();
-        $instance->background = $parser->getAnimeBackground();
-        $instance->openingTheme = $parser->getAnimeOpeningTheme();
-        $instance->endingTheme = $parser->getAnimeEndingTheme();
-
-
+        $instance->premiered = $parser->getPremiered();
+        $instance->broadcast = $parser->getBroadcast();
+        $instance->producer = $parser->getProducers();
+        $instance->licensors = $parser->getLicensors();
+        $instance->studios = $parser->getStudios();
+        $instance->source = $parser->getSource();
+        $instance->genres = $parser->getGenres();
+        $instance->duration = $parser->getDuration();
+        $instance->rating = $parser->getRating();
+        $instance->score = $parser->getScore();
+        $instance->scoredBy = $parser->getScoredBy();
+        $instance->rank = $parser->getRank();
+        $instance->popularity = $parser->getPopularity();
+        $instance->members = $parser->getMembers();
+        $instance->favorites = $parser->getFavorites();
+        $instance->related = $parser->getRelated();
+        $instance->background = $parser->getBackground();
+        $instance->openingTheme = $parser->getOpeningThemes();
+        $instance->endingTheme = $parser->getEndingThemes();
 
         return $instance;
     }

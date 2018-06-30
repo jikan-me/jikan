@@ -25,34 +25,4 @@ class JString
             )
         );
     }
-
-    /**
-     * @param string $string
-     *
-     * @return string
-     */
-    public static function utf8(string $string): string
-    {
-        return utf8_encode($string);
-    }
-
-    /**
-     * @param string $string
-     *
-     * @return null|string
-     */
-    public static function assertNull(string $string)
-    {
-        return empty($string) ? null : $string;
-    }
-
-    /**
-     * @param string $string
-     *
-     * @return string
-     */
-    public static function BR2BB(string $string) : string
-    {
-        return str_replace(['<br>', '<br/>', '<br />'], '[br]', $string);
-    }
 }

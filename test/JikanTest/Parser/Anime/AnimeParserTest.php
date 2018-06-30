@@ -29,11 +29,11 @@ class AnimeParserTest extends TestCase
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime\AnimeParser($crawler);
-
-        $jikan = new Jikan();
-        $this->anime = $jikan->Anime(
-            $request
-        );
+//
+//        $jikan = new Jikan();
+//        $this->>$this->parser = $jikan->Anime(
+//            $request
+//        );
     }
 
     /**
@@ -42,7 +42,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_mal_id(): void
     {
-        self::assertEquals(21, $this->parser->getAnimeId());
+        self::assertEquals(21, $this->parser->getId());
     }
 
 
@@ -52,7 +52,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_url(): void
     {
-        self::assertEquals('https://myanimelist.net/anime/21/One_Piece', $this->parser->getAnimeURL());
+        self::assertEquals('https://myanimelist.net/anime/21/One_Piece', $this->parser->getURL());
     }
 
     /**
@@ -61,7 +61,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_title(): void
     {
-        self::assertEquals('One Piece', $this->parser->getAnimeTitle());
+        self::assertEquals('One Piece', $this->parser->getTitle());
     }
 
     /**
@@ -70,7 +70,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_title_english(): void
     {
-        self::assertEquals('One Piece', $this->parser->getAnimeTitleEnglish());
+        self::assertEquals('One Piece', $this->parser->getTitleEnglish());
     }
 
     /**
@@ -79,7 +79,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_title_synonyms(): void
     {
-        self::assertEquals('OP', $this->parser->getAnimeTitleSynonyms());
+        self::assertEquals('OP', $this->parser->getTitleSynonyms());
     }
 
     /**
@@ -88,7 +88,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_title_japanese(): void
     {
-        self::assertEquals('ONE PIECE', $this->parser->getAnimeTitleJapanese());
+        self::assertEquals('ONE PIECE', $this->parser->getTitleJapanese());
     }
 
     /**
@@ -99,7 +99,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             'https://myanimelist.cdn-dena.com/images/anime/6/73245.jpg',
-            $this->parser->getAnimeImageURL()
+            $this->parser->getImageURL()
         );
     }
 
@@ -111,7 +111,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             'Gol D. Roger was known as the "Pirate King," the strongest and most infamous being to have sailed the Grand Line. The capture and execution of Roger by the World Government brought a change throughout the world. His last words before his death revealed the existence of the greatest treasure in the world, One Piece. It was this revelation that brought about the Grand Age of Pirates, men who dreamed of finding One Piece—which promises an unlimited amount of riches and fame—and quite possibly the pinnacle of glory and the title of the Pirate King. Enter Monkey D. Luffy, a 17-year-old boy who defies your standard definition of a pirate. Rather than the popular persona of a wicked, hardened, toothless pirate ransacking villages for fun, Luffy’s reason for being a pirate is one of pure wonder: the thought of an exciting adventure that leads him to intriguing people and ultimately, the promised treasure. Following in the footsteps of his childhood hero, Luffy and his crew travel across the Grand Line, experiencing crazy adventures, unveiling dark mysteries and battling strong enemies, all in order to reach the most coveted of all fortunes—One Piece. [Written by MAL Rewrite]',
-            $this->parser->getAnimeSynopsis()
+            $this->parser->getSynopsis()
         );
     }
 
@@ -123,7 +123,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             'TV',
-            $this->parser->getAnimeType()
+            $this->parser->getType()
         );
     }
 
@@ -135,7 +135,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             0,
-            $this->parser->getAnimeEpisodes()
+            $this->parser->getEpisodes()
         );
     }
 
@@ -145,9 +145,10 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_episodes_unknown(): void
     {
+        self::markTestSkipped('Move to Anime model test, or logic to parser');
         self::assertEquals(
             true,
-            $this->anime->getEpisodesUnknown()
+            $this->parser->getEpisodesUnknown()
         );
     }
 
@@ -159,7 +160,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             'Currently Airing',
-            $this->parser->getAnimeStatus()
+            $this->parser->getStatus()
         );
     }
 
@@ -169,9 +170,10 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_airing(): void
     {
+        self::markTestSkipped('this logic should be put in the parser');
         self::assertEquals(
             true,
-            $this->anime->isAiring()
+            $this->parser->isAiring()
         );
     }
 
@@ -183,7 +185,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             'Oct 20, 1999 to ?',
-            $this->anime->getAiredString()
+            $this->parser->getAnimeAiredString()
         );
     }
 
@@ -193,7 +195,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_aired(): void
     {
-        $aired = $this->anime->getAired();
+        $aired = $this->parser->getAired();
         self::assertInstanceOf(\DateTimeImmutable::class, $aired->getFrom());
         self::assertEquals('1999-10-20', $aired->getFrom()->format('Y-m-d'));
         self::assertNull($aired->getUntil());
@@ -205,7 +207,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_premiered(): void
     {
-        self::assertEquals('Fall 1999', $this->anime->getPremiered());
+        self::assertEquals('Fall 1999', $this->parser->getPremiered());
     }
 
     /**
@@ -214,7 +216,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_broadcast(): void
     {
-        self::assertEquals('Sundays at 09:30 (JST)', $this->anime->getBroadcast());
+        self::assertEquals('Sundays at 09:30 (JST)', $this->parser->getBroadcast());
     }
 
     /**
@@ -223,7 +225,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_producer(): void
     {
-        $producers = $this->anime->getProducers();
+        $producers = $this->parser->getProducers();
         self::assertCount(3, $producers);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $producers);
         self::assertContains('Fuji TV', $producers);
@@ -237,7 +239,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_licensor(): void
     {
-        $licensors = $this->anime->getLicensors();
+        $licensors = $this->parser->getLicensors();
         self::assertCount(2, $licensors);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $licensors);
         self::assertContains('Funimation', $licensors);
@@ -250,7 +252,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_studio(): void
     {
-        $studios = $this->anime->getStudios();
+        $studios = $this->parser->getStudios();
         self::assertCount(1, $studios);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $studios);
         self::assertContains('Toei Animation', $studios);
@@ -262,7 +264,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_source(): void
     {
-        self::assertEquals('Manga', $this->anime->getSource());
+        self::assertEquals('Manga', $this->parser->getSource());
     }
 
     /**
@@ -271,7 +273,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_genre(): void
     {
-        $genres = $this->anime->getGenres();
+        $genres = $this->parser->getGenres();
         self::assertCount(7, $genres);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $genres);
         self::assertContains('Action', $genres);
@@ -291,7 +293,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             '24 min',
-            $this->anime->getDuration()
+            $this->parser->getDuration()
         );
     }
 
@@ -303,7 +305,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             'PG-13 - Teens 13 or older',
-            $this->anime->getRating()
+            $this->parser->getRating()
         );
     }
 
@@ -315,7 +317,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             8.54,
-            $this->anime->getScore()
+            $this->parser->getScore()
         );
     }
 
@@ -327,7 +329,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             428921,
-            $this->anime->getScoredBy()
+            $this->parser->getScoredBy()
         );
     }
 
@@ -339,7 +341,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             89,
-            $this->anime->getRank()
+            $this->parser->getRank()
         );
     }
 
@@ -351,7 +353,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             37,
-            $this->anime->getPopularity()
+            $this->parser->getPopularity()
         );
     }
 
@@ -363,7 +365,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             730240,
-            $this->anime->getMembers()
+            $this->parser->getMembers()
         );
     }
 
@@ -375,7 +377,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             70500,
-            $this->anime->getFavorites()
+            $this->parser->getFavorites()
         );
     }
 
@@ -385,7 +387,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_related(): void
     {
-        $related = $this->anime->getRelated();
+        $related = $this->parser->getRelated();
         self::assertCount(45, $related);
         self::assertContainsOnly(MalUrl::class, $related);
     }
@@ -398,7 +400,7 @@ class AnimeParserTest extends TestCase
     {
         self::assertEquals(
             'Several anime-original arcs have been adapted into light novels, and the series has inspired 40 video games as of 2016.',
-            $this->anime->getBackground()
+            $this->parser->getBackground()
         );
     }
 
@@ -408,7 +410,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_opening(): void
     {
-        $ops = $this->anime->getOpeningTheme();
+        $ops = $this->parser->getOpeningThemes();
         self::assertCount(19, $ops);
         self::assertContains('"We Are! (ウィーアー!)" by Hiroshi Kitadani (eps 1-47)', $ops);
         self::assertContains('"We Are (ウィーアー! 〜10周年Ver.〜)" by TVXQ (eps 373-394)', $ops);
@@ -420,7 +422,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_ending(): void
     {
-        $eds = $this->anime->getEndingTheme();
+        $eds = $this->parser->getEndingThemes();
         self::assertCount(21, $eds);
         self::assertContains('"memories" by Maki Otsuki (eps 1-30)', $eds);
         self::assertContains('"We go! (ウィーゴー!)" by Hiroshi Kitadani (eps 542, 590)', $eds);

@@ -45,16 +45,16 @@ class AnimeParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeId(): int
+    public function getId(): int
     {
-        return Parser::idFromUrl($this->getAnimeURL());
+        return Parser::idFromUrl($this->getURL());
     }
 
     /**
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeURL(): string
+    public function getURL(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:url\']')->attr('content');
     }
@@ -63,7 +63,7 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeTitle(): string
+    public function getTitle(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content');
     }
@@ -72,7 +72,7 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeImageURL(): string
+    public function getImageURL(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content');
     }
@@ -81,7 +81,7 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeSynopsis(): string
+    public function getSynopsis(): string
     {
         return JString::cleanse(
             $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
@@ -92,7 +92,7 @@ class AnimeParser implements ParserInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeTitleEnglish(): ?string
+    public function getTitleEnglish(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//span[text()="English:"]');
@@ -109,7 +109,7 @@ class AnimeParser implements ParserInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeTitleSynonyms(): ?string
+    public function getTitleSynonyms(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//span[text()="Synonyms:"]');
@@ -126,7 +126,7 @@ class AnimeParser implements ParserInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeTitleJapanese(): ?string
+    public function getTitleJapanese(): ?string
     {
         $title = $this->crawler
             ->filterXPath('//span[text()="Japanese:"]');
@@ -143,7 +143,7 @@ class AnimeParser implements ParserInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeType(): ?string
+    public function getType(): ?string
     {
         $type = $this->crawler
             ->filterXPath('//span[text()="Type:"]');
@@ -160,7 +160,7 @@ class AnimeParser implements ParserInterface
      * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeEpisodes(): ?int
+    public function getEpisodes(): ?int
     {
         $episodes = $this->crawler
             ->filterXPath('//span[text()="Episodes:"]');
@@ -180,7 +180,7 @@ class AnimeParser implements ParserInterface
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeStatus(): ?string
+    public function getStatus(): ?string
     {
         $status = $this->crawler
             ->filterXPath('//span[text()="Status:"]');
@@ -196,8 +196,9 @@ class AnimeParser implements ParserInterface
     /**
      * @return string
      * @throws \InvalidArgumentException
+     * @todo \DateTimeImmunable
      */
-    public function getAnimePremiered(): ?string
+    public function getPremiered(): ?string
     {
         $premiered = $this->crawler
             ->filterXPath('//span[text()="Premiered:"]');
@@ -215,7 +216,7 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeBroadcast(): ?string
+    public function getBroadcast(): ?string
     {
         $broadcast = $this->crawler
             ->filterXPath('//span[text()="Broadcast:"]');
@@ -234,7 +235,7 @@ class AnimeParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeProducer(): array
+    public function getProducers(): array
     {
         $producer = $this->crawler
             ->filterXPath('//span[text()="Producers:"]');
@@ -255,7 +256,7 @@ class AnimeParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeLicensor(): array
+    public function getLicensors(): array
     {
         $licensor = $this->crawler
             ->filterXPath('//span[text()="Licensors:"]');
@@ -276,7 +277,7 @@ class AnimeParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeStudio(): array
+    public function getStudios(): array
     {
         $studio = $this->crawler->filterXPath('//span[text()="Studios:"]');
 
@@ -295,7 +296,7 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeSource(): ?string
+    public function getSource(): ?string
     {
         $source = $this->crawler
             ->filterXPath('//span[text()="Source:"]');
@@ -314,7 +315,7 @@ class AnimeParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeGenre(): array
+    public function getGenres(): array
     {
         $genre = $this->crawler
             ->filterXPath('//span[text()="Genres:"]');
@@ -334,7 +335,7 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeDuration(): ?string
+    public function getDuration(): ?string
     {
         $duration = $this->crawler
             ->filterXPath('//span[text()="Duration:"]');
@@ -356,7 +357,7 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeRating(): ?string
+    public function getRating(): ?string
     {
         $rating = $this->crawler
             ->filterXPath('//span[text()="Rating:"]');
@@ -371,27 +372,28 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return float
      * @throws \InvalidArgumentException
      */
-    public function getAnimeScore(): ?string
+    public function getScore(): ?float
     {
-        $score = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Score:"]');
+        return $this->crawler->filterXPath('//span[@itemprop="ratingValue"]')->text();
+    }
 
-        if (!$score->count()) {
-            return null;
-        }
-
-        return explode(PHP_EOL, trim(str_replace($score->text(), '', $score->parents()->text())))[0];
+    /**
+     * @return float
+     * @throws \InvalidArgumentException
+     */
+    public function getScoredBy(): ?float
+    {
+        return str_replace(',', '', $this->crawler->filterXPath('//span[@itemprop="ratingCount"]')->text());
     }
 
     /**
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getAnimeRank(): ?int
+    public function getRank(): ?int
     {
         $rank = $this->crawler
             ->filterXPath('//span[text()="Ranked:"]');
@@ -417,7 +419,7 @@ class AnimeParser implements ParserInterface
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getAnimePopularity(): ?int
+    public function getPopularity(): ?int
     {
         $popularity = $this->crawler
             ->filterXPath('//span[text()="Popularity:"]');
@@ -435,7 +437,7 @@ class AnimeParser implements ParserInterface
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getAnimeMembers(): ?int
+    public function getMembers(): ?int
     {
         $member = $this->crawler
             ->filterXPath('//span[text()="Members:"]');
@@ -453,7 +455,7 @@ class AnimeParser implements ParserInterface
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getAnimeFavorites(): ?int
+    public function getFavorites(): ?int
     {
         $favorite = $this->crawler
             ->filterXPath('//span[text()="Favorites:"]');
@@ -471,7 +473,7 @@ class AnimeParser implements ParserInterface
      * @return MalUrl[]
      * @throws \RuntimeException
      */
-    public function getAnimeRelated(): array
+    public function getRelated(): array
     {
         return $this->crawler
             ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr/td/a')
@@ -487,7 +489,7 @@ class AnimeParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAnimeBackground(): ?string
+    public function getBackground(): ?string
     {
         $background = Parser::removeChildNodes($this->crawler->filterXPath('//span[@itemprop="description"]/..'));
         $background = $background->text();
@@ -502,7 +504,7 @@ class AnimeParser implements ParserInterface
      * @return array
      * @throws \RuntimeException
      */
-    public function getAnimeOpeningTheme(): array
+    public function getOpeningThemes(): array
     {
         return array_filter(
             preg_split(
@@ -516,7 +518,7 @@ class AnimeParser implements ParserInterface
      * @return array
      * @throws \RuntimeException
      */
-    public function getAnimeEndingTheme(): array
+    public function getEndingThemes(): array
     {
         return array_filter(
             preg_split(

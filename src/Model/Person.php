@@ -29,7 +29,7 @@ class Person extends Model
 
 	public $voiceActingRoles = [];
 
-	public $animeStaffPosition = [];
+	public $animeStaffPositions = [];
 
 	public $publishedManga = [];
 
@@ -54,6 +54,8 @@ class Person extends Model
         $instance->about = $parser->getPersonAbout();
         $instance->memberFavorites = $parser->getPersonFavorites();
         $instance->voiceActingRoles = $parser->getPersonVoiceActingRoles();
+        $instance->animeStaffPositions = $parser->getPersonAnimeStaffPositions();
+        $instance->publishedManga = $parser->getPersonPublishedManga();
 
         return $instance;
     }
@@ -160,7 +162,7 @@ class Person extends Model
      */
     public function getAnimeStaffPositions(): array
     {
-        return $this->animeStaffPosition;
+        return $this->animeStaffPositions;
 	}
 
     /**

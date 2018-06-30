@@ -7,15 +7,14 @@ use Jikan\Model;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Parser\Common\AnimeMetaParser;
-use Jikan\Parser\Common\CharacterMetaParser;
 
 
 /**
- * Class VoiceActingRoleParser
+ * Class AnimeStaffPositionParser
  *
  * @package Jikan\Parser
  */
-class VoiceActingRoleParser implements ParserInterface
+class AnimeStaffPositionParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -23,7 +22,7 @@ class VoiceActingRoleParser implements ParserInterface
     private $crawler;
 
     /**
-     * VoiceActingRoleParser constructor.
+     * AnimeStaffPositionParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -35,26 +34,21 @@ class VoiceActingRoleParser implements ParserInterface
     /**
      * Return the model
      */
-    public function getModel(): Model\VoiceActingRole
+    public function getModel(): Model\AnimeStaffPosition
     {
-        return Model\VoiceActingRole::fromParser($this);
+        return Model\AnimeStaffPosition::fromParser($this);
     }
-
 
     /**
      * @return string
      * @throws \RuntimeException
      */
-    public function getRole(): ?string
+    public function getPosition(): string
     {
-        $role = $this->crawler
-            ->filterXPath('//td[3]/div')
-            ->text();
-
-        return JString::UTF8NbspTrim(
-            JString::cleanse(
-                $role                
-            )
+        return JString::cleanse(
+            $this->crawler
+                ->filterXPath('//small')
+                ->text()
         );
     }
 
@@ -68,20 +62,6 @@ class VoiceActingRoleParser implements ParserInterface
             $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')
-        );
-    }
-
-
-    /**
-     * @return Model\CharacterMeta[]
-     * @throws \InvalidArgumentException
-     */
-    public function getCharacterMeta(): Model\CharacterMeta
-    {
-        return new Model\CharacterMeta(
-            $this->crawler->filterXPath('//td[position() = 3]/a')->text(),
-            $this->crawler->filterXPath('//td[position() = 3]/a')->attr('href'),
-            $this->crawler->filterXPath('//td[position() = 4]/div/a/img')->attr('data-src')
         );
     }
 

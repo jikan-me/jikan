@@ -7,20 +7,11 @@ namespace Jikan\Model;
  *
  * @package Jikan\Model
  */
-abstract class ItemMeta
+class ItemMeta
 {
-    /**
-     * @var int
-     */
-    private $malId;
 
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
+     * @var MalUrl
      */
     private $url;
 
@@ -30,37 +21,24 @@ abstract class ItemMeta
     private $imageUrl;
 
     /**
-     * @param $parser
-     * @param $instance
+     * Genre constructor.
+     *
+     * @param string $name
+     * @param string $url
      */
-    protected static function setProperties($parser, $instance)
+    public function __construct(string $name, string $url, string $imageUrl)
     {
-        $instance->malId = $parser->getMalId();
-        $instance->url = $parser->getUrl();
-        $instance->name = $parser->getName();
-        $instance->imageUrl = $parser->getImage();
+        $this->url = new MalUrl(
+            $name,
+            $url
+        );
+        $this->imageUrl = $imageUrl;
     }
 
     /**
-     * @return int
+     * @return MalUrl
      */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
+    public function getUrl(): MalUrl
     {
         return $this->url;
     }
@@ -72,5 +50,4 @@ abstract class ItemMeta
     {
         return $this->imageUrl;
     }
-
 }

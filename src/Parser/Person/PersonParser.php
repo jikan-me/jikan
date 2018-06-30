@@ -218,13 +218,70 @@ class PersonParser implements ParserInterface
      */
     public function getPersonVoiceActingRoles(): array
     {
-        return $this->crawler
-            ->filterXPath('//div[contains(text(), \'Voice Acting Roles\')]/../table[1]/tr')
-            ->each(
-                function (Crawler $c) {
-                    return (new VoiceActingRoleParser($c))->getModel();
-                }
-            );
+        $node = $this->crawler
+            ->filterXPath('//div[contains(text(), \'Voice Acting Roles\')]');
+        
+        if (strpos($node->parents()->text(), 'No voice acting roles have been added to this person.')) {
+            return [];
+        }
+
+        if (!$node->count()) {
+            return [];
+        }
+
+        return $node->nextAll()->children()->each(
+            function (Crawler $c) {
+                return (new VoiceActingRoleParser($c))->getModel();
+            }
+        );
+    }
+
+    /**
+     * @return Model\AnimeStaffPositions[]
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonAnimeStaffPositions(): array
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[contains(text(), \'Anime Staff Positions\')]');
+
+        if (strpos($node->parents()->text(), 'No staff positions have been added to this person.')) {
+            return [];
+        }
+
+        if (!$node->count()) {
+            return [];
+        }
+
+        return $node->nextAll()->children()->each(
+            function (Crawler $c) {
+                return (new AnimeStaffPositionParser($c))->getModel();
+            }
+        );
+    }
+
+    /**
+     * @return Model\PublishedManga[]
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonPublishedManga(): array
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[contains(text(), \'Published Manga\')]');
+
+        if (strpos($node->parents()->text(), 'No published manga have been added to this person.')) {
+            return [];
+        }
+
+        if (!$node->count()) {
+            return [];
+        }
+
+        return $node->nextAll()->children()->each(
+            function (Crawler $c) {
+                return (new PublishedMangaParser($c))->getModel();
+            }
+        );
     }
 
 }

@@ -47,10 +47,12 @@ class VoiceActingRoleParser implements ParserInterface
      */
     public function getRole(): string
     {
-        return Jstring::cleanse(
-            $this->crawler
-                ->filterXPath('//td[3]/div')
-                ->text()
+        return JString::UTF8NbspTrim(
+            JString::cleanse(
+                $this->crawler
+                    ->filterXPath('//td[3]/div')
+                    ->text()
+            )
         );
     }
 

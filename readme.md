@@ -17,12 +17,12 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 ## Jikan REST API [![REST PHP](https://img.shields.io/badge/JikanPHP-1.15.15-blue.svg?style=flat)](https://jikan.moe)
 If you don't want to handle PHP, you're in luck! Jikan has it's own RESTful API service (CORS enabled + JSON response) hosted by [Hibiki](https://github.com/assintates)
 
-**[REST DOCUMENTATION](https://jikan.docs.apiary.io)**
-
-**[See which apps are using JikanREST](https://jikan.moe/showcase)**
+- **[REST DOCUMENTATION](https://jikan.docs.apiary.io)**
+- **[See which apps are using JikanREST](https://jikan.moe/showcase)**
+- **[Want to host your own instance of Jikan REST?](https://github.com/jikan-me/jikan-rest)**
 
 ### WARNING: BULK REQUESTS
-If your use of the API is **NOT** for an app/bot/etc that makes consistent amount of requests but **rather** for the sake of making bulk requests, keep in mind to have a **3-4 second delay between EACH request** otherwise **your IP will be blacklisted**.
+If your use of the API is **NOT** for an app/bot/etc that makes consistent amount of requests but **rather** for the sake of making bulk requests, keep in mind to have a **4 second delay between EACH request** otherwise **your IP will be blacklisted**.
 
 Remember, you're not the only one using the API. Be responsible.
 
@@ -30,6 +30,7 @@ Remember, you're not the only one using the API. Be responsible.
 - **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant & Abhinav Kasamsetty
 - **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
+- **[JavaScript]** [JikanJS](github.com/zuritor/jikanjs) by Zuritor
 
 Contributions to Jikan by making wrappers in programming languages of your choice are much appreciated! Do let me know if you've made one and I'll include it here.
 
@@ -94,7 +95,7 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [Ruby](https://github.com/jikan-me/jikan.rb#usage)
 
 ## Contributions
-I would like to thank these 3 for graciously hosting Jikan REST for free!
+I would like to thank these people for hosting the Jikan REST service!
 * [Hibiki](https://twitter.com/Assintates)
 * [Sif](https://myanimelist.net/profile/ArtoriasMoreder)
 * [BroHosting](https://brohosting.eu)

@@ -59,6 +59,22 @@ class MalUrl
     }
 
     /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string

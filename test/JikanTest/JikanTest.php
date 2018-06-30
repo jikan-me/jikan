@@ -53,6 +53,19 @@ class JikanTest extends TestCase
 
     /**
      * @test
+     * @vcr PersonParserTest.yaml
+     */
+    public function it_gets_person()
+    {
+        $person = $this->jikan->Person(new \Jikan\Request\Person(1));
+        self::assertInstanceOf(\Jikan\Model\Person::class, $person);
+        self::assertCount(367, $person->getVoiceActingRoles());
+        self::assertCount(15, $person->getAnimeStaffPositions());
+        self::assertCount(0, $person->getPublishedManga());
+    }
+
+    /**
+     * @test
      * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_seasonal_anime()

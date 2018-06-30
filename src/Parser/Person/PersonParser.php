@@ -68,7 +68,7 @@ class PersonParser implements ParserInterface
     /**
      * @return string
      */
-    public function getPersonImageURL(): string
+    public function getPersonImageUrl(): string
     {
         return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content');
     }

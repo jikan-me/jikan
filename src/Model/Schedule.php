@@ -2,22 +2,20 @@
 
 namespace Jikan\Model;
 
-
 class Schedule extends Model
 {
 
-	public $monday = [];
+    public $monday = [];
 
-	public $tuesday = [];
+    public $tuesday = [];
 
-	public $wednesday = [];
+    public $wednesday = [];
 
-	public $thursday = [];
+    public $thursday = [];
 
-	public $friday = [];
+    public $friday = [];
 
-	public $saturday = [];
+    public $saturday = [];
 
-	public $sunday = [];
-
+    public $sunday = [];
 }

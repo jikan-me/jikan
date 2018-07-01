@@ -9,7 +9,6 @@ use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Parser\Common\AnimeMetaParser;
 use Jikan\Parser\Common\CharacterMetaParser;
 
-
 /**
  * Class VoiceActingRoleParser
  *
@@ -53,7 +52,7 @@ class VoiceActingRoleParser implements ParserInterface
 
         return JString::UTF8NbspTrim(
             JString::cleanse(
-                $role                
+                $role
             )
         );
     }
@@ -84,5 +83,4 @@ class VoiceActingRoleParser implements ParserInterface
             $this->crawler->filterXPath('//td[position() = 4]/div/a/img')->attr('data-src')
         );
     }
-
 }

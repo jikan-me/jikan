@@ -8,7 +8,6 @@ use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Parser\Common\MangaMetaParser;
 
-
 /**
  * Class PublishedMangaParser
  *
@@ -64,5 +63,4 @@ class PublishedMangaParser implements ParserInterface
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')
         );
     }
-
 }

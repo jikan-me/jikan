@@ -102,5 +102,4 @@ class Jikan
     {
         return $this->myanimelist->getSeasonal($request);
     }
-
 }

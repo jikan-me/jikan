@@ -87,7 +87,6 @@ class PersonParser implements ParserInterface
     public function getPersonGivenName(): ?string
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Given name:"]');
 
         if (!$node->count()) {
@@ -106,8 +105,7 @@ class PersonParser implements ParserInterface
     public function getPersonFamilyName(): ?string
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Family name:"]');
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/span[text()="Family name:"]');
 
         if (!$node->count()) {
             return null;
@@ -141,8 +139,7 @@ class PersonParser implements ParserInterface
     public function getPersonAlternateNames(): ?string
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Alternate names:"]');
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/span[text()="Alternate names:"]');
 
         if (!$node->count()) {
             return null;
@@ -161,8 +158,7 @@ class PersonParser implements ParserInterface
     public function getPersonWebsite(): ?string
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Website:"]');
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/span[text()="Website:"]');
 
 
         $website = $node->nextAll()->filter('a');
@@ -187,7 +183,6 @@ class PersonParser implements ParserInterface
     public function getPersonFavorites(): ?int
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Member Favorites:"]');
 
 

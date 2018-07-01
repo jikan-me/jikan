@@ -233,51 +233,65 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return MalUrl[]
+     * @return array
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getProducers(): array
     {
-        return $this->crawler
-            ->filterXPath('//span[text()="Producers:"]/following-sibling::a')
-            ->each(
+        $producer = $this->crawler
+            ->filterXPath('//span[text()="Producers:"]');
+
+        if ($producer->count() && strpos($producer->parents()->text(), 'None found') === false) {
+            return $producer->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
+        }
+
+        return []; // If `None found`
     }
 
     /**
-     * @return MalUrl[]
+     * @return array
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getLicensors(): array
     {
-        return $this->crawler
-            ->filterXPath('//span[text()="Licensors:"]/following-sibling::a')
-            ->each(
+        $licensor = $this->crawler
+            ->filterXPath('//span[text()="Licensors:"]');
+
+        if ($licensor->count() && strpos($licensor->parents()->text(), 'None found') === false) {
+            return $licensor->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
+        }
+
+        return []; // If `None found`
     }
 
     /**
-     * @return MalUrl[]
+     * @return array
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getStudios(): array
     {
-        return $this->crawler
-            ->filterXPath('//span[text()="Studios:"]/following-sibling::a')
-            ->each(
+        $studio = $this->crawler->filterXPath('//span[text()="Studios:"]');
+
+        if ($studio->count() && strpos($studio->parents()->text(), 'None found') === false) {
+            return $studio->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
+        }
+
+        return []; // If `None found`
     }
 
     /**
@@ -299,18 +313,24 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return MalUrl[]
+     * @return MalUrl
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getGenres(): array
     {
-        return $this->crawler
-            ->filterXPath('//span[text()="Genres:"]/following-sibling::a')->each(
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Genres:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
+        }
+
+        return []; // If `No genres have been added yet`
     }
 
     /**
@@ -452,7 +472,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return MalUrl[]
+     * @return array
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */

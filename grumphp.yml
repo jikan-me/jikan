@@ -3,12 +3,16 @@ parameters:
     bin_dir: ./vendor/bin
     tasks:
         phpcs:
-            standard: "PSR2"
+            standard: 'PSR2'
             ignore_patterns:
-                - "test/*.php"
-                - "src/Jikan.php"
+                - 'test/*.php'
+                - 'src/Jikan.php'
         git_blacklist:
             keywords:
-                - "\\)\\s?:\\s?void"
+                - 'var_dump'
+                - 'exit'
+                - 'else'
+                - 'ini_set'
+                - 'error_reporting'
         phpunit: ~
         phplint: ~

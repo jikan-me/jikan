@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-class Top extends Model
+class Top
 {
 
     public $top = [];

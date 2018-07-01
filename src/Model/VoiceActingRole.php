@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Parser\Person\VoiceActingRoleParser;
+
 /**
  * Class VoiceActingRole
  *
@@ -25,11 +27,13 @@ class VoiceActingRole
     private $characterMeta;
 
     /**
-     * @param \Jikan\Parser\Person\VoiceActingRoleParser $parser
+     * @param VoiceActingRoleParser $parser
      *
      * @return VoiceActingRole
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
-    public static function fromParser(\Jikan\Parser\Person\VoiceActingRoleParser $parser): VoiceActingRole
+    public static function fromParser(VoiceActingRoleParser $parser): VoiceActingRole
     {
         $instance = new self();
         $instance->role = $parser->getRole();

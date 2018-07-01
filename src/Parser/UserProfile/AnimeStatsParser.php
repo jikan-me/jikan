@@ -3,6 +3,7 @@
 namespace Jikan\Parser\UserProfile;
 
 use Jikan\Helper\Parser;
+use Jikan\Model\AnimeStats;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -28,11 +29,12 @@ class AnimeStatsParser
     }
 
     /**
-     * @return \Jikan\Model\AnimeStats
+     * @return AnimeStats
+     * @throws \InvalidArgumentException
      */
-    public function getModel(): \Jikan\Model\AnimeStats
+    public function getModel(): AnimeStats
     {
-        return \Jikan\Model\AnimeStats::fromParser($this);
+        return AnimeStats::fromParser($this);
     }
 
     /**

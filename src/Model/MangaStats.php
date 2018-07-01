@@ -125,6 +125,7 @@ class MangaStats
      * @param MangaStatsParser $parser
      *
      * @return MangaStats
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(MangaStatsParser $parser): MangaStats
     {

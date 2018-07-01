@@ -2,7 +2,7 @@
 
 namespace Jikan\Request;
 
-class Top extends Requests
+class Top
 {
     
 }

@@ -3,6 +3,8 @@
 namespace Jikan\Parser\UserProfile;
 
 use Jikan\Model;
+use Jikan\Model\AnimeStats;
+use Jikan\Model\MangaStats;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -29,6 +31,8 @@ class UserProfileParser
 
     /**
      * Return the model
+     *
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\UserProfile
     {
@@ -123,10 +127,10 @@ class UserProfileParser
     }
 
     /**
-     * @return \Jikan\Model\AnimeStats
+     * @return AnimeStats
      * @throws \InvalidArgumentException
      */
-    public function getAnimeStats(): \Jikan\Model\AnimeStats
+    public function getAnimeStats(): AnimeStats
     {
         $this->crawler
             ->filterXPath('//div[@class=\'stats anime\']');
@@ -135,10 +139,10 @@ class UserProfileParser
     }
 
     /**
-     * @return \Jikan\Model\MangaStats
+     * @return MangaStats
      * @throws \InvalidArgumentException
      */
-    public function getMangaStats(): \Jikan\Model\MangaStats
+    public function getMangaStats(): MangaStats
     {
         $this->crawler
             ->filterXPath('//div[@class=\'stats anime\']');

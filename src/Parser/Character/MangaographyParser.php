@@ -16,6 +16,7 @@ class MangaographyParser extends OgraphyParser implements ParserInterface
      * Return the model
      *
      * @return Model\Mangaography
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\Mangaography
     {

@@ -6,7 +6,6 @@ use Jikan\Helper\JString;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use Jikan\Parser\Common\MangaMetaParser;
 
 /**
  * Class PublishedMangaParser
@@ -32,6 +31,9 @@ class PublishedMangaParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function getModel(): Model\PublishedManga
     {
@@ -40,6 +42,7 @@ class PublishedMangaParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getPosition(): string
@@ -52,7 +55,7 @@ class PublishedMangaParser implements ParserInterface
     }
 
     /**
-     * @return Model\MangaMeta[]
+     * @return Model\MangaMeta
      * @throws \InvalidArgumentException
      */
     public function getMangaMeta(): Model\MangaMeta

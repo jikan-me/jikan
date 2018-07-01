@@ -30,6 +30,7 @@ class MangaStatsParser
 
     /**
      * @return MangaStats
+     * @throws \InvalidArgumentException
      */
     public function getModel(): MangaStats
     {

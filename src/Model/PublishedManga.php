@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Parser\Person\PublishedMangaParser;
+
 /**
  * Class PublishedManga
  *
@@ -21,11 +23,13 @@ class PublishedManga
 
 
     /**
-     * @param \Jikan\Parser\Person\PublishedMangaParser $parser
+     * @param PublishedMangaParser $parser
      *
      * @return PublishedManga
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
-    public static function fromParser(\Jikan\Parser\Person\PublishedMangaParser $parser): PublishedManga
+    public static function fromParser(PublishedMangaParser $parser): PublishedManga
     {
         $instance = new self();
         $instance->position = $parser->getPosition();

@@ -16,6 +16,7 @@ class AnimeographyParser extends OgraphyParser implements ParserInterface
      * Return the model
      *
      * @return Model\Animeography
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\Animeography
     {

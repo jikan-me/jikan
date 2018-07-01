@@ -31,6 +31,9 @@ class AnimeStaffPositionParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\AnimeStaffPosition
     {
@@ -39,6 +42,7 @@ class AnimeStaffPositionParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getPosition(): string

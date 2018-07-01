@@ -31,6 +31,9 @@ class PersonParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\Person
     {
@@ -40,6 +43,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getPersonId(): int
@@ -51,6 +55,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getPersonURL(): string
     {
@@ -59,6 +64,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getPersonName(): string
     {
@@ -67,6 +73,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getPersonImageUrl(): string
     {
@@ -148,6 +155,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return string|null
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getPersonWebsite(): ?string
@@ -194,6 +202,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return string|null
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getPersonAbout(): ?string
@@ -218,6 +227,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return Model\VoiceActingRole[]
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getPersonVoiceActingRoles(): array
@@ -242,6 +252,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return Model\AnimeStaffPosition[]
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getPersonAnimeStaffPositions(): array
@@ -266,6 +277,7 @@ class PersonParser implements ParserInterface
 
     /**
      * @return Model\PublishedManga[]
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getPersonPublishedManga(): array

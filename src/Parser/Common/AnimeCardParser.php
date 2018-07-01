@@ -154,6 +154,7 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getAnimeId(): int
@@ -165,6 +166,7 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getAnimeUrl(): string
@@ -174,6 +176,7 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return string|null
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getAnimeImage(): ?string
@@ -198,6 +201,7 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return null|string[]
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getLicensors(): ?array
@@ -214,6 +218,7 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return bool
+     * @throws \InvalidArgumentException
      */
     public function isR18(): bool
     {
@@ -224,6 +229,7 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return bool
+     * @throws \InvalidArgumentException
      */
     public function isKids(): bool
     {
@@ -234,6 +240,7 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return bool
+     * @throws \InvalidArgumentException
      */
     public function isContinuing(): bool
     {

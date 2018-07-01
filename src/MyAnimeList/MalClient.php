@@ -35,6 +35,8 @@ class MalClient
      * @param Request\Anime $request
      *
      * @return Model\Anime
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getAnime(Request\Anime $request): Model\Anime
     {
@@ -48,6 +50,8 @@ class MalClient
      * @param Request\Manga $request
      *
      * @return Model\Manga
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getManga(Request\Manga $request): Model\Manga
     {
@@ -61,6 +65,8 @@ class MalClient
      * @param Request\Character $request
      *
      * @return Model\Character
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getCharacter(Request\Character $request): Model\Character
     {
@@ -74,6 +80,8 @@ class MalClient
      * @param Request\Person $request
      *
      * @return Model\Person
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getPerson(Request\Person $request): Model\Person
     {
@@ -87,6 +95,7 @@ class MalClient
      * @param Request\UserProfile $request
      *
      * @return Model\UserProfile
+     * @throws \InvalidArgumentException
      */
     public function getUserProfile(Request\UserProfile $request): Model\UserProfile
     {
@@ -100,6 +109,8 @@ class MalClient
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getSeasonal(Request\Seasonal $request): Model\Seasonal
     {

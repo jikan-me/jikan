@@ -6,8 +6,6 @@ use Jikan\Helper\JString;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use Jikan\Parser\Common\AnimeMetaParser;
-use Jikan\Parser\Common\CharacterMetaParser;
 
 /**
  * Class VoiceActingRoleParser
@@ -33,6 +31,9 @@ class VoiceActingRoleParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public function getModel(): Model\VoiceActingRole
     {
@@ -42,6 +43,7 @@ class VoiceActingRoleParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getRole(): ?string
@@ -58,7 +60,7 @@ class VoiceActingRoleParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeMeta[]
+     * @return Model\AnimeMeta
      * @throws \InvalidArgumentException
      */
     public function getAnimeMeta(): Model\AnimeMeta
@@ -72,7 +74,7 @@ class VoiceActingRoleParser implements ParserInterface
 
 
     /**
-     * @return Model\CharacterMeta[]
+     * @return Model\CharacterMeta
      * @throws \InvalidArgumentException
      */
     public function getCharacterMeta(): Model\CharacterMeta

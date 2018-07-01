@@ -32,6 +32,8 @@ class SeasonalParser implements ParserInterface
 
     /**
      * @return Model\Seasonal
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Model\Seasonal
     {
@@ -40,6 +42,7 @@ class SeasonalParser implements ParserInterface
 
     /**
      * @return array|Model\SeasonalAnime[]
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getSeasonalAnime(): array
@@ -55,6 +58,7 @@ class SeasonalParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getSeason(): string

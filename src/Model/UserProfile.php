@@ -76,6 +76,7 @@ class UserProfile
      * @param UserProfileParser $parser
      *
      * @return UserProfile
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(UserProfileParser $parser): self
     {

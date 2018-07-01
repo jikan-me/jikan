@@ -26,6 +26,8 @@ class Seasonal
      * @param SeasonalParser $parser
      *
      * @return Seasonal
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     public static function fromParser(SeasonalParser $parser): self
     {

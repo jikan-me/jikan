@@ -33,6 +33,7 @@ class CharacterParser implements ParserInterface
     /**
      * Return the model
      *
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getModel(): Model\Character
@@ -42,6 +43,7 @@ class CharacterParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMalId(): int
     {

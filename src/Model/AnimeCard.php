@@ -109,6 +109,9 @@ class AnimeCard
     /**
      * @param Parser\Common\AnimeCardParser $parser
      * @param AnimeCard                     $instance
+     *
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
     protected static function setProperties(Parser\Common\AnimeCardParser $parser, $instance): void
     {

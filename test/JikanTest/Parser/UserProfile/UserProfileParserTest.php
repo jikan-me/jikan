@@ -117,7 +117,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_favorites()
     {
-        $this->markTestSkipped('Not yet added');
+        $this->markTestSkipped('Not available on MAL atm');
     }
 
     /**
@@ -126,10 +126,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_about()
     {
-        self::assertEquals(
-            null,
-            $this->parser->getAbout()
-        );
+        self::assertEquals(null,$this->parser->getAbout());
     }
     
 }

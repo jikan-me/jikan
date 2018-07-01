@@ -71,19 +71,6 @@ class PersonParserTest extends TestCase
      * @test
      * @vcr PersonParserTest.yaml
      */
-    public function it_gets_the_alternateNames()
-    {
-        self::markTestSkipped('Incomplete Parser: Need to convert string to array');
-        // $aliases = $this->parser->getNameNicknames();
-        // self::assertCount(2, $aliases);
-        // self::assertContains('Momon', $aliases);
-        // self::assertContains('Ainz Ooal Gown', $aliases);
-    }
-
-    /**
-     * @test
-     * @vcr PersonParserTest.yaml
-     */
     public function it_gets_the_about()
     {
         self::assertContains('She began her voice-acting career in 1999 and has continued her work as a seiyuu for more than a decade.\n\n', $this->parser->getPersonAbout());

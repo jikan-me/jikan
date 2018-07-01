@@ -319,9 +319,9 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getEpisodesUnknown(): string
+    public function isEpisodesUnknown(): bool
     {
         return $this->episodesUnknown;
     }

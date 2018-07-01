@@ -70,6 +70,8 @@ class Character
      * @param Parser\Character\CharacterParser $parser
      *
      * @return Character
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(Parser\Character\CharacterParser $parser): self
     {

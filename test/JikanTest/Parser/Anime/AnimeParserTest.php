@@ -142,37 +142,11 @@ class AnimeParserTest extends TestCase
      * @test
      * @vcr AnimeParserTest.yaml
      */
-    public function it_gets_the_anime_episodes_unknown(): void
-    {
-        self::markTestSkipped('Move to Anime model test, or logic to parser');
-        self::assertEquals(
-            true,
-            $this->parser->getEpisodesUnknown()
-        );
-    }
-
-    /**
-     * @test
-     * @vcr AnimeParserTest.yaml
-     */
     public function it_gets_the_anime_status(): void
     {
         self::assertEquals(
             'Currently Airing',
             $this->parser->getStatus()
-        );
-    }
-
-    /**
-     * @test
-     * @vcr AnimeParserTest.yaml
-     */
-    public function it_gets_the_anime_airing(): void
-    {
-        self::markTestSkipped('this logic should be put in the parser');
-        self::assertEquals(
-            true,
-            $this->parser->isAiring()
         );
     }
 

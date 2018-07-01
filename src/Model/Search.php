@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-class Search extends Model
+class Search
 {
 
     public $result = [];

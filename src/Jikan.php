@@ -45,6 +45,8 @@ class Jikan
      * @param Request\Anime $request
      *
      * @return Model\Anime
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function Anime(Request\Anime $request): Model\Anime
     {
@@ -55,6 +57,8 @@ class Jikan
      * @param Request\Manga $request
      *
      * @return Model\Manga
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function Manga(Request\Manga $request): Model\Manga
     {
@@ -65,6 +69,8 @@ class Jikan
      * @param Request\Character $request
      *
      * @return Model\Character
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function Character(Request\Character $request): Model\Character
     {
@@ -75,6 +81,8 @@ class Jikan
      * @param Request\Person $request
      *
      * @return Model\Person
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function Person(Request\Person $request): Model\Person
     {
@@ -85,6 +93,7 @@ class Jikan
      * @param Request\UserProfile $request
      *
      * @return Model\UserProfile
+     * @throws \InvalidArgumentException
      */
     public function UserProfile(Request\UserProfile $request): Model\UserProfile
     {
@@ -95,6 +104,8 @@ class Jikan
      * @param Request\Seasonal $request
      *
      * @return Model\Seasonal
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function Seasonal(Request\Seasonal $request): Model\Seasonal
     {

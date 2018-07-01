@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Parser\Person\AnimeStaffPositionParser;
+
 /**
  * Class AnimeStaffPosition
  *
@@ -20,19 +22,13 @@ class AnimeStaffPosition
     private $animeMeta;
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name->getName();
-    }
-
-    /**
-     * @param \Jikan\Parser\Person\AnimeStaffPositionParser $parser
+     * @param AnimeStaffPositionParser $parser
      *
      * @return AnimeStaffPosition
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public static function fromParser(\Jikan\Parser\Person\AnimeStaffPositionParser $parser): AnimeStaffPosition
+    public static function fromParser(AnimeStaffPositionParser $parser): AnimeStaffPosition
     {
         $instance = new self();
         $instance->position = $parser->getPosition();
@@ -46,7 +42,7 @@ class AnimeStaffPosition
      */
     public function getPosition(): string
     {
-        return $this->role;
+        return $this->position;
     }
 
     /**

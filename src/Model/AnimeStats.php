@@ -65,6 +65,7 @@ class AnimeStats
      * @param AnimeStatsParser $parser
      *
      * @return AnimeStats
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(AnimeStatsParser $parser): self
     {

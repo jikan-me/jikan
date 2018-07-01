@@ -3,7 +3,7 @@
 namespace Jikan\Helper;
 
 use Jikan\Model\MalUrl;
-use Jikan\Parser\MalUrlParser;
+use Jikan\Parser\Common\MalUrlParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -49,6 +49,7 @@ class MalUrlExtractor
      * Extract all mal urls that begin with BASE_URL/$type
      *
      * @return MalUrl[]
+     * @throws \InvalidArgumentException
      */
     public function getMalUrls(): array
     {

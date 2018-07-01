@@ -86,6 +86,8 @@ class Person
      * @param PersonParser $parser
      *
      * @return Person
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(PersonParser $parser): self
     {

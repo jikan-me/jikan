@@ -35,6 +35,8 @@ class AnimeParser implements ParserInterface
 
     /**
      * @return Anime
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Anime
     {
@@ -554,6 +556,7 @@ class AnimeParser implements ParserInterface
 
     /**
      * @return null|string
+     * @throws \InvalidArgumentException
      */
     public function getPreview(): ?string
     {

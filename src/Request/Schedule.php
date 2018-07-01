@@ -2,7 +2,7 @@
 
 namespace Jikan\Request;
 
-class Schedule extends Requests
+class Schedule
 {
     
 }

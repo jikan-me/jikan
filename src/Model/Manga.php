@@ -7,6 +7,9 @@ namespace Jikan\Model;
  *
  * @package Jikan\Model
  */
+
+use Jikan\Parser\Manga\MangaParser;
+
 /**
  * Class Manga
  *
@@ -159,11 +162,13 @@ class Manga
     /**
      * Create an instance from an MangaParser parser
      *
-     * @param \Jikan\Parser\Manga\MangaParser $parser
+     * @param MangaParser $parser
      *
      * @return Manga
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public static function fromParser(\Jikan\Parser\Manga\MangaParser $parser): Manga
+    public static function fromParser(MangaParser $parser): Manga
     {
         $instance = new self();
 

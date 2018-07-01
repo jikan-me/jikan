@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-class Schedule extends Model
+class Schedule
 {
 
     public $monday = [];

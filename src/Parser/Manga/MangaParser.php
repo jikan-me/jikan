@@ -5,6 +5,7 @@ namespace Jikan\Parser\Manga;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\DateRange;
+use Jikan\Model\Manga;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -32,11 +33,13 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Manga
+     * @return Manga
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public function getModel(): \Jikan\Model\Manga
+    public function getModel(): Manga
     {
-        return \Jikan\Model\Manga::fromParser($this);
+        return Manga::fromParser($this);
     }
 
     /**
@@ -410,6 +413,7 @@ class MangaParser implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getMangaRelated(): array
@@ -441,6 +445,7 @@ class MangaParser implements ParserInterface
 
     /**
      * @return DateRange
+     * @throws \InvalidArgumentException
      */
     public function getPublished(): DateRange
     {

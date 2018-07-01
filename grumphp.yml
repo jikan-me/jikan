@@ -2,10 +2,11 @@ parameters:
     git_dir: .
     bin_dir: ./vendor/bin
     tasks:
-#        phpcs:
-#            standard: "PSR2"
-#            ignore_patterns:
-#                - "test/*.php"
+        phpcs:
+            standard: "PSR2"
+            ignore_patterns:
+                - "test/*.php"
+                - "src/Jikan.php"
         git_blacklist:
             keywords:
                 - "\\)\\s?:\\s?void"

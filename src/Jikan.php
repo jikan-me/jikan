@@ -19,8 +19,6 @@ use Jikan\Model;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request;
 
-require __DIR__.'/consts.php';
-
 /**
  * Class Jikan
  *

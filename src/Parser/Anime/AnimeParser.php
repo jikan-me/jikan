@@ -542,7 +542,7 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeAiredString(): ?string
     {
-        $aired = $this->crawler->filterXPath('//span[contains(text(), "DateRange")]/..')->text();
+        $aired = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..')->text();
         $aired = explode(PHP_EOL, trim($aired))[1];
 
         return trim($aired);

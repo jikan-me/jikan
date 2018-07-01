@@ -4,7 +4,7 @@ namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Aired;
+use Jikan\Model\DateRange;
 use Jikan\Model\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
@@ -529,11 +529,11 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return Aired
+     * @return DateRange
      */
-    public function getAired(): Aired
+    public function getAired(): DateRange
     {
-        return new Aired($this->getAnimeAiredString());
+        return new DateRange($this->getAnimeAiredString());
     }
 
     /**
@@ -542,7 +542,7 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeAiredString(): ?string
     {
-        $aired = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..')->text();
+        $aired = $this->crawler->filterXPath('//span[contains(text(), "DateRange")]/..')->text();
         $aired = explode(PHP_EOL, trim($aired))[1];
 
         return trim($aired);

@@ -10,17 +10,6 @@ namespace Jikan\Model;
 class MalUrl
 {
     /**
-     * @var int
-     */    
-    private $malId;
-    
-    /**
-     * @var string
-     */
-    
-     private $type;
-    
-     /**
      * @var string
      */
     private $name;
@@ -29,8 +18,6 @@ class MalUrl
      * @var string
      */
     private $url;
-
-
 
     /**
      * Genre constructor.
@@ -42,12 +29,6 @@ class MalUrl
     {
         $this->name = $name;
         $this->url = $url;
-
-        if (preg_match('~https://myanimelist.net/(.*?)/(.*?)/(.*?)~', $this->url, $matches)) {
-            $this->type = $matches[1];
-            $this->malId = (int) $matches[2];
-        }
-        
     }
 
     /**
@@ -63,7 +44,7 @@ class MalUrl
      */
     public function getMalId(): int
     {
-        return $this->malId;
+        return (int)preg_replace('#https://myanimelist.net/\w+/(\d+)/.*#', '$1', $this->url);
     }
 
     /**
@@ -71,7 +52,7 @@ class MalUrl
      */
     public function getType(): string
     {
-        return $this->type;
+        return preg_replace('#https://myanimelist.net/(\w+)/.*#', '', $this->url);
     }
 
     /**

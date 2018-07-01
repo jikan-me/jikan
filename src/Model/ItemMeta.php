@@ -25,6 +25,7 @@ class ItemMeta
      *
      * @param string $name
      * @param string $url
+     * @param string $imageUrl
      */
     public function __construct(string $name, string $url, string $imageUrl)
     {

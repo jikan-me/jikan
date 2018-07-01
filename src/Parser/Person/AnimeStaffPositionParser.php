@@ -6,8 +6,6 @@ use Jikan\Helper\JString;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use Jikan\Parser\Common\AnimeMetaParser;
-
 
 /**
  * Class AnimeStaffPositionParser
@@ -53,7 +51,7 @@ class AnimeStaffPositionParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeMeta[]
+     * @return Model\AnimeMeta
      * @throws \InvalidArgumentException
      */
     public function getAnimeMeta(): Model\AnimeMeta
@@ -64,5 +62,4 @@ class AnimeStaffPositionParser implements ParserInterface
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')
         );
     }
-
 }

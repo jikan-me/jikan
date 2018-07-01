@@ -4,6 +4,7 @@ namespace Jikan\Parser\Manga;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Model\DateRange;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -221,26 +222,6 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return string
-     * @throws \InvalidArgumentException
-     */
-    public function getMangaPublishedString(): ?string
-    {
-        $aired = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Published:"]');
-
-        if (!$aired->count()) {
-            return null;
-        }
-
-        return JString::cleanse(
-            str_replace($aired->text(), '', $aired->parents()->text())
-        );
-    }
-
-
-    /**
      * @return array
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
@@ -305,7 +286,6 @@ class MangaParser implements ParserInterface
 
         return []; // If `No genres have been added yet`
     }
-
 
     /**
      * @return float
@@ -431,46 +411,16 @@ class MangaParser implements ParserInterface
     /**
      * @return array
      * @throws \RuntimeException
-     * @todo Create related manga sub parser
      */
     public function getMangaRelated(): array
     {
-        $related = [];
-        $relatedNode = $this->crawler
-            ->filter('table.anime_detail_related_anime')
-            ->filter('tr')->each(
-                function ($tr) {
-                    return $tr->each(
-                        function ($td) {
-                            $related = [];
-                            $relationType = substr($td->filter('td')->first()->text(), 0, -1);
-                            $relationNodes = $td->filter('td')->last();
-
-                            $related[$relationType] = $relationNodes->filter('a')->each(
-                                function ($node) {
-                                    $url = BASE_URL.substr($node->attr('href'), 1);
-                                    preg_match('~https://myanimelist.net/(.*)/(.*)/(.*)~', $url, $matches);
-
-                                    return [
-                                        'mal_id' => (int)$matches[2],
-                                        'type'   => $matches[1],
-                                        'url'    => $url,
-                                        'title'  => $node->text(),
-                                    ];
-                                }
-                            );
-
-                            return $related;
-                        }
-                    )[0];
+        return $this->crawler
+            ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr/td/a')
+            ->each(
+                function (Crawler $c) {
+                    return (new MalUrlParser($c))->getModel();
                 }
             );
-
-        foreach ($relatedNode as $node) {
-            $related = array_merge($related, $node);
-        }
-
-        return $related;
     }
 
     /**
@@ -487,5 +437,32 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse($background);
+    }
+
+    /**
+     * @return DateRange
+     */
+    public function getPublished(): DateRange
+    {
+        return new DateRange($this->getMangaPublishedString());
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaPublishedString(): ?string
+    {
+        $aired = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
+            ->filterXPath('//span[text()="Published:"]');
+
+        if (!$aired->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            str_replace($aired->text(), '', $aired->parents()->text())
+        );
     }
 }

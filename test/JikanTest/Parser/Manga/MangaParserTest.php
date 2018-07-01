@@ -3,6 +3,8 @@
 namespace JikanTest\Parser\Manga;
 
 use Jikan\Jikan;
+use Jikan\Model\DateRange;
+use Jikan\Model\MalUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -214,13 +216,12 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_published()
     {
-        self::assertEquals(
-            [
-                'from' => '1999-09-21',
-                'to'   => '2014-11-10',
-            ],
-            $this->manga->getPublished()
-        );
+        $range = $this->manga->getPublished();
+        self::assertInstanceOf(DateRange::class, $range);
+        self::assertInstanceOf(\DateTimeImmutable::class, $range->getFrom());
+        self::assertInstanceOf(\DateTimeImmutable::class, $range->getUntil());
+        self::assertEquals('1999-09-21', $range->getFrom()->format('Y-m-d'));
+        self::assertEquals('2014-11-10', $range->getUntil()->format('Y-m-d'));
     }
 
     /**
@@ -342,11 +343,9 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_related()
     {
-        $this->markTestSkipped('Todo');
-        self::assertEquals(
-            [],
-            $this->manga->getRelated()
-        );
+        $related = $this->parser->getMangaRelated();
+        self::assertContainsOnlyInstancesOf(MalUrl::class, $related);
+        self::assertCount(19, $related);
     }
 
     /**

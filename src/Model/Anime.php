@@ -81,7 +81,7 @@ class Anime
     private $airedString;
 
     /**
-     * @var Aired
+     * @var DateRange
      */
     private $aired;
 
@@ -341,9 +341,9 @@ class Anime
     }
 
     /**
-     * @return Aired
+     * @return DateRange
      */
-    public function getAired(): Aired
+    public function getAired(): DateRange
     {
         return $this->aired;
     }

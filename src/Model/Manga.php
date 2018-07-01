@@ -2,71 +2,164 @@
 
 namespace Jikan\Model;
 
-
+/**
+ * Class Manga
+ *
+ * @package Jikan\Model
+ */
+/**
+ * Class Manga
+ *
+ * @package Jikan\Model
+ */
 class Manga extends Model
 {
 
-	private $malId;
-	
-	private $url;
+    /**
+     * @var int
+     */
+    private $malId;
 
-	private $title;
+    /**
+     * @var string
+     */
+    private $url;
 
-	private $titleEnglish;
+    /**
+     * @var string
+     */
+    private $title;
 
-	private $titleSynonyms;
+    /**
+     * @var string
+     */
+    private $titleEnglish;
 
-	private $titleJapanese;
+    /**
+     * @var string[]
+     */
+    private $titleSynonyms;
 
-	private $status;
+    /**
+     * @var string
+     */
+    private $titleJapanese;
 
-	private $imageUrl;
+    /**
+     * @var string
+     */
+    private $status;
 
-	private $type;
+    /**
+     * @var string
+     */
+    private $imageUrl;
 
-	private $volumes;
+    /**
+     * @var string
+     */
+    private $type;
 
-	private $volumesUnknown;
+    /**
+     * @var int
+     */
+    private $volumes;
 
-	private $chapters;
+    /**
+     * @var bool
+     */
+    private $volumesUnknown;
 
-	private $chaptersUnknown;
+    /**
+     * @var int
+     */
+    private $chapters;
 
-	private $publishing = false;
+    /**
+     * @var bool
+     */
+    private $chaptersUnknown;
 
-	private $publishedString;
+    /**
+     * @var bool
+     */
+    private $publishing = false;
 
-	private $published = [];
+    /**
+     * @var string
+     */
+    private $publishedString;
 
-	private $rank;
+    /**
+     * @var DateRange
+     */
+    private $published;
 
-	private $score;
+    /**
+     * @var int
+     */
+    private $rank;
 
-	private $scoredBy;
+    /**
+     * @var float
+     */
+    private $score;
 
-	private $popularity;
+    /**
+     * @var int
+     */
+    private $scoredBy;
 
-	private $members;
+    /**
+     * @var int
+     */
+    private $popularity;
 
-	private $favorites;
+    /**
+     * @var int
+     */
+    private $members;
 
-	private $synopsis;
+    /**
+     * @var int
+     */
+    private $favorites;
 
-	private $background;
-	
-	private $related = [];
+    /**
+     * @var string
+     */
+    private $synopsis;
 
-	private $genres = [];
+    /**
+     * @var string
+     */
+    private $background;
 
-	private $author = [];
+    /**
+     * @var array
+     */
+    private $related = [];
 
-	private $serializations = [];
+    /**
+     * @var array
+     */
+    private $genres = [];
+
+    /**
+     * @var array
+     */
+    private $authors = [];
+
+    /**
+     * @var array
+     */
+    private $serializations = [];
 
 
-	/**
+    /**
      * Create an instance from an MangaParser parser
      *
-     * @param \Jikan\Parser\MangaParser $parser
+     * @param \Jikan\Parser\Manga\MangaParser $parser
      *
      * @return Manga
      */
@@ -76,8 +169,7 @@ class Manga extends Model
 
         $instance->title = $parser->getMangaTitle();
         $instance->url = $parser->getMangaURL();
-        $instance->malId = $parser->getMangaID();
-
+        $instance->malId = $parser->getMangaId();
         $instance->imageUrl = $parser->getMangaImageURL();
         $instance->synopsis = $parser->getMangaSynopsis();
         $instance->titleEnglish = $parser->getMangaTitleEnglish();
@@ -91,38 +183,7 @@ class Manga extends Model
         $instance->status = $parser->getMangaStatus();
         $instance->publishing = $instance->status === 'Publishing';
         $instance->publishedString = $parser->getMangaPublishedString();
-
-        if (!empty($instance->publishedString) && $instance->publishedString != 'Not available') {
-            if (strpos($instance->publishedString, 'to')) {
-                preg_match('~(.*) to (.*)~', $instance->publishedString, $matches);
-                $instance->published = [
-                    'from' => (strpos($matches[1], '?') !== false) ? null : @date_format(date_create($matches[1]), 'o-m-d'),
-                    'to' => (strpos($matches[2], '?') !== false) ? null : @date_format(date_create($matches[2]), 'o-m-d')
-                ];
-            } else {
-                if (
-                    preg_match('~^[0-9]{4}$~', $instance->publishedString)
-                    || preg_match('~^[A-Za-z]{1,}, [0-9]{4}$~', $instance->publishedString)
-                    ) 
-                {
-                    $instance->published = [
-                        'from' => null,
-                        'to' => null
-                    ];
-                } else {
-                    $instance->published = [
-                        'from' => (strpos($instance->publishedString, '?') !== false) ? null : @date_format(date_create($instance->publishedString), 'o-m-d'),
-                        'to' => (strpos($instance->publishedString, '?') !== false) ? null : @date_format(date_create($instance->publishedString), 'o-m-d')
-                    ];
-                }
-            }
-        } else {
-            $instance->published = [
-                'from' => null,
-                'to' => null
-            ];
-        }
-
+        $instance->published = $parser->getPublished();
         $instance->genres = $parser->getMangaGenre();
         $instance->score = $parser->getMangaScore();
         $instance->scoredBy = $parser->getMangaScoredBy();
@@ -132,12 +193,12 @@ class Manga extends Model
         $instance->favorites = $parser->getMangaFavorites();
         $instance->related = $parser->getMangaRelated();
         $instance->background = $parser->getMangaBackground();
-        $instance->author = $parser->getMangaAuthors();
+        $instance->authors = $parser->getMangaAuthors();
         $instance->serializations = $parser->getMangaSerialization();
 
         return $instance;
-	}
-	
+    }
+
     /**
      * @return int
      */
@@ -171,6 +232,14 @@ class Manga extends Model
     }
 
     /**
+     * @return string[]
+     */
+    public function getTitleSynonyms(): array
+    {
+        return $this->titleSynonyms;
+    }
+
+    /**
      * @return string
      */
     public function getTitleJapanese(): string
@@ -178,14 +247,6 @@ class Manga extends Model
         return $this->titleJapanese;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitleSynonyms(): string
-    {
-        return $this->titleSynonyms;
-	}
-	
     /**
      * @return string
      */
@@ -200,8 +261,8 @@ class Manga extends Model
     public function getImageUrl(): string
     {
         return $this->imageUrl;
-	}
-	
+    }
+
     /**
      * @return string
      */
@@ -210,7 +271,6 @@ class Manga extends Model
         return $this->type;
     }
 
-
     /**
      * @return int
      */
@@ -218,14 +278,14 @@ class Manga extends Model
     {
         return $this->volumes;
     }
-    
+
     /**
      * @return bool
      */
     public function isVolumesUnknown(): bool
     {
         return $this->volumesUnknown;
-	}
+    }
 
     /**
      * @return int
@@ -234,15 +294,15 @@ class Manga extends Model
     {
         return $this->chapters;
     }
-    
+
     /**
      * @return bool
      */
     public function isChaptersUnknown(): bool
     {
         return $this->chaptersUnknown;
-	}
-	
+    }
+
     /**
      * @return bool
      */
@@ -260,58 +320,57 @@ class Manga extends Model
     }
 
     /**
-     * @return array
+     * @return DateRange
      */
-    public function getPublished(): array
+    public function getPublished(): DateRange
     {
         return $this->published;
-    }	
-
-
-    /**
-     * @return string
-     */
-    public function getScore(): string
-    {
-        return $this->score;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getScoredBy(): string
-    {
-        return $this->scoredBy;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRank(): string
+    public function getRank(): int
     {
         return $this->rank;
     }
 
     /**
-     * @return string
+     * @return float
      */
-    public function getPopularity(): string
+    public function getScore(): float
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return int
+     */
+    public function getScoredBy(): int
+    {
+        return $this->scoredBy;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPopularity(): int
     {
         return $this->popularity;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getMembers(): string
+    public function getMembers(): int
     {
         return $this->members;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getFavorites(): string
+    public function getFavorites(): int
     {
         return $this->favorites;
     }
@@ -330,32 +389,32 @@ class Manga extends Model
     public function getBackground(): string
     {
         return $this->background;
-	}
-	
+    }
+
     /**
      * @return array
      */
     public function getRelated(): array
     {
         return $this->related;
-	}
-	
+    }
+
     /**
      * @return array
      */
     public function getGenres(): array
     {
         return $this->genres;
-	}
-	
+    }
+
     /**
      * @return array
      */
     public function getAuthors(): array
     {
-        return $this->author;
-	}
-	
+        return $this->authors;
+    }
+
     /**
      * @return array
      */

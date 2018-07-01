@@ -5,11 +5,11 @@ namespace Jikan\Model;
 use Jikan\Helper\Parser;
 
 /**
- * Class Aired
+ * Class DateRange
  *
  * @package Jikan\Model
  */
-class Aired
+class DateRange
 {
     /**
      * @var string
@@ -17,7 +17,7 @@ class Aired
     private $aired;
 
     /**
-     * Aired constructor.
+     * DateRange constructor.
      *
      * @param string $aired
      */
@@ -35,7 +35,7 @@ class Aired
         if ($aired === 'Not available') {
             return null;
         }
-        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
+        if (strpos($aired, ' to ') !== false || strpos($aired, ' to ?') !== false) {
             $aired = explode(' to ', $aired)[0];
         }
 
@@ -51,7 +51,8 @@ class Aired
         if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
             return null;
         }
+        $aired = explode(' to ', $aired)[1];
 
-        return Parser::parseDate(explode(' to ', $aired)[1]);
+        return Parser::parseDate($aired);
     }
 }

@@ -32,7 +32,7 @@ class Character
     public $nameKanji;
 
     /**
-     * @var array
+     * @var string[]
      */
     public $nicknames = [];
 
@@ -52,17 +52,17 @@ class Character
     public $imageUrl;
 
     /**
-     * @var array
+     * @var Animeography[]
      */
     public $animeography = [];
 
     /**
-     * @var array
+     * @var Mangaography[]
      */
     public $mangaography = [];
 
     /**
-     * @var array
+     * @var VoiceActor[]
      */
     public $voiceActors = [];
 
@@ -156,7 +156,7 @@ class Character
     }
 
     /**
-     * @return array
+     * @return Animeography[]
      */
     public function getAnimeography(): array
     {
@@ -164,7 +164,7 @@ class Character
     }
 
     /**
-     * @return array
+     * @return Mangaography[]
      */
     public function getMangaography(): array
     {
@@ -172,7 +172,7 @@ class Character
     }
 
     /**
-     * @return array
+     * @return VoiceActor[]
      */
     public function getVoiceActors(): array
     {

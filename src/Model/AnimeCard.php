@@ -42,7 +42,7 @@ class AnimeCard
     protected $members;
 
     /**
-     * @var array|MalUrl[]
+     * @var MalUrl[]
      */
     protected $genres;
 

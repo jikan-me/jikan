@@ -139,22 +139,22 @@ class Manga
     private $background;
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $related = [];
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $genres = [];
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $authors = [];
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $serializations = [];
 
@@ -397,7 +397,7 @@ class Manga
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getRelated(): array
     {
@@ -405,7 +405,7 @@ class Manga
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getGenres(): array
     {
@@ -413,7 +413,7 @@ class Manga
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getAuthors(): array
     {
@@ -421,7 +421,7 @@ class Manga
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getSerializations(): array
     {

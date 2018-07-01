@@ -148,7 +148,7 @@ class Anime
     private $broadcast;
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $related = [];
 
@@ -158,27 +158,27 @@ class Anime
     private $producer = [];
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $licensors = [];
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $studios = [];
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $genres = [];
 
     /**
-     * @var array
+     * @var string[]
      */
     private $openingTheme = [];
 
     /**
-     * @var array
+     * @var string[]
      */
     private $endingTheme = [];
 
@@ -455,7 +455,7 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getRelated(): array
     {
@@ -463,7 +463,7 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getProducers(): array
     {
@@ -471,7 +471,7 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getLicensors(): array
     {
@@ -479,7 +479,7 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getStudios(): array
     {
@@ -487,7 +487,7 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      */
     public function getGenres(): array
     {
@@ -495,7 +495,7 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getOpeningTheme(): array
     {
@@ -503,7 +503,7 @@ class Anime
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getEndingTheme(): array
     {

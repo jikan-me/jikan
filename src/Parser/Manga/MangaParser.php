@@ -5,6 +5,7 @@ namespace Jikan\Parser\Manga;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\DateRange;
+use Jikan\Model\MalUrl;
 use Jikan\Model\Manga;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
@@ -225,69 +226,49 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getMangaAuthors(): array
     {
-        $author = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Authors:"]');
-
-        if ($author->count() && strpos($author->parents()->text(), 'None found') === false) {
-            return $author->parents()->first()->filter('a')->each(
+        return $this->crawler
+            ->filterXPath('//span[text()="Authors:"]/following-sibling::a')
+            ->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
-        }
-
-        return []; // If `None found`
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getMangaSerialization(): array
     {
-        $studio = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Serialization:"]');
-
-        if ($studio->count() && strpos($studio->parents()->text(), 'None found') === false) {
-            return $studio->parents()->first()->filter('a')->each(
+        return $this->crawler
+            ->filterXPath('//span[text()="Serialization:"]/following-sibling::a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
-        }
-
-        return []; // If `None found`
     }
 
     /**
-     * @return array
+     * @return MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getMangaGenre(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
-            ->filterXPath('//span[text()="Genres:"]');
-
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filter('a')->each(
+        return $this->crawler
+            ->filterXPath('//span[text()="Genres:"]/following-sibling::a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
-        }
-
-        return []; // If `No genres have been added yet`
     }
 
     /**

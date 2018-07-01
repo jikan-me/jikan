@@ -97,8 +97,7 @@ class AnimeParser implements ParserInterface
      */
     public function getTitleEnglish(): ?string
     {
-        $title = $this->crawler
-            ->filterXPath('//span[text()="English:"]');
+        $title = $this->crawler->filterXPath('//span[text()="English:"]');
         if (!$title->count()) {
             return null;
         }
@@ -379,7 +378,7 @@ class AnimeParser implements ParserInterface
      */
     public function getScore(): ?float
     {
-        return $this->crawler->filterXPath('//span[@itemprop="ratingValue"]')->text();
+        return Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingValue"]'));
     }
 
     /**
@@ -388,7 +387,12 @@ class AnimeParser implements ParserInterface
      */
     public function getScoredBy(): ?float
     {
-        return str_replace(',', '', $this->crawler->filterXPath('//span[@itemprop="ratingCount"]')->text());
+        $rating = Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingCount"]'));
+        if ($rating === null) {
+            return $rating;
+        }
+
+        return str_replace(',', '', $rating);
     }
 
     /**

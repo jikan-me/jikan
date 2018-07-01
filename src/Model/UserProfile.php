@@ -23,7 +23,7 @@ class UserProfile
     private $url;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $image_url;
 
@@ -174,5 +174,29 @@ class UserProfile
     public function getAbout(): string
     {
         return $this->about;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getImageUrl(): ?string
+    {
+        return $this->image_url;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFavorite(): array
+    {
+        return $this->favorite;
     }
 }

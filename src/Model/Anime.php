@@ -199,6 +199,7 @@ class Anime
     public static function fromParser(AnimeParser $parser): Anime
     {
         $instance = new self();
+        $instance->preview = $parser->getPreview();
         $instance->title = $parser->getTitle();
         $instance->url = $parser->getURL();
         $instance->malId = $parser->getId();
@@ -230,10 +231,9 @@ class Anime
         $instance->members = $parser->getMembers();
         $instance->favorites = $parser->getFavorites();
         $instance->related = $parser->getRelated();
-        $instance->background = $parser->getBackground();
         $instance->openingTheme = $parser->getOpeningThemes();
         $instance->endingTheme = $parser->getEndingThemes();
-        $instance->preview = $parser->getPreview();
+        $instance->background = $parser->getBackground();
 
         return $instance;
     }
@@ -320,6 +320,7 @@ class Anime
 
     /**
      * @return bool
+     * @todo shouldn't we return null if its unknow and drop this funtion?
      */
     public function isEpisodesUnknown(): bool
     {

@@ -58,12 +58,16 @@ class UserProfileParser
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "user-image")]/img')->attr('src');
+        try {
+            return $this->crawler->filterXPath('//div[contains(@class, "user-image")]/img')->attr('src');
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

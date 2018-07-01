@@ -1,5 +1,7 @@
 <?php
 
+namespace JikanTest;
+
 use Jikan\Jikan;
 use PHPUnit\Framework\TestCase;
 

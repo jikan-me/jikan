@@ -21,16 +21,8 @@ class VoiceActingRole
 
     /**
      * @var CharacterMeta
-     */ 
-    private $characterMeta;
-
-    /**
-     * @return string
      */
-    public function __toString()
-    {
-        return $this->name->getName();
-    }
+    private $characterMeta;
 
     /**
      * @param \Jikan\Parser\Person\VoiceActingRoleParser $parser
@@ -61,7 +53,7 @@ class VoiceActingRole
     public function getAnimeMeta(): AnimeMeta
     {
         return $this->animeMeta;
-    }    
+    }
 
     /**
      * @return CharacterMeta
@@ -69,5 +61,5 @@ class VoiceActingRole
     public function getCharacterMeta(): CharacterMeta
     {
         return $this->characterMeta;
-    }    
+    }
 }

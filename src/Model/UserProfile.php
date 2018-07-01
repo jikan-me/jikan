@@ -53,12 +53,12 @@ class UserProfile
     private $joined;
 
     /**
-     * @var \Jikan\Model\AnimeStats
+     * @var AnimeStats
      */
     private $animeStats;
 
     /**
-     * @var \Jikan\Model\MangaStats
+     * @var MangaStats
      */
     private $mangaStats;
 
@@ -73,7 +73,7 @@ class UserProfile
     private $about;
 
     /**
-     * @param UserProfileParser
+     * @param UserProfileParser $parser
      *
      * @return UserProfile
      */
@@ -144,17 +144,17 @@ class UserProfile
     }
 
     /**
-     * @return \Jikan\Model\AnimeStats
+     * @return AnimeStats
      */
-    public function getAnimeStats(): \Jikan\Model\AnimeStats
+    public function getAnimeStats(): AnimeStats
     {
         return $this->animeStats;
     }
 
     /**
-     * @return \Jikan\Model\MangaStats
+     * @return MangaStats
      */
-    public function getMangaStats(): \Jikan\Model\MangaStats
+    public function getMangaStats(): MangaStats
     {
         return $this->mangaStats;
     }

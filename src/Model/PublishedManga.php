@@ -39,14 +39,14 @@ class PublishedManga
      */
     public function getPosition(): string
     {
-        return $this->role;
+        return $this->position;
     }
 
     /**
      * @return mangaMeta
      */
-    public function getMangaMeta(): mangaMeta
+    public function getMangaMeta(): MangaMeta
     {
         return $this->mangaMeta;
-    }    
+    }
 }

@@ -9,7 +9,7 @@ use Jikan\Parser\Seasonal\SeasonalParser;
  *
  * @package Jikan\Model
  */
-class Seasonal extends Model
+class Seasonal
 {
 
     /**
@@ -23,7 +23,7 @@ class Seasonal extends Model
     public $anime = [];
 
     /**
-     * @param SeasonalParser
+     * @param SeasonalParser $parser
      *
      * @return Seasonal
      */

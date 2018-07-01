@@ -2,49 +2,96 @@
 
 namespace Jikan\Model;
 
-class Person extends Model
+use Jikan\Helper\Parser;
+use Jikan\Parser\Person\PersonParser;
+
+/**
+ * Class Person
+ *
+ * @package Jikan\Model
+ */
+class Person
 {
-
-	public $malId;
-
-	public $url;
-
-	public $imageUrl;
-
-	public $websiteUrl;
-
-	public $name;
-
-	public $givenName;
-
-	public $familyName;
-
-	public $alternateNames;
-
-	public $birthday;
-
-	public $memberFavorites;
-
-	public $about;
-
-	public $voiceActingRoles = [];
-
-	public $animeStaffPositions = [];
-
-	public $publishedManga = [];
-
+    /**
+     * @var int
+     */
+    public $malId;
 
     /**
-     * @param Parser\PersonParser $parser
+     * @var string
+     */
+    public $url;
+
+    /**
+     * @var string
+     */
+    public $imageUrl;
+
+    /**
+     * @var string
+     */
+    public $websiteUrl;
+
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var string
+     */
+    public $givenName;
+
+    /**
+     * @var string
+     */
+    public $familyName;
+
+    /**
+     * @var string[]
+     */
+    public $alternateNames;
+
+    /**
+     * @var string
+     */
+    public $birthday;
+
+    /**
+     * @var int
+     */
+    public $memberFavorites;
+
+    /**
+     * @var string
+     */
+    public $about;
+
+    /**
+     * @var VoiceActingRole[]
+     */
+    public $voiceActingRoles = [];
+
+    /**
+     * @var AnimeStaffPosition[]
+     */
+    public $animeStaffPositions = [];
+
+    /**
+     * @var PublishedManga[]
+     */
+    public $publishedManga = [];
+
+    /**
+     * @param PersonParser $parser
      *
      * @return Person
      */
-    public static function fromParser(\Jikan\Parser\Person\PersonParser $parser): self
+    public static function fromParser(PersonParser $parser): self
     {
         $instance = new self();
-
         $instance->malId = $parser->getPersonId();
-        $instance->url = $parser->getPersonUrl();
+        $instance->url = $parser->getPersonURL();
         $instance->imageUrl = $parser->getPersonImageUrl();
         $instance->name = $parser->getPersonName();
         $instance->givenName = $parser->getPersonGivenName();
@@ -66,24 +113,15 @@ class Person extends Model
     public function getMalId(): int
     {
         return $this->malId;
-	}
-	
+    }
+
     /**
      * @return string
      */
     public function getUrl(): string
     {
         return $this->url;
-	}
-
-    /**
-     * @return string
-     */
-    public function getWebsiteUrl(): string
-    {
-        return $this->websiteUrl;
-	}
-	
+    }
 
     /**
      * @return string
@@ -92,23 +130,31 @@ class Person extends Model
     {
         return $this->imageUrl;
     }
-	
+
+    /**
+     * @return string
+     */
+    public function getWebsiteUrl(): string
+    {
+        return $this->websiteUrl;
+    }
+
     /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
-	}
-	
+    }
+
     /**
      * @return string
      */
     public function getGivenName(): string
     {
         return $this->givenName;
-	}
-	
+    }
+
     /**
      * @return string
      */
@@ -118,28 +164,28 @@ class Person extends Model
     }
 
     /**
-     * @return string
+     * @return string[]
      */
-    public function getAlternateNames(): string
+    public function getAlternateNames(): array
     {
         return $this->alternateNames;
-	}
+    }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable
      */
-    public function getBirthday(): string
+    public function getBirthday(): ?\DateTimeImmutable
     {
-        return $this->birthday;
-	}
+        return Parser::parseDate($this->birthday);
+    }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getMemberFavorites(): string
+    public function getMemberFavorites(): int
     {
         return $this->memberFavorites;
-	}
+    }
 
     /**
      * @return string
@@ -147,30 +193,53 @@ class Person extends Model
     public function getAbout(): string
     {
         return $this->about;
-	}
+    }
 
     /**
-     * @return array
+     * @return VoiceActingRole[]
      */
     public function getVoiceActingRoles(): array
     {
         return $this->voiceActingRoles;
-	}
+    }
 
     /**
-     * @return array
+     * @param VoiceActingRole[] $voiceActingRoles
+     */
+    public function setVoiceActingRoles(array $voiceActingRoles): void
+    {
+        $this->voiceActingRoles = $voiceActingRoles;
+    }
+
+    /**
+     * @return AnimeStaffPosition[]
      */
     public function getAnimeStaffPositions(): array
     {
         return $this->animeStaffPositions;
-	}
+    }
 
     /**
-     * @return array
+     * @param AnimeStaffPosition[] $animeStaffPositions
+     */
+    public function setAnimeStaffPositions(array $animeStaffPositions): void
+    {
+        $this->animeStaffPositions = $animeStaffPositions;
+    }
+
+    /**
+     * @return PublishedManga[]
      */
     public function getPublishedManga(): array
     {
         return $this->publishedManga;
-	}
-	
+    }
+
+    /**
+     * @param PublishedManga[] $publishedManga
+     */
+    public function setPublishedManga(array $publishedManga): void
+    {
+        $this->publishedManga = $publishedManga;
+    }
 }

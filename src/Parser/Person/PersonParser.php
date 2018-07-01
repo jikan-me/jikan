@@ -82,7 +82,7 @@ class PersonParser implements ParserInterface
         $node = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Given name:"]');
-            
+
         if (!$node->count()) {
             return null;
         }
@@ -107,7 +107,11 @@ class PersonParser implements ParserInterface
         }
 
         // MAL screwed up the HTML here
-        preg_match('~Family name:(.*?)(Alternate names|Birthday|Website|Member Favorites|More)~', $node->parents()->text(), $matches);
+        preg_match(
+            '~Family name:(.*?)(Alternate names|Birthday|Website|Member Favorites|More)~',
+            $node->parents()->text(),
+            $matches
+        );
 
         if (empty($matches)) {
             return null;
@@ -125,7 +129,7 @@ class PersonParser implements ParserInterface
     /**
      * @return string|null
      * @throws \InvalidArgumentException
-     * @todo return array, explode "," 
+     * @todo return array, explode ","
      */
     public function getPersonAlternateNames(): ?string
     {
@@ -183,7 +187,7 @@ class PersonParser implements ParserInterface
             return null;
         }
 
-        return (int) JString::cleanse(
+        return (int)JString::cleanse(
             str_replace([$node->text(), ','], '', $node->parents()->text())
         );
     }
@@ -210,7 +214,7 @@ class PersonParser implements ParserInterface
             $node->html()
         );
     }
-    
+
 
     /**
      * @return Model\VoiceActingRole[]
@@ -220,7 +224,7 @@ class PersonParser implements ParserInterface
     {
         $node = $this->crawler
             ->filterXPath('//div[contains(text(), \'Voice Acting Roles\')]');
-        
+
         if (strpos($node->parents()->text(), 'No voice acting roles have been added to this person.')) {
             return [];
         }
@@ -237,7 +241,7 @@ class PersonParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeStaffPositions[]
+     * @return Model\AnimeStaffPosition[]
      * @throws \InvalidArgumentException
      */
     public function getPersonAnimeStaffPositions(): array
@@ -283,5 +287,4 @@ class PersonParser implements ParserInterface
             }
         );
     }
-
 }

@@ -12,7 +12,7 @@ namespace Jikan\Model;
  *
  * @package Jikan\Model
  */
-class Manga extends Model
+class Manga
 {
 
     /**

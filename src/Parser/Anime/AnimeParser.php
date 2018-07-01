@@ -4,6 +4,7 @@ namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Model\Anime;
 use Jikan\Model\DateRange;
 use Jikan\Model\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
@@ -33,11 +34,11 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Anime
+     * @return Anime
      */
-    public function getModel(): \Jikan\Model\Anime
+    public function getModel(): Anime
     {
-        return \Jikan\Model\Anime::fromParser($this);
+        return Anime::fromParser($this);
     }
 
     /**
@@ -196,7 +197,6 @@ class AnimeParser implements ParserInterface
     /**
      * @return string
      * @throws \InvalidArgumentException
-     * @todo \DateTimeImmunable
      */
     public function getPremiered(): ?string
     {
@@ -471,6 +471,7 @@ class AnimeParser implements ParserInterface
 
     /**
      * @return MalUrl[]
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getRelated(): array
@@ -502,6 +503,7 @@ class AnimeParser implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getOpeningThemes(): array
@@ -516,6 +518,7 @@ class AnimeParser implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getEndingThemes(): array
@@ -530,6 +533,7 @@ class AnimeParser implements ParserInterface
 
     /**
      * @return DateRange
+     * @throws \InvalidArgumentException
      */
     public function getAired(): DateRange
     {
@@ -546,5 +550,18 @@ class AnimeParser implements ParserInterface
         $aired = explode(PHP_EOL, trim($aired))[1];
 
         return trim($aired);
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPreview(): ?string
+    {
+        $video = $this->crawler->filterXPath('//div[contains(@class, "video-promotion")]/a');
+        if (!$video->count()) {
+            return null;
+        }
+
+        return $video->attr('href');
     }
 }

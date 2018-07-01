@@ -4,7 +4,6 @@
 
 namespace JikanTest\Parser\Anime;
 
-use Jikan\Jikan;
 use Jikan\Model\MalUrl;
 use PHPUnit\Framework\TestCase;
 
@@ -426,5 +425,15 @@ class AnimeParserTest extends TestCase
         self::assertCount(21, $eds);
         self::assertContains('"memories" by Maki Otsuki (eps 1-30)', $eds);
         self::assertContains('"We go! (ウィーゴー!)" by Hiroshi Kitadani (eps 542, 590)', $eds);
+    }
+
+    /**
+     * @test
+     * @vcr AnimeParserTest.yaml
+     */
+    public function it_gets_the_preview_video()
+    {
+        $preview = $this->parser->getPreview();
+        self::assertEquals('https://www.youtube.com/embed/um-tFlVamOI?enablejsapi=1&wmode=opaque&autoplay=1', $preview);
     }
 }

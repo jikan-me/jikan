@@ -2,6 +2,8 @@
 
 namespace Jikan\Model;
 
+use Jikan\Parser\Anime\AnimeParser;
+
 /**
  * Class AnimeParser
  *
@@ -151,7 +153,7 @@ class Anime
     private $related = [];
 
     /**
-     * @var array
+     * @var MalUrl[]
      */
     private $producer = [];
 
@@ -181,13 +183,20 @@ class Anime
     private $endingTheme = [];
 
     /**
+     * @var string|null
+     */
+    private $preview;
+
+    /**
      * Create an instance from an AnimeParser parser
      *
-     * @param \Jikan\Parser\Anime\AnimeParser $parser
+     * @param AnimeParser $parser
      *
      * @return Anime
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public static function fromParser(\Jikan\Parser\Anime\AnimeParser $parser): Anime
+    public static function fromParser(AnimeParser $parser): Anime
     {
         $instance = new self();
         $instance->title = $parser->getTitle();
@@ -224,6 +233,7 @@ class Anime
         $instance->background = $parser->getBackground();
         $instance->openingTheme = $parser->getOpeningThemes();
         $instance->endingTheme = $parser->getEndingThemes();
+        $instance->preview = $parser->getPreview();
 
         return $instance;
     }
@@ -498,5 +508,21 @@ class Anime
     public function getEndingTheme(): array
     {
         return $this->endingTheme;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getProducer(): array
+    {
+        return $this->producer;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPreview(): ?string
+    {
+        return $this->preview;
     }
 }

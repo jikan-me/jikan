@@ -124,6 +124,19 @@ class Jikan
         return $this->myanimelist->getProducer($request);
     }
 
+
+    /**
+     * @param Request\Genre $request
+     *
+     * @return Model\Genre
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function Genre(Request\Genre $request): Model\Genre
+    {
+        return $this->myanimelist->getGenre($request);
+    }
+
     /**
      * @param Request\Schedule $request
      *

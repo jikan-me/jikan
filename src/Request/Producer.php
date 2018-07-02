@@ -17,9 +17,9 @@ class Producer implements RequestInterface
     /**
      * Producer constructor.
      *
-     * @param int    $page
+     * @param int $id
+     * @param int $page
      *
-     * @throws \InvalidArgumentException
      */
     public function __construct(int $id, int $page = 1)
     {

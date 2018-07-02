@@ -17,9 +17,9 @@ class Genre implements RequestInterface
     /**
      * Genre constructor.
      *
-     * @param int    $page
+     * @param int $id
+     * @param int $page
      *
-     * @throws \InvalidArgumentException
      */
     public function __construct(int $id, int $page = 1)
     {

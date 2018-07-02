@@ -207,7 +207,7 @@ class AnimeCardParser implements ParserInterface
         //bypass lazyloading
         $image = $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
 
-        if (!is_null($image)) {
+        if (null !== $image) {
             return $image;
         }
 

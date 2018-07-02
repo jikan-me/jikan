@@ -3,6 +3,7 @@
 namespace JikanTest;
 
 use Jikan\Jikan;
+use Jikan\Model\Friend;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -98,5 +99,31 @@ class JikanTest extends TestCase
     {
         $schedule = $this->jikan->Schedule(new \Jikan\Request\Schedule());
         self::assertInstanceOf(\Jikan\Model\Schedule::class, $schedule);
+    }
+    /**
+     * @test
+     * @vcr FriendsParserTest.yaml
+     */
+    public function it_gets_friends()
+    {
+        $friends = $this->jikan->Friends(new \Jikan\Request\Friends('morshuwarrior'));
+        self::assertContainsOnlyInstancesOf(Friend::class, $friends);
+        self::assertCount(100, $friends);
+        self::assertContains('sandshark', $friends);
+        self::assertContains('mangalicker94', $friends);
+        self::assertContains('Moune-Chan', $friends);
+
+        // Second page
+        $friends = $this->jikan->Friends(new \Jikan\Request\Friends('morshuwarrior', 1));
+        self::assertContainsOnlyInstancesOf(Friend::class, $friends);
+        self::assertCount(100, $friends);
+        self::assertContains('sword123', $friends);
+        self::assertContains('Impactaction', $friends);
+
+        // Empty page
+        // Second page
+        $friends = $this->jikan->Friends(new \Jikan\Request\Friends('morshuwarrior', 100));
+        self::assertContainsOnlyInstancesOf(Friend::class, $friends);
+        self::assertCount(0, $friends);
     }
 }

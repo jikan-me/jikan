@@ -135,4 +135,15 @@ class Jikan
     {
         return $this->myanimelist->getSchedule($request);
     }
+
+    /**
+     * @param Request\Friends $request
+     *
+     * @return Model\Friend[]
+     * @throws \InvalidArgumentException
+     */
+    public function Friends(Request\Friends $request): array
+    {
+        return $this->myanimelist->getFriends($request);
+    }
 }

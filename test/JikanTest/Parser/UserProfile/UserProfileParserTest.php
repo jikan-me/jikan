@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class UserProfileParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Profile
+     * @var \Jikan\Parser\UserProfile\UserProfileParser
      */
     private $parser;
 
@@ -45,7 +45,10 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_image()
     {
-        self::assertEquals('https://myanimelist.cdn-dena.com/images/userimages/3600201.jpg', $this->parser->getImageUrl());
+        self::assertEquals(
+            'https://myanimelist.cdn-dena.com/images/userimages/3600201.jpg',
+            $this->parser->getImageUrl()
+        );
     }
 
     /**
@@ -120,7 +123,10 @@ class UserProfileParserTest extends TestCase
         self::assertInstanceOf(\Jikan\Model\Favorites::class, $this->parser->getFavorites());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\AnimeMeta::class, $this->parser->getFavorites()->getAnime());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\MangaMeta::class, $this->parser->getFavorites()->getManga());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\CharacterMeta::class, $this->parser->getFavorites()->getCharacters());
+        self::assertContainsOnlyInstancesOf(
+            \Jikan\Model\CharacterMeta::class,
+            $this->parser->getFavorites()->getCharacters()
+        );
         self::assertContainsOnlyInstancesOf(\Jikan\Model\PersonMeta::class, $this->parser->getFavorites()->getPeople());
 
     }
@@ -131,7 +137,6 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_about()
     {
-        self::assertEquals(null,$this->parser->getAbout());
+        self::assertEquals(null, $this->parser->getAbout());
     }
-    
 }

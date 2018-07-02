@@ -61,6 +61,8 @@ class Schedule
      * @param ScheduleParser $parser
      *
      * @return Schedule
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(ScheduleParser $parser): self
     {

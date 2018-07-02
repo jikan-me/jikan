@@ -43,6 +43,8 @@ class ScheduleParser implements ParserInterface
      * @param string $day
      *
      * @return array
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getShedule(string $day = 'all'): array
     {

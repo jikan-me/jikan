@@ -142,10 +142,24 @@ class MalClient
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSchedule($request): Model\Schedule
+    public function getSchedule(Request\Schedule $request): Model\Schedule
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Schedule\ScheduleParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
+     * @param Request\Friends $request
+     *
+     * @return Model\Friend[]
+     * @throws \InvalidArgumentException
+     */
+    public function getFriends(Request\Friends $request):array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Friend\FriendsParser($crawler);
 
         return $parser->getModel();
     }

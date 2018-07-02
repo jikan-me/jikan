@@ -2,7 +2,6 @@
 
 namespace Jikan\Parser\UserProfile;
 
-use Jikan\Helper\Parser;
 use Jikan\Model\Favorites;
 use Jikan\Model\AnimeMeta;
 use Jikan\Model\MangaMeta;

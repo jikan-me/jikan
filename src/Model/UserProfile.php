@@ -63,7 +63,7 @@ class UserProfile
     private $mangaStats;
 
     /**
-     * @var array
+     * @var Favorites
      */
     private $favorites;
 

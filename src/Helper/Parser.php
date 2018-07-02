@@ -72,6 +72,7 @@ class Parser
      * @param Crawler $crawler
      *
      * @return null|string
+     * @throws \InvalidArgumentException
      */
     public static function textOrNull(Crawler $crawler): ?string
     {

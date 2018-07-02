@@ -157,7 +157,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_id()
     {
-        self::assertEquals(36456, $this->parser->getAnimeId());
+        self::assertEquals(36456, $this->parser->getAnimeMeta()->getUrl()->getMalId());
     }
 
     /**

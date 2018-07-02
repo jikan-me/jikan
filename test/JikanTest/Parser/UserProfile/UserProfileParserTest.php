@@ -117,7 +117,12 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_favorites()
     {
-        $this->markTestSkipped('Not available on MAL atm');
+        self::assertInstanceOf(\Jikan\Model\Favorites::class, $this->parser->getFavorites());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\AnimeMeta::class, $this->parser->getFavorites()->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\MangaMeta::class, $this->parser->getFavorites()->getManga());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\CharacterMeta::class, $this->parser->getFavorites()->getCharacters());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\PersonMeta::class, $this->parser->getFavorites()->getPeople());
+
     }
 
     /**

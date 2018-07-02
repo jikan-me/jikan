@@ -27,7 +27,7 @@ class ItemMeta
      * @param string $url
      * @param string $imageUrl
      */
-    public function __construct(string $name, string $url, string $imageUrl)
+    public function __construct($name, $url, $imageUrl)
     {
         $this->url = new MalUrl(
             $name,

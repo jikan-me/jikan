@@ -68,7 +68,7 @@ class PersonParser implements ParserInterface
      */
     public function getPersonName(): string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content');
+        return JString::cleanse($this->crawler->filterXPath('//meta[@property=\'og:title\']')->attr('content'));
     }
 
     /**
@@ -132,22 +132,28 @@ class PersonParser implements ParserInterface
     }
 
     /**
-     * @return string|null
+     * @return array|null
      * @throws \InvalidArgumentException
-     * @todo return array, explode ","
      */
-    public function getPersonAlternateNames(): ?string
+    public function getPersonAlternateNames(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/span[text()="Alternate names:"]');
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/div/span[text()="Alternate names:"]');
 
         if (!$node->count()) {
-            return null;
+            return [];
         }
 
-        return JString::cleanse(
+        $names = explode(
+            ",",
             str_replace($node->text(), '', $node->parents()->text())
         );
+
+        foreach ($names as &$name) {
+            $name = JString::cleanse($name);
+        }
+
+        return $names;
     }
 
     /**

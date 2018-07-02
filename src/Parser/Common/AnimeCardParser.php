@@ -153,15 +153,17 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return Model\AnimeMeta
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeId(): int
+    public function getAnimeMeta(): Model\AnimeMeta
     {
-        preg_match('#https?://myanimelist.net/anime/(\d+)#', $this->getAnimeUrl(), $matches);
-
-        return (int)$matches[1];
+        return new Model\AnimeMeta(
+            $this->getTitle(),
+            $this->getAnimeUrl(),
+            $this->getAnimeImage()
+        );
     }
 
     /**
@@ -181,7 +183,14 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAnimeImage(): ?string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
+        //bypass lazyloading
+        $image = $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
+
+        if (!is_null($image)) {
+            return $image;
+        }
+
+        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('data-src');
     }
 
     /**

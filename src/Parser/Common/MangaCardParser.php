@@ -88,7 +88,7 @@ class MangaCardParser implements ParserInterface
      */
     public function getType(): string
     {
-        return $this->crawler->filterXPath('//span[contains(@class, "source")]')->text();
+        return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "source")]')->text());
     }
 
     /**
@@ -212,17 +212,16 @@ class MangaCardParser implements ParserInterface
      */
     public function getSerialization(): ?array
     {
-        // $serialization = $this->crawler->filterXPath('//p[contains(@class, "serialization")]/a');
+        $serialization = $this->crawler->filterXPath('//p[contains(@class, "serialization")]/a');
 
-        // if (!$serialization->count()) {
-        //     return [];
-        // }
+        if (!$serialization->count()) {
+            return [];
+        }
 
-        // return $serialization->each(
-        //     function(Crawler $c) {
-        //         return $c->text();
-        //     }
-        // )
-        return [];
+        return $serialization->each(
+            function(Crawler $c) {
+                return $c->text();
+            }
+        );
     }
 }

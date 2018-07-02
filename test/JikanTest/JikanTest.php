@@ -137,15 +137,4 @@ class JikanTest extends TestCase
         $producer = $this->jikan->Producer(new \Jikan\Request\Producer(1));
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Producer::class, $producer);
     }
-
-    /**
-     * @test
-     * @vcr GenreParserTest.yaml
-     */
-    public function it_gets_genre()
-    {
-        $this->markTestSkipped('must be revisited.');
-        // $genre = $this->jikan->Genre(new \Jikan\Request\Genre(1, 'anime'));
-        // self::assertContainsOnlyInstancesOf(\Jikan\Model\Genre::class, $genre);
-    }
 }

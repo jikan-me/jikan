@@ -5,6 +5,9 @@ namespace Jikan\Parser\UserProfile;
 use Jikan\Helper\Parser;
 use Jikan\Model\Favorites;
 use Jikan\Model\AnimeMeta;
+use Jikan\Model\MangaMeta;
+use Jikan\Model\CharacterMeta;
+use Jikan\Model\PersonMeta;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -78,7 +81,7 @@ class FavoritesParser
                             ->attr('style'),
                         $matches
                     );
-                    return new AnimeMeta(
+                    return new MangaMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         $matches[1]
@@ -102,7 +105,7 @@ class FavoritesParser
                             ->attr('style'),
                         $matches
                     );
-                    return new AnimeMeta(
+                    return new CharacterMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         $matches[1]
@@ -126,7 +129,7 @@ class FavoritesParser
                             ->attr('style'),
                         $matches
                     );
-                    return new AnimeMeta(
+                    return new PersonMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         $matches[1]

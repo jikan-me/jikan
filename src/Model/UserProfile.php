@@ -65,7 +65,7 @@ class UserProfile
     /**
      * @var array
      */
-    private $favorite;
+    private $favorites;
 
     /**
      * @var string
@@ -92,6 +92,7 @@ class UserProfile
         $instance->animeStats = $parser->getAnimeStats();
         $instance->mangaStats = $parser->getMangaStats();
         $instance->about = $parser->getAbout();
+        $instance->favorites = $parser->getFavorites();
 
         return $instance;
     }
@@ -165,7 +166,7 @@ class UserProfile
      */
     public function getFavorites(): array
     {
-        return $this->favorite;
+        return $this->favorites;
     }
 
     /**
@@ -192,11 +193,4 @@ class UserProfile
         return $this->image_url;
     }
 
-    /**
-     * @return array
-     */
-    public function getFavorite(): array
-    {
-        return $this->favorite;
-    }
 }

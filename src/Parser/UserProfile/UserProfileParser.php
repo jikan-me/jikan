@@ -171,4 +171,13 @@ class UserProfileParser
             $about->html()
         );
     }
+
+    /**
+     * @return array|null
+     * @throws \InvalidArgumentException
+     */
+    public function getFavorites(): ?array
+    {
+        return [];
+    }
 }

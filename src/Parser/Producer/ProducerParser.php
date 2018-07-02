@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Producer;
 
 use Jikan\Helper\JString;
+use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Parser\Common\AnimeCardParser;
 use Jikan\Parser\ParserInterface;
@@ -57,12 +58,15 @@ class ProducerParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return Model\MalUrl
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getUrl(): string
+    public function getUrl(): Model\MalUrl
     {
-        return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
+        return new Model\MalUrl(
+            JString::cleanse(Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()),
+            $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content')
+        );
     }
 }

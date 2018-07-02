@@ -39,9 +39,9 @@ class Producer
     }
 
     /**
-     * @return string
+     * @return MalUrl
      */
-    public function getUrl(): string
+    public function getUrl(): MalUrl
     {
         return $this->season;
     }

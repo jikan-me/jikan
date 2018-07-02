@@ -14,5 +14,6 @@ parameters:
                 - 'else'
                 - 'ini_set'
                 - 'error_reporting'
+                - 'die'
         phpunit: ~
         phplint: ~

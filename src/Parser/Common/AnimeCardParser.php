@@ -34,7 +34,17 @@ class AnimeCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\SeasonalAnime
+    public function getModel(): Model\AnimeCard
+    {
+        return Model\AnimeCard::parseAnimeCard($this);
+    }
+
+    /**
+     * @return Model\SeasonalAnime
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getSeasonalModel(): Model\SeasonalAnime
     {
         return Model\SeasonalAnime::parseSeasonalAnime($this);
     }

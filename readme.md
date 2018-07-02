@@ -78,13 +78,8 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Changelog
-### 1.15.14 stable - May 26, 18
-- **[Anime, Manga, Extended]**
-    - Fix Some parsing methods were not parsing correctly [#148](/../../issues/148)
-- **[Person]**
-    - Add information about roles [#146](/../../issues/146)
-- **[Seasonal]**
-    - Add `season_name` and `season_year` data
+### 1.16.1 stable - July 3, 17
+- Bug fix [#163](/../../issues/163)
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 

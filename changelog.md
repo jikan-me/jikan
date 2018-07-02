@@ -1,5 +1,13 @@
 ## Changelog
 
+### 1.16.1 stable - July 3, 17
+- Bug fix [#163](/../../issues/163)
+
+### 1.16.0 stable - June 28, 17 
+- Switch over to Guzzle for fetching file/status
+- Improvements to Search, Seasonal & Person by extending the schema
+- Fix some parsing issues with some requests depending on geolocation thinking
+
 ### 1.15.14 stable - May 26, 18
 - **[Anime, Manga, Extended]**
 	- Fix Some parsing methods were not parsing correctly [#148](/../../issues/148)

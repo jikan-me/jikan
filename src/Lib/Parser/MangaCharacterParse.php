@@ -30,7 +30,7 @@ class MangaCharacterParse extends TemplateParse
 
         $this->addRule(
             'character',
-            '~</div>Characters</h2>~',
+            '~<h2>Characters</h2>~',
             function () {
                 $running = true;
                 $i = 0;

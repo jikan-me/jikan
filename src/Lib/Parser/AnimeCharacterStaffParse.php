@@ -31,7 +31,7 @@ class AnimeCharacterStaffParse extends TemplateParse
 
         $this->addRule(
             'character',
-            '~</div>Characters & Voice Actors</h2>~',
+            '~<h2>Characters & Voice Actors</h2>~',
             function () {
                 $running = true;
                 $i = 0;

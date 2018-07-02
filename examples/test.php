@@ -11,7 +11,7 @@ $jikan = new Jikan\Jikan;
 $time_start = microtime(true);
 
 // $jikan->Manga(1, [CHARACTERS]);
-$jikan->Search("Grand%20Blue", MANGA);
+$jikan->Manga(1, [CHARACTERS]);
 // $jikan->Seasonal();
 
 $time_end = microtime(true);

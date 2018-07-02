@@ -142,14 +142,14 @@ class PersonParse extends TemplateParse
 
         $this->addRule(
             'voice_acting_role',
-            '~</div>Voice Acting Roles</div>~',
+            '~<div class="normal_header">Voice Acting Roles</div>~',
             function () {
                 $running = true;
                 $i = 1;
                 $voiceActingRoles = [];
                 while ($running) {
                     $line = $this->file[$this->lineNo + $i];
-                    if (preg_match('~</span>Anime Staff Positions</div>~', $line)) {
+                    if (preg_match('~<div class="normal_header">Anime Staff Positions</div>~', $line)) {
                         $running = false;
                     }
 
@@ -175,6 +175,7 @@ class PersonParse extends TemplateParse
                             $this->file[$this->lineNo + $i],
                             $char
                         );
+
                         $i++;
                         $charMeta = [];
                         preg_match(
@@ -208,7 +209,7 @@ class PersonParse extends TemplateParse
 
         $this->addRule(
             'anime_staff_position',
-            '~</span>Anime Staff Positions</div>~',
+            '~<div class="normal_header">Anime Staff Positions</div>~',
             function () {
                 $running = true;
                 $i = 1;

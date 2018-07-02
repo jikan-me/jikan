@@ -32,7 +32,7 @@ class AnimeGenre
     public static function fromParser(AnimeGenreParser $parser): self
     {
         $instance = new self();
-        $instance->url = $parser->getUrl();
+        // $instance->url = $parser->getUrl();
         $instance->anime = $parser->getGenreAnime();
 
         return $instance;

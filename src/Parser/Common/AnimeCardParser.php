@@ -242,8 +242,9 @@ class AnimeCardParser implements ParserInterface
     public function getLicensors(): ?array
     {
         $licensors = $this->crawler->filterXPath('//p[contains(@class, "licensors")]');
+        
         if (!$licensors->count()) {
-            return null;
+            return [];
         }
         $licensors = JString::cleanse($licensors->attr('data-licensors'));
         $licensors = explode(',', $licensors);

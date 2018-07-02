@@ -136,6 +136,21 @@ class MalClient
     }
 
     /**
+     * @param Request\Genre $request
+     *
+     * @return Model\Genre
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getGenre(Request\Genre $request): Model\Genre
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Genre\GenreParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
      * @param $request
      *
      * @return Model\Schedule

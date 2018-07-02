@@ -1,7 +1,8 @@
 ## Changelog
 
-### 1.16.1 stable - July 3, 17
+### 1.16.2 stable - July 3, 17
 - Bug fix [#163](/../../issues/163)
+- Fix HTTP responses
 
 ### 1.16.0 stable - June 28, 17 
 - Switch over to Guzzle for fetching file/status

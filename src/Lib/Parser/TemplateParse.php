@@ -4,6 +4,7 @@ namespace Jikan\Lib\Parser;
 
 use Jikan\Helper\Utils as Util;
 use Jikan\Jikan;
+use \GuzzleHttp\Exception\BadResponseException;
 
 /**
  * Class TemplateParse
@@ -45,13 +46,17 @@ abstract class TemplateParse
         if (is_null($this->filePath)) {
             throw new \Exception('File path is null');
         }
+
         $response = Jikan::$guzzle->get($this->filePath);
+
         if ($response->getStatusCode() === 429) {
             throw new \Exception('MyAnimeList Rate Limit reached');
         }
         if ($response->getStatusCode() !== 200) {
             throw new \Exception('File does not exist');
         }
+
+        $this->setStatus($response->getStatusCode());
         $this->file = (string)$response->getBody();
         $this->file = explode(PHP_EOL, $this->file);
         array_walk($this->file, Util::class.'::trim'); // bystanders begone!

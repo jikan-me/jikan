@@ -14,7 +14,7 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 1. `composer require jikan-me/jikan`
 2. [Documentation](https://jikan.moe/docs)
 
-## Jikan REST API [![REST PHP](https://img.shields.io/badge/JikanPHP-1.15.15-blue.svg?style=flat)](https://jikan.moe)
+## Jikan REST API [![REST PHP](https://img.shields.io/badge/JikanPHP-1.16.2-blue.svg?style=flat)](https://jikan.moe)
 If you don't want to handle PHP, you're in luck! Jikan has it's own RESTful API service (CORS enabled + JSON response) hosted by [Hibiki](https://github.com/assintates)
 
 - **[REST DOCUMENTATION](https://jikan.docs.apiary.io)**
@@ -78,8 +78,9 @@ Contributions to Jikan by making wrappers in programming languages of your choic
 - [PThreads](https://github.com/krakjoe/pthreads) (Multi-threaded) Support (CLI ONLY!)
 
 ## Changelog
-### 1.16.1 stable - July 3, 17
+### 1.16.2 stable - July 3, 17
 - Bug fix [#163](/../../issues/163)
+- Fix HTTP responses
 
 **[Read More](https://github.com/jikan-me/jikan/tree/master/changelog.md)**
 

@@ -42,7 +42,9 @@ class Jikan
      */
     public function __construct(ClientInterface $client = null)
     {
-        self::$guzzle = $client ?? new Client();
+        self::$guzzle = $client ?? new Client([
+            'http_errors' => false
+        ]);
     }
 
     /**

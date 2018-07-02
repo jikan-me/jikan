@@ -212,16 +212,17 @@ class MangaCardParser implements ParserInterface
      */
     public function getSerialization(): ?array
     {
-        $serialization = $this->crawler->filterXPath('//p[contains(@class, "serialization")]/a');
+        // $serialization = $this->crawler->filterXPath('//p[contains(@class, "serialization")]/a');
 
-        if (!$serialization->count()) {
-            return [];
-        }
+        // if (!$serialization->count()) {
+        //     return [];
+        // }
 
-        return $serialization->each(
-            function(Crawler $c) {
-                return $c->text();
-            }
-        )
+        // return $serialization->each(
+        //     function(Crawler $c) {
+        //         return $c->text();
+        //     }
+        // )
+        return [];
     }
 }

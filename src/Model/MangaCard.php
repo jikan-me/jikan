@@ -112,7 +112,7 @@ class MangaCard
         $instance->volumes = $parser->getVolumes();
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
-        $instance->source = $parser->getSource();
+        $instance->type = $parser->getType();
         $instance->author = $parser->getAuthor();
         $instance->score = $parser->getMangaScore();
         $instance->serialization = $parser->getSerialization();

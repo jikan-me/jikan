@@ -219,7 +219,7 @@ class MangaCardParser implements ParserInterface
         }
 
         return $serialization->each(
-            function(Crawler $c) {
+            function (Crawler $c) {
                 return $c->text();
             }
         );

@@ -119,4 +119,19 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\Producer $request
+     *
+     * @return Model\Producer
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getProducer(Request\Producer $request): Model\Producer
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Producer\ProducerParser($crawler);
+
+        return $parser->getModel();
+    }
 }

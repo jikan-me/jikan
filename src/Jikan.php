@@ -111,4 +111,16 @@ class Jikan
     {
         return $this->myanimelist->getSeasonal($request);
     }
+
+    /**
+     * @param Request\Producer $request
+     *
+     * @return Model\Producer
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function Producer(Request\Producer $request): Model\Producer
+    {
+        return $this->myanimelist->getProducer($request);
+    }
 }

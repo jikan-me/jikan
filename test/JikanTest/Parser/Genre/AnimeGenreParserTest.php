@@ -26,7 +26,7 @@ class AnimeGenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr GenreParserTest.yaml
+     * @vcr AnimeGenreParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -36,7 +36,7 @@ class AnimeGenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr GenreParserTest.yaml
+     * @vcr AnimeGenreParserTest.yaml
      */
     public function it_gets_anime()
     {

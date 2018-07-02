@@ -96,7 +96,7 @@ class AnimeCard
      */
     public function __toString()
     {
-        return $this->meta->getUrl()->getName();
+        return (string)$this->meta;
     }
 
     /**

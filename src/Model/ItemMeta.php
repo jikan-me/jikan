@@ -11,7 +11,7 @@ class ItemMeta
 {
 
     /**
-     * @var MalUrl
+     * @var string
      */
     private $url;
 
@@ -21,19 +21,31 @@ class ItemMeta
     private $imageUrl;
 
     /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
      * Genre constructor.
      *
      * @param string $name
      * @param string $url
      * @param string $imageUrl
      */
-    public function __construct($name, $url, $imageUrl)
+    public function __construct(string $name, string $url, string $imageUrl)
     {
-        $this->url = new MalUrl(
-            $name,
-            $url
-        );
+        $this->url = $url;
         $this->imageUrl = $imageUrl;
+        $this->name = $name;
+        $this->url = $url;
     }
 
     /**
@@ -41,7 +53,7 @@ class ItemMeta
      */
     public function getUrl(): MalUrl
     {
-        return $this->url;
+        return new MalUrl($this->name, $this->url);
     }
 
     /**
@@ -50,5 +62,13 @@ class ItemMeta
     public function getImageUrl(): string
     {
         return $this->imageUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 }

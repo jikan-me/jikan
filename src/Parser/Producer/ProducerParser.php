@@ -63,8 +63,6 @@ class ProducerParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        $season = $this->crawler->filter('div.navi-seasonal a.on')->text();
-
-        return JString::cleanse($season);
+        return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
     }
 }

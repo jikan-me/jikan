@@ -43,7 +43,7 @@ class Producer
      */
     public function getUrl(): MalUrl
     {
-        return $this->season;
+        return $this->url;
     }
 
     /**

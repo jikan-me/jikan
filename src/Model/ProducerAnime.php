@@ -12,11 +12,6 @@ use Jikan\Parser;
 class ProducerAnime extends AnimeCard
 {
     /**
-     * @var bool
-     */
-    private $continuing;
-
-    /**
      * @param Parser\Common\AnimeCardParser $parser
      *
      * @return ProducerAnime

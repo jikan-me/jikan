@@ -192,5 +192,4 @@ class UserProfile
     {
         return $this->image_url;
     }
-
 }

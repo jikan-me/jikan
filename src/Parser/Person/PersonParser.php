@@ -134,23 +134,26 @@ class PersonParser implements ParserInterface
     /**
      * @return array|null
      * @throws \InvalidArgumentException
-     * @todo return array, explode ","
      */
-    public function getPersonAlternateNames(): ?array
+    public function getPersonAlternateNames(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/span[text()="Alternate names:"]');
-
+            ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]/div/span[text()="Alternate names:"]');
 
         if (!$node->count()) {
-            return null;
+            return [];
         }
 
-        // JString::cleanse(
-        //     str_replace($node->text(), '', $node->parents()->text())
-        // );
+        $names = explode(
+            ",",
+            str_replace($node->text(), '', $node->parents()->text())
+        );
 
-        return [];
+        foreach ($names as &$name) {
+            $name = JString::cleanse($name);
+        }
+
+        return $names;
     }
 
     /**

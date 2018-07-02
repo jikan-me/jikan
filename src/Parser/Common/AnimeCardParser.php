@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Common;
 
 use Jikan\Helper\JString;
+use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -47,6 +48,16 @@ class AnimeCardParser implements ParserInterface
     public function getSeasonalModel(): Model\SeasonalAnime
     {
         return Model\SeasonalAnime::parseSeasonalAnime($this);
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getId(): int
+    {
+        return Parser::idFromUrl($this->getAnimeUrl());
     }
 
     /**

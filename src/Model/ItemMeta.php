@@ -45,7 +45,8 @@ class ItemMeta
         $this->url = $url;
         $this->imageUrl = $imageUrl;
         $this->name = $name;
-        $this->url = $url;
+
+        $this->url = $this->getUrl();
     }
 
     /**

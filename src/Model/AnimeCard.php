@@ -12,9 +12,19 @@ use Jikan\Parser;
 class AnimeCard
 {
     /**
-     * @var AnimeMeta
+     * @var MalUrl
      */
-    protected $meta;
+    protected $url;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $imageUrl;
 
     /**
      * @var string
@@ -96,7 +106,7 @@ class AnimeCard
      */
     public function __toString()
     {
-        return (string)$this->meta;
+        return (string)$this->url;
     }
 
     /**
@@ -108,7 +118,9 @@ class AnimeCard
      */
     protected static function setProperties(Parser\Common\AnimeCardParser $parser, $instance): void
     {
-        $instance->meta = $parser->getAnimeMeta();
+        $instance->url = $parser->getAnimeUrl();
+        $instance->name = $parser->getTitle();
+        $instance->imageUrl = $parser->getAnimeImage();
         $instance->synopsis = $parser->getDescription();
         $instance->type = $parser->getType();
         $instance->airingStart = $parser->getAirDates();
@@ -121,14 +133,32 @@ class AnimeCard
         $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
         $instance->kids = $parser->isKids();
+        
+        $instance->url = $instance->getUrl();
     }
 
     /**
-     * @return AnimeMeta
+     * @return MalUrl
      */
-    public function getMeta(): AnimeMeta
+    public function getUrl(): MalUrl
     {
-        return $this->meta;
+        return new MalUrl($this->name, $this->url);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
     }
 
     /**

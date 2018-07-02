@@ -4,7 +4,7 @@
 [![build](https://travis-ci.org/jikan-me/jikan.svg?branch=master)](https://travis-ci.org/jikan-me/jikan?branch=master) [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP->=%207.0-blue.svg?style=flat)]() [![Discord Server](https://img.shields.io/discord/460491088004907029.svg?style=flat&logo=discord)](https://discord.gg/4q8E4Gg)
 
 
-Jikan is a **depenency free**, PHP API with easy-to-use syntax that scrapes and parses requests from [MyAnimeList.net](https://myanimelist.net).
+Jikan is a PHP API with easy-to-use syntax that scrapes and parses requests from [MyAnimeList.net](https://myanimelist.net).
 
 The raison d'être of Jikan is to help developers easily get the data they need for their apps and projects without having to depend on the lackluster official API, unstable APIs, or sidetracking their projects to develop parsers.
 
@@ -96,6 +96,9 @@ I would like to thank these people for hosting the Jikan REST service!
 * [Hibiki](https://twitter.com/Assintates)
 * [Sif](https://myanimelist.net/profile/ArtoriasMoreder)
 * [BroHosting](https://brohosting.eu)
+
+## Dependencies
+- Guzzle
 
 ## DISCLAIMER
 - Jikan is in no way affiliated with MyAnimeList. 

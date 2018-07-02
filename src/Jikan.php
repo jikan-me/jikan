@@ -123,4 +123,16 @@ class Jikan
     {
         return $this->myanimelist->getProducer($request);
     }
+
+    /**
+     * @param Request\Schedule $request
+     *
+     * @return Model\Schedule
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function Schedule(Request\Schedule $request): Model\Schedule
+    {
+        return $this->myanimelist->getSchedule($request);
+    }
 }

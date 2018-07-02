@@ -89,4 +89,14 @@ class JikanTest extends TestCase
         self::assertInstanceOf(\Jikan\Model\AnimeStats::class, $user->getAnimeStats());
         self::assertInstanceOf(\Jikan\Model\MangaStats::class, $user->getMangaStats());
     }
+
+    /**
+     * @test
+     * @vcr ScheduleParserTest.yaml
+     */
+    public function it_gets_schedule()
+    {
+        $schedule = $this->jikan->Schedule(new \Jikan\Request\Schedule());
+        self::assertInstanceOf(\Jikan\Model\Schedule::class, $schedule);
+    }
 }

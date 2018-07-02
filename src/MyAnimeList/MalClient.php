@@ -134,4 +134,19 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param $request
+     *
+     * @return Model\Schedule
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getSchedule($request): Model\Schedule
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Schedule\ScheduleParser($crawler);
+
+        return $parser->getModel();
+    }
 }

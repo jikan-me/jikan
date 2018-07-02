@@ -9,11 +9,11 @@ use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeCardParser
+ * Class MangaCardParser
  *
  * @package Jikan\Parser
  */
-class AnimeCardParser implements ParserInterface
+class MangaCardParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -21,7 +21,7 @@ class AnimeCardParser implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeCardParser constructor.
+     * MangaCardParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -31,23 +31,13 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\SeasonalAnime
+     * @return Model\SeasonalManga
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\AnimeCard
+    public function getModel(): Model\MangaCard
     {
-        return Model\AnimeCard::parseAnimeCard($this);
-    }
-
-    /**
-     * @return Model\SeasonalAnime
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function getSeasonalModel(): Model\SeasonalAnime
-    {
-        return Model\SeasonalAnime::parseSeasonalAnime($this);
+        return Model\MangaCard::parseMangaCard($this);
     }
 
     /**
@@ -57,7 +47,7 @@ class AnimeCardParser implements ParserInterface
      */
     public function getId(): int
     {
-        return Parser::idFromUrl($this->getAnimeUrl());
+        return Parser::idFromUrl($this->getMangaUrl());
     }
 
     /**
@@ -65,7 +55,7 @@ class AnimeCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getProducer(): array
+    public function getAuthor(): array
     {
         return $this->crawler
             ->filterXPath('//span[contains(@class, "producer")]/a')
@@ -81,7 +71,7 @@ class AnimeCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getEpisodes(): ?int
+    public function getVolumes(): ?int
     {
 
         $eps = $this->crawler->filterXPath('//div[contains(@class, "eps")]')->text();
@@ -96,7 +86,7 @@ class AnimeCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSource(): string
+    public function getType(): string
     {
         return $this->crawler->filterXPath('//span[contains(@class, "source")]')->text();
     }
@@ -137,30 +127,11 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return string|null
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function getType(): ?string
-    {
-        $text = $this->crawler->filterXPath('//div[contains(@class, "info")]');
-
-        if (!$text->count()) {
-            return null;
-        }
-
-        $text = JString::cleanse($text->text());
-        preg_match('/^([\w\.]+)/', $text, $matches);
-
-        return $matches[1];
-    }
-
-    /**
      * @return string
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAirDates(): string
+    public function getPublishDates(): string
     {
         return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text());
     }
@@ -179,16 +150,16 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeMeta
+     * @return Model\MangaMeta
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeMeta(): Model\AnimeMeta
+    public function getMangaMeta(): Model\MangaMeta
     {
-        return new Model\AnimeMeta(
+        return new Model\MangaMeta(
             $this->getTitle(),
-            $this->getAnimeUrl(),
-            $this->getAnimeImage()
+            $this->getMangaUrl(),
+            $this->getMangaImage()
         );
     }
 
@@ -197,7 +168,7 @@ class AnimeCardParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeUrl(): string
+    public function getMangaUrl(): string
     {
         return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
     }
@@ -207,7 +178,7 @@ class AnimeCardParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeImage(): ?string
+    public function getMangaImage(): ?string
     {
         //bypass lazyloading
         $image = $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
@@ -224,7 +195,7 @@ class AnimeCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAnimeScore(): ?float
+    public function getMangaScore(): ?float
     {
         $score = JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "score")]')->text());
         if ($score === 'N/A') {
@@ -235,51 +206,23 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return string[]
+     * @return null|string[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getLicensors(): array
+    public function getSerialization(): ?array
     {
-        $licensors = $this->crawler->filterXPath('//p[contains(@class, "licensors")]');
-        
-        if (!$licensors->count()) {
-            return [];
-        }
-        $licensors = JString::cleanse($licensors->attr('data-licensors'));
-        $licensors = explode(',', $licensors);
+        // $serialization = $this->crawler->filterXPath('//p[contains(@class, "serialization")]/a');
 
-        return array_filter($licensors);
-    }
+        // if (!$serialization->count()) {
+        //     return [];
+        // }
 
-    /**
-     * @return bool
-     * @throws \InvalidArgumentException
-     */
-    public function isR18(): bool
-    {
-        $classes = explode(' ', $this->crawler->attr('class'));
-
-        return \in_array('r18', $classes, true);
-    }
-
-    /**
-     * @return bool
-     * @throws \InvalidArgumentException
-     */
-    public function isKids(): bool
-    {
-        $classes = explode(' ', $this->crawler->attr('class'));
-
-        return \in_array('kids', $classes, true);
-    }
-
-    /**
-     * @return bool
-     * @throws \InvalidArgumentException
-     */
-    public function isContinuing(): bool
-    {
-        return strpos($this->crawler->parents()->text(), '(Continuing)') !== false;
+        // return $serialization->each(
+        //     function(Crawler $c) {
+        //         return $c->text();
+        //     }
+        // )
+        return [];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Jikan\Request;
 
-class Genre implements RequestInterface
+class AnimeGenre implements RequestInterface
 {
     /**
      * @var int

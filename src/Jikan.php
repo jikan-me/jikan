@@ -126,15 +126,27 @@ class Jikan
 
 
     /**
-     * @param Request\Genre $request
+     * @param Request\AnimeGenre $request
      *
-     * @return Model\Genre
+     * @return Model\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Genre(Request\Genre $request): Model\Genre
+    public function AnimeGenre(Request\AnimeGenre $request): Model\AnimeGenre
     {
-        return $this->myanimelist->getGenre($request);
+        return $this->myanimelist->getAnimeGenre($request);
+    }
+
+    /**
+     * @param Request\MangaGenre $request
+     *
+     * @return Model\MangaGenre
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function MangaGenre(Request\MangaGenre $request): Model\MangaGenre
+    {
+        return $this->myanimelist->getMangaGenre($request);
     }
 
     /**

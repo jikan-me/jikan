@@ -126,4 +126,26 @@ class JikanTest extends TestCase
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(0, $friends);
     }
+
+    /**
+     * @test
+     * @vcr ProducerParserTest.yaml
+     */
+    public function it_gets_producer()
+    {
+        $this->markTestSkipped('must be revisited.');
+        $producer = $this->jikan->Producer(new \Jikan\Request\Producer(1));
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Producer::class, $producer);
+    }
+
+    /**
+     * @test
+     * @vcr GenreParserTest.yaml
+     */
+    public function it_gets_genre()
+    {
+        $this->markTestSkipped('must be revisited.');
+        // $genre = $this->jikan->Genre(new \Jikan\Request\Genre(1, 'anime'));
+        // self::assertContainsOnlyInstancesOf(\Jikan\Model\Genre::class, $genre);
+    }
 }

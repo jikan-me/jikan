@@ -5,7 +5,7 @@ namespace Jikan\Parser\Genre;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
-use Jikan\Parser\Common\AnimeCardParser;
+use Jikan\Parser\Common\MangaCardParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -14,7 +14,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser
  */
-class GenreParser implements ParserInterface
+class MangaGenreParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -32,27 +32,27 @@ class GenreParser implements ParserInterface
     }
 
     /**
-     * @return Model\Genre
+     * @return Model\MangaGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Genre
+    public function getModel(): Model\MangaGenre
     {
-        return Model\Genre::fromParser($this);
+        return Model\MangaGenre::fromParser($this);
     }
 
     /**
-     * @return array|Model\GenreAnime[]
+     * @return array|Model\MangaGenre[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getGenreAnime(): array
+    public function getGenreManga(): array
     {
         return $this->crawler
             ->filter('div.seasonal-anime')
             ->each(
-                function (Crawler $animeCrawler) {
-                    return (new AnimeCardParser($animeCrawler))->getModel();
+                function (Crawler $MangaCrawler) {
+                    return (new MangaCardParser($MangaCrawler))->getModel();
                 }
             );
     }

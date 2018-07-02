@@ -4,16 +4,16 @@ namespace JikanTest\Parser\Person;
 
 use Goutte\Client;
 use Jikan\Model\AnimeCard;
-use Jikan\Parser\Genre\GenreParser;
+use Jikan\Parser\Genre\AnimeGenreParser;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class GenreParserTest
+ * Class AnimeGenreParserTest
  */
-class GenreParserTest extends TestCase
+class AnimeGenreParserTest extends TestCase
 {
     /**
-     * @var GenreParser
+     * @var AnimeGenreParser
      */
     private $parser;
 
@@ -21,12 +21,12 @@ class GenreParserTest extends TestCase
     {
         $client = new Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/genre/1');
-        $this->parser = new GenreParser($crawler);
+        $this->parser = new AnimeGenreParser($crawler);
     }
 
     /**
      * @test
-     * @vcr GenreParserTest.yaml
+     * @vcr AnimeGenreParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -36,7 +36,7 @@ class GenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr GenreParserTest.yaml
+     * @vcr AnimeGenreParserTest.yaml
      */
     public function it_gets_anime()
     {

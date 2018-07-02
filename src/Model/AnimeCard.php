@@ -12,9 +12,9 @@ use Jikan\Parser;
 class AnimeCard
 {
     /**
-     * @var string
+     * @var AnimeMeta
      */
-    protected $title;
+    protected $meta;
 
     /**
      * @var string
@@ -55,21 +55,6 @@ class AnimeCard
      * @var MalUrl[]
      */
     protected $producer;
-
-    /**
-     * @var string|null
-     */
-    protected $imageUrl;
-
-    /**
-     * @var string
-     */
-    protected $malId;
-
-    /**
-     * @var string
-     */
-    protected $url;
 
     /**
      * @var float|null
@@ -115,7 +100,7 @@ class AnimeCard
      */
     protected static function setProperties(Parser\Common\AnimeCardParser $parser, $instance): void
     {
-        $instance->title = $parser->getTitle();
+        $instance->meta = $parser->getAnimeMeta();
         $instance->synopsis = $parser->getDescription();
         $instance->type = $parser->getType();
         $instance->airingStart = $parser->getAirDates();
@@ -124,9 +109,6 @@ class AnimeCard
         $instance->genres = $parser->getGenres();
         $instance->source = $parser->getSource();
         $instance->producer = $parser->getProducer();
-        $instance->imageUrl = $parser->getAnimeImage();
-        $instance->malId = $parser->getAnimeId();
-        $instance->url = $parser->getAnimeUrl();
         $instance->score = $parser->getAnimeScore();
         $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
@@ -134,11 +116,11 @@ class AnimeCard
     }
 
     /**
-     * @return string
+     * @return AnimeMeta
      */
-    public function getTitle(): string
+    public function getMeta(): AnimeMeta
     {
-        return $this->title;
+        return $this->meta;
     }
 
     /**
@@ -203,30 +185,6 @@ class AnimeCard
     public function getProducer(): array
     {
         return $this->producer;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getImageUrl(): ?string
-    {
-        return $this->imageUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMalId(): string
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
     }
 
     /**

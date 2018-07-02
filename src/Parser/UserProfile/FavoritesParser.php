@@ -4,6 +4,7 @@ namespace Jikan\Parser\UserProfile;
 
 use Jikan\Helper\Parser;
 use Jikan\Model\Favorites;
+use Jikan\Model\AnimeMeta;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -44,7 +45,22 @@ class FavoritesParser
      */
     public function getAnime(): array
     {
-        return [];
+        return $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
+            ->each(
+                function (Crawler $crawler) {
+                    preg_match(
+                        '~background-image:url\(\'(.*)\'\)~',
+                        $crawler->filterXPath('//div[position() = 1]/a')
+                            ->attr('style'),
+                        $matches
+                    );
+                    return new AnimeMeta(
+                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
+                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
+                        $matches[1]
+                    );
+                }
+            );
     }
 
     /**
@@ -53,7 +69,22 @@ class FavoritesParser
      */
     public function getManga(): array
     {
-        return [];
+        return $this->crawler->filterXPath('//ul[@class=\'favorites-list manga\']/li')
+            ->each(
+                function (Crawler $crawler) {
+                    preg_match(
+                        '~background-image:url\(\'(.*)\'\)~',
+                        $crawler->filterXPath('//div[position() = 1]/a')
+                            ->attr('style'),
+                        $matches
+                    );
+                    return new AnimeMeta(
+                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
+                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
+                        $matches[1]
+                    );
+                }
+            );
     }
 
     /**
@@ -62,7 +93,22 @@ class FavoritesParser
      */
     public function getCharacters(): array
     {
-        return [];
+        return $this->crawler->filterXPath('//ul[@class=\'favorites-list characters\']/li')
+            ->each(
+                function (Crawler $crawler) {
+                    preg_match(
+                        '~background-image:url\(\'(.*)\'\)~',
+                        $crawler->filterXPath('//div[position() = 1]/a')
+                            ->attr('style'),
+                        $matches
+                    );
+                    return new AnimeMeta(
+                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
+                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
+                        $matches[1]
+                    );
+                }
+            );
     }
 
     /**
@@ -71,7 +117,21 @@ class FavoritesParser
      */
     public function getPeople(): array
     {
-        return [];
+        return $this->crawler->filterXPath('//ul[@class=\'favorites-list people\']/li')
+            ->each(
+                function (Crawler $crawler) {
+                    preg_match(
+                        '~background-image:url\(\'(.*)\'\)~',
+                        $crawler->filterXPath('//div[position() = 1]/a')
+                            ->attr('style'),
+                        $matches
+                    );
+                    return new AnimeMeta(
+                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
+                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
+                        $matches[1]
+                    );
+                }
+            );
     }
-    
 }

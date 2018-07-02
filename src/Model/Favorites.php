@@ -80,5 +80,4 @@ class Favorites
     {
         return $this->people;
     }
-
 }

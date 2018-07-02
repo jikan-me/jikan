@@ -145,7 +145,7 @@ class JikanTest extends TestCase
     public function it_gets_genre()
     {
         $this->markTestSkipped('must be revisited.');
-        $genre = $this->jikan->Genre(new \Jikan\Request\Genre(1, 'anime'));
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Genre::class, $genre);
+        // $genre = $this->jikan->Genre(new \Jikan\Request\Genre(1, 'anime'));
+        // self::assertContainsOnlyInstancesOf(\Jikan\Model\Genre::class, $genre);
     }
 }

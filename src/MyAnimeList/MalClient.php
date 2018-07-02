@@ -136,16 +136,33 @@ class MalClient
     }
 
     /**
-     * @param Request\Genre $request
+     * @param Request\AnimeGenre $request
      *
-     * @return Model\Genre
+     * @return Model\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getGenre(Request\Genre $request): Model\Genre
+    public function getAnimeGenre(Request\AnimeGenre $request): Model\AnimeGenre
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Genre\GenreParser($crawler);
+        
+        $parser = new Parser\Genre\AnimeGenreParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
+     * @param Request\MangaGenre $request
+     *
+     * @return Model\MangaGenre
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaGenre(Request\MangaGenre $request): Model\MangaGenre
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        
+        $parser = new Parser\Genre\MangaGenreParser($crawler);
 
         return $parser->getModel();
     }
@@ -157,7 +174,7 @@ class MalClient
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSchedule(Request\Schedule $request): Model\Schedule
+    public function getSchedule($request): Model\Schedule
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Schedule\ScheduleParser($crawler);
@@ -175,7 +192,6 @@ class MalClient
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Friend\FriendsParser($crawler);
-
         return $parser->getModel();
     }
 }

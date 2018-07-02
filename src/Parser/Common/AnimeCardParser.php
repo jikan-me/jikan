@@ -235,11 +235,11 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return null|string[]
+     * @return string[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getLicensors(): ?array
+    public function getLicensors(): array
     {
         $licensors = $this->crawler->filterXPath('//p[contains(@class, "licensors")]');
         

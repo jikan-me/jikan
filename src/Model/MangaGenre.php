@@ -32,7 +32,7 @@ class MangaGenre
     public static function fromParser(MangaGenreParser $parser): self
     {
         $instance = new self();
-        // $instance->url = $parser->getUrl();
+        $instance->url = $parser->getUrl();
         $instance->manga = $parser->getGenreManga();
 
         return $instance;

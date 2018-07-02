@@ -183,7 +183,14 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAnimeImage(): ?string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
+        //bypass lazyloading
+        $image = $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
+
+        if (!is_null($image)) {
+            return $image;
+        }
+
+        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('data-src');
     }
 
     /**

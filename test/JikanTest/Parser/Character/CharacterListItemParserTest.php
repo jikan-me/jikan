@@ -4,8 +4,9 @@ namespace JikanTest\Parser\Character;
 
 use Goutte\Client;
 use Jikan\Model\VoiceActor;
-use Jikan\Parser\Character\CharacterListItemParser;
+use Jikan\Parser\Anime\CharacterListItemParser;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class CharacterListItemParserTest
@@ -13,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class CharacterListItemParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Character\CharacterListItemParser
+     * @var \Jikan\Parser\Anime\CharacterListItemParser
      */
     private $parser;
 
@@ -23,7 +24,14 @@ class CharacterListItemParserTest extends TestCase
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/35073/Overlord_II/characters');
 
         $this->parser = new CharacterListItemParser(
-            $crawler->filterXPath('//h2[text()="Characters & Voice Actors"]/following-sibling::table[1]')
+            $crawler->filterXPath('//h2[text()="Characters & Voice Actors"]/following-sibling::table')
+                ->reduce(
+                    function (Crawler $crawler) {
+                        return (bool)$crawler->filterXPath(
+                            '//a[contains(@href, "https://myanimelist.net/character")]'
+                        )->count();
+                    }
+                )->first()
         );
     }
 
@@ -34,6 +42,15 @@ class CharacterListItemParserTest extends TestCase
     public function it_gets_the_mal_id()
     {
         self::assertEquals(116275, $this->parser->getMalId());
+    }
+
+    /**
+     * @test
+     * @vcr CharactersParserTest.yaml
+     */
+    public function it_gets_the_name()
+    {
+        self::assertEquals('Albedo', $this->parser->getName());
     }
 
     /**

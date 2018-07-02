@@ -4,6 +4,7 @@ namespace JikanTest;
 
 use Jikan\Jikan;
 use Jikan\Model\Friend;
+use Jikan\Request\CharactersAndStaff;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -100,6 +101,7 @@ class JikanTest extends TestCase
         $schedule = $this->jikan->Schedule(new \Jikan\Request\Schedule());
         self::assertInstanceOf(\Jikan\Model\Schedule::class, $schedule);
     }
+
     /**
      * @test
      * @vcr FriendsParserTest.yaml
@@ -136,5 +138,15 @@ class JikanTest extends TestCase
         $this->markTestSkipped('must be revisited.');
         $producer = $this->jikan->Producer(new \Jikan\Request\Producer(1));
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Producer::class, $producer);
+    }
+
+    /**
+     * @test
+     * @vcr CharactersParserTest.yaml
+     */
+    public function it_gets_characters_and_staff()
+    {
+        $charactersAndStaff = $this->jikan->CharactersAndStaff(new CharactersAndStaff(35073));
+        self::assertInstanceOf(\Jikan\Model\CharactersAndStaff::class, $charactersAndStaff);
     }
 }

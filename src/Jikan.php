@@ -78,6 +78,18 @@ class Jikan
     }
 
     /**
+     * @param Request\CharactersAndStaff $request
+     *
+     * @return Model\CharactersAndStaff
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function CharactersAndStaff(Request\CharactersAndStaff $request): Model\CharactersAndStaff
+    {
+        return $this->myanimelist->getCharactersAndStaff($request);
+    }
+
+    /**
      * @param Request\Person $request
      *
      * @return Model\Person

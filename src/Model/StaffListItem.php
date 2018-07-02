@@ -2,14 +2,14 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\Anime\CharacterListItemParser;
+use Jikan\Parser;
 
 /**
  * Class CharacterParser
  *
  * @package Jikan\Model
  */
-class CharacterListItem
+class StaffListItem
 {
     /**
      * @var int
@@ -19,7 +19,7 @@ class CharacterListItem
     /**
      * @var string
      */
-    public $characterUrl;
+    public $url;
 
     /**
      * @var string
@@ -32,21 +32,21 @@ class CharacterListItem
     public $imageUrl;
 
     /**
-     * @var VoiceActor[]
+     * @var string[]
      */
-    public $voiceActors = [];
+    public $positions = [];
 
     /**
-     * @param CharacterListItemParser $parser
+     * @param \Jikan\Parser\Anime\StaffListItemParser $parser
      *
-     * @return CharacterListItem
+     * @return StaffListItem
      */
-    public static function fromParser(CharacterListItemParser $parser): self
+    public static function fromParser(Parser\Anime\StaffListItemParser $parser): self
     {
         $instance = new self();
-        $instance->voiceActors = $parser->getVoiceActors();
+        $instance->positions = $parser->getPositions();
         $instance->malId = $parser->getMalId();
-        $instance->characterUrl = $parser->getCharacterUrl();
+        $instance->url = $parser->getUrl();
         $instance->name = $parser->getName();
         $instance->imageUrl = $parser->getImage();
 
@@ -59,14 +59,6 @@ class CharacterListItem
     public function getMalId(): int
     {
         return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCharacterUrl(): string
-    {
-        return $this->characterUrl;
     }
 
     /**
@@ -86,10 +78,18 @@ class CharacterListItem
     }
 
     /**
-     * @return VoiceActor[]
+     * @return string
      */
-    public function getVoiceActors(): array
+    public function getUrl(): string
     {
-        return $this->voiceActors;
+        return $this->url;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getPositions(): array
+    {
+        return $this->positions;
     }
 }

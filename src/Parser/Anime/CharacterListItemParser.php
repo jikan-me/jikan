@@ -1,10 +1,11 @@
 <?php
 
-namespace Jikan\Parser\Character;
+namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\Parser;
 use Jikan\Model\CharacterListItem;
 use Jikan\Model\VoiceActor;
+use Jikan\Parser\Character\VoiceActorParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -35,9 +36,11 @@ class CharacterListItemParser implements ParserInterface
      */
     public function getVoiceActors()
     {
-        return $this->crawler->filterXPath('//table[2]/tr')->each(function (Crawler $c) {
-            return (new VoiceActorParser($c))->getModel();
-        });
+        return $this->crawler->filterXPath('//table[2]/tr')->each(
+            function (Crawler $c) {
+                return (new VoiceActorParser($c))->getModel();
+            }
+        );
     }
 
     /**

@@ -47,7 +47,7 @@ class VoiceActorParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return $this->crawler->filterXPath('//td[2]/a')->attr('href');
+        return $this->crawler->filterXPath('//a')->attr('href');
     }
 
     /**
@@ -60,21 +60,15 @@ class VoiceActorParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl
-     * @throws \InvalidArgumentException
-     */
-    public function getPerson(): Model\MalUrl
-    {
-        return (new MalUrlParser($this->crawler->filterXPath('//td[2]/a')))->getModel();
-    }
-
-    /**
      * @return string
      * @throws \InvalidArgumentException
      */
     public function getImage(): string
     {
-        return $this->crawler->filterXPath('//td[1]/div/a/img')->attr('src');
+
+        $img = $this->crawler->filterXPath('//img');
+
+        return $img->attr('src') ?? $img->attr('data-src');
     }
 
     /**
@@ -84,5 +78,21 @@ class VoiceActorParser implements ParserInterface
     public function getLanguage(): string
     {
         return $this->crawler->filterXPath('//small')->last()->text();
+    }
+
+    /**
+     * @return Model\MalUrl
+     * @throws \InvalidArgumentException
+     */
+    public function getPerson(): Model\MalUrl
+    {
+        return (new MalUrlParser(
+            $this->crawler->filterXPath('//a')
+                ->reduce(
+                    function (Crawler $crawler) {
+                        return !$crawler->filter('img')->count();
+                    }
+                )
+        ))->getModel();
     }
 }

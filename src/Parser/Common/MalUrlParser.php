@@ -33,9 +33,12 @@ class MalUrlParser
      */
     public function getModel(): MalUrl
     {
+        $href = $this->crawler->attr('href');
+        $href = str_replace('https://myanimelist.net', '', $href);
+
         return new MalUrl(
             $this->crawler->text(),
-            'https://myanimelist.net'.$this->crawler->attr('href')
+            'https://myanimelist.net'.$href
         );
     }
 }

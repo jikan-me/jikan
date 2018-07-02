@@ -56,9 +56,9 @@ class VoiceActor
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->name = $parser->getPerson();
-        $instance->url = $parser->getUrl();
         $instance->imageUrl = $parser->getImage();
         $instance->language = $parser->getLanguage();
+        $instance->url = $parser->getUrl();
 
         return $instance;
     }

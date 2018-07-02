@@ -17,7 +17,7 @@ class Friend
     private $name;
 
     /**
-     * @var
+     * @var string
      */
     private $avatar;
 
@@ -72,9 +72,9 @@ class Friend
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAvatar()
+    public function getAvatar(): string
     {
         return $this->avatar;
     }

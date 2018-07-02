@@ -312,7 +312,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return MalUrl
+     * @return MalUrl[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */

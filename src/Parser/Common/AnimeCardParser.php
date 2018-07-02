@@ -137,14 +137,19 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getType(): string
+    public function getType(): ?string
     {
-        $text = $this->crawler->filterXPath('//div[contains(@class, "info")]')->text();
-        $text = JString::cleanse($text);
+        $text = $this->crawler->filterXPath('//div[contains(@class, "info")]');
+
+        if (!$text->count()) {
+            return null;
+        }
+
+        $text = JString::cleanse($text->text());
         preg_match('/^([\w\.]+)/', $text, $matches);
 
         return $matches[1];

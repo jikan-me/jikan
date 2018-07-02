@@ -65,7 +65,9 @@ class ProducerParser implements ParserInterface
     public function getUrl(): Model\MalUrl
     {
         return new Model\MalUrl(
-            JString::cleanse(Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()),
+            JString::cleanse(
+                Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
+            ),
             $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content')
         );
     }

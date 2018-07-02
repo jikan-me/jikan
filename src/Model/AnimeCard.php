@@ -92,6 +92,14 @@ class AnimeCard
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->meta->getUrl()->getName();
+    }
+
+    /**
      * @param Parser\Common\AnimeCardParser $parser
      * @param AnimeCard                     $instance
      *

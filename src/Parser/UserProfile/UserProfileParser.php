@@ -173,11 +173,14 @@ class UserProfileParser
     }
 
     /**
-     * @return array|null
+     * @return Model\Favorites
      * @throws \InvalidArgumentException
      */
-    public function getFavorites(): ?array
+    public function getFavorites(): Model\Favorites
     {
-        return [];
+        // $node = $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
+        $node = $this->crawler->filterXPath('//div[contains(@class, \'user-favorites\')]');
+
+        return (new FavoritesParser($node))->getModel();
     }
 }

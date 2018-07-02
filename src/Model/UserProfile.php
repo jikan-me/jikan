@@ -162,9 +162,9 @@ class UserProfile
     }
 
     /**
-     * @return array
+     * @return Favorites
      */
-    public function getFavorites(): array
+    public function getFavorites(): Favorites
     {
         return $this->favorites;
     }

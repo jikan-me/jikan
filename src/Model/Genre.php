@@ -2,10 +2,10 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\Genre\GenreParser;
+use Jikan\Parser\Genre\AnimeGenreParser;
 
 /**
- * Class Genre
+ * Class AnimeGenre
  *
  * @package Jikan\Model
  */
@@ -18,18 +18,18 @@ class Genre
     public $url;
 
     /**
-     * @var array|GenreAnime[]
+     * @var array|AnimeCard[]
      */
     public $anime = [];
 
     /**
-     * @param GenreParser $parser
+     * @param AnimeGenreParser $parser
      *
-     * @return Genre
+     * @return AnimeGenre
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public static function fromParser(GenreParser $parser): self
+    public static function fromParser(AnimeGenreParser $parser): self
     {
         $instance = new self();
         $instance->url = $parser->getUrl();
@@ -47,7 +47,7 @@ class Genre
     }
 
     /**
-     * @return array|GenreAnime[]
+     * @return array|AnimeCard[]
      */
     public function getAnime(): array
     {

@@ -32,13 +32,13 @@ class GenreParser implements ParserInterface
     }
 
     /**
-     * @return Model\Genre
+     * @return Model\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Genre
+    public function getModel(): Model\AnimeGenre
     {
-        return Model\Genre::fromParser($this);
+        return Model\AnimeGenre::fromParser($this);
     }
 
     /**

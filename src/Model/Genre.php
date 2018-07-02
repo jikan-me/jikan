@@ -2,14 +2,14 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\Producer\ProducerParser;
+use Jikan\Parser\Genre\GenreParser;
 
 /**
- * Class Producer
+ * Class Genre
  *
  * @package Jikan\Model
  */
-class Producer
+class Genre
 {
 
     /**
@@ -18,22 +18,22 @@ class Producer
     public $url;
 
     /**
-     * @var array|ProducerAnime[]
+     * @var array|GenreAnime[]
      */
     public $anime = [];
 
     /**
-     * @param ProducerParser $parser
+     * @param GenreParser $parser
      *
-     * @return Producer
+     * @return Genre
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public static function fromParser(ProducerParser $parser): self
+    public static function fromParser(GenreParser $parser): self
     {
         $instance = new self();
         $instance->url = $parser->getUrl();
-        $instance->anime = $parser->getProducerAnime();
+        $instance->anime = $parser->getGenreAnime();
 
         return $instance;
     }
@@ -47,7 +47,7 @@ class Producer
     }
 
     /**
-     * @return array|ProducerAnime[]
+     * @return array|GenreAnime[]
      */
     public function getAnime(): array
     {

@@ -2,7 +2,7 @@
 
 namespace Jikan\Request;
 
-class Producer implements RequestInterface
+class Genre implements RequestInterface
 {
     /**
      * @var int
@@ -15,7 +15,7 @@ class Producer implements RequestInterface
     private $page;
 
     /**
-     * Producer constructor.
+     * Genre constructor.
      *
      * @param int    $page
      *
@@ -32,6 +32,6 @@ class Producer implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/anime/producer/%s?page=%s', $this->id, $this->page);
+        return sprintf('https://myanimelist.net/anime/genre/%s?page=%s', $this->id, $this->page);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser\Producer;
+namespace Jikan\Parser\Genre;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
@@ -10,11 +10,11 @@ use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class ProducerParser
+ * Class GenreParser
  *
  * @package Jikan\Parser
  */
-class ProducerParser implements ParserInterface
+class GenreParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -22,7 +22,7 @@ class ProducerParser implements ParserInterface
     private $crawler;
 
     /**
-     * ProducerParser constructor.
+     * GenreParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -32,21 +32,21 @@ class ProducerParser implements ParserInterface
     }
 
     /**
-     * @return Model\Producer
+     * @return Model\Genre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Producer
+    public function getModel(): Model\Genre
     {
-        return Model\Producer::fromParser($this);
+        return Model\Genre::fromParser($this);
     }
 
     /**
-     * @return array|Model\ProducerAnime[]
+     * @return array|Model\GenreAnime[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getProducerAnime(): array
+    public function getGenreAnime(): array
     {
         return $this->crawler
             ->filter('div.seasonal-anime')

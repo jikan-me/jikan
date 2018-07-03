@@ -238,4 +238,17 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\AnimePictures $request
+     *
+     * @return Model\AnimePictures
+     */
+    public function getAnimePictures(Request\AnimePictures $request): Model\AnimePictures
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Anime\AnimePicturesParser($crawler);
+
+        return $parser->getModel();
+    }
 }

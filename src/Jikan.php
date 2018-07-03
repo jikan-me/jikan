@@ -207,4 +207,13 @@ class Jikan
     {
         return $this->myanimelist->getFriends($request);
     }
+
+    /**
+     * @param Request\AnimePictures $request
+     * @return Model\AnimePictures
+     */
+    public function AnimePictures(Request\AnimePictures $request): Model\AnimePictures
+    {
+        return $this->myanimelist->getAnimePictures($request);
+    }
 }

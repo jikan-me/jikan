@@ -65,7 +65,7 @@ class CharactersAndStaffParser implements ParserInterface
     public function getStaff(): array
     {
         return $this->crawler
-            ->filterXPath('//a[@name="staff"]/following-sibling::table')
+            ->filterXPath('//h2/div/../following-sibling::table')
             ->each(
                 function (Crawler $crawler) {
                     return (new StaffListItemParser($crawler))->getModel();

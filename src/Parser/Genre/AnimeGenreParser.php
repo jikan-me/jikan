@@ -42,7 +42,7 @@ class AnimeGenreParser implements ParserInterface
     }
 
     /**
-     * @return array|Model\GenreAnime[]
+     * @return array|Model\AnimeGenre[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */

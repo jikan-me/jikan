@@ -4,6 +4,11 @@ namespace Jikan\Model;
 
 use Jikan\Parser\Anime\EpisodesParser;
 
+/**
+ * Class Episodes
+ *
+ * @package Jikan\Model
+ */
 class Episodes
 {
     /**
@@ -16,6 +21,11 @@ class Episodes
      */
     private $episodes;
 
+    /**
+     * @param EpisodesParser $parser
+     *
+     * @return Episodes
+     */
     public static function fromParser(EpisodesParser $parser): self
     {
         $instance = new self();

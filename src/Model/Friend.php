@@ -4,6 +4,11 @@ namespace Jikan\Model;
 
 use Jikan\Parser\Friend\FriendParser;
 
+/**
+ * Class Friend
+ *
+ * @package Jikan\Model
+ */
 class Friend
 {
     /**
@@ -32,6 +37,9 @@ class Friend
      */
     private $friendsSince;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;

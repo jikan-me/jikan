@@ -31,7 +31,7 @@ class PictureParser implements ParserInterface
     /**
      * @return null|string
      */
-    public function getLarge()
+    public function getLarge(): ?string
     {
         return $this->crawler->filterXPath('//a')->attr('href');
     }
@@ -39,7 +39,7 @@ class PictureParser implements ParserInterface
     /**
      * @return null|string
      */
-    public function getSmall()
+    public function getSmall(): ?string
     {
         return $this->crawler->filterXPath('//img')->attr('src');
     }
@@ -47,7 +47,7 @@ class PictureParser implements ParserInterface
     /**
      * @return Picture
      */
-    public function getModel()
+    public function getModel(): Picture
     {
         return Picture::fromParser($this);
     }

@@ -9,6 +9,11 @@ use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class StaffListItemParser
+ *
+ * @package Jikan\Parser\Anime
+ */
 class StaffListItemParser implements ParserInterface
 {
     /**
@@ -42,12 +47,19 @@ class StaffListItemParser implements ParserInterface
         return Parser::idFromUrl($this->getUrl());
     }
 
-    public function getMalUrl()
+    /**
+     * @return string
+     */
+    public function getUrl(): string
     {
-        static $url;
-        if ($url !== null) {
-            return $url;
-        }
+        return $this->getMalUrl()->getUrl();
+    }
+
+    /**
+     * @return \Jikan\Model\MalUrl
+     */
+    public function getMalUrl(): \Jikan\Model\MalUrl
+    {
         $link = $this->crawler->filterXPath('//a')
             ->reduce(
                 function (Crawler $c) {
@@ -56,17 +68,7 @@ class StaffListItemParser implements ParserInterface
             )
             ->first();
 
-        $url = (new MalUrlParser($link))->getModel();
-
-        return $url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->getMalUrl()->getUrl();
+        return (new MalUrlParser($link))->getModel();
     }
 
     /**
@@ -88,7 +90,7 @@ class StaffListItemParser implements ParserInterface
     /**
      * Return the model
      */
-    public function getModel()
+    public function getModel(): StaffListItem
     {
         return StaffListItem::fromParser($this);
     }

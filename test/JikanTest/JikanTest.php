@@ -135,9 +135,8 @@ class JikanTest extends TestCase
      */
     public function it_gets_producer()
     {
-        $this->markTestSkipped('must be revisited.');
         $producer = $this->jikan->Producer(new \Jikan\Request\Producer(1));
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Producer::class, $producer);
+        self::assertInstanceOf(\Jikan\Model\Producer::class, $producer);
     }
 
     /**
@@ -147,6 +146,9 @@ class JikanTest extends TestCase
     public function it_gets_characters_and_staff()
     {
         $charactersAndStaff = $this->jikan->CharactersAndStaff(new CharactersAndStaff(35073));
-        self::assertInstanceOf(\Jikan\Model\CharactersAndStaff::class, $charactersAndStaff);
+        $staff = $charactersAndStaff->getStaff();
+        $characters = $charactersAndStaff->getCharacters();
+        self::assertCount(53, $characters);
+        self::assertCount(13, $staff);
     }
 }

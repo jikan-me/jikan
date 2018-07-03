@@ -4,6 +4,11 @@ namespace Jikan\Model;
 
 use Jikan\Parser\Anime\CharactersAndStaffParser;
 
+/**
+ * Class CharactersAndStaff
+ *
+ * @package Jikan\Model
+ */
 class CharactersAndStaff
 {
     /**
@@ -16,6 +21,11 @@ class CharactersAndStaff
      */
     private $staff;
 
+    /**
+     * @param CharactersAndStaffParser $parser
+     *
+     * @return CharactersAndStaff
+     */
     public static function fromParser(CharactersAndStaffParser $parser): self
     {
         $instance = new self();

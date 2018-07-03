@@ -2,6 +2,11 @@
 
 namespace Jikan\Request;
 
+/**
+ * Class Magazine
+ *
+ * @package Jikan\Request
+ */
 class Magazine implements RequestInterface
 {
     /**

@@ -2,6 +2,11 @@
 
 namespace Jikan\Request;
 
+/**
+ * Class Producer
+ *
+ * @package Jikan\Request
+ */
 class Producer implements RequestInterface
 {
     /**

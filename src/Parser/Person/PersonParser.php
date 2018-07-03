@@ -145,7 +145,7 @@ class PersonParser implements ParserInterface
         }
 
         $names = explode(
-            ",",
+            ',',
             str_replace($node->text(), '', $node->parents()->text())
         );
 

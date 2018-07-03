@@ -17,12 +17,11 @@ class StaffListItemParserTest extends TestCase
 
     public function setUp()
     {
-        self::markTestSkipped('WiP');
         $client = new Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/35073/_/characters');
 
         $this->parser = new \Jikan\Parser\Anime\StaffListItemParser(
-            $crawler->filterXPath('//a[@name="staff"]/following-sibling::table')
+            $crawler->filterXPath('//h2/div/../following-sibling::table')
                 ->eq(4)
         );
     }

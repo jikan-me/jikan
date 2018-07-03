@@ -2,10 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
-use Jikan\Helper\Parser;
 use Jikan\Model\EpisodeListItem;
-use Jikan\Model\VoiceActor;
-use Jikan\Parser\Episode\VoiceActorParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Model\DateRange;
@@ -65,7 +62,7 @@ class EpisodeListItemParser implements ParserInterface
     }
 
     /**
-     * @return ?string
+     * @return null|string
      */
     public function getTitleJapanese(): ?string
     {
@@ -81,7 +78,7 @@ class EpisodeListItemParser implements ParserInterface
     }
 
     /**
-     * @return ?string
+     * @return null|string
      */
     public function getTitleRomanji(): ?string
     {
@@ -97,7 +94,7 @@ class EpisodeListItemParser implements ParserInterface
     }
 
     /**
-     * @return ?DateRange
+     * @return DateRange|null ?DateRange
      */
     public function getAired(): ?DateRange
     {

@@ -2,6 +2,11 @@
 
 namespace Jikan\Request;
 
+/**
+ * Class AnimeGenre
+ *
+ * @package Jikan\Request
+ */
 class AnimeGenre implements RequestInterface
 {
     /**

@@ -33,10 +33,12 @@ class PicturesPageParser implements ParserInterface
      */
     public function getModel(): array
     {
-        return $pictureLinks = $this->crawler
+        return $this->crawler
             ->filterXPath('//a[@class="js-picture-gallery"]')
-            ->each(function (Crawler $crawler) {
-                return Picture::fromParser(new PictureParser($crawler));
-            });
+            ->each(
+                function (Crawler $crawler) {
+                    return Picture::fromParser(new PictureParser($crawler));
+                }
+            );
     }
 }

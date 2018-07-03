@@ -31,7 +31,7 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\SeasonalManga
+     * @return Model\MangaCard
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

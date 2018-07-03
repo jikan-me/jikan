@@ -2,6 +2,11 @@
 
 namespace Jikan\Request;
 
+/**
+ * Class Seasonal
+ *
+ * @package Jikan\Request
+ */
 class Seasonal implements RequestInterface
 {
     /**

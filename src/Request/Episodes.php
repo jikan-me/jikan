@@ -2,6 +2,11 @@
 
 namespace Jikan\Request;
 
+/**
+ * Class Episodes
+ *
+ * @package Jikan\Request
+ */
 class Episodes implements RequestInterface
 {
     /**

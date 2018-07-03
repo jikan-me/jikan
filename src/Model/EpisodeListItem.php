@@ -32,7 +32,7 @@ class EpisodeListItem
     public $titleRomanji;
 
     /**
-     * @var \DateTimeImmutable
+     * @var DateRange|null
      */
     public $aired;
 
@@ -110,9 +110,9 @@ class EpisodeListItem
     }
 
     /**
-     * @return DateRange
+     * @return DateRange|null
      */
-    public function getAired(): DateRange
+    public function getAired(): ?DateRange
     {
         return $this->aired;
     }

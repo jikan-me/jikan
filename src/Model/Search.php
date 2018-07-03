@@ -2,6 +2,11 @@
 
 namespace Jikan\Model;
 
+/**
+ * Class Search
+ *
+ * @package Jikan\Model
+ */
 class Search
 {
 

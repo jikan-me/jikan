@@ -34,15 +34,49 @@ class EpisodesParser implements ParserInterface
      */
     public function getEpisodes(): array
     {
-        $node = $this->crawler
-            ->filterXPath('//table[contains(@class, \'js-watch-episode-list ascend\')]/tr');
+        $episodes = $this->crawler
+            ->filterXPath('//table[contains(@class, \'js-watch-episode-list ascend\')]/tr[1]');
 
-        return [];
-            // ->each(
-            //     function (Crawler $crawler) {
-            //         return (new EpisodeListItemParser($crawler))->getModel();
-            //     }
-            // );
+        if (!$episodes->count()) {
+            return [];
+        }
+
+        return $episodes->nextAll()
+            ->each(
+                function (Crawler $crawler) {
+                    return (new EpisodeListItemParser($crawler))->getModel();
+                }
+            );
+    }
+
+    /**
+     * @return int
+     */
+    public function getEpisodesLastPage(): int
+    {
+        $episodesLastPage = $this->crawler
+            ->filterXPath('//div[contains(@class, \'pagination\')]')
+            ->children();
+
+        if ($episodesLastPage->getNode(1)->tagName === 'span') {
+            $episodesLastPage = $episodesLastPage
+                ->filterXPath('//a')
+                ->last();
+
+            preg_match('~(\d+) - (\d+)~', $episodesLastPage->text(), $matches);
+            return ceil((int) $matches[2] / 100);
+        }
+
+        $episodesLastPage = $this->crawler
+            ->filterXPath('//div[contains(@class, \'pagination\')]/a')
+            ->last();
+        
+        if (!$episodesLastPage->count()) {
+            return 1;
+        }
+
+        preg_match('~(\d+) - (\d+)~', $episodesLastPage->text(), $matches);
+        return ceil((int) $matches[2] / 100);
     }
 
     /**

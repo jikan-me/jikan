@@ -11,6 +11,10 @@ use Jikan\Parser\Anime\EpisodeListItemParser;
  */
 class EpisodeListItem
 {
+    /**
+     * @var int
+     */
+    public $episodeId;
 
     /**
      * @var string
@@ -60,6 +64,7 @@ class EpisodeListItem
     public static function fromParser(EpisodeListItemParser $parser): self
     {
         $instance = new self();
+        $instance->episodeId = $parser->getEpisodeId();
         $instance->title = $parser->getTitle();
         $instance->titleJapanese = $parser->getTitleJapanese();
         $instance->titleRomanji = $parser->getTitleRomanji();
@@ -70,6 +75,14 @@ class EpisodeListItem
         $instance->forumUrl = $parser->getForumUrl();
 
         return $instance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEpisodeId(): int
+    {
+        return $this->episodeId;
     }
 
     /**
@@ -97,9 +110,9 @@ class EpisodeListItem
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateRange
      */
-    public function getAired(): \DateTimeImmutable
+    public function getAired(): DateRange
     {
         return $this->aired;
     }

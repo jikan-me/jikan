@@ -227,4 +227,24 @@ class Jikan
     {
         return $this->myanimelist->getMangaPictures($request);
     }
+
+    /**
+     * @param Request\PersonPictures $request
+     *
+     * @return Model\Picture[]
+     */
+    public function PersonPictures(Request\PersonPictures $request): array
+    {
+        return $this->myanimelist->getPersonPictures($request);
+    }
+
+    /**
+     * @param Request\CharacterPictures $request
+     *
+     * @return Model\Picture[]
+     */
+    public function CharacterPictures(Request\CharacterPictures $request): array
+    {
+        return $this->myanimelist->getCharacterPictures($request);
+    }
 }

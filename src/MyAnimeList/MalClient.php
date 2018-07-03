@@ -264,4 +264,30 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\CharacterPictures $request
+     *
+     * @return Model\Picture[]
+     */
+    public function getCharacterPictures(Request\CharacterPictures $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Common\PicturesPageParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
+     * @param Request\PersonPictures $request
+     *
+     * @return Model\Picture[]
+     */
+    public function getPersonPictures(Request\PersonPictures $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Common\PicturesPageParser($crawler);
+
+        return $parser->getModel();
+    }
 }

@@ -22,6 +22,16 @@ class PicturesPageParserTest extends TestCase
      */
     private $mangaParser;
 
+    /**
+     * @var PicturesPageParser
+     */
+    private $personParser;
+
+    /**
+     * @var PicturesPageParser
+     */
+    private $characterParser;
+
     public function setUp()
     {
         $client = new Client();
@@ -30,6 +40,12 @@ class PicturesPageParserTest extends TestCase
 
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/50145/jikan/pics');
         $this->mangaParser = new PicturesPageParser($crawler);
+
+        $crawler = $client->request('GET', 'https://myanimelist.net/people/11162/jikan/pictures');
+        $this->personParser = new PicturesPageParser($crawler);
+
+        $crawler = $client->request('GET', 'https://myanimelist.net/character/105591/jikan/pictures');
+        $this->characterParser = new PicturesPageParser($crawler);
     }
 
     /**
@@ -58,5 +74,33 @@ class PicturesPageParserTest extends TestCase
         self::assertInstanceOf(Picture::class, $pictures[0]);
         self::assertContains('https://myanimelist.cdn-dena.com/images/anime/', $pictures[0]->getSmall());
         self::assertContains('https://myanimelist.cdn-dena.com/images/anime/', $pictures[0]->getLarge());
+    }
+
+    /**
+     * @test
+     * @vcr AnimeGenreParserTest.yaml
+     */
+    public function it_gets_person_pictures()
+    {
+        $pictures = $this->personParser->getModel();
+
+        self::assertGreaterThan(0, count($pictures));
+        self::assertInstanceOf(Picture::class, $pictures[0]);
+        self::assertContains('https://myanimelist.cdn-dena.com/images/voiceactors/', $pictures[0]->getSmall());
+        self::assertContains('https://myanimelist.cdn-dena.com/images/voiceactors/', $pictures[0]->getLarge());
+    }
+
+    /**
+     * @test
+     * @vcr AnimeGenreParserTest.yaml
+     */
+    public function it_gets_character_pictures()
+    {
+        $pictures = $this->characterParser->getModel();
+
+        self::assertGreaterThan(0, count($pictures));
+        self::assertInstanceOf(Picture::class, $pictures[0]);
+        self::assertContains('https://myanimelist.cdn-dena.com/images/characters/', $pictures[0]->getSmall());
+        self::assertContains('https://myanimelist.cdn-dena.com/images/characters/', $pictures[0]->getLarge());
     }
 }

@@ -47,6 +47,21 @@ class MalClient
     }
 
     /**
+     * @param Request\Episodes $request
+     *
+     * @return Model\Episodes
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getEpisodes(Request\Episodes $request): Model\Episodes
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Anime\EpisodesParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
      * @param Request\Manga $request
      *
      * @return Model\Manga

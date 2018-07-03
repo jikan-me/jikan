@@ -54,6 +54,18 @@ class Jikan
     }
 
     /**
+     * @param Request\Episodes $request
+     *
+     * @return Model\Episodes
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function Episodes(Request\Episodes $request): Model\Episodes
+    {
+        return $this->myanimelist->getEpisodes($request);
+    }
+
+    /**
      * @param Request\Manga $request
      *
      * @return Model\Manga

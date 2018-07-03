@@ -210,10 +210,21 @@ class Jikan
 
     /**
      * @param Request\AnimePictures $request
-     * @return Model\AnimePictures
+     *
+     * @return Model\Picture[]
      */
-    public function AnimePictures(Request\AnimePictures $request): Model\AnimePictures
+    public function AnimePictures(Request\AnimePictures $request): array
     {
         return $this->myanimelist->getAnimePictures($request);
+    }
+
+    /**
+     * @param Request\MangaPictures $request
+     *
+     * @return Model\Picture[]
+     */
+    public function MangaPictures(Request\MangaPictures $request): array
+    {
+        return $this->myanimelist->getMangaPictures($request);
     }
 }

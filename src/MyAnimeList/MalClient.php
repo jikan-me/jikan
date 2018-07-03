@@ -242,12 +242,25 @@ class MalClient
     /**
      * @param Request\AnimePictures $request
      *
-     * @return Model\AnimePictures
+     * @return Model\Picture[]
      */
-    public function getAnimePictures(Request\AnimePictures $request): Model\AnimePictures
+    public function getAnimePictures(Request\AnimePictures $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Anime\AnimePicturesParser($crawler);
+        $parser = new Parser\Common\PicturesPageParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
+     * @param Request\MangaPictures $request
+     *
+     * @return Model\Picture[]
+     */
+    public function getMangaPictures(Request\MangaPictures $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Common\PicturesPageParser($crawler);
 
         return $parser->getModel();
     }

@@ -136,6 +136,18 @@ class Jikan
         return $this->myanimelist->getProducer($request);
     }
 
+    /**
+     * @param Request\Magazine $request
+     *
+     * @return Model\Magazine
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function Magazine(Request\Magazine $request): Model\Magazine
+    {
+        return $this->myanimelist->getMagazine($request);
+    }
+
 
     /**
      * @param Request\AnimeGenre $request

@@ -136,6 +136,21 @@ class MalClient
     }
 
     /**
+     * @param Request\Magazine $request
+     *
+     * @return Model\Magazine
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getMagazine(Request\Magazine $request): Model\Magazine
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Magazine\MagazineParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
      * @param Request\AnimeGenre $request
      *
      * @return Model\AnimeGenre

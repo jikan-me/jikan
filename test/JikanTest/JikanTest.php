@@ -108,7 +108,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_friends()
     {
-        $friends = $this->jikan->Friends(new \Jikan\Request\Friends('morshuwarrior'));
+        $friends = $this->jikan->Friends(new \Jikan\Request\UserFriends('morshuwarrior'));
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(100, $friends);
         self::assertContains('sandshark', $friends);
@@ -116,7 +116,7 @@ class JikanTest extends TestCase
         self::assertContains('Moune-Chan', $friends);
 
         // Second page
-        $friends = $this->jikan->Friends(new \Jikan\Request\Friends('morshuwarrior', 1));
+        $friends = $this->jikan->Friends(new \Jikan\Request\UserFriends('morshuwarrior', 1));
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(100, $friends);
         self::assertContains('sword123', $friends);
@@ -124,7 +124,7 @@ class JikanTest extends TestCase
 
         // Empty page
         // Second page
-        $friends = $this->jikan->Friends(new \Jikan\Request\Friends('morshuwarrior', 100));
+        $friends = $this->jikan->Friends(new \Jikan\Request\UserFriends('morshuwarrior', 100));
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(0, $friends);
     }

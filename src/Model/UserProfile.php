@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\UserProfile\UserProfileParser;
+use Jikan\Parser\User\Profile\UserProfileParser;
 
 /**
  * Class UserProfile

@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser\Friend;
+namespace Jikan\Parser\User\Friends;
 
 use Jikan\Model\Friend;
 use Jikan\Parser\ParserInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\DomCrawler\Crawler;
 /**
  * Class FriendsParser
  *
- * @package Jikan\Parser\Friend
+ * @package Jikan\Parser\User\Friends
  */
 class FriendsParser implements ParserInterface
 {

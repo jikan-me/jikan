@@ -3,11 +3,11 @@
 namespace Jikan\Request;
 
 /**
- * Class Friends
+ * Class UserFriends
  *
  * @package Jikan\Request
  */
-class Friends implements RequestInterface
+class UserFriends implements RequestInterface
 {
 
     /**

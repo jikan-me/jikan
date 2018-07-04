@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser\UserProfile;
+namespace Jikan\Parser\User\Profile;
 
 use Jikan\Model;
 use Jikan\Model\AnimeStats;

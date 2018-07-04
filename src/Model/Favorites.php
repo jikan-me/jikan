@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\UserProfile\FavoritesParser;
+use Jikan\Parser\User\Profile\FavoritesParser;
 
 /**
  * Class Favorites

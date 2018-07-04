@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\UserProfile\AnimeStatsParser;
+use Jikan\Parser\User\Profile\AnimeStatsParser;
 
 /**
  * Class AnimeStats

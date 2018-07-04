@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser\Friend;
+namespace Jikan\Parser\User\Friends;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;

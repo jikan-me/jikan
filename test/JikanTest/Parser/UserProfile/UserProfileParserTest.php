@@ -1,6 +1,6 @@
 <?php
 
-namespace JikanTest\Parser\UserProfile;
+namespace JikanTest\Parser\User\Profile;
 
 use PHPUnit\Framework\TestCase;
 
@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class UserProfileParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\UserProfile\UserProfileParser
+     * @var \Jikan\Parser\User\UserProfile\UserProfileParser
      */
     private $parser;
 
@@ -18,7 +18,7 @@ class UserProfileParserTest extends TestCase
     {
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/sandshark');
-        $this->parser = new \Jikan\Parser\UserProfile\UserProfileParser($crawler);
+        $this->parser = new \Jikan\Parser\User\Profile\UserProfileParser($crawler);
     }
 
     /**

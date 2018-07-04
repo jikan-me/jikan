@@ -115,7 +115,7 @@ class MalClient
     public function getUserProfile(Request\UserProfile $request): Model\UserProfile
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\UserProfile\UserProfileParser($crawler);
+        $parser = new Parser\User\Profile\UserProfileParser($crawler);
 
         return $parser->getModel();
     }
@@ -213,15 +213,15 @@ class MalClient
     }
 
     /**
-     * @param Request\Friends $request
+     * @param Request\UserFriends $request
      *
      * @return Model\Friend[]
      * @throws \InvalidArgumentException
      */
-    public function getFriends(Request\Friends $request): array
+    public function getUserFriends(Request\UserFriends $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
-        $parser = new Parser\Friend\FriendsParser($crawler);
+        $parser = new Parser\User\Friends\FriendsParser($crawler);
 
         return $parser->getModel();
     }

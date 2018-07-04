@@ -1,13 +1,13 @@
 <?php
 
-namespace JikanTest\Parser\Friend;
+namespace JikanTest\Parser\User\Friends;
 
 use PHPUnit\Framework\TestCase;
 
 class FriendParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Friend\FriendParser
+     * @var \Jikan\Parser\User\Friends\FriendParser
      */
     private $parser;
 
@@ -15,7 +15,7 @@ class FriendParserTest extends TestCase
     {
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/morshuwarrior/friends');
-        $this->parser = new \Jikan\Parser\Friend\FriendParser(
+        $this->parser = new \Jikan\Parser\User\Friends\FriendParser(
             $crawler->filterXPath(
                 '//div[contains(@class, "friendBlock")][3]'
             )

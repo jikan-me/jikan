@@ -210,14 +210,14 @@ class Jikan
     }
 
     /**
-     * @param Request\Friends $request
+     * @param Request\UserFriends $request
      *
-     * @return Model\Friend[]
+     * @return Model\UserFriend[]
      * @throws \InvalidArgumentException
      */
-    public function Friends(Request\Friends $request): array
+    public function UserFriends(Request\UserFriends $request): array
     {
-        return $this->myanimelist->getFriends($request);
+        return $this->myanimelist->getUserFriends($request);
     }
 
     /**

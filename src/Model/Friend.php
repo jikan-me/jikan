@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\Friend\FriendParser;
+use Jikan\Parser\User\Friends\FriendParser;
 
 /**
  * Class Friend

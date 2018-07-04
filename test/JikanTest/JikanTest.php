@@ -4,6 +4,7 @@ namespace JikanTest;
 
 use Jikan\Jikan;
 use Jikan\Model\Friend;
+use Jikan\Request\AnimeVideos;
 use Jikan\Request\CharactersAndStaff;
 use PHPUnit\Framework\TestCase;
 
@@ -150,5 +151,18 @@ class JikanTest extends TestCase
         $characters = $charactersAndStaff->getCharacters();
         self::assertCount(53, $characters);
         self::assertCount(13, $staff);
+    }
+
+    /**
+     * @test
+     * @vcr AnimeVideosParserTest.yaml
+     */
+    public function it_gets_anime_videos()
+    {
+        $videos = $this->jikan->AnimeVideos(new AnimeVideos(1));
+        $promos = $videos->getPromos();
+        $episodes = $videos->getEpisodes();
+        self::assertCount(3, $promos);
+        self::assertCount(26, $episodes);
     }
 }

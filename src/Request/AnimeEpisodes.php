@@ -3,11 +3,11 @@
 namespace Jikan\Request;
 
 /**
- * Class Episodes
+ * Class AnimeEpisodes
  *
  * @package Jikan\Request
  */
-class Episodes implements RequestInterface
+class AnimeEpisodes implements RequestInterface
 {
     /**
      * @var int
@@ -20,7 +20,7 @@ class Episodes implements RequestInterface
     private $page;
 
     /**
-     * Episodes constructor.
+     * AnimeEpisodes constructor.
      *
      * @param int $id
      * @param int $page

@@ -12,61 +12,6 @@ use Jikan\Parser\User\Profile\MangaStatsParser;
 class MangaStats
 {
     /**
-     * @var
-     */
-    private $mangaVolumesRead;
-
-    /**
-     * @var
-     */
-    private $mangaChaptersRead;
-
-    /**
-     * @var
-     */
-    private $mangaReread;
-
-    /**
-     * @var
-     */
-    private $mangaTotalEntries;
-
-    /**
-     * @var
-     */
-    private $mangaPlanToRead;
-
-    /**
-     * @var
-     */
-    private $mangaDropped;
-
-    /**
-     * @var
-     */
-    private $mangaOnHold;
-
-    /**
-     * @var
-     */
-    private $mangaCompleted;
-
-    /**
-     * @var
-     */
-    private $mangaReading;
-
-    /**
-     * @var
-     */
-    private $mangaMeanScore;
-
-    /**
-     * @var
-     */
-    private $mangaDaysRead;
-
-    /**
      * @var float
      */
     private $daysRead;
@@ -148,88 +93,88 @@ class MangaStats
     /**
      * @return float
      */
-    public function getMangaDaysRead(): float
+    public function getDaysRead(): float
     {
-        return $this->mangaDaysRead;
+        return $this->daysRead;
     }
 
     /**
      * @return float
      */
-    public function getMangaMeanScore(): float
+    public function getMeanScore(): float
     {
-        return $this->mangaMeanScore;
+        return $this->meanScore;
     }
 
     /**
      * @return int
      */
-    public function getMangaReading(): int
+    public function getReading(): int
     {
-        return $this->mangaReading;
+        return $this->reading;
     }
 
     /**
      * @return int
      */
-    public function getMangaCompleted(): int
+    public function getCompleted(): int
     {
-        return $this->mangaCompleted;
+        return $this->completed;
     }
 
     /**
      * @return int
      */
-    public function getMangaOnHold(): int
+    public function getOnHold(): int
     {
-        return $this->mangaOnHold;
+        return $this->onHold;
     }
 
     /**
      * @return int
      */
-    public function getMangaDropped(): int
+    public function getDropped(): int
     {
-        return $this->mangaDropped;
+        return $this->dropped;
     }
 
     /**
      * @return int
      */
-    public function getMangaPlanToRead(): int
+    public function getPlanToRead(): int
     {
-        return $this->mangaPlanToRead;
+        return $this->planToRead;
     }
 
     /**
      * @return int
      */
-    public function getMangaTotalEntries(): int
+    public function getTotalEntries(): int
     {
-        return $this->mangaTotalEntries;
+        return $this->totalEntries;
     }
 
     /**
      * @return int
      */
-    public function getMangaReread(): int
+    public function getReread(): int
     {
-        return $this->mangaReread;
+        return $this->reread;
     }
 
     /**
      * @return int
      */
-    public function getMangaChaptersRead(): int
+    public function getChaptersRead(): int
     {
-        return $this->mangaChaptersRead;
+        return $this->chaptersRead;
     }
 
     /**
      * @return int
      */
-    public function getMangaVolumesRead(): int
+    public function getVolumesRead(): int
     {
-        return $this->mangaVolumesRead;
+        return $this->volumesRead;
     }
 }

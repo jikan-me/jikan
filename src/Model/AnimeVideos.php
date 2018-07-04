@@ -5,11 +5,11 @@ namespace Jikan\Model;
 use Jikan\Parser\Anime\VideosParser;
 
 /**
- * Class Videos
+ * Class AnimeVideos
  *
  * @package Jikan\Model
  */
-class Videos
+class AnimeVideos
 {
     /**
      * @var PromoListItem[]
@@ -29,7 +29,7 @@ class Videos
     public static function fromParser(VideosParser $parser): self
     {
         $instance = new self();
-        $instance->episodes = $parser->getPromo();
+        $instance->episodes = $parser->getPromos();
         $instance->promo = $parser->getEpisodes();
 
         return $instance;
@@ -38,7 +38,7 @@ class Videos
     /**
      * @return PromoListItem[]
      */
-    public function getPromo(): array
+    public function getPromos(): array
     {
         return $this->promo;
     }

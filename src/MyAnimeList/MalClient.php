@@ -62,6 +62,21 @@ class MalClient
     }
 
     /**
+     * @param Request\AnimeVideos $request
+     *
+     * @return Model\AnimeVideos
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeVideos(Request\AnimeVideos $request): Model\AnimeVideos
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Anime\VideosParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
      * @param Request\Manga $request
      *
      * @return Model\Manga

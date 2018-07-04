@@ -29,7 +29,6 @@ class AnimeVideos implements RequestInterface
      */
     public function getPath(): string
     {
-        // MyAnimeList wants <something> after /<id>/... it happily accepts jikan as a valid parameter though
-        return sprintf('https://myanimelist.net/anime/%d/jikan/video', $this->id);
+        return sprintf('https://myanimelist.net/anime/%d/_/video', $this->id);
     }
 }

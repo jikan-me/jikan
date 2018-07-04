@@ -68,11 +68,11 @@ class Jikan
     /**
      * @param Request\AnimeVideos $request
      *
-     * @return Model\Videos
+     * @return Model\AnimeVideos
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeVideos(Request\AnimeVideos $request): Model\Videos
+    public function AnimeVideos(Request\AnimeVideos $request): Model\AnimeVideos
     {
         return $this->myanimelist->getAnimeVideos($request);
     }

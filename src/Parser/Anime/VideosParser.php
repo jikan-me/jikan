@@ -48,8 +48,8 @@ class VideosParser implements ParserInterface
     /**
      * Return the model
      */
-    public function getModel(): Episodes
+    public function getModel(): AnimeVideos
     {
-        return Episodes::fromParser($this);
+        return AnimeVideos::fromParser($this);
     }
 }

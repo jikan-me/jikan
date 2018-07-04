@@ -1,15 +1,13 @@
 <?php
 /**
- *    Jikan - MyAnimeList Unofficial API v2
- *    Developed by Irfan | @irfanDahir
+ *    Jikan - MyAnimeList.net Unofficial API v2
+ *    Authors - @irfan-dahir, @janvernieuwe, @coderiekelt
  *
- *    This is an unofficial MAL API that provides the features that the official one lacks.
- *    Jikan scraps web pages through a modular method, parses the data you require from MAL and returns it back as a
- * PHP/JSON array/object. Jikan parses the data MAL web pages and returns it as a PHP Array No authentication is needed
- * for utilizing this library.
+ *    This is an unofficial MAL API that stands in for the lackluster features of the official API.
+ *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.
  *
- *    Jikan is NOT affiliated with MyAnimeList.
- *   This library does not perform any rate limitations, so use it responsibly.
+ *    Jikan is NOT affiliated with MyAnimeList.net
+ *    This library does not perform any rate limitations, so use it responsibly.
  */
 
 namespace Jikan;

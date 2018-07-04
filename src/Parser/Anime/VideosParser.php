@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Model\StreamEpisodeListItem;
+use Jikan\Model\PromoListItem;
 use Jikan\Model\AnimeVideos;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -34,7 +35,17 @@ class VideosParser implements ParserInterface
      */
     public function getEpisodes(): array
     {
-        return [];
+        $episodes = $this->crawler
+            ->filterXPath('//div[@class="js-video-list-content"]/div[contains(@class, "video-list-outer")]');
+
+        if (!$episodes->count()) {
+            return [];
+        }
+
+        return $episodes
+            ->each(function (Crawler $crawler) {
+                return (new StreamEpisodeListItemParser($crawler))->getModel();
+            });
     }
 
     /**
@@ -42,7 +53,18 @@ class VideosParser implements ParserInterface
      */
     public function getPromos(): array
     {
-        return [];
+        $promos = $this->crawler
+            ->filterXPath('//div[contains(@class, "video-block promotional-video")]/section/div');
+
+        if (!$promos->count()) {
+            return [];
+        }
+
+
+        return $promos
+            ->each(function (Crawler $crawler) {
+                return (new PromoListItemParser($crawler))->getModel();
+            });
     }
 
     /**

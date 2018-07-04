@@ -29,8 +29,8 @@ class AnimeVideos
     public static function fromParser(VideosParser $parser): self
     {
         $instance = new self();
-        $instance->episodes = $parser->getPromos();
-        $instance->promo = $parser->getEpisodes();
+        $instance->episodes = $parser->getEpisodes();
+        $instance->promo = $parser->getPromos();
 
         return $instance;
     }

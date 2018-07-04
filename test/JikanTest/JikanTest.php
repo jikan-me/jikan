@@ -4,8 +4,11 @@ namespace JikanTest;
 
 use Jikan\Jikan;
 use Jikan\Model\Friend;
+use Jikan\Model\News\NewsListItem;
 use Jikan\Request\AnimeVideos;
 use Jikan\Request\CharactersAndStaff;
+use Jikan\Request\News\AnimeNewsListRequest;
+use Jikan\Request\News\MangaNewsListRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -164,5 +167,27 @@ class JikanTest extends TestCase
         $episodes = $videos->getEpisodes();
         self::assertCount(3, $promos);
         self::assertCount(26, $episodes);
+    }
+
+    /**
+     * @test
+     * @vcr NewsParserTest.yaml
+     */
+    public function it_gets_manga_news_list()
+    {
+        $items = $this->jikan->MangaNewsList(new MangaNewsListRequest(2));
+        self::assertCount(14, $items);
+        self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
+    }
+
+    /**
+     * @test
+     * @vcr NewsParserTest.yaml
+     */
+    public function it_gets_anime_news_list()
+    {
+        $items = $this->jikan->AnimeNewsList(new AnimeNewsListRequest(21));
+        self::assertCount(30, $items);
+        self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
 }

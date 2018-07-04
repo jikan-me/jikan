@@ -305,4 +305,17 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\RequestInterface $request
+     *
+     * @return Model\News\NewsListItem[]
+     */
+    public function getNewsList(Request\RequestInterface $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\News\NewsListParser($crawler);
+
+        return $parser->getModel();
+    }
 }

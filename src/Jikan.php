@@ -257,4 +257,24 @@ class Jikan
     {
         return $this->myanimelist->getCharacterPictures($request);
     }
+
+    /**
+     * @param Request\News\AnimeNewsListRequest $request
+     *
+     * @return Model\News\NewsListItem[]
+     */
+    public function AnimeNewsList(Request\News\AnimeNewsListRequest $request): array
+    {
+        return $this->myanimelist->getNewsList($request);
+    }
+
+    /**
+     * @param Request\News\MangaNewsListRequest $request
+     *
+     * @return Model\News\NewsListItem[]
+     */
+    public function MangaNewsList(Request\News\MangaNewsListRequest $request): array
+    {
+        return $this->myanimelist->getNewsList($request);
+    }
 }

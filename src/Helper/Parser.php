@@ -59,10 +59,10 @@ class Parser
     public static function parseDate(string $date): ?\DateTimeImmutable
     {
         if (preg_match('/^\d{4}$/', $date)) {
-            return \DateTimeImmutable::createFromFormat('Y-m-d', $date.'-01-01');
+            return \DateTimeImmutable::createFromFormat('Y-m-d', $date.'-01-01', new \DateTimeZone('UTC'));
         }
         try {
-            return new \DateTimeImmutable($date);
+            return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;
         }

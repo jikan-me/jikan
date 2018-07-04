@@ -24,7 +24,7 @@ class AnimeVideos
     /**
      * @param VideosParser $parser
      *
-     * @return Videos
+     * @return AnimeVideos
      */
     public static function fromParser(VideosParser $parser): self
     {
@@ -44,7 +44,7 @@ class AnimeVideos
     }
 
     /**
-     * @return StreamEpisodeListItem
+     * @return StreamEpisodeListItem[]
      */
     public function getEpisodes(): array
     {

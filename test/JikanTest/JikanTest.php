@@ -141,7 +141,7 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
+     * @vcr CharactersAndStaffParserTest.yaml
      */
     public function it_gets_characters_and_staff()
     {

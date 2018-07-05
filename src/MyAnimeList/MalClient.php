@@ -243,12 +243,13 @@ CharacterPictures
     }
 
     /**
-     * @param Request\Anime\AnimeCharaAnimePicturesRequest $request
+     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      *
      * @return Model\CharactersAndStaff
      */
-    public function getCharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\CharactersAndStaff
-    {
+    public function getCharactersAndStaff(
+        Request\Anime\AnimeCharactersAndStaffRequest $request
+    ): Model\CharactersAndStaff {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\CharactersAndStaffParser($crawler);
 

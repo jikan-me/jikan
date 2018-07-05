@@ -24,7 +24,7 @@ class MangaParserTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\Manga(11);
+        $request = new \Jikan\Request\Manga\MangaRequest(11);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Manga\MangaParser($crawler);

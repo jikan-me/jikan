@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Schedule;
+
+use Jikan\Request\RequestInterface;
 
 /**
  * Class Schedule
  *
  * @package Jikan\Request
  */
-class Schedule
+class ScheduleRequest
 {
     /**
      * @return string

@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Producer;
+
+use Jikan\Request\RequestInterface;
 
 /**
- * Class MangaGenre
+ * Class Producer
  *
  * @package Jikan\Request
  */
-class MangaGenre implements RequestInterface
+class ProducerRequest implements RequestInterface
 {
     /**
      * @var int
@@ -20,7 +22,7 @@ class MangaGenre implements RequestInterface
     private $page;
 
     /**
-     * Genre constructor.
+     * Producer constructor.
      *
      * @param int $id
      * @param int $page
@@ -37,6 +39,6 @@ class MangaGenre implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/manga/genre/%s?page=%s', $this->id, $this->page);
+        return sprintf('https://myanimelist.net/anime/producer/%s?page=%s', $this->id, $this->page);
     }
 }

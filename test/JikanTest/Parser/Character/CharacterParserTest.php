@@ -16,7 +16,7 @@ class CharacterParserTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\Character(116281);
+        $request = new \Jikan\Request\Character\CharacterRequest(116281);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Character\CharacterParser($crawler);

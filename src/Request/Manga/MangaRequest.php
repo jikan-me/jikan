@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Manga;
+
+use Jikan\Request\RequestInterface;
 
 /**
- * Class AnimeRequest
+ * Class MangaRequest
  *
  * @package Jikan\Request
  */
-class Anime implements RequestInterface
+class MangaRequest implements RequestInterface
 {
     /**
      * @var bool
@@ -20,7 +22,7 @@ class Anime implements RequestInterface
     private $id;
 
     /**
-     * AnimeRequest constructor.
+     * MangaRequest constructor.
      *
      * @param int $id
      */
@@ -30,7 +32,7 @@ class Anime implements RequestInterface
     }
 
     /**
-     * @return Anime
+     * @return Manga
      */
     public function withCharacters(): self
     {
@@ -52,6 +54,6 @@ class Anime implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/anime/%s/', $this->id);
+        return sprintf('https://myanimelist.net/manga/%s/', $this->id);
     }
 }

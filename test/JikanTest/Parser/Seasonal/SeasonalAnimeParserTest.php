@@ -38,7 +38,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function setUp()
     {
         $client = new \Goutte\Client();
-        $request = new \Jikan\Request\Seasonal(2018, 'spring');
+        $request = new \Jikan\Request\Seasonal\SeasonalRequest(2018, 'spring');
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new AnimeCardParser($crawler->filter('div.seasonal-anime')->first());
         $this->parser2 = new AnimeCardParser($crawler->filter('div.seasonal-anime')->eq(2));

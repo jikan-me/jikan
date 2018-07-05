@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Magazine;
+
+use Jikan\Request\RequestInterface;
 
 /**
- * Class AnimeEpisodes
+ * Class Magazine
  *
  * @package Jikan\Request
  */
-class AnimeEpisodes implements RequestInterface
+class MagazineRequest implements RequestInterface
 {
     /**
      * @var int
@@ -20,7 +22,7 @@ class AnimeEpisodes implements RequestInterface
     private $page;
 
     /**
-     * AnimeEpisodes constructor.
+     * Magazine constructor.
      *
      * @param int $id
      * @param int $page
@@ -29,7 +31,7 @@ class AnimeEpisodes implements RequestInterface
     public function __construct(int $id, int $page = 1)
     {
         $this->id = $id;
-        $this->page = ($page - 1) * 100;
+        $this->page = $page;
     }
 
     /**
@@ -37,6 +39,6 @@ class AnimeEpisodes implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/anime/%s/_/episode?offset=%s', $this->id, $this->page);
+        return sprintf('https://myanimelist.net/manga/magazine/%s?page=%s', $this->id, $this->page);
     }
 }

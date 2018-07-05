@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Anime;
+
+use Jikan\Request\RequestInterface;
 
 /**
- * Class MangaPictures
+ * Class AnimeVideos
  *
  * @package Jikan\Request
  */
-class MangaPictures implements RequestInterface
+class AnimeVideosRequest implements RequestInterface
 {
     /**
      * @var int
@@ -29,7 +31,6 @@ class MangaPictures implements RequestInterface
      */
     public function getPath(): string
     {
-        // MyAnimeList wants <something> after /<id>/... it happily accepts jikan as a valid parameter though
-        return sprintf('https://myanimelist.net/manga/%d/jikan/pics', $this->id);
+        return sprintf('https://myanimelist.net/anime/%d/_/video', $this->id);
     }
 }

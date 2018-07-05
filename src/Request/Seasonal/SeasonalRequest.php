@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Seasonal;
+
+use Jikan\Request\RequestInterface;
 
 /**
  * Class Seasonal
  *
  * @package Jikan\Request
  */
-class Seasonal implements RequestInterface
+class SeasonalRequest implements RequestInterface
 {
     /**
      * @var int

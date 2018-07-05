@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\User;
+
+use Jikan\Request\RequestInterface;
 
 /**
  * Class UserFriends
  *
  * @package Jikan\Request
  */
-class UserFriends implements RequestInterface
+class UserFriendsRequest implements RequestInterface
 {
 
     /**

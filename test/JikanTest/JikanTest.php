@@ -5,8 +5,6 @@ namespace JikanTest;
 use Jikan\Jikan;
 use Jikan\Model\Friend;
 use Jikan\Model\News\NewsListItem;
-use Jikan\Request\AnimeVideos;
-use Jikan\Request\CharactersAndStaff;
 use Jikan\Request\News\AnimeNewsListRequest;
 use Jikan\Request\News\MangaNewsListRequest;
 use PHPUnit\Framework\TestCase;
@@ -32,7 +30,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_anime()
     {
-        $anime = $this->jikan->Anime(new \Jikan\Request\Anime(21));
+        $anime = $this->jikan->Anime(new \Jikan\Request\Anime\AnimeRequest(21));
         self::assertInstanceOf(\Jikan\Model\Anime::class, $anime);
     }
 
@@ -42,7 +40,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_manga()
     {
-        $manga = $this->jikan->Manga(new \Jikan\Request\Manga(11));
+        $manga = $this->jikan->Manga(new \Jikan\Request\Manga\MangaRequest(11));
         self::assertInstanceOf(\Jikan\Model\Manga::class, $manga);
     }
 
@@ -52,7 +50,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_characters()
     {
-        $character = $this->jikan->Character(new \Jikan\Request\Character(116281));
+        $character = $this->jikan->Character(new \Jikan\Request\Character\CharacterRequest(116281));
         self::assertInstanceOf(\Jikan\Model\Character::class, $character);
         self::assertCount(9, $character->getAnimeography());
         self::assertCount(2, $character->getMangaography());
@@ -65,7 +63,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_person()
     {
-        $person = $this->jikan->Person(new \Jikan\Request\Person(1));
+        $person = $this->jikan->Person(new \Jikan\Request\Person\PersonRequest(1));
         self::assertInstanceOf(\Jikan\Model\Person::class, $person);
         self::assertCount(367, $person->getVoiceActingRoles());
         self::assertCount(15, $person->getAnimeStaffPositions());
@@ -78,7 +76,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_seasonal_anime()
     {
-        $seasonal = $this->jikan->Seasonal(new \Jikan\Request\Seasonal(2018, 'spring'));
+        $seasonal = $this->jikan->Seasonal(new \Jikan\Request\Seasonal\SeasonalRequest(2018, 'spring'));
         self::assertInstanceOf(\Jikan\Model\Seasonal::class, $seasonal);
         self::assertCount(234, $seasonal->getAnime());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\SeasonalAnime::class, $seasonal->getAnime());
@@ -90,7 +88,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_user_profile()
     {
-        $user = $this->jikan->UserProfile(new \Jikan\Request\UserProfile('sandshark'));
+        $user = $this->jikan->UserProfile(new \Jikan\Request\User\UserProfileRequest('sandshark'));
         self::assertInstanceOf(\Jikan\Model\UserProfile::class, $user);
         self::assertInstanceOf(\Jikan\Model\AnimeStats::class, $user->getAnimeStats());
         self::assertInstanceOf(\Jikan\Model\MangaStats::class, $user->getMangaStats());
@@ -102,7 +100,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_schedule()
     {
-        $schedule = $this->jikan->Schedule(new \Jikan\Request\Schedule());
+        $schedule = $this->jikan->Schedule(new \Jikan\Request\Schedule\ScheduleRequest());
         self::assertInstanceOf(\Jikan\Model\Schedule::class, $schedule);
     }
 
@@ -112,7 +110,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_friends()
     {
-        $friends = $this->jikan->UserFriends(new \Jikan\Request\UserFriends('morshuwarrior'));
+        $friends = $this->jikan->UserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior'));
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(100, $friends);
         self::assertContains('sandshark', $friends);
@@ -120,7 +118,7 @@ class JikanTest extends TestCase
         self::assertContains('Moune-Chan', $friends);
 
         // Second page
-        $friends = $this->jikan->UserFriends(new \Jikan\Request\UserFriends('morshuwarrior', 1));
+        $friends = $this->jikan->UserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 1));
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(100, $friends);
         self::assertContains('sword123', $friends);
@@ -128,7 +126,7 @@ class JikanTest extends TestCase
 
         // Empty page
         // Second page
-        $friends = $this->jikan->UserFriends(new \Jikan\Request\UserFriends('morshuwarrior', 100));
+        $friends = $this->jikan->UserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 100));
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(0, $friends);
     }
@@ -139,7 +137,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_producer()
     {
-        $producer = $this->jikan->Producer(new \Jikan\Request\Producer(1));
+        $producer = $this->jikan->Producer(new \Jikan\Request\Producer\ProducerRequest(1));
         self::assertInstanceOf(\Jikan\Model\Producer::class, $producer);
     }
 
@@ -149,7 +147,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_characters_and_staff()
     {
-        $charactersAndStaff = $this->jikan->CharactersAndStaff(new CharactersAndStaff(35073));
+        $charactersAndStaff = $this->jikan->CharactersAndStaff(new \Jikan\Request\Anime\AnimeCharactersAndStaffRequest(35073));
         $staff = $charactersAndStaff->getStaff();
         $characters = $charactersAndStaff->getCharacters();
         self::assertCount(53, $characters);
@@ -162,7 +160,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_anime_videos()
     {
-        $videos = $this->jikan->AnimeVideos(new AnimeVideos(1));
+        $videos = $this->jikan->AnimeVideos(new \Jikan\Request\Anime\AnimeVideosRequest(1));
         $promos = $videos->getPromos();
         $episodes = $videos->getEpisodes();
         self::assertCount(3, $promos);

@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Character;
+
+use Jikan\Request\RequestInterface;
 
 /**
  * Class CharacterPictures
  *
  * @package Jikan\Request
  */
-class CharacterPictures implements RequestInterface
+class CharacterPicturesRequest implements RequestInterface
 {
     /**
      * @var int

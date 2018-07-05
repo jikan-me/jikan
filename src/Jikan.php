@@ -1,7 +1,7 @@
 <?php
 /**
  *    Jikan - MyAnimeList.net Unofficial API v2
- *    Authors - @irfan-dahir, @janvernieuwe, @coderiekelt
+ *    Authors + Contributors - @irfan-dahir, @janvernieuwe, @coderiekelt
  *
  *    This is an unofficial MAL API that stands in for the lackluster features of the official API.
  *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.
@@ -40,220 +40,220 @@ class Jikan
     }
 
     /**
-     * @param Request\Anime $request
+     * @param Request\Anime\AnimeRequest $request
      *
      * @return Model\Anime
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Anime(Request\Anime $request): Model\Anime
+    public function Anime(Request\Anime\AnimeRequest $request): Model\Anime
     {
         return $this->myanimelist->getAnime($request);
     }
 
     /**
-     * @param Request\AnimeEpisodes $request
+     * @param Request\Anime\AnimeEpisodesRequest $request
      *
      * @return Model\Episodes
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeEpisodes(Request\AnimeEpisodes $request): Model\Episodes
+    public function AnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Episodes
     {
         return $this->myanimelist->getAnimeEpisodes($request);
     }
 
     /**
-     * @param Request\AnimeVideos $request
+     * @param Request\Anime\AnimeVideosRequest $request
      *
      * @return Model\AnimeVideos
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeVideos(Request\AnimeVideos $request): Model\AnimeVideos
+    public function AnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\AnimeVideos
     {
         return $this->myanimelist->getAnimeVideos($request);
     }
 
     /**
-     * @param Request\Manga $request
+     * @param Request\Manga\MangaRequest $request
      *
      * @return Model\Manga
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Manga(Request\Manga $request): Model\Manga
+    public function Manga(Request\Manga\MangaRequest $request): Model\Manga
     {
         return $this->myanimelist->getManga($request);
     }
 
     /**
-     * @param Request\Character $request
+     * @param Request\Character\CharacterRequest $request
      *
      * @return Model\Character
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Character(Request\Character $request): Model\Character
+    public function Character(Request\Character\CharacterRequest $request): Model\Character
     {
         return $this->myanimelist->getCharacter($request);
     }
 
     /**
-     * @param Request\CharactersAndStaff $request
+     * @param Request\Anime\AnimeCharactersAndStaff $request
      *
      * @return Model\CharactersAndStaff
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function CharactersAndStaff(Request\CharactersAndStaff $request): Model\CharactersAndStaff
+    public function CharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\CharactersAndStaff
     {
         return $this->myanimelist->getCharactersAndStaff($request);
     }
 
     /**
-     * @param Request\Person $request
+     * @param Request\Person\PersonRequest $request
      *
      * @return Model\Person
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Person(Request\Person $request): Model\Person
+    public function Person(Request\Person\PersonRequest $request): Model\Person
     {
         return $this->myanimelist->getPerson($request);
     }
 
     /**
-     * @param Request\UserProfile $request
+     * @param Request\User\UserProfileRequest $request
      *
      * @return Model\UserProfile
      * @throws \InvalidArgumentException
      */
-    public function UserProfile(Request\UserProfile $request): Model\UserProfile
+    public function UserProfile(Request\User\UserProfileRequest $request): Model\UserProfile
     {
         return $this->myanimelist->getUserProfile($request);
     }
 
     /**
-     * @param Request\Seasonal $request
+     * @param Request\Seasonal\SeasonalRequest $request
      *
      * @return Model\Seasonal
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Seasonal(Request\Seasonal $request): Model\Seasonal
+    public function Seasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal
     {
         return $this->myanimelist->getSeasonal($request);
     }
 
     /**
-     * @param Request\Producer $request
+     * @param Request\Producer\ProducerRequest $request
      *
      * @return Model\Producer
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Producer(Request\Producer $request): Model\Producer
+    public function Producer(Request\Producer\ProducerRequest $request): Model\Producer
     {
         return $this->myanimelist->getProducer($request);
     }
 
     /**
-     * @param Request\Magazine $request
+     * @param Request\Magazine\MagazineRequest $request
      *
      * @return Model\Magazine
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Magazine(Request\Magazine $request): Model\Magazine
+    public function Magazine(Request\Magazine\MagazineRequest $request): Model\Magazine
     {
         return $this->myanimelist->getMagazine($request);
     }
 
 
     /**
-     * @param Request\AnimeGenre $request
+     * @param Request\Genre\AnimeGenre $request
      *
      * @return Model\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeGenre(Request\AnimeGenre $request): Model\AnimeGenre
+    public function AnimeGenre(Request\Genre\AnimeGenre $request): Model\AnimeGenre
     {
         return $this->myanimelist->getAnimeGenre($request);
     }
 
     /**
-     * @param Request\MangaGenre $request
+     * @param Request\Genre\MangaGenre $request
      *
      * @return Model\MangaGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function MangaGenre(Request\MangaGenre $request): Model\MangaGenre
+    public function MangaGenre(Request\Genre\MangaGenre $request): Model\MangaGenre
     {
         return $this->myanimelist->getMangaGenre($request);
     }
 
     /**
-     * @param Request\Schedule $request
+     * @param Request\Schedule\ScheduleRequest $request
      *
      * @return Model\Schedule
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Schedule(Request\Schedule $request): Model\Schedule
+    public function Schedule(Request\Schedule\ScheduleRequest $request): Model\Schedule
     {
         return $this->myanimelist->getSchedule($request);
     }
 
     /**
-     * @param Request\UserFriends $request
+     * @param Request\User\UserFriendsRequest $request
      *
      * @return Model\UserFriend[]
      * @throws \InvalidArgumentException
      */
-    public function UserFriends(Request\UserFriends $request): array
+    public function UserFriends(Request\User\UserFriendsRequest $request): array
     {
         return $this->myanimelist->getUserFriends($request);
     }
 
     /**
-     * @param Request\AnimePictures $request
+     * @param Request\Anime\AnimePicturesRequest $request
      *
      * @return Model\Picture[]
      */
-    public function AnimePictures(Request\AnimePictures $request): array
+    public function AnimePictures(Request\Anime\AnimePicturesRequest $request): array
     {
         return $this->myanimelist->getAnimePictures($request);
     }
 
     /**
-     * @param Request\MangaPictures $request
+     * @param Request\Manga\MangaPicturesRequest $request
      *
      * @return Model\Picture[]
      */
-    public function MangaPictures(Request\MangaPictures $request): array
+    public function MangaPictures(Request\Manga\MangaPicturesRequest $request): array
     {
         return $this->myanimelist->getMangaPictures($request);
     }
 
     /**
-     * @param Request\PersonPictures $request
+     * @param Request\Person\PersonPicturesRequest $request
      *
      * @return Model\Picture[]
      */
-    public function PersonPictures(Request\PersonPictures $request): array
+    public function PersonPictures(Request\Person\PersonPicturesRequest $request): array
     {
         return $this->myanimelist->getPersonPictures($request);
     }
 
     /**
-     * @param Request\CharacterPictures $request
+     * @param Request\Character\CharacterPicturesRequest $request
      *
      * @return Model\Picture[]
      */
-    public function CharacterPictures(Request\CharacterPictures $request): array
+    public function CharacterPictures(Request\Character\CharacterPicturesRequest $request): array
     {
         return $this->myanimelist->getCharacterPictures($request);
     }

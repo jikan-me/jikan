@@ -20,7 +20,7 @@ class AnimeTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\Anime(21);
+        $request = new \Jikan\Request\Anime\AnimeRequest(21);
         $jikan = new Jikan();
         $this->anime = $jikan->Anime($request);
     }

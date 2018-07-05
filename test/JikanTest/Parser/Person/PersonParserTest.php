@@ -16,7 +16,7 @@ class PersonParserTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\Person(99);
+        $request = new \Jikan\Request\Person\PersonRequest(99);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Person\PersonParser($crawler);

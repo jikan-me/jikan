@@ -1,13 +1,15 @@
 <?php
 
-namespace Jikan\Request;
+namespace Jikan\Request\Genre;
+
+use Jikan\Request\RequestInterface;
 
 /**
- * Class AnimeGenre
+ * Class MangaGenre
  *
  * @package Jikan\Request
  */
-class AnimeGenre implements RequestInterface
+class MangaGenreRequest implements RequestInterface
 {
     /**
      * @var int
@@ -37,6 +39,6 @@ class AnimeGenre implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/anime/genre/%s?page=%s', $this->id, $this->page);
+        return sprintf('https://myanimelist.net/manga/genre/%s?page=%s', $this->id, $this->page);
     }
 }

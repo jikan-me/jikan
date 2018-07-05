@@ -58,7 +58,7 @@ abstract class TemplateParse
 
         $this->setStatus($response->getStatusCode());
         $this->file = (string)$response->getBody();
-        $this->file = explode(PHP_EOL, $this->file);
+        $this->file = explode("\n", $this->file);
         array_walk($this->file, Util::class.'::trim'); // bystanders begone!
     }
 

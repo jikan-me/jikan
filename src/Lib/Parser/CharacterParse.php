@@ -196,8 +196,7 @@ class CharacterParse extends TemplateParse
                 $running = true;
                 $i = 1;
                 $voiceActors = [];
-                while ($running) {
-                    $line = $this->file[$this->lineNo + $i]; // bugs
+                while ($running && $line = $this->file[$this->lineNo + $i]) {
                     if (preg_match('~<h2><div class="floatRightHeader">~', $line) ||
                         preg_match('~<div class="mauto clearfix pt24" style="width:760px;">~', $line) ||
                         preg_match(

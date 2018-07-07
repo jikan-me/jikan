@@ -173,19 +173,19 @@ class SearchRequest implements RequestInterface
     }
 
     /**
-     * @param int[] $startDate
+     * @param int $day, int $month, int $year
      */
-    public function setStartDate(array $startDate)
+    public function setStartDate(int $day, int $month, int $year)
     {
-        $this->startDate = $startDate;
+        $this->startDate = [$day, $month, $year];
     }
 
     /**
-     * @param int[] $endDate
+     * @param int $day, int $month, int $year
      */
-    public function setEndDate(array $endDate)
+    public function setEndDate(int $day, int $month, int $year)
     {
-        $this->endDate = $endDate;
+        $this->endDate = [$day, $month, $year];
     }
 
     /**

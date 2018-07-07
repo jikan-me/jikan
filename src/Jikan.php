@@ -276,4 +276,44 @@ class Jikan
     {
         return $this->myanimelist->getNewsList($request);
     }
+
+    /**
+     * @param Request\Search\AnimeSearchRequest $request
+     *
+     * @return Model\Search\AnimeSearchListItem[]
+     */
+    public function AnimeSearch(Request\Search\AnimeSearchRequest $request): array
+    {
+        return $this->myanimelist->getAnimeSearch($request);
+    }
+
+    /**
+     * @param Request\Search\MangaSearchRequest $request
+     *
+     * @return Model\Search\MangaSearchListItem[]
+     */
+    public function MangaSearch(Request\Search\MangaSearchRequest $request): array
+    {
+        return $this->myanimelist->getMangaSearch($request);
+    }
+
+    /**
+     * @param Request\Search\CharacterSearchRequest $request
+     *
+     * @return Model\Search\CharacterSearchListItem[]
+     */
+    public function CharacterSearch(Request\Search\CharacterSearchRequest $request): array
+    {
+        return $this->myanimelist->getCharacterSearch($request);
+    }
+
+    /**
+     * @param Request\Search\PersonSearchRequest $request
+     *
+     * @return Model\Search\PersonSearchListItem[]
+     */
+    public function PersonSearch(Request\Search\PersonSearchRequest $request): array
+    {
+        return $this->myanimelist->getPersonSearch($request);
+    }
 }

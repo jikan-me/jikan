@@ -5,30 +5,19 @@ namespace Jikan\Request\Search;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class SearchRequest
+ * Class AnimeSearchRequest
  *
- * NOTE: These were the only types available at the time of coding this
- * Add to it if more searches get enabled
  *
  * @package Jikan\Request\Search
  */
-class SearchRequest implements RequestInterface
+class AnimeSearchRequest implements RequestInterface
 {
-    public const ANIME = 'anime';
-    public const MANGA = 'manga';
-    public const CHARACTER = 'character';
-    public const PEOPLE = 'people';
-    //public const NEWS = 'news'; // for later version
 
     /**
      * @var string
      */
     private $query;
 
-    /**
-     * @var string
-     */
-    private $type;
     /**
      * @var int
      */
@@ -41,7 +30,7 @@ class SearchRequest implements RequestInterface
     /**
      * @var string
      */
-    private $subType = 0;
+    private $type = 0;
 
     /**
      * @var float
@@ -87,13 +76,11 @@ class SearchRequest implements RequestInterface
      * SearchRequest constructor.
      *
      * @param string $query
-     * @param string $type
      * @param int    $page
      */
-    public function __construct(string $query, string $type, int $page = 0)
+    public function __construct(string $query, int $page = 0)
     {
         $this->query = $query;
-        $this->type = $type;
         $this->page = $page;
     }
 
@@ -113,7 +100,7 @@ class SearchRequest implements RequestInterface
         $query = http_build_query([
             'q' => $this->query,
             'show' => $this->page ? 50 * $this->page : null,
-            'type' => $this->subType,
+            'type' => $this->type,
             'score' => $this->score,
             'status' => $this->status,
             'p' => $this->producer,
@@ -141,9 +128,9 @@ class SearchRequest implements RequestInterface
         );
     }
 
-    public function setSubType(string $subType)
+    public function setType(string $type)
     {
-        $this->subType = $subType;
+        $this->type = $type;
     }
 
     /**

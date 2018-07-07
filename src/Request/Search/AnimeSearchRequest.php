@@ -91,11 +91,6 @@ class AnimeSearchRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        /** @noinspection PhpUsageOfSilenceOperatorInspection */
-        if (@\constant(self::class.'::'.strtoupper($this->type)) === null) {
-            throw new \InvalidArgumentException('Invalid search type');
-        }
-
 
         $query = http_build_query([
             'q' => $this->query,
@@ -112,15 +107,18 @@ class AnimeSearchRequest implements RequestInterface
             'em' => $this->endDate[1],
             'ey' => $this->endDate[2],
             'gx' => (int) $this->genreExclude,
-            'genre' => empty($this->genre) ?: $this->genre;
         ]);
 
+        if (!empty($this->genre)) {
+            foreach ($this->genre as $genre) {
+                $query .= '&genre[]=' . $genre;
+            }
+        }
+
         var_dump(sprintf(
-            'https://myanimelist.net/%s.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g',
-            $this->type,
+            'https://myanimelist.net/anime.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g',
             $query
-        );
-        die;
+        ));
         return sprintf(
             'https://myanimelist.net/%s.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g',
             $this->type,
@@ -131,79 +129,98 @@ class AnimeSearchRequest implements RequestInterface
     public function setType(string $type)
     {
         $this->type = $type;
+
+        return $this;
     }
 
     /**
      * @param float $score
+     * @return $this
      */
     public function setScore(float $score)
     {
         $this->score = $score;
+
+        return $this;
     }
 
     /**
      * @param int $status
+     * @return $this
      */
     public function setStatus(int $status)
     {
         $this->status = $status;
+
+        return $this;
     }
 
     /**
      * @param int $producer
+     * @return $this
      */
     public function setProducer(int $producer)
     {
         $this->producer = $producer;
+
+        return $this;
     }
 
     /**
      * @param int $rated
+     * @return $this
      */
     public function setRated(int $rated)
     {
         $this->rated = $rated;
+
+        return $this;
     }
 
     /**
      * @param int $day, int $month, int $year
+     * @return $this
      */
     public function setStartDate(int $day, int $month, int $year)
     {
         $this->startDate = [$day, $month, $year];
+
+        return $this;
     }
 
     /**
      * @param int $day, int $month, int $year
+     * @return $this
      */
     public function setEndDate(int $day, int $month, int $year)
     {
         $this->endDate = [$day, $month, $year];
+
+        return $this;
     }
 
     /**
-     * @param int[] $genre
+     * @param int ...$genre
+     * @return $this
      */
-    public function setGenre($genre)
+    public function setGenre(...$genre)
     {
-        if (is_array($genre)) {
-            $this->genre = array_unique(
-                array_merge($genre, $this->genre)
-            );
+        $this->genre = array_unique(
+            array_merge($genre, $this->genre)
+        );
 
-            return;
-        }
 
-        if (!in_array($genre, $this->genre)) {
-            $this->genre[] = $genre;
-        }
+        return $this;
     }
 
     /**
      * @param bool $genreExclude
+     * @return $this
      */
     public function setGenreExclude(bool $genreExclude)
     {
         $this->genreExclude = $genreExclude;
+
+        return $this;
     }
 }

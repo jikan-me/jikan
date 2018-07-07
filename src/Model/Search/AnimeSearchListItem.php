@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Search;
 
-use Jikan\Model\DateRange;
 use Jikan\Model\MalUrl;
 use Jikan\Parser;
 
@@ -50,12 +49,12 @@ class AnimeSearchListItem
     private $score;
 
     /**
-     * @var ?DateRange
+     * @var ?\DateTimeImmutable
      */
     private $startDate;
 
     /**
-     * @var ?DateRange
+     * @var ?\DateTimeImmutable
      */
     private $endDate;
 
@@ -153,17 +152,17 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return ?DateRange
+     * @return ?\DateTimeImmutable
      */
-    public function getStartDate(): ?DateRange
+    public function getStartDate(): ?\DateTimeImmutable
     {
         return $this->startDate;
     }
 
     /**
-     * @return ?DateRange
+     * @return ?\DateTimeImmutable
      */
-    public function getEndDate(): ?DateRange
+    public function getEndDate(): ?\DateTimeImmutable
     {
         return $this->endDate;
     }

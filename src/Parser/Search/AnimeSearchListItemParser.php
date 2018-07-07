@@ -2,7 +2,8 @@
 
 namespace Jikan\Parser\Search;
 
-use Jikan\Model\DateRange;
+use Jikan\Helper\Parser;
+use Jikan\Helper\JString;
 use Jikan\Model\MalUrl;
 use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Model\Search\AnimeSearchListItem;
@@ -52,7 +53,7 @@ class AnimeSearchListItemParser
      */
     public function getTitle(): string
     {
-        return "";
+        return $this->crawler->filterXPath('//td[2]/a/strong')->text();
     }
 
     /**
@@ -60,7 +61,7 @@ class AnimeSearchListItemParser
      */
     public function getImageUrl(): string
     {
-        return "";
+        return $this->crawler->filterXPath('//td[1]/div/a/img')->attr('data-src');
     }
 
     /**
@@ -68,7 +69,11 @@ class AnimeSearchListItemParser
      */
     public function getSynopsis(): string
     {
-        return "";
+        return JString::cleanse(
+            Parser::removeChildNodes(
+                $this->crawler->filterXPath('//td[2]/div[@class="pt4"]')
+            )->text()
+        );
     }
 
     /**
@@ -76,7 +81,9 @@ class AnimeSearchListItemParser
      */
     public function getType(): string
     {
-        return "";
+        return JString::cleanse(
+            $this->crawler->filterXPath('//td[3]')->text()
+        );
     }
 
     /**
@@ -84,7 +91,7 @@ class AnimeSearchListItemParser
      */
     public function getEpisodes(): int
     {
-        return 0;
+        return (int) $this->crawler->filterXPath('//td[4]')->text();
     }
 
     /**
@@ -92,23 +99,35 @@ class AnimeSearchListItemParser
      */
     public function getScore(): float
     {
-        return 0.00;
+        return (float) $this->crawler->filterXPath('//td[5]')->text();
     }
 
     /**
-     * @return ?DateRange
+     * @return ?\DateTimeImmutable
      */
-    public function getStartDate(): ?DateRange
+    public function getStartDate(): ?\DateTimeImmutable
     {
-        return new DateRange("04-08-12");
+        $date = JString::cleanse($this->crawler->filterXPath('//td[6]')->text());
+
+        if ($date === '-') {
+            return null;
+        }
+
+        return Parser::parseDateMDY($date);
     }
 
     /**
-     * @return ?DateRange
+     * @return ?\DateTimeImmutable
      */
-    public function getEndDate(): ?DateRange
+    public function getEndDate(): ?\DateTimeImmutable
     {
-        return new DateRange("06-24-12");
+        $date = JString::cleanse($this->crawler->filterXPath('//td[7]')->text());
+
+        if ($date === '-') {
+            return null;
+        }
+
+        return Parser::parseDateMDY($date);
     }
 
     /**
@@ -116,7 +135,11 @@ class AnimeSearchListItemParser
      */
     public function getMembers(): int
     {
-        return 0;
+        return (int) str_replace(
+            ',',
+            '',
+            $this->crawler->filterXPath('//td[8]')->text()
+        );
     }
 
     /**
@@ -124,6 +147,8 @@ class AnimeSearchListItemParser
      */
     public function getRated(): string
     {
-        return "PG-13";
+        return JString::cleanse(
+            $this->crawler->filterXPath('//td[9]')->text()
+        );
     }
 }

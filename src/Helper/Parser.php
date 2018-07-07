@@ -69,6 +69,23 @@ class Parser
     }
 
     /**
+     * @param string $date
+     *
+     * @return \DateTimeImmutable|null
+     */
+    public static function parseDateMDY(string $date): ?\DateTimeImmutable
+    {
+        $date = str_replace('??', '01', $date);
+        $date .= ", 00:00:00";
+
+        try {
+            return \DateTimeImmutable::createFromFormat('m-d-y, H:i:s', $date, new \DateTimeZone('UTC'));
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
      * @param Crawler $crawler
      *
      * @return null|string

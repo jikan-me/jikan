@@ -59,8 +59,13 @@ class SearchRequest implements RequestInterface
         if (@\constant(self::class.'::'.strtoupper($this->type)) === null) {
             throw new \InvalidArgumentException('Invalid search type');
         }
-        $query = http_build_query(['q' => $this->query, 'show' => $this->page ? 50 * $this->page : null]);
 
-        return sprintf('https://myanimelist.net/%s.php?%s', $this->type, $query);
+
+        $query = http_build_query([
+            'q' => $this->query,
+            'show' => $this->page ? 50 * $this->page : null
+        ]);
+
+        return sprintf('https://myanimelist.net/%s.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g', $this->type, $query);
     }
 }

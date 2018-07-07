@@ -42,7 +42,12 @@ class AnimeSearchParser
      */
     public function getResults(): array
     {
-        return [];
+        return $this->crawler
+            ->filterXPath('//div[contains(@class, "js-categories-seasonal")]/table/tr[1]')
+            ->nextAll()
+            ->each(function (Crawler $c) {
+                return (new AnimeSearchListItemParser($c))->getModel();
+            });
     }
 
     /**

@@ -115,13 +115,8 @@ class AnimeSearchRequest implements RequestInterface
             }
         }
 
-        var_dump(sprintf(
-            'https://myanimelist.net/anime.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g',
-            $query
-        ));
         return sprintf(
-            'https://myanimelist.net/%s.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g',
-            $this->type,
+            'https://myanimelist.net/anime.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g',
             $query
         );
     }

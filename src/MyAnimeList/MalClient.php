@@ -320,4 +320,44 @@ CharacterPictures
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\Search\AnimeSearchRequest $request
+     *
+     * @return Model\Search\AnimeSearchItem[]
+     */
+    public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): array // WIP
+    {
+        return [];
+    }
+
+    /**
+     * @param Request\Search\MangaSearchRequest $request
+     *
+     * @return Model\Search\MangaSearchItem[]
+     */
+    public function getMangaSearch(Request\Search\MangaSearchRequest $request): array // WIP
+    {
+        return [];
+    }
+
+    /**
+     * @param Request\Search\CharacterSearchRequest $request
+     *
+     * @return Model\Search\CharacterSearchItem[]
+     */
+    public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): array // WIP
+    {
+        return [];
+    }
+
+    /**
+     * @param Request\Search\PersonSearchRequest $request
+     *
+     * @return Model\Search\PersonSearchItem[]
+     */
+    public function getPersonSearch(Request\Search\PersonSearchRequest $request): array // WIP
+    {
+        return [];
+    }
 }

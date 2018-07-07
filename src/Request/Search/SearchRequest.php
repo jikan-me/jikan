@@ -124,7 +124,8 @@ class SearchRequest implements RequestInterface
             'ed' => $this->endDate[0],
             'em' => $this->endDate[1],
             'ey' => $this->endDate[2],
-            'gx' => (int) $this->genreExclude
+            'gx' => (int) $this->genreExclude,
+            'genre' => empty($this->genre) ?: $this->genre;
         ]);
 
 

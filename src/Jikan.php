@@ -1,7 +1,6 @@
 <?php
 /**
  *    Jikan - MyAnimeList.net Unofficial API v2
- *    Authors + Contributors - @irfan-dahir, @janvernieuwe, @coderiekelt
  *
  *    This is an unofficial MAL API that stands in for the lackluster features of the official API.
  *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.

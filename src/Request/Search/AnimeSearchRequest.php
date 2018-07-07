@@ -109,6 +109,7 @@ class AnimeSearchRequest implements RequestInterface
             'gx' => (int) $this->genreExclude,
         ]);
 
+        // Add genre[]=
         if (!empty($this->genre)) {
             foreach ($this->genre as $genre) {
                 $query .= '&genre[]=' . $genre;

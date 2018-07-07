@@ -324,11 +324,14 @@ CharacterPictures
     /**
      * @param Request\Search\AnimeSearchRequest $request
      *
-     * @return Model\Search\AnimeSearchItem[]
+     * @return Model\Search\AnimeSearch
      */
-    public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): array // WIP
+    public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
-        return [];
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Search\AnimeSearchParser($crawler);
+
+        return $parser->getModel();
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Seasonal;
 
-use Jikan\Parser\Search\SearchParser;
+use Jikan\Parser\Search\AnimeSearchParser;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class SearchParserTest extends TestCase
 {
     /**
-     * @var SearchParser
+     * @var AnimeSearchParser
      */
     private $parser;
 

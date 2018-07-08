@@ -15,5 +15,6 @@ parameters:
                 - 'ini_set'
                 - 'error_reporting'
                 - 'die'
-        phpunit: ~
+        phpunit:
+            testsuite: Fast
         phplint: ~

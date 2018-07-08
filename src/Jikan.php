@@ -300,12 +300,13 @@ class Jikan
     /**
      * @param Request\Search\CharacterSearchRequest $request
      *
-     * @return Model\Search\CharacterSearchListItem[]
+     * @return Model\Search\CharacterSearch
      */
-    public function CharacterSearch(Request\Search\CharacterSearchRequest $request): array
+    public function CharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
         return $this->myanimelist->getCharacterSearch($request);
     }
+
 
     /**
      * @param Request\Search\PersonSearchRequest $request

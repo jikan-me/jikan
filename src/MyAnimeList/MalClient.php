@@ -350,11 +350,14 @@ CharacterPictures
     /**
      * @param Request\Search\CharacterSearchRequest $request
      *
-     * @return Model\Search\CharacterSearchItem[]
+     * @return Model\Search\CharacterSearch
      */
-    public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): array // WIP
+    public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
-        return [];
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Search\CharacterSearchParser($crawler);
+
+        return $parser->getModel();
     }
 
     /**

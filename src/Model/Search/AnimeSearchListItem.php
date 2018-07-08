@@ -59,6 +59,16 @@ class AnimeSearchListItem
     private $endDate;
 
     /**
+     * @var ?string
+     */
+    private $startDateString;
+
+    /**
+     * @var ?string
+     */
+    private $endDateString;
+
+    /**
      * @var int
      */
     private $members;
@@ -86,6 +96,8 @@ class AnimeSearchListItem
         $instance->type = $parser->getType();
         $instance->episodes = $parser->getEpisodes();
         $instance->score = $parser->getScore();
+        $instance->startDateString = $parser->getStartDateString();
+        $instance->endDateString = $parser->getEndDateString();
         $instance->startDate = $parser->getStartDate();
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
@@ -181,5 +193,21 @@ class AnimeSearchListItem
     public function getRated(): string
     {
         return $this->rated;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getStartDateString(): ?string
+    {
+        return $this->startDateString;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getEndDateString(): ?string
+    {
+        return $this->endDateString;
     }
 }

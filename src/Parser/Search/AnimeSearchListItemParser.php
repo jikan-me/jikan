@@ -107,9 +107,9 @@ class AnimeSearchListItemParser
      */
     public function getStartDate(): ?\DateTimeImmutable
     {
-        $date = JString::cleanse($this->crawler->filterXPath('//td[6]')->text());
+        $date = $this->getStartDateString();
 
-        if ($date === '-') {
+        if (is_null($date)) {
             return null;
         }
 
@@ -121,13 +121,41 @@ class AnimeSearchListItemParser
      */
     public function getEndDate(): ?\DateTimeImmutable
     {
+        $date = $this->getEndDateString();
+
+        if (is_null($date)) {
+            return null;
+        }
+
+        return Parser::parseDateMDY($date);
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getStartDateString(): ?string
+    {
+        $date = JString::cleanse($this->crawler->filterXPath('//td[6]')->text());
+
+        if ($date === '-') {
+            return null;
+        }
+
+        return $date;
+    }
+
+    /**
+     * @return ?string
+     */
+    public function getEndDateString(): ?string
+    {
         $date = JString::cleanse($this->crawler->filterXPath('//td[7]')->text());
 
         if ($date === '-') {
             return null;
         }
 
-        return Parser::parseDateMDY($date);
+        return $date;
     }
 
     /**

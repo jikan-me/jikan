@@ -75,11 +75,15 @@ class Parser
      */
     public static function parseDateMDY(string $date): ?\DateTimeImmutable
     {
-        if ($date === '-') return null;
+        if ($date === '-') {
+            return null;
+        }
 
         $dateArray = explode('-', $date);
 
-        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === date('y')) return null;
+        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === date('y')) {
+            return null;
+        }
 
         $date = str_replace('??', '01', $date);
 

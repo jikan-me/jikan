@@ -32,28 +32,15 @@ class PicturesPageParserTest extends TestCase
      */
     private $characterParser;
 
-    public function setUp()
-    {
-        $client = new Client();
-        $crawler = $client->request('GET', 'https://myanimelist.net/anime/22147/jikan/pics');
-        $this->animeParser = new PicturesPageParser($crawler);
-
-        $crawler = $client->request('GET', 'https://myanimelist.net/manga/50145/jikan/pics');
-        $this->mangaParser = new PicturesPageParser($crawler);
-
-        $crawler = $client->request('GET', 'https://myanimelist.net/people/11162/jikan/pictures');
-        $this->personParser = new PicturesPageParser($crawler);
-
-        $crawler = $client->request('GET', 'https://myanimelist.net/character/105591/jikan/pictures');
-        $this->characterParser = new PicturesPageParser($crawler);
-    }
-
     /**
      * @test
-     * @vcr PicturesPageParserTest.yaml
+     * @vcr MangaPictures.yaml
      */
     public function it_gets_manga_pictures()
     {
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://myanimelist.net/manga/50145/jikan/pics');
+        $this->mangaParser = new PicturesPageParser($crawler);
         $pictures = $this->mangaParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));
@@ -64,10 +51,13 @@ class PicturesPageParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeGenreParserTest.yaml
+     * @vcr AnimePictures.yaml
      */
     public function it_gets_anime_pictures()
     {
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://myanimelist.net/anime/22147/jikan/pics');
+        $this->animeParser = new PicturesPageParser($crawler);
         $pictures = $this->animeParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));
@@ -78,10 +68,13 @@ class PicturesPageParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeGenreParserTest.yaml
+     * @vcr Peopleictures.yaml
      */
     public function it_gets_person_pictures()
     {
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://myanimelist.net/people/11162/jikan/pictures');
+        $this->personParser = new PicturesPageParser($crawler);
         $pictures = $this->personParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));
@@ -92,10 +85,13 @@ class PicturesPageParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeGenreParserTest.yaml
+     * @vcr CharacterPictures.yaml
      */
     public function it_gets_character_pictures()
     {
+        $client = new Client();
+        $crawler = $client->request('GET', 'https://myanimelist.net/character/105591/jikan/pictures');
+        $this->characterParser = new PicturesPageParser($crawler);
         $pictures = $this->characterParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));

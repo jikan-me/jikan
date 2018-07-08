@@ -45,7 +45,10 @@ class AnimeSearchListItemParser
      */
     public function getUrl(): MalUrl
     {
-        return new MalUrl($this->getTitle(), "https://myanimelist.net/anime/1/whitebox");
+        return new MalUrl(
+            $this->getTitle(),
+            $this->crawler->filterXPath('//td[2]/a')->attr("href")
+        );
     }
 
     /**

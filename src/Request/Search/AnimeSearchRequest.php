@@ -78,7 +78,7 @@ class AnimeSearchRequest implements RequestInterface
      * @param string $query
      * @param int    $page
      */
-    public function __construct(string $query, int $page = 0)
+    public function __construct(string $query, int $page = 1)
     {
         $this->query = $query;
         $this->page = $page;

@@ -188,4 +188,15 @@ class JikanTest extends TestCase
         self::assertCount(30, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
+
+    /**
+     * @test
+     * @vcr AnimeSearchParserTest.yaml
+     */
+    public function it_gets_anime_search()
+    {
+        $search = $this->jikan->AnimeSearch(new \Jikan\Request\Search\AnimeSearchRequest('Fate'));
+        self::assertCount(50, $search->getResults());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\AnimeSearchListItem::class, $search->getResults());
+    }
 }

@@ -97,7 +97,7 @@ class MalClient
      * @return Model\Character
      * @throws \RuntimeException
      * @throws \InvalidArgumentExceptionCharacterPictures
-CharacterPictures
+     * CharacterPictures
      */
     public function getCharacter(Request\Character\CharacterRequest $request): Model\Character
     {
@@ -368,5 +368,18 @@ CharacterPictures
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): array // WIP
     {
         return [];
+    }
+
+    /**
+     * @param $request
+     *
+     * @return Model\Manga\CharacterListItem[]
+     */
+    public function getMangaCharacters(Request\Manga\MangaCharactersRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Manga\CharactersParser($crawler);
+
+        return $parser->getCharacters();
     }
 }

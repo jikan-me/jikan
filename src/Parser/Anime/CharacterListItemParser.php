@@ -82,4 +82,14 @@ class CharacterListItemParser implements ParserInterface
     {
         return CharacterListItem::fromParser($this);
     }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getRole(): string
+    {
+        //echo $this->crawler->filterXPath('//td[2]/div/small')->text();
+        return $this->crawler->filterXPath('//td[2]/div/small')->text();
+    }
 }

@@ -147,7 +147,9 @@ class JikanTest extends TestCase
      */
     public function it_gets_characters_and_staff()
     {
-        $charactersAndStaff = $this->jikan->CharactersAndStaff(new \Jikan\Request\Anime\AnimeCharactersAndStaffRequest(35073));
+        $charactersAndStaff = $this->jikan->CharactersAndStaff(
+            new \Jikan\Request\Anime\AnimeCharactersAndStaffRequest(35073)
+        );
         $staff = $charactersAndStaff->getStaff();
         $characters = $charactersAndStaff->getCharacters();
         self::assertCount(53, $characters);
@@ -198,5 +200,16 @@ class JikanTest extends TestCase
         $search = $this->jikan->AnimeSearch(new \Jikan\Request\Search\AnimeSearchRequest('Fate'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\AnimeSearchListItem::class, $search->getResults());
+    }
+
+    /**
+     * @test
+     * @vcr MangaCharacterListParserTest.yaml
+     */
+    public function it_gets_manga_characters()
+    {
+        $characters = $this->jikan->MangaCharacters(new \Jikan\Request\Manga\MangaCharactersRequest(2));
+        self::assertCount(70, $characters);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Manga\CharacterListItem::class, $characters);
     }
 }

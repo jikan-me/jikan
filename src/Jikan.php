@@ -317,4 +317,9 @@ class Jikan
     {
         return $this->myanimelist->getPersonSearch($request);
     }
+
+    public function MangaCharacters(Request\Manga\MangaCharactersRequest $request)
+    {
+        return $this->myanimelist->getMangaCharacters($request);
+    }
 }

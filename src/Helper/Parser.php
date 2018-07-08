@@ -75,14 +75,15 @@ class Parser
      */
     public static function parseDateMDY(string $date): ?\DateTimeImmutable
     {
-        $date = str_replace('??', '01', $date);
-        $date .= ", 00:00:00";
+        if ($date === '-') return null;
 
-        try {
-            return \DateTimeImmutable::createFromFormat('m-d-y, H:i:s', $date, new \DateTimeZone('UTC'));
-        } catch (\Exception $e) {
-            return null;
-        }
+        $dateArray = explode('-', $date);
+
+        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === date('y')) return null;
+
+        $date = str_replace('??', '01', $date);
+
+        return \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC')) ?: null;
     }
 
     /**

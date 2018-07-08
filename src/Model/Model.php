@@ -34,21 +34,4 @@ abstract class Model
             return $this->{$key};
         }
     }
-
-    /**
-     * @param      $class
-     * @param      $key_array
-     * @param      $value
-     * @param null $key
-     */
-    public function insert($class, $key_array, $value, $key = null)
-    {
-        if (property_exists('Jikan\Model\\'.$class, $key)) {
-            if (is_null($key)) {
-                $this->{$key_array}[] = $value;
-            } else {
-                $this->{$key_array}[$key] = $value;
-            }
-        }
-    }
 }

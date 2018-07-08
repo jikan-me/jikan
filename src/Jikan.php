@@ -290,9 +290,9 @@ class Jikan
     /**
      * @param Request\Search\MangaSearchRequest $request
      *
-     * @return Model\Search\MangaSearchListItem[]
+     * @return Model\Search\MangaSearch
      */
-    public function MangaSearch(Request\Search\MangaSearchRequest $request): array
+    public function MangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
         return $this->myanimelist->getMangaSearch($request);
     }

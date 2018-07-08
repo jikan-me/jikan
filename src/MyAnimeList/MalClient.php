@@ -337,11 +337,14 @@ CharacterPictures
     /**
      * @param Request\Search\MangaSearchRequest $request
      *
-     * @return Model\Search\MangaSearchItem[]
+     * @return Model\Search\MangaSearch
      */
-    public function getMangaSearch(Request\Search\MangaSearchRequest $request): array // WIP
+    public function getMangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
-        return [];
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Search\MangaSearchParser($crawler);
+
+        return $parser->getModel();
     }
 
     /**

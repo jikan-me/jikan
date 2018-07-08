@@ -1,11 +1,10 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Character;
 
 use Jikan\Helper\Parser;
 use Jikan\Model\CharacterListItem;
 use Jikan\Model\VoiceActor;
-use Jikan\Parser\Character\VoiceActorParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

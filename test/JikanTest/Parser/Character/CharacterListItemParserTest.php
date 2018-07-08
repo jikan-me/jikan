@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Character;
 
 use Goutte\Client;
 use Jikan\Model\VoiceActor;
-use Jikan\Parser\Anime\CharacterListItemParser;
+use Jikan\Parser\Character\CharacterListItemParser;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -14,7 +14,7 @@ use Symfony\Component\DomCrawler\Crawler;
 class CharacterListItemParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\Anime\CharacterListItemParser
+     * @var \Jikan\Parser\Character\CharacterListItemParser
      */
     private $parser;
 

@@ -3,7 +3,7 @@
 namespace Jikan\Parser\Manga;
 
 use Jikan\Model\Manga\CharacterListItem;
-use Jikan\Parser\Anime\CharacterListItemParser;
+use Jikan\Parser\Character\CharacterListItemParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**

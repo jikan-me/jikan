@@ -2,7 +2,7 @@
 
 namespace Jikan\Model;
 
-use Jikan\Parser\Anime\CharacterListItemParser;
+use Jikan\Parser\Character\CharacterListItemParser;
 
 /**
  * Class CharacterParser

@@ -5,6 +5,7 @@ namespace Jikan\Parser\Anime;
 use Jikan\Model\CharacterListItem;
 use Jikan\Model\CharactersAndStaff;
 use Jikan\Model\StaffListItem;
+use Jikan\Parser\Character\CharacterListItemParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

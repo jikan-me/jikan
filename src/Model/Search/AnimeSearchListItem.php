@@ -29,6 +29,11 @@ class AnimeSearchListItem
     private $title;
 
     /**
+     * @var bool
+     */
+    private $airing;
+
+    /**
      * @var string
      */
     private $synopsis;
@@ -102,6 +107,15 @@ class AnimeSearchListItem
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->rated = $parser->getRated();
+        $instance->airing =
+            is_null($instance->endDate)
+            &&
+            (
+                new \DateTimeImmutable(
+                    "now",
+                    new \DateTimeZone('UTC')
+                ) > $instance->startDate
+            );
 
         return $instance;
     }
@@ -209,5 +223,13 @@ class AnimeSearchListItem
     public function getEndDateString(): ?string
     {
         return $this->endDateString;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAiring(): bool
+    {
+        return $this->airing;
     }
 }

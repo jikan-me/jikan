@@ -109,6 +109,7 @@ class AnimeSearchListItem
         $instance->rated = $parser->getRated();
         $instance->airing =
             is_null($instance->endDate)
+            && !is_null($instance->startDate)
             &&
             (
                 new \DateTimeImmutable(

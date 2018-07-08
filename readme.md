@@ -20,33 +20,54 @@ Bleeding edge, re-write of the Jikan PHP API. Focusing on speed, stability and c
 - Anime
 	- [X] Main
 	- [X] Characters & Staff
-	- [ ] Episodes
-	- [ ] News
-	- [ ] Videos
+	- [X] Episodes
+	- [X] News
+	- [X] Videos
 	- [ ] Stats
-	- [ ] Pictures
+	- [X] Pictures
 	- [ ] Forum
 	- [ ] More Info
 - Manga
-	- [ ] Main
+	- [X] Main
 	- [ ] Characters
-	- [ ] News
+	- [X] News
 	- [ ] Stats
-	- [ ] Pictures
+	- [X] Pictures
 	- [ ] Forum
 	- [ ] More Info
 - Person
-	- [ ] Main
-	- [ ] Pictures
+	- [X] Main
+	- [X] Pictures
 - Character
-	- [ ] Main
-	- [ ] Pictures
+	- [X] Main
+	- [X] Pictures
 - [ ] Schedule
 - Search
-	- [ ] Basic
-	- [ ] Advanced
-- [ ] Seasonal
-- [ ] Top
+	- [X] Anime
+	- [ ] Manga
+	- [ ] Character
+	- [ ] Person
+- [X] Seasonal
+- [X] Schedule
+- Top
+    - [ ] Anime
+    - [ ] Manga
+    - [ ] Person
+    - [ ] Character
+
+#### NEW!
+- Genre
+    - [X] Anime
+    - [X] Manga
+- User
+    - [X] Profile
+    - [X] Friends
+    - [ ] History
+- [X] Producers
+- [X] Studios
+- [X] Magazines
+
+
 
 ### Phase 3
 - [ ] Code Clean Up

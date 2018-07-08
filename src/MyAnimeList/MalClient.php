@@ -312,6 +312,8 @@ class MalClient
      * @param Request\RequestInterface $request
      *
      * @return Model\News\NewsListItem[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getNewsList(Request\RequestInterface $request): array
     {
@@ -325,6 +327,8 @@ class MalClient
      * @param Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
@@ -338,6 +342,8 @@ class MalClient
      * @param Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getMangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
@@ -351,6 +357,8 @@ class MalClient
      * @param Request\Search\CharacterSearchRequest $request
      *
      * @return Model\Search\CharacterSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
@@ -381,5 +389,20 @@ class MalClient
         $parser = new Parser\Manga\CharactersParser($crawler);
 
         return $parser->getCharacters();
+    }
+
+    /**
+     * @param Request\Top\TopAnimeRequest $request
+     *
+     * @return array
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getTopAnime(Request\Top\TopAnimeRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Top\TopAnimeParser($crawler);
+
+        return $parser->getTopAnime();
     }
 }

@@ -99,7 +99,7 @@ class Jikan
     }
 
     /**
-     * @param Request\Anime\AnimeCharactersAndStaff $request
+     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      *
      * @return Model\CharactersAndStaff
      * @throws \RuntimeException
@@ -318,8 +318,25 @@ class Jikan
         return $this->myanimelist->getPersonSearch($request);
     }
 
-    public function MangaCharacters(Request\Manga\MangaCharactersRequest $request)
+    /**
+     * @param Request\Manga\MangaCharactersRequest $request
+     *
+     * @return Model\Manga\CharacterListItem[]
+     */
+    public function MangaCharacters(Request\Manga\MangaCharactersRequest $request): array
     {
         return $this->myanimelist->getMangaCharacters($request);
+    }
+
+    /**
+     * @param Request\Top\TopAnimeRequest|null $request
+     *
+     * @return Model\Top\TopAnime[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function TopAnime(?Request\Top\TopAnimeRequest $request = null): array
+    {
+        return $this->myanimelist->getTopAnime($request ?? new Request\Top\TopAnimeRequest());
     }
 }

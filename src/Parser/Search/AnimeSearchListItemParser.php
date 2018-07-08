@@ -171,12 +171,16 @@ class AnimeSearchListItemParser
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getRated(): string
+    public function getRated(): ?string
     {
-        return JString::cleanse(
-            $this->crawler->filterXPath('//td[9]')->text()
-        );
+        $rated = JString::cleanse($this->crawler->filterXPath('//td[9]')->text());
+
+        if ($rated === '-') {
+            return null;
+        }
+
+        return $rated;
     }
 }

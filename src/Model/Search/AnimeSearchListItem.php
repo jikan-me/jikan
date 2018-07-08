@@ -79,7 +79,7 @@ class AnimeSearchListItem
     private $members;
 
     /**
-     * @var string
+     * @var ?string
      */
     private $rated;
 
@@ -202,9 +202,9 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getRated(): string
+    public function getRated(): ?string
     {
         return $this->rated;
     }

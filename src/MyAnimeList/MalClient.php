@@ -435,4 +435,19 @@ class MalClient
 
         return $parser->getTopCharacters();
     }
+
+    /**
+     * @param Request\Top\TopPeopleRequest $request
+     *
+     * @return Model\Top\TopPeople[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getTopPeople(Request\Top\TopPeopleRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Top\TopPeopleParser($crawler);
+
+        return $parser->getTopPeople();
+    }
 }

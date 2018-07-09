@@ -6,11 +6,11 @@ use Jikan\Model\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopCharacter
+ * Class TopPeople
  *
  * @package Jikan\Model
  */
-class TopCharacter
+class TopPeople
 {
     /**
      * @var int
@@ -28,16 +28,6 @@ class TopCharacter
     private $nameKanji;
 
     /**
-     * @var MalUrl[]
-     */
-    private $animeography;
-
-    /**
-     * @var MalUrl[]
-     */
-    private $mangaography;
-
-    /**
      * @var int
      */
     private $favorites;
@@ -46,6 +36,11 @@ class TopCharacter
      * @var string
      */
     private $image;
+
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    private $birthday;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -62,10 +57,9 @@ class TopCharacter
         $instance->rank = $parser->getRank();
         $instance->malUrl = $parser->getMalUrl();
         $instance->nameKanji = $parser->getKanjiName();
-        $instance->animeography = $parser->getAnimeography();
-        $instance->mangaography = $parser->getMangaography();
-        $instance->favorites = $parser->getFavorites();
+        $instance->favorites = $parser->getPeopleFavorites();
         $instance->image = $parser->getImage();
+        $instance->birthday = $parser->getBirthday();
 
         return $instance;
     }
@@ -100,22 +94,6 @@ class TopCharacter
     }
 
     /**
-     * @return MalUrl[]
-     */
-    public function getAnimeography(): array
-    {
-        return $this->animeography;
-    }
-
-    /**
-     * @return MalUrl[]
-     */
-    public function getMangaography(): array
-    {
-        return $this->mangaography;
-    }
-
-    /**
      * @return int
      */
     public function getFavorites(): int
@@ -129,5 +107,13 @@ class TopCharacter
     public function getImage(): string
     {
         return $this->image;
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getBirthday(): ?\DateTimeImmutable
+    {
+        return $this->birthday;
     }
 }

@@ -8,6 +8,7 @@ use Jikan\Model\News\NewsListItem;
 use Jikan\Model\Top\TopAnime;
 use Jikan\Model\Top\TopCharacter;
 use Jikan\Model\Top\TopManga;
+use Jikan\Model\Top\TopPeople;
 use Jikan\Request\News\AnimeNewsListRequest;
 use Jikan\Request\News\MangaNewsListRequest;
 use PHPUnit\Framework\TestCase;
@@ -235,11 +236,11 @@ class JikanTest extends TestCase
      */
     public function it_gets_top_manga()
     {
-        $anime = $this->jikan->TopManga();
-        self::assertCount(50, $anime);
-        self::assertContainsOnlyInstancesOf(TopManga::class, $anime);
-        self::assertContains('Berserk', $anime);
-        self::assertContains('Shigatsu wa Kimi no Uso', $anime);
+        $manga = $this->jikan->TopManga();
+        self::assertCount(50, $manga);
+        self::assertContainsOnlyInstancesOf(TopManga::class, $manga);
+        self::assertContains('Berserk', $manga);
+        self::assertContains('Shigatsu wa Kimi no Uso', $manga);
     }
 
     /**
@@ -248,10 +249,23 @@ class JikanTest extends TestCase
      */
     public function it_gets_top_characters()
     {
-        $anime = $this->jikan->TopCharacters();
-        self::assertCount(50, $anime);
-        self::assertContainsOnlyInstancesOf(TopCharacter::class, $anime);
-        self::assertContains('Lamperouge, Lelouch', $anime);
-        self::assertContains('Usui, Takumi', $anime);
+        $characters = $this->jikan->TopCharacters();
+        self::assertCount(50, $characters);
+        self::assertContainsOnlyInstancesOf(TopCharacter::class, $characters);
+        self::assertContains('Lamperouge, Lelouch', $characters);
+        self::assertContains('Usui, Takumi', $characters);
+    }
+
+    /**
+     * @test
+     * @vcr TopPeopleParserTest.yaml
+     */
+    public function it_gets_top_people()
+    {
+        $people = $this->jikan->TopPeople();
+        self::assertCount(50, $people);
+        self::assertContainsOnlyInstancesOf(TopPeople::class, $people);
+        self::assertContains('Hanazawa, Kana', $people);
+        self::assertContains('Asano, Inio', $people);
     }
 }

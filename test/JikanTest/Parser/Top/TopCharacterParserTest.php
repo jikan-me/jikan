@@ -65,7 +65,7 @@ class TopCharacterParserTest extends TestCase
      */
     public function it_gets_the_character_kanji()
     {
-        self::assertEquals('モンキー・D・ルフィ', $this->parser->getCharacterKanji());
+        self::assertEquals('モンキー・D・ルフィ', $this->parser->getKanjiName());
     }
 
     /**

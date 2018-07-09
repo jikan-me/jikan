@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Top;
 
 use Jikan\Helper\JString;
+use Jikan\Helper\Parser;
 use Jikan\Model\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Symfony\Component\DomCrawler\Crawler;
@@ -157,12 +158,16 @@ class TopListItemParser
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getCharacterKanji(): string
+    public function getKanjiName(): ?string
     {
-        return trim($this->crawler->filterXPath('//span[@class="fs12 fn-grey6"][1]')->text(), '()');
+        try {
+            return trim($this->crawler->filterXPath('//span[@class="fs12 fn-grey6"][1]')->text(), '()');
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**
@@ -200,5 +205,24 @@ class TopListItemParser
     public function getFavorites(): int
     {
         return (int)preg_replace('/\D/', '', $this->crawler->filterXPath('//td[5]')->text());
+    }
+
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getPeopleFavorites(): int
+    {
+        return (int)preg_replace('/\D/', '', $this->crawler->filterXPath('//td[4]')->text());
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     * @throws \InvalidArgumentException
+     */
+    public function getBirthday(): ?\DateTimeImmutable
+    {
+        return Parser::parseDate($this->crawler->filterXPath('//td[3]')->text());
     }
 }

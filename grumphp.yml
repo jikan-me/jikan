@@ -1,6 +1,7 @@
 parameters:
     git_dir: .
     bin_dir: ./vendor/bin
+    process_timeout: 180
     tasks:
         phpcs:
             standard: 'PSR2'

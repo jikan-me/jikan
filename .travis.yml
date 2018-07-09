@@ -26,9 +26,5 @@ before_install:
 install:
   - travis_retry composer update --no-progress --profile --no-scripts --no-suggest $DEPENDENCIES
 
-before_script:
-  - phpenv config-add travis.ini
-  - php -i
-
 script:
    - vendor/bin/grumphp run

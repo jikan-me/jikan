@@ -26,5 +26,8 @@ before_install:
 install:
   - travis_retry composer update --no-progress --profile --no-scripts --no-suggest $DEPENDENCIES
 
+before_script:
+  - echo 'max_execution_time = 180' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
 script:
    - vendor/bin/grumphp run

@@ -35,7 +35,7 @@ install:
     - appveyor DownloadFile https://getcomposer.org/composer.phar
 
 before_test:
-    - cd C:\projects\grumphp
+    - cd C:\projects\jikan
     - php C:\tools\composer.phar update --no-progress --profile --prefer-dist --no-scripts --no-interaction --no-suggest
 
 test_script:

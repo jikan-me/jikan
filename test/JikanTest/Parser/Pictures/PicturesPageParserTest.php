@@ -1,6 +1,6 @@
 <?php
 
-namespace JikanTest\Parser\Person;
+namespace JikanTest\Parser\Pictures;
 
 use Goutte\Client;
 use Jikan\Model\Picture;

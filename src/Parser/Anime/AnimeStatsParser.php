@@ -94,6 +94,9 @@ class AnimeStatsParser implements ParserInterface
             ->getNode(0)->textContent);
     }
 
+    /**
+     * @return array
+     */
     public function getScores(): array
     {
         $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::table');

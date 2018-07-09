@@ -476,4 +476,19 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\Manga\MangaStatsRequest $request
+     *
+     * @return Model\Manga\MangaStats
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaStats(Request\Manga\MangaStatsRequest $request): Model\Manga\MangaStats
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Manga\MangaStatsParser($crawler);
+
+        return $parser->getModel();
+    }
 }

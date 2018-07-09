@@ -406,4 +406,16 @@ class Jikan
     {
         return $this->myanimelist->getAnimeStats($request);
     }
+
+    /**
+     * @param Request\Manga\MangaStatsRequest $request
+     *
+     * @return Model\Manga\MangaStats
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function MangaStats(Request\Manga\MangaStatsRequest $request): Model\Manga\MangaStats
+    {
+        return $this->myanimelist->getMangaStats($request);
+    }
 }

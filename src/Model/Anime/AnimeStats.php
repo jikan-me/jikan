@@ -57,6 +57,7 @@ class AnimeStats
         $instance->dropped = $parser->getDropped();
         $instance->planToWatch = $parser->getPlanToWatch();
         $instance->total = $parser->getTotal();
+        $instance->scores = $parser->getScores();
 
         return $instance;
     }

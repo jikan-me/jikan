@@ -94,6 +94,34 @@ class AnimeStatsParser implements ParserInterface
             ->getNode(0)->textContent);
     }
 
+    public function getScores(): array
+    {
+        $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::table');
+        $voteCounts = $table->filterXPath('//small[contains(text(), \'votes\')]');
+
+        $scores = [];
+        $score = 10;
+
+        $voteCounts->each(function (Crawler $crawler) use (&$scores, &$score) {
+            $scores[$score] = [
+                'votes' => $this->sanitize($crawler->text()),
+                'percentage' => (double)preg_replace(
+                    '/[^0-9,.]/',
+                    '',
+                    substr(
+                        $completeText = $crawler->parents()->getNode(0)->textContent,
+                        0,
+                        strpos($completeText, '%')
+                    )
+                )
+            ];
+
+            $score--;
+        });
+
+        return $scores;
+    }
+
     /**
      * @param $input
      * @param $badText

@@ -4,9 +4,9 @@ namespace Jikan\Parser\Manga;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\DateRange;
-use Jikan\Model\MalUrl;
-use Jikan\Model\Manga;
+use Jikan\Model\Common\DateRange;
+use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Manga\Manga;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -34,7 +34,7 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return Manga
+     * @return \Jikan\Model\Manga\Manga
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -226,7 +226,7 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

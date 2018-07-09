@@ -3,8 +3,8 @@
 namespace Jikan\Parser\User\Profile;
 
 use Jikan\Model;
-use Jikan\Model\AnimeStats;
-use Jikan\Model\MangaStats;
+use Jikan\Model\User\AnimeStats;
+use Jikan\Model\User\MangaStats;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -34,9 +34,9 @@ class UserProfileParser
      *
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\UserProfile
+    public function getModel(): Model\User\UserProfile
     {
-        return Model\UserProfile::fromParser($this);
+        return Model\User\UserProfile::fromParser($this);
     }
 
     /**
@@ -131,7 +131,7 @@ class UserProfileParser
     }
 
     /**
-     * @return AnimeStats
+     * @return \Jikan\Model\User\AnimeStats
      * @throws \InvalidArgumentException
      */
     public function getAnimeStats(): AnimeStats
@@ -143,7 +143,7 @@ class UserProfileParser
     }
 
     /**
-     * @return MangaStats
+     * @return \Jikan\Model\User\MangaStats
      * @throws \InvalidArgumentException
      */
     public function getMangaStats(): MangaStats
@@ -173,10 +173,10 @@ class UserProfileParser
     }
 
     /**
-     * @return Model\Favorites
+     * @return \Jikan\Model\User\Favorites
      * @throws \InvalidArgumentException
      */
-    public function getFavorites(): Model\Favorites
+    public function getFavorites(): Model\User\Favorites
     {
         // $node = $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
         $node = $this->crawler->filterXPath('//div[contains(@class, \'user-favorites\')]');

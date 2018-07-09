@@ -2,11 +2,11 @@
 
 namespace Jikan\Parser\Search;
 
-use Jikan\Helper\Parser;
 use Jikan\Helper\JString;
-use Jikan\Model\MalUrl;
-use Symfony\Component\DomCrawler\Crawler;
+use Jikan\Helper\Parser;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Search\MangaSearchListItem;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class MangaSearchListItemParser
@@ -42,14 +42,14 @@ class MangaSearchListItemParser
     }
 
     /**
-     * @return MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \InvalidArgumentException
      */
     public function getUrl(): MalUrl
     {
         return new MalUrl(
             $this->getTitle(),
-            $this->crawler->filterXPath('//td[2]/a')->attr("href")
+            $this->crawler->filterXPath('//td[2]/a')->attr('href')
         );
     }
 
@@ -123,14 +123,14 @@ class MangaSearchListItemParser
     }
 
     /**
-     * @return ?\DateTimeImmutable
+     * @return \DateTimeImmutable|null ?\DateTimeImmutable
      * @throws \InvalidArgumentException
      */
     public function getStartDate(): ?\DateTimeImmutable
     {
         $date = $this->getStartDateString();
 
-        if (is_null($date)) {
+        if (null === $date) {
             return null;
         }
 
@@ -138,14 +138,14 @@ class MangaSearchListItemParser
     }
 
     /**
-     * @return ?\DateTimeImmutable
+     * @return \DateTimeImmutable|null ?\DateTimeImmutable
      * @throws \InvalidArgumentException
      */
     public function getEndDate(): ?\DateTimeImmutable
     {
         $date = $this->getEndDateString();
 
-        if (is_null($date)) {
+        if (null === $date) {
             return null;
         }
 
@@ -153,7 +153,7 @@ class MangaSearchListItemParser
     }
 
     /**
-     * @return ?string
+     * @return null|string ?string
      * @throws \InvalidArgumentException
      */
     public function getStartDateString(): ?string
@@ -168,7 +168,7 @@ class MangaSearchListItemParser
     }
 
     /**
-     * @return ?string
+     * @return null|string ?string
      * @throws \InvalidArgumentException
      */
     public function getEndDateString(): ?string

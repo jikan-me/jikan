@@ -2,13 +2,12 @@
 
 namespace Jikan\Model\Forum;
 
-use Jikan\Model\Forum\ForumPost;
 use Jikan\Parser\Forum\ForumTopicParser;
 
 /**
  * Class ForumPost
  *
- * @package Jikan\Model\Anime
+ * @package Jikan\Model\Anime\Anime
  */
 class ForumTopic
 {

@@ -35,9 +35,9 @@ class PersonParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Person
+    public function getModel(): Model\Person\Person
     {
-        return Model\Person::fromParser($this);
+        return Model\Person\Person::fromParser($this);
     }
 
 
@@ -227,7 +227,7 @@ class PersonParser implements ParserInterface
 
 
     /**
-     * @return Model\VoiceActingRole[]
+     * @return \Jikan\Model\Person\VoiceActingRole[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -252,7 +252,7 @@ class PersonParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeStaffPosition[]
+     * @return \Jikan\Model\Person\AnimeStaffPosition[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -277,7 +277,7 @@ class PersonParser implements ParserInterface
     }
 
     /**
-     * @return Model\PublishedManga[]
+     * @return \Jikan\Model\Person\PublishedManga[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

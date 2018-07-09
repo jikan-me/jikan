@@ -3,8 +3,8 @@
 namespace JikanTest\Parser\Manga;
 
 use Jikan\Jikan;
-use Jikan\Model\DateRange;
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\DateRange;
+use Jikan\Model\Common\MalUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,7 +18,7 @@ class MangaParserTest extends TestCase
     private $parser;
 
     /**
-     * @var \Jikan\Model\Manga
+     * @var \Jikan\Model\Manga\Manga
      */
     private $manga;
 
@@ -232,7 +232,7 @@ class MangaParserTest extends TestCase
     {
         $authors = $this->manga->getAuthors();
         self::assertCount(1, $authors);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $authors);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $authors);
         self::assertContains('Kishimoto, Masashi', $authors);
     }
 
@@ -244,7 +244,7 @@ class MangaParserTest extends TestCase
     {
         $serializations = $this->manga->getSerializations();
         self::assertCount(1, $serializations);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $serializations);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $serializations);
         self::assertContains('Shounen Jump (Weekly)', $serializations);
     }
 
@@ -256,7 +256,7 @@ class MangaParserTest extends TestCase
     {
         $genres = $this->manga->getGenres();
         self::assertCount(5, $genres);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $genres);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $genres);
         self::assertContains('Action', $genres);
         self::assertContains('Adventure', $genres);
         self::assertContains('Martial Arts', $genres);

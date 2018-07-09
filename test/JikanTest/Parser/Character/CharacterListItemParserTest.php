@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Character;
 
 use Goutte\Client;
-use Jikan\Model\VoiceActor;
+use Jikan\Model\Character\VoiceActor;
 use Jikan\Parser\Character\CharacterListItemParser;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DomCrawler\Crawler;

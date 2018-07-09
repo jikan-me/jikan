@@ -2,9 +2,9 @@
 
 namespace Jikan\Parser\Anime;
 
-use Jikan\Model\StreamEpisodeListItem;
-use Jikan\Model\PromoListItem;
-use Jikan\Model\AnimeVideos;
+use Jikan\Model\Anime\AnimeVideos;
+use Jikan\Model\Anime\PromoListItem;
+use Jikan\Model\Anime\StreamEpisodeListItem;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -31,7 +31,7 @@ class VideosParser implements ParserInterface
     }
 
     /**
-     * @return StreamEpisodeListItem[]
+     * @return \Jikan\Model\Anime\StreamEpisodeListItem[]
      * @throws \InvalidArgumentException
      */
     public function getEpisodes(): array

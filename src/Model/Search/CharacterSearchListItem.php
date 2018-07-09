@@ -2,19 +2,19 @@
 
 namespace Jikan\Model\Search;
 
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser;
 
 /**
  * Class CharacterSearchListItem
  *
- * @package Jikan\Model\Search
+ * @package Jikan\Model\Search\Search
  */
 class CharacterSearchListItem
 {
 
     /**
-     * @var MalUrl
+     * @var \Jikan\Model\Common\MalUrl
      */
     private $url;
 
@@ -34,12 +34,12 @@ class CharacterSearchListItem
     private $alternativeNames;
 
     /**
-     * @var MalUrl[]
+     * @var \Jikan\Model\Common\MalUrl[]
      */
     private $anime;
 
     /**
-     * @var MalUrl[]
+     * @var \Jikan\Model\Common\MalUrl[]
      */
     private $manga;
 
@@ -66,7 +66,7 @@ class CharacterSearchListItem
 
 
     /**
-     * @return MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      */
     public function getUrl(): MalUrl
     {
@@ -98,7 +98,7 @@ class CharacterSearchListItem
     }
 
     /**
-     * @return MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      */
     public function getAnime(): array
     {
@@ -106,7 +106,7 @@ class CharacterSearchListItem
     }
 
     /**
-     * @return MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      */
     public function getManga(): array
     {

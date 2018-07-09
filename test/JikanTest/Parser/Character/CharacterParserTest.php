@@ -109,7 +109,7 @@ class CharacterParserTest extends TestCase
     {
         $animeography = $this->parser->getAnimeography();
         self::assertCount(9, $animeography);
-        self::assertContainsOnly(\Jikan\Model\Animeography::class, $animeography);
+        self::assertContainsOnly(\Jikan\Model\Character\Animeography::class, $animeography);
     }
 
     /**
@@ -120,7 +120,7 @@ class CharacterParserTest extends TestCase
     {
         $manaography = $this->parser->getMangaography();
         self::assertCount(2, $manaography);
-        self::assertContainsOnly(\Jikan\Model\Mangaography::class, $manaography);
+        self::assertContainsOnly(\Jikan\Model\Character\Mangaography::class, $manaography);
     }
 
     /**
@@ -131,7 +131,7 @@ class CharacterParserTest extends TestCase
     {
         $voiceActors = $this->parser->getVoiceActors();
         self::assertCount(4, $voiceActors);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\VoiceActor::class, $voiceActors);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Character\VoiceActor::class, $voiceActors);
         self::assertContains('Hino, Satoshi', $voiceActors);
         self::assertContains('Mendiant, Charles', $voiceActors);
         self::assertContains('Kaminski, Stefan', $voiceActors);

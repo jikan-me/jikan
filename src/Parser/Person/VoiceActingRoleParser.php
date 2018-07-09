@@ -35,9 +35,9 @@ class VoiceActingRoleParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getModel(): Model\VoiceActingRole
+    public function getModel(): Model\Person\VoiceActingRole
     {
-        return Model\VoiceActingRole::fromParser($this);
+        return Model\Person\VoiceActingRole::fromParser($this);
     }
 
 
@@ -60,12 +60,12 @@ class VoiceActingRoleParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeMeta
+     * @return \Jikan\Model\Anime\AnimeMeta
      * @throws \InvalidArgumentException
      */
-    public function getAnimeMeta(): Model\AnimeMeta
+    public function getAnimeMeta(): Model\Anime\AnimeMeta
     {
-        return new Model\AnimeMeta(
+        return new Model\Anime\AnimeMeta(
             $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')
@@ -74,12 +74,12 @@ class VoiceActingRoleParser implements ParserInterface
 
 
     /**
-     * @return Model\CharacterMeta
+     * @return \Jikan\Model\Character\CharacterMeta
      * @throws \InvalidArgumentException
      */
-    public function getCharacterMeta(): Model\CharacterMeta
+    public function getCharacterMeta(): Model\Character\CharacterMeta
     {
-        return new Model\CharacterMeta(
+        return new Model\Character\CharacterMeta(
             $this->crawler->filterXPath('//td[position() = 3]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 3]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 4]/div/a/img')->attr('data-src')

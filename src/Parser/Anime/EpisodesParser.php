@@ -2,8 +2,8 @@
 
 namespace Jikan\Parser\Anime;
 
-use Jikan\Model\EpisodeListItem;
-use Jikan\Model\Episodes;
+use Jikan\Model\Anime\EpisodeListItem;
+use Jikan\Model\Anime\Episodes;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

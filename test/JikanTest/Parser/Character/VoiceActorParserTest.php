@@ -47,7 +47,7 @@ class VoiceActorParserTest extends TestCase
     public function it_gets_the_person()
     {
         $person = $this->parser->getPerson();
-        self::assertInstanceOf(\Jikan\Model\MalUrl::class, $person);
+        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $person);
         self::assertEquals('Hino, Satoshi', $person);
         self::assertEquals('https://myanimelist.net/people/245/Satoshi_Hino', $person->getUrl());
     }

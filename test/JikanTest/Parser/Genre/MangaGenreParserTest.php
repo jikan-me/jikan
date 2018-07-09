@@ -3,8 +3,8 @@
 namespace JikanTest\Parser\Genre;
 
 use Goutte\Client;
-use Jikan\Model\MangaCard;
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Manga\MangaCard;
 use Jikan\Parser\Genre\MangaGenreParser;
 use PHPUnit\Framework\TestCase;
 

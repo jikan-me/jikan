@@ -4,7 +4,7 @@ namespace Jikan\Parser\User\Friends;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Friend;
+use Jikan\Model\User\Friend;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

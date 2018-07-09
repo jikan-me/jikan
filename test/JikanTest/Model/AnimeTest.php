@@ -5,7 +5,6 @@
 namespace JikanTest\Parser\Anime;
 
 use Jikan\Jikan;
-use Jikan\Model\MalUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class AnimeTest extends TestCase
 {
     /**
-     * @var \Jikan\Model\Anime
+     * @var \Jikan\Model\Anime\Anime
      */
     private $anime;
 

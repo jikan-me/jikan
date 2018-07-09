@@ -57,14 +57,14 @@ class SeasonalAnimeParserTest extends TestCase
         $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         $producer = $this->parser->getProducer();
         self::assertCount(1, $producer);
-        self::assertContainsOnly(\Jikan\Model\MalUrl::class, $producer);
+        self::assertContainsOnly(\Jikan\Model\Common\MalUrl::class, $producer);
         $producer = $producer[0];
         self::assertEquals('Bones', $producer);
         self::assertEquals('https://myanimelist.net/anime/producer/4/Bones', $producer->getUrl());
 
         $producer = $this->parser2->getProducer();
         self::assertCount(2, $producer);
-        self::assertContainsOnly(\Jikan\Model\MalUrl::class, $producer);
+        self::assertContainsOnly(\Jikan\Model\Common\MalUrl::class, $producer);
         self::assertContains('Pierrot Plus', $producer);
         self::assertContains('Studio Pierrot', $producer);
     }
@@ -98,7 +98,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_genres()
     {
         $genres = $this->parser->getGenres();
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $genres);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $genres);
         self::assertContains('Action', $genres);
         self::assertContains('Comedy', $genres);
         self::assertContains('School', $genres);

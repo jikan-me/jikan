@@ -4,7 +4,7 @@ namespace Jikan\Parser\News;
 
 use Jikan\Helper\Constants;
 use Jikan\Helper\Parser;
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Model\News\NewsListItem;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;

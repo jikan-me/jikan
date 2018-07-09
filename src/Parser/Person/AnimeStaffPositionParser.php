@@ -35,9 +35,9 @@ class AnimeStaffPositionParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\AnimeStaffPosition
+    public function getModel(): Model\Person\AnimeStaffPosition
     {
-        return Model\AnimeStaffPosition::fromParser($this);
+        return Model\Person\AnimeStaffPosition::fromParser($this);
     }
 
     /**
@@ -55,12 +55,12 @@ class AnimeStaffPositionParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeMeta
+     * @return \Jikan\Model\Anime\AnimeMeta
      * @throws \InvalidArgumentException
      */
-    public function getAnimeMeta(): Model\AnimeMeta
+    public function getAnimeMeta(): Model\Anime\AnimeMeta
     {
-        return new Model\AnimeMeta(
+        return new Model\Anime\AnimeMeta(
             $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')

@@ -39,6 +39,6 @@ class SeasonalParserTest extends TestCase
     {
         $anime = $this->springParser->getSeasonalAnime();
         self::assertCount(234, $anime);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\SeasonalAnime::class, $anime);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Seasonal\SeasonalAnime::class, $anime);
     }
 }

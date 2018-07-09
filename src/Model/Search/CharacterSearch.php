@@ -7,7 +7,7 @@ use Jikan\Parser;
 /**
  * Class CharacterSearch
  *
- * @package Jikan\Model\Search
+ * @package Jikan\Model\Search\Search
  */
 class CharacterSearch
 {

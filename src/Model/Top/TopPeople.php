@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Top;
 
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
@@ -18,7 +18,7 @@ class TopPeople
     private $rank;
 
     /**
-     * @var MalUrl
+     * @var \Jikan\Model\Common\MalUrl
      */
     private $malUrl;
 
@@ -78,7 +78,7 @@ class TopPeople
     }
 
     /**
-     * @return MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      */
     public function getMalUrl(): MalUrl
     {

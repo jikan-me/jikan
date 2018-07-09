@@ -33,13 +33,13 @@ class VoiceActorParser implements ParserInterface
     /**
      * Return the model
      *
-     * @return Model\VoiceActor
+     * @return \Jikan\Model\Character\VoiceActor
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\VoiceActor
+    public function getModel(): Model\Character\VoiceActor
     {
-        return Model\VoiceActor::fromParser($this);
+        return Model\Character\VoiceActor::fromParser($this);
     }
 
     /**
@@ -82,11 +82,11 @@ class VoiceActorParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getPerson(): Model\MalUrl
+    public function getPerson(): Model\Common\MalUrl
     {
         return (new MalUrlParser(
             $this->crawler->filterXPath('//a')

@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Top;
 
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
@@ -28,7 +28,7 @@ class TopCharacter
     private $nameKanji;
 
     /**
-     * @var MalUrl[]
+     * @var \Jikan\Model\Common\MalUrl[]
      */
     private $animeography;
 
@@ -100,7 +100,7 @@ class TopCharacter
     }
 
     /**
-     * @return MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      */
     public function getAnimeography(): array
     {

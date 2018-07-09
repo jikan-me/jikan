@@ -2,7 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
-use Jikan\Model\PromoListItem;
+use Jikan\Model\Anime\PromoListItem;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -29,7 +29,7 @@ class PromoListItemParser implements ParserInterface
     }
 
     /**
-     * @return PromoListItem
+     * @return \Jikan\Model\Anime\PromoListItem
      * @throws \InvalidArgumentException
      */
     public function getModel(): PromoListItem

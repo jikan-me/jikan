@@ -106,7 +106,7 @@ class PersonParserTest extends TestCase
     {
         $voiceActingRoles = $this->parser->getPersonVoiceActingRoles();
         self::assertCount(439, $voiceActingRoles);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\VoiceActingRole::class, $voiceActingRoles);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\VoiceActingRole::class, $voiceActingRoles);
     }
 
     /**
@@ -117,7 +117,7 @@ class PersonParserTest extends TestCase
     {
         $animeStaffPositions = $this->parser->getPersonAnimeStaffPositions();
         self::assertCount(42, $animeStaffPositions);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\AnimeStaffPosition::class, $animeStaffPositions);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\AnimeStaffPosition::class, $animeStaffPositions);
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace Jikan\Parser\Anime;
 
-use Jikan\Model\CharacterListItem;
-use Jikan\Model\CharactersAndStaff;
-use Jikan\Model\StaffListItem;
+use Jikan\Model\Anime\CharactersAndStaff;
+use Jikan\Model\Anime\StaffListItem;
+use Jikan\Model\Character\CharacterListItem;
 use Jikan\Parser\Character\CharacterListItemParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -32,7 +32,7 @@ class CharactersAndStaffParser implements ParserInterface
     }
 
     /**
-     * @return CharacterListItem[]
+     * @return \Jikan\Model\Character\CharacterListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

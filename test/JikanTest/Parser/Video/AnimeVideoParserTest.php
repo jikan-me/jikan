@@ -3,8 +3,8 @@
 namespace JikanTest\Parser\Video;
 
 use Goutte\Client;
-use Jikan\Model\PromoListItem;
-use Jikan\Model\StreamEpisodeListItem;
+use Jikan\Model\Anime\PromoListItem;
+use Jikan\Model\Anime\StreamEpisodeListItem;
 use Jikan\Parser\Anime\VideosParser;
 use PHPUnit\Framework\TestCase;
 

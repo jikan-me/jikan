@@ -36,11 +36,11 @@ class MalClient
     /**
      * @param Request\Anime\AnimeRequest $request
      *
-     * @return Model\Anime
+     * @return \Jikan\Model\Anime\Anime
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAnime(Request\Anime\AnimeRequest $request): Model\Anime
+    public function getAnime(Request\Anime\AnimeRequest $request): Model\Anime\Anime
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\AnimeParser($crawler);
@@ -51,11 +51,11 @@ class MalClient
     /**
      * @param Request\Anime\AnimeEpisodesRequest $request
      *
-     * @return Model\Episodes
+     * @return \Jikan\Model\Anime\Episodes
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Episodes
+    public function getAnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Anime\Episodes
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\EpisodesParser($crawler);
@@ -66,11 +66,11 @@ class MalClient
     /**
      * @param Request\Anime\AnimeVideosRequest $request
      *
-     * @return Model\AnimeVideos
+     * @return \Jikan\Model\Anime\AnimeVideos
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\AnimeVideos
+    public function getAnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\Anime\AnimeVideos
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\VideosParser($crawler);
@@ -81,11 +81,11 @@ class MalClient
     /**
      * @param Request\Manga\MangaRequest $request
      *
-     * @return Model\Manga
+     * @return \Jikan\Model\Manga\Manga
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getManga(Request\Manga\MangaRequest $request): Model\Manga
+    public function getManga(Request\Manga\MangaRequest $request): Model\Manga\Manga
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Manga\MangaParser($crawler);
@@ -96,12 +96,12 @@ class MalClient
     /**
      * @param Request\Character\CharacterRequest $request
      *
-     * @return Model\Character
+     * @return \Jikan\Model\Character\Character
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      * CharacterPictures
      */
-    public function getCharacter(Request\Character\CharacterRequest $request): Model\Character
+    public function getCharacter(Request\Character\CharacterRequest $request): Model\Character\Character
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Character\CharacterParser($crawler);
@@ -112,11 +112,11 @@ class MalClient
     /**
      * @param Request\Person\PersonRequest $request
      *
-     * @return Model\Person
+     * @return \Jikan\Model\Person\Person
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getPerson(Request\Person\PersonRequest $request): Model\Person
+    public function getPerson(Request\Person\PersonRequest $request): Model\Person\Person
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Person\PersonParser($crawler);
@@ -127,10 +127,10 @@ class MalClient
     /**
      * @param Request\User\UserProfileRequest $request
      *
-     * @return Model\UserProfile
+     * @return \Jikan\Model\User\UserProfile
      * @throws \InvalidArgumentException
      */
-    public function getUserProfile(Request\User\UserProfileRequest $request): Model\UserProfile
+    public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\User\Profile\UserProfileParser($crawler);
@@ -141,7 +141,7 @@ class MalClient
     /**
      * @param Request\User\UserFriendsRequest $request
      *
-     * @return Model\Friend[]
+     * @return \Jikan\Model\User\Friend[]
      * @throws \InvalidArgumentException
      */
     public function getUserFriends(Request\User\UserFriendsRequest $request): array
@@ -155,11 +155,11 @@ class MalClient
     /**
      * @param Request\Seasonal\SeasonalRequest $request
      *
-     * @return Model\Seasonal
+     * @return \Jikan\Model\Seasonal\Seasonal
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSeasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal
+    public function getSeasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal\Seasonal
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Seasonal\SeasonalParser($crawler);
@@ -170,11 +170,11 @@ class MalClient
     /**
      * @param Request\Producer\ProducerRequest $request
      *
-     * @return Model\Producer
+     * @return \Jikan\Model\Producer\Producer
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getProducer(Request\Producer\ProducerRequest $request): Model\Producer
+    public function getProducer(Request\Producer\ProducerRequest $request): Model\Producer\Producer
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Producer\ProducerParser($crawler);
@@ -185,11 +185,11 @@ class MalClient
     /**
      * @param Request\Magazine\MagazineRequest $request
      *
-     * @return Model\Magazine
+     * @return \Jikan\Model\Magazine\Magazine
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getMagazine(Request\Magazine\MagazineRequest $request): Model\Magazine
+    public function getMagazine(Request\Magazine\MagazineRequest $request): Model\Magazine\Magazine
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Magazine\MagazineParser($crawler);
@@ -200,11 +200,11 @@ class MalClient
     /**
      * @param Request\Genre\AnimeGenreRequest $request
      *
-     * @return Model\AnimeGenre
+     * @return \Jikan\Model\Anime\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\AnimeGenre
+    public function getAnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Anime\AnimeGenre
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
 
@@ -216,11 +216,11 @@ class MalClient
     /**
      * @param Request\Genre\MangaGenreRequest $request
      *
-     * @return Model\MangaGenre
+     * @return \Jikan\Model\Genre\MangaGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getMangaGenre(Request\Genre\MangaGenreRequest $request): Model\MangaGenre
+    public function getMangaGenre(Request\Genre\MangaGenreRequest $request): Model\Genre\MangaGenre
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
 
@@ -232,11 +232,11 @@ class MalClient
     /**
      * @param Request\Schedule\ScheduleRequest $request
      *
-     * @return Model\Schedule
+     * @return \Jikan\Model\Shedule\Schedule
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSchedule(Request\Schedule\ScheduleRequest $request): Model\Schedule
+    public function getSchedule(Request\Schedule\ScheduleRequest $request): Model\Shedule\Schedule
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Schedule\ScheduleParser($crawler);
@@ -247,13 +247,13 @@ class MalClient
     /**
      * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      *
-     * @return Model\CharactersAndStaff
+     * @return \Jikan\Model\Anime\CharactersAndStaff
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
-    ): Model\CharactersAndStaff {
+    ): Model\Anime\CharactersAndStaff {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\CharactersAndStaffParser($crawler);
 
@@ -263,7 +263,7 @@ class MalClient
     /**
      * @param Request\Anime\AnimePicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function getAnimePictures(Request\Anime\AnimePicturesRequest $request): array
@@ -277,7 +277,7 @@ class MalClient
     /**
      * @param Request\Manga\MangaPicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function getMangaPictures(Request\Manga\MangaPicturesRequest $request): array
@@ -291,7 +291,7 @@ class MalClient
     /**
      * @param Request\Character\CharacterPicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function getCharacterPictures(Request\Character\CharacterPicturesRequest $request): array
@@ -305,7 +305,7 @@ class MalClient
     /**
      * @param Request\Person\PersonPicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function getPersonPictures(Request\Person\PersonPicturesRequest $request): array

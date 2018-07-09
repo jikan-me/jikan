@@ -127,7 +127,7 @@ class MangaSearchRequest implements RequestInterface
      * @param float $score
      * @return $this
      */
-    public function setScore(float $score)
+    public function setScore(float $score): self
     {
         $this->score = $score;
 
@@ -138,7 +138,7 @@ class MangaSearchRequest implements RequestInterface
      * @param int $status
      * @return $this
      */
-    public function setStatus(int $status)
+    public function setStatus(int $status): self
     {
         $this->status = $status;
 
@@ -149,7 +149,7 @@ class MangaSearchRequest implements RequestInterface
      * @param int $magazine
      * @return $this
      */
-    public function setMagazine(int $magazine)
+    public function setMagazine(int $magazine): self
     {
         $this->magazine = $magazine;
 
@@ -157,10 +157,13 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day, int $month, int $year
+     * @param int $day , int $month, int $year
+     * @param int $month
+     * @param int $year
+     *
      * @return $this
      */
-    public function setStartDate(int $day, int $month, int $year)
+    public function setStartDate(int $day, int $month, int $year): self
     {
         $this->startDate = [$day, $month, $year];
 
@@ -168,10 +171,12 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day, int $month, int $year
+     * @param int $day , int $month, int $year
+     * @param int $month
+     * @param int $year
      * @return $this
      */
-    public function setEndDate(int $day, int $month, int $year)
+    public function setEndDate(int $day, int $month, int $year): self
     {
         $this->endDate = [$day, $month, $year];
 
@@ -182,7 +187,7 @@ class MangaSearchRequest implements RequestInterface
      * @param int ...$genre
      * @return $this
      */
-    public function setGenre(...$genre)
+    public function setGenre(...$genre): self
     {
         $this->genre = array_unique(
             array_merge($genre, $this->genre)
@@ -196,7 +201,7 @@ class MangaSearchRequest implements RequestInterface
      * @param bool $genreExclude
      * @return $this
      */
-    public function setGenreExclude(bool $genreExclude)
+    public function setGenreExclude(bool $genreExclude): self
     {
         $this->genreExclude = $genreExclude;
 

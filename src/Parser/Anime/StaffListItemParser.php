@@ -4,8 +4,8 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\Parser;
-use Jikan\Model\MalUrl;
-use Jikan\Model\StaffListItem;
+use Jikan\Model\Anime\StaffListItem;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -60,7 +60,7 @@ class StaffListItemParser implements ParserInterface
     }
 
     /**
-     * @return MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \InvalidArgumentException
      */
     public function getMalUrl(): MalUrl

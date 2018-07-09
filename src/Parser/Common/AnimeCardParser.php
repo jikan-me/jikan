@@ -31,23 +31,23 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\SeasonalAnime
+     * @return \Jikan\Model\Seasonal\SeasonalAnime
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\AnimeCard
+    public function getModel(): Model\Anime\AnimeCard
     {
-        return Model\AnimeCard::parseAnimeCard($this);
+        return Model\Anime\AnimeCard::parseAnimeCard($this);
     }
 
     /**
-     * @return Model\SeasonalAnime
+     * @return \Jikan\Model\Seasonal\SeasonalAnime
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSeasonalModel(): Model\SeasonalAnime
+    public function getSeasonalModel(): Model\Seasonal\SeasonalAnime
     {
-        return Model\SeasonalAnime::parseSeasonalAnime($this);
+        return Model\Seasonal\SeasonalAnime::parseSeasonalAnime($this);
     }
 
     /**
@@ -61,7 +61,7 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -102,7 +102,7 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return array|Model\MalUrl[]
+     * @return array|\Jikan\Model\Common\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -179,13 +179,13 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeMeta
+     * @return \Jikan\Model\Anime\AnimeMeta
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeMeta(): Model\AnimeMeta
+    public function getAnimeMeta(): Model\Anime\AnimeMeta
     {
-        return new Model\AnimeMeta(
+        return new Model\Anime\AnimeMeta(
             $this->getTitle(),
             $this->getAnimeUrl(),
             $this->getAnimeImage()

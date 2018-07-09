@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Person;
 
 use Goutte\Client;
-use Jikan\Model\AnimeCard;
+use Jikan\Model\Anime\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;
 use PHPUnit\Framework\TestCase;
 

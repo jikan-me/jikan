@@ -15,11 +15,11 @@ class AnimeographyParser extends OgraphyParser implements ParserInterface
     /**
      * Return the model
      *
-     * @return Model\Animeography
+     * @return \Jikan\Model\Character\Animeography
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Animeography
+    public function getModel(): Model\Character\Animeography
     {
-        return Model\Animeography::fromParser($this);
+        return Model\Character\Animeography::fromParser($this);
     }
 }

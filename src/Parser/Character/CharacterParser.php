@@ -36,9 +36,9 @@ class CharacterParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Character
+    public function getModel(): Model\Character\Character
     {
-        return Model\Character::fromParser($this);
+        return Model\Character\Character::fromParser($this);
     }
 
     /**
@@ -135,7 +135,7 @@ class CharacterParser implements ParserInterface
     }
 
     /**
-     * @return Model\Animeography[]
+     * @return \Jikan\Model\Character\Animeography[]
      * @throws \InvalidArgumentException
      */
     public function getAnimeography(): array
@@ -150,7 +150,7 @@ class CharacterParser implements ParserInterface
     }
 
     /**
-     * @return Model\Mangaography[]
+     * @return \Jikan\Model\Character\Mangaography[]
      * @throws \InvalidArgumentException
      */
     public function getMangaography(): array
@@ -165,7 +165,7 @@ class CharacterParser implements ParserInterface
     }
 
     /**
-     * @return Model\VoiceActor[]
+     * @return \Jikan\Model\Character\VoiceActor[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

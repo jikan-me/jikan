@@ -6,7 +6,7 @@ use Jikan\Parser\Anime\AnimeStatsParser;
 
 /**
  * Class AnimeStats
- * @package Jikan\Model\Anime
+ * @package Jikan\Model\Anime\Anime
  */
 class AnimeStats
 {
@@ -46,7 +46,10 @@ class AnimeStats
     private $scores;
 
     /**
+     * @param AnimeStatsParser $parser
+     *
      * @return AnimeStats
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(AnimeStatsParser $parser): AnimeStats
     {

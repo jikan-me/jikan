@@ -15,11 +15,11 @@ class MangaographyParser extends OgraphyParser implements ParserInterface
     /**
      * Return the model
      *
-     * @return Model\Mangaography
+     * @return \Jikan\Model\Character\Mangaography
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Mangaography
+    public function getModel(): Model\Character\Mangaography
     {
-        return Model\Mangaography::fromParser($this);
+        return Model\Character\Mangaography::fromParser($this);
     }
 }

@@ -51,6 +51,10 @@ class ForumTopicParser
         return Constants::BASE_URL.$this->crawler->filterXPath('//a[2]')->attr('href');
     }
 
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
     public function getTitle(): string
     {
         return $this->crawler->filterXPath('//a[2]')->text();

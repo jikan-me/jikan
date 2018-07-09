@@ -4,7 +4,7 @@
 
 namespace JikanTest\Parser\Anime;
 
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,7 +18,7 @@ class AnimeParserTest extends TestCase
     private $parser;
 
     /**
-     * @var \Jikan\Model\Anime
+     * @var \Jikan\Model\Anime\Anime
      */
     private $anime;
 
@@ -200,7 +200,7 @@ class AnimeParserTest extends TestCase
     {
         $producers = $this->parser->getProducers();
         self::assertCount(3, $producers);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $producers);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $producers);
         self::assertContains('Fuji TV', $producers);
         self::assertContains('TAP', $producers);
         self::assertContains('Shueisha', $producers);
@@ -214,7 +214,7 @@ class AnimeParserTest extends TestCase
     {
         $licensors = $this->parser->getLicensors();
         self::assertCount(2, $licensors);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $licensors);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $licensors);
         self::assertContains('Funimation', $licensors);
         self::assertContains('4Kids Entertainment', $licensors);
     }
@@ -227,7 +227,7 @@ class AnimeParserTest extends TestCase
     {
         $studios = $this->parser->getStudios();
         self::assertCount(1, $studios);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $studios);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $studios);
         self::assertContains('Toei Animation', $studios);
     }
 
@@ -248,7 +248,7 @@ class AnimeParserTest extends TestCase
     {
         $genres = $this->parser->getGenres();
         self::assertCount(7, $genres);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MalUrl::class, $genres);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $genres);
         self::assertContains('Action', $genres);
         self::assertContains('Adventure', $genres);
         self::assertContains('Comedy', $genres);

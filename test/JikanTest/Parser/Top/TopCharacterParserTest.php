@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Top;
 
 use Goutte\Client;
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 use PHPUnit\Framework\TestCase;
 

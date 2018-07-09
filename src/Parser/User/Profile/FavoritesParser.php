@@ -2,11 +2,11 @@
 
 namespace Jikan\Parser\User\Profile;
 
-use Jikan\Model\Favorites;
-use Jikan\Model\AnimeMeta;
-use Jikan\Model\MangaMeta;
-use Jikan\Model\CharacterMeta;
-use Jikan\Model\PersonMeta;
+use Jikan\Model\Anime\AnimeMeta;
+use Jikan\Model\Character\CharacterMeta;
+use Jikan\Model\Common\MangaMeta;
+use Jikan\Model\Common\PersonMeta;
+use Jikan\Model\User\Favorites;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**

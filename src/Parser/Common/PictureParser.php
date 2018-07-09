@@ -2,7 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
-use Jikan\Model\Picture;
+use Jikan\Model\Common\Picture;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

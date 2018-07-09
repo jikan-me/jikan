@@ -2,7 +2,7 @@
 
 namespace Jikan\Parser\User\Friends;
 
-use Jikan\Model\Friend;
+use Jikan\Model\User\Friend;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

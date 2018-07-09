@@ -32,17 +32,17 @@ class AnimeGenreParser implements ParserInterface
     }
 
     /**
-     * @return Model\AnimeGenre
+     * @return \Jikan\Model\Anime\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\AnimeGenre
+    public function getModel(): Model\Anime\AnimeGenre
     {
-        return Model\AnimeGenre::fromParser($this);
+        return Model\Anime\AnimeGenre::fromParser($this);
     }
 
     /**
-     * @return array|Model\AnimeGenre[]
+     * @return array|\Jikan\Model\Anime\AnimeGenre[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
@@ -58,13 +58,13 @@ class AnimeGenreParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getUrl(): Model\MalUrl
+    public function getUrl(): Model\Common\MalUrl
     {
-        return new Model\MalUrl(
+        return new Model\Common\MalUrl(
             JString::cleanse(
                 Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
             ),

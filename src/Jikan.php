@@ -43,11 +43,11 @@ class Jikan
     /**
      * @param Request\Anime\AnimeRequest $request
      *
-     * @return Model\Anime
+     * @return \Jikan\Model\Anime\Anime
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Anime(Request\Anime\AnimeRequest $request): Model\Anime
+    public function Anime(Request\Anime\AnimeRequest $request): Model\Anime\Anime
     {
         return $this->myanimelist->getAnime($request);
     }
@@ -55,11 +55,11 @@ class Jikan
     /**
      * @param Request\Anime\AnimeEpisodesRequest $request
      *
-     * @return Model\Episodes
+     * @return \Jikan\Model\Anime\Episodes
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Episodes
+    public function AnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Anime\Episodes
     {
         return $this->myanimelist->getAnimeEpisodes($request);
     }
@@ -67,11 +67,11 @@ class Jikan
     /**
      * @param Request\Anime\AnimeVideosRequest $request
      *
-     * @return Model\AnimeVideos
+     * @return \Jikan\Model\Anime\AnimeVideos
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\AnimeVideos
+    public function AnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\Anime\AnimeVideos
     {
         return $this->myanimelist->getAnimeVideos($request);
     }
@@ -79,11 +79,11 @@ class Jikan
     /**
      * @param Request\Manga\MangaRequest $request
      *
-     * @return Model\Manga
+     * @return \Jikan\Model\Manga\Manga
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Manga(Request\Manga\MangaRequest $request): Model\Manga
+    public function Manga(Request\Manga\MangaRequest $request): Model\Manga\Manga
     {
         return $this->myanimelist->getManga($request);
     }
@@ -91,11 +91,11 @@ class Jikan
     /**
      * @param Request\Character\CharacterRequest $request
      *
-     * @return Model\Character
+     * @return \Jikan\Model\Character\Character
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Character(Request\Character\CharacterRequest $request): Model\Character
+    public function Character(Request\Character\CharacterRequest $request): Model\Character\Character
     {
         return $this->myanimelist->getCharacter($request);
     }
@@ -103,11 +103,11 @@ class Jikan
     /**
      * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      *
-     * @return Model\CharactersAndStaff
+     * @return \Jikan\Model\Anime\CharactersAndStaff
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function CharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\CharactersAndStaff
+    public function CharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\Anime\CharactersAndStaff
     {
         return $this->myanimelist->getCharactersAndStaff($request);
     }
@@ -115,11 +115,11 @@ class Jikan
     /**
      * @param Request\Person\PersonRequest $request
      *
-     * @return Model\Person
+     * @return \Jikan\Model\Person\Person
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Person(Request\Person\PersonRequest $request): Model\Person
+    public function Person(Request\Person\PersonRequest $request): Model\Person\Person
     {
         return $this->myanimelist->getPerson($request);
     }
@@ -127,10 +127,10 @@ class Jikan
     /**
      * @param Request\User\UserProfileRequest $request
      *
-     * @return Model\UserProfile
+     * @return \Jikan\Model\User\UserProfile
      * @throws \InvalidArgumentException
      */
-    public function UserProfile(Request\User\UserProfileRequest $request): Model\UserProfile
+    public function UserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
     {
         return $this->myanimelist->getUserProfile($request);
     }
@@ -138,11 +138,11 @@ class Jikan
     /**
      * @param Request\Seasonal\SeasonalRequest $request
      *
-     * @return Model\Seasonal
+     * @return \Jikan\Model\Seasonal\Seasonal
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Seasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal
+    public function Seasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal\Seasonal
     {
         return $this->myanimelist->getSeasonal($request);
     }
@@ -150,11 +150,11 @@ class Jikan
     /**
      * @param Request\Producer\ProducerRequest $request
      *
-     * @return Model\Producer
+     * @return \Jikan\Model\Producer\Producer
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Producer(Request\Producer\ProducerRequest $request): Model\Producer
+    public function Producer(Request\Producer\ProducerRequest $request): Model\Producer\Producer
     {
         return $this->myanimelist->getProducer($request);
     }
@@ -162,11 +162,11 @@ class Jikan
     /**
      * @param Request\Magazine\MagazineRequest $request
      *
-     * @return Model\Magazine
+     * @return \Jikan\Model\Magazine\Magazine
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Magazine(Request\Magazine\MagazineRequest $request): Model\Magazine
+    public function Magazine(Request\Magazine\MagazineRequest $request): Model\Magazine\Magazine
     {
         return $this->myanimelist->getMagazine($request);
     }
@@ -175,11 +175,11 @@ class Jikan
     /**
      * @param Request\Genre\AnimeGenreRequest $request
      *
-     * @return Model\AnimeGenre
+     * @return \Jikan\Model\Anime\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\AnimeGenre
+    public function AnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Anime\AnimeGenre
     {
         return $this->myanimelist->getAnimeGenre($request);
     }
@@ -187,11 +187,11 @@ class Jikan
     /**
      * @param Request\Genre\MangaGenreRequest $request
      *
-     * @return Model\MangaGenre
+     * @return \Jikan\Model\Genre\MangaGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function MangaGenre(Request\Genre\MangaGenreRequest $request): Model\MangaGenre
+    public function MangaGenre(Request\Genre\MangaGenreRequest $request): Model\Genre\MangaGenre
     {
         return $this->myanimelist->getMangaGenre($request);
     }
@@ -199,11 +199,11 @@ class Jikan
     /**
      * @param Request\Schedule\ScheduleRequest $request
      *
-     * @return Model\Schedule
+     * @return \Jikan\Model\Shedule\Schedule
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Schedule(Request\Schedule\ScheduleRequest $request): Model\Schedule
+    public function Schedule(Request\Schedule\ScheduleRequest $request): Model\Shedule\Schedule
     {
         return $this->myanimelist->getSchedule($request);
     }
@@ -211,7 +211,7 @@ class Jikan
     /**
      * @param Request\User\UserFriendsRequest $request
      *
-     * @return Model\UserFriend[]
+     * @return Model\User\Friend[]
      * @throws \InvalidArgumentException
      */
     public function UserFriends(Request\User\UserFriendsRequest $request): array
@@ -222,7 +222,7 @@ class Jikan
     /**
      * @param Request\Anime\AnimePicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function AnimePictures(Request\Anime\AnimePicturesRequest $request): array
@@ -233,7 +233,7 @@ class Jikan
     /**
      * @param Request\Manga\MangaPicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function MangaPictures(Request\Manga\MangaPicturesRequest $request): array
@@ -244,7 +244,7 @@ class Jikan
     /**
      * @param Request\Person\PersonPicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function PersonPictures(Request\Person\PersonPicturesRequest $request): array
@@ -255,7 +255,7 @@ class Jikan
     /**
      * @param Request\Character\CharacterPicturesRequest $request
      *
-     * @return Model\Picture[]
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
      */
     public function CharacterPictures(Request\Character\CharacterPicturesRequest $request): array

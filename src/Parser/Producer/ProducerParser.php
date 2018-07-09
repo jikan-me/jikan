@@ -32,17 +32,17 @@ class ProducerParser implements ParserInterface
     }
 
     /**
-     * @return Model\Producer
+     * @return \Jikan\Model\Producer\Producer
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Producer
+    public function getModel(): Model\Producer\Producer
     {
-        return Model\Producer::fromParser($this);
+        return Model\Producer\Producer::fromParser($this);
     }
 
     /**
-     * @return array|Model\ProducerAnime[]
+     * @return array|\Jikan\Model\Producer\ProducerAnime[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
@@ -58,13 +58,13 @@ class ProducerParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getUrl(): Model\MalUrl
+    public function getUrl(): Model\Common\MalUrl
     {
-        return new Model\MalUrl(
+        return new Model\Common\MalUrl(
             JString::cleanse(
                 Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
             ),

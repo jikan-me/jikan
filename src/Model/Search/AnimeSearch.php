@@ -7,7 +7,7 @@ use Jikan\Parser;
 /**
  * Class CharacterParser
  *
- * @package Jikan\Model\Search
+ * @package Jikan\Model\Search\Search
  */
 class AnimeSearch
 {

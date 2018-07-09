@@ -2,7 +2,6 @@
 
 namespace Jikan\Parser\Manga;
 
-use Jikan\Model\Anime\AnimeStats;
 use Jikan\Model\Manga\MangaStats;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -31,6 +30,7 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getReading(): int
     {
@@ -42,6 +42,7 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getCompleted(): int
     {
@@ -53,6 +54,7 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getOnHold(): int
     {
@@ -64,6 +66,7 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getDropped(): int
     {
@@ -75,6 +78,7 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getPlanToRead(): int
     {
@@ -86,6 +90,7 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getTotal(): int
     {
@@ -97,6 +102,7 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      */
     public function getScores(): array
     {
@@ -128,9 +134,8 @@ class MangaStatsParser implements ParserInterface
 
     /**
      * @param $input
-     * @param $badText
      *
-     * @return float
+     * @return int
      */
     private function sanitize($input): int
     {
@@ -138,7 +143,7 @@ class MangaStatsParser implements ParserInterface
     }
 
     /**
-     * @return AnimeStats
+     * @return MangaStats
      * @throws \InvalidArgumentException
      */
     public function getModel(): MangaStats

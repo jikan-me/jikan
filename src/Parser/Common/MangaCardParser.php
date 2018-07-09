@@ -31,13 +31,13 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\MangaCard
+     * @return \Jikan\Model\Manga\MangaCard
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\MangaCard
+    public function getModel(): Model\Manga\MangaCard
     {
-        return Model\MangaCard::parseMangaCard($this);
+        return Model\Manga\MangaCard::parseMangaCard($this);
     }
 
     /**
@@ -51,7 +51,7 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -92,7 +92,7 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
-     * @return array|Model\MalUrl[]
+     * @return array|\Jikan\Model\Common\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -150,13 +150,13 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
-     * @return Model\MangaMeta
+     * @return \Jikan\Model\Common\MangaMeta
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getMangaMeta(): Model\MangaMeta
+    public function getMangaMeta(): Model\Common\MangaMeta
     {
-        return new Model\MangaMeta(
+        return new Model\Common\MangaMeta(
             $this->getTitle(),
             $this->getMangaUrl(),
             $this->getMangaImage()

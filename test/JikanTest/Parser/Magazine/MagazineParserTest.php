@@ -3,7 +3,6 @@
 namespace JikanTest\Parser\Magazine;
 
 use Goutte\Client;
-use Jikan\Model\MangaCard;
 use Jikan\Parser\Magazine\MagazineParser;
 use PHPUnit\Framework\TestCase;
 
@@ -31,7 +30,7 @@ class MagazineParserTest extends TestCase
     public function it_gets_url()
     {
         $url = $this->parser->getUrl();
-        self::assertInstanceOf(\Jikan\Model\MalUrl::class, $url);
+        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $url);
     }
 
     /**
@@ -42,6 +41,6 @@ class MagazineParserTest extends TestCase
     {
         $manga = $this->parser->getMagazineManga();
         self::assertCount(56, $manga);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MangaCard::class, $manga);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Manga\MangaCard::class, $manga);
     }
 }

@@ -31,17 +31,17 @@ class SeasonalParser implements ParserInterface
     }
 
     /**
-     * @return Model\Seasonal
+     * @return \Jikan\Model\Seasonal\Seasonal
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Seasonal
+    public function getModel(): Model\Seasonal\Seasonal
     {
-        return Model\Seasonal::fromParser($this);
+        return Model\Seasonal\Seasonal::fromParser($this);
     }
 
     /**
-     * @return array|Model\SeasonalAnime[]
+     * @return array|\Jikan\Model\Seasonal\SeasonalAnime[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */

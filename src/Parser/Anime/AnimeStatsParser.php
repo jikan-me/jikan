@@ -30,6 +30,7 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getWatching(): int
     {
@@ -41,6 +42,7 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getCompleted(): int
     {
@@ -52,6 +54,7 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getOnHold(): int
     {
@@ -63,6 +66,7 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getDropped(): int
     {
@@ -74,6 +78,7 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getPlanToWatch(): int
     {
@@ -85,6 +90,7 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getTotal(): int
     {
@@ -96,6 +102,7 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      */
     public function getScores(): array
     {
@@ -127,9 +134,8 @@ class AnimeStatsParser implements ParserInterface
 
     /**
      * @param $input
-     * @param $badText
      *
-     * @return float
+     * @return int
      */
     private function sanitize($input): int
     {

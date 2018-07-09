@@ -45,7 +45,7 @@ class CharacterSearchRequest implements RequestInterface
 
         $query = http_build_query([
             'q' => $this->query,
-            'show' => ($this->page != 1) ? 50 * ($this->page-1) : null,
+            'show' => ($this->page !== 1) ? 50 * ($this->page-1) : null,
         ]);
 
         return sprintf(

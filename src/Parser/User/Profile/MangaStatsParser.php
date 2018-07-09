@@ -3,7 +3,7 @@
 namespace Jikan\Parser\User\Profile;
 
 use Jikan\Helper\Parser;
-use Jikan\Model\MangaStats;
+use Jikan\Model\User\MangaStats;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**

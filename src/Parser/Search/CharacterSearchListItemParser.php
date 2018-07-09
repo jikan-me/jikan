@@ -3,11 +3,11 @@
 namespace Jikan\Parser\Search;
 
 use Jikan\Helper\Constants;
-use Jikan\Helper\Parser;
 use Jikan\Helper\JString;
-use Jikan\Model\MalUrl;
-use Symfony\Component\DomCrawler\Crawler;
+use Jikan\Helper\Parser;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Search\CharacterSearchListItem;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class CharacterSearchListItemParser
@@ -49,7 +49,7 @@ class CharacterSearchListItemParser
     {
         return new MalUrl(
             $this->getName(),
-            $this->crawler->filterXPath('//td[2]/a')->attr("href")
+            $this->crawler->filterXPath('//td[2]/a')->attr('href')
         );
     }
 
@@ -75,7 +75,7 @@ class CharacterSearchListItemParser
         }
 
         $names = str_replace(['(', ')'], '', $names->text());
-        $names = explode(",", $names);
+        $names = explode(',', $names);
 
         foreach ($names as &$name) {
             $name = JString::cleanse($name);
@@ -111,7 +111,7 @@ class CharacterSearchListItemParser
         return $anime->each(function (Crawler $c) {
             return new MalUrl(
                 $c->text(),
-                Constants::BASE_URL . $c->attr("href")
+                Constants::BASE_URL . $c->attr('href')
             );
         });
     }
@@ -132,7 +132,7 @@ class CharacterSearchListItemParser
         return $manga->each(function (Crawler $c) {
             return new MalUrl(
                 $c->text(),
-                Constants::BASE_URL . $c->attr("href")
+                Constants::BASE_URL . $c->attr('href')
             );
         });
     }

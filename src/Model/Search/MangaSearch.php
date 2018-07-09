@@ -7,7 +7,7 @@ use Jikan\Parser;
 /**
  * Class MangaSearch
  *
- * @package Jikan\Model\Search
+ * @package Jikan\Model\Search\Search
  */
 class MangaSearch
 {

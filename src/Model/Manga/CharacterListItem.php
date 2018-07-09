@@ -7,7 +7,7 @@ use Jikan\Parser\Character\CharacterListItemParser;
 /**
  * Class CharacterParser
  *
- * @package Jikan\Model\Manga
+ * @package Jikan\Model\Manga\Manga
  */
 class CharacterListItem
 {

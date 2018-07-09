@@ -35,9 +35,9 @@ class PublishedMangaParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getModel(): Model\PublishedManga
+    public function getModel(): Model\Person\PublishedManga
     {
-        return Model\PublishedManga::fromParser($this);
+        return Model\Person\PublishedManga::fromParser($this);
     }
 
     /**
@@ -55,12 +55,12 @@ class PublishedMangaParser implements ParserInterface
     }
 
     /**
-     * @return Model\MangaMeta
+     * @return \Jikan\Model\Common\MangaMeta
      * @throws \InvalidArgumentException
      */
-    public function getMangaMeta(): Model\MangaMeta
+    public function getMangaMeta(): Model\Common\MangaMeta
     {
-        return new Model\MangaMeta(
+        return new Model\Common\MangaMeta(
             $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')

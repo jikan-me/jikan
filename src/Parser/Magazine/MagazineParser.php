@@ -32,17 +32,17 @@ class MagazineParser implements ParserInterface
     }
 
     /**
-     * @return Model\Magazine
+     * @return \Jikan\Model\Magazine\Magazine
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Magazine
+    public function getModel(): Model\Magazine\Magazine
     {
-        return Model\Magazine::fromParser($this);
+        return Model\Magazine\Magazine::fromParser($this);
     }
 
     /**
-     * @return array|Model\MagazineManga[]
+     * @return array|\Jikan\Model\Magazine\MagazineManga[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
@@ -58,13 +58,13 @@ class MagazineParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getUrl(): Model\MalUrl
+    public function getUrl(): Model\Common\MalUrl
     {
-        return new Model\MalUrl(
+        return new Model\Common\MalUrl(
             JString::cleanse(
                 Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
             ),

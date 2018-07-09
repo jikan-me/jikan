@@ -2,13 +2,13 @@
 
 namespace Jikan\Model\Search;
 
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser;
 
 /**
  * Class MangaSearchListItem
  *
- * @package Jikan\Model\Search
+ * @package Jikan\Model\Search\Search
  */
 class MangaSearchListItem
 {
@@ -110,12 +110,12 @@ class MangaSearchListItem
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->publishing =
-            \is_null($instance->endDate)
-            && !\is_null($instance->startDate)
+            null === $instance->endDate
+            && null !== $instance->startDate
             &&
             (
                 new \DateTimeImmutable(
-                    "now",
+                    'now',
                     new \DateTimeZone('UTC')
                 ) > $instance->startDate
             );
@@ -189,7 +189,7 @@ class MangaSearchListItem
     }
 
     /**
-     * @return ?\DateTimeImmutable
+     * @return \DateTimeImmutable|null ?\DateTimeImmutable
      */
     public function getStartDate(): ?\DateTimeImmutable
     {
@@ -197,7 +197,7 @@ class MangaSearchListItem
     }
 
     /**
-     * @return ?\DateTimeImmutable
+     * @return \DateTimeImmutable|null ?\DateTimeImmutable
      */
     public function getEndDate(): ?\DateTimeImmutable
     {
@@ -213,7 +213,7 @@ class MangaSearchListItem
     }
 
     /**
-     * @return ?string
+     * @return null|string ?string
      */
     public function getStartDateString(): ?string
     {
@@ -221,7 +221,7 @@ class MangaSearchListItem
     }
 
     /**
-     * @return ?string
+     * @return null|string ?string
      */
     public function getEndDateString(): ?string
     {

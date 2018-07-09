@@ -102,7 +102,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_anime_stats()
     {
-        self::assertInstanceOf(\Jikan\Model\AnimeStats::class, $this->parser->getAnimeStats());
+        self::assertInstanceOf(\Jikan\Model\User\AnimeStats::class, $this->parser->getAnimeStats());
     }
 
     /**
@@ -111,7 +111,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_manga_stats()
     {
-        self::assertInstanceOf(\Jikan\Model\MangaStats::class, $this->parser->getMangaStats());
+        self::assertInstanceOf(\Jikan\Model\User\MangaStats::class, $this->parser->getMangaStats());
     }
 
     /**
@@ -120,14 +120,14 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_favorites()
     {
-        self::assertInstanceOf(\Jikan\Model\Favorites::class, $this->parser->getFavorites());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\AnimeMeta::class, $this->parser->getFavorites()->getAnime());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\MangaMeta::class, $this->parser->getFavorites()->getManga());
+        self::assertInstanceOf(\Jikan\Model\User\Favorites::class, $this->parser->getFavorites());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Anime\AnimeMeta::class, $this->parser->getFavorites()->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MangaMeta::class, $this->parser->getFavorites()->getManga());
         self::assertContainsOnlyInstancesOf(
-            \Jikan\Model\CharacterMeta::class,
+            \Jikan\Model\Character\CharacterMeta::class,
             $this->parser->getFavorites()->getCharacters()
         );
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\PersonMeta::class, $this->parser->getFavorites()->getPeople());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\PersonMeta::class, $this->parser->getFavorites()->getPeople());
 
     }
 

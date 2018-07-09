@@ -3,8 +3,8 @@
 namespace Jikan\Parser\Character;
 
 use Jikan\Helper\Parser;
-use Jikan\Model\CharacterListItem;
-use Jikan\Model\VoiceActor;
+use Jikan\Model\Character\CharacterListItem;
+use Jikan\Model\Character\VoiceActor;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -81,7 +81,7 @@ class CharacterListItemParser implements ParserInterface
     }
 
     /**
-     * @return CharacterListItem
+     * @return \Jikan\Model\Character\CharacterListItem
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

@@ -3,7 +3,6 @@
 namespace JikanTest\Parser\Person;
 
 use Goutte\Client;
-use Jikan\Model\AnimeCard;
 use Jikan\Parser\Producer\ProducerParser;
 use PHPUnit\Framework\TestCase;
 
@@ -31,7 +30,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_url()
     {
         $url = $this->parser->getUrl();
-        self::assertInstanceOf(\Jikan\Model\MalUrl::class, $url);
+        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $url);
     }
 
     /**
@@ -42,6 +41,6 @@ class ProducerParserTest extends TestCase
     {
         $anime = $this->parser->getProducerAnime();
         self::assertCount(100, $anime);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\AnimeCard::class, $anime);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Anime\AnimeCard::class, $anime);
     }
 }

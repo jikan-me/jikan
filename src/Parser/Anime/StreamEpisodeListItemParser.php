@@ -3,7 +3,7 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\Parser;
-use Jikan\Model\StreamEpisodeListItem;
+use Jikan\Model\Anime\StreamEpisodeListItem;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

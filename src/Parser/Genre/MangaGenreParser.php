@@ -32,17 +32,17 @@ class MangaGenreParser implements ParserInterface
     }
 
     /**
-     * @return Model\MangaGenre
+     * @return \Jikan\Model\Genre\MangaGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\MangaGenre
+    public function getModel(): Model\Genre\MangaGenre
     {
-        return Model\MangaGenre::fromParser($this);
+        return Model\Genre\MangaGenre::fromParser($this);
     }
 
     /**
-     * @return array|Model\MangaGenre[]
+     * @return array|\Jikan\Model\Genre\MangaGenre[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
@@ -58,13 +58,13 @@ class MangaGenreParser implements ParserInterface
     }
 
     /**
-     * @return Model\MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getUrl(): Model\MalUrl
+    public function getUrl(): Model\Common\MalUrl
     {
-        return new Model\MalUrl(
+        return new Model\Common\MalUrl(
             JString::cleanse(
                 Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
             ),

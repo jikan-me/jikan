@@ -4,7 +4,7 @@ namespace Jikan\Parser\Top;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -53,7 +53,7 @@ class TopListItemParser
     }
 
     /**
-     * @return MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      * @throws \InvalidArgumentException
      */
     public function getMalUrl(): MalUrl
@@ -172,7 +172,7 @@ class TopListItemParser
     }
 
     /**
-     * @return MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      * @throws \InvalidArgumentException
      */
     public function getAnimeography(): array
@@ -186,7 +186,7 @@ class TopListItemParser
     }
 
     /**
-     * @return MalUrl[]
+     * @return \Jikan\Model\Common\MalUrl[]
      * @throws \InvalidArgumentException
      */
     public function getMangaography(): array

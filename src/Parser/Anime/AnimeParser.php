@@ -4,9 +4,9 @@ namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Anime;
-use Jikan\Model\DateRange;
-use Jikan\Model\MalUrl;
+use Jikan\Model\Anime\Anime;
+use Jikan\Model\Common\DateRange;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -538,7 +538,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return DateRange
+     * @return \Jikan\Model\Common\DateRange
      * @throws \InvalidArgumentException
      */
     public function getAired(): DateRange

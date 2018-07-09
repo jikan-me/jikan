@@ -2,19 +2,19 @@
 
 namespace Jikan\Model\Search;
 
-use Jikan\Model\MalUrl;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser;
 
 /**
  * Class AnimeSearchListItem
  *
- * @package Jikan\Model\Search
+ * @package Jikan\Model\Search\Search
  */
 class AnimeSearchListItem
 {
 
     /**
-     * @var MalUrl
+     * @var \Jikan\Model\Common\MalUrl
      */
     private $url;
 
@@ -109,12 +109,12 @@ class AnimeSearchListItem
         $instance->members = $parser->getMembers();
         $instance->rated = $parser->getRated();
         $instance->airing =
-            \is_null($instance->endDate)
-            && !\is_null($instance->startDate)
+            null === $instance->endDate
+            && null !== $instance->startDate
             &&
             (
                 new \DateTimeImmutable(
-                    "now",
+                    'now',
                     new \DateTimeZone('UTC')
                 ) > $instance->startDate
             );
@@ -124,7 +124,7 @@ class AnimeSearchListItem
 
 
     /**
-     * @return MalUrl
+     * @return \Jikan\Model\Common\MalUrl
      */
     public function getUrl(): MalUrl
     {

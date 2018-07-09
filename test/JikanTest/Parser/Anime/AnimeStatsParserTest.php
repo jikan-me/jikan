@@ -2,10 +2,7 @@
 
 namespace JikanTest\Parser\Anime;
 
-use Goutte\Client;
-use Jikan\Model\Picture;
 use Jikan\Parser\Anime\AnimeStatsParser;
-use Jikan\Parser\Common\PicturesPageParser;
 use PHPUnit\Framework\TestCase;
 
 /**

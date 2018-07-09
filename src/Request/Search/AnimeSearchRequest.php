@@ -133,7 +133,7 @@ class AnimeSearchRequest implements RequestInterface
      * @param float $score
      * @return $this
      */
-    public function setScore(float $score)
+    public function setScore(float $score): self
     {
         $this->score = $score;
 
@@ -144,7 +144,7 @@ class AnimeSearchRequest implements RequestInterface
      * @param int $status
      * @return $this
      */
-    public function setStatus(int $status)
+    public function setStatus(int $status): self
     {
         $this->status = $status;
 
@@ -155,7 +155,7 @@ class AnimeSearchRequest implements RequestInterface
      * @param int $producer
      * @return $this
      */
-    public function setProducer(int $producer)
+    public function setProducer(int $producer): self
     {
         $this->producer = $producer;
 
@@ -166,7 +166,7 @@ class AnimeSearchRequest implements RequestInterface
      * @param int $rated
      * @return $this
      */
-    public function setRated(int $rated)
+    public function setRated(int $rated): self
     {
         $this->rated = $rated;
 
@@ -174,10 +174,13 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day, int $month, int $year
+     * @param int $day , int $month, int $year
+     * @param int $month
+     * @param int $year
+     *
      * @return $this
      */
-    public function setStartDate(int $day, int $month, int $year)
+    public function setStartDate(int $day, int $month, int $year): self
     {
         $this->startDate = [$day, $month, $year];
 
@@ -185,10 +188,12 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day, int $month, int $year
+     * @param int $day , int $month, int $year
+     * @param int $month
+     * @param int $year
      * @return $this
      */
-    public function setEndDate(int $day, int $month, int $year)
+    public function setEndDate(int $day, int $month, int $year): self
     {
         $this->endDate = [$day, $month, $year];
 
@@ -199,7 +204,7 @@ class AnimeSearchRequest implements RequestInterface
      * @param int ...$genre
      * @return $this
      */
-    public function setGenre(...$genre)
+    public function setGenre(...$genre): self
     {
         $this->genre = array_unique(
             array_merge($genre, $this->genre)
@@ -213,7 +218,7 @@ class AnimeSearchRequest implements RequestInterface
      * @param bool $genreExclude
      * @return $this
      */
-    public function setGenreExclude(bool $genreExclude)
+    public function setGenreExclude(bool $genreExclude): self
     {
         $this->genreExclude = $genreExclude;
 

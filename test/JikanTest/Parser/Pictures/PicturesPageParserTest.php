@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Pictures;
 
 use Goutte\Client;
-use Jikan\Model\Picture;
+use Jikan\Model\Common\Picture;
 use Jikan\Parser\Common\PicturesPageParser;
 use PHPUnit\Framework\TestCase;
 

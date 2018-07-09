@@ -4,12 +4,12 @@ namespace JikanTest;
 
 use Jikan\Jikan;
 use Jikan\Model\Forum\ForumTopic;
-use Jikan\Model\Friend;
 use Jikan\Model\News\NewsListItem;
 use Jikan\Model\Top\TopAnime;
 use Jikan\Model\Top\TopCharacter;
 use Jikan\Model\Top\TopManga;
 use Jikan\Model\Top\TopPeople;
+use Jikan\Model\User\Friend;
 use Jikan\Request\Forum\AnimeForumRequest;
 use Jikan\Request\Forum\MangaForumRequest;
 use Jikan\Request\News\AnimeNewsListRequest;
@@ -38,7 +38,7 @@ class JikanTest extends TestCase
     public function it_gets_anime()
     {
         $anime = $this->jikan->Anime(new \Jikan\Request\Anime\AnimeRequest(21));
-        self::assertInstanceOf(\Jikan\Model\Anime::class, $anime);
+        self::assertInstanceOf(\Jikan\Model\Anime\Anime::class, $anime);
     }
 
     /**
@@ -48,7 +48,7 @@ class JikanTest extends TestCase
     public function it_gets_manga()
     {
         $manga = $this->jikan->Manga(new \Jikan\Request\Manga\MangaRequest(11));
-        self::assertInstanceOf(\Jikan\Model\Manga::class, $manga);
+        self::assertInstanceOf(\Jikan\Model\Manga\Manga::class, $manga);
     }
 
     /**
@@ -58,7 +58,7 @@ class JikanTest extends TestCase
     public function it_gets_characters()
     {
         $character = $this->jikan->Character(new \Jikan\Request\Character\CharacterRequest(116281));
-        self::assertInstanceOf(\Jikan\Model\Character::class, $character);
+        self::assertInstanceOf(\Jikan\Model\Character\Character::class, $character);
         self::assertCount(9, $character->getAnimeography());
         self::assertCount(2, $character->getMangaography());
         self::assertCount(4, $character->getVoiceActors());
@@ -71,7 +71,7 @@ class JikanTest extends TestCase
     public function it_gets_person()
     {
         $person = $this->jikan->Person(new \Jikan\Request\Person\PersonRequest(1));
-        self::assertInstanceOf(\Jikan\Model\Person::class, $person);
+        self::assertInstanceOf(\Jikan\Model\Person\Person::class, $person);
         self::assertCount(367, $person->getVoiceActingRoles());
         self::assertCount(15, $person->getAnimeStaffPositions());
         self::assertCount(0, $person->getPublishedManga());
@@ -84,9 +84,9 @@ class JikanTest extends TestCase
     public function it_gets_seasonal_anime()
     {
         $seasonal = $this->jikan->Seasonal(new \Jikan\Request\Seasonal\SeasonalRequest(2018, 'spring'));
-        self::assertInstanceOf(\Jikan\Model\Seasonal::class, $seasonal);
+        self::assertInstanceOf(\Jikan\Model\Seasonal\Seasonal::class, $seasonal);
         self::assertCount(234, $seasonal->getAnime());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\SeasonalAnime::class, $seasonal->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Seasonal\SeasonalAnime::class, $seasonal->getAnime());
     }
 
     /**
@@ -96,9 +96,9 @@ class JikanTest extends TestCase
     public function it_gets_user_profile()
     {
         $user = $this->jikan->UserProfile(new \Jikan\Request\User\UserProfileRequest('sandshark'));
-        self::assertInstanceOf(\Jikan\Model\UserProfile::class, $user);
-        self::assertInstanceOf(\Jikan\Model\AnimeStats::class, $user->getAnimeStats());
-        self::assertInstanceOf(\Jikan\Model\MangaStats::class, $user->getMangaStats());
+        self::assertInstanceOf(\Jikan\Model\User\UserProfile::class, $user);
+        self::assertInstanceOf(\Jikan\Model\User\AnimeStats::class, $user->getAnimeStats());
+        self::assertInstanceOf(\Jikan\Model\User\MangaStats::class, $user->getMangaStats());
     }
 
     /**
@@ -108,7 +108,7 @@ class JikanTest extends TestCase
     public function it_gets_schedule()
     {
         $schedule = $this->jikan->Schedule(new \Jikan\Request\Schedule\ScheduleRequest());
-        self::assertInstanceOf(\Jikan\Model\Schedule::class, $schedule);
+        self::assertInstanceOf(\Jikan\Model\Shedule\Schedule::class, $schedule);
     }
 
     /**
@@ -145,7 +145,7 @@ class JikanTest extends TestCase
     public function it_gets_producer()
     {
         $producer = $this->jikan->Producer(new \Jikan\Request\Producer\ProducerRequest(1));
-        self::assertInstanceOf(\Jikan\Model\Producer::class, $producer);
+        self::assertInstanceOf(\Jikan\Model\Producer\Producer::class, $producer);
     }
 
     /**

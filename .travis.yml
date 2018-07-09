@@ -28,6 +28,7 @@ install:
 
 before_script:
   - phpenv config-add travis.ini
+  - php -i
 
 script:
    - vendor/bin/grumphp run

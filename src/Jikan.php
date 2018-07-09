@@ -408,6 +408,18 @@ class Jikan
     }
 
     /**
+     * @param Request\Manga\MangaStatsRequest $request
+     *
+     * @return Model\Manga\MangaStats
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function MangaStats(Request\Manga\MangaStatsRequest $request): Model\Manga\MangaStats
+    {
+        return $this->myanimelist->getMangaStats($request);
+    }
+
+    /**
      * @param Request\Forum\AnimeForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]

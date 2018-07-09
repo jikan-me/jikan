@@ -1,17 +1,18 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Manga;
 
 use Jikan\Model\Anime\AnimeStats;
+use Jikan\Model\Manga\MangaStats;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeStatsParser
+ * Class MangaStatsParser
  *
  * @package Jikan\Parser\Common
  */
-class AnimeStatsParser implements ParserInterface
+class MangaStatsParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -31,10 +32,10 @@ class AnimeStatsParser implements ParserInterface
     /**
      * @return int
      */
-    public function getWatching(): int
+    public function getReading(): int
     {
         return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Watching:\')]')
+            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Reading:\')]')
             ->parents()
             ->getNode(0)->textContent);
     }
@@ -75,10 +76,10 @@ class AnimeStatsParser implements ParserInterface
     /**
      * @return int
      */
-    public function getPlanToWatch(): int
+    public function getPlanToRead(): int
     {
         return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Watch:\')]')
+            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Read:\')]')
             ->parents()
             ->getNode(0)->textContent);
     }
@@ -140,8 +141,8 @@ class AnimeStatsParser implements ParserInterface
      * @return AnimeStats
      * @throws \InvalidArgumentException
      */
-    public function getModel(): AnimeStats
+    public function getModel(): MangaStats
     {
-        return AnimeStats::fromParser($this);
+        return MangaStats::fromParser($this);
     }
 }

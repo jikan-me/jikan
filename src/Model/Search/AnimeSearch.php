@@ -27,6 +27,7 @@ class AnimeSearch
      * @param Parser\Search\AnimeSearchParser $parser
      *
      * @return AnimeSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

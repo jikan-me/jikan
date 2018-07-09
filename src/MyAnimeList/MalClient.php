@@ -22,6 +22,8 @@ class MalClient
      * MalClient constructor.
      *
      * @param GuzzleClient|null $guzzle
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(GuzzleClient $guzzle = null)
     {
@@ -95,8 +97,8 @@ class MalClient
      * @param Request\Character\CharacterRequest $request
      *
      * @return Model\Character
+     * @throws \InvalidArgumentException
      * @throws \RuntimeException
-     * @throws \InvalidArgumentExceptionCharacterPictures
      * CharacterPictures
      */
     public function getCharacter(Request\Character\CharacterRequest $request): Model\Character
@@ -246,6 +248,8 @@ class MalClient
      * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      *
      * @return Model\CharactersAndStaff
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
@@ -260,6 +264,7 @@ class MalClient
      * @param Request\Anime\AnimePicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
     public function getAnimePictures(Request\Anime\AnimePicturesRequest $request): array
     {
@@ -273,6 +278,7 @@ class MalClient
      * @param Request\Manga\MangaPicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
     public function getMangaPictures(Request\Manga\MangaPicturesRequest $request): array
     {
@@ -283,11 +289,12 @@ class MalClient
     }
 
     /**
-     * @param Request\CharacterPictures $request
+     * @param Request\Character\CharacterPicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
-    public function getCharacterPictures(Request\CharacterPictures $request): array
+    public function getCharacterPictures(Request\Character\CharacterPicturesRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Common\PicturesPageParser($crawler);
@@ -299,6 +306,7 @@ class MalClient
      * @param Request\Person\PersonPicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
     public function getPersonPictures(Request\Person\PersonPicturesRequest $request): array
     {
@@ -327,6 +335,7 @@ class MalClient
      * @param Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -342,6 +351,7 @@ class MalClient
      * @param Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -382,6 +392,7 @@ class MalClient
      * @param $request
      *
      * @return Model\Manga\CharacterListItem[]
+     * @throws \InvalidArgumentException
      */
     public function getMangaCharacters(Request\Manga\MangaCharactersRequest $request): array
     {

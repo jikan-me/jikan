@@ -30,6 +30,7 @@ class PicturesPageParser implements ParserInterface
 
     /**
      * @return Picture[]
+     * @throws \InvalidArgumentException
      */
     public function getModel(): array
     {

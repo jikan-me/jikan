@@ -89,6 +89,7 @@ class AnimeSearchListItem
      * @return AnimeSearchListItem
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public static function fromParser(Parser\Search\AnimeSearchListItemParser $parser): self
     {
@@ -108,8 +109,8 @@ class AnimeSearchListItem
         $instance->members = $parser->getMembers();
         $instance->rated = $parser->getRated();
         $instance->airing =
-            is_null($instance->endDate)
-            && !is_null($instance->startDate)
+            \is_null($instance->endDate)
+            && !\is_null($instance->startDate)
             &&
             (
                 new \DateTimeImmutable(
@@ -179,7 +180,7 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return ?\DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
     public function getStartDate(): ?\DateTimeImmutable
     {
@@ -187,7 +188,7 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return ?\DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
     public function getEndDate(): ?\DateTimeImmutable
     {
@@ -203,7 +204,7 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return ?string
+     * @return string|null
      */
     public function getRated(): ?string
     {
@@ -211,7 +212,7 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return ?string
+     * @return string|null
      */
     public function getStartDateString(): ?string
     {
@@ -219,7 +220,7 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return ?string
+     * @return string|null
      */
     public function getEndDateString(): ?string
     {

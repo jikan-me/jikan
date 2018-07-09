@@ -31,6 +31,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return EpisodeListItem
+     * @throws \InvalidArgumentException
      */
     public function getModel(): EpisodeListItem
     {
@@ -39,6 +40,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getEpisodeId(): int
     {
@@ -47,6 +49,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getEpisodeUrl(): string
     {
@@ -55,6 +58,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getTitle(): string
     {
@@ -63,6 +67,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return null|string
+     * @throws \InvalidArgumentException
      */
     public function getTitleJapanese(): ?string
     {
@@ -79,6 +84,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return null|string
+     * @throws \InvalidArgumentException
      */
     public function getTitleRomanji(): ?string
     {
@@ -95,6 +101,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return DateRange|null ?DateRange
+     * @throws \InvalidArgumentException
      */
     public function getAired(): ?DateRange
     {
@@ -149,6 +156,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getVideoUrl(): ?string
     {
@@ -163,6 +171,7 @@ class EpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getForumUrl(): ?string
     {

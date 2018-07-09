@@ -166,6 +166,7 @@ class CharacterParser implements ParserInterface
 
     /**
      * @return Model\VoiceActor[]
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getVoiceActors(): array

@@ -51,6 +51,7 @@ class NewsListItem
      * @param NewsListItemParser $parser
      *
      * @return NewsListItem
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(NewsListItemParser $parser): self
     {

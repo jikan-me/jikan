@@ -25,6 +25,8 @@ class CharactersAndStaff
      * @param CharactersAndStaffParser $parser
      *
      * @return CharactersAndStaff
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(CharactersAndStaffParser $parser): self
     {

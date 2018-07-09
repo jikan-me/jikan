@@ -9,7 +9,7 @@ use Jikan\Request\RequestInterface;
  *
  * @package Jikan\Request
  */
-class ScheduleRequest
+class ScheduleRequest implements RequestInterface
 {
     /**
      * @return string

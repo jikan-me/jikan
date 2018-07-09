@@ -32,7 +32,7 @@ class AnimeRequest implements RequestInterface
     }
 
     /**
-     * @return Anime
+     * @return self
      */
     public function withCharacters(): self
     {

@@ -32,7 +32,7 @@ class MangaRequest implements RequestInterface
     }
 
     /**
-     * @return Manga
+     * @return self
      */
     public function withCharacters(): self
     {

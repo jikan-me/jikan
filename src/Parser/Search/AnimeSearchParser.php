@@ -29,6 +29,7 @@ class AnimeSearchParser
 
     /**
      * @return AnimeSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -39,6 +40,9 @@ class AnimeSearchParser
 
     /**
      * @return array
+     * @throws \Exception
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getResults(): array
     {

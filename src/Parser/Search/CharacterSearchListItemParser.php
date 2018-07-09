@@ -43,6 +43,7 @@ class CharacterSearchListItemParser
 
     /**
      * @return MalUrl
+     * @throws \InvalidArgumentException
      */
     public function getUrl(): MalUrl
     {
@@ -54,6 +55,7 @@ class CharacterSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getName(): string
     {
@@ -62,6 +64,7 @@ class CharacterSearchListItemParser
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      */
     public function getAlternativeNames(): array
     {
@@ -83,6 +86,7 @@ class CharacterSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImageUrl(): string
     {
@@ -91,6 +95,7 @@ class CharacterSearchListItemParser
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      */
     public function getAnime(): array
     {
@@ -113,6 +118,7 @@ class CharacterSearchListItemParser
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      */
     public function getManga(): array
     {

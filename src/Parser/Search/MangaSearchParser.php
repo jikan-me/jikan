@@ -29,6 +29,7 @@ class MangaSearchParser
 
     /**
      * @return MangaSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -39,6 +40,9 @@ class MangaSearchParser
 
     /**
      * @return array
+     * @throws \Exception
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getResults(): array
     {

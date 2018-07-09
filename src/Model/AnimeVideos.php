@@ -25,6 +25,7 @@ class AnimeVideos
      * @param VideosParser $parser
      *
      * @return AnimeVideos
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(VideosParser $parser): self
     {

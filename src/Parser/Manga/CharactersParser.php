@@ -30,6 +30,7 @@ class CharactersParser
 
     /**
      * @return CharacterListItem[]
+     * @throws \InvalidArgumentException
      */
     public function getCharacters(): array
     {
@@ -44,7 +45,7 @@ class CharactersParser
             )
             ->each(
                 function (Crawler $crawler) {
-                    return \Jikan\Model\Manga\CharacterListItem::fromParser(new CharacterListItemParser($crawler));
+                    return CharacterListItem::fromParser(new CharacterListItemParser($crawler));
                 }
             );
     }

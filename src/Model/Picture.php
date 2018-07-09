@@ -26,6 +26,7 @@ class Picture
      * @param PictureParser $parser
      *
      * @return Picture
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(PictureParser $parser): Picture
     {

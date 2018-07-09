@@ -27,6 +27,7 @@ class MangaSearch
      * @param Parser\Search\MangaSearchParser $parser
      *
      * @return MangaSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

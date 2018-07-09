@@ -4,6 +4,7 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\Parser;
+use Jikan\Model\MalUrl;
 use Jikan\Model\StaffListItem;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
@@ -33,6 +34,7 @@ class StaffListItemParser implements ParserInterface
 
     /**
      * @return string[]
+     * @throws \InvalidArgumentException
      */
     public function getPositions(): array
     {
@@ -41,6 +43,7 @@ class StaffListItemParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMalId(): int
     {
@@ -49,6 +52,7 @@ class StaffListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getUrl(): string
     {
@@ -56,9 +60,10 @@ class StaffListItemParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\MalUrl
+     * @return MalUrl
+     * @throws \InvalidArgumentException
      */
-    public function getMalUrl(): \Jikan\Model\MalUrl
+    public function getMalUrl(): MalUrl
     {
         $link = $this->crawler->filterXPath('//a')
             ->reduce(
@@ -73,6 +78,7 @@ class StaffListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getName(): string
     {
@@ -81,6 +87,7 @@ class StaffListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImage(): string
     {
@@ -89,6 +96,8 @@ class StaffListItemParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \InvalidArgumentException
      */
     public function getModel(): StaffListItem
     {

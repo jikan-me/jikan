@@ -31,6 +31,7 @@ class EpisodesParser implements ParserInterface
 
     /**
      * @return EpisodeListItem[]
+     * @throws \InvalidArgumentException
      */
     public function getEpisodes(): array
     {
@@ -51,6 +52,7 @@ class EpisodesParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getEpisodesLastPage(): int
     {
@@ -81,6 +83,8 @@ class EpisodesParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Episodes
     {

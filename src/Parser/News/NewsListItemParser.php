@@ -44,6 +44,7 @@ class NewsListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getTitle(): string
     {
@@ -52,6 +53,7 @@ class NewsListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getUrl(): string
     {
@@ -60,6 +62,7 @@ class NewsListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImage(): string
     {
@@ -68,6 +71,7 @@ class NewsListItemParser implements ParserInterface
 
     /**
      * @return \DateTimeImmutable
+     * @throws \InvalidArgumentException
      */
     public function getDate(): ?\DateTimeImmutable
     {
@@ -76,6 +80,7 @@ class NewsListItemParser implements ParserInterface
 
     /**
      * @return MalUrl
+     * @throws \InvalidArgumentException
      */
     public function getAuthor(): MalUrl
     {
@@ -84,6 +89,7 @@ class NewsListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getDiscussionLink(): string
     {
@@ -92,6 +98,7 @@ class NewsListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getIntro(): string
     {

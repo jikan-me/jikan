@@ -48,6 +48,7 @@ class VoiceActor
      * @param VoiceActorParser $parser
      *
      * @return VoiceActor
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public static function fromParser(VoiceActorParser $parser): VoiceActor

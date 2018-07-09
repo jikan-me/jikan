@@ -32,6 +32,8 @@ class CharacterListItemParser implements ParserInterface
 
     /**
      * @return VoiceActor[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getVoiceActors(): array
     {
@@ -44,6 +46,7 @@ class CharacterListItemParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMalId(): int
     {
@@ -52,6 +55,7 @@ class CharacterListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getCharacterUrl(): string
     {
@@ -60,6 +64,7 @@ class CharacterListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getName(): string
     {
@@ -68,6 +73,7 @@ class CharacterListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImage(): string
     {
@@ -76,6 +82,8 @@ class CharacterListItemParser implements ParserInterface
 
     /**
      * @return CharacterListItem
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getModel(): CharacterListItem
     {

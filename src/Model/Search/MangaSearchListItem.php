@@ -90,6 +90,7 @@ class MangaSearchListItem
      * @return MangaSearchListItem
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public static function fromParser(Parser\Search\MangaSearchListItemParser $parser): self
     {
@@ -109,8 +110,8 @@ class MangaSearchListItem
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->publishing =
-            is_null($instance->endDate)
-            && !is_null($instance->startDate)
+            \is_null($instance->endDate)
+            && !\is_null($instance->startDate)
             &&
             (
                 new \DateTimeImmutable(

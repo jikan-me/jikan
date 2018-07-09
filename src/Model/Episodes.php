@@ -25,6 +25,7 @@ class Episodes
      * @param EpisodesParser $parser
      *
      * @return Episodes
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(EpisodesParser $parser): self
     {

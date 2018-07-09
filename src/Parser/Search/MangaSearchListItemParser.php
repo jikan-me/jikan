@@ -32,6 +32,7 @@ class MangaSearchListItemParser
 
     /**
      * @return MangaSearchListItem
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -42,6 +43,7 @@ class MangaSearchListItemParser
 
     /**
      * @return MalUrl
+     * @throws \InvalidArgumentException
      */
     public function getUrl(): MalUrl
     {
@@ -53,6 +55,7 @@ class MangaSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getTitle(): string
     {
@@ -61,6 +64,7 @@ class MangaSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImageUrl(): string
     {
@@ -69,6 +73,7 @@ class MangaSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getSynopsis(): string
     {
@@ -81,6 +86,7 @@ class MangaSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getType(): string
     {
@@ -91,6 +97,7 @@ class MangaSearchListItemParser
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getVolumes(): int
     {
@@ -99,6 +106,7 @@ class MangaSearchListItemParser
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getChapters(): int
     {
@@ -107,6 +115,7 @@ class MangaSearchListItemParser
 
     /**
      * @return float
+     * @throws \InvalidArgumentException
      */
     public function getScore(): float
     {
@@ -115,6 +124,7 @@ class MangaSearchListItemParser
 
     /**
      * @return ?\DateTimeImmutable
+     * @throws \InvalidArgumentException
      */
     public function getStartDate(): ?\DateTimeImmutable
     {
@@ -129,6 +139,7 @@ class MangaSearchListItemParser
 
     /**
      * @return ?\DateTimeImmutable
+     * @throws \InvalidArgumentException
      */
     public function getEndDate(): ?\DateTimeImmutable
     {
@@ -143,6 +154,7 @@ class MangaSearchListItemParser
 
     /**
      * @return ?string
+     * @throws \InvalidArgumentException
      */
     public function getStartDateString(): ?string
     {
@@ -157,6 +169,7 @@ class MangaSearchListItemParser
 
     /**
      * @return ?string
+     * @throws \InvalidArgumentException
      */
     public function getEndDateString(): ?string
     {
@@ -171,6 +184,7 @@ class MangaSearchListItemParser
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMembers(): int
     {

@@ -32,6 +32,8 @@ class Jikan
      * Jikan constructor.
      *
      * @param GuzzleClient|null $guzzle
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(GuzzleClient $guzzle = null)
     {
@@ -171,25 +173,25 @@ class Jikan
 
 
     /**
-     * @param Request\Genre\AnimeGenre $request
+     * @param Request\Genre\AnimeGenreRequest $request
      *
      * @return Model\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeGenre(Request\Genre\AnimeGenre $request): Model\AnimeGenre
+    public function AnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\AnimeGenre
     {
         return $this->myanimelist->getAnimeGenre($request);
     }
 
     /**
-     * @param Request\Genre\MangaGenre $request
+     * @param Request\Genre\MangaGenreRequest $request
      *
      * @return Model\MangaGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function MangaGenre(Request\Genre\MangaGenre $request): Model\MangaGenre
+    public function MangaGenre(Request\Genre\MangaGenreRequest $request): Model\MangaGenre
     {
         return $this->myanimelist->getMangaGenre($request);
     }
@@ -221,6 +223,7 @@ class Jikan
      * @param Request\Anime\AnimePicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
     public function AnimePictures(Request\Anime\AnimePicturesRequest $request): array
     {
@@ -231,6 +234,7 @@ class Jikan
      * @param Request\Manga\MangaPicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
     public function MangaPictures(Request\Manga\MangaPicturesRequest $request): array
     {
@@ -241,6 +245,7 @@ class Jikan
      * @param Request\Person\PersonPicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
     public function PersonPictures(Request\Person\PersonPicturesRequest $request): array
     {
@@ -251,6 +256,7 @@ class Jikan
      * @param Request\Character\CharacterPicturesRequest $request
      *
      * @return Model\Picture[]
+     * @throws \InvalidArgumentException
      */
     public function CharacterPictures(Request\Character\CharacterPicturesRequest $request): array
     {
@@ -285,6 +291,7 @@ class Jikan
      * @param Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -297,6 +304,7 @@ class Jikan
      * @param Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -332,6 +340,7 @@ class Jikan
      * @param Request\Manga\MangaCharactersRequest $request
      *
      * @return Model\Manga\CharacterListItem[]
+     * @throws \InvalidArgumentException
      */
     public function MangaCharacters(Request\Manga\MangaCharactersRequest $request): array
     {

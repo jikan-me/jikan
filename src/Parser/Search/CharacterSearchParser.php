@@ -39,6 +39,8 @@ class CharacterSearchParser
 
     /**
      * @return array
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getResults(): array
     {

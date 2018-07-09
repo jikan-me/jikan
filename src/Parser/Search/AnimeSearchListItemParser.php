@@ -32,6 +32,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return AnimeSearchListItem
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -42,6 +43,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return MalUrl
+     * @throws \InvalidArgumentException
      */
     public function getUrl(): MalUrl
     {
@@ -53,6 +55,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getTitle(): string
     {
@@ -61,6 +64,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImageUrl(): string
     {
@@ -69,6 +73,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getSynopsis(): string
     {
@@ -81,6 +86,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getType(): string
     {
@@ -91,6 +97,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getEpisodes(): int
     {
@@ -99,6 +106,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return float
+     * @throws \InvalidArgumentException
      */
     public function getScore(): float
     {
@@ -107,6 +115,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return ?\DateTimeImmutable
+     * @throws \InvalidArgumentException
      */
     public function getStartDate(): ?\DateTimeImmutable
     {
@@ -121,6 +130,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return ?\DateTimeImmutable
+     * @throws \InvalidArgumentException
      */
     public function getEndDate(): ?\DateTimeImmutable
     {
@@ -135,6 +145,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return ?string
+     * @throws \InvalidArgumentException
      */
     public function getStartDateString(): ?string
     {
@@ -149,6 +160,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return ?string
+     * @throws \InvalidArgumentException
      */
     public function getEndDateString(): ?string
     {
@@ -163,6 +175,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getMembers(): int
     {
@@ -175,6 +188,7 @@ class AnimeSearchListItemParser
 
     /**
      * @return ?string
+     * @throws \InvalidArgumentException
      */
     public function getRated(): ?string
     {

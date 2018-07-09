@@ -30,6 +30,7 @@ class PictureParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getLarge(): string
     {
@@ -38,6 +39,7 @@ class PictureParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getSmall() : string
     {
@@ -46,6 +48,7 @@ class PictureParser implements ParserInterface
 
     /**
      * @return Picture
+     * @throws \InvalidArgumentException
      */
     public function getModel(): Picture
     {

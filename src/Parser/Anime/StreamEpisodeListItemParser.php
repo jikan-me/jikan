@@ -31,6 +31,7 @@ class StreamEpisodeListItemParser implements ParserInterface
 
     /**
      * @return StreamEpisodeListItem
+     * @throws \InvalidArgumentException
      */
     public function getModel(): StreamEpisodeListItem
     {
@@ -39,6 +40,7 @@ class StreamEpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getTitle(): string
     {
@@ -47,6 +49,7 @@ class StreamEpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getEpisode(): string
     {
@@ -55,6 +58,7 @@ class StreamEpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getUrl(): string
     {
@@ -63,6 +67,7 @@ class StreamEpisodeListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImageUrl(): string
     {

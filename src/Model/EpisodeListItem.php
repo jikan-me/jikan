@@ -60,6 +60,7 @@ class EpisodeListItem
      * @param EpisodeListItemParser $parser
      *
      * @return EpisodeListItem
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(EpisodeListItemParser $parser): self
     {

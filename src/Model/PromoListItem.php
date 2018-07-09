@@ -30,6 +30,7 @@ class PromoListItem
      * @param PromoListItemParser $parser
      *
      * @return PromoListItem
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(PromoListItemParser $parser): self
     {

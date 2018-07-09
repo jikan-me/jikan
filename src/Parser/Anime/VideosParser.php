@@ -32,6 +32,7 @@ class VideosParser implements ParserInterface
 
     /**
      * @return StreamEpisodeListItem[]
+     * @throws \InvalidArgumentException
      */
     public function getEpisodes(): array
     {
@@ -50,6 +51,7 @@ class VideosParser implements ParserInterface
 
     /**
      * @return PromoListItem[]
+     * @throws \InvalidArgumentException
      */
     public function getPromos(): array
     {
@@ -69,6 +71,8 @@ class VideosParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \InvalidArgumentException
      */
     public function getModel(): AnimeVideos
     {

@@ -40,6 +40,7 @@ class StaffListItem
      * @param \Jikan\Parser\Anime\StaffListItemParser $parser
      *
      * @return StaffListItem
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(Parser\Anime\StaffListItemParser $parser): self
     {

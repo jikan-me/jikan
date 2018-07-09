@@ -34,6 +34,7 @@ class VoiceActorParser implements ParserInterface
      * Return the model
      *
      * @return Model\VoiceActor
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getModel(): Model\VoiceActor
@@ -82,6 +83,7 @@ class VoiceActorParser implements ParserInterface
 
     /**
      * @return Model\MalUrl
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getPerson(): Model\MalUrl

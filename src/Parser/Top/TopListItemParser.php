@@ -120,6 +120,7 @@ class TopListItemParser
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      */
     private function getTextArray(): array
     {

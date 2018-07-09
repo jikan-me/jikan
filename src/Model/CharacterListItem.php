@@ -40,6 +40,8 @@ class CharacterListItem
      * @param CharacterListItemParser $parser
      *
      * @return CharacterListItem
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(CharacterListItemParser $parser): self
     {

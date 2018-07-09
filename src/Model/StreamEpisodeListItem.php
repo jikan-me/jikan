@@ -35,6 +35,7 @@ class StreamEpisodeListItem
      * @param StreamEpisodeListItemParser $parser
      *
      * @return StreamEpisodeListItem
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(StreamEpisodeListItemParser $parser): self
     {

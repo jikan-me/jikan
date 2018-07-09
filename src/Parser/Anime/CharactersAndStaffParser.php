@@ -33,6 +33,8 @@ class CharactersAndStaffParser implements ParserInterface
 
     /**
      * @return CharacterListItem[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getCharacters(): array
     {
@@ -54,6 +56,9 @@ class CharactersAndStaffParser implements ParserInterface
 
     /**
      * Return the model
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function getModel(): CharactersAndStaff
     {
@@ -62,6 +67,7 @@ class CharactersAndStaffParser implements ParserInterface
 
     /**
      * @return StaffListItem[]
+     * @throws \InvalidArgumentException
      */
     public function getStaff(): array
     {

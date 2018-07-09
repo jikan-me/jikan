@@ -30,6 +30,7 @@ class PromoListItemParser implements ParserInterface
 
     /**
      * @return PromoListItem
+     * @throws \InvalidArgumentException
      */
     public function getModel(): PromoListItem
     {
@@ -39,6 +40,7 @@ class PromoListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getTitle(): string
     {
@@ -47,6 +49,7 @@ class PromoListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getImageUrl(): string
     {
@@ -55,6 +58,7 @@ class PromoListItemParser implements ParserInterface
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getVideoUrl(): string
     {

@@ -3,12 +3,15 @@
 namespace JikanTest;
 
 use Jikan\Jikan;
+use Jikan\Model\Forum\ForumTopic;
 use Jikan\Model\Friend;
 use Jikan\Model\News\NewsListItem;
 use Jikan\Model\Top\TopAnime;
 use Jikan\Model\Top\TopCharacter;
 use Jikan\Model\Top\TopManga;
 use Jikan\Model\Top\TopPeople;
+use Jikan\Request\Forum\AnimeForumRequest;
+use Jikan\Request\Forum\MangaForumRequest;
 use Jikan\Request\News\AnimeNewsListRequest;
 use Jikan\Request\News\MangaNewsListRequest;
 use PHPUnit\Framework\TestCase;
@@ -267,5 +270,31 @@ class JikanTest extends TestCase
         self::assertContainsOnlyInstancesOf(TopPeople::class, $people);
         self::assertContains('Hanazawa, Kana', $people);
         self::assertContains('Asano, Inio', $people);
+    }
+
+    /**
+     * @test
+     * @vcr ForumTopicParserTest.yaml
+     */
+    public function it_gets_anime_forum()
+    {
+        $topics = $this->jikan->AnimeForum(new AnimeForumRequest(21));
+        self::assertCount(15, $topics);
+        self::assertContainsOnlyInstancesOf(ForumTopic::class, $topics);
+        self::assertContains('One Piece Episode 461 Discussion', $topics);
+        self::assertContains('One Piece Episode 101 Discussion', $topics);
+    }
+
+    /**
+     * @test
+     * @vcr MangaForumTopicParserTest.yaml
+     */
+    public function it_gets_manga_forum()
+    {
+        $topics = $this->jikan->MangaForum(new MangaForumRequest(21));
+        self::assertCount(15, $topics);
+        self::assertContainsOnlyInstancesOf(ForumTopic::class, $topics);
+        self::assertContains('Death Note Chapter 60 Discussion', $topics);
+        self::assertContains('Death Note Chapter 21 Discussion', $topics);
     }
 }

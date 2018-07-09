@@ -406,4 +406,26 @@ class Jikan
     {
         return $this->myanimelist->getAnimeStats($request);
     }
+
+    /**
+     * @param Request\Forum\AnimeForumRequest $request
+     *
+     * @return Model\Forum\ForumTopic[]
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeForum(Request\Forum\AnimeForumRequest $request): array
+    {
+        return $this->myanimelist->getAnimeForumTopics($request);
+    }
+
+    /**
+     * @param Request\Forum\MangaForumRequest $request
+     *
+     * @return Model\Forum\ForumTopic[]
+     * @throws \InvalidArgumentException
+     */
+    public function MangaForum(Request\Forum\MangaForumRequest $request): array
+    {
+        return $this->myanimelist->getMangaForumTopics($request);
+    }
 }

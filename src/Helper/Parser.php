@@ -68,6 +68,15 @@ class Parser
         }
     }
 
+    public static function parseForumDate(string $date): ?\DateTimeImmutable
+    {
+        if (!preg_match('/\d{4}/', $date)) {
+            $date .= ', '.date('Y');
+        }
+
+        return self::parseDate($date);
+    }
+
     /**
      * @param string $date
      *

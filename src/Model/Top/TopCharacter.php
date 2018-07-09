@@ -6,11 +6,11 @@ use Jikan\Model\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopAnime
+ * Class TopCharacters
  *
  * @package Jikan\Model
  */
-class TopAnime
+class TopCharacter
 {
     /**
      * @var int
@@ -25,32 +25,22 @@ class TopAnime
     /**
      * @var string
      */
-    private $type;
+    private $nameKanji;
+
+    /**
+     * @var MalUrl[]
+     */
+    private $animeography;
+
+    /**
+     * @var MalUrl[]
+     */
+    private $mangaography;
 
     /**
      * @var int
      */
-    private $episodes;
-
-    /**
-     * @var string
-     */
-    private $startDate;
-
-    /**
-     * @var string
-     */
-    private $endDate;
-
-    /**
-     * @var int
-     */
-    private $members;
-
-    /**
-     * @var float
-     */
-    private $rating;
+    private $favorites;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -66,12 +56,10 @@ class TopAnime
         $instance = new self();
         $instance->rank = $parser->getRank();
         $instance->malUrl = $parser->getMalUrl();
-        $instance->type = $parser->getAnimeType();
-        $instance->episodes = $parser->getEpisodes();
-        $instance->startDate = $parser->getAnimeStartDate();
-        $instance->endDate = $parser->getAnimeEndDate();
-        $instance->members = $parser->getAnimeMembers();
-        $instance->rating = $parser->getAnimeRating();
+        $instance->nameKanji = $parser->getCharacterKanji();
+        $instance->animeography = $parser->getAnimeography();
+        $instance->mangaography = $parser->getMangaography();
+        $instance->favorites = $parser->getFavorites();
 
         return $instance;
     }
@@ -100,48 +88,32 @@ class TopAnime
     /**
      * @return string
      */
-    public function getType(): string
+    public function getNameKanji(): string
     {
-        return $this->type;
+        return $this->nameKanji;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getAnimeography(): array
+    {
+        return $this->animeography;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getMangaography(): array
+    {
+        return $this->mangaography;
     }
 
     /**
      * @return int
      */
-    public function getEpisodes(): int
+    public function getFavorites(): int
     {
-        return $this->episodes;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStartDate(): string
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEndDate(): string
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMembers(): int
-    {
-        return $this->members;
-    }
-
-    /**
-     * @return float
-     */
-    public function getRating(): float
-    {
-        return $this->rating;
+        return $this->favorites;
     }
 }

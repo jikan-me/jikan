@@ -261,6 +261,8 @@ class Jikan
      * @param Request\News\AnimeNewsListRequest $request
      *
      * @return Model\News\NewsListItem[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function AnimeNewsList(Request\News\AnimeNewsListRequest $request): array
     {
@@ -271,6 +273,8 @@ class Jikan
      * @param Request\News\MangaNewsListRequest $request
      *
      * @return Model\News\NewsListItem[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function MangaNewsList(Request\News\MangaNewsListRequest $request): array
     {
@@ -281,6 +285,8 @@ class Jikan
      * @param Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function AnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
@@ -291,6 +297,8 @@ class Jikan
      * @param Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function MangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
@@ -301,6 +309,8 @@ class Jikan
      * @param Request\Search\CharacterSearchRequest $request
      *
      * @return Model\Search\CharacterSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function CharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
@@ -338,5 +348,17 @@ class Jikan
     public function TopAnime(?Request\Top\TopAnimeRequest $request = null): array
     {
         return $this->myanimelist->getTopAnime($request ?? new Request\Top\TopAnimeRequest());
+    }
+
+    /**
+     * @param Request\Top\TopCharactersRequest|null $request
+     *
+     * @return Model\Top\TopCharacter[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function TopCharacters(?Request\Top\TopCharactersRequest $request = null): array
+    {
+        return $this->myanimelist->getTopCharacters($request ?? new Request\Top\TopCharactersRequest());
     }
 }

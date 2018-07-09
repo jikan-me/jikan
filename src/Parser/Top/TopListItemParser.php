@@ -57,7 +57,7 @@ class TopListItemParser
      */
     public function getMalUrl(): MalUrl
     {
-        return (new MalUrlParser($this->crawler->filterXPath('//td[2]/div/div/a')))->getModel();
+        return (new MalUrlParser($this->crawler->filterXPath('//a[contains(@class,"fs14 fw-b")][1]')))->getModel();
     }
 
     /**
@@ -80,6 +80,7 @@ class TopListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeType(): string
     {
@@ -88,6 +89,7 @@ class TopListItemParser
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getEpisodes(): int
     {
@@ -96,6 +98,7 @@ class TopListItemParser
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getAnimeMembers(): int
     {
@@ -104,6 +107,7 @@ class TopListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeStartDate(): string
     {
@@ -112,9 +116,56 @@ class TopListItemParser
 
     /**
      * @return string
+     * @throws \InvalidArgumentException
      */
     public function getAnimeEndDate(): string
     {
         return JString::cleanse(explode(' - ', explode("\n", $this->getAnimeText())[1])[1] ?? '?');
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getCharacterKanji(): string
+    {
+        return trim($this->crawler->filterXPath('//span[@class="fs12 fn-grey6"][1]')->text(), '()');
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeography(): array
+    {
+        return $this->crawler->filterXPath('//td[3]/div/a')
+            ->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaography(): array
+    {
+        return $this->crawler->filterXPath('//td[4]/div/a')
+            ->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getFavorites(): int
+    {
+        return (int)preg_replace('/\D/', '', $this->crawler->filterXPath('//td[5]')->text());
     }
 }

@@ -394,7 +394,7 @@ class MalClient
     /**
      * @param Request\Top\TopAnimeRequest $request
      *
-     * @return array
+     * @return Model\Top\TopAnime[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -404,5 +404,20 @@ class MalClient
         $parser = new Parser\Top\TopAnimeParser($crawler);
 
         return $parser->getTopAnime();
+    }
+
+    /**
+     * @param Request\Top\TopCharactersRequest $request
+     *
+     * @return Model\Top\TopCharacter[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getTopCharacters(Request\Top\TopCharactersRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Top\TopCharactersParser($crawler);
+
+        return $parser->getTopCharacters();
     }
 }

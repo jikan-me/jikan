@@ -2,15 +2,15 @@
 
 namespace Jikan\Parser\Top;
 
-use Jikan\Model\Top\TopAnime;
+use Jikan\Model\Top\TopCharacter;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class TopAnimeParser
+ * Class TopCharactersParser
  *
  * @package Jikan\Parser\Top
  */
-class TopAnimeParser
+class TopCharactersParser
 {
     /**
      * @var Crawler
@@ -29,17 +29,17 @@ class TopAnimeParser
     }
 
     /**
-     * @return TopAnime[]
+     * @return TopCharacter[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getTopAnime(): array
+    public function getTopCharacters(): array
     {
         return $this->crawler
             ->filterXPath('//tr[@class="ranking-list"]')
             ->each(
                 function (Crawler $crawler) {
-                    return TopAnime::fromParser(new TopListItemParser($crawler));
+                    return TopCharacter::fromParser(new TopListItemParser($crawler));
                 }
             );
     }

@@ -394,4 +394,16 @@ class Jikan
     {
         return $this->myanimelist->getTopPeople($request ?? new Request\Top\TopPeopleRequest());
     }
+
+    /**
+     * @param Request\Anime\AnimeStatsRequest $request
+     *
+     * @return Model\Anime\AnimeStats
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeStats(Request\Anime\AnimeStatsRequest $request): Model\Anime\AnimeStats
+    {
+        return $this->myanimelist->getAnimeStats($request);
+    }
 }

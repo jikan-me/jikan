@@ -461,4 +461,19 @@ class MalClient
 
         return $parser->getTopPeople();
     }
+
+    /**
+     * @param Request\Anime\AnimeStatsRequest $request
+     *
+     * @return Model\Anime\AnimeStats
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeStats(Request\Anime\AnimeStatsRequest $request): Model\Anime\AnimeStats
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Anime\AnimeStatsParser($crawler);
+
+        return $parser->getModel();
+    }
 }

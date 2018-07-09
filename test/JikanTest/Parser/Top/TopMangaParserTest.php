@@ -109,4 +109,16 @@ class TopMangaParserTest extends TestCase
     {
         self::assertEquals('', $this->parser->getEndDate());
     }
+
+    /**
+     * @test
+     * @vcr TopMangaParserTest.yaml
+     */
+    public function it_gets_the_manga_image()
+    {
+        self::assertEquals(
+            'https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/55539.jpg?s=b4d9e935b7152f0c9e69b34a7797fe02',
+            $this->parser->getImage()
+        );
+    }
 }

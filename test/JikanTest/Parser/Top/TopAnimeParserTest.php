@@ -50,6 +50,18 @@ class TopAnimeParserTest extends TestCase
      * @test
      * @vcr TopAnimeParserTest.yaml
      */
+    public function it_gets_the_image()
+    {
+        self::assertEquals(
+            'https://myanimelist.cdn-dena.com/r/50x70/images/anime/3/80136.jpg?s=a3b3a8039e99287c719995e564e3d084',
+            $this->parser->getImage()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr TopAnimeParserTest.yaml
+     */
     public function it_gets_the_anime_rating()
     {
         self::assertEquals(9.04, $this->parser->getRating());

@@ -43,6 +43,11 @@ class TopCharacter
     private $favorites;
 
     /**
+     * @var string
+     */
+    private $image;
+
+    /**
      * Create an instance from an AnimeParser parser
      *
      * @param TopListItemParser $parser
@@ -60,6 +65,7 @@ class TopCharacter
         $instance->animeography = $parser->getAnimeography();
         $instance->mangaography = $parser->getMangaography();
         $instance->favorites = $parser->getFavorites();
+        $instance->image = $parser->getImage();
 
         return $instance;
     }
@@ -115,5 +121,13 @@ class TopCharacter
     public function getFavorites(): int
     {
         return $this->favorites;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
     }
 }

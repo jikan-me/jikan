@@ -42,6 +42,18 @@ class TopCharacterParserTest extends TestCase
      * @test
      * @vcr TopCharacterParserTest.yaml
      */
+    public function it_gets_the_image()
+    {
+        self::assertEquals(
+            'https://myanimelist.cdn-dena.com/r/50x78/images/characters/9/310307.jpg?s=1422edf1e44c7b6262386330461eecfd',
+            $this->parser->getImage()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr TopCharacterParserTest.yaml
+     */
     public function it_gets_the_rank()
     {
         self::assertEquals(3, $this->parser->getRank());

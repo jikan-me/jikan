@@ -25,6 +25,11 @@ class TopAnime
     /**
      * @var string
      */
+    private $image;
+
+    /**
+     * @var string
+     */
     private $type;
 
     /**
@@ -72,6 +77,7 @@ class TopAnime
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->rating = $parser->getRating();
+        $instance->image = $parser->getImage();
 
         return $instance;
     }
@@ -143,5 +149,13 @@ class TopAnime
     public function getRating(): float
     {
         return $this->rating;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
     }
 }

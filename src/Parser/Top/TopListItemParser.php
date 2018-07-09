@@ -61,6 +61,15 @@ class TopListItemParser
     }
 
     /**
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function getImage(): ?string
+    {
+        return $this->crawler->filterXPath('//img[1]')->attr('data-src');
+    }
+
+    /**
      * @return int
      * @throws \InvalidArgumentException
      */

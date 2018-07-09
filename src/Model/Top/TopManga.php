@@ -53,6 +53,11 @@ class TopManga
     private $rating;
 
     /**
+     * @var string
+     */
+    private $image;
+
+    /**
      * Create an instance from an AnimeParser parser
      *
      * @param TopListItemParser $parser
@@ -72,6 +77,7 @@ class TopManga
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->rating = $parser->getRating();
+        $instance->image = $parser->getImage();
 
         return $instance;
     }
@@ -143,5 +149,13 @@ class TopManga
     public function getRating(): float
     {
         return $this->rating;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
     }
 }

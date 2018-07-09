@@ -351,6 +351,18 @@ class Jikan
     }
 
     /**
+     * @param Request\Top\TopMangaRequest|null $request
+     *
+     * @return Model\Top\TopManga[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function TopManga(?Request\Top\TopMangaRequest $request = null): array
+    {
+        return $this->myanimelist->getTopManga($request ?? new Request\Top\TopMangaRequest());
+    }
+
+    /**
      * @param Request\Top\TopCharactersRequest|null $request
      *
      * @return Model\Top\TopCharacter[]

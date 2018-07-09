@@ -407,6 +407,21 @@ class MalClient
     }
 
     /**
+     * @param Request\Top\TopMangaRequest $request
+     *
+     * @return Model\Top\TopManga[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getTopManga(Request\Top\TopMangaRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Top\TopMangaParser($crawler);
+
+        return $parser->getTopManga();
+    }
+
+    /**
      * @param Request\Top\TopCharactersRequest $request
      *
      * @return Model\Top\TopCharacter[]

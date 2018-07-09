@@ -38,7 +38,7 @@ class TopListItemParser
      * @return string
      * @throws \InvalidArgumentException
      */
-    private function getAnimeText(): string
+    private function getText(): string
     {
         if ($this->animeText !== null) {
             return $this->animeText;
@@ -73,7 +73,7 @@ class TopListItemParser
      * @return float
      * @throws \InvalidArgumentException
      */
-    public function getAnimeRating(): float
+    public function getRating(): float
     {
         return (float)$this->crawler->filterXPath('//td[3]/div/span')->text();
     }
@@ -82,9 +82,9 @@ class TopListItemParser
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeType(): string
+    public function getType(): string
     {
-        return preg_replace('/^(\w+).*$/', '$1', explode("\n", $this->getAnimeText())[0]);
+        return preg_replace('/^(\w+).*$/', '$1', $this->getTextArray()[0]);
     }
 
     /**
@@ -93,34 +93,58 @@ class TopListItemParser
      */
     public function getEpisodes(): int
     {
-        return (int)preg_replace('/.*(\d+) eps.*/', '$1', explode("\n", $this->getAnimeText())[0]);
+        return (int)preg_replace('/.*\((\d+) eps\).*/', '$1', $this->getTextArray()[0]);
+    }
+
+    /**
+     * @return int|null
+     * @throws \InvalidArgumentException
+     */
+    public function getVolumes(): ?int
+    {
+        $count = 0;
+        $vols = preg_replace('/.*\((\d+) vols\).*/', '$1', $this->getTextArray()[0], -1, $count);
+
+        return $count ? (int)$vols : null;
+    }
+
+    /**
+     * @return array
+     */
+    private function getTextArray(): array
+    {
+        $parts = explode(PHP_EOL, $this->getText());
+        $parts = array_map('trim', $parts);
+        $parts = array_filter($parts);
+
+        return array_values($parts);
     }
 
     /**
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getAnimeMembers(): int
+    public function getMembers(): int
     {
-        return (int)preg_replace('/\D/', '$1', explode("\n", $this->getAnimeText())[2]);
+        return (int)preg_replace('/\D/', '', $this->getTextArray()[2]);
     }
 
     /**
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeStartDate(): string
+    public function getStartDate(): string
     {
-        return JString::cleanse(explode(' - ', explode("\n", $this->getAnimeText())[1])[0]);
+        return JString::cleanse(explode('-', $this->getTextArray()[1])[0]);
     }
 
     /**
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getAnimeEndDate(): string
+    public function getEndDate(): string
     {
-        return JString::cleanse(explode(' - ', explode("\n", $this->getAnimeText())[1])[1] ?? '?');
+        return JString::cleanse(explode('-', $this->getTextArray()[1])[1] ?? '?');
     }
 
     /**

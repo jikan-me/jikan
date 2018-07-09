@@ -52,7 +52,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_rating()
     {
-        self::assertEquals(9.04, $this->parser->getAnimeRating());
+        self::assertEquals(9.04, $this->parser->getRating());
     }
 
     /**
@@ -61,7 +61,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_type()
     {
-        self::assertEquals('Movie', $this->parser->getAnimeType());
+        self::assertEquals('Movie', $this->parser->getType());
     }
 
     /**
@@ -79,7 +79,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_members()
     {
-        self::assertEquals(533061, $this->parser->getAnimeMembers());
+        self::assertEquals(533061, $this->parser->getMembers());
     }
 
     /**
@@ -88,7 +88,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_start_date()
     {
-        self::assertEquals('Sep 2016', $this->parser->getAnimeStartDate());
+        self::assertEquals('Sep 2016', $this->parser->getStartDate());
     }
 
     /**
@@ -97,6 +97,6 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_end_date()
     {
-        self::assertEquals('Sep 2016', $this->parser->getAnimeEndDate());
+        self::assertEquals('Sep 2016', $this->parser->getEndDate());
     }
 }

@@ -6,11 +6,11 @@ use Jikan\Model\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopAnime
+ * Class TopManga
  *
  * @package Jikan\Model
  */
-class TopAnime
+class TopManga
 {
     /**
      * @var int
@@ -28,9 +28,9 @@ class TopAnime
     private $type;
 
     /**
-     * @var int
+     * @var int|null
      */
-    private $episodes;
+    private $volumes;
 
     /**
      * @var string
@@ -67,7 +67,7 @@ class TopAnime
         $instance->rank = $parser->getRank();
         $instance->malUrl = $parser->getMalUrl();
         $instance->type = $parser->getType();
-        $instance->episodes = $parser->getEpisodes();
+        $instance->volumes = $parser->getVolumes();
         $instance->startDate = $parser->getStartDate();
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
@@ -106,11 +106,11 @@ class TopAnime
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getEpisodes(): int
+    public function getVolumes(): ?int
     {
-        return $this->episodes;
+        return $this->volumes;
     }
 
     /**

@@ -7,6 +7,7 @@ use Jikan\Model\Friend;
 use Jikan\Model\News\NewsListItem;
 use Jikan\Model\Top\TopAnime;
 use Jikan\Model\Top\TopCharacter;
+use Jikan\Model\Top\TopManga;
 use Jikan\Request\News\AnimeNewsListRequest;
 use Jikan\Request\News\MangaNewsListRequest;
 use PHPUnit\Framework\TestCase;
@@ -227,6 +228,20 @@ class JikanTest extends TestCase
         self::assertContains('Fullmetal Alchemist: Brotherhood', $anime);
         self::assertContains('Mushishi Zoku Shou: Suzu no Shizuku', $anime);
     }
+
+    /**
+     * @test
+     * @vcr TopMangaParserTest.yaml
+     */
+    public function it_gets_top_manga()
+    {
+        $anime = $this->jikan->TopManga();
+        self::assertCount(50, $anime);
+        self::assertContainsOnlyInstancesOf(TopManga::class, $anime);
+        self::assertContains('Berserk', $anime);
+        self::assertContains('Shigatsu wa Kimi no Uso', $anime);
+    }
+
     /**
      * @test
      * @vcr TopCharacterParserTest.yaml

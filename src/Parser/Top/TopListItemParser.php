@@ -124,7 +124,7 @@ class TopListItemParser
      */
     private function getTextArray(): array
     {
-        $parts = explode(PHP_EOL, $this->getText());
+        $parts = explode("\n", $this->getText());
         $parts = array_map('trim', $parts);
         $parts = array_filter($parts);
 

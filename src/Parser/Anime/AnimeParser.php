@@ -412,7 +412,7 @@ class AnimeParser implements ParserInterface
             '#',
             '',
             substr(
-                explode(PHP_EOL, trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
+                explode("\n", trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
                 0,
                 -1
             )
@@ -553,7 +553,7 @@ class AnimeParser implements ParserInterface
     public function getAnimeAiredString(): ?string
     {
         $aired = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..')->text();
-        $aired = explode(PHP_EOL, trim($aired))[1];
+        $aired = explode("\n", trim($aired))[1];
 
         return trim($aired);
     }

@@ -73,8 +73,8 @@ class PersonParserTest extends TestCase
      */
     public function it_gets_the_about()
     {
-        self::assertContains('She began her voice-acting career in 1999 and has continued her work as a seiyuu for more than a decade.\n', $this->parser->getPersonAbout());
-        self::assertContains('Married on June 2, 2014, her 29th birthday.\n', $this->parser->getPersonAbout());
+        self::assertContains('She began her voice-acting career in 1999 and has continued her work as a seiyuu for more than a decade.\n\n', $this->parser->getPersonAbout());
+        self::assertContains('Married on June 2, 2014, her 29th birthday.\n\n', $this->parser->getPersonAbout());
     }
 
     /**

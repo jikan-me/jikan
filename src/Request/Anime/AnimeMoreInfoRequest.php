@@ -1,6 +1,9 @@
 <?php
+
 namespace Jikan\Request\Anime;
+
 use Jikan\Request\RequestInterface;
+
 /**
  * Class AnimeMoreInfoRequest
  *
@@ -12,6 +15,7 @@ class AnimeMoreInfoRequest implements RequestInterface
      * @var int
      */
     private $id;
+
     /**
      * AnimeRequest constructor.
      *
@@ -21,6 +25,7 @@ class AnimeMoreInfoRequest implements RequestInterface
     {
         $this->id = $id;
     }
+
     /**
      * @return string
      */

@@ -22,7 +22,7 @@ install:
   - ps: Set-Service wuauserv -StartupType Manual
   - IF EXIST c:\tools\php71 (SET PHP=0)
   - IF %PHP%==1 cinst -y OpenSSL.Light
-  - IF %PHP%==1 cinst -y php -version %php_ver%
+  - IF %PHP%==1 cinst -y php -version %PHP_VERSION%
   - cd C:\tools\php71
   - IF %PHP%==1 copy php.ini-production php.ini
   - IF %PHP%==1 echo date.timezone="UTC" >> php.ini

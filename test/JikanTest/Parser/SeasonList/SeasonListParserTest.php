@@ -28,7 +28,7 @@ class SeasonListParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\SeasonList\SeasonListParser::getModel
-     * @vcr SeasonListParser.yaml
+     * @vcr SeasonList.yaml
      */
     public function it_contains_season_items(): void
     {

@@ -9,7 +9,3 @@ use Jikan\Request\RequestInterface;
  *
  * @package Jikan\Request\Anime
  */
-class AnimeMoreInfoRequest implements RequestInterface
-{
-
-}

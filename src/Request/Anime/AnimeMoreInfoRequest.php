@@ -13,7 +13,9 @@ class AnimeMoreInfoRequest implements RequestInterface
     /**
      * @var int
      */
+
     private $id;
+
     /**
      * AnimeRequest constructor.
      *
@@ -23,6 +25,7 @@ class AnimeMoreInfoRequest implements RequestInterface
     {
         $this->id = $id;
     }
+
     /**
      * @return string
      */

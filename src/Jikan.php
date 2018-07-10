@@ -440,16 +440,4 @@ class Jikan
     {
         return $this->myanimelist->getMangaForumTopics($request);
     }
-
-    /**
-     * @param Request\Anime\AnimeMoreInfoRequest $request
-     *
-     * @return Model\Anime\MoreInfo
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): Model\Anime\MoreInfo
-    {
-        return $this->myanimelist->getAnimeMoreInfo($request);
-    }
 }

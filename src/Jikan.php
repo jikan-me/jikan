@@ -451,4 +451,15 @@ class Jikan
     {
         return $this->myanimelist->getAnimeMoreInfo($request);
     }
+
+    /**
+     * @param Request\SeasonList\SeasonListRequest $request
+     *
+     * @return array
+     * @throws \InvalidArgumentException
+     */
+    public function SeasonList(Request\SeasonList\SeasonListRequest $request): array
+    {
+        return $this->myanimelist->getSeasonList($request);
+    }
 }

@@ -12,7 +12,7 @@ class MangaSearchTest extends TestCase
 {
 
     private $search;
-    private $anime;
+    private $manga;
 
     public function setUp()
     {
@@ -20,7 +20,7 @@ class MangaSearchTest extends TestCase
         $this->search = $jikan->MangaSearch(
             new \Jikan\Request\Search\MangaSearchRequest('Fate')
         );
-        $this->anime = $this->search->getResults()[0];
+        $this->manga = $this->search->getResults()[0];
     }
 
     /**
@@ -29,7 +29,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_title()
     {
-        self::assertEquals("Fate/Zero", $this->anime->getTitle());
+        self::assertEquals("Fate/Zero", $this->manga->getTitle());
     }
 
     /**
@@ -38,7 +38,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/196931.jpg?s=7da8d65371bc975c9ecda0d30a832984", $this->anime->getImageUrl());
+        self::assertEquals("https://myanimelist.cdn-dena.com/r/50x70/images/manga/3/196931.jpg?s=7da8d65371bc975c9ecda0d30a832984", $this->manga->getImageUrl());
     }
 
     /**
@@ -47,7 +47,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_publishing()
     {
-        self::assertEquals($this->anime->isPublishing(), false);
+        self::assertEquals($this->manga->isPublishing(), false);
     }
 
     /**
@@ -56,7 +56,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_synopsis()
     {
-        self::assertContains("War of the Holy Grail—Pursuing the power of the \"Holy Grail\" which grants a miracle, this is a contest in which seven magi summon seven Heroic Spirits to compete for it.", $this->anime->getSynopsis());
+        self::assertContains("War of the Holy Grail—Pursuing the power of the \"Holy Grail\" which grants a miracle, this is a contest in which seven magi summon seven Heroic Spirits to compete for it.", $this->manga->getSynopsis());
     }
 
     /**
@@ -65,7 +65,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_type()
     {
-        self::assertEquals($this->anime->getType(), "Manga");
+        self::assertEquals($this->manga->getType(), "Manga");
     }
 
     /**
@@ -74,7 +74,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_chapters()
     {
-        self::assertEquals($this->anime->getChapters(), 79);
+        self::assertEquals($this->manga->getChapters(), 79);
     }
 
     /**
@@ -83,7 +83,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_volumes()
     {
-        self::assertEquals($this->anime->getVolumes(), 14);
+        self::assertEquals($this->manga->getVolumes(), 14);
     }
 
     /**
@@ -92,7 +92,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_start_date()
     {
-        self::assertInstanceOf(\DateTimeImmutable::class, $this->anime->getStartDate());
+        self::assertInstanceOf(\DateTimeImmutable::class, $this->manga->getStartDate());
     }
 
     /**
@@ -101,7 +101,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_end_date()
     {
-        self::assertInstanceOf(\DateTimeImmutable::class, $this->anime->getEndDate());
+        self::assertInstanceOf(\DateTimeImmutable::class, $this->manga->getEndDate());
     }
 
     /**
@@ -110,7 +110,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_members()
     {
-        self::assertEquals($this->anime->getMembers(), 3659);
+        self::assertEquals($this->manga->getMembers(), 3659);
     }
 
     /**
@@ -119,6 +119,6 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_score()
     {
-        self::assertEquals($this->anime->getScore(), 7.81);
+        self::assertEquals($this->manga->getScore(), 7.81);
     }
 }

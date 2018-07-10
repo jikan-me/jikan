@@ -133,7 +133,6 @@ class AnimeSearchRequest implements RequestInterface
      * @return $this
      */
     public function setStartsWithChar(string $char)
-
     {
         $this->char = $char;
 

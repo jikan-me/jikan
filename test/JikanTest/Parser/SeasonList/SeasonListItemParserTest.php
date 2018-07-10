@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: miraris
- * Date: 10.7.18
- * Time: 19:42
- */
 
 namespace Jikan\Parser\SeasonList;
 
-use Jikan\Parser\SeasonList\SeasonListItemParser;
 use PHPUnit\Framework\TestCase;
 
 class SeasonListItemParserTest extends TestCase

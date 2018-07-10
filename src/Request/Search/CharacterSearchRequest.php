@@ -68,7 +68,7 @@ class CharacterSearchRequest implements RequestInterface
      * @param string $char
      * @return $this
      */
-    public function startsWith(string $char)
+    public function setStartsWithChar(string $char)
     {
         $this->char = $char;
 

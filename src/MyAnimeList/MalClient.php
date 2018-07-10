@@ -533,4 +533,18 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\SeasonList\SeasonListRequest $request
+     *
+     * @return Model\SeasonList\SeasonListItem[] An array of SeasonListItem instances
+     * @throws \InvalidArgumentException
+     */
+    public function getSeasonList(Request\SeasonList\SeasonListRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\SeasonList\SeasonListParser($crawler);
+
+        return $parser->getModel();
+    }
 }

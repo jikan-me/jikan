@@ -211,6 +211,17 @@ class JikanTest extends TestCase
 
     /**
      * @test
+     * @vcr MangaSearchParserTest.yaml
+     */
+    public function it_gets_manga_search()
+    {
+        $search = $this->jikan->MangaSearch(new \Jikan\Request\Search\MangaSearchRequest('Fate'));
+        self::assertCount(50, $search->getResults());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\MangaSearchListItem::class, $search->getResults());
+    }
+
+    /**
+     * @test
      * @vcr MangaCharacterListParserTest.yaml
      */
     public function it_gets_manga_characters()

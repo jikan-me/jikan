@@ -13,7 +13,6 @@ class AnimeMoreInfoParserTest extends TestCase
 
     public function setUp()
     {
-        \VCR\VCR::turnOff();
         $request = new \Jikan\Request\Anime\AnimeMoreInfoRequest(21);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());

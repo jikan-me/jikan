@@ -1,9 +1,12 @@
 <?php
+
 namespace Jikan\Parser\Anime;
+
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\MoreInfo;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
+
 /**
  * Class MoreInfoParser
  *
@@ -15,6 +18,7 @@ class MoreInfoParser implements ParserInterface
      * @var Crawler
      */
     private $crawler;
+
     /**
      * MoreInfoParser constructor.
      *
@@ -24,6 +28,7 @@ class MoreInfoParser implements ParserInterface
     {
         $this->crawler = $crawler;
     }
+
     /**
      * Return the model
      *
@@ -34,6 +39,7 @@ class MoreInfoParser implements ParserInterface
     {
         return MoreInfo::fromParser($this);
     }
+
     /**
      * @return string
      * @throws \InvalidArgumentException

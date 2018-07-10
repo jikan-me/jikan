@@ -15,6 +15,7 @@ class MoreInfo
      * @var string
      */
     private $moreInfo;
+
     /**
      * @param MoreInfoParser $parser
      *
@@ -28,6 +29,7 @@ class MoreInfo
         $instance->moreInfo = $parser->getMoreInfo();
         return $instance;
     }
+
     /**
      * @return string
      */

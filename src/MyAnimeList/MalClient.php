@@ -519,4 +519,17 @@ class MalClient
 
         return $parser->getTopics();
     }
+
+    /**
+     * @param Request\Anime\AnimeMoreInfoRequest $request
+     *
+     * @return Model\Anime\MoreInfo
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): Model\Anime\MoreInfo
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Anime\MoreInfoParser($crawler);
+        return $parser->getModel();
+    }
 }

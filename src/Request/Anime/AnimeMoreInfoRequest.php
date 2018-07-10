@@ -17,17 +17,17 @@ class AnimeMoreInfoRequest implements RequestInterface
     private $id;
 
     /**
-     * AnimeRequest constructor.
+     * AnimeMoreInfoRequest constructor
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }
 
     /**
-     * @return string
+     * return string
      */
     public function getPath(): string
     {

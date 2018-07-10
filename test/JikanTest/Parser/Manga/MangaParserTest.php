@@ -202,18 +202,6 @@ class MangaParserTest extends TestCase
      * @test
      * @vcr MangaParserTest.yaml
      */
-    public function it_gets_the_manga_published_string()
-    {
-        self::assertEquals(
-            "Sep  21, 1999 to Nov  10, 2014",
-            $this->manga->getPublishedString()
-        );
-    }
-
-    /**
-     * @test
-     * @vcr MangaParserTest.yaml
-     */
     public function it_gets_the_manga_published()
     {
         $range = $this->manga->getPublished();

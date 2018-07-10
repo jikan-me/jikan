@@ -22,7 +22,7 @@ class AnimeMoreInfoParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\MoreInfoParser
-     * @vcr AnimeParserTest.yaml
+     * @vcr AnimeMoreInfoParserTest.yaml
      */
     public function it_gets_more_info(): void
     {

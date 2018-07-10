@@ -5,12 +5,12 @@ namespace Jikan\Request\Search;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class CharacterSearchRequest
+ * Class PersonSearchRequest
  *
  *
  * @package Jikan\Request\Search
  */
-class CharacterSearchRequest implements RequestInterface
+class PersonSearchRequest implements RequestInterface
 {
 
     /**

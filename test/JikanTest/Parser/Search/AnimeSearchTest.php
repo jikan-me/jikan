@@ -101,7 +101,7 @@ class AnimeSearchTest extends TestCase
      */
     public function it_gets_the_members()
     {
-        self::assertEquals($this->anime->getMembers(), 677070);
+        self::assertEquals($this->anime->getMembers(), 677392);
     }
 
     /**

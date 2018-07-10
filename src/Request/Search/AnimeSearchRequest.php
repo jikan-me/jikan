@@ -30,6 +30,11 @@ class AnimeSearchRequest implements RequestInterface
     /**
      * @var string
      */
+    private $char = null;
+
+    /**
+     * @var string
+     */
     private $type = 0;
 
     /**
@@ -94,7 +99,8 @@ class AnimeSearchRequest implements RequestInterface
 
         $query = http_build_query([
             'q' => $this->query,
-            'show' => $this->page ? 50 * ($this->page-1) : null,
+            'show' => ($this->page !== 1) ? 50 * ($this->page-1) : null,
+            'letter' => $this->char,
             'type' => $this->type,
             'score' => $this->score,
             'status' => $this->status,
@@ -122,6 +128,21 @@ class AnimeSearchRequest implements RequestInterface
         );
     }
 
+    /**
+     * @param string $char
+     * @return $this
+     */
+    public function setStartsWithChar(string $char)
+    {
+        $this->char = $char;
+
+        return $this;
+    }
+
+    /**
+     * @param string $type
+     * @return $this
+     */
     public function setType(string $type)
     {
         $this->type = $type;

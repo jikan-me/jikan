@@ -5,15 +5,15 @@ namespace Jikan\Model\Search;
 use Jikan\Parser;
 
 /**
- * Class AnimeSearch
+ * Class PersonSearch
  *
  * @package Jikan\Model\Search\Search
  */
-class AnimeSearch
+class PersonSearch
 {
 
     /**
-     * @var AnimeSearchItem[]
+     * @var PersonSearchItem[]
      */
     private $results;
 
@@ -24,14 +24,14 @@ class AnimeSearch
 
 
     /**
-     * @param Parser\Search\AnimeSearchParser $parser
+     * @param Parser\Search\PersonSearchParser $parser
      *
-     * @return AnimeSearch
+     * @return PersonSearch
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\Search\AnimeSearchParser $parser): self
+    public static function fromParser(Parser\Search\PersonSearchParser $parser): self
     {
         $instance = new self();
 
@@ -42,7 +42,7 @@ class AnimeSearch
     }
 
     /**
-     * @return AnimeSearchItem[]
+     * @return PersonSearchItem[]
      */
     public function getResults(): array
     {

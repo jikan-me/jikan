@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\MoreInfo;
 use Jikan\Parser\ParserInterface;
@@ -20,7 +21,7 @@ class MoreInfoParser implements ParserInterface
     private $crawler;
 
     /**
-     * MoreInfoParser constructor.
+     * MoreInfoParser Constructor
      *
      * @param Crawler $crawler
      */
@@ -46,7 +47,7 @@ class MoreInfoParser implements ParserInterface
      */
     public function getMoreInfo(): string
     {
-        return trim(
+        return JString::cleanse(
             Parser::removeChildNodes(
                 $this->crawler->filterXPath('//div[@class="js-scrollfix-bottom-rel"]')
             )->text()

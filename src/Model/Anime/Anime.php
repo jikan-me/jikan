@@ -80,12 +80,7 @@ class Anime
     private $airing = false;
 
     /**
-     * @var string
-     */
-    private $airedString;
-
-    /**
-     * @var \Jikan\Model\Common\DateRange
+     * @var DateRange
      */
     private $aired;
 
@@ -215,7 +210,6 @@ class Anime
         $instance->episodesUnknown = $instance->episodes === 0;
         $instance->status = $parser->getStatus();
         $instance->airing = $instance->status === 'Currently Airing';
-        $instance->airedString = $parser->getAnimeAiredString();
         $instance->aired = $parser->getAired();
         $instance->premiered = $parser->getPremiered();
         $instance->broadcast = $parser->getBroadcast();
@@ -343,14 +337,6 @@ class Anime
     public function isAiring(): bool
     {
         return $this->airing;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAiredString(): string
-    {
-        return $this->airedString;
     }
 
     /**

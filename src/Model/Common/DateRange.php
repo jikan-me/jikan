@@ -55,4 +55,12 @@ class DateRange
 
         return Parser::parseDate($aired);
     }
+
+    /**
+     * @return string
+     */
+    public function getAiredString(): string
+    {
+        return $this->aired;
+    }
 }

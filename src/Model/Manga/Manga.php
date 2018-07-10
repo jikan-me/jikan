@@ -91,11 +91,6 @@ class Manga
     private $publishing = false;
 
     /**
-     * @var string
-     */
-    private $publishedString;
-
-    /**
      * @var DateRange
      */
     private $published;
@@ -189,7 +184,6 @@ class Manga
         $instance->volumesUnknown = $instance->volumes === 0;
         $instance->status = $parser->getMangaStatus();
         $instance->publishing = $instance->status === 'Publishing';
-        $instance->publishedString = $parser->getMangaPublishedString();
         $instance->published = $parser->getPublished();
         $instance->genres = $parser->getMangaGenre();
         $instance->score = $parser->getMangaScore();
@@ -316,14 +310,6 @@ class Manga
     public function isPublishing(): bool
     {
         return $this->publishing;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPublishedString(): string
-    {
-        return $this->publishedString;
     }
 
     /**

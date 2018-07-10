@@ -80,7 +80,7 @@ class Anime
     private $airing = false;
 
     /**
-     * @var \Jikan\Model\Common\DateRange
+     * @var DateRange
      */
     private $aired;
 

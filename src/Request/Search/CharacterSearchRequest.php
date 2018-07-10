@@ -24,6 +24,15 @@ class CharacterSearchRequest implements RequestInterface
     private $page;
 
     /**
+     * Advanced Search
+     */
+
+    /**
+     * @var string
+     */
+    private $char = null;
+
+    /**
      * SearchRequest constructor.
      *
      * @param string $query
@@ -46,11 +55,23 @@ class CharacterSearchRequest implements RequestInterface
         $query = http_build_query([
             'q' => $this->query,
             'show' => ($this->page !== 1) ? 50 * ($this->page-1) : null,
+            'letter' => $this->char,
         ]);
 
         return sprintf(
             'https://myanimelist.net/character.php?%s',
             $query
         );
+    }
+
+    /**
+     * @param string $char
+     * @return $this
+     */
+    public function startsWith(string $char)
+    {
+        $this->char = $char;
+
+        return $this;
     }
 }

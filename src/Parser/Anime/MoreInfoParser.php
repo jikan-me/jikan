@@ -25,7 +25,7 @@ class MoreInfoParser implements ParserInterface
      *
      * @param Crawler $crawler
      */
-    public function __construt(Crawler $crawler)
+    public function __construct(Crawler $crawler)
     {
         $this->crawler = $crawler;
     }

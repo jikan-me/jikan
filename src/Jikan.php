@@ -331,7 +331,7 @@ class Jikan
      *
      * @return Model\Search\PersonSearchListItem[]
      */
-    public function PersonSearch(Request\Search\PersonSearchRequest $request): array
+    public function PersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
         return $this->myanimelist->getPersonSearch($request);
     }

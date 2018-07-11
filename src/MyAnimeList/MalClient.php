@@ -381,11 +381,16 @@ class MalClient
     /**
      * @param Request\Search\PersonSearchRequest $request
      *
-     * @return Model\Search\PersonSearchItem[]
+     * @return Model\Search\PersonSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public function getPersonSearch(Request\Search\PersonSearchRequest $request): array // WIP
+    public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
-        return [];
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Search\PersonSearchParser($crawler);
+
+        return $parser->getModel();
     }
 
     /**

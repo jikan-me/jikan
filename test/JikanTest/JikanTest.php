@@ -236,6 +236,18 @@ class JikanTest extends TestCase
 
     /**
      * @test
+     * @vcr PersonSearchParserTest.yaml
+     */
+    public function it_gets_person_search()
+    {
+        $search = $this->jikan->PersonSearch(new \Jikan\Request\Search\PersonSearchRequest('Ara'));
+        self::assertCount(50, $search->getResults());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\PersonSearchListItem::class, $search->getResults());
+        self::assertEquals(20, $search->getLastPage());
+    }
+
+    /**
+     * @test
      * @vcr MangaCharacterListParserTest.yaml
      */
     public function it_gets_manga_characters()

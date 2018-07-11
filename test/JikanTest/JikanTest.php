@@ -178,6 +178,46 @@ class JikanTest extends TestCase
 
     /**
      * @test
+     * @vcr AnimePicturesParserTest.yaml
+     */
+    public function it_gets_anime_pictures()
+    {
+        $pictures = $this->jikan->AnimePictures(new \Jikan\Request\Anime\AnimePicturesRequest(1));
+        self::assertCount(10, $pictures);
+    }
+
+    /**
+     * @test
+     * @vcr MangaPicturesParserTest.yaml
+     */
+    public function it_gets_manga_pictures()
+    {
+        $pictures = $this->jikan->MangaPictures(new \Jikan\Request\Manga\MangaPicturesRequest(1));
+        self::assertCount(8, $pictures);
+    }
+
+    /**
+     * @test
+     * @vcr PersonPicturesParserTest.yaml
+     */
+    public function it_gets_person_pictures()
+    {
+        $pictures = $this->jikan->PersonPictures(new \Jikan\Request\Person\PersonPicturesRequest(1));
+        self::assertCount(4, $pictures);
+    }
+
+    /**
+     * @test
+     * @vcr CharacterPicturesParserTest.yaml
+     */
+    public function it_gets_character_pictures()
+    {
+        $pictures = $this->jikan->CharacterPictures(new \Jikan\Request\Character\CharacterPicturesRequest(1));
+        self::assertCount(15, $pictures);
+    }
+
+    /**
+     * @test
      * @vcr NewsParserTest.yaml
      */
     public function it_gets_manga_news_list()

@@ -420,23 +420,23 @@ class Jikan
     }
 
     /**
-     * @param Request\Forum\AnimeForumRequest $request
+     * @param Request\Anime\AnimeForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function AnimeForum(Request\Forum\AnimeForumRequest $request): array
+    public function AnimeForum(Request\Anime\AnimeForumRequest $request): array
     {
         return $this->myanimelist->getAnimeForumTopics($request);
     }
 
     /**
-     * @param Request\Forum\MangaForumRequest $request
+     * @param Request\Manga\MangaForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function MangaForum(Request\Forum\MangaForumRequest $request): array
+    public function MangaForum(Request\Manga\MangaForumRequest $request): array
     {
         return $this->myanimelist->getMangaForumTopics($request);
     }

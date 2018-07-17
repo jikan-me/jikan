@@ -498,12 +498,12 @@ class MalClient
     }
 
     /**
-     * @param Request\Forum\AnimeForumRequest $request
+     * @param Request\Anime\AnimeForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getAnimeForumTopics(Request\Forum\AnimeForumRequest $request): array
+    public function getAnimeForumTopics(Request\Anime\AnimeForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);
@@ -512,12 +512,12 @@ class MalClient
     }
 
     /**
-     * @param Request\Forum\MangaForumRequest $request
+     * @param Request\Manga\MangaForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getMangaForumTopics(Request\Forum\MangaForumRequest $request): array
+    public function getMangaForumTopics(Request\Manga\MangaForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);

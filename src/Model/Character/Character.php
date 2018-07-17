@@ -19,7 +19,7 @@ class Character
     /**
      * @var string
      */
-    public $characterUrl;
+    public $url;
 
     /**
      * @var string
@@ -80,7 +80,7 @@ class Character
         $instance->mangaography = $parser->getMangaography();
         $instance->voiceActors = $parser->getVoiceActors();
         $instance->malId = $parser->getMalId();
-        $instance->characterUrl = $parser->getCharacterUrl();
+        $instance->url = $parser->getCharacterUrl();
         $instance->name = $parser->getName();
         $instance->nameKanji = $parser->getNameKanji();
         $instance->nicknames = $parser->getNameNicknames();
@@ -104,7 +104,7 @@ class Character
      */
     public function getCharacterUrl(): string
     {
-        return $this->characterUrl;
+        return $this->url;
     }
 
     /**

@@ -12,8 +12,8 @@ use Jikan\Model\Top\TopPeople;
 use Jikan\Model\User\Friend;
 use Jikan\Request\Forum\AnimeForumRequest;
 use Jikan\Request\Forum\MangaForumRequest;
-use Jikan\Request\News\AnimeNewsListRequest;
-use Jikan\Request\News\MangaNewsListRequest;
+use Jikan\Request\Anime\AnimeNewsRequest;
+use Jikan\Request\Manga\MangaNewsRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -218,22 +218,22 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
+     * @vcr MangaNewsParserTest.yaml
      */
-    public function it_gets_manga_news_list()
+    public function it_gets_manga_news()
     {
-        $items = $this->jikan->MangaNewsList(new MangaNewsListRequest(2));
+        $items = $this->jikan->MangaNews(new MangaNewsRequest(2));
         self::assertCount(14, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
+     * @vcr AnimeNewsParserTest.yaml
      */
-    public function it_gets_anime_news_list()
+    public function it_gets_anime_news()
     {
-        $items = $this->jikan->AnimeNewsList(new AnimeNewsListRequest(21));
+        $items = $this->jikan->AnimeNews(new AnimeNewsRequest(21));
         self::assertCount(30, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }

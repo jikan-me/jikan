@@ -264,25 +264,25 @@ class Jikan
     }
 
     /**
-     * @param Request\News\AnimeNewsListRequest $request
+     * @param Request\Anime\AnimeNewsRequest $request
      *
      * @return Model\News\NewsListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeNewsList(Request\News\AnimeNewsListRequest $request): array
+    public function AnimeNews(Request\Anime\AnimeNewsRequest $request): array
     {
         return $this->myanimelist->getNewsList($request);
     }
 
     /**
-     * @param Request\News\MangaNewsListRequest $request
+     * @param Request\Manga\MangaNewsRequest $request
      *
      * @return Model\News\NewsListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function MangaNewsList(Request\News\MangaNewsListRequest $request): array
+    public function MangaNews(Request\Manga\MangaNewsRequest $request): array
     {
         return $this->myanimelist->getNewsList($request);
     }

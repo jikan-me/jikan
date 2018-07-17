@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Request\News;
+namespace Jikan\Request\Manga;
 
 use Jikan\Request\RequestInterface;
 
@@ -9,7 +9,7 @@ use Jikan\Request\RequestInterface;
  *
  * @package Jikan\Request
  */
-class AnimeNewsListRequest implements RequestInterface
+class MangaNewsRequest implements RequestInterface
 {
     /**
      * @var int
@@ -31,6 +31,6 @@ class AnimeNewsListRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/anime/%s/_/news', $this->id);
+        return sprintf('https://myanimelist.net/manga/%s/_/news', $this->id);
     }
 }

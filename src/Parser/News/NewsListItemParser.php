@@ -61,12 +61,18 @@ class NewsListItemParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
-        return $this->crawler->filterXPath('//img[1]')->attr('data-src');
+        $image = $this->crawler->filterXPath('//img[1]');
+
+        if (!$image->count()) {
+            return null;
+        }
+
+        return $image->attr('data-src');
     }
 
     /**

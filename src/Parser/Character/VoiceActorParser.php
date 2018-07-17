@@ -57,7 +57,12 @@ class VoiceActorParser implements ParserInterface
      */
     public function getName(): string
     {
-        return $this->crawler->filterXPath('//a')->text();
+        return $this->crawler->filterXPath('//a')
+            ->reduce(
+                function (Crawler $crawler) {
+                    return !$crawler->filter('img')->count();
+                }
+            )->text();
     }
 
     /**

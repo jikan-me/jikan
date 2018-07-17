@@ -2,15 +2,15 @@
 
 namespace Jikan\Model\Anime;
 
-use Jikan\Model\Character\CharacterListItem;
+use Jikan\Model\Anime\CharacterListItem;
 use Jikan\Parser\Anime\CharactersAndStaffParser;
 
 /**
- * Class CharactersAndStaff
+ * Class AnimeCharactersAndStaff
  *
  * @package Jikan\Model
  */
-class CharactersAndStaff
+class AnimeCharactersAndStaff
 {
     /**
      * @var CharacterListItem[]
@@ -25,7 +25,7 @@ class CharactersAndStaff
     /**
      * @param CharactersAndStaffParser $parser
      *
-     * @return CharactersAndStaff
+     * @return AnimeCharactersAndStaff
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

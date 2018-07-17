@@ -53,6 +53,18 @@ class Jikan
     }
 
     /**
+     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
+     *
+     * @return \Jikan\Model\Anime\AnimeCharactersAndStaff
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeCharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\Anime\AnimeCharactersAndStaff
+    {
+        return $this->myanimelist->getCharactersAndStaff($request);
+    }
+
+    /**
      * @param Request\Anime\AnimeEpisodesRequest $request
      *
      * @return \Jikan\Model\Anime\Episodes
@@ -98,18 +110,6 @@ class Jikan
     public function Character(Request\Character\CharacterRequest $request): Model\Character\Character
     {
         return $this->myanimelist->getCharacter($request);
-    }
-
-    /**
-     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
-     *
-     * @return \Jikan\Model\Anime\CharactersAndStaff
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function CharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\Anime\CharactersAndStaff
-    {
-        return $this->myanimelist->getCharactersAndStaff($request);
     }
 
     /**

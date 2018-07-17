@@ -2,9 +2,8 @@
 
 namespace Jikan\Parser\Anime;
 
-use Jikan\Model\Anime\CharactersAndStaff;
+use Jikan\Model\Anime\AnimeCharactersAndStaff;
 use Jikan\Model\Anime\StaffListItem;
-use Jikan\Model\Character\CharacterListItem;
 use Jikan\Parser\Character\CharacterListItemParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -60,9 +59,9 @@ class CharactersAndStaffParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): CharactersAndStaff
+    public function getModel(): AnimeCharactersAndStaff
     {
-        return CharactersAndStaff::fromParser($this);
+        return AnimeCharactersAndStaff::fromParser($this);
     }
 
     /**

@@ -52,6 +52,15 @@ class VoiceActorParser implements ParserInterface
     }
 
     /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getName(): string
+    {
+        return $this->crawler->filterXPath('//a')->text();
+    }
+
+    /**
      * @return int
      * @throws \InvalidArgumentException
      */

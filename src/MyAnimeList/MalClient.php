@@ -247,13 +247,13 @@ class MalClient
     /**
      * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      *
-     * @return \Jikan\Model\Anime\CharactersAndStaff
+     * @return \Jikan\Model\Anime\AnimeCharactersAndStaff
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
-    ): Model\Anime\CharactersAndStaff {
+    ): Model\Anime\AnimeCharactersAndStaff {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\CharactersAndStaffParser($crawler);
 

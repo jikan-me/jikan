@@ -154,7 +154,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_characters_and_staff()
     {
-        $charactersAndStaff = $this->jikan->CharactersAndStaff(
+        $charactersAndStaff = $this->jikan->AnimeCharactersAndStaff(
             new \Jikan\Request\Anime\AnimeCharactersAndStaffRequest(35073)
         );
         $staff = $charactersAndStaff->getStaff();

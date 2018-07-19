@@ -5,7 +5,7 @@ namespace Jikan\Request\Schedule;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class Schedule
+ * Class ScheduleRequest
  *
  * @package Jikan\Request
  */

@@ -5,7 +5,7 @@ namespace Jikan\Request\Person;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class PersonPictures
+ * Class PersonPicturesRequest
  *
  * @package Jikan\Request
  */
@@ -17,11 +17,11 @@ class PersonPicturesRequest implements RequestInterface
     private $id;
 
     /**
-     * AnimeRequest constructor.
+     * PersonPicturesRequest constructor.
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }

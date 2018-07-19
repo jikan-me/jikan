@@ -5,7 +5,7 @@ namespace Jikan\Request\Seasonal;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class Seasonal
+ * Class SeasonalRequest
  *
  * @package Jikan\Request
  */
@@ -22,7 +22,7 @@ class SeasonalRequest implements RequestInterface
     private $season;
 
     /**
-     * Season constructor.
+     * SeasonalRequest constructor.
      *
      * @param int    $year
      * @param string $season

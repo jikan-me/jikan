@@ -78,7 +78,7 @@ class AnimeSearchRequest implements RequestInterface
     private $genreExclude = false;
 
     /**
-     * SearchRequest constructor.
+     * AnimeSearchRequest constructor.
      *
      * @param string $query
      * @param int    $page

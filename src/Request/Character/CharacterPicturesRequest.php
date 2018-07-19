@@ -17,11 +17,11 @@ class CharacterPicturesRequest implements RequestInterface
     private $id;
 
     /**
-     * AnimeRequest constructor.
+     * CharacterPicturesRequest constructor.
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }

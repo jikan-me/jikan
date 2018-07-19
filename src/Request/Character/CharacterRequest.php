@@ -14,16 +14,16 @@ class CharacterRequest implements RequestInterface
     /**
      * @var int
      */
-    private $characterId;
+    private $id;
 
     /**
-     * Character constructor.
+     * CharacterRequest constructor.
      *
-     * @param int $characterId
+     * @param int $id
      */
-    public function __construct($characterId)
+    public function __construct(int $id)
     {
-        $this->characterId = $characterId;
+        $this->id = $id;
     }
 
     /**
@@ -33,6 +33,6 @@ class CharacterRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/character/%s', $this->characterId);
+        return sprintf('https://myanimelist.net/character/%s', $this->id);
     }
 }

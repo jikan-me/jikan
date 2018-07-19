@@ -33,7 +33,7 @@ class CharacterSearchRequest implements RequestInterface
     private $char = null;
 
     /**
-     * SearchRequest constructor.
+     * CharacterSearchRequest constructor.
      *
      * @param string $query
      * @param int    $page

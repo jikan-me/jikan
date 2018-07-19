@@ -17,11 +17,11 @@ class AnimeNewsRequest implements RequestInterface
     private $id;
 
     /**
-     * AnimeRequest constructor.
+     * AnimeNewsRequest constructor.
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }

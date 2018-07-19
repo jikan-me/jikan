@@ -21,7 +21,7 @@ class MangaStatsRequest implements RequestInterface
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }

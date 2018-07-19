@@ -12,11 +12,6 @@ use Jikan\Request\RequestInterface;
 class AnimeRequest implements RequestInterface
 {
     /**
-     * @var bool
-     */
-    private $characters = false;
-
-    /**
      * @var int
      */
     private $id;
@@ -26,27 +21,9 @@ class AnimeRequest implements RequestInterface
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return self
-     */
-    public function withCharacters(): self
-    {
-        $this->characters = true;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasCharacters(): bool
-    {
-        return $this->characters;
     }
 
     /**

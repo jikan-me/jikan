@@ -5,7 +5,7 @@ namespace Jikan\Request\Producer;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class Producer
+ * Class ProducerRequest
  *
  * @package Jikan\Request
  */
@@ -22,7 +22,7 @@ class ProducerRequest implements RequestInterface
     private $page;
 
     /**
-     * Producer constructor.
+     * ProducerRequest constructor.
      *
      * @param int $id
      * @param int $page

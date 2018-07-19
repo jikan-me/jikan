@@ -73,7 +73,7 @@ class MangaSearchRequest implements RequestInterface
     private $genreExclude = false;
 
     /**
-     * SearchRequest constructor.
+     * MangaSearchRequest constructor.
      *
      * @param string $query
      * @param int    $page

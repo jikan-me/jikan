@@ -22,7 +22,7 @@ class AnimeEpisodesRequest implements RequestInterface
     private $page;
 
     /**
-     * AnimeEpisodes constructor.
+     * AnimeEpisodesRequest constructor.
      *
      * @param int $id
      * @param int $page

@@ -53,7 +53,7 @@ class Person
     public $alternateNames;
 
     /**
-     * @var string
+     * @var \DateTimeImmutable|null
      */
     public $birthday;
 
@@ -100,6 +100,7 @@ class Person
         $instance->familyName = $parser->getPersonFamilyName();
         $instance->alternateNames = $parser->getPersonAlternateNames();
         $instance->websiteUrl = $parser->getPersonWebsite();
+        $instance->birthday = $parser->getPersonBirthday();
         $instance->about = $parser->getPersonAbout();
         $instance->memberFavorites = $parser->getPersonFavorites();
         $instance->voiceActingRoles = $parser->getPersonVoiceActingRoles();
@@ -174,11 +175,11 @@ class Person
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
     public function getBirthday(): ?\DateTimeImmutable
     {
-        return Parser::parseDate($this->birthday);
+        return $this->birthday;
     }
 
     /**

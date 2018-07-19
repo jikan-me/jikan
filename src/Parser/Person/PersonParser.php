@@ -6,6 +6,7 @@ use Jikan\Helper\JString;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
+use Jikan\Helper\Parser;
 
 /**
  * Class PersonParser
@@ -180,6 +181,27 @@ class PersonParser implements ParserInterface
 
 
         return $website->attr('href');
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonBirthday(): ?\DateTimeImmutable
+    {
+        $node = $this->crawler
+            ->filterXPath('//span[text()="Birthday:"]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return Parser::parseBirthday(
+            JString::cleanse(
+                str_replace($node->text(), '', $node->parents()->text())
+            )
+        );
     }
 
     /**

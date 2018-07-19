@@ -52,7 +52,7 @@ class ItemMeta
         $this->imageUrl = $imageUrl;
         $this->name = $name;
 
-        $this->malId = (int) Parser::idFromUrl($this->url);
+        $this->malId = Parser::idFromUrl($this->url);
     }
 
     /**

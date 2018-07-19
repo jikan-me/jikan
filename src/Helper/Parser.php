@@ -100,6 +100,22 @@ class Parser
     }
 
     /**
+     * @param string $date
+     *
+     * @return \DateTimeImmutable|null
+     */
+    public static function parseBirthday(string $date): ?\DateTimeImmutable
+    {
+        $date = str_replace("  ", " ", $date);
+
+        if (preg_match('~[a-zA-z]+ \d+, \d{4}~', $date)) {
+            return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
+        }
+
+        return null;
+    }
+
+    /**
      * @param Crawler $crawler
      *
      * @return null|string

@@ -42,13 +42,13 @@ class Parser
     /**
      * Extract the id from a mal url
      *
-     * @param string $url
+     * @param int $url
      *
-     * @return string
+     * @return int
      */
-    public static function idFromUrl(string $url): string
+    public static function idFromUrl(string $url): int
     {
-        return (int)preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
+        return (int) preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Helper\Parser;
+
 /**
  * Class ItemMeta
  *
@@ -9,6 +11,10 @@ namespace Jikan\Model\Common;
  */
 class ItemMeta
 {
+    /**
+     * @var int
+     */
+    private $malId;
 
     /**
      * @var string
@@ -46,15 +52,23 @@ class ItemMeta
         $this->imageUrl = $imageUrl;
         $this->name = $name;
 
-        $this->url = $this->getUrl();
+        $this->malId = (int) Parser::idFromUrl($this->url);
     }
 
     /**
-     * @return MalUrl
+     * @return int
      */
-    public function getUrl(): MalUrl
+    public function getMalId(): int
     {
-        return new MalUrl($this->name, $this->url);
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**

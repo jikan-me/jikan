@@ -399,13 +399,23 @@ class MangaParser implements ParserInterface
      */
     public function getMangaRelated(): array
     {
-        return $this->crawler
-            ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr/td/a')
+        $related = [];
+        $this->crawler
+            ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr')
             ->each(
-                function (Crawler $c) {
-                    return (new MalUrlParser($c))->getModel();
+                function (Crawler $c) use (&$related) {
+                    $related[
+                    JString::cleanse(str_replace(":", "", $c->filterXPath('//td[1]')->text()))
+                    ] = $c->filterXPath('//td[2]/a')
+                        ->each(
+                            function (Crawler $c) {
+                                return (new MalUrlParser($c))->getModel();
+                            }
+                        );
                 }
             );
+
+        return $related;
     }
 
     /**

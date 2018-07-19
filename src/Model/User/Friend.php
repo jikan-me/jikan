@@ -19,12 +19,12 @@ class Friend
     /**
      * @var string
      */
-    private $name;
+    private $username;
 
     /**
      * @var string
      */
-    private $avatar;
+    private $imageUrl;
 
 
     /**
@@ -42,7 +42,7 @@ class Friend
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
@@ -55,8 +55,8 @@ class Friend
     {
         $instance = new self();
         $instance->url = $parser->getUrl();
-        $instance->name = $parser->getName();
-        $instance->avatar = $parser->getAvatar();
+        $instance->username = $parser->getName();
+        $instance->imageUrl = $parser->getAvatar();
         $instance->friendsSince = $parser->getFriendsSince();
         $instance->lastOnline = $parser->getLastOnline();
 
@@ -74,17 +74,17 @@ class Friend
     /**
      * @return string
      */
-    public function getName(): string
+    public function getUsername(): string
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
      * @return string
      */
-    public function getAvatar(): string
+    public function getImageUrl(): string
     {
-        return $this->avatar;
+        return $this->imageUrl;
     }
 
     /**

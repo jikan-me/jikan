@@ -197,7 +197,7 @@ class PersonParser implements ParserInterface
             return null;
         }
 
-        return Parser::parseBirthday(
+        return Parser::parseDateMDYReadable(
             JString::cleanse(
                 str_replace($node->text(), '', $node->parents()->text())
             )

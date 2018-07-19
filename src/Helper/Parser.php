@@ -104,7 +104,7 @@ class Parser
      *
      * @return \DateTimeImmutable|null
      */
-    public static function parseBirthday(string $date): ?\DateTimeImmutable
+    public static function parseDateMDYReadable(string $date): ?\DateTimeImmutable
     {
         $date = str_replace("  ", " ", $date);
 

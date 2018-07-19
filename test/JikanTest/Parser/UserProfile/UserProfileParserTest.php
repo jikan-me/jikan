@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class UserProfileParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\User\UserProfile\UserProfileParser
+     * @var \Jikan\Parser\User\Profile\UserProfileParser
      */
     private $parser;
 
@@ -57,7 +57,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_join_date()
     {
-        self::assertEquals('Feb 26, 2014', $this->parser->getJoinDate());
+        self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getJoinDate());
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Jikan\Parser\Character;
 use Jikan\Helper\Parser;
 use Jikan\Model\Character\CharacterListItem;
 use Jikan\Model\Character\VoiceActor;
+use Jikan\Parser\Character\VoiceActorParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

@@ -42,13 +42,13 @@ class Parser
     /**
      * Extract the id from a mal url
      *
-     * @param string $url
+     * @param int $url
      *
-     * @return string
+     * @return int
      */
-    public static function idFromUrl(string $url): string
+    public static function idFromUrl(string $url): int
     {
-        return (int)preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
+        return (int) preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
     }
 
     /**
@@ -97,6 +97,22 @@ class Parser
         $date = str_replace('??', '01', $date);
 
         return \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC')) ?: null;
+    }
+
+    /**
+     * @param string $date
+     *
+     * @return \DateTimeImmutable|null
+     */
+    public static function parseDateMDYReadable(string $date): ?\DateTimeImmutable
+    {
+        $date = str_replace("  ", " ", $date);
+
+        if (preg_match('~[a-zA-z]+ \d+, \d{4}~', $date)) {
+            return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
+        }
+
+        return null;
     }
 
     /**

@@ -59,6 +59,13 @@ class AnimeSearchParser
      */
     public function getLastPage(): int
     {
-        return 0;
+        $pages = $this->crawler
+            ->filterXPath('//div[contains(@class, "normal_header")]/div/div/span/a');
+
+        if (!$pages->count()) {
+            return 1;
+        }
+
+        return (int) $pages->last()->text();
     }
 }

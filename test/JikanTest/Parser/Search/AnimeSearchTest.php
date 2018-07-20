@@ -112,4 +112,13 @@ class AnimeSearchTest extends TestCase
     {
         self::assertEquals($this->anime->getRated(), 'R');
     }
+
+    /**
+     * @test
+     * @vcr AnimeSearchTest.yaml
+     */
+    public function it_gets_the_score()
+    {
+        self::assertEquals($this->anime->getScore(), 8.44);
+    }
 }

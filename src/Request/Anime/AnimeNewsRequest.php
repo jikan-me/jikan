@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Request\News;
+namespace Jikan\Request\Anime;
 
 use Jikan\Request\RequestInterface;
 
@@ -9,7 +9,7 @@ use Jikan\Request\RequestInterface;
  *
  * @package Jikan\Request
  */
-class AnimeNewsListRequest implements RequestInterface
+class AnimeNewsRequest implements RequestInterface
 {
     /**
      * @var int
@@ -17,11 +17,11 @@ class AnimeNewsListRequest implements RequestInterface
     private $id;
 
     /**
-     * AnimeRequest constructor.
+     * AnimeNewsRequest constructor.
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }

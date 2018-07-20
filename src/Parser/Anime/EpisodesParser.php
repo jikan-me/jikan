@@ -57,8 +57,14 @@ class EpisodesParser implements ParserInterface
     public function getEpisodesLastPage(): int
     {
         $episodesLastPage = $this->crawler
-            ->filterXPath('//div[contains(@class, \'pagination\')]')
-            ->children();
+            ->filterXPath('//div[contains(@class, \'pagination\')]');
+
+        if (!$episodesLastPage->count()) {
+            return 1;
+        }
+
+        $episodesLastPage = $episodesLastPage->children();
+
 
         if ($episodesLastPage->getNode(1)->tagName === 'span') {
             $episodesLastPage = $episodesLastPage

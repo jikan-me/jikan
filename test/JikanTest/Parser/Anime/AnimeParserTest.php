@@ -361,8 +361,8 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_related(): void
     {
         $related = $this->parser->getRelated();
-        self::assertCount(45, $related);
-        self::assertContainsOnly(MalUrl::class, $related);
+        self::assertCount(6, $related);
+        self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Adaptation']);
     }
 
     /**

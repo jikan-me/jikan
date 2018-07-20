@@ -15,7 +15,7 @@ class UserProfile
     /**
      * @var string
      */
-    private $name;
+    private $username;
 
     /**
      * @var string
@@ -25,7 +25,7 @@ class UserProfile
     /**
      * @var string|null
      */
-    private $image_url;
+    private $imageUrl;
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class UserProfile
     private $gender;
 
     /**
-     * @var string
+     * @var \DateTimeImmutable|null
      */
     private $birthday;
 
@@ -48,7 +48,7 @@ class UserProfile
     private $location;
 
     /**
-     * @var string
+     * @var \DateTimeImmutable|null
      */
     private $joined;
 
@@ -81,9 +81,9 @@ class UserProfile
     public static function fromParser(UserProfileParser $parser): self
     {
         $instance = new self();
-        $instance->name = $parser->getUsername();
+        $instance->username = $parser->getUsername();
         $instance->url = $parser->getProfileUrl();
-        $instance->image_url = $parser->getImageUrl();
+        $instance->imageUrl = $parser->getImageUrl();
         $instance->joined = $parser->getJoinDate();
         $instance->lastOnline = $parser->getLastOnline();
         $instance->gender = $parser->getGender();
@@ -100,9 +100,9 @@ class UserProfile
     /**
      * @return string
      */
-    public function getName(): string
+    public function getUsername(): string
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
@@ -122,9 +122,9 @@ class UserProfile
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable|null
      */
-    public function getBirthday(): string
+    public function getBirthday(): ?\DateTimeImmutable
     {
         return $this->birthday;
     }
@@ -138,9 +138,9 @@ class UserProfile
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable|null
      */
-    public function getJoined(): string
+    public function getJoined(): ?\DateTimeImmutable
     {
         return $this->joined;
     }
@@ -190,6 +190,6 @@ class UserProfile
      */
     public function getImageUrl(): ?string
     {
-        return $this->image_url;
+        return $this->imageUrl;
     }
 }

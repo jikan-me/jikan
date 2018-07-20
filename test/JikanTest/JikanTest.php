@@ -10,10 +10,10 @@ use Jikan\Model\Top\TopCharacter;
 use Jikan\Model\Top\TopManga;
 use Jikan\Model\Top\TopPeople;
 use Jikan\Model\User\Friend;
-use Jikan\Request\Forum\AnimeForumRequest;
-use Jikan\Request\Forum\MangaForumRequest;
-use Jikan\Request\News\AnimeNewsListRequest;
-use Jikan\Request\News\MangaNewsListRequest;
+use Jikan\Request\Anime\AnimeForumRequest;
+use Jikan\Request\Manga\MangaForumRequest;
+use Jikan\Request\Anime\AnimeNewsRequest;
+use Jikan\Request\Manga\MangaNewsRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -154,7 +154,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_characters_and_staff()
     {
-        $charactersAndStaff = $this->jikan->CharactersAndStaff(
+        $charactersAndStaff = $this->jikan->AnimeCharactersAndStaff(
             new \Jikan\Request\Anime\AnimeCharactersAndStaffRequest(35073)
         );
         $staff = $charactersAndStaff->getStaff();
@@ -178,22 +178,62 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
+     * @vcr AnimePicturesParserTest.yaml
      */
-    public function it_gets_manga_news_list()
+    public function it_gets_anime_pictures()
     {
-        $items = $this->jikan->MangaNewsList(new MangaNewsListRequest(2));
+        $pictures = $this->jikan->AnimePictures(new \Jikan\Request\Anime\AnimePicturesRequest(1));
+        self::assertCount(10, $pictures);
+    }
+
+    /**
+     * @test
+     * @vcr MangaPicturesParserTest.yaml
+     */
+    public function it_gets_manga_pictures()
+    {
+        $pictures = $this->jikan->MangaPictures(new \Jikan\Request\Manga\MangaPicturesRequest(1));
+        self::assertCount(8, $pictures);
+    }
+
+    /**
+     * @test
+     * @vcr PersonPicturesParserTest.yaml
+     */
+    public function it_gets_person_pictures()
+    {
+        $pictures = $this->jikan->PersonPictures(new \Jikan\Request\Person\PersonPicturesRequest(1));
+        self::assertCount(4, $pictures);
+    }
+
+    /**
+     * @test
+     * @vcr CharacterPicturesParserTest.yaml
+     */
+    public function it_gets_character_pictures()
+    {
+        $pictures = $this->jikan->CharacterPictures(new \Jikan\Request\Character\CharacterPicturesRequest(1));
+        self::assertCount(15, $pictures);
+    }
+
+    /**
+     * @test
+     * @vcr MangaNewsParserTest.yaml
+     */
+    public function it_gets_manga_news()
+    {
+        $items = $this->jikan->MangaNews(new MangaNewsRequest(2));
         self::assertCount(14, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
+     * @vcr AnimeNewsParserTest.yaml
      */
-    public function it_gets_anime_news_list()
+    public function it_gets_anime_news()
     {
-        $items = $this->jikan->AnimeNewsList(new AnimeNewsListRequest(21));
+        $items = $this->jikan->AnimeNews(new AnimeNewsRequest(21));
         self::assertCount(30, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
@@ -207,6 +247,43 @@ class JikanTest extends TestCase
         $search = $this->jikan->AnimeSearch(new \Jikan\Request\Search\AnimeSearchRequest('Fate'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\AnimeSearchListItem::class, $search->getResults());
+        self::assertEquals(17, $search->getLastPage());
+    }
+
+    /**
+     * @test
+     * @vcr MangaSearchParserTest.yaml
+     */
+    public function it_gets_manga_search()
+    {
+        $search = $this->jikan->MangaSearch(new \Jikan\Request\Search\MangaSearchRequest('Fate'));
+        self::assertCount(50, $search->getResults());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\MangaSearchListItem::class, $search->getResults());
+        self::assertEquals(20, $search->getLastPage());
+    }
+
+    /**
+     * @test
+     * @vcr CharacterSearchParserTest.yaml
+     */
+    public function it_gets_character_search()
+    {
+        $search = $this->jikan->CharacterSearch(new \Jikan\Request\Search\CharacterSearchRequest('Fate'));
+        self::assertCount(50, $search->getResults());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\CharacterSearchListItem::class, $search->getResults());
+        self::assertEquals(11, $search->getLastPage());
+    }
+
+    /**
+     * @test
+     * @vcr PersonSearchParserTest.yaml
+     */
+    public function it_gets_person_search()
+    {
+        $search = $this->jikan->PersonSearch(new \Jikan\Request\Search\PersonSearchRequest('Ara'));
+        self::assertCount(50, $search->getResults());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\PersonSearchListItem::class, $search->getResults());
+        self::assertEquals(20, $search->getLastPage());
     }
 
     /**

@@ -53,6 +53,18 @@ class Jikan
     }
 
     /**
+     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
+     *
+     * @return \Jikan\Model\Anime\AnimeCharactersAndStaff
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeCharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\Anime\AnimeCharactersAndStaff
+    {
+        return $this->myanimelist->getCharactersAndStaff($request);
+    }
+
+    /**
      * @param Request\Anime\AnimeEpisodesRequest $request
      *
      * @return \Jikan\Model\Anime\Episodes
@@ -98,18 +110,6 @@ class Jikan
     public function Character(Request\Character\CharacterRequest $request): Model\Character\Character
     {
         return $this->myanimelist->getCharacter($request);
-    }
-
-    /**
-     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
-     *
-     * @return \Jikan\Model\Anime\CharactersAndStaff
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function CharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\Anime\CharactersAndStaff
-    {
-        return $this->myanimelist->getCharactersAndStaff($request);
     }
 
     /**
@@ -264,25 +264,25 @@ class Jikan
     }
 
     /**
-     * @param Request\News\AnimeNewsListRequest $request
+     * @param Request\Anime\AnimeNewsRequest $request
      *
      * @return Model\News\NewsListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeNewsList(Request\News\AnimeNewsListRequest $request): array
+    public function AnimeNews(Request\Anime\AnimeNewsRequest $request): array
     {
         return $this->myanimelist->getNewsList($request);
     }
 
     /**
-     * @param Request\News\MangaNewsListRequest $request
+     * @param Request\Manga\MangaNewsRequest $request
      *
      * @return Model\News\NewsListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function MangaNewsList(Request\News\MangaNewsListRequest $request): array
+    public function MangaNews(Request\Manga\MangaNewsRequest $request): array
     {
         return $this->myanimelist->getNewsList($request);
     }
@@ -331,7 +331,7 @@ class Jikan
      *
      * @return Model\Search\PersonSearchListItem[]
      */
-    public function PersonSearch(Request\Search\PersonSearchRequest $request): array
+    public function PersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
         return $this->myanimelist->getPersonSearch($request);
     }
@@ -420,23 +420,23 @@ class Jikan
     }
 
     /**
-     * @param Request\Forum\AnimeForumRequest $request
+     * @param Request\Anime\AnimeForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function AnimeForum(Request\Forum\AnimeForumRequest $request): array
+    public function AnimeForum(Request\Anime\AnimeForumRequest $request): array
     {
         return $this->myanimelist->getAnimeForumTopics($request);
     }
 
     /**
-     * @param Request\Forum\MangaForumRequest $request
+     * @param Request\Manga\MangaForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function MangaForum(Request\Forum\MangaForumRequest $request): array
+    public function MangaForum(Request\Manga\MangaForumRequest $request): array
     {
         return $this->myanimelist->getMangaForumTopics($request);
     }
@@ -450,5 +450,16 @@ class Jikan
     public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): Model\Anime\MoreInfo
     {
         return $this->myanimelist->getAnimeMoreInfo($request);
+    }
+
+    /**
+     * @param Request\SeasonList\SeasonListRequest $request
+     *
+     * @return array
+     * @throws \InvalidArgumentException
+     */
+    public function SeasonList(Request\SeasonList\SeasonListRequest $request): array
+    {
+        return $this->myanimelist->getSeasonList($request);
     }
 }

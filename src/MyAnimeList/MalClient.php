@@ -247,13 +247,13 @@ class MalClient
     /**
      * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      *
-     * @return \Jikan\Model\Anime\CharactersAndStaff
+     * @return \Jikan\Model\Anime\AnimeCharactersAndStaff
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
-    ): Model\Anime\CharactersAndStaff {
+    ): Model\Anime\AnimeCharactersAndStaff {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\CharactersAndStaffParser($crawler);
 
@@ -381,11 +381,16 @@ class MalClient
     /**
      * @param Request\Search\PersonSearchRequest $request
      *
-     * @return Model\Search\PersonSearchItem[]
+     * @return Model\Search\PersonSearch
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public function getPersonSearch(Request\Search\PersonSearchRequest $request): array // WIP
+    public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
-        return [];
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\Search\PersonSearchParser($crawler);
+
+        return $parser->getModel();
     }
 
     /**
@@ -493,12 +498,12 @@ class MalClient
     }
 
     /**
-     * @param Request\Forum\AnimeForumRequest $request
+     * @param Request\Anime\AnimeForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getAnimeForumTopics(Request\Forum\AnimeForumRequest $request): array
+    public function getAnimeForumTopics(Request\Anime\AnimeForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);
@@ -507,12 +512,12 @@ class MalClient
     }
 
     /**
-     * @param Request\Forum\MangaForumRequest $request
+     * @param Request\Manga\MangaForumRequest $request
      *
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getMangaForumTopics(Request\Forum\MangaForumRequest $request): array
+    public function getMangaForumTopics(Request\Manga\MangaForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);
@@ -530,6 +535,20 @@ class MalClient
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Anime\MoreInfoParser($crawler);
+
+        return $parser->getModel();
+    }
+
+    /**
+     * @param Request\SeasonList\SeasonListRequest $request
+     *
+     * @return Model\SeasonList\SeasonListItem[] An array of SeasonListItem instances
+     * @throws \InvalidArgumentException
+     */
+    public function getSeasonList(Request\SeasonList\SeasonListRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\SeasonList\SeasonListParser($crawler);
 
         return $parser->getModel();
     }

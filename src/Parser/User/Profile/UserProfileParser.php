@@ -6,6 +6,7 @@ use Jikan\Model;
 use Jikan\Model\User\AnimeStats;
 use Jikan\Model\User\MangaStats;
 use Symfony\Component\DomCrawler\Crawler;
+use Jikan\Helper\Parser;
 
 /**
  * Class UserProfileParser
@@ -45,7 +46,7 @@ class UserProfileParser
      */
     public function getUsername(): string
     {
-        return (string )preg_replace('#.*/(\w+)$#', '$1', $this->getProfileUrl());
+        return (string) preg_replace('#.*/(\w+)$#', '$1', $this->getProfileUrl());
     }
 
     /**
@@ -71,12 +72,14 @@ class UserProfileParser
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable|null
      * @throws \InvalidArgumentException
      */
-    public function getJoinDate(): string
+    public function getJoinDate(): ?\DateTimeImmutable
     {
-        return $this->crawler->filterXPath('//span[contains(text(), \'Joined\')]/following-sibling::span')->text();
+        return Parser::parseDateMDYReadable(
+            $this->crawler->filterXPath('//span[contains(text(), \'Joined\')]/following-sibling::span')->text()
+        );
     }
 
     /**
@@ -103,17 +106,19 @@ class UserProfileParser
     }
 
     /**
-     * @return string|null
+     * @return \DateTimeImmutable|null
      * @throws \InvalidArgumentException
      */
-    public function getBirthday(): ?string
+    public function getBirthday(): ?\DateTimeImmutable
     {
-        $gender = $this->crawler->filterXPath('//span[contains(text(), \'Birthday\')]/following-sibling::span');
-        if (!$gender->count()) {
+        $node = $this->crawler->filterXPath('//span[contains(text(), \'Birthday\')]/following-sibling::span');
+        if (!$node->count()) {
             return null;
         }
 
-        return $gender->text();
+        return Parser::parseDateMDYReadable(
+            $node->text()
+        );
     }
 
     /**

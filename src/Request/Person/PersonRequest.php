@@ -5,7 +5,7 @@ namespace Jikan\Request\Person;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class Person
+ * Class PersonRequest
  *
  * @package Jikan\Request
  */
@@ -14,16 +14,16 @@ class PersonRequest implements RequestInterface
     /**
      * @var int
      */
-    private $personId;
+    private $id;
 
     /**
-     * Person constructor.
+     * PersonRequest constructor.
      *
-     * @param int $personId
+     * @param int $id
      */
-    public function __construct($personId)
+    public function __construct(int $id)
     {
-        $this->personId = $personId;
+        $this->id = $id;
     }
 
     /**
@@ -33,6 +33,6 @@ class PersonRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/people/%s', $this->personId);
+        return sprintf('https://myanimelist.net/people/%s', $this->id);
     }
 }

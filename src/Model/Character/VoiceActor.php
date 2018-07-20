@@ -18,7 +18,7 @@ class VoiceActor
     private $malId;
 
     /**
-     * @var MalUrl
+     * @var string
      */
     private $name;
 
@@ -42,7 +42,7 @@ class VoiceActor
      */
     public function __toString()
     {
-        return $this->name->getName();
+        return $this->getName();
     }
 
     /**
@@ -57,7 +57,7 @@ class VoiceActor
         $instance = new self();
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
-        $instance->name = $parser->getPerson();
+        $instance->name = $parser->getName();
         $instance->imageUrl = $parser->getImage();
         $instance->language = $parser->getLanguage();
         $instance->url = $parser->getUrl();
@@ -74,9 +74,9 @@ class VoiceActor
     }
 
     /**
-     * @return MalUrl
+     * @return string
      */
-    public function getName(): MalUrl
+    public function getName(): string
     {
         return $this->name;
     }

@@ -5,7 +5,7 @@ namespace Jikan\Request\Genre;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class AnimeGenre
+ * Class AnimeGenreRequest
  *
  * @package Jikan\Request
  */
@@ -22,7 +22,7 @@ class AnimeGenreRequest implements RequestInterface
     private $page;
 
     /**
-     * Genre constructor.
+     * AnimeGenreRequest constructor.
      *
      * @param int $id
      * @param int $page

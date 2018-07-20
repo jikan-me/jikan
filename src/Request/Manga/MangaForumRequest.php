@@ -1,15 +1,15 @@
 <?php
 
-namespace Jikan\Request\Forum;
+namespace Jikan\Request\Manga;
 
 use Jikan\Request\RequestInterface;
 
 /**
- * Class AnimeForumRequest
+ * Class MangaForumRequest
  *
  * @package Jikan\Request
  */
-class AnimeForumRequest implements RequestInterface
+class MangaForumRequest implements RequestInterface
 {
     /**
      * @var array
@@ -27,7 +27,7 @@ class AnimeForumRequest implements RequestInterface
     private $topic;
 
     /**
-     * AnimeForumRequest constructor.
+     * MangaForumRequest constructor.
      *
      * @param int         $id
      * @param string|null $topic
@@ -48,6 +48,6 @@ class AnimeForumRequest implements RequestInterface
             $query = '?'.http_build_query(['topic' => $this->topic]);
         }
 
-        return sprintf('https://myanimelist.net/anime/%s/_/forum%s', $this->id, $query);
+        return sprintf('https://myanimelist.net/manga/%s/_/forum%s', $this->id, $query);
     }
 }

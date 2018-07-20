@@ -5,7 +5,7 @@ namespace Jikan\Request\Manga;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class MangaPictures
+ * Class MangaPicturesRequest
  *
  * @package Jikan\Request
  */
@@ -17,11 +17,11 @@ class MangaPicturesRequest implements RequestInterface
     private $id;
 
     /**
-     * AnimeRequest constructor.
+     * MangaPicturesRequest constructor.
      *
      * @param int $id
      */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
     }

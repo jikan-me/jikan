@@ -29,6 +29,11 @@ class CharacterListItem
     /**
      * @var string
      */
+    public $role;
+
+    /**
+     * @var string
+     */
     public $imageUrl;
 
     /**
@@ -50,6 +55,7 @@ class CharacterListItem
         $instance->malId = $parser->getMalId();
         $instance->characterUrl = $parser->getCharacterUrl();
         $instance->name = $parser->getName();
+        $instance->role = $parser->getRole();
         $instance->imageUrl = $parser->getImage();
 
         return $instance;
@@ -77,6 +83,14 @@ class CharacterListItem
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->role;
     }
 
     /**

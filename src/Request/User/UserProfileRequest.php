@@ -22,7 +22,7 @@ class UserProfileRequest implements RequestInterface
      *
      * @param string $username
      */
-    public function __construct($username)
+    public function __construct(string $username)
     {
         $this->username = $username;
     }

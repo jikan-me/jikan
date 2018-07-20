@@ -5,7 +5,7 @@ namespace Jikan\Request\Magazine;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class Magazine
+ * Class MagazineRequest
  *
  * @package Jikan\Request
  */
@@ -22,7 +22,7 @@ class MagazineRequest implements RequestInterface
     private $page;
 
     /**
-     * Magazine constructor.
+     * MagazineRequest constructor.
      *
      * @param int $id
      * @param int $page

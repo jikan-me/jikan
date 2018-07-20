@@ -33,7 +33,7 @@ class PersonSearchRequest implements RequestInterface
     private $char = null;
 
     /**
-     * SearchRequest constructor.
+     * PersonSearchRequest constructor.
      *
      * @param string $query
      * @param int    $page

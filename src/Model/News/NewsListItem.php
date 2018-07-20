@@ -35,12 +35,12 @@ class NewsListItem
     /**
      * @var string
      */
-    private $discussionLink;
+    private $forumUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $image;
+    private $imageUrl;
 
     /**
      * @var string
@@ -60,8 +60,8 @@ class NewsListItem
         $instance->title = $parser->getTitle();
         $instance->date = $parser->getDate();
         $instance->author = $parser->getAuthor();
-        $instance->discussionLink = $parser->getDiscussionLink();
-        $instance->image = $parser->getImage();
+        $instance->forumUrl = $parser->getDiscussionLink();
+        $instance->imageUrl = $parser->getImage();
         $instance->intro = $parser->getIntro();
 
         return $instance;
@@ -102,17 +102,17 @@ class NewsListItem
     /**
      * @return string
      */
-    public function getDiscussionLink(): string
+    public function getForumUrl(): string
     {
-        return $this->discussionLink;
+        return $this->forumUrl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImage(): string
+    public function getImageUrl(): ?string
     {
-        return $this->image;
+        return $this->imageUrl;
     }
 
     /**

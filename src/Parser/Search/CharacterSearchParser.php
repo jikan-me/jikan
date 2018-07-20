@@ -57,6 +57,13 @@ class CharacterSearchParser
      */
     public function getLastPage(): int
     {
-        return 0;
+        $pages = $this->crawler
+            ->filterXPath('//div[@id="content"]/div[@class="borderClass"][1]/div/span/a');
+
+        if (!$pages->count()) {
+            return 1;
+        }
+
+        return (int) $pages->last()->text();
     }
 }

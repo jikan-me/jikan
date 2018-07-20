@@ -26,6 +26,11 @@ class DateRange
         $this->aired = $aired;
     }
 
+    public function __toString()
+    {
+        return $this->aired;
+    }
+
     /**
      * @return \DateTimeImmutable|null
      */
@@ -54,13 +59,5 @@ class DateRange
         $aired = explode(' to ', $aired)[1];
 
         return Parser::parseDate($aired);
-    }
-
-    /**
-     * @return string
-     */
-    public function getAiredString(): string
-    {
-        return $this->aired;
     }
 }

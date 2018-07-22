@@ -444,12 +444,23 @@ class Jikan
     /**
      * @param Request\Anime\AnimeMoreInfoRequest $request
      *
-     * @return Model\Anime\AnimeMoreInfo
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): Model\Anime\AnimeMoreInfo
+    public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): ?string
     {
         return $this->myanimelist->getAnimeMoreInfo($request);
+    }
+
+    /**
+     * @param Request\Manga\MangaMoreInfoRequest $request
+     *
+     * @return string|null
+     * @throws \InvalidArgumentException
+     */
+    public function MangaMoreInfo(Request\Manga\MangaMoreInfoRequest $request): ?string
+    {
+        return $this->myanimelist->getMangaMoreInfo($request);
     }
 
     /**

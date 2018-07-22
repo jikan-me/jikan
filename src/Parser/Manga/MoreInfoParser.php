@@ -1,17 +1,17 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Manga;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Anime\AnimeMoreInfo;
+use Jikan\Model\Manga\MangaMoreInfo;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class MoreInfoParser
  *
- * @package Jikan\Parser\Anime
+ * @package Jikan\Parser\Manga
  */
 class MoreInfoParser implements ParserInterface
 {
@@ -36,13 +36,13 @@ class MoreInfoParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): AnimeMoreInfo
+    public function getModel(): MangaMoreInfo
     {
-        return AnimeMoreInfo::fromParser($this);
+        return MangaMoreInfo::fromParser($this);
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getMoreInfo(): ?string

@@ -1,15 +1,15 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Manga;
 
-use Jikan\Parser\Anime\MoreInfoParser;
+use Jikan\Parser\Manga\MoreInfoParser;
 
 /**
- * Class AnimeMoreInfo
+ * Class MangaMoreInfo
  *
- * @package Jikan\Model\Anime
+ * @package Jikan\Model\Manga
  */
-class AnimeMoreInfo
+class MangaMoreInfo
 {
     /**
      * @var string
@@ -19,7 +19,7 @@ class AnimeMoreInfo
     /**
      * @param MoreInfoParser $parser
      *
-     * @return AnimeMoreInfo
+     * @return MangaMoreInfo
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -32,7 +32,7 @@ class AnimeMoreInfo
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getMoreInfo(): ?string
     {

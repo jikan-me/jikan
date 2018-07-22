@@ -78,7 +78,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_title_synonyms(): void
     {
-        self::assertEquals('OP', $this->parser->getTitleSynonyms());
+        self::assertContains('OP', $this->parser->getTitleSynonyms());
     }
 
     /**

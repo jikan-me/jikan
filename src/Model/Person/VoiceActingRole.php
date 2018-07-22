@@ -2,8 +2,8 @@
 
 namespace Jikan\Model\Person;
 
-use Jikan\Model\Anime\AnimeMeta;
-use Jikan\Model\Character\CharacterMeta;
+use Jikan\Model\Common\AnimeMeta;
+use Jikan\Model\Common\CharacterMeta;
 use Jikan\Parser\Person\VoiceActingRoleParser;
 
 /**

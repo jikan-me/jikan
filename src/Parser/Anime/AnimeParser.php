@@ -9,6 +9,7 @@ use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
+use PHP_CodeSniffer\Tokenizers\JS;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -108,20 +109,26 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string|null
+     * @return array
      * @throws \InvalidArgumentException
      */
-    public function getTitleSynonyms(): ?string
+    public function getTitleSynonyms(): array
     {
         $title = $this->crawler
             ->filterXPath('//span[text()="Synonyms:"]');
+
         if (!$title->count()) {
-            return null;
+            return [];
         }
 
-        return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
-        );
+        $titles = str_replace($title->text(), '', $title->parents()->text());
+        $titles = explode(",", $titles);
+
+        foreach ($titles as &$title) {
+            $title = JString::cleanse($title);
+        }
+
+        return $titles;
     }
 
     /**

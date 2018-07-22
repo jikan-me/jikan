@@ -55,12 +55,12 @@ class AnimeStaffPositionParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Anime\AnimeMeta
+     * @return \Jikan\Model\Common\AnimeMeta
      * @throws \InvalidArgumentException
      */
-    public function getAnimeMeta(): Model\Anime\AnimeMeta
+    public function getAnimeMeta(): Model\Common\AnimeMeta
     {
-        return new Model\Anime\AnimeMeta(
+        return new Model\Common\AnimeMeta(
             $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')

@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Person;
 
-use Jikan\Model\Anime\AnimeMeta;
+use Jikan\Model\Common\AnimeMeta;
 use Jikan\Parser\Person\AnimeStaffPositionParser;
 
 /**

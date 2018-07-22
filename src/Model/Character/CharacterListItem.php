@@ -19,7 +19,12 @@ class CharacterListItem
     /**
      * @var string
      */
-    public $characterUrl;
+    public $url;
+
+    /**
+     * @var string
+     */
+    public $imageUrl;
 
     /**
      * @var string
@@ -32,14 +37,14 @@ class CharacterListItem
     public $role;
 
     /**
-     * @var string
-     */
-    public $imageUrl;
-
-    /**
      * @var VoiceActor[]
      */
     public $voiceActors = [];
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * @param CharacterListItemParser $parser
@@ -53,7 +58,7 @@ class CharacterListItem
         $instance = new self();
         $instance->voiceActors = $parser->getVoiceActors();
         $instance->malId = $parser->getMalId();
-        $instance->characterUrl = $parser->getCharacterUrl();
+        $instance->url = $parser->getCharacterUrl();
         $instance->name = $parser->getName();
         $instance->role = $parser->getRole();
         $instance->imageUrl = $parser->getImage();
@@ -72,9 +77,9 @@ class CharacterListItem
     /**
      * @return string
      */
-    public function getCharacterUrl(): string
+    public function getUrl(): string
     {
-        return $this->characterUrl;
+        return $this->url;
     }
 
     /**

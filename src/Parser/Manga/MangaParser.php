@@ -112,21 +112,27 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return string|null
+     * @return string[]
      * @throws \InvalidArgumentException
      */
-    public function getMangaTitleSynonyms(): ?string
+    public function getMangaTitleSynonyms(): array
     {
         $title = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Synonyms:"]');
+
         if (!$title->count()) {
-            return null;
+            return [];
         }
 
-        return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
-        );
+        $titles = str_replace($title->text(), '', $title->parents()->text());
+        $titles = explode(",", $titles);
+
+        foreach ($titles as &$title) {
+            $title = JString::cleanse($title);
+        }
+
+        return $titles;
     }
 
     /**

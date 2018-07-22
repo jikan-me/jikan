@@ -40,7 +40,7 @@ class Anime
     private $titleJapanese;
 
     /**
-     * @var string
+     * @var string[]
      */
     private $titleSynonyms;
 
@@ -152,7 +152,7 @@ class Anime
     /**
      * @var \Jikan\Model\Common\MalUrl[]
      */
-    private $producer = [];
+    private $producers = [];
 
     /**
      * @var MalUrl[]
@@ -182,7 +182,7 @@ class Anime
     /**
      * @var string|null
      */
-    private $preview;
+    private $previewVideoUrl;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -196,7 +196,7 @@ class Anime
     public static function fromParser(AnimeParser $parser): Anime
     {
         $instance = new self();
-        $instance->preview = $parser->getPreview();
+        $instance->previewVideoUrl = $parser->getPreview();
         $instance->title = $parser->getTitle();
         $instance->url = $parser->getURL();
         $instance->malId = $parser->getId();
@@ -213,7 +213,7 @@ class Anime
         $instance->aired = $parser->getAired();
         $instance->premiered = $parser->getPremiered();
         $instance->broadcast = $parser->getBroadcast();
-        $instance->producer = $parser->getProducers();
+        $instance->producers = $parser->getProducers();
         $instance->licensors = $parser->getLicensors();
         $instance->studios = $parser->getStudios();
         $instance->source = $parser->getSource();
@@ -275,9 +275,9 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string[]
      */
-    public function getTitleSynonyms(): string
+    public function getTitleSynonyms(): array
     {
         return $this->titleSynonyms;
     }
@@ -288,6 +288,14 @@ class Anime
     public function getImageUrl(): string
     {
         return $this->imageUrl;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getPreviewVideoUrl(): ?string
+    {
+        return $this->previewVideoUrl;
     }
 
     /**
@@ -456,7 +464,7 @@ class Anime
      */
     public function getProducers(): array
     {
-        return $this->producer;
+        return $this->producers;
     }
 
     /**
@@ -497,21 +505,5 @@ class Anime
     public function getEndingTheme(): array
     {
         return $this->endingTheme;
-    }
-
-    /**
-     * @return \Jikan\Model\Common\MalUrl[]
-     */
-    public function getProducer(): array
-    {
-        return $this->producer;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getPreview(): ?string
-    {
-        return $this->preview;
     }
 }

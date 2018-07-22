@@ -78,7 +78,7 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_title_synonyms()
     {
-        self::assertEquals(null, $this->parser->getMangaTitleSynonyms());
+        self::assertEquals([], $this->parser->getMangaTitleSynonyms());
     }
 
     /**

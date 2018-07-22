@@ -71,4 +71,12 @@ class StreamEpisodeListItem
     {
         return $this->url;
     }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
+    }
 }

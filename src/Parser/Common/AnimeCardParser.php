@@ -179,13 +179,13 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Anime\AnimeMeta
+     * @return \Jikan\Model\Common\AnimeMeta
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getAnimeMeta(): Model\Anime\AnimeMeta
+    public function getAnimeMeta(): Model\Common\AnimeMeta
     {
-        return new Model\Anime\AnimeMeta(
+        return new Model\Common\AnimeMeta(
             $this->getTitle(),
             $this->getAnimeUrl(),
             $this->getAnimeImage()

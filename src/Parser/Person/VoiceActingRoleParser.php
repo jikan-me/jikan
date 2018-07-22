@@ -60,12 +60,12 @@ class VoiceActingRoleParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Anime\AnimeMeta
+     * @return \Jikan\Model\Common\AnimeMeta
      * @throws \InvalidArgumentException
      */
-    public function getAnimeMeta(): Model\Anime\AnimeMeta
+    public function getAnimeMeta(): Model\Common\AnimeMeta
     {
-        return new Model\Anime\AnimeMeta(
+        return new Model\Common\AnimeMeta(
             $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')
@@ -74,12 +74,12 @@ class VoiceActingRoleParser implements ParserInterface
 
 
     /**
-     * @return \Jikan\Model\Character\CharacterMeta
+     * @return \Jikan\Model\Common\CharacterMeta
      * @throws \InvalidArgumentException
      */
-    public function getCharacterMeta(): Model\Character\CharacterMeta
+    public function getCharacterMeta(): Model\Common\CharacterMeta
     {
-        return new Model\Character\CharacterMeta(
+        return new Model\Common\CharacterMeta(
             $this->crawler->filterXPath('//td[position() = 3]/a')->text(),
             $this->crawler->filterXPath('//td[position() = 3]/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 4]/div/a/img')->attr('data-src')

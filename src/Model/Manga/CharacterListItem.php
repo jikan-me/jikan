@@ -19,17 +19,17 @@ class CharacterListItem
     /**
      * @var string
      */
-    private $characterUrl;
-
-    /**
-     * @var string
-     */
-    private $name;
+    private $url;
 
     /**
      * @var string
      */
     private $imageUrl;
+
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * @var string
@@ -52,7 +52,7 @@ class CharacterListItem
         $instance = new self();
         $instance->role = $parser->getRole();
         $instance->malId = $parser->getMalId();
-        $instance->characterUrl = $parser->getCharacterUrl();
+        $instance->url = $parser->getCharacterUrl();
         $instance->name = $parser->getName();
         $instance->imageUrl = $parser->getImage();
 
@@ -70,9 +70,9 @@ class CharacterListItem
     /**
      * @return string
      */
-    public function getCharacterUrl(): string
+    public function getUrl(): string
     {
-        return $this->characterUrl;
+        return $this->url;
     }
 
     /**

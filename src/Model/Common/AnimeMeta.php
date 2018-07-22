@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Common;
 
 use Jikan\Model\Common\ItemMeta;
 

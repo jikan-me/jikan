@@ -2,8 +2,8 @@
 
 namespace Jikan\Parser\User\Profile;
 
-use Jikan\Model\Anime\AnimeMeta;
-use Jikan\Model\Character\CharacterMeta;
+use Jikan\Model\Common\AnimeMeta;
+use Jikan\Model\Common\CharacterMeta;
 use Jikan\Model\Common\MangaMeta;
 use Jikan\Model\Common\PersonMeta;
 use Jikan\Model\User\Favorites;

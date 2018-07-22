@@ -444,10 +444,10 @@ class Jikan
     /**
      * @param Request\Anime\AnimeMoreInfoRequest $request
      *
-     * @return Model\Anime\MoreInfo
+     * @return Model\Anime\AnimeMoreInfo
      * @throws \InvalidArgumentException
      */
-    public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): Model\Anime\MoreInfo
+    public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): Model\Anime\AnimeMoreInfo
     {
         return $this->myanimelist->getAnimeMoreInfo($request);
     }

@@ -4,7 +4,7 @@ namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Anime\MoreInfo;
+use Jikan\Model\Anime\AnimeMoreInfo;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -36,9 +36,9 @@ class MoreInfoParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): MoreInfo
+    public function getModel(): AnimeMoreInfo
     {
-        return MoreInfo::fromParser($this);
+        return AnimeMoreInfo::fromParser($this);
     }
 
     /**

@@ -5,11 +5,11 @@ namespace Jikan\Model\Anime;
 use Jikan\Parser\Anime\MoreInfoParser;
 
 /**
- * Class MoreInfo
+ * Class AnimeMoreInfo
  *
  * @package Jikan\Model\Anime
  */
-class MoreInfo
+class AnimeMoreInfo
 {
     /**
      * @var string
@@ -19,7 +19,7 @@ class MoreInfo
     /**
      * @param MoreInfoParser $parser
      *
-     * @return MoreInfo
+     * @return AnimeMoreInfo
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

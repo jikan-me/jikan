@@ -79,7 +79,7 @@ class ScheduleParse extends TemplateParse
             'sunday',
             '~<div class="anime-header">Sunday</div>~',
             function () {
-                $this->model->set('Schedule', 'sunday', $this->parseTo('<div class="mauto clearfix pt24"'));
+                $this->model->set('Schedule', 'sunday', $this->parseTo('<div style="clear:both;"></div>'));
             }
         );
 

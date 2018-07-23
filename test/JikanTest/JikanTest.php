@@ -374,4 +374,15 @@ class JikanTest extends TestCase
         self::assertContains('Death Note Chapter 60 Discussion', $topics);
         self::assertContains('Death Note Chapter 21 Discussion', $topics);
     }
+
+    /**
+     * @test
+     * @vcr HistoryParserTest.yaml
+     */
+    public function it_gets_user_history()
+    {
+        $history = $this->jikan->UserHistory(new \Jikan\Request\User\UserHistoryRequest('nekomata1037'));
+        self::assertCount(17, $history);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\History::class, $history);
+    }
 }

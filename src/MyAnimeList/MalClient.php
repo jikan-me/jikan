@@ -566,4 +566,18 @@ class MalClient
 
         return $parser->getModel();
     }
+
+    /**
+     * @param Request\User\UserHistoryRequest $request
+     *
+     * @return array
+     * @throws \InvalidArgumentException
+     */
+    public function getUserHistory(Request\User\UserHistoryRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $parser = new Parser\User\History\HistoryParser($crawler);
+
+        return $parser->getModel();
+    }
 }

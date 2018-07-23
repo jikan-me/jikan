@@ -473,4 +473,15 @@ class Jikan
     {
         return $this->myanimelist->getSeasonList($request);
     }
+
+    /**
+     * @param Request\User\UserHistoryRequest $request
+     *
+     * @return array
+     * @throws \InvalidArgumentException
+     */
+    public function UserHistory(Request\User\UserHistoryRequest $request): array
+    {
+        return $this->myanimelist->getUserHistory($request);
+    }
 }

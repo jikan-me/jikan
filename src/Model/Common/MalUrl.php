@@ -66,6 +66,14 @@ class MalUrl
     /**
      * @return string
      */
+    public function getTitle(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
     public function getUrl(): string
     {
         return $this->url;

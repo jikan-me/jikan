@@ -19,4 +19,7 @@ class Constants
         'Summer',
         'Fall',
     ];
+
+    public const ANIME = 'anime';
+    public const MANGA = 'manga';
 }

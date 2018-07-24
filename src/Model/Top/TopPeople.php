@@ -35,7 +35,7 @@ class TopPeople
     /**
      * @var string
      */
-    private $image;
+    private $imageUrl;
 
     /**
      * @var \DateTimeImmutable|null
@@ -104,9 +104,9 @@ class TopPeople
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImageUrl(): string
     {
-        return $this->image;
+        return $this->imageUrl;
     }
 
     /**

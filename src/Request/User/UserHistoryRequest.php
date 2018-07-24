@@ -36,9 +36,9 @@ class UserHistoryRequest implements RequestInterface
             if (!\in_array($type, ['anime', 'manga'])) {
                 throw new \InvalidArgumentException(sprintf('Type %s is not valid', $type));
             }
-        }
 
-        $this->type = $type;
+            $this->type = $type;
+        }
     }
 
     /**

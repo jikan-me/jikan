@@ -45,7 +45,7 @@ class TopCharacter
     /**
      * @var string
      */
-    private $image;
+    private $imageUrl;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -65,7 +65,7 @@ class TopCharacter
         $instance->animeography = $parser->getAnimeography();
         $instance->mangaography = $parser->getMangaography();
         $instance->favorites = $parser->getFavorites();
-        $instance->image = $parser->getImage();
+        $instance->imageUrl = $parser->getImage();
 
         return $instance;
     }
@@ -126,8 +126,8 @@ class TopCharacter
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImageUrl(): string
     {
-        return $this->image;
+        return $this->imageUrl;
     }
 }

@@ -25,7 +25,7 @@ class TopAnime
     /**
      * @var string
      */
-    private $image;
+    private $imageUrl;
 
     /**
      * @var string
@@ -77,7 +77,7 @@ class TopAnime
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->rating = $parser->getRating();
-        $instance->image = $parser->getImage();
+        $instance->imageUrl = $parser->getImage();
 
         return $instance;
     }
@@ -154,8 +154,8 @@ class TopAnime
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImageUrl(): string
     {
-        return $this->image;
+        return $this->imageUrl;
     }
 }

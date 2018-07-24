@@ -55,7 +55,7 @@ class TopManga
     /**
      * @var string
      */
-    private $image;
+    private $imageUrl;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -77,7 +77,7 @@ class TopManga
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->rating = $parser->getRating();
-        $instance->image = $parser->getImage();
+        $instance->imageUrl = $parser->getImage();
 
         return $instance;
     }
@@ -154,8 +154,8 @@ class TopManga
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getImageUrl(): string
     {
-        return $this->image;
+        return $this->imageUrl;
     }
 }

@@ -63,7 +63,6 @@ class HistoryItemParser implements ParserInterface
     public function getIncrement(): int
     {
         return (int) $this->crawler->filterXPath('//td[1]/strong')->text();
-
     }
 
     /**
@@ -74,11 +73,10 @@ class HistoryItemParser implements ParserInterface
     {
         $date = JString::cleanse(
             Parser::removeChildNodes(
-              $this->crawler->filterXPath('//td[2]')
+                $this->crawler->filterXPath('//td[2]')
             )->text()
         );
 
         return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
     }
-
 }

@@ -6,52 +6,42 @@ Bleeding edge, re-write of the Jikan PHP API. Focusing on speed, stability and m
 ## Dependencies
 - fabpot/goutte
 
-## Refactoring Process
-### Phase 1
-- [X] **Core**
-- [X] Modal Class
-- Data Response enhancement methods [#147](/../../issues/147), [#153](/../../issues/153)
-	- [X] HTML quotes
-	- [X] Trims
-	- [X] UTF8 Encodes
-	- [X] Null for empty
 
-### Phase 2
 - Anime
 	- [X] Main
 	- [X] Characters & Staff
 	- [X] Episodes
 	- [X] News
 	- [X] Videos
-	- [ ] Stats
+	- [X] Stats
 	- [X] Pictures
-	- [ ] Forum
-	- [ ] More Info
+	- [X] Forum
+	- [X] More Info
 - Manga
 	- [X] Main
-	- [ ] Characters
+	- [X] Characters
 	- [X] News
-	- [ ] Stats
+	- [X] Stats
 	- [X] Pictures
-	- [ ] Forum
-	- [ ] More Info
+	- [X] Forum
+	- [X] More Info
 - Person
 	- [X] Main
 	- [X] Pictures
 - Character
 	- [X] Main
 	- [X] Pictures
-- [ ] Schedule
+- [X] Schedule
 - Search
 	- [X] Anime
-	- [ ] Manga
-	- [ ] Character
-	- [ ] Person
+	- [X] Manga
+	- [X] Character
+	- [X] Person
 - [X] Seasonal
 - [X] Schedule
 - Top
-    - [ ] Anime
-    - [ ] Manga
+    - [X] Anime
+    - [X] Manga
 
 #### NEW!
 - Genre
@@ -60,14 +50,10 @@ Bleeding edge, re-write of the Jikan PHP API. Focusing on speed, stability and m
 - User
     - [X] Profile
     - [X] Friends
-    - [ ] History
+    - [X] History
 - [X] Producers
 - [X] Studios
 - [X] Magazines
 - Top
-    - [ ] Person
-    - [ ] Character
-
-
-### Phase 3
-- [ ] Code Clean Up
+    - [X] Person
+    - [X] Character

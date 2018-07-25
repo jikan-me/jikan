@@ -14,9 +14,24 @@ class MangaGenre
 {
 
     /**
-     * @var MalUrl
+     * @var int
+     */
+    public $malId;
+
+    /**
+     * @var string
      */
     public $url;
+
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var int
+     */
+    public $count;
 
     /**
      * @var array|MangaGenre[]
@@ -34,17 +49,44 @@ class MangaGenre
     {
         $instance = new self();
         $instance->url = $parser->getUrl();
+        $instance->malId = $parser->getMalId();
+        $instance->name = $parser->getName();
+        $instance->count = $parser->getCount();
         $instance->manga = $parser->getGenreManga();
 
         return $instance;
     }
 
     /**
-     * @return MalUrl
+     * @return int
      */
-    public function getUrl(): MalUrl
+    public function getMalId(): int
+    {
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
     {
         return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
     }
 
     /**

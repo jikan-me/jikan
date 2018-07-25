@@ -1,4 +1,13 @@
 <?php
+/**
+ *    Jikan - MyAnimeList.net Unofficial API v2
+ *
+ *    This is an unofficial MAL API that stands in for the lackluster features of the official API.
+ *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.
+ *
+ *    Jikan is NOT affiliated with MyAnimeList.net
+ *    This library does not perform any rate limitations, so use it responsibly.
+ */
 
 namespace Jikan\MyAnimeList;
 
@@ -200,11 +209,11 @@ class MalClient
     /**
      * @param Request\Genre\AnimeGenreRequest $request
      *
-     * @return \Jikan\Model\Anime\AnimeGenre
+     * @return \Jikan\Model\Genre\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Anime\AnimeGenre
+    public function getAnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Genre\AnimeGenre
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
 

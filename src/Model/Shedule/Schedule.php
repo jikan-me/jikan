@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Shedule;
 
-use Jikan\Model\Anime\AnimeCard;
+use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;
 
 /**

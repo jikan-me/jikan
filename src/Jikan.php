@@ -175,11 +175,11 @@ class Jikan
     /**
      * @param Request\Genre\AnimeGenreRequest $request
      *
-     * @return \Jikan\Model\Anime\AnimeGenre
+     * @return \Jikan\Model\Genre\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Anime\AnimeGenre
+    public function AnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Genre\AnimeGenre
     {
         return $this->myanimelist->getAnimeGenre($request);
     }

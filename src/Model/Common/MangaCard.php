@@ -1,8 +1,7 @@
 <?php
 
-namespace Jikan\Model\Manga;
+namespace Jikan\Model\Common;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser;
 
 /**
@@ -13,14 +12,19 @@ use Jikan\Parser;
 class MangaCard
 {
     /**
-     * @var MalUrl
+     * @var int
+     */
+    protected $malId;
+
+    /**
+     * @var string
      */
     protected $url;
 
     /**
      * @var string
      */
-    protected $name;
+    protected $title;
 
     /**
      * @var string
@@ -38,7 +42,7 @@ class MangaCard
     protected $type;
 
     /**
-     * @var string
+     * @var \DateTimeImmutable|null
      */
     protected $publishingStart;
 
@@ -104,8 +108,9 @@ class MangaCard
      */
     protected static function setProperties(Parser\Common\MangaCardParser $parser, $instance): void
     {
+        $instance->malId = $parser->getMalId();
         $instance->url = $parser->getMangaUrl();
-        $instance->name = $parser->getTitle();
+        $instance->title = $parser->getTitle();
         $instance->imageUrl = $parser->getMangaImage();
         $instance->synopsis = $parser->getDescription();
         $instance->type = $parser->getType();
@@ -117,24 +122,30 @@ class MangaCard
         $instance->author = $parser->getAuthor();
         $instance->score = $parser->getMangaScore();
         $instance->serialization = $parser->getSerialization();
-        
-        $instance->url = $instance->getUrl();
     }
 
     /**
-     * @return MalUrl
+     * @return int
      */
-    public function getUrl(): MalUrl
+    public function getMalId(): int
     {
-        return new MalUrl($this->name, $this->url);
+        return $this->malId;
     }
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getUrl(): string
     {
-        return $this->name;
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     /**
@@ -162,9 +173,9 @@ class MangaCard
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable|null
      */
-    public function getPublishingStart(): string
+    public function getPublishingStart(): ?\DateTimeImmutable
     {
         return $this->publishingStart;
     }

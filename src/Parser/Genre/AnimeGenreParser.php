@@ -32,17 +32,17 @@ class AnimeGenreParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Anime\AnimeGenre
+     * @return \Jikan\Model\Genre\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Anime\AnimeGenre
+    public function getModel(): Model\Genre\AnimeGenre
     {
-        return Model\Anime\AnimeGenre::fromParser($this);
+        return Model\Genre\AnimeGenre::fromParser($this);
     }
 
     /**
-     * @return array|\Jikan\Model\Anime\AnimeGenre[]
+     * @return array|\Jikan\Model\Genre\AnimeGenre[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
@@ -58,17 +58,50 @@ class AnimeGenreParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return string
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getUrl(): Model\Common\MalUrl
+    public function getUrl(): string
     {
-        return new Model\Common\MalUrl(
-            JString::cleanse(
-                Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
-            ),
-            $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content')
+        return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
+    }
+
+    /**
+     * @return int
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getMalId(): int
+    {
+        return (int) preg_replace('#https://myanimelist.net(/\w+/\w+/)(\d+).*#', '$2', $this->getUrl());
+    }
+
+    /**
+     * @return string
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getName(): string
+    {
+        return JString::cleanse(
+            Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
+        );
+    }
+
+    /**
+     * @return int
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getCount(): int
+    {
+
+        return 0;
+        return (int) str_replace(
+            ["(", ")", ","],
+            "",
+            $this->crawler->filterXPath('//span[@class=\'di-ib mt4\']/span')->text()
         );
     }
 }

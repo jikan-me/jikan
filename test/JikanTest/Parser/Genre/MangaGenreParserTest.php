@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Genre;
 
 use Goutte\Client;
 use Jikan\Model\Common\MalUrl;
-use Jikan\Model\Manga\MangaCard;
+use Jikan\Model\Common\MangaCard;
 use Jikan\Parser\Genre\MangaGenreParser;
 use PHPUnit\Framework\TestCase;
 
@@ -32,7 +32,7 @@ class MangaGenreParserTest extends TestCase
     public function it_gets_url()
     {
         $url = $this->parser->getUrl();
-        self::assertInstanceOf(MalUrl::class, $url);
+        self::assertEquals("https://myanimelist.net/manga/genre/1/Action", $url);
     }
 
     /**

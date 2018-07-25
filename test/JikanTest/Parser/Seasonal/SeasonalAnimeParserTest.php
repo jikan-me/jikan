@@ -139,7 +139,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_air_dates()
     {
-        self::assertEquals('Apr 7, 2018, 17:30 (JST)', $this->parser->getAirDates());
+        self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getAirDates());
     }
 
     /**
@@ -157,7 +157,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_id()
     {
-        self::assertEquals(36456, $this->parser->getId());
+        self::assertEquals(36456, $this->parser->getMalId());
     }
 
     /**

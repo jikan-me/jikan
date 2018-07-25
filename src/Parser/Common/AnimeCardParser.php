@@ -35,9 +35,9 @@ class AnimeCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Anime\AnimeCard
+    public function getModel(): Model\Common\AnimeCard
     {
-        return Model\Anime\AnimeCard::parseAnimeCard($this);
+        return Model\Common\AnimeCard::parseAnimeCard($this);
     }
 
     /**
@@ -55,7 +55,7 @@ class AnimeCardParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getId(): int
+    public function getMalId(): int
     {
         return Parser::idFromUrl($this->getAnimeUrl());
     }
@@ -156,13 +156,24 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return ?\DateTimeImmutable
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getAirDates(): string
+    public function getAirDates(): ?\DateTimeImmutable
     {
-        return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text());
+        $date = str_replace(
+            "(JST)",
+            "",
+            JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text())
+        );
+
+        try {
+            return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
+                ->setTimezone(new \DateTimeZone("UTC"));
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

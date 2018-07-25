@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Genre;
 
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Genre\AnimeGenreParser;
@@ -14,9 +14,24 @@ class AnimeGenre
 {
 
     /**
-     * @var \Jikan\Model\Common\MalUrl
+     * @var int
+     */
+    public $malId;
+
+    /**
+     * @var string
      */
     public $url;
+
+    /**
+     * @var string
+     */
+    public $name;
+
+    /**
+     * @var int
+     */
+    public $count;
 
     /**
      * @var array|AnimeCard[]
@@ -34,17 +49,44 @@ class AnimeGenre
     {
         $instance = new self();
         $instance->url = $parser->getUrl();
+        $instance->malId = $parser->getMalId();
+        $instance->name = $parser->getName();
+        $instance->count = $parser->getCount();
         $instance->anime = $parser->getGenreAnime();
 
         return $instance;
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return int
      */
-    public function getUrl(): MalUrl
+    public function getMalId(): int
+    {
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
     {
         return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
     }
 
     /**

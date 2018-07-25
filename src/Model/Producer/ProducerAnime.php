@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Producer;
 
-use Jikan\Model\Anime\AnimeCard;
+use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser;
 
 /**

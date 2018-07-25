@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Magazine;
 
-use Jikan\Model\Manga\MangaCard;
+use Jikan\Model\Common\MangaCard;
 use Jikan\Parser;
 
 /**

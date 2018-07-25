@@ -1,8 +1,7 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Common;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser;
 
 /**
@@ -13,14 +12,19 @@ use Jikan\Parser;
 class AnimeCard
 {
     /**
-     * @var \Jikan\Model\Common\MalUrl
+     * @var int
+     */
+    protected $malId;
+
+    /**
+     * @var string
      */
     protected $url;
 
     /**
      * @var string
      */
-    protected $name;
+    protected $title;
 
     /**
      * @var string
@@ -38,7 +42,7 @@ class AnimeCard
     protected $type;
 
     /**
-     * @var string
+     * @var \DateTimeImmutable|null
      */
     protected $airingStart;
 
@@ -65,7 +69,7 @@ class AnimeCard
     /**
      * @var \Jikan\Model\Common\MalUrl[]
      */
-    protected $producer;
+    protected $producers;
 
     /**
      * @var float|null
@@ -107,7 +111,7 @@ class AnimeCard
      */
     public function __toString()
     {
-        return (string)$this->url;
+        return (string) $this->url;
     }
 
     /**
@@ -119,8 +123,9 @@ class AnimeCard
      */
     protected static function setProperties(Parser\Common\AnimeCardParser $parser, $instance): void
     {
+        $instance->malId = $parser->getMalId();
         $instance->url = $parser->getAnimeUrl();
-        $instance->name = $parser->getTitle();
+        $instance->title = $parser->getTitle();
         $instance->imageUrl = $parser->getAnimeImage();
         $instance->synopsis = $parser->getDescription();
         $instance->type = $parser->getType();
@@ -129,29 +134,35 @@ class AnimeCard
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
         $instance->source = $parser->getSource();
-        $instance->producer = $parser->getProducer();
+        $instance->producers = $parser->getProducer();
         $instance->score = $parser->getAnimeScore();
         $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
         $instance->kids = $parser->isKids();
-        
-        $instance->url = $instance->getUrl();
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return int
      */
-    public function getUrl(): MalUrl
+    public function getMalId(): int
     {
-        return new MalUrl($this->name, $this->url);
+        return $this->malId;
     }
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getUrl(): string
     {
-        return $this->name;
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     /**
@@ -179,9 +190,9 @@ class AnimeCard
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable|null
      */
-    public function getAiringStart(): string
+    public function getAiringStart(): ?\DateTimeImmutable
     {
         return $this->airingStart;
     }
@@ -221,9 +232,9 @@ class AnimeCard
     /**
      * @return \Jikan\Model\Common\MalUrl[]
      */
-    public function getProducer(): array
+    public function getProducers(): array
     {
-        return $this->producer;
+        return $this->producers;
     }
 
     /**

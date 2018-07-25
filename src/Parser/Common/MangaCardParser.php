@@ -31,13 +31,13 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Manga\MangaCard
+     * @return \Jikan\Model\Common\MangaCard
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Manga\MangaCard
+    public function getModel(): Model\Common\MangaCard
     {
-        return Model\Manga\MangaCard::parseMangaCard($this);
+        return Model\Common\MangaCard::parseMangaCard($this);
     }
 
     /**
@@ -45,7 +45,7 @@ class MangaCardParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getId(): int
+    public function getMalId(): int
     {
         return Parser::idFromUrl($this->getMangaUrl());
     }
@@ -127,13 +127,25 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return ?\DateTimeImmutable
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getPublishDates(): string
+    public function getPublishDates(): ?\DateTimeImmutable
     {
-        return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text());
+        $date = str_replace(
+            "(JST)",
+            "",
+            JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text())
+        );
+
+        try {
+            return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
+                ->setTimezone(new \DateTimeZone("UTC"))
+                ->setTime(0, 0);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

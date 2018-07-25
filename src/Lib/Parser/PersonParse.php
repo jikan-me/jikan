@@ -216,7 +216,7 @@ class PersonParse extends TemplateParse
                 $animeStaffPositions = [];
                 while ($running) {
                     $line = $this->file[$this->lineNo + $i];
-                    if (preg_match('~</span>Published Manga</div>~', $line)) {
+                    if (preg_match('~<div class="normal_header">Published Manga</div>~', $line)) {
                         $running = false;
                     }
 
@@ -261,7 +261,7 @@ class PersonParse extends TemplateParse
 
         $this->addRule(
             'published_manga',
-            '~</span>Published Manga</div>~',
+            '~<div class="normal_header">Published Manga</div>~',
             function () {
                 $running = true;
                 $i = 1;

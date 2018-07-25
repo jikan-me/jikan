@@ -16,7 +16,7 @@ class History
     /**
      * @var MalUrl
      */
-    private $url;
+    private $malUrl;
 
     /**
      * @var int
@@ -38,7 +38,7 @@ class History
     public static function fromParser(HistoryItemParser $parser): self
     {
         $instance = new self();
-        $instance->url = $parser->getUrl();
+        $instance->malUrl = $parser->getUrl();
         $instance->increment = $parser->getIncrement();
         $instance->date = $parser->getDate();
 
@@ -49,9 +49,9 @@ class History
     /**
      * @return MalUrl
      */
-    public function getUrl(): MalUrl
+    public function getMalUrl(): MalUrl
     {
-        return $this->url;
+        return $this->malUrl;
     }
 
     /**

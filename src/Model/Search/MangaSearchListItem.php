@@ -16,7 +16,7 @@ class MangaSearchListItem
     /**
      * @var MalUrl
      */
-    private $url;
+    private $malUrl;
 
     /**
      * @var string
@@ -96,7 +96,7 @@ class MangaSearchListItem
     {
         $instance = new self();
 
-        $instance->url = $parser->getUrl();
+        $instance->malUrl = $parser->getUrl();
         $instance->imageUrl = $parser->getImageUrl();
         $instance->title = $parser->getTitle();
         $instance->synopsis = $parser->getSynopsis();
@@ -127,9 +127,9 @@ class MangaSearchListItem
     /**
      * @return MalUrl
      */
-    public function getUrl(): MalUrl
+    public function getMalUrl(): MalUrl
     {
-        return $this->url;
+        return $this->malUrl;
     }
 
     /**

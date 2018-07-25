@@ -16,7 +16,7 @@ class Producer
     /**
      * @var MalUrl
      */
-    public $url;
+    public $malUrl;
 
     /**
      * @var array|ProducerAnime[]
@@ -33,7 +33,7 @@ class Producer
     public static function fromParser(ProducerParser $parser): self
     {
         $instance = new self();
-        $instance->url = $parser->getUrl();
+        $instance->malUrl = $parser->getUrl();
         $instance->anime = $parser->getProducerAnime();
 
         return $instance;
@@ -42,9 +42,9 @@ class Producer
     /**
      * @return MalUrl
      */
-    public function getUrl(): MalUrl
+    public function getMalUrl(): MalUrl
     {
-        return $this->url;
+        return $this->malUrl;
     }
 
     /**

@@ -16,7 +16,7 @@ class PersonSearchListItem
     /**
      * @var \Jikan\Model\Common\MalUrl
      */
-    private $url;
+    private $malUrl;
 
     /**
      * @var string
@@ -44,7 +44,7 @@ class PersonSearchListItem
     {
         $instance = new self();
 
-        $instance->url = $parser->getUrl();
+        $instance->malUrl = $parser->getUrl();
         $instance->imageUrl = $parser->getImageUrl();
         $instance->name = $parser->getName();
         $instance->alternativeNames = $parser->getAlternativeNames();
@@ -56,9 +56,9 @@ class PersonSearchListItem
     /**
      * @return \Jikan\Model\Common\MalUrl
      */
-    public function getUrl(): MalUrl
+    public function getMalUrl(): MalUrl
     {
-        return $this->url;
+        return $this->malUrl;
     }
 
     /**

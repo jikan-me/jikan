@@ -16,7 +16,7 @@ class AnimeSearchListItem
     /**
      * @var \Jikan\Model\Common\MalUrl
      */
-    private $url;
+    private $malUrl;
 
     /**
      * @var string
@@ -95,7 +95,7 @@ class AnimeSearchListItem
     {
         $instance = new self();
 
-        $instance->url = $parser->getUrl();
+        $instance->malUrl = $parser->getUrl();
         $instance->imageUrl = $parser->getImageUrl();
         $instance->title = $parser->getTitle();
         $instance->synopsis = $parser->getSynopsis();
@@ -126,9 +126,9 @@ class AnimeSearchListItem
     /**
      * @return \Jikan\Model\Common\MalUrl
      */
-    public function getUrl(): MalUrl
+    public function getMalUrl(): MalUrl
     {
-        return $this->url;
+        return $this->malUrl;
     }
 
     /**

@@ -16,7 +16,7 @@ class Magazine
     /**
      * @var \Jikan\Model\Common\MalUrl
      */
-    public $url;
+    public $malUrl;
 
     /**
      * @var array|MagazineManga[]
@@ -33,7 +33,7 @@ class Magazine
     public static function fromParser(MagazineParser $parser): self
     {
         $instance = new self();
-        $instance->url = $parser->getUrl();
+        $instance->malUrl = $parser->getUrl();
         $instance->manga = $parser->getMagazineManga();
 
         return $instance;
@@ -42,9 +42,9 @@ class Magazine
     /**
      * @return \Jikan\Model\Common\MalUrl
      */
-    public function getUrl(): MalUrl
+    public function getMalUrl(): MalUrl
     {
-        return $this->url;
+        return $this->malUrl;
     }
 
     /**

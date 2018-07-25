@@ -44,4 +44,13 @@ class MangaGenreParserTest extends TestCase
         $manga = $this->parser->getGenreManga();
         self::assertContainsOnlyInstancesOf(MangaCard::class, $manga);
     }
+
+    /**
+     * @test
+     * @vcr MangaGenreParserTest.yaml
+     */
+    public function it_gets_the_count()
+    {
+        self::assertEquals(6187, $this->parser->getCount());
+    }
 }

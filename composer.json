@@ -10,9 +10,6 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {
-        "fabpot/goutte": "^3.2"
-    },
     "autoload": {
         "psr-4": {
             "Jikan\\": [
@@ -26,6 +23,9 @@
                 "test/JikanTest"
             ]
         }
+    },
+    "require": {
+        "fabpot/goutte": "^3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.3",

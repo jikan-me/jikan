@@ -4,7 +4,6 @@ namespace JikanTest\Parser\Genre;
 
 use Goutte\Client;
 use Jikan\Model\Common\AnimeCard;
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Genre\AnimeGenreParser;
 use PHPUnit\Framework\TestCase;
 
@@ -43,5 +42,14 @@ class AnimeGenreParserTest extends TestCase
     {
         $anime = $this->parser->getGenreAnime();
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $anime);
+    }
+
+    /**
+     * @test
+     * @vcr AnimeGenreParserTest.yaml
+     */
+    public function it_gets_the_count()
+    {
+        self::assertEquals(3263, $this->parser->getCount());
     }
 }

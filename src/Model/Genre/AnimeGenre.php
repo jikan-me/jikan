@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Genre;
 
-use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Genre\AnimeGenreParser;
 
 /**

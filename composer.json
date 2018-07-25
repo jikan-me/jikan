@@ -34,6 +34,7 @@
         "squizlabs/php_codesniffer": "^3.3",
         "phpro/grumphp": "^0.14.1",
         "jakub-onderka/php-parallel-lint": "^1.0",
-        "doctrine/collections": "^1.5"
+        "doctrine/collections": "^1.5",
+        "jikan-me/jikan-fixtures": "dev-master"
     }
 }

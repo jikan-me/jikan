@@ -1,16 +1,21 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-if (!file_exists('jikan-fixtures/fixtures')) {
-    echo "ERROR: jikan-fixtures/fixtures not found\n";
-    echo "Clone the fixtures repo into project root directory\n";
-    echo "git clone https://github.com/jikan-me/jikan-fixtures.git\n";
+$fixturesPath = __DIR__ . "/../vendor/jikan-me/jikan-fixtures/fixtures";
+
+if (!file_exists($fixturesPath)) {
+    echo "ERROR: Fixtures not found\n";
+    die;
+}
+
+if (!is_readable($fixturesPath)) {
+    echo "ERROR: Fixtures are not readable\n";
     die;
 }
 
 
 \VCR\VCR::configure()
-    ->setCassettePath('jikan-fixtures/fixtures')
+    ->setCassettePath($fixturesPath)
     ->enableLibraryHooks(['curl'])
     ->enableRequestMatchers(['url', 'method', 'query_string'])
 ;

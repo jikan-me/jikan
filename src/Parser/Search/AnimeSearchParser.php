@@ -2,8 +2,9 @@
 
 namespace Jikan\Parser\Search;
 
-use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Model\Search\AnimeSearch;
+use Jikan\Model\Search\AnimeSearchListItem;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class AnimeSearchParser
@@ -39,7 +40,7 @@ class AnimeSearchParser
     }
 
     /**
-     * @return array
+     * @return AnimeSearchListItem[]
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
@@ -49,13 +50,16 @@ class AnimeSearchParser
         return $this->crawler
             ->filterXPath('//div[contains(@class, "js-categories-seasonal")]/table/tr[1]')
             ->nextAll()
-            ->each(function (Crawler $c) {
-                return (new AnimeSearchListItemParser($c))->getModel();
-            });
+            ->each(
+                function (Crawler $c) {
+                    return (new AnimeSearchListItemParser($c))->getModel();
+                }
+            );
     }
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getLastPage(): int
     {
@@ -66,6 +70,6 @@ class AnimeSearchParser
             return 1;
         }
 
-        return (int) $pages->last()->text();
+        return (int)$pages->last()->text();
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Jikan\Parser\User\Profile;
 
+use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Model\User\AnimeStats;
 use Jikan\Model\User\MangaStats;
 use Symfony\Component\DomCrawler\Crawler;
-use Jikan\Helper\Parser;
 
 /**
  * Class UserProfileParser
@@ -34,6 +34,8 @@ class UserProfileParser
      * Return the model
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
+     * @throws \Exception
      */
     public function getModel(): Model\User\UserProfile
     {
@@ -46,7 +48,7 @@ class UserProfileParser
      */
     public function getUsername(): string
     {
-        return (string) preg_replace('#.*/(\w+)$#', '$1', $this->getProfileUrl());
+        return (string)preg_replace('#.*/(\w+)$#', '$1', $this->getProfileUrl());
     }
 
     /**
@@ -74,6 +76,7 @@ class UserProfileParser
     /**
      * @return \DateTimeImmutable|null
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getJoinDate(): ?\DateTimeImmutable
     {
@@ -108,6 +111,7 @@ class UserProfileParser
     /**
      * @return \DateTimeImmutable|null
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getBirthday(): ?\DateTimeImmutable
     {

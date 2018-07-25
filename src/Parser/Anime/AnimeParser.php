@@ -9,7 +9,6 @@ use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
-use PHP_CodeSniffer\Tokenizers\JS;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -122,7 +121,7 @@ class AnimeParser implements ParserInterface
         }
 
         $titles = str_replace($title->text(), '', $title->parents()->text());
-        $titles = explode(",", $titles);
+        $titles = explode(',', $titles);
 
         foreach ($titles as &$title) {
             $title = JString::cleanse($title);
@@ -494,14 +493,14 @@ class AnimeParser implements ParserInterface
             ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr')
             ->each(
                 function (Crawler $c) use (&$related) {
-                    $related[
-                        JString::cleanse(str_replace(":", "", $c->filterXPath('//td[1]')->text()))
-                    ] = $c->filterXPath('//td[2]/a')
-                            ->each(
-                                function (Crawler $c) {
-                                    return (new MalUrlParser($c))->getModel();
-                                }
-                            );
+                    $related[JString::cleanse(
+                        str_replace(':', '', $c->filterXPath('//td[1]')->text())
+                    )] = $c->filterXPath('//td[2]/a')
+                        ->each(
+                            function (Crawler $c) {
+                                return (new MalUrlParser($c))->getModel();
+                            }
+                        );
                 }
             );
 

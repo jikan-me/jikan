@@ -2,8 +2,8 @@
 
 namespace Jikan\Request\Top;
 
-use Jikan\Request\RequestInterface;
 use Jikan\Helper\Constants;
+use Jikan\Request\RequestInterface;
 
 class TopAnimeRequest implements RequestInterface
 {
@@ -20,23 +20,30 @@ class TopAnimeRequest implements RequestInterface
     /**
      * TopAnimeRequest constructor.
      *
-     * @param int $page
+     * @param int  $page
+     * @param null $type
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(int $page = 1, $type = null)
     {
         $this->page = $page;
 
-        if (!is_null($type)) {
-            if (!\in_array($type, [
-                Constants::TOP_AIRING,
-                Constants::TOP_UPCOMING,
-                Constants::TOP_TV,
-                Constants::TOP_MOVIE,
-                Constants::TOP_OVA,
-                Constants::TOP_SPECIAL,
-                Constants::TOP_BY_POPULARITY,
-                Constants::TOP_BY_FAVORITES,
-            ])) {
+        if (null !== $type) {
+            if (!\in_array(
+                $type,
+                [
+                    Constants::TOP_AIRING,
+                    Constants::TOP_UPCOMING,
+                    Constants::TOP_TV,
+                    Constants::TOP_MOVIE,
+                    Constants::TOP_OVA,
+                    Constants::TOP_SPECIAL,
+                    Constants::TOP_BY_POPULARITY,
+                    Constants::TOP_BY_FAVORITES,
+                ],
+                true
+            )) {
                 throw new \InvalidArgumentException(sprintf('Type %s is not valid', $type));
             }
 
@@ -53,9 +60,9 @@ class TopAnimeRequest implements RequestInterface
     {
         return 'https://myanimelist.net/topanime.php?'.http_build_query(
             [
-                'limit' => 50 * ($this->page-1),
-                'type' => $this->type
-            ]
+                    'limit' => 50 * ($this->page - 1),
+                    'type'  => $this->type,
+                ]
         );
     }
 }

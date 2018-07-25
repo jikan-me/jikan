@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Person;
 
-use Jikan\Helper\Parser;
 use Jikan\Parser\Person\PersonParser;
 
 /**
@@ -86,6 +85,7 @@ class Person
      * @param PersonParser $parser
      *
      * @return Person
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

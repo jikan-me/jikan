@@ -2,8 +2,9 @@
 
 namespace Jikan\Parser\Search;
 
-use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Model\Search\CharacterSearch;
+use Jikan\Model\Search\CharacterSearchListItem;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class CharacterSearchParser
@@ -38,7 +39,7 @@ class CharacterSearchParser
     }
 
     /**
-     * @return array
+     * @return CharacterSearchListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -47,13 +48,16 @@ class CharacterSearchParser
         return $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr[1]')
             ->nextAll()
-            ->each(function (Crawler $c) {
-                return (new CharacterSearchListItemParser($c))->getModel();
-            });
+            ->each(
+                function (Crawler $c) {
+                    return (new CharacterSearchListItemParser($c))->getModel();
+                }
+            );
     }
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getLastPage(): int
     {
@@ -64,6 +68,6 @@ class CharacterSearchParser
             return 1;
         }
 
-        return (int) $pages->last()->text();
+        return (int)$pages->last()->text();
     }
 }

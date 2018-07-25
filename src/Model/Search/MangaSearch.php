@@ -13,7 +13,7 @@ class MangaSearch
 {
 
     /**
-     * @var MangaSearchItem[]
+     * @var MangaSearchListItem[]
      */
     private $results;
 
@@ -42,7 +42,7 @@ class MangaSearch
     }
 
     /**
-     * @return MangaSearchItem[]
+     * @return MangaSearchListItem[]
      */
     public function getResults(): array
     {

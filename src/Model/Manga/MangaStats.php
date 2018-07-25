@@ -6,6 +6,7 @@ use Jikan\Parser\Manga\MangaStatsParser;
 
 /**
  * Class MangaStats
+ *
  * @package Jikan\Model\Anime\Anime
  */
 class MangaStats

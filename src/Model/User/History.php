@@ -34,6 +34,7 @@ class History
      *
      * @return History
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public static function fromParser(HistoryItemParser $parser): self
     {

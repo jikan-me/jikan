@@ -30,24 +30,17 @@ class HistoryParser implements ParserInterface
 
     /**
      * @return History[]
+     * @throws \Exception
      * @throws \InvalidArgumentException
      */
     public function getModel(): array
     {
         $node = $this->crawler->filterXPath('//div[@id="content"]/div/table/tr');
 
-        if (!$node->count()) {
-            return [];
-        }
-
         return $node
             ->reduce(
                 function (Crawler $c) {
-                    $node = $c->filterXPath('//td[contains(@class, "borderClass")]');
-
-                    if (!$node->count()) {
-                        return false;
-                    }
+                    return (bool)$c->filterXPath('//td[contains(@class, "borderClass")]')->count();
                 }
             )
             ->each(

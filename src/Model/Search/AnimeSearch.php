@@ -13,7 +13,7 @@ class AnimeSearch
 {
 
     /**
-     * @var AnimeSearchItem[]
+     * @var AnimeSearchListItem[]
      */
     private $results;
 
@@ -42,7 +42,7 @@ class AnimeSearch
     }
 
     /**
-     * @return AnimeSearchItem[]
+     * @return AnimeSearchListItem[]
      */
     public function getResults(): array
     {

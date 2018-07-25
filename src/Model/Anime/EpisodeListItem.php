@@ -46,7 +46,7 @@ class EpisodeListItem
      * @var bool
      */
     public $recap;
-    
+
     /**
      * @var string
      */

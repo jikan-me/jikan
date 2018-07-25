@@ -42,13 +42,22 @@ class Parser
     /**
      * Extract the id from a mal url
      *
-     * @param int $url
+     * @param string $url
      *
      * @return int
      */
     public static function idFromUrl(string $url): int
     {
-        return (int) preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
+        return (int)preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
+    }
+
+    public static function parseForumDate(string $date): ?\DateTimeImmutable
+    {
+        if (!preg_match('/\d{4}/', $date)) {
+            $date .= ', '.date('Y');
+        }
+
+        return self::parseDate($date);
     }
 
     /**
@@ -66,15 +75,6 @@ class Parser
         } catch (\Exception $e) {
             return null;
         }
-    }
-
-    public static function parseForumDate(string $date): ?\DateTimeImmutable
-    {
-        if (!preg_match('/\d{4}/', $date)) {
-            $date .= ', '.date('Y');
-        }
-
-        return self::parseDate($date);
     }
 
     /**
@@ -103,10 +103,11 @@ class Parser
      * @param string $date
      *
      * @return \DateTimeImmutable|null
+     * @throws \Exception
      */
     public static function parseDateMDYReadable(string $date): ?\DateTimeImmutable
     {
-        $date = str_replace("  ", " ", $date);
+        $date = str_replace('  ', ' ', $date);
 
         if (preg_match('~[a-zA-z]+ \d+, \d{4}~', $date)) {
             return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));

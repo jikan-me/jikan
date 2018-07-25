@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Character;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Character\VoiceActorParser;
 
 /**
@@ -38,14 +37,6 @@ class VoiceActor
     private $language;
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getName();
-    }
-
-    /**
      * @param VoiceActorParser $parser
      *
      * @return VoiceActor
@@ -66,11 +57,11 @@ class VoiceActor
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getMalId(): int
+    public function __toString()
     {
-        return $this->malId;
+        return $this->getName();
     }
 
     /**
@@ -79,6 +70,14 @@ class VoiceActor
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
     }
 
     /**

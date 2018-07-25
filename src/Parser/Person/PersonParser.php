@@ -3,10 +3,10 @@
 namespace Jikan\Parser\Person;
 
 use Jikan\Helper\JString;
+use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use Jikan\Helper\Parser;
 
 /**
  * Class PersonParser
@@ -35,6 +35,8 @@ class PersonParser implements ParserInterface
      *
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
+     * @throws \Exception
      */
     public function getModel(): Model\Person\Person
     {
@@ -187,6 +189,7 @@ class PersonParser implements ParserInterface
      * @return \DateTimeImmutable|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getPersonBirthday(): ?\DateTimeImmutable
     {

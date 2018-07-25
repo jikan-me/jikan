@@ -41,7 +41,7 @@ class PictureParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getSmall() : string
+    public function getSmall(): string
     {
         return $this->crawler->filterXPath('//img')->attr('src');
     }

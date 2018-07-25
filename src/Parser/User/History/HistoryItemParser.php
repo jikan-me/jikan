@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\History;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
@@ -34,6 +35,7 @@ class HistoryItemParser implements ParserInterface
     /**
      * Return the model
      *
+     * @throws \Exception
      * @throws \InvalidArgumentException
      */
     public function getModel(): History
@@ -51,7 +53,7 @@ class HistoryItemParser implements ParserInterface
         $name = $this->crawler->filterXPath('//td[1]/a')->text();
 
         preg_match('~/(.\w+).php\?id=(.\d+)~', $url, $matches);
-        $url = \Jikan\Helper\Constants::BASE_URL . "/" . $matches[1] . "/" . $matches[2];
+        $url = Constants::BASE_URL.'/'.$matches[1].'/'.$matches[2];
 
         return new MalUrl($name, $url);
     }
@@ -62,12 +64,13 @@ class HistoryItemParser implements ParserInterface
      */
     public function getIncrement(): int
     {
-        return (int) $this->crawler->filterXPath('//td[1]/strong')->text();
+        return (int)$this->crawler->filterXPath('//td[1]/strong')->text();
     }
 
     /**
      * @return \DateTimeImmutable
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getDate(): \DateTimeImmutable
     {

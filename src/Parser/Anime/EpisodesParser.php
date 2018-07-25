@@ -72,19 +72,21 @@ class EpisodesParser implements ParserInterface
                 ->last();
 
             preg_match('~(\d+) - (\d+)~', $episodesLastPage->text(), $matches);
-            return ceil((int) $matches[2] / 100);
+
+            return ceil((int)$matches[2] / 100);
         }
 
         $episodesLastPage = $this->crawler
             ->filterXPath('//div[contains(@class, \'pagination\')]/a')
             ->last();
-        
+
         if (!$episodesLastPage->count()) {
             return 1;
         }
 
         preg_match('~(\d+) - (\d+)~', $episodesLastPage->text(), $matches);
-        return ceil((int) $matches[2] / 100);
+
+        return ceil((int)$matches[2] / 100);
     }
 
     /**

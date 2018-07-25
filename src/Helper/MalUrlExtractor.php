@@ -2,7 +2,6 @@
 
 namespace Jikan\Helper;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
 use Symfony\Component\DomCrawler\Crawler;
 

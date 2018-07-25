@@ -107,14 +107,6 @@ class AnimeCard
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) $this->url;
-    }
-
-    /**
      * @param Parser\Common\AnimeCardParser $parser
      * @param AnimeCard                     $instance
      *
@@ -139,6 +131,14 @@ class AnimeCard
         $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
         $instance->kids = $parser->isKids();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->url;
     }
 
     /**

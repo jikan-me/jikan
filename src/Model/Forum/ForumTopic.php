@@ -51,11 +51,6 @@ class ForumTopic
      */
     private $lastPost;
 
-    public function __toString()
-    {
-        return $this->title;
-    }
-
     /**
      * @param ForumTopicParser $parser
      *
@@ -75,6 +70,11 @@ class ForumTopic
         $instance->lastPost = $parser->getLastPost();
 
         return $instance;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 
     /**

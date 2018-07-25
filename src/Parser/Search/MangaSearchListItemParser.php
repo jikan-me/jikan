@@ -101,7 +101,7 @@ class MangaSearchListItemParser
      */
     public function getVolumes(): int
     {
-        return (int) $this->crawler->filterXPath('//td[4]')->text();
+        return (int)$this->crawler->filterXPath('//td[4]')->text();
     }
 
     /**
@@ -110,7 +110,7 @@ class MangaSearchListItemParser
      */
     public function getChapters(): int
     {
-        return (int) $this->crawler->filterXPath('//td[5]')->text();
+        return (int)$this->crawler->filterXPath('//td[5]')->text();
     }
 
     /**
@@ -119,7 +119,7 @@ class MangaSearchListItemParser
      */
     public function getScore(): float
     {
-        return (float) $this->crawler->filterXPath('//td[6]')->text();
+        return (float)$this->crawler->filterXPath('//td[6]')->text();
     }
 
     /**
@@ -129,21 +129,6 @@ class MangaSearchListItemParser
     public function getStartDate(): ?\DateTimeImmutable
     {
         $date = $this->getStartDateString();
-
-        if (null === $date) {
-            return null;
-        }
-
-        return Parser::parseDateMDY($date);
-    }
-
-    /**
-     * @return \DateTimeImmutable|null ?\DateTimeImmutable
-     * @throws \InvalidArgumentException
-     */
-    public function getEndDate(): ?\DateTimeImmutable
-    {
-        $date = $this->getEndDateString();
 
         if (null === $date) {
             return null;
@@ -168,6 +153,21 @@ class MangaSearchListItemParser
     }
 
     /**
+     * @return \DateTimeImmutable|null ?\DateTimeImmutable
+     * @throws \InvalidArgumentException
+     */
+    public function getEndDate(): ?\DateTimeImmutable
+    {
+        $date = $this->getEndDateString();
+
+        if (null === $date) {
+            return null;
+        }
+
+        return Parser::parseDateMDY($date);
+    }
+
+    /**
      * @return null|string ?string
      * @throws \InvalidArgumentException
      */
@@ -188,7 +188,7 @@ class MangaSearchListItemParser
      */
     public function getMembers(): int
     {
-        return (int) str_replace(
+        return (int)str_replace(
             ',',
             '',
             $this->crawler->filterXPath('//td[9]')->text()

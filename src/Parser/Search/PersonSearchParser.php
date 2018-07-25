@@ -2,8 +2,9 @@
 
 namespace Jikan\Parser\Search;
 
-use Symfony\Component\DomCrawler\Crawler;
 use Jikan\Model\Search\PersonSearch;
+use Jikan\Model\Search\PersonSearchListItem;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class PersonSearchParser
@@ -31,6 +32,7 @@ class PersonSearchParser
      * @return PersonSearch
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getModel(): PersonSearch
     {
@@ -38,7 +40,7 @@ class PersonSearchParser
     }
 
     /**
-     * @return array
+     * @return PersonSearchListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -47,13 +49,16 @@ class PersonSearchParser
         return $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr[1]')
             ->nextAll()
-            ->each(function (Crawler $c) {
-                return (new PersonSearchListItemParser($c))->getModel();
-            });
+            ->each(
+                function (Crawler $c) {
+                    return (new PersonSearchListItemParser($c))->getModel();
+                }
+            );
     }
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getLastPage(): int
     {
@@ -64,6 +69,6 @@ class PersonSearchParser
             return 1;
         }
 
-        return (int) $pages->last()->text();
+        return (int)$pages->last()->text();
     }
 }

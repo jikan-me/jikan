@@ -59,7 +59,8 @@ class Jikan
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeCharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request): Model\Anime\AnimeCharactersAndStaff
+    public function AnimeCharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request
+    ): Model\Anime\AnimeCharactersAndStaff
     {
         return $this->myanimelist->getCharactersAndStaff($request);
     }
@@ -118,6 +119,7 @@ class Jikan
      * @return \Jikan\Model\Person\Person
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function Person(Request\Person\PersonRequest $request): Model\Person\Person
     {
@@ -129,6 +131,7 @@ class Jikan
      *
      * @return \Jikan\Model\User\UserProfile
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function UserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
     {
@@ -329,7 +332,10 @@ class Jikan
     /**
      * @param Request\Search\PersonSearchRequest $request
      *
-     * @return Model\Search\PersonSearchListItem[]
+     * @return Model\Search\PersonSearch
+     * @throws \Exception
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public function PersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
@@ -445,6 +451,7 @@ class Jikan
      * @param Request\Anime\AnimeMoreInfoRequest $request
      *
      * @return string|null
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): ?string
@@ -456,6 +463,7 @@ class Jikan
      * @param Request\Manga\MangaMoreInfoRequest $request
      *
      * @return string|null
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function MangaMoreInfo(Request\Manga\MangaMoreInfoRequest $request): ?string
@@ -467,6 +475,7 @@ class Jikan
      * @param Request\SeasonList\SeasonListRequest $request
      *
      * @return array
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function SeasonList(Request\SeasonList\SeasonListRequest $request): array
@@ -479,6 +488,7 @@ class Jikan
      *
      * @return array
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function UserHistory(Request\User\UserHistoryRequest $request): array
     {

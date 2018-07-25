@@ -30,7 +30,7 @@ class CharacterSearchRequest implements RequestInterface
     /**
      * @var string
      */
-    private $char = null;
+    private $char;
 
     /**
      * CharacterSearchRequest constructor.
@@ -52,11 +52,13 @@ class CharacterSearchRequest implements RequestInterface
     public function getPath(): string
     {
 
-        $query = http_build_query([
-            'q' => $this->query,
-            'show' => ($this->page !== 1) ? 50 * ($this->page-1) : null,
-            'letter' => $this->char,
-        ]);
+        $query = http_build_query(
+            [
+                'q'      => $this->query,
+                'show'   => ($this->page !== 1) ? 50 * ($this->page - 1) : null,
+                'letter' => $this->char,
+            ]
+        );
 
         return sprintf(
             'https://myanimelist.net/character.php?%s',
@@ -66,9 +68,10 @@ class CharacterSearchRequest implements RequestInterface
 
     /**
      * @param string $char
+     *
      * @return $this
      */
-    public function setStartsWithChar(string $char)
+    public function setStartsWithChar(string $char): self
     {
         $this->char = $char;
 

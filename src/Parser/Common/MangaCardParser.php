@@ -51,6 +51,16 @@ class MangaCardParser implements ParserInterface
     }
 
     /**
+     * @return string
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getMangaUrl(): string
+    {
+        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
+    }
+
+    /**
      * @return \Jikan\Model\Common\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
@@ -111,37 +121,26 @@ class MangaCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getTitle(): string
-    {
-        return $this->crawler->filterXPath('//p[contains(@class,"title-text")]/a')->text();
-    }
-
-    /**
-     * @return string
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
     public function getDescription(): string
     {
         return $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/span')->text();
     }
 
     /**
-     * @return ?\DateTimeImmutable
-     * @throws \RuntimeException
+     * @return \DateTimeImmutable|null ?\DateTimeImmutable
      * @throws \InvalidArgumentException
      */
     public function getPublishDates(): ?\DateTimeImmutable
     {
         $date = str_replace(
-            "(JST)",
-            "",
+            '(JST)',
+            '',
             JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text())
         );
 
         try {
             return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
-                ->setTimezone(new \DateTimeZone("UTC"))
+                ->setTimezone(new \DateTimeZone('UTC'))
                 ->setTime(0, 0);
         } catch (\Exception $e) {
             return null;
@@ -177,12 +176,12 @@ class MangaCardParser implements ParserInterface
 
     /**
      * @return string
-     * @throws \InvalidArgumentException
      * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public function getMangaUrl(): string
+    public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
+        return $this->crawler->filterXPath('//p[contains(@class,"title-text")]/a')->text();
     }
 
     /**

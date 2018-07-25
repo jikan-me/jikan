@@ -23,7 +23,7 @@ class MangaMoreInfo
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(MoreInfoParser $parser) : self
+    public static function fromParser(MoreInfoParser $parser): self
     {
         $instance = new self();
         $instance->moreInfo = $parser->getMoreInfo();

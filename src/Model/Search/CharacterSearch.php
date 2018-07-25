@@ -13,7 +13,7 @@ class CharacterSearch
 {
 
     /**
-     * @var CharacterSearchItem[]
+     * @var CharacterSearchListItem[]
      */
     private $results;
 
@@ -41,7 +41,7 @@ class CharacterSearch
     }
 
     /**
-     * @return CharacterSearchItem[]
+     * @return CharacterSearchListItem[]
      */
     public function getResults(): array
     {

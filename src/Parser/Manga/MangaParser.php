@@ -126,7 +126,7 @@ class MangaParser implements ParserInterface
         }
 
         $titles = str_replace($title->text(), '', $title->parents()->text());
-        $titles = explode(",", $titles);
+        $titles = explode(',', $titles);
 
         foreach ($titles as &$title) {
             $title = JString::cleanse($title);
@@ -410,9 +410,9 @@ class MangaParser implements ParserInterface
             ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr')
             ->each(
                 function (Crawler $c) use (&$related) {
-                    $related[
-                    JString::cleanse(str_replace(":", "", $c->filterXPath('//td[1]')->text()))
-                    ] = $c->filterXPath('//td[2]/a')
+                    $related[JString::cleanse(
+                        str_replace(':', '', $c->filterXPath('//td[1]')->text())
+                    )] = $c->filterXPath('//td[2]/a')
                         ->each(
                             function (Crawler $c) {
                                 return (new MalUrlParser($c))->getModel();

@@ -124,6 +124,7 @@ class MalClient
      * @return \Jikan\Model\Person\Person
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getPerson(Request\Person\PersonRequest $request): Model\Person\Person
     {
@@ -138,6 +139,7 @@ class MalClient
      *
      * @return \Jikan\Model\User\UserProfile
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
     {
@@ -393,6 +395,7 @@ class MalClient
      * @return Model\Search\PersonSearch
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
@@ -538,6 +541,7 @@ class MalClient
      * @param Request\Anime\AnimeMoreInfoRequest $request
      *
      * @return string|null
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getAnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): ?string
@@ -552,6 +556,7 @@ class MalClient
      * @param Request\Manga\MangaMoreInfoRequest $request
      *
      * @return string|null
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getMangaMoreInfo(Request\Manga\MangaMoreInfoRequest $request): ?string
@@ -566,6 +571,7 @@ class MalClient
      * @param Request\SeasonList\SeasonListRequest $request
      *
      * @return Model\SeasonList\SeasonListItem[] An array of SeasonListItem instances
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getSeasonList(Request\SeasonList\SeasonListRequest $request): array
@@ -581,6 +587,7 @@ class MalClient
      *
      * @return array
      * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getUserHistory(Request\User\UserHistoryRequest $request): array
     {

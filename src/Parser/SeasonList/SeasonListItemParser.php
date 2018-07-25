@@ -2,10 +2,10 @@
 
 namespace Jikan\Parser\SeasonList;
 
+use Jikan\Helper\Constants;
 use Jikan\Model\SeasonList\SeasonListItem;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
-use Jikan\Helper\Constants;
 
 /**
  * Class SeasonListItemParser
@@ -21,6 +21,8 @@ class SeasonListItemParser implements ParserInterface
 
     /**
      * SeasonListItemParser constructor.
+     *
+     * @param Crawler $crawler
      */
     public function __construct(Crawler $crawler)
     {
@@ -38,11 +40,12 @@ class SeasonListItemParser implements ParserInterface
 
     /**
      * @return int
+     * @throws \InvalidArgumentException
      */
     public function getYear(): int
     {
         return (int)preg_replace(
-            '/[^0-9]/',
+            '/\D/',
             '',
             $this->crawler
                 ->filterXPath('//td')
@@ -53,13 +56,17 @@ class SeasonListItemParser implements ParserInterface
 
     /**
      * @return array
+     * @throws \InvalidArgumentException
      */
     public function getSeasons(): array
     {
         $seasons = $this->crawler->text();
 
-        return array_filter(Constants::SEASONS, function ($season) use ($seasons) {
-            return preg_match("/$season/", $seasons) != false;
-        });
+        return array_filter(
+            Constants::SEASONS,
+            function ($season) use ($seasons) {
+                return preg_match("/$season/", $seasons) !== false;
+            }
+        );
     }
 }

@@ -36,7 +36,7 @@ class PromoListItem
     {
         $instance = new self();
         $instance->title = $parser->getTitle();
-        $instance->videoUrl= $parser->getVideoUrl();
+        $instance->videoUrl = $parser->getVideoUrl();
         $instance->imageUrl = $parser->getImageUrl();
 
         return $instance;
@@ -49,6 +49,7 @@ class PromoListItem
     {
         return $this->title;
     }
+
     /**
      * @return string
      */
@@ -56,6 +57,7 @@ class PromoListItem
     {
         return $this->imageUrl;
     }
+
     /**
      * @return string
      */

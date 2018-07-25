@@ -40,7 +40,7 @@ class FavoritesParser
         return Favorites::fromParser($this);
     }
 
- 
+
     /**
      * @return array
      * @throws \InvalidArgumentException
@@ -56,6 +56,7 @@ class FavoritesParser
                             ->attr('style'),
                         $matches
                     );
+
                     return new AnimeMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -80,6 +81,7 @@ class FavoritesParser
                             ->attr('style'),
                         $matches
                     );
+
                     return new MangaMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -104,6 +106,7 @@ class FavoritesParser
                             ->attr('style'),
                         $matches
                     );
+
                     return new CharacterMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -128,6 +131,7 @@ class FavoritesParser
                             ->attr('style'),
                         $matches
                     );
+
                     return new PersonMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),

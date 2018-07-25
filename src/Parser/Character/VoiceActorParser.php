@@ -44,15 +44,7 @@ class VoiceActorParser implements ParserInterface
 
     /**
      * @return string
-     * @throws \InvalidArgumentException
-     */
-    public function getUrl(): string
-    {
-        return $this->crawler->filterXPath('//a')->attr('href');
-    }
-
-    /**
-     * @return string
+     * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
     public function getName(): string
@@ -72,6 +64,15 @@ class VoiceActorParser implements ParserInterface
     public function getMalId(): int
     {
         return Helper\Parser::idFromUrl($this->getUrl());
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getUrl(): string
+    {
+        return $this->crawler->filterXPath('//a')->attr('href');
     }
 
     /**

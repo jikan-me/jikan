@@ -34,10 +34,22 @@ class MangaStatsParser implements ParserInterface
      */
     public function getReading(): int
     {
-        return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Reading:\')]')
-            ->parents()
-            ->getNode(0)->textContent);
+        return $this->sanitize(
+            $this->crawler
+                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Reading:\')]')
+                ->parents()
+                ->getNode(0)->textContent
+        );
+    }
+
+    /**
+     * @param $input
+     *
+     * @return int
+     */
+    private function sanitize($input): int
+    {
+        return (int)preg_replace('/\D/', '', $input);
     }
 
     /**
@@ -46,10 +58,12 @@ class MangaStatsParser implements ParserInterface
      */
     public function getCompleted(): int
     {
-        return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Completed:\')]')
-            ->parents()
-            ->getNode(0)->textContent);
+        return $this->sanitize(
+            $this->crawler
+                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Completed:\')]')
+                ->parents()
+                ->getNode(0)->textContent
+        );
     }
 
     /**
@@ -58,10 +72,12 @@ class MangaStatsParser implements ParserInterface
      */
     public function getOnHold(): int
     {
-        return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'On-Hold:\')]')
-            ->parents()
-            ->getNode(0)->textContent);
+        return $this->sanitize(
+            $this->crawler
+                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'On-Hold:\')]')
+                ->parents()
+                ->getNode(0)->textContent
+        );
     }
 
     /**
@@ -70,10 +86,12 @@ class MangaStatsParser implements ParserInterface
      */
     public function getDropped(): int
     {
-        return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Dropped:\')]')
-            ->parents()
-            ->getNode(0)->textContent);
+        return $this->sanitize(
+            $this->crawler
+                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Dropped:\')]')
+                ->parents()
+                ->getNode(0)->textContent
+        );
     }
 
     /**
@@ -82,10 +100,12 @@ class MangaStatsParser implements ParserInterface
      */
     public function getPlanToRead(): int
     {
-        return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Read:\')]')
-            ->parents()
-            ->getNode(0)->textContent);
+        return $this->sanitize(
+            $this->crawler
+                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Read:\')]')
+                ->parents()
+                ->getNode(0)->textContent
+        );
     }
 
     /**
@@ -94,10 +114,12 @@ class MangaStatsParser implements ParserInterface
      */
     public function getTotal(): int
     {
-        return $this->sanitize($this->crawler
-            ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Total:\')]')
-            ->parents()
-            ->getNode(0)->textContent);
+        return $this->sanitize(
+            $this->crawler
+                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Total:\')]')
+                ->parents()
+                ->getNode(0)->textContent
+        );
     }
 
     /**
@@ -112,34 +134,26 @@ class MangaStatsParser implements ParserInterface
         $scores = [];
         $score = 10;
 
-        $voteCounts->each(function (Crawler $crawler) use (&$scores, &$score) {
-            $scores[$score] = [
-                'votes' => $this->sanitize($crawler->text()),
-                'percentage' => (double)preg_replace(
-                    '/[^0-9,.]/',
-                    '',
-                    substr(
-                        $completeText = $crawler->parents()->getNode(0)->textContent,
-                        0,
-                        strpos($completeText, '%')
-                    )
-                )
-            ];
+        $voteCounts->each(
+            function (Crawler $crawler) use (&$scores, &$score) {
+                $scores[$score] = [
+                    'votes'      => $this->sanitize($crawler->text()),
+                    'percentage' => (double)preg_replace(
+                        '/[^0-9,.]/',
+                        '',
+                        substr(
+                            $completeText = $crawler->parents()->getNode(0)->textContent,
+                            0,
+                            strpos($completeText, '%')
+                        )
+                    ),
+                ];
 
-            $score--;
-        });
+                $score--;
+            }
+        );
 
         return $scores;
-    }
-
-    /**
-     * @param $input
-     *
-     * @return int
-     */
-    private function sanitize($input): int
-    {
-        return (int)preg_replace('/\D/', '', $input);
     }
 
     /**

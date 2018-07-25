@@ -36,23 +36,6 @@ class TopListItemParser
     }
 
     /**
-     * @return string
-     * @throws \InvalidArgumentException
-     */
-    private function getText(): string
-    {
-        if ($this->animeText !== null) {
-            return $this->animeText;
-        }
-
-        return JString::cleanse(
-            $this->animeText = $this->crawler
-                ->filterXPath('//div[contains(@class, "information")]')
-                ->text()
-        );
-    }
-
-    /**
      * @return \Jikan\Model\Common\MalUrl
      * @throws \InvalidArgumentException
      */
@@ -98,6 +81,36 @@ class TopListItemParser
     }
 
     /**
+     * @return array
+     * @throws \InvalidArgumentException
+     */
+    private function getTextArray(): array
+    {
+        $parts = explode("\n", $this->getText());
+        $parts = array_map('trim', $parts);
+        $parts = array_filter($parts);
+
+        return array_values($parts);
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    private function getText(): string
+    {
+        if ($this->animeText !== null) {
+            return $this->animeText;
+        }
+
+        return JString::cleanse(
+            $this->animeText = $this->crawler
+                ->filterXPath('//div[contains(@class, "information")]')
+                ->text()
+        );
+    }
+
+    /**
      * @return int
      * @throws \InvalidArgumentException
      */
@@ -116,19 +129,6 @@ class TopListItemParser
         $vols = preg_replace('/.*\((\d+) vols\).*/', '$1', $this->getTextArray()[0], -1, $count);
 
         return $count ? (int)$vols : null;
-    }
-
-    /**
-     * @return array
-     * @throws \InvalidArgumentException
-     */
-    private function getTextArray(): array
-    {
-        $parts = explode("\n", $this->getText());
-        $parts = array_map('trim', $parts);
-        $parts = array_filter($parts);
-
-        return array_values($parts);
     }
 
     /**

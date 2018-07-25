@@ -13,7 +13,7 @@ class PersonSearch
 {
 
     /**
-     * @var PersonSearchItem[]
+     * @var PersonSearchListItem[]
      */
     private $results;
 
@@ -42,7 +42,7 @@ class PersonSearch
     }
 
     /**
-     * @return PersonSearchItem[]
+     * @return PersonSearchListItem[]
      */
     public function getResults(): array
     {

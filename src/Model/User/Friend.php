@@ -38,14 +38,6 @@ class Friend
     private $friendsSince;
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->username;
-    }
-
-    /**
      * @param FriendParser $parser
      *
      * @return Friend
@@ -61,6 +53,14 @@ class Friend
         $instance->lastOnline = $parser->getLastOnline();
 
         return $instance;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->username;
     }
 
     /**

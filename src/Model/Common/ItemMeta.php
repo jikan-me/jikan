@@ -32,14 +32,6 @@ class ItemMeta
     private $name;
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
-    }
-
-    /**
      * Genre constructor.
      *
      * @param string $name
@@ -53,6 +45,14 @@ class ItemMeta
         $this->name = $name;
 
         $this->malId = Parser::idFromUrl($this->url);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**

@@ -6,6 +6,7 @@ use Jikan\Parser\Anime\AnimeStatsParser;
 
 /**
  * Class AnimeStats
+ *
  * @package Jikan\Model\Anime\Anime
  */
 class AnimeStats

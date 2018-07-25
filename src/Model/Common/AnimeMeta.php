@@ -2,8 +2,6 @@
 
 namespace Jikan\Model\Common;
 
-use Jikan\Model\Common\ItemMeta;
-
 /**
  * Class AnimeMeta
  *

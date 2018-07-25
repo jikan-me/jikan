@@ -108,12 +108,14 @@ class CharacterSearchListItemParser
             return [];
         }
 
-        return $anime->each(function (Crawler $c) {
-            return new MalUrl(
-                $c->text(),
-                Constants::BASE_URL . $c->attr('href')
-            );
-        });
+        return $anime->each(
+            function (Crawler $c) {
+                return new MalUrl(
+                    $c->text(),
+                    Constants::BASE_URL.$c->attr('href')
+                );
+            }
+        );
     }
 
     /**
@@ -123,17 +125,19 @@ class CharacterSearchListItemParser
     public function getManga(): array
     {
         $manga = $this->crawler
-                ->filterXPath('//td[3]/small/div/a');
+            ->filterXPath('//td[3]/small/div/a');
 
         if (!$manga->count()) {
             return [];
         }
 
-        return $manga->each(function (Crawler $c) {
-            return new MalUrl(
-                $c->text(),
-                Constants::BASE_URL . $c->attr('href')
-            );
-        });
+        return $manga->each(
+            function (Crawler $c) {
+                return new MalUrl(
+                    $c->text(),
+                    Constants::BASE_URL.$c->attr('href')
+                );
+            }
+        );
     }
 }

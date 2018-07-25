@@ -30,7 +30,7 @@ class MangaSearchRequest implements RequestInterface
     /**
      * @var string
      */
-    private $char = null;
+    private $char;
 
     /**
      * @var string
@@ -55,12 +55,12 @@ class MangaSearchRequest implements RequestInterface
     /**
      * @var int[]
      */
-    private $startDate = [0,0,0];
+    private $startDate = [0, 0, 0];
 
     /**
      * @var int[]
      */
-    private $endDate = [0,0,0];
+    private $endDate = [0, 0, 0];
 
     /**
      * @var int[]
@@ -92,27 +92,29 @@ class MangaSearchRequest implements RequestInterface
     public function getPath(): string
     {
 
-        $query = http_build_query([
-            'q' => $this->query,
-            'show' => ($this->page !== 1) ? 50 * ($this->page-1) : null,
-            'letter' => $this->char,
-            'type' => $this->type,
-            'score' => $this->score,
-            'status' => $this->status,
-            'mid' => $this->magazine,
-            'sd' => $this->startDate[0],
-            'sm' => $this->startDate[1],
-            'sy' => $this->startDate[2],
-            'ed' => $this->endDate[0],
-            'em' => $this->endDate[1],
-            'ey' => $this->endDate[2],
-            'gx' => (int) $this->genreExclude,
-        ]);
+        $query = http_build_query(
+            [
+                'q'      => $this->query,
+                'show'   => ($this->page !== 1) ? 50 * ($this->page - 1) : null,
+                'letter' => $this->char,
+                'type'   => $this->type,
+                'score'  => $this->score,
+                'status' => $this->status,
+                'mid'    => $this->magazine,
+                'sd'     => $this->startDate[0],
+                'sm'     => $this->startDate[1],
+                'sy'     => $this->startDate[2],
+                'ed'     => $this->endDate[0],
+                'em'     => $this->endDate[1],
+                'ey'     => $this->endDate[2],
+                'gx'     => (int)$this->genreExclude,
+            ]
+        );
 
         // Add genre[]=
         if (!empty($this->genre)) {
             foreach ($this->genre as $genre) {
-                $query .= '&genre[]=' . $genre;
+                $query .= '&genre[]='.$genre;
             }
         }
 
@@ -124,9 +126,10 @@ class MangaSearchRequest implements RequestInterface
 
     /**
      * @param string $char
+     *
      * @return $this
      */
-    public function setStartsWithChar(string $char)
+    public function setStartsWithChar(string $char): self
     {
         $this->char = $char;
 
@@ -135,9 +138,10 @@ class MangaSearchRequest implements RequestInterface
 
     /**
      * @param string $type
+     *
      * @return $this
      */
-    public function setType(string $type)
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -146,6 +150,7 @@ class MangaSearchRequest implements RequestInterface
 
     /**
      * @param float $score
+     *
      * @return $this
      */
     public function setScore(float $score): self
@@ -157,6 +162,7 @@ class MangaSearchRequest implements RequestInterface
 
     /**
      * @param int $status
+     *
      * @return $this
      */
     public function setStatus(int $status): self
@@ -168,6 +174,7 @@ class MangaSearchRequest implements RequestInterface
 
     /**
      * @param int $magazine
+     *
      * @return $this
      */
     public function setMagazine(int $magazine): self
@@ -195,6 +202,7 @@ class MangaSearchRequest implements RequestInterface
      * @param int $day , int $month, int $year
      * @param int $month
      * @param int $year
+     *
      * @return $this
      */
     public function setEndDate(int $day, int $month, int $year): self
@@ -206,6 +214,7 @@ class MangaSearchRequest implements RequestInterface
 
     /**
      * @param int ...$genre
+     *
      * @return $this
      */
     public function setGenre(...$genre): self
@@ -220,6 +229,7 @@ class MangaSearchRequest implements RequestInterface
 
     /**
      * @param bool $genreExclude
+     *
      * @return $this
      */
     public function setGenreExclude(bool $genreExclude): self

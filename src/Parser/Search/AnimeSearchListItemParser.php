@@ -101,7 +101,7 @@ class AnimeSearchListItemParser
      */
     public function getEpisodes(): int
     {
-        return (int) $this->crawler->filterXPath('//td[4]')->text();
+        return (int)$this->crawler->filterXPath('//td[4]')->text();
     }
 
     /**
@@ -110,7 +110,7 @@ class AnimeSearchListItemParser
      */
     public function getScore(): float
     {
-        return (float) $this->crawler->filterXPath('//td[5]')->text();
+        return (float)$this->crawler->filterXPath('//td[5]')->text();
     }
 
     /**
@@ -120,21 +120,6 @@ class AnimeSearchListItemParser
     public function getStartDate(): ?\DateTimeImmutable
     {
         $date = $this->getStartDateString();
-
-        if (null === $date) {
-            return null;
-        }
-
-        return Parser::parseDateMDY($date);
-    }
-
-    /**
-     * @return \DateTimeImmutable|null
-     * @throws \InvalidArgumentException
-     */
-    public function getEndDate(): ?\DateTimeImmutable
-    {
-        $date = $this->getEndDateString();
 
         if (null === $date) {
             return null;
@@ -159,6 +144,21 @@ class AnimeSearchListItemParser
     }
 
     /**
+     * @return \DateTimeImmutable|null
+     * @throws \InvalidArgumentException
+     */
+    public function getEndDate(): ?\DateTimeImmutable
+    {
+        $date = $this->getEndDateString();
+
+        if (null === $date) {
+            return null;
+        }
+
+        return Parser::parseDateMDY($date);
+    }
+
+    /**
      * @return string|null
      * @throws \InvalidArgumentException
      */
@@ -179,7 +179,7 @@ class AnimeSearchListItemParser
      */
     public function getMembers(): int
     {
-        return (int) str_replace(
+        return (int)str_replace(
             ',',
             '',
             $this->crawler->filterXPath('//td[8]')->text()

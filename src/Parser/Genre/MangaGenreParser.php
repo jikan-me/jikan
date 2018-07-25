@@ -58,6 +58,16 @@ class MangaGenreParser implements ParserInterface
     }
 
     /**
+     * @return int
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getMalId(): int
+    {
+        return (int)preg_replace('#https://myanimelist.net(/\w+/\w+/)(\d+).*#', '$2', $this->getUrl());
+    }
+
+    /**
      * @return string
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
@@ -65,16 +75,6 @@ class MangaGenreParser implements ParserInterface
     public function getUrl(): string
     {
         return $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content');
-    }
-
-    /**
-     * @return int
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function getMalId(): int
-    {
-        return (int) preg_replace('#https://myanimelist.net(/\w+/\w+/)(\d+).*#', '$2', $this->getUrl());
     }
 
     /**

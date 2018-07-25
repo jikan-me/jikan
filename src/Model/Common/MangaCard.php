@@ -92,14 +92,6 @@ class MangaCard
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string)$this->url;
-    }
-
-    /**
      * @param Parser\Common\MangaCardParser $parser
      * @param MangaCard                     $instance
      *
@@ -122,6 +114,14 @@ class MangaCard
         $instance->authors = $parser->getAuthor();
         $instance->score = $parser->getMangaScore();
         $instance->serialization = $parser->getSerialization();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->url;
     }
 
     /**

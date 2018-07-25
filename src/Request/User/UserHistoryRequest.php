@@ -26,13 +26,16 @@ class UserHistoryRequest implements RequestInterface
      * UserHistoryRequest constructor.
      *
      * @param string $username
+     * @param null   $type
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(string $username, $type = null)
     {
         $this->username = $username;
 
 
-        if (!is_null($type)) {
+        if (null !== $type) {
             if (!\in_array($type, ['anime', 'manga'])) {
                 throw new \InvalidArgumentException(sprintf('Type %s is not valid', $type));
             }

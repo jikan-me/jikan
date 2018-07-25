@@ -61,6 +61,16 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
+     * @return string
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getAnimeUrl(): string
+    {
+        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
+    }
+
+    /**
      * @return \Jikan\Model\Common\MalUrl[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
@@ -121,16 +131,6 @@ class AnimeCardParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getTitle(): string
-    {
-        return $this->crawler->filterXPath('//p[contains(@class,"title-text")]/a')->text();
-    }
-
-    /**
-     * @return string
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
     public function getDescription(): string
     {
         return $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/span')->text();
@@ -156,21 +156,20 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return ?\DateTimeImmutable
-     * @throws \RuntimeException
+     * @return \DateTimeImmutable|null ?\DateTimeImmutable
      * @throws \InvalidArgumentException
      */
     public function getAirDates(): ?\DateTimeImmutable
     {
         $date = str_replace(
-            "(JST)",
-            "",
+            '(JST)',
+            '',
             JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text())
         );
 
         try {
             return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
-                ->setTimezone(new \DateTimeZone("UTC"));
+                ->setTimezone(new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;
         }
@@ -205,12 +204,12 @@ class AnimeCardParser implements ParserInterface
 
     /**
      * @return string
-     * @throws \InvalidArgumentException
      * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
-    public function getAnimeUrl(): string
+    public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
+        return $this->crawler->filterXPath('//p[contains(@class,"title-text")]/a')->text();
     }
 
     /**
@@ -253,7 +252,7 @@ class AnimeCardParser implements ParserInterface
     public function getLicensors(): array
     {
         $licensors = $this->crawler->filterXPath('//p[contains(@class, "licensors")]');
-        
+
         if (!$licensors->count()) {
             return [];
         }

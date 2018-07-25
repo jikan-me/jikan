@@ -36,11 +36,6 @@ class CharacterListItem
      */
     private $role;
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
     /**
      * @param CharacterListItemParser $parser
      *
@@ -57,6 +52,11 @@ class CharacterListItem
         $instance->imageUrl = $parser->getImage();
 
         return $instance;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 
     /**

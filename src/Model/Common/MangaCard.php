@@ -64,7 +64,7 @@ class MangaCard
     /**
      * @var MalUrl[]
      */
-    protected $author;
+    protected $authors;
 
     /**
      * @var float|null
@@ -119,7 +119,7 @@ class MangaCard
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
         $instance->type = $parser->getType();
-        $instance->author = $parser->getAuthor();
+        $instance->authors = $parser->getAuthor();
         $instance->score = $parser->getMangaScore();
         $instance->serialization = $parser->getSerialization();
     }
@@ -207,9 +207,9 @@ class MangaCard
     /**
      * @return MalUrl[]
      */
-    public function getAuthor(): array
+    public function getAuthors(): array
     {
-        return $this->author;
+        return $this->authors;
     }
 
     /**

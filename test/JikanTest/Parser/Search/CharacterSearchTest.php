@@ -47,7 +47,7 @@ class CharacterSearchTest extends TestCase
      */
     public function it_gets_the_url()
     {
-        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->anime->getUrl());
+        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->anime->getMalUrl());
     }
 
     /**

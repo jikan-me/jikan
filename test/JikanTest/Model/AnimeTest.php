@@ -4,7 +4,7 @@
 
 namespace JikanTest\Parser\Anime;
 
-use Jikan\Jikan;
+use Jikan\MyAnimeList\MalClient;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,8 +20,8 @@ class AnimeTest extends TestCase
     public function setUp()
     {
         $request = new \Jikan\Request\Anime\AnimeRequest(21);
-        $jikan = new Jikan();
-        $this->anime = $jikan->Anime($request);
+        $jikan = new MalClient;
+        $this->anime = $jikan->getAnime($request);
     }
 
 

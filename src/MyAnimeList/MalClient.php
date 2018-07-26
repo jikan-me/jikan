@@ -262,7 +262,7 @@ class MalClient
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getCharactersAndStaff(
+    public function getAnimeCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
     ): Model\Anime\AnimeCharactersAndStaff {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
@@ -515,7 +515,7 @@ class MalClient
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getAnimeForumTopics(Request\Anime\AnimeForumRequest $request): array
+    public function getAnimeForum(Request\Anime\AnimeForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);
@@ -529,7 +529,7 @@ class MalClient
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getMangaForumTopics(Request\Manga\MangaForumRequest $request): array
+    public function getMangaForum(Request\Manga\MangaForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);

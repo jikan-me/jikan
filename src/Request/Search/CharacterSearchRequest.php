@@ -35,13 +35,15 @@ class CharacterSearchRequest implements RequestInterface
     /**
      * CharacterSearchRequest constructor.
      *
-     * @param string $query
+     * @param string|null $query
      * @param int    $page
      */
-    public function __construct(string $query, int $page = 1)
+    public function __construct(?string $query = null, int $page = 1)
     {
         $this->query = $query;
         $this->page = $page;
+
+        $this->query = $this->query ?? "";
     }
 
     /**
@@ -64,6 +66,31 @@ class CharacterSearchRequest implements RequestInterface
             'https://myanimelist.net/character.php?%s',
             $query
         );
+    }
+
+    /**
+     * @param null|string $query
+     *
+     * @return $this
+     */
+    public function setQuery(?string $query = null): self
+    {
+        $this->query = $query;
+        $this->query = $this->query ?? "";
+
+        return $this;
+    }
+
+    /**
+     * @param int $page
+     *
+     * @return $this
+     */
+    public function setPage(int $page): self
+    {
+        $this->page = $page;
+
+        return $this;
     }
 
     /**

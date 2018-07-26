@@ -84,11 +84,14 @@ class FriendParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable
      * @throws \InvalidArgumentException
      */
-    public function getLastOnline(): string
+    public function getLastOnline(): \DateTimeImmutable
     {
-        return JString::cleanse($this->crawler->filterXPath('//div[4]')->text());
+        return new \DateTimeImmutable(
+            JString::cleanse($this->crawler->filterXPath('//div[4]')->text()),
+            new \DateTimeZone('UTC')
+        );
     }
 }

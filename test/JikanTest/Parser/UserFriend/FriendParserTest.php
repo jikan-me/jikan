@@ -69,6 +69,6 @@ class FriendParserTest extends TestCase
      */
     public function it_gets_last_online()
     {
-        self::assertEquals('10 minutes ago', $this->parser->getLastOnline());
+        self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getLastOnline());
     }
 }

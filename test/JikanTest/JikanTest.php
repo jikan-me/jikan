@@ -128,7 +128,8 @@ class JikanTest extends TestCase
         $friends = $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 1));
         self::assertContainsOnlyInstancesOf(Friend::class, $friends);
         self::assertCount(100, $friends);
-        self::assertContains('Impactaction', $friends);
+        self::assertContains('Benku', $friends);
+        self::assertContains('Seiya', $friends);
 
         // Empty page
         // Second page

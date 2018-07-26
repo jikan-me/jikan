@@ -392,7 +392,7 @@ class Jikan
     /**
      * @param Request\Top\TopPeopleRequest|null $request
      *
-     * @return Model\Top\TopPeople[]
+     * @return Model\Top\TopPerson[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

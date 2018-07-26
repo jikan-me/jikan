@@ -2,7 +2,7 @@
 
 namespace Jikan\Parser\Top;
 
-use Jikan\Model\Top\TopPeople;
+use Jikan\Model\Top\TopPerson;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -29,7 +29,7 @@ class TopPeopleParser
     }
 
     /**
-     * @return TopPeople[]
+     * @return TopPerson[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -39,7 +39,7 @@ class TopPeopleParser
             ->filterXPath('//tr[@class="ranking-list"]')
             ->each(
                 function (Crawler $crawler) {
-                    return TopPeople::fromParser(new TopListItemParser($crawler));
+                    return TopPerson::fromParser(new TopListItemParser($crawler));
                 }
             );
     }

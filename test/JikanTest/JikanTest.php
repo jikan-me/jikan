@@ -8,7 +8,7 @@ use Jikan\Model\News\NewsListItem;
 use Jikan\Model\Top\TopAnime;
 use Jikan\Model\Top\TopCharacter;
 use Jikan\Model\Top\TopManga;
-use Jikan\Model\Top\TopPeople;
+use Jikan\Model\Top\TopPerson;
 use Jikan\Model\User\Friend;
 use Jikan\Request\Anime\AnimeForumRequest;
 use Jikan\Request\Manga\MangaForumRequest;
@@ -344,7 +344,7 @@ class JikanTest extends TestCase
     {
         $people = $this->jikan->TopPeople();
         self::assertCount(50, $people);
-        self::assertContainsOnlyInstancesOf(TopPeople::class, $people);
+        self::assertContainsOnlyInstancesOf(TopPerson::class, $people);
         self::assertContains('Hanazawa, Kana', $people);
         self::assertContains('Asano, Inio', $people);
     }

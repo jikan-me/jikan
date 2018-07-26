@@ -467,7 +467,7 @@ class MalClient
     /**
      * @param Request\Top\TopPeopleRequest $request
      *
-     * @return Model\Top\TopPeople[]
+     * @return Model\Top\TopPerson[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */

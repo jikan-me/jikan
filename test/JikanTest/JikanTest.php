@@ -96,7 +96,7 @@ class JikanTest extends TestCase
     public function it_gets_user_profile()
     {
         $user = $this->jikan->UserProfile(new \Jikan\Request\User\UserProfileRequest('sandshark'));
-        self::assertInstanceOf(\Jikan\Model\User\UserProfile::class, $user);
+        self::assertInstanceOf(\Jikan\Model\User\Profile::class, $user);
         self::assertInstanceOf(\Jikan\Model\User\AnimeStats::class, $user->getAnimeStats());
         self::assertInstanceOf(\Jikan\Model\User\MangaStats::class, $user->getMangaStats());
     }

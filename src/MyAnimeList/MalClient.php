@@ -137,11 +137,11 @@ class MalClient
     /**
      * @param Request\User\UserProfileRequest $request
      *
-     * @return \Jikan\Model\User\UserProfile
+     * @return \Jikan\Model\User\Profile
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
+    public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\Profile
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\User\Profile\UserProfileParser($crawler);

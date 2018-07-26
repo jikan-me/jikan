@@ -5,11 +5,11 @@ namespace Jikan\Model\User;
 use Jikan\Parser\User\Profile\UserProfileParser;
 
 /**
- * Class UserProfile
+ * Class Profile
  *
  * @package Jikan\Model
  */
-class UserProfile
+class Profile
 {
 
     /**
@@ -28,7 +28,7 @@ class UserProfile
     private $imageUrl;
 
     /**
-     * @var string
+     * @var \DateTimeImmutable
      */
     private $lastOnline;
 
@@ -75,7 +75,7 @@ class UserProfile
     /**
      * @param UserProfileParser $parser
      *
-     * @return UserProfile
+     * @return Profile
      * @throws \Exception
      * @throws \InvalidArgumentException
      */
@@ -107,9 +107,9 @@ class UserProfile
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable
      */
-    public function getLastOnline(): string
+    public function getLastOnline(): \DateTimeImmutable
     {
         return $this->lastOnline;
     }

@@ -129,11 +129,11 @@ class Jikan
     /**
      * @param Request\User\UserProfileRequest $request
      *
-     * @return \Jikan\Model\User\UserProfile
+     * @return \Jikan\Model\User\Profile
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public function UserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
+    public function UserProfile(Request\User\UserProfileRequest $request): Model\User\Profile
     {
         return $this->myanimelist->getUserProfile($request);
     }

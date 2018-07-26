@@ -385,4 +385,16 @@ class JikanTest extends TestCase
         self::assertCount(17, $history);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\User\History::class, $history);
     }
+
+    /**
+     * @test
+     * @vcr AnimeEpisodesParserTest.yaml
+     */
+    public function it_gets_anime_episodes()
+    {
+        $episodes = $this->jikan->getAnimeEpisodes(new \Jikan\Request\Anime\AnimeEpisodesRequest(21));
+        self::assertCount(100, $episodes->getEpisodes());
+        self::assertEquals(9, $episodes->getEpisodesLastPage());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Anime\EpisodeListItem::class, $episodes->getEpisodes());
+    }
 }

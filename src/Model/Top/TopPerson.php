@@ -6,11 +6,11 @@ use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopPeople
+ * Class TopPerson
  *
  * @package Jikan\Model
  */
-class TopPeople
+class TopPerson
 {
     /**
      * @var int

@@ -41,457 +41,563 @@ class Jikan
     }
 
     /**
-     * @param Request\Anime\AnimeRequest $request
+     * @param int $id
      *
      * @return \Jikan\Model\Anime\Anime
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Anime(Request\Anime\AnimeRequest $request): Model\Anime\Anime
+    public function Anime(int $id): Model\Anime\Anime
     {
-        return $this->myanimelist->getAnime($request);
+        return $this->myanimelist->getAnime(
+            new Request\Anime\AnimeRequest($id)
+        );
     }
 
     /**
-     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
+     * @param int $id
      *
      * @return \Jikan\Model\Anime\AnimeCharactersAndStaff
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeCharactersAndStaff(Request\Anime\AnimeCharactersAndStaffRequest $request
-    ): Model\Anime\AnimeCharactersAndStaff
+    public function AnimeCharactersAndStaff(int $id): Model\Anime\AnimeCharactersAndStaff
     {
-        return $this->myanimelist->getCharactersAndStaff($request);
+        return $this->myanimelist->getCharactersAndStaff(
+            new Request\Anime\AnimeCharactersAndStaffRequest($id)
+        );
     }
 
     /**
-     * @param Request\Anime\AnimeEpisodesRequest $request
+     * @param int $id
+     * @param int $page
      *
      * @return \Jikan\Model\Anime\Episodes
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Anime\Episodes
+    public function AnimeEpisodes(int $id, int $page = 1): Model\Anime\Episodes
     {
-        return $this->myanimelist->getAnimeEpisodes($request);
+        return $this->myanimelist->getAnimeEpisodes(
+            new Request\Anime\AnimeEpisodesRequest($id, $page)
+        );
     }
 
     /**
-     * @param Request\Anime\AnimeVideosRequest $request
+     * @param int $id
      *
      * @return \Jikan\Model\Anime\AnimeVideos
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\Anime\AnimeVideos
+    public function AnimeVideos(int $id): Model\Anime\AnimeVideos
     {
-        return $this->myanimelist->getAnimeVideos($request);
+        return $this->myanimelist->getAnimeVideos(
+            new Request\Anime\AnimeVideosRequest($id)
+        );
     }
 
     /**
-     * @param Request\Manga\MangaRequest $request
+     * @param int $id
+     *
+     * @return \Jikan\Model\Common\Picture[]
+     * @throws \InvalidArgumentException
+     */
+    public function AnimePictures(int $id): array
+    {
+        return $this->myanimelist->getAnimePictures(
+            new Request\Anime\AnimePicturesRequest($id)
+        );
+    }
+
+
+    /**
+     * @param int $id
+     *
+     * @return Model\News\NewsListItem[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeNews(int $id): array
+    {
+        return $this->myanimelist->getNewsList(
+            new Request\Anime\AnimeNewsRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\Forum\ForumTopic[]
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeForum(int $id): array
+    {
+        return $this->myanimelist->getAnimeForum(
+            new Request\Anime\AnimeForumRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\Anime\AnimeStats
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeStats(int $id): Model\Anime\AnimeStats
+    {
+        return $this->myanimelist->getAnimeStats(
+            new Request\Anime\AnimeStatsRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return string|null
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeMoreInfo(int $id): ?string
+    {
+        return $this->myanimelist->getAnimeMoreInfo(
+            new Request\Anime\AnimeMoreInfoRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
      *
      * @return \Jikan\Model\Manga\Manga
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Manga(Request\Manga\MangaRequest $request): Model\Manga\Manga
+    public function Manga(int $id): Model\Manga\Manga
     {
-        return $this->myanimelist->getManga($request);
+        return $this->myanimelist->getManga(
+            new Request\Manga\MangaRequest($id)
+        );
     }
 
     /**
-     * @param Request\Character\CharacterRequest $request
+     * @param int $id
+     *
+     * @return Model\Manga\CharacterListItem[]
+     * @throws \InvalidArgumentException
+     */
+    public function MangaCharacters(int $id): array
+    {
+        return $this->myanimelist->getMangaCharacters(
+            new Request\Manga\MangaCharactersRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Common\Picture[]
+     * @throws \InvalidArgumentException
+     */
+    public function MangaPictures(int $id): array
+    {
+        return $this->myanimelist->getMangaPictures(
+            new Request\Manga\MangaPicturesRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\News\NewsListItem[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function MangaNews(int $id): array
+    {
+        return $this->myanimelist->getNewsList(
+            new Request\Manga\MangaNewsRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\Forum\ForumTopic[]
+     * @throws \InvalidArgumentException
+     */
+    public function MangaForum(int $id): array
+    {
+        return $this->myanimelist->getMangaForum(
+            new Request\Manga\MangaForumRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\Manga\MangaStats
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function MangaStats(int $id): Model\Manga\MangaStats
+    {
+        return $this->myanimelist->getMangaStats(
+            new Request\Manga\MangaStatsRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return string|null
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function MangaMoreInfo(int $id): ?string
+    {
+        return $this->myanimelist->getMangaMoreInfo(
+            new Request\Manga\MangaMoreInfoRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
      *
      * @return \Jikan\Model\Character\Character
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Character(Request\Character\CharacterRequest $request): Model\Character\Character
+    public function Character(int $id): Model\Character\Character
     {
-        return $this->myanimelist->getCharacter($request);
+        return $this->myanimelist->getCharacter(
+            new Request\Character\CharacterRequest($id)
+        );
     }
 
     /**
-     * @param Request\Person\PersonRequest $request
+     * @param int $id
+     *
+     * @return \Jikan\Model\Common\Picture[]
+     * @throws \InvalidArgumentException
+     */
+    public function CharacterPictures(int $id): array
+    {
+        return $this->myanimelist->getCharacterPictures(
+            new Request\Character\CharacterPicturesRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
      *
      * @return \Jikan\Model\Person\Person
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public function Person(Request\Person\PersonRequest $request): Model\Person\Person
+    public function Person(int $id): Model\Person\Person
     {
-        return $this->myanimelist->getPerson($request);
+        return $this->myanimelist->getPerson(
+            new Request\Person\PersonRequest($id)
+        );
     }
 
     /**
-     * @param Request\User\UserProfileRequest $request
+     * @param int $id
      *
-     * @return \Jikan\Model\User\UserProfile
+     * @return \Jikan\Model\Common\Picture[]
      * @throws \InvalidArgumentException
-     * @throws \Exception
      */
-    public function UserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
+    public function PersonPictures(int $id): array
     {
-        return $this->myanimelist->getUserProfile($request);
+        return $this->myanimelist->getPersonPictures(
+            new Request\Person\PersonPicturesRequest($id)
+        );
     }
 
     /**
-     * @param Request\Seasonal\SeasonalRequest $request
+     * @param int $year
+     * @param string $season
      *
      * @return \Jikan\Model\Seasonal\Seasonal
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Seasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal\Seasonal
+    public function Seasonal(int $year, string $season): Model\Seasonal\Seasonal
     {
-        return $this->myanimelist->getSeasonal($request);
+        return $this->myanimelist->getSeasonal(
+            new Request\Seasonal\SeasonalRequest($year, $season)
+        );
     }
 
     /**
-     * @param Request\Producer\ProducerRequest $request
      *
-     * @return \Jikan\Model\Producer\Producer
+     * @return array
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Producer(Request\Producer\ProducerRequest $request): Model\Producer\Producer
+    public function SeasonList(): array
     {
-        return $this->myanimelist->getProducer($request);
+        return $this->myanimelist->getSeasonList(
+            new Request\SeasonList\SeasonListRequest()
+        );
     }
 
     /**
-     * @param Request\Magazine\MagazineRequest $request
-     *
-     * @return \Jikan\Model\Magazine\Magazine
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function Magazine(Request\Magazine\MagazineRequest $request): Model\Magazine\Magazine
-    {
-        return $this->myanimelist->getMagazine($request);
-    }
-
-
-    /**
-     * @param Request\Genre\AnimeGenreRequest $request
-     *
-     * @return \Jikan\Model\Genre\AnimeGenre
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function AnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Genre\AnimeGenre
-    {
-        return $this->myanimelist->getAnimeGenre($request);
-    }
-
-    /**
-     * @param Request\Genre\MangaGenreRequest $request
-     *
-     * @return \Jikan\Model\Genre\MangaGenre
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function MangaGenre(Request\Genre\MangaGenreRequest $request): Model\Genre\MangaGenre
-    {
-        return $this->myanimelist->getMangaGenre($request);
-    }
-
-    /**
-     * @param Request\Schedule\ScheduleRequest $request
      *
      * @return \Jikan\Model\Shedule\Schedule
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function Schedule(Request\Schedule\ScheduleRequest $request): Model\Shedule\Schedule
+    public function Schedule(): Model\Shedule\Schedule
     {
-        return $this->myanimelist->getSchedule($request);
+        return $this->myanimelist->getSchedule(
+            new Request\Schedule\ScheduleRequest()
+        );
     }
 
     /**
-     * @param Request\User\UserFriendsRequest $request
+     * @param int $id
+     * @param int $page
      *
-     * @return Model\User\Friend[]
-     * @throws \InvalidArgumentException
-     */
-    public function UserFriends(Request\User\UserFriendsRequest $request): array
-    {
-        return $this->myanimelist->getUserFriends($request);
-    }
-
-    /**
-     * @param Request\Anime\AnimePicturesRequest $request
-     *
-     * @return \Jikan\Model\Common\Picture[]
-     * @throws \InvalidArgumentException
-     */
-    public function AnimePictures(Request\Anime\AnimePicturesRequest $request): array
-    {
-        return $this->myanimelist->getAnimePictures($request);
-    }
-
-    /**
-     * @param Request\Manga\MangaPicturesRequest $request
-     *
-     * @return \Jikan\Model\Common\Picture[]
-     * @throws \InvalidArgumentException
-     */
-    public function MangaPictures(Request\Manga\MangaPicturesRequest $request): array
-    {
-        return $this->myanimelist->getMangaPictures($request);
-    }
-
-    /**
-     * @param Request\Person\PersonPicturesRequest $request
-     *
-     * @return \Jikan\Model\Common\Picture[]
-     * @throws \InvalidArgumentException
-     */
-    public function PersonPictures(Request\Person\PersonPicturesRequest $request): array
-    {
-        return $this->myanimelist->getPersonPictures($request);
-    }
-
-    /**
-     * @param Request\Character\CharacterPicturesRequest $request
-     *
-     * @return \Jikan\Model\Common\Picture[]
-     * @throws \InvalidArgumentException
-     */
-    public function CharacterPictures(Request\Character\CharacterPicturesRequest $request): array
-    {
-        return $this->myanimelist->getCharacterPictures($request);
-    }
-
-    /**
-     * @param Request\Anime\AnimeNewsRequest $request
-     *
-     * @return Model\News\NewsListItem[]
+     * @return \Jikan\Model\Producer\Producer
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeNews(Request\Anime\AnimeNewsRequest $request): array
+    public function Producer(int $id, int $page): Model\Producer\Producer
     {
-        return $this->myanimelist->getNewsList($request);
+        return $this->myanimelist->getProducer(
+            new Request\Producer\ProducerRequest($id, $page)
+        );
     }
 
     /**
-     * @param Request\Manga\MangaNewsRequest $request
+     * @param int $id
+     * @param int $page
      *
-     * @return Model\News\NewsListItem[]
+     * @return \Jikan\Model\Magazine\Magazine
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function MangaNews(Request\Manga\MangaNewsRequest $request): array
+    public function Magazine(int $id, int $page): Model\Magazine\Magazine
     {
-        return $this->myanimelist->getNewsList($request);
+        return $this->myanimelist->getMagazine(
+            new Request\Magazine\MagazineRequest($id, $page)
+        );
     }
 
     /**
-     * @param Request\Search\AnimeSearchRequest $request
+     * @param int $id
+     * @param int $page
+     *
+     * @return \Jikan\Model\Genre\AnimeGenre
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function AnimeGenre(int $id, int $page): Model\Genre\AnimeGenre
+    {
+        return $this->myanimelist->getAnimeGenre(
+            new Request\Genre\AnimeGenreRequest($id, $page)
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param int $page
+     *
+     * @return \Jikan\Model\Genre\MangaGenre
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function MangaGenre(int $id, int $page): Model\Genre\MangaGenre
+    {
+        return $this->myanimelist->getMangaGenre(
+            new Request\Genre\MangaGenreRequest($id, $page)
+        );
+    }
+
+    /**
+     * @param int $page
+     * @param string|null $type
+     *
+     * @return Model\Top\TopAnime[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function TopAnime(int $page, ?string $type = null): array
+    {
+        return $this->myanimelist->getTopAnime(
+            new Request\Top\TopAnimeRequest($page, $type)
+        );
+    }
+
+    /**
+     * @param int $page
+     * @param string|null $type
+     *
+     * @return Model\Top\TopManga[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function TopManga(int $page, ?string $type = null): array
+    {
+        return $this->myanimelist->getTopManga(
+            new Request\Top\TopMangaRequest($page, $type)
+        );
+    }
+
+    /**
+     * @param int $page
+     *
+     * @return Model\Top\TopCharacter[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function TopCharacters(int $page = 1): array
+    {
+        return $this->myanimelist->getTopCharacters(
+            new Request\Top\TopCharactersRequest($page)
+        );
+    }
+
+    /**
+     * @param int $page
+     *
+     * @return Model\Top\TopPerson[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function TopPeople(int $page = 1): array
+    {
+        return $this->myanimelist->getTopPeople(
+            new Request\Top\TopPeopleRequest($page)
+        );
+    }
+
+    /**
+     * @param string|null $query
+     * @param int $page
+     * @param null|Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function AnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
+    public function AnimeSearch(?string $query, int $page = 1, ?Request\Search\AnimeSearchRequest $request = null): Model\Search\AnimeSearch
     {
-        return $this->myanimelist->getAnimeSearch($request);
+        return $this->myanimelist->getAnimeSearch(
+            !is_null($request)
+                ? $request
+                    ->setQuery($query)
+                    ->setPage($page)
+                : new Request\Search\AnimeSearchRequest($query, $page)
+        );
     }
 
     /**
-     * @param Request\Search\MangaSearchRequest $request
+     * @param string|null $query
+     * @param int $page
+     * @param null|Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function MangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
+    public function MangaSearch(?string $query, int $page = 1, ?Request\Search\MangaSearchRequest $request = null): Model\Search\MangaSearch
     {
-        return $this->myanimelist->getMangaSearch($request);
+        return $this->myanimelist->getMangaSearch(
+            !is_null($request)
+                ? $request
+                ->setQuery($query)
+                ->setPage($page)
+                : new Request\Search\MangaSearchRequest($query, $page)
+        );
     }
 
     /**
-     * @param Request\Search\CharacterSearchRequest $request
+     * @param string|null $query
+     * @param int $page
+     * @param null|Request\Search\CharacterSearchRequest $request
      *
      * @return Model\Search\CharacterSearch
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function CharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
+    public function CharacterSearch(?string $query, int $page = 1, ?Request\Search\CharacterSearchRequest $request = null): Model\Search\CharacterSearch
     {
-        return $this->myanimelist->getCharacterSearch($request);
+        return $this->myanimelist->getCharacterSearch(
+            !is_null($request)
+                ? $request
+                ->setQuery($query)
+                ->setPage($page)
+                : new Request\Search\CharacterSearchRequest($query, $page)
+        );
     }
 
-
     /**
-     * @param Request\Search\PersonSearchRequest $request
+     * @param string|null $query
+     * @param int $page
+     * @param null|Request\Search\PersonSearchRequest $request
      *
      * @return Model\Search\PersonSearch
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function PersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
+    public function PersonSearch(?string $query, int $page = 1, ?Request\Search\CharacterSearchRequest $request = null): Model\Search\PersonSearch
     {
-        return $this->myanimelist->getPersonSearch($request);
+        return $this->myanimelist->getPersonSearch(
+            !is_null($request)
+                ? $request
+                ->setQuery($query)
+                ->setPage($page)
+                : new Request\Search\PersonSearchRequest($query, $page)
+        );
     }
 
     /**
-     * @param Request\Manga\MangaCharactersRequest $request
+     * @param string $username
      *
-     * @return Model\Manga\CharacterListItem[]
+     * @return \Jikan\Model\User\Profile
+     * @throws \InvalidArgumentException
+     * @throws \Exception
+     */
+    public function UserProfile(string $username): Model\User\Profile
+    {
+        return $this->myanimelist->getUserProfile(
+            new Request\User\UserProfileRequest($username)
+        );
+    }
+
+    /**
+     * @param string $username
+     * @param int $page
+     *
+     * @return Model\User\Friend[]
      * @throws \InvalidArgumentException
      */
-    public function MangaCharacters(Request\Manga\MangaCharactersRequest $request): array
+    public function UserFriends(string $username, int $page = 1): array
     {
-        return $this->myanimelist->getMangaCharacters($request);
+        return $this->myanimelist->getUserFriends(
+            new Request\User\UserFriendsRequest($username, $page)
+        );
     }
 
     /**
-     * @param Request\Top\TopAnimeRequest|null $request
-     *
-     * @return Model\Top\TopAnime[]
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function TopAnime(?Request\Top\TopAnimeRequest $request = null): array
-    {
-        return $this->myanimelist->getTopAnime($request ?? new Request\Top\TopAnimeRequest());
-    }
-
-    /**
-     * @param Request\Top\TopMangaRequest|null $request
-     *
-     * @return Model\Top\TopManga[]
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function TopManga(?Request\Top\TopMangaRequest $request = null): array
-    {
-        return $this->myanimelist->getTopManga($request ?? new Request\Top\TopMangaRequest());
-    }
-
-    /**
-     * @param Request\Top\TopCharactersRequest|null $request
-     *
-     * @return Model\Top\TopCharacter[]
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function TopCharacters(?Request\Top\TopCharactersRequest $request = null): array
-    {
-        return $this->myanimelist->getTopCharacters($request ?? new Request\Top\TopCharactersRequest());
-    }
-
-    /**
-     * @param Request\Top\TopPeopleRequest|null $request
-     *
-     * @return Model\Top\TopPeople[]
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function TopPeople(?Request\Top\TopPeopleRequest $request = null): array
-    {
-        return $this->myanimelist->getTopPeople($request ?? new Request\Top\TopPeopleRequest());
-    }
-
-    /**
-     * @param Request\Anime\AnimeStatsRequest $request
-     *
-     * @return Model\Anime\AnimeStats
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function AnimeStats(Request\Anime\AnimeStatsRequest $request): Model\Anime\AnimeStats
-    {
-        return $this->myanimelist->getAnimeStats($request);
-    }
-
-    /**
-     * @param Request\Manga\MangaStatsRequest $request
-     *
-     * @return Model\Manga\MangaStats
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function MangaStats(Request\Manga\MangaStatsRequest $request): Model\Manga\MangaStats
-    {
-        return $this->myanimelist->getMangaStats($request);
-    }
-
-    /**
-     * @param Request\Anime\AnimeForumRequest $request
-     *
-     * @return Model\Forum\ForumTopic[]
-     * @throws \InvalidArgumentException
-     */
-    public function AnimeForum(Request\Anime\AnimeForumRequest $request): array
-    {
-        return $this->myanimelist->getAnimeForumTopics($request);
-    }
-
-    /**
-     * @param Request\Manga\MangaForumRequest $request
-     *
-     * @return Model\Forum\ForumTopic[]
-     * @throws \InvalidArgumentException
-     */
-    public function MangaForum(Request\Manga\MangaForumRequest $request): array
-    {
-        return $this->myanimelist->getMangaForumTopics($request);
-    }
-
-    /**
-     * @param Request\Anime\AnimeMoreInfoRequest $request
-     *
-     * @return string|null
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function AnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): ?string
-    {
-        return $this->myanimelist->getAnimeMoreInfo($request);
-    }
-
-    /**
-     * @param Request\Manga\MangaMoreInfoRequest $request
-     *
-     * @return string|null
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function MangaMoreInfo(Request\Manga\MangaMoreInfoRequest $request): ?string
-    {
-        return $this->myanimelist->getMangaMoreInfo($request);
-    }
-
-    /**
-     * @param Request\SeasonList\SeasonListRequest $request
-     *
-     * @return array
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function SeasonList(Request\SeasonList\SeasonListRequest $request): array
-    {
-        return $this->myanimelist->getSeasonList($request);
-    }
-
-    /**
-     * @param Request\User\UserHistoryRequest $request
+     * @param string $username
+     * @param null|string $type
      *
      * @return array
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public function UserHistory(Request\User\UserHistoryRequest $request): array
+    public function UserHistory(string $username, ?string $type = null): array
     {
-        return $this->myanimelist->getUserHistory($request);
+        return $this->myanimelist->getUserHistory(
+            new Request\User\UserHistoryRequest($username, $type)
+        );
     }
 }

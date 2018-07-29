@@ -137,11 +137,11 @@ class MalClient
     /**
      * @param Request\User\UserProfileRequest $request
      *
-     * @return \Jikan\Model\User\UserProfile
+     * @return \Jikan\Model\User\Profile
      * @throws \InvalidArgumentException
      * @throws \Exception
      */
-    public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\UserProfile
+    public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\Profile
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\User\Profile\UserProfileParser($crawler);
@@ -262,7 +262,7 @@ class MalClient
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getCharactersAndStaff(
+    public function getAnimeCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
     ): Model\Anime\AnimeCharactersAndStaff {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
@@ -467,7 +467,7 @@ class MalClient
     /**
      * @param Request\Top\TopPeopleRequest $request
      *
-     * @return Model\Top\TopPeople[]
+     * @return Model\Top\TopPerson[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -515,7 +515,7 @@ class MalClient
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getAnimeForumTopics(Request\Anime\AnimeForumRequest $request): array
+    public function getAnimeForum(Request\Anime\AnimeForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);
@@ -529,7 +529,7 @@ class MalClient
      * @return Model\Forum\ForumTopic[]
      * @throws \InvalidArgumentException
      */
-    public function getMangaForumTopics(Request\Manga\MangaForumRequest $request): array
+    public function getMangaForum(Request\Manga\MangaForumRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         $parser = new Parser\Forum\ForumPageParser($crawler);

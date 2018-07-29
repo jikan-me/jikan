@@ -2,8 +2,8 @@
 
 namespace JikanTest\Parser\Search;
 
+use Jikan\MyAnimeList\MalClient;
 use PHPUnit\Framework\TestCase;
-use Jikan\Jikan;
 
 /**
  * Class PersonSearchTest
@@ -16,8 +16,8 @@ class PersonSearchTest extends TestCase
 
     public function setUp()
     {
-        $jikan = new Jikan;
-        $this->search = $jikan->PersonSearch(
+        $jikan = new MalClient;
+        $this->search = $jikan->getPersonSearch(
             new \Jikan\Request\Search\PersonSearchRequest('Ara')
         );
         $this->person = $this->search->getResults()[0];

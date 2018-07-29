@@ -14,7 +14,7 @@ class AnimeSearchRequest implements RequestInterface
 {
 
     /**
-     * @var string
+     * @var string|null
      */
     private $query;
 
@@ -80,13 +80,15 @@ class AnimeSearchRequest implements RequestInterface
     /**
      * AnimeSearchRequest constructor.
      *
-     * @param string $query
+     * @param string|null $query
      * @param int    $page
      */
-    public function __construct(string $query, int $page = 1)
+    public function __construct(?string $query = null, int $page = 1)
     {
         $this->query = $query;
         $this->page = $page;
+
+        $this->query = $this->query ?? "";
     }
 
     /**
@@ -128,6 +130,31 @@ class AnimeSearchRequest implements RequestInterface
             'https://myanimelist.net/anime.php?%s&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g',
             $query
         );
+    }
+
+    /**
+     * @param null|string $query
+     *
+     * @return $this
+     */
+    public function setQuery(?string $query = null): self
+    {
+        $this->query = $query;
+        $this->query = $this->query ?? "";
+
+        return $this;
+    }
+
+    /**
+     * @param int $page
+     *
+     * @return $this
+     */
+    public function setPage(int $page): self
+    {
+        $this->page = $page;
+
+        return $this;
     }
 
     /**

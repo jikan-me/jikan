@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace JikanTest\Parser\Anime;
 
 use PHPUnit\Framework\TestCase;
 

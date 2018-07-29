@@ -37,9 +37,9 @@ class UserProfileParser
      * @throws \Exception
      * @throws \Exception
      */
-    public function getModel(): Model\User\UserProfile
+    public function getModel(): Model\User\Profile
     {
-        return Model\User\UserProfile::fromParser($this);
+        return Model\User\Profile::fromParser($this);
     }
 
     /**
@@ -86,12 +86,15 @@ class UserProfileParser
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable
      * @throws \InvalidArgumentException
      */
-    public function getLastOnline(): string
+    public function getLastOnline(): \DateTimeImmutable
     {
-        return $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')->text();
+        return new \DateTimeImmutable(
+            $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')->text(),
+            new \DateTimeZone("UTC")
+        );
     }
 
     /**

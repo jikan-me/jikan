@@ -25,9 +25,9 @@ class UserFriendsRequest implements RequestInterface
      * UserProfileRequest constructor.
      *
      * @param string $username
-     * @param int    $page starts at 0
+     * @param int    $page starts at 1
      */
-    public function __construct(string $username, int $page = 0)
+    public function __construct(string $username, int $page = 1)
     {
         $this->username = $username;
         $this->page = $page;
@@ -40,7 +40,7 @@ class UserFriendsRequest implements RequestInterface
     {
         $query = '';
         if ($this->page) {
-            $query = '?'.http_build_query(['offset' => $this->page * 100]);
+            $query = '?'.http_build_query(['offset' => ($this->page - 1) * 100]);
         }
 
         return sprintf('https://myanimelist.net/profile/%s/friends%s', $this->username, $query);

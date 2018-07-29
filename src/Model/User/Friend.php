@@ -28,7 +28,7 @@ class Friend
 
 
     /**
-     * @var string
+     * @var \DateTimeImmutable
      */
     private $lastOnline;
 
@@ -88,9 +88,9 @@ class Friend
     }
 
     /**
-     * @return string
+     * @return \DateTimeImmutable
      */
-    public function getLastOnline(): string
+    public function getLastOnline(): \DateTimeImmutable
     {
         return $this->lastOnline;
     }

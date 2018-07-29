@@ -15,7 +15,6 @@ use Jikan\Request\Manga\MangaForumRequest;
 use Jikan\Request\Anime\AnimeNewsRequest;
 use Jikan\Request\Manga\MangaNewsRequest;
 use PHPUnit\Framework\TestCase;
-use VCR\VCR;
 
 /**
  * Class JikanTest

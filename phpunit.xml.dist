@@ -7,4 +7,10 @@
             <directory>./test/JikanTest</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">/path/to/files</directory>
+            <file>src</file>
+        </whitelist>
+    </filter>
 </phpunit>

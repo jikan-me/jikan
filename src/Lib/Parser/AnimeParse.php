@@ -84,6 +84,13 @@ class AnimeParse extends TemplateParse
             '~<span class="dark_text">Type:</span>~',
             function () {
                 preg_match('~<a href="(.*?)">(.*?)</a>~', $this->file[$this->lineNo + 1], $this->matches);
+
+                if (empty($this->matches)) {
+                    $type = trim(str_replace("</div>", "", $this->file[$this->lineNo + 1]));
+                    $this->model->set('Anime', 'type', $type);
+                    return;
+                }
+                
                 $this->model->set('Anime', 'type', $this->matches[2]);
             }
         );

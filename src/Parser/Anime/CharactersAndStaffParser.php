@@ -72,6 +72,13 @@ class CharactersAndStaffParser implements ParserInterface
     {
         return $this->crawler
             ->filterXPath('//h2/div/../following-sibling::table')
+            ->reduce(
+                function (Crawler $crawler) {
+                    return !(bool)$crawler->filterXPath(
+                        '//a[contains(@href, "https://myanimelist.net/character")]'
+                    )->count();
+                }
+            )
             ->each(
                 function (Crawler $crawler) {
                     return (new StaffListItemParser($crawler))->getModel();

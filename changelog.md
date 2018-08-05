@@ -1,5 +1,29 @@
 ## Changelog
 
+### 2.0.0-rc.1 - Aug 5, 18
+- Complete refactor using better dependencies
+    - Parser is more robust and stable
+    - Library now implements PSR2
+- Clean data values
+- Added **Top**
+    - Characters
+    - People
+- Added **Genre**
+    - Anime listing by genre
+    - Manga listing by genre
+- Added **Producers**
+    - Anime listing by producer
+- Added **Magazine**
+    - Manga listing by magazine
+- Added **User**
+    - Profile
+    - History
+    - Friends
+- Complete syntax revamp
+- And a whole lot more!
+
+**You'll have to visit the NEW documentation for v2+ for usage**
+
 ### 1.15.14 stable - May 26, 18
 - **[Anime, Manga, Extended]**
 	- Fix Some parsing methods were not parsing correctly [#148](/../../issues/148)

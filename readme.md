@@ -71,10 +71,37 @@ There's a REST service available, as well as a few wrappers built around it.
 - User
     - Profile
     - Friends
+        - Pagination support
     - History
+        - All
+        - Anime
+        - Manga
 
 ## Changelog
 
+### 2.0.0-rc.1 - Aug 5, 18
+- Complete refactor using better dependencies
+    - Parser is more robust and stable
+    - Library now implements PSR2
+- Clean data values
+- Added **Top**
+    - Characters
+    - People
+- Added **Genre**
+    - Anime listing by genre
+    - Manga listing by genre
+- Added **Producers**
+    - Anime listing by producer
+- Added **Magazine**
+    - Manga listing by magazine
+- Added **User**
+    - Profile
+    - History
+    - Friends
+- Complete syntax revamp
+- And a whole lot more!
+
+**You'll have to visit the NEW documentation for v2+ for usage**
 
 ## Dependencies
 - [Goutte](https://github.com/FriendsOfPHP/Goutte)

@@ -31,9 +31,7 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Seasonal\SeasonalAnime
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @return Model\Common\AnimeCard
      */
     public function getModel(): Model\Common\AnimeCard
     {

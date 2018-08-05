@@ -518,12 +518,11 @@ class Jikan
     }
 
     /**
-     * @param string|null                             $query
-     * @param int                                     $page
-     * @param null|Request\Search\PersonSearchRequest $request
+     * @param string|null                                                                   $query
+     * @param int                                                                           $page
+     * @param Request\Search\CharacterSearchRequest|Request\Search\PersonSearchRequest|null $request
      *
      * @return Model\Search\PersonSearch
-     * @throws ParserException
      */
     public function PersonSearch(
         ?string $query,

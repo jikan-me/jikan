@@ -26,6 +26,9 @@ class DateRange
         $this->aired = $aired;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->aired;

@@ -258,9 +258,9 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int ...$genre
+     * @param array|int ...$genre
      *
-     * @return $this
+     * @return AnimeSearchRequest
      */
     public function setGenre(...$genre): self
     {

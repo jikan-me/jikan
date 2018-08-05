@@ -93,7 +93,7 @@ class UserProfileParser
     {
         return new \DateTimeImmutable(
             $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')->text(),
-            new \DateTimeZone("UTC")
+            new \DateTimeZone('UTC')
         );
     }
 

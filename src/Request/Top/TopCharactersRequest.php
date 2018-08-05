@@ -4,6 +4,11 @@ namespace Jikan\Request\Top;
 
 use Jikan\Request\RequestInterface;
 
+/**
+ * Class TopCharactersRequest
+ *
+ * @package Jikan\Request\Top
+ */
 class TopCharactersRequest implements RequestInterface
 {
     /**

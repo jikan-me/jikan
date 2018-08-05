@@ -3,6 +3,11 @@
 
 namespace Jikan\Model\Forum;
 
+/**
+ * Class ForumPost
+ *
+ * @package Jikan\Model\Forum
+ */
 class ForumPost
 {
     /**

@@ -5,6 +5,11 @@ namespace Jikan\Request\Top;
 use Jikan\Helper\Constants;
 use Jikan\Request\RequestInterface;
 
+/**
+ * Class TopAnimeRequest
+ *
+ * @package Jikan\Request\Top
+ */
 class TopAnimeRequest implements RequestInterface
 {
     /**

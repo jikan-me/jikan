@@ -240,9 +240,9 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int ...$genre
+     * @param array|int ...$genre
      *
-     * @return $this
+     * @return MangaSearchRequest
      */
     public function setGenre(...$genre): self
     {

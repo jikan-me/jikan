@@ -82,6 +82,9 @@ class TopManga
         return $instance;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->malUrl->getName();

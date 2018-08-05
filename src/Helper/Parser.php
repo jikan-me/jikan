@@ -51,6 +51,11 @@ class Parser
         return (int)preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
     }
 
+    /**
+     * @param string $date
+     *
+     * @return \DateTimeImmutable|null
+     */
     public static function parseForumDate(string $date): ?\DateTimeImmutable
     {
         if (!preg_match('/\d{4}/', $date)) {

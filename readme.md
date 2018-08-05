@@ -12,7 +12,7 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 ## Getting Started
 1. `composer require jikan-me/jikan`
-2. [Documentation](https://docs.jikan.moe)
+2. [Documentation](http://docs.jikan.moe)
 
 ## Jikan REST API
 There's a REST service available, as well as a few wrappers built around it.

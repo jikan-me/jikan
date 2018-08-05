@@ -1,0 +1,20 @@
+parameters:
+    git_dir: .
+    bin_dir: ./vendor/bin
+    process_timeout: 180
+    tasks:
+        phpcs:
+            standard: 'PSR2'
+            ignore_patterns:
+                - 'test/*.php'
+                - 'src/Jikan.php'
+        git_blacklist:
+            keywords:
+                - 'var_dump'
+                - 'exit'
+                - 'else'
+                - 'ini_set'
+                - 'error_reporting'
+                - 'die'
+        phpunit: ~
+        phplint: ~

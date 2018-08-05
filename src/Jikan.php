@@ -1,128 +1,581 @@
 <?php
 /**
-*	Jikan - MyAnimeList Unofficial API
-*	Developed by Irfan | irfan.dahir.co
-*	
-*	This is an unofficial MAL API that provides the features that the official one lacks.
-*	Jikan scraps web pages through a modular method, parses the data you require from MAL and returns it back as a PHP/JSON array/object.
-*   Jikan parses the data MAL web pages and returns it as a PHP Array
-*	No authentication is needed for utilizing this library.
-*
-*	Jikan is NOT affiliated with MyAnimeList.
-*   This library does not perform any rate limitations, so use it responsibly.
-*/
+ *    Jikan - MyAnimeList.net Unofficial API v2
+ *
+ *    This is an unofficial MAL API that stands in for the lackluster features of the official API.
+ *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.
+ *
+ *    Jikan is NOT affiliated with MyAnimeList.net
+ *    This library does not perform any rate limitations, so use it responsibly.
+ */
 
 namespace Jikan;
 
-require __DIR__ . '/config.php'; 
+use GuzzleHttp\Client as GuzzleClient;
+use Jikan\Exception\ParserException;
+use Jikan\Model;
+use Jikan\MyAnimeList\MalClient;
+use Jikan\Request;
 
-
-use Jikan\Helper\SearchConfig as SearchConfig;
-
+/**
+ * Class Jikan
+ *
+ * @package Jikan
+ */
 class Jikan
 {
-
-    public $status = 200;
-    public $response = [];
-
-	public function __construct() {
-		return $this;
-	}
-
-    private function setStatus() {
-        $this->status = $this->response['code'];
-        unset($this->response['code']);
-    }
-
-	/*
-	 * Anime
-	 */
-	public function Anime($id = null, Array $extend = []) {
-	    $this->response = (array) (new Get\Anime($id, $extend))->response;
-        $this->setStatus();
-
-	    return $this;
-    }
-
-    /*
-     * Manga
+    /**
+     * @var MalClient
      */
-    public function Manga($id = null, Array $extend = []) {
-        $this->response = (array) (new Get\Manga($id, $extend))->response;
-        $this->setStatus();
+    private $myanimelist;
 
-        return $this;
+    /**
+     * Jikan constructor.
+     *
+     * @param GuzzleClient|null $guzzle
+     *
+     * @throws ParserException
+     */
+    public function __construct(GuzzleClient $guzzle = null)
+    {
+        $this->myanimelist = new MalClient($guzzle);
     }
 
-    /*
-     * Character
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Anime\Anime
+     * @throws ParserException
      */
-    public function Character($id = null, Array $extend = []) {
-        $this->response = (array) (new Get\Character($id, $extend))->response;
-        $this->setStatus();
-
-        return $this;
+    public function Anime(int $id): Model\Anime\Anime
+    {
+        return $this->myanimelist->getAnime(
+            new Request\Anime\AnimeRequest($id)
+        );
     }
 
-    /*
-     * Person
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Anime\AnimeCharactersAndStaff
+     * @throws ParserException
      */
-    public function Person($id = null, Array $extend = []) {
-        $this->response = (array) (new Get\Person($id, $extend))->response;
-        $this->setStatus();
-
-        return $this;
+    public function AnimeCharactersAndStaff(int $id): Model\Anime\AnimeCharactersAndStaff
+    {
+        return $this->myanimelist->getAnimeCharactersAndStaff(
+            new Request\Anime\AnimeCharactersAndStaffRequest($id)
+        );
     }
 
-    /*
-     * Search
+    /**
+     * @param int $id
+     * @param int $page
+     *
+     * @return \Jikan\Model\Anime\Episodes
+     * @throws ParserException
      */
-    public function Search(string $query = null, string $type = ANIME, int $page = 1, SearchConfig $config = null) {
-        $this->response = (array) (new Get\Search($query, $type, $page, $config))->response;
-        $this->setStatus();
-
-        return $this;
+    public function AnimeEpisodes(int $id, int $page = 1): Model\Anime\Episodes
+    {
+        return $this->myanimelist->getAnimeEpisodes(
+            new Request\Anime\AnimeEpisodesRequest($id, $page)
+        );
     }
 
-    /*
-     * Seasonal Anime
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Anime\AnimeVideos
+     * @throws ParserException
      */
-    public function Seasonal(string $season = null, int $year = null) {
-        $this->response = (array) (new Get\Seasonal($season, $year))->response;
-        $this->setStatus();
-
-        return $this;
+    public function AnimeVideos(int $id): Model\Anime\AnimeVideos
+    {
+        return $this->myanimelist->getAnimeVideos(
+            new Request\Anime\AnimeVideosRequest($id)
+        );
     }
 
-    /*
-     * Anime Schedule For Current Season
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Common\Picture[]
+     * @throws ParserException
      */
-    public function Schedule() {
-        $this->response = (array) (new Get\Schedule())->response;
-        $this->setStatus();
-
-        return $this;
+    public function AnimePictures(int $id): array
+    {
+        return $this->myanimelist->getAnimePictures(
+            new Request\Anime\AnimePicturesRequest($id)
+        );
     }
 
-    /*
-     * Top Anime/Manga
-     */
-    public function Top(string $type, int $page, string $subtype = null) {
-        $this->response = (array) (new Get\Top($type, $page, $subtype))->response;
-        $this->setStatus();
 
-        return $this;
+    /**
+     * @param int $id
+     *
+     * @return Model\News\NewsListItem[]
+     * @throws ParserException
+     */
+    public function AnimeNews(int $id): array
+    {
+        return $this->myanimelist->getNewsList(
+            new Request\Anime\AnimeNewsRequest($id)
+        );
     }
 
-    /*
-     * User List
-     * 
+    /**
+     * @param int $id
+     *
+     * @return Model\Forum\ForumTopic[]
+     * @throws ParserException
      */
-/*    public function UserList(string $username, string $type, int $status = null) {
-        $this->response = (array) (new Get\User($username, $type, $status))->response;
-        $this->setStatus();
+    public function AnimeForum(int $id): array
+    {
+        return $this->myanimelist->getAnimeForum(
+            new Request\Anime\AnimeForumRequest($id)
+        );
+    }
 
-        return $this;
-    }*/
+    /**
+     * @param int $id
+     *
+     * @return Model\Anime\AnimeStats
+     * @throws ParserException
+     */
+    public function AnimeStats(int $id): Model\Anime\AnimeStats
+    {
+        return $this->myanimelist->getAnimeStats(
+            new Request\Anime\AnimeStatsRequest($id)
+        );
+    }
 
+    /**
+     * @param int $id
+     *
+     * @return string|null
+     * @throws ParserException
+     */
+    public function AnimeMoreInfo(int $id): ?string
+    {
+        return $this->myanimelist->getAnimeMoreInfo(
+            new Request\Anime\AnimeMoreInfoRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Manga\Manga
+     * @throws ParserException
+     */
+    public function Manga(int $id): Model\Manga\Manga
+    {
+        return $this->myanimelist->getManga(
+            new Request\Manga\MangaRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\Manga\CharacterListItem[]
+     * @throws ParserException
+     */
+    public function MangaCharacters(int $id): array
+    {
+        return $this->myanimelist->getMangaCharacters(
+            new Request\Manga\MangaCharactersRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Common\Picture[]
+     * @throws ParserException
+     */
+    public function MangaPictures(int $id): array
+    {
+        return $this->myanimelist->getMangaPictures(
+            new Request\Manga\MangaPicturesRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\News\NewsListItem[]
+     * @throws ParserException
+     */
+    public function MangaNews(int $id): array
+    {
+        return $this->myanimelist->getNewsList(
+            new Request\Manga\MangaNewsRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\Forum\ForumTopic[]
+     * @throws ParserException
+     */
+    public function MangaForum(int $id): array
+    {
+        return $this->myanimelist->getMangaForum(
+            new Request\Manga\MangaForumRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Model\Manga\MangaStats
+     * @throws ParserException
+     */
+    public function MangaStats(int $id): Model\Manga\MangaStats
+    {
+        return $this->myanimelist->getMangaStats(
+            new Request\Manga\MangaStatsRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return string|null
+     * @throws ParserException
+     */
+    public function MangaMoreInfo(int $id): ?string
+    {
+        return $this->myanimelist->getMangaMoreInfo(
+            new Request\Manga\MangaMoreInfoRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Character\Character
+     * @throws ParserException
+     */
+    public function Character(int $id): Model\Character\Character
+    {
+        return $this->myanimelist->getCharacter(
+            new Request\Character\CharacterRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Common\Picture[]
+     * @throws ParserException
+     */
+    public function CharacterPictures(int $id): array
+    {
+        return $this->myanimelist->getCharacterPictures(
+            new Request\Character\CharacterPicturesRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Person\Person
+     * @throws ParserException
+     */
+    public function Person(int $id): Model\Person\Person
+    {
+        return $this->myanimelist->getPerson(
+            new Request\Person\PersonRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return \Jikan\Model\Common\Picture[]
+     * @throws ParserException
+     */
+    public function PersonPictures(int $id): array
+    {
+        return $this->myanimelist->getPersonPictures(
+            new Request\Person\PersonPicturesRequest($id)
+        );
+    }
+
+    /**
+     * @param int    $year
+     * @param string $season
+     *
+     * @return \Jikan\Model\Seasonal\Seasonal
+     * @throws ParserException
+     */
+    public function Seasonal(int $year, string $season): Model\Seasonal\Seasonal
+    {
+        return $this->myanimelist->getSeasonal(
+            new Request\Seasonal\SeasonalRequest($year, $season)
+        );
+    }
+
+    /**
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function SeasonList(): array
+    {
+        return $this->myanimelist->getSeasonList(
+            new Request\SeasonList\SeasonListRequest()
+        );
+    }
+
+    /**
+     *
+     * @return \Jikan\Model\Shedule\Schedule
+     * @throws ParserException
+     */
+    public function Schedule(): Model\Shedule\Schedule
+    {
+        return $this->myanimelist->getSchedule(
+            new Request\Schedule\ScheduleRequest()
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param int $page
+     *
+     * @return \Jikan\Model\Producer\Producer
+     * @throws ParserException
+     */
+    public function Producer(int $id, int $page): Model\Producer\Producer
+    {
+        return $this->myanimelist->getProducer(
+            new Request\Producer\ProducerRequest($id, $page)
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param int $page
+     *
+     * @return \Jikan\Model\Magazine\Magazine
+     * @throws ParserException
+     */
+    public function Magazine(int $id, int $page): Model\Magazine\Magazine
+    {
+        return $this->myanimelist->getMagazine(
+            new Request\Magazine\MagazineRequest($id, $page)
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param int $page
+     *
+     * @return \Jikan\Model\Genre\AnimeGenre
+     * @throws ParserException
+     */
+    public function AnimeGenre(int $id, int $page): Model\Genre\AnimeGenre
+    {
+        return $this->myanimelist->getAnimeGenre(
+            new Request\Genre\AnimeGenreRequest($id, $page)
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param int $page
+     *
+     * @return \Jikan\Model\Genre\MangaGenre
+     * @throws ParserException
+     */
+    public function MangaGenre(int $id, int $page): Model\Genre\MangaGenre
+    {
+        return $this->myanimelist->getMangaGenre(
+            new Request\Genre\MangaGenreRequest($id, $page)
+        );
+    }
+
+    /**
+     * @param int         $page
+     * @param string|null $type
+     *
+     * @return Model\Top\TopAnime[]
+     * @throws ParserException
+     */
+    public function TopAnime(int $page, ?string $type = null): array
+    {
+        return $this->myanimelist->getTopAnime(
+            new Request\Top\TopAnimeRequest($page, $type)
+        );
+    }
+
+    /**
+     * @param int         $page
+     * @param string|null $type
+     *
+     * @return Model\Top\TopManga[]
+     * @throws ParserException
+     */
+    public function TopManga(int $page, ?string $type = null): array
+    {
+        return $this->myanimelist->getTopManga(
+            new Request\Top\TopMangaRequest($page, $type)
+        );
+    }
+
+    /**
+     * @param int $page
+     *
+     * @return Model\Top\TopCharacter[]
+     * @throws ParserException
+     */
+    public function TopCharacters(int $page = 1): array
+    {
+        return $this->myanimelist->getTopCharacters(
+            new Request\Top\TopCharactersRequest($page)
+        );
+    }
+
+    /**
+     * @param int $page
+     *
+     * @return Model\Top\TopPerson[]
+     * @throws ParserException
+     */
+    public function TopPeople(int $page = 1): array
+    {
+        return $this->myanimelist->getTopPeople(
+            new Request\Top\TopPeopleRequest($page)
+        );
+    }
+
+    /**
+     * @param string|null                            $query
+     * @param int                                    $page
+     * @param null|Request\Search\AnimeSearchRequest $request
+     *
+     * @return Model\Search\AnimeSearch
+     * @throws ParserException
+     */
+    public function AnimeSearch(
+        ?string $query,
+        int $page = 1,
+        ?Request\Search\AnimeSearchRequest $request = null
+    ): Model\Search\AnimeSearch {
+        return $this->myanimelist->getAnimeSearch(
+            null !== $request
+                ? $request
+                ->setQuery($query)
+                ->setPage($page)
+                : new Request\Search\AnimeSearchRequest($query, $page)
+        );
+    }
+
+    /**
+     * @param string|null                            $query
+     * @param int                                    $page
+     * @param null|Request\Search\MangaSearchRequest $request
+     *
+     * @return Model\Search\MangaSearch
+     * @throws ParserException
+     */
+    public function MangaSearch(
+        ?string $query,
+        int $page = 1,
+        ?Request\Search\MangaSearchRequest $request = null
+    ): Model\Search\MangaSearch {
+        return $this->myanimelist->getMangaSearch(
+            null !== $request
+                ? $request
+                ->setQuery($query)
+                ->setPage($page)
+                : new Request\Search\MangaSearchRequest($query, $page)
+        );
+    }
+
+    /**
+     * @param string|null                                $query
+     * @param int                                        $page
+     * @param null|Request\Search\CharacterSearchRequest $request
+     *
+     * @return Model\Search\CharacterSearch
+     * @throws ParserException
+     */
+    public function CharacterSearch(
+        ?string $query,
+        int $page = 1,
+        ?Request\Search\CharacterSearchRequest $request = null
+    ): Model\Search\CharacterSearch {
+        return $this->myanimelist->getCharacterSearch(
+            null !== $request
+                ? $request
+                ->setQuery($query)
+                ->setPage($page)
+                : new Request\Search\CharacterSearchRequest($query, $page)
+        );
+    }
+
+    /**
+     * @param string|null                                                                   $query
+     * @param int                                                                           $page
+     * @param Request\Search\CharacterSearchRequest|Request\Search\PersonSearchRequest|null $request
+     *
+     * @return Model\Search\PersonSearch
+     */
+    public function PersonSearch(
+        ?string $query,
+        int $page = 1,
+        ?Request\Search\CharacterSearchRequest $request = null
+    ): Model\Search\PersonSearch {
+        return $this->myanimelist->getPersonSearch(
+            null !== $request
+                ? $request
+                ->setQuery($query)
+                ->setPage($page)
+                : new Request\Search\PersonSearchRequest($query, $page)
+        );
+    }
+
+    /**
+     * @param string $username
+     *
+     * @return \Jikan\Model\User\Profile
+     * @throws ParserException
+     */
+    public function UserProfile(string $username): Model\User\Profile
+    {
+        return $this->myanimelist->getUserProfile(
+            new Request\User\UserProfileRequest($username)
+        );
+    }
+
+    /**
+     * @param string $username
+     * @param int    $page
+     *
+     * @return Model\User\Friend[]
+     * @throws ParserException
+     */
+    public function UserFriends(string $username, int $page = 1): array
+    {
+        return $this->myanimelist->getUserFriends(
+            new Request\User\UserFriendsRequest($username, $page)
+        );
+    }
+
+    /**
+     * @param string      $username
+     * @param null|string $type
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function UserHistory(string $username, ?string $type = null): array
+    {
+        return $this->myanimelist->getUserHistory(
+            new Request\User\UserHistoryRequest($username, $type)
+        );
+    }
 }

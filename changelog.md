@@ -5,6 +5,7 @@
     - Parser is more robust and stable
     - Library now implements PSR2
 - Clean data values
+- Added **Season List**
 - Added **Top**
     - Characters
     - People

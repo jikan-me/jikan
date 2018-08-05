@@ -56,6 +56,7 @@ There's a REST service available, as well as a few wrappers built around it.
     - Pagination Support
     - Advanced Search (Filters)
 - Seasonal Anime (Season + Year)
+- Season List
 - Anime Scheduling (for current season)
 - Top
     - Anime
@@ -84,6 +85,7 @@ There's a REST service available, as well as a few wrappers built around it.
     - Parser is more robust and stable
     - Library now implements PSR2
 - Clean data values
+- Added **Season List**
 - Added **Top**
     - Characters
     - People

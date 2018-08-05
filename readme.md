@@ -66,6 +66,7 @@ There's a REST service available, as well as a few wrappers built around it.
 
 ## Dependencies
 - [Goutte](https://github.com/FriendsOfPHP/Goutte)
+- PHP ^7.1
 
 ## DISCLAIMER
 - Jikan is not affiliated with MyAnimeList.net 

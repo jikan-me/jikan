@@ -14,6 +14,8 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 1. `composer require jikan-me/jikan`
 2. [Documentation](http://docs.jikan.moe)
 
+:exclamation: If you are using `dev-master` and are not ready for v2 yet, require version `~1.0` until you are.
+
 ## Jikan REST API
 There's a REST service available, as well as a few wrappers built around it.
 

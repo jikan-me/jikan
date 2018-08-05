@@ -10,19 +10,18 @@ The raison d'être of Jikan is to help developers easily get the data they need 
 
 The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And that's what this API saves you of. ;)
 
-### Getting Started
+## Getting Started
 1. `composer require jikan-me/jikan`
 2. [Documentation](https://docs.jikan.moe)
 
 ## Jikan REST API
-If you don't want to handle PHP, you're in luck! Jikan has it's own RESTful API service (CORS enabled + JSON response) hosted by 
 There's a REST service available, as well as a few wrappers built around it.
 
 - **[REST DOCUMENTATION](https://jikan.docs.apiary.io)**
 - **[See which apps are using JikanREST](https://jikan.moe/showcase)**
 - **[Want to host your own instance of Jikan REST?](https://github.com/jikan-me/jikan-rest)**
 
-## Wrappers
+### Wrappers
 - **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant & Abhinav Kasamsetty
 - **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
@@ -49,17 +48,30 @@ There's a REST service available, as well as a few wrappers built around it.
     - Pictures
 - People Parsing
     - Pictures
-- Search (Anime/Manga/Character/Person)
-    - Filters (Advanced Search)
+- Search
+    - Anime
+    - Manga
+    - Character
+    - Person
     - Pagination Support
-    - No.# of pages
+    - Advanced Search (Filters)
 - Seasonal Anime (Season + Year)
 - Anime Scheduling (for current season)
 - Top
     - Anime
     - Manga
+    - Characters
+    - People
     - Sub Types & Pagination Support
-
+- Genre
+    - Anime
+    - Manga
+- Producers (Anime Listing)
+- Magazines (Manga Listing)
+- User
+    - Profile
+    - Friends
+    - History
 
 ## Changelog
 

@@ -16,7 +16,7 @@ class SeasonListItemParserTest extends TestCase
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/season/archive');
         $this->parser = new SeasonListItemParser(
-            $crawler->filterXPath('//table[contains(@class, "anime-seasonal-byseason")]/tr')->eq(1)
+            $crawler->filterXPath('//table[contains(@class, "anime-seasonal-byseason")]/tr')->first()
         );
     }
 
@@ -27,7 +27,7 @@ class SeasonListItemParserTest extends TestCase
      */
     public function it_gets_the_year(): void
     {
-        self::assertEquals(2018, $this->parser->getYear());
+        self::assertEquals(date('Y', strtotime('+1 year')), $this->parser->getYear());
     }
 
     /**

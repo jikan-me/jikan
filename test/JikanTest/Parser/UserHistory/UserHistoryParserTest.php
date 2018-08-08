@@ -10,10 +10,13 @@ use PHPUnit\Framework\TestCase;
 class HistoryParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\User\History\HistoryParser
+     * @var \Jikan\Model\User\History[]
      */
     private $parser;
 
+    /**
+     * @throws \Exception
+     */
     public function setUp()
     {
         $client = new \Goutte\Client();
@@ -27,8 +30,8 @@ class HistoryParserTest extends TestCase
      */
     public function it_gets_the_url()
     {
-        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->parser[0]->getUrl());
-        self::assertEquals('Imouto sae Ireba Ii.', $this->parser[0]->getUrl()->getTitle());
+        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->parser[0]->getMalUrl());
+        self::assertInternalType('string', $this->parser[0]->getMalUrl()->getTitle());
     }
 
     /**
@@ -37,7 +40,7 @@ class HistoryParserTest extends TestCase
      */
     public function it_gets_the_increment()
     {
-        self::assertEquals(12, $this->parser[0]->getIncrement());
+        self::assertInternalType('int', $this->parser[0]->getIncrement());
     }
 
     /**

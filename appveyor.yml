@@ -52,7 +52,7 @@ test_script:
 
 on_success:
   - ps: Invoke-RestMethod https://raw.githubusercontent.com/k3rn31p4nic/appveyor-discord-webhook/master/send.ps1 -o send.ps1
-  - ps: ./send.ps1 success $env:WEBHOOK_URL
+  - ps: ./send.ps1 success $env:WEBHOOK_URL_PASS
 on_failure:
   - ps: Invoke-RestMethod https://raw.githubusercontent.com/k3rn31p4nic/appveyor-discord-webhook/master/send.ps1 -o send.ps1
-  - ps: ./send.ps1 failure $env:WEBHOOK_URL
+  - ps: ./send.ps1 failure $env:WEBHOOK_URL_FAIL

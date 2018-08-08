@@ -20,7 +20,7 @@ class HistoryParserTest extends TestCase
     public function setUp()
     {
         $client = new \Goutte\Client();
-        $crawler = $client->request('GET', 'https://myanimelist.net/history/nekomata1037');
+        $crawler = $client->request('GET', 'https://myanimelist.net/history/nekomata1037/');
         $this->parser = (new \Jikan\Parser\User\History\HistoryParser($crawler))->getModel();
     }
 

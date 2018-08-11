@@ -533,12 +533,14 @@ class AnimeParser implements ParserInterface
      */
     public function getOpeningThemes(): array
     {
-        return array_filter(
+        $items = array_filter(
             preg_split(
                 '/\s?#\d+:\s/m',
                 $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]')->text()
             )
         );
+
+        return array_values($items);
     }
 
     /**
@@ -548,12 +550,14 @@ class AnimeParser implements ParserInterface
      */
     public function getEndingThemes(): array
     {
-        return array_filter(
+        $items =  array_filter(
             preg_split(
                 '/\s?#\d+:\s/m',
                 $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]')->text()
             )
         );
+
+        return array_values($items);
     }
 
     /**

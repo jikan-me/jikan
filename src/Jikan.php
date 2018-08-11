@@ -304,13 +304,13 @@ class Jikan
     }
 
     /**
-     * @param int    $year
-     * @param string $season
+     * @param ?int    $year
+     * @param ?string $season
      *
      * @return \Jikan\Model\Seasonal\Seasonal
      * @throws ParserException
      */
-    public function Seasonal(int $year, string $season): Model\Seasonal\Seasonal
+    public function Seasonal(?int $year = null, ?string $season = null): Model\Seasonal\Seasonal
     {
         return $this->myanimelist->getSeasonal(
             new Request\Seasonal\SeasonalRequest($year, $season)

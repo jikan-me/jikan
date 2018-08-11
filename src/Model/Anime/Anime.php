@@ -172,12 +172,12 @@ class Anime
     /**
      * @var string[]
      */
-    private $openingTheme = [];
+    private $openingThemes = [];
 
     /**
      * @var string[]
      */
-    private $endingTheme = [];
+    private $endingThemes = [];
 
     /**
      * @var string|null
@@ -227,8 +227,8 @@ class Anime
         $instance->members = $parser->getMembers();
         $instance->favorites = $parser->getFavorites();
         $instance->related = $parser->getRelated();
-        $instance->openingTheme = $parser->getOpeningThemes();
-        $instance->endingTheme = $parser->getEndingThemes();
+        $instance->openingThemes = $parser->getOpeningThemes();
+        $instance->endingThemes = $parser->getEndingThemes();
         $instance->background = $parser->getBackground();
 
         return $instance;
@@ -494,16 +494,16 @@ class Anime
     /**
      * @return string[]
      */
-    public function getOpeningTheme(): array
+    public function getOpeningThemes(): array
     {
-        return $this->openingTheme;
+        return $this->openingThemes;
     }
 
     /**
      * @return string[]
      */
-    public function getEndingTheme(): array
+    public function getEndingThemes(): array
     {
-        return $this->endingTheme;
+        return $this->endingThemes;
     }
 }

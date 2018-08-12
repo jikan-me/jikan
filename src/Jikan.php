@@ -376,7 +376,7 @@ class Jikan
      * @return \Jikan\Model\Genre\AnimeGenre
      * @throws ParserException
      */
-    public function AnimeGenre(int $id, int $page): Model\Genre\AnimeGenre
+    public function AnimeGenre(int $id, int $page = 1): Model\Genre\AnimeGenre
     {
         return $this->myanimelist->getAnimeGenre(
             new Request\Genre\AnimeGenreRequest($id, $page)
@@ -390,7 +390,7 @@ class Jikan
      * @return \Jikan\Model\Genre\MangaGenre
      * @throws ParserException
      */
-    public function MangaGenre(int $id, int $page): Model\Genre\MangaGenre
+    public function MangaGenre(int $id, int $page = 1): Model\Genre\MangaGenre
     {
         return $this->myanimelist->getMangaGenre(
             new Request\Genre\MangaGenreRequest($id, $page)

@@ -96,10 +96,16 @@ class MangaGenreParser implements ParserInterface
      */
     public function getCount(): int
     {
+        $count = $this->crawler->filterXPath('//span[@class=\'di-ib mt4\']/span');
+
+        if (!$count->count()) {
+            return 0;
+        }
+
         return (int)preg_replace(
             '/\D/',
             '',
-            $this->crawler->filterXPath('//span[@class=\'di-ib mt4\']/span')->text()
+            $count->text()
         );
     }
 }

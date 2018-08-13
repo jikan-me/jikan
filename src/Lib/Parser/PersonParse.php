@@ -142,14 +142,14 @@ class PersonParse extends TemplateParse
 
         $this->addRule(
             'voice_acting_role',
-            '~<div class="normal_header">Voice Acting Roles</div>~',
+            '~</div>Voice Acting Roles</div>~',
             function () {
                 $running = true;
                 $i = 1;
                 $voiceActingRoles = [];
                 while ($running) {
                     $line = $this->file[$this->lineNo + $i];
-                    if (preg_match('~<div class="normal_header">Anime Staff Positions</div>~', $line)) {
+                    if (preg_match('~</span>Anime Staff Positions</div>~', $line)) {
                         $running = false;
                     }
 
@@ -209,14 +209,14 @@ class PersonParse extends TemplateParse
 
         $this->addRule(
             'anime_staff_position',
-            '~<div class="normal_header">Anime Staff Positions</div>~',
+            '~</span>Anime Staff Positions</div>~',
             function () {
                 $running = true;
                 $i = 1;
                 $animeStaffPositions = [];
                 while ($running) {
                     $line = $this->file[$this->lineNo + $i];
-                    if (preg_match('~<div class="normal_header">Published Manga</div>~', $line)) {
+                    if (preg_match('~</span>Published Manga</div>~', $line)) {
                         $running = false;
                     }
 
@@ -261,7 +261,7 @@ class PersonParse extends TemplateParse
 
         $this->addRule(
             'published_manga',
-            '~<div class="normal_header">Published Manga</div>~',
+            '~</span>Published Manga</div>~',
             function () {
                 $running = true;
                 $i = 1;

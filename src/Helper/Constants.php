@@ -62,14 +62,16 @@ class Constants
     public const SEARCH_MANGA_MANHUA = 6;
 
     public const SEARCH_ANIME_STATUS_AIRING = 1;
-    public const SEARCH_ANIME_STATUS_COMPLETED = 2;
-    public const SEARCH_ANIME_STATUS_NOT_YET_AIRED = 3;
-    public const SEARCH_ANIME_STATUS_NYA = 3; // alias
+    public const SEARCH_ANIME_STATUS_FINISHED_AIRING = 2;
+    public const SEARCH_ANIME_STATUS_COMPLETED = 2; // alias
+    public const SEARCH_ANIME_STATUS_TO_BE_AIRD = 3;
+    public const SEARCH_ANIME_STATUS_TBA = 3; // alias
 
     public const SEARCH_MANGA_STATUS_PUBLISHING = 1;
-    public const SEARCH_MANGA_STATUS_COMPLETED = 2;
-    public const SEARCH_MANGA_STATUS_NOT_YET_PUBLISHED = 3;
-    public const SEARCH_MANGA_STATUS_NYP = 3;
+    public const SEARCH_MANGA_STATUS_FINISHED_PUBLISHING = 2;
+    public const SEARCH_MANGA_STATUS_COMPLETED = 2; // alias
+    public const SEARCH_MANGA_STATUS_TO_BE_PUBLISHED = 3;
+    public const SEARCH_MANGA_STATUS_TBP = 3; // alias
 
     public const SEARCH_ANIME_RATING_G = 1;
     public const SEARCH_ANIME_RATING_ALL = 1; // alias

@@ -36,7 +36,7 @@ class Manga
     private $title;
 
     /**
-     * @var string
+     * @var null|string
      */
     private $titleEnglish;
 
@@ -225,9 +225,9 @@ class Manga
     }
 
     /**
-     * @return string
+     * @return null|string
      */
-    public function getTitleEnglish(): string
+    public function getTitleEnglish(): ?string
     {
         return $this->titleEnglish;
     }

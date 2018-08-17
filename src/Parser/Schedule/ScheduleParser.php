@@ -30,13 +30,13 @@ class ScheduleParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Shedule\Schedule
+     * @return \Jikan\Model\Schedule\Schedule
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Shedule\Schedule
+    public function getModel(): Model\Schedule\Schedule
     {
-        return Model\Shedule\Schedule::fromParser($this);
+        return Model\Schedule\Schedule::fromParser($this);
     }
 
     /**

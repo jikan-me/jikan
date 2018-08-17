@@ -280,10 +280,10 @@ class MalClient
     /**
      * @param Request\Schedule\ScheduleRequest $request
      *
-     * @return Model\Shedule\Schedule
+     * @return Model\Schedule\Schedule
      * @throws ParserException
      */
-    public function getSchedule(Request\Schedule\ScheduleRequest $request): Model\Shedule\Schedule
+    public function getSchedule(Request\Schedule\ScheduleRequest $request): Model\Schedule\Schedule
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

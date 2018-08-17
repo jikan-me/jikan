@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Model\Shedule;
+namespace Jikan\Model\Schedule;
 
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;

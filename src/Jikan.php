@@ -331,10 +331,10 @@ class Jikan
 
     /**
      *
-     * @return \Jikan\Model\Shedule\Schedule
+     * @return \Jikan\Model\Schedule\Schedule
      * @throws ParserException
      */
-    public function Schedule(): Model\Shedule\Schedule
+    public function Schedule(): Model\Schedule\Schedule
     {
         return $this->myanimelist->getSchedule(
             new Request\Schedule\ScheduleRequest()

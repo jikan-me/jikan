@@ -108,7 +108,7 @@ class JikanTest extends TestCase
     public function it_gets_schedule()
     {
         $schedule = $this->jikan->getSchedule(new \Jikan\Request\Schedule\ScheduleRequest());
-        self::assertInstanceOf(\Jikan\Model\Shedule\Schedule::class, $schedule);
+        self::assertInstanceOf(\Jikan\Model\Schedule\Schedule::class, $schedule);
     }
 
     /**

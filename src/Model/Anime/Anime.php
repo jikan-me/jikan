@@ -27,6 +27,16 @@ class Anime
     /**
      * @var string
      */
+    private $imageUrl;
+
+    /**
+     * @var string|null
+     */
+    private $previewVideoUrl;
+
+    /**
+     * @var string
+     */
     private $title;
 
     /**
@@ -43,11 +53,6 @@ class Anime
      * @var string[]
      */
     private $titleSynonyms;
-
-    /**
-     * @var string
-     */
-    private $imageUrl;
 
     /**
      * @var string
@@ -178,11 +183,6 @@ class Anime
      * @var string[]
      */
     private $endingThemes = [];
-
-    /**
-     * @var string|null
-     */
-    private $previewVideoUrl;
 
     /**
      * Create an instance from an AnimeParser parser

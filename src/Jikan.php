@@ -348,7 +348,7 @@ class Jikan
      * @return \Jikan\Model\Producer\Producer
      * @throws ParserException
      */
-    public function Producer(int $id, int $page): Model\Producer\Producer
+    public function Producer(int $id, int $page = 1): Model\Producer\Producer
     {
         return $this->myanimelist->getProducer(
             new Request\Producer\ProducerRequest($id, $page)
@@ -362,7 +362,7 @@ class Jikan
      * @return \Jikan\Model\Magazine\Magazine
      * @throws ParserException
      */
-    public function Magazine(int $id, int $page): Model\Magazine\Magazine
+    public function Magazine(int $id, int $page = 1): Model\Magazine\Magazine
     {
         return $this->myanimelist->getMagazine(
             new Request\Magazine\MagazineRequest($id, $page)

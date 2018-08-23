@@ -66,24 +66,14 @@ class Manga
     private $type;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $volumes;
 
     /**
-     * @var bool
-     */
-    private $volumesUnknown;
-
-    /**
-     * @var int
+     * @var int|null
      */
     private $chapters;
-
-    /**
-     * @var bool
-     */
-    private $chaptersUnknown;
 
     /**
      * @var bool
@@ -180,8 +170,6 @@ class Manga
         $instance->type = $parser->getMangaType();
         $instance->chapters = $parser->getMangaChapters();
         $instance->volumes = $parser->getMangaVolumes();
-        $instance->chaptersUnknown = $instance->chapters === 0;
-        $instance->volumesUnknown = $instance->volumes === 0;
         $instance->status = $parser->getMangaStatus();
         $instance->publishing = $instance->status === 'Publishing';
         $instance->published = $parser->getPublished();
@@ -273,35 +261,19 @@ class Manga
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getVolumes(): int
+    public function getVolumes(): ?int
     {
         return $this->volumes;
     }
 
     /**
-     * @return bool
+     * @return int|null
      */
-    public function isVolumesUnknown(): bool
-    {
-        return $this->volumesUnknown;
-    }
-
-    /**
-     * @return int
-     */
-    public function getChapters(): int
+    public function getChapters(): ?int
     {
         return $this->chapters;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isChaptersUnknown(): bool
-    {
-        return $this->chaptersUnknown;
     }
 
     /**

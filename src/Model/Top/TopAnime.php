@@ -38,12 +38,12 @@ class TopAnime
     private $episodes;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $startDate;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $endDate;
 
@@ -123,17 +123,17 @@ class TopAnime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStartDate(): string
+    public function getStartDate(): ?string
     {
         return $this->startDate;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEndDate(): string
+    public function getEndDate(): ?string
     {
         return $this->endDate;
     }

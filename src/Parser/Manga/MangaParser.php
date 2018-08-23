@@ -187,7 +187,7 @@ class MangaParser implements ParserInterface
             return null;
         }
 
-        return (str_replace($chapters->text(), '', $chapters->parents()->text()) === 'Unknown') ? 0 : (int)str_replace(
+        return (trim(str_replace($chapters->text(), '', $chapters->parents()->text())) === 'Unknown') ? null : (int)str_replace(
             $chapters->text(),
             '',
             $chapters->parents()->text()
@@ -208,7 +208,7 @@ class MangaParser implements ParserInterface
             return null;
         }
 
-        return (str_replace($chapters->text(), '', $chapters->parents()->text()) === 'Unknown') ? 0 : (int)str_replace(
+        return (trim(str_replace($chapters->text(), '', $chapters->parents()->text())) === 'Unknown') ? null : (int)str_replace(
             $chapters->text(),
             '',
             $chapters->parents()->text()

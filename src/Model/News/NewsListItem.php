@@ -28,9 +28,14 @@ class NewsListItem
     private $date;
 
     /**
-     * @var MalUrl
+     * @var string
      */
-    private $author;
+    private $authorName;
+
+    /**
+     * @var string
+     */
+    private $authorUrl;
 
     /**
      * @var string
@@ -59,7 +64,8 @@ class NewsListItem
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
         $instance->date = $parser->getDate();
-        $instance->author = $parser->getAuthor();
+        $instance->authorName = $parser->getAuthor()->getName();
+        $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
         $instance->imageUrl = $parser->getImage();
         $instance->intro = $parser->getIntro();
@@ -92,11 +98,19 @@ class NewsListItem
     }
 
     /**
-     * @return MalUrl
+     * @return string
      */
-    public function getAuthor(): MalUrl
+    public function getAuthorName(): string
     {
-        return $this->author;
+        return $this->authorName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorUrl(): string
+    {
+        return $this->authorUrl;
     }
 
     /**

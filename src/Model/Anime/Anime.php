@@ -309,20 +309,11 @@ class Anime
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getEpisodes(): ?string
+    public function getEpisodes(): ?int
     {
         return $this->episodes;
-    }
-
-    /**
-     * @return bool
-     * @todo shouldn't we return null if its unknow and drop this funtion?
-     */
-    public function isEpisodesUnknown(): bool
-    {
-        return $this->episodesUnknown;
     }
 
     /**

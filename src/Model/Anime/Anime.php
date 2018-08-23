@@ -32,7 +32,7 @@ class Anime
     /**
      * @var string|null
      */
-    private $previewVideoUrl;
+    private $trailerUrl;
 
     /**
      * @var string
@@ -196,7 +196,7 @@ class Anime
     public static function fromParser(AnimeParser $parser): Anime
     {
         $instance = new self();
-        $instance->previewVideoUrl = $parser->getPreview();
+        $instance->trailerUrl = $parser->getPreview();
         $instance->title = $parser->getTitle();
         $instance->url = $parser->getURL();
         $instance->malId = $parser->getId();
@@ -293,9 +293,9 @@ class Anime
     /**
      * @return null|string
      */
-    public function getPreviewVideoUrl(): ?string
+    public function getTrailerUrl(): ?string
     {
-        return $this->previewVideoUrl;
+        return $this->trailerUrl;
     }
 
     /**

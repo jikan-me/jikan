@@ -3,6 +3,7 @@
 namespace Jikan\Model\Genre;
 
 use Jikan\Model\Common\AnimeCard;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Genre\AnimeGenreParser;
 
 /**
@@ -13,25 +14,16 @@ use Jikan\Parser\Genre\AnimeGenreParser;
 class AnimeGenre
 {
 
-    /**
-     * @var int
-     */
-    public $malId;
 
     /**
-     * @var string
+     * @var \Jikan\Model\Common\MalUrl
      */
-    public $url;
-
-    /**
-     * @var string
-     */
-    public $name;
+    public $malUrl;
 
     /**
      * @var int
      */
-    public $count;
+    public $itemCount;
 
     /**
      * @var array|AnimeCard[]
@@ -48,45 +40,30 @@ class AnimeGenre
     public static function fromParser(AnimeGenreParser $parser): self
     {
         $instance = new self();
-        $instance->url = $parser->getUrl();
-        $instance->malId = $parser->getMalId();
-        $instance->name = $parser->getName();
-        $instance->count = $parser->getCount();
+        $instance->itemCount = $parser->getCount();
         $instance->anime = $parser->getGenreAnime();
+        $instance->malUrl = new MalUrl(
+            $parser->getName(),
+            $parser->getUrl()
+        );
 
         return $instance;
     }
 
     /**
-     * @return int
+     * @return \Jikan\Model\Common\MalUrl
      */
-    public function getMalId(): int
+    public function getMalUrl(): MalUrl
     {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
+        return $this->malUrl;
     }
 
     /**
      * @return int
      */
-    public function getCount(): int
+    public function getItemCount(): int
     {
-        return $this->count;
+        return $this->itemCount;
     }
 
     /**

@@ -14,16 +14,16 @@ class DateRange
     /**
      * @var string
      */
-    private $aired;
+    private $date;
 
     /**
      * DateRange constructor.
      *
-     * @param string $aired
+     * @param string $date
      */
-    public function __construct(string $aired)
+    public function __construct(string $date)
     {
-        $this->aired = $aired;
+        $this->date = $date;
     }
 
     /**
@@ -31,7 +31,7 @@ class DateRange
      */
     public function __toString()
     {
-        return $this->aired;
+        return $this->date;
     }
 
     /**
@@ -39,15 +39,15 @@ class DateRange
      */
     public function getFrom(): ?\DateTimeImmutable
     {
-        $aired = $this->aired;
-        if ($aired === 'Not available') {
+        $date = $this->date;
+        if ($date === 'Not available') {
             return null;
         }
-        if (strpos($aired, ' to ') !== false || strpos($aired, ' to ?') !== false) {
-            $aired = explode(' to ', $aired)[0];
+        if (strpos($date, ' to ') !== false || strpos($date, ' to ?') !== false) {
+            $date = explode(' to ', $date)[0];
         }
 
-        return Parser::parseDate($aired);
+        return Parser::parseDate($date);
     }
 
     /**
@@ -55,12 +55,12 @@ class DateRange
      */
     public function getUntil(): ?\DateTimeImmutable
     {
-        $aired = $this->aired;
-        if (strpos($aired, ' to ') === false || strpos($aired, ' to ?') !== false) {
+        $date = $this->date;
+        if (strpos($date, ' to ') === false || strpos($date, ' to ?') !== false) {
             return null;
         }
-        $aired = explode(' to ', $aired)[1];
+        $date = explode(' to ', $date)[1];
 
-        return Parser::parseDate($aired);
+        return Parser::parseDate($date);
     }
 }

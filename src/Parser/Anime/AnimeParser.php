@@ -175,11 +175,12 @@ class AnimeParser implements ParserInterface
         $episodes = $this->crawler
             ->filterXPath('//span[text()="Episodes:"]');
 
+
         if (!$episodes->count()) {
             return null;
         }
 
-        return (str_replace($episodes->text(), '', $episodes->parents()->text()) === 'Unknown') ? 0 : (int)str_replace(
+        return (trim(str_replace($episodes->text(), '', $episodes->parents()->text())) === 'Unknown') ? null : (int)str_replace(
             $episodes->text(),
             '',
             $episodes->parents()->text()

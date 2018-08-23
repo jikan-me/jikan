@@ -202,7 +202,6 @@ class Anime
         $instance->titleJapanese = $parser->getTitleJapanese();
         $instance->type = $parser->getType();
         $instance->episodes = $parser->getEpisodes();
-        $instance->episodesUnknown = $instance->episodes === 0;
         $instance->status = $parser->getStatus();
         $instance->airing = $instance->status === 'Currently Airing';
         $instance->aired = $parser->getAired();

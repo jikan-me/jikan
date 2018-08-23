@@ -65,14 +65,9 @@ class Anime
     private $source;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $episodes;
-
-    /**
-     * @var bool
-     */
-    private $episodesUnknown;
 
     /**
      * @var string
@@ -315,9 +310,9 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEpisodes(): string
+    public function getEpisodes(): ?string
     {
         return $this->episodes;
     }

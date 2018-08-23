@@ -44,14 +44,14 @@ class MalUrl
      */
     public function getMalId(): int
     {
-        return (int)
+        return
             ctype_digit(
                 preg_replace('#https://myanimelist.net/\w+/(\d+|\w+/(\d+))/.*#', '$1', $this->url)
             )
             ?
-            preg_replace('#https://myanimelist.net/\w+/(\d+|\w+/(\d+))/.*#', '$1', $this->url)
+                (int) preg_replace('#https://myanimelist.net/\w+/(\d+|\w+/(\d+))/.*#', '$1', $this->url)
             :
-            preg_replace('#https://myanimelist.net/\w+/(\d+|\w+/(\d+))/.*#', '$2', $this->url)
+                (int) preg_replace('#https://myanimelist.net/\w+/(\d+|\w+/(\d+))/.*#', '$2', $this->url)
             ;
     }
 

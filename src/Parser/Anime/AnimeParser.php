@@ -84,11 +84,13 @@ class AnimeParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getSynopsis(): string
+    public function getSynopsis(): ?string
     {
-        return JString::cleanse(
+        $synopsis = JString::cleanse(
             $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
         );
+
+        return (preg_match('~^Looking for information on the anime~', $synopsis)) ? null : $synopsis;
     }
 
     /**

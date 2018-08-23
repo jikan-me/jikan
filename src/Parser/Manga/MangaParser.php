@@ -86,11 +86,13 @@ class MangaParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getMangaSynopsis(): string
+    public function getMangaSynopsis(): ?string
     {
-        return JString::cleanse(
+        $synopsis = JString::cleanse(
             $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
         );
+
+        return (preg_match('~^Looking for information on the manga~', $synopsis)) ? null : $synopsis;
     }
 
     /**

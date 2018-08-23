@@ -130,7 +130,7 @@ class Anime
     private $favorites;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $synopsis;
 
@@ -420,9 +420,9 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSynopsis(): string
+    public function getSynopsis(): ?string
     {
         return $this->synopsis;
     }

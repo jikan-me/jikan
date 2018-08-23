@@ -187,11 +187,20 @@ class MangaParser implements ParserInterface
             return null;
         }
 
-        return (trim(str_replace($chapters->text(), '', $chapters->parents()->text())) === 'Unknown') ? null : (int)str_replace(
-            $chapters->text(),
-            '',
-            $chapters->parents()->text()
-        );
+        return
+            (
+                trim(
+                    str_replace($chapters->text(), '', $chapters->parents()->text())
+                ) === 'Unknown'
+            )
+                ?
+                null
+                :
+                (int)str_replace(
+                    $chapters->text(),
+                    '',
+                    $chapters->parents()->text()
+                );
     }
 
     /**
@@ -200,19 +209,28 @@ class MangaParser implements ParserInterface
      */
     public function getMangaVolumes(): ?int
     {
-        $chapters = $this->crawler
+        $volumes = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr/td[@class="borderClass"]')
             ->filterXPath('//span[text()="Volumes:"]');
 
-        if (!$chapters->count()) {
+        if (!$volumes->count()) {
             return null;
         }
 
-        return (trim(str_replace($chapters->text(), '', $chapters->parents()->text())) === 'Unknown') ? null : (int)str_replace(
-            $chapters->text(),
-            '',
-            $chapters->parents()->text()
-        );
+        return
+            (
+                trim(
+                    str_replace($volumes->text(), '', $volumes->parents()->text())
+                ) === 'Unknown'
+            )
+                ?
+                null
+                :
+                (int)str_replace(
+                    $volumes->text(),
+                    '',
+                    $volumes->parents()->text()
+                );
     }
 
     /**

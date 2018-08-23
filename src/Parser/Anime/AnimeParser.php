@@ -180,11 +180,20 @@ class AnimeParser implements ParserInterface
             return null;
         }
 
-        return (trim(str_replace($episodes->text(), '', $episodes->parents()->text())) === 'Unknown') ? null : (int)str_replace(
-            $episodes->text(),
-            '',
-            $episodes->parents()->text()
-        );
+        return
+            (
+                trim(
+                    str_replace($episodes->text(), '', $episodes->parents()->text())
+                ) === 'Unknown'
+            )
+                ?
+                null
+                :
+                (int)str_replace(
+                    $episodes->text(),
+                    '',
+                    $episodes->parents()->text()
+                );
     }
 
     /**

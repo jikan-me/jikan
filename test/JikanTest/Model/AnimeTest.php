@@ -29,15 +29,6 @@ class AnimeTest extends TestCase
      * @test
      * @vcr AnimeParserTest.yaml
      */
-    public function it_gets_the_anime_episodes_unknown(): void
-    {
-        self::assertEquals(true,$this->anime->isEpisodesUnknown());
-    }
-
-    /**
-     * @test
-     * @vcr AnimeParserTest.yaml
-     */
     public function it_gets_the_anime_airing(): void
     {
         self::assertEquals(true,$this->anime->isAiring());

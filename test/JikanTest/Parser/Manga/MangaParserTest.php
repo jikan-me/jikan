@@ -154,30 +154,6 @@ class MangaParserTest extends TestCase
      * @test
      * @vcr MangaParserTest.yaml
      */
-    public function it_gets_the_manga_chapters_unknown()
-    {
-        self::assertEquals(
-            false,
-            $this->manga->isChaptersUnknown()
-        );
-    }
-
-    /**
-     * @test
-     * @vcr MangaParserTest.yaml
-     */
-    public function it_gets_the_manga_volumes_unknown()
-    {
-        self::assertEquals(
-            false,
-            $this->manga->isVolumesUnknown()
-        );
-    }
-
-    /**
-     * @test
-     * @vcr MangaParserTest.yaml
-     */
     public function it_gets_the_manga_status()
     {
         self::assertEquals(

@@ -73,7 +73,7 @@ class ForumPost
     /**
      * @return \DateTimeImmutable|null
      */
-    public function getDate(): ?\DateTimeImmutable
+    public function getDatePosted(): ?\DateTimeImmutable
     {
         return $this->datePosted;
     }

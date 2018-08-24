@@ -99,6 +99,6 @@ class ForumTopicParserTest extends TestCase
         self::assertEquals('Serhiyko', $lastPost->getAuthorName());
         self::assertEquals('https://myanimelist.net/profile/Serhiyko', $lastPost->getAuthorUrl());
         self::assertEquals('https://myanimelist.net/forum/?topicid=251121&goto=lastpost', $lastPost->getUrl());
-        self::assertEquals('2018-05-27', $lastPost->getRelativeDate()->format('Y-m-d'));
+        self::assertEquals('2018-05-27', $lastPost->getDatePosted()->format('Y-m-d'));
     }
 }

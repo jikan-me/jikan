@@ -63,7 +63,7 @@ class PersonSearchRequest implements RequestInterface
         );
 
         return sprintf(
-            'https://myanimelist.net/character.php?%s',
+            'https://myanimelist.net/people.php?%s',
             $query
         );
     }

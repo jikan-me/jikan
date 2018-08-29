@@ -84,11 +84,11 @@ class MangaCardParser implements ParserInterface
     public function getVolumes(): ?int
     {
 
-        $eps = $this->crawler->filterXPath('//div[contains(@class, "eps")]')->text();
-        $eps = JString::cleanse($eps);
-        str_replace(' eps', '', $eps);
+        $vols = $this->crawler->filterXPath('//div[contains(@class, "eps")]')->text();
+        $vols = JString::cleanse($vols);
+        $vols = str_replace(' eps', '', $vols);
 
-        return $eps === '?' ? null : (int)$eps;
+        return $vols === '?' ? null : (int)$vols;
     }
 
     /**

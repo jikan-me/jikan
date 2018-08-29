@@ -94,7 +94,7 @@ class AnimeCardParser implements ParserInterface
 
         $eps = $this->crawler->filterXPath('//div[contains(@class, "eps")]')->text();
         $eps = JString::cleanse($eps);
-        str_replace(' eps', '', $eps);
+        $eps = str_replace(' eps', '', $eps);
 
         return $eps === '?' ? null : (int)$eps;
     }

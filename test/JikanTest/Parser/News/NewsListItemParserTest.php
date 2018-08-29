@@ -85,6 +85,18 @@ class NewsListItemParserTest extends TestCase
      * @test
      * @vcr NewsParserTest.yaml
      */
+    public function it_gets_the_comments(): void
+    {
+        self::assertEquals(
+            31,
+            $this->parser->getComments()
+        );
+    }
+
+    /**
+     * @test
+     * @vcr NewsParserTest.yaml
+     */
     public function it_gets_the_introduction(): void
     {
         self::assertEquals(

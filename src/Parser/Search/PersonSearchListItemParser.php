@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Search;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Search\PersonSearchListItem;
@@ -45,7 +46,7 @@ class PersonSearchListItemParser
      */
     public function getUrl(): string
     {
-        return $this->crawler->filterXPath('//td[2]/a')->attr('href');
+        return Constants::BASE_URL . $this->crawler->filterXPath('//td[2]/a')->attr('href');
     }
 
     /**

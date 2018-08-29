@@ -15,7 +15,7 @@ class SeasonalAnime extends AnimeCard
     /**
      * @var bool
      */
-    private $continuing;
+    protected $continuing;
 
     /**
      * @param Parser\Common\AnimeCardParser $parser

@@ -18,7 +18,7 @@ class Seasonal
     public $season_name;
 
     /**
-     * @var string
+     * @var int
      */
     public $season_year;
 
@@ -38,7 +38,7 @@ class Seasonal
     {
         $instance = new self();
         $instance->season_name = explode(" ", $parser->getSeason())[0];
-        $instance->season_year = explode(" ", $parser->getSeason())[1];
+        $instance->season_year = (int) explode(" ", $parser->getSeason())[1];
         $instance->anime = $parser->getSeasonalAnime();
 
         return $instance;
@@ -53,9 +53,9 @@ class Seasonal
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getSeasonYear(): string
+    public function getSeasonYear(): int
     {
         return $this->season_year;
     }

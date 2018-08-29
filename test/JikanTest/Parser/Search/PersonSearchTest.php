@@ -47,7 +47,7 @@ class PersonSearchTest extends TestCase
      */
     public function it_gets_the_url()
     {
-        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->person->getMalUrl());
+        self::assertEquals("https://myanimelist.net/character/23524/Ara-chan", $this->person->getUrl());
     }
 
     /**

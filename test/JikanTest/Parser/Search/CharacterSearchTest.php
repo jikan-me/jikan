@@ -47,7 +47,7 @@ class CharacterSearchTest extends TestCase
      */
     public function it_gets_the_url()
     {
-        self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->anime->getMalUrl());
+        self::assertEquals("https://myanimelist.net/character/1896/Fate_Testarossa", $this->anime->getUrl());
     }
 
     /**

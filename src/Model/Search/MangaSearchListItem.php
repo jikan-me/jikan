@@ -75,16 +75,6 @@ class MangaSearchListItem
     private $endDate;
 
     /**
-     * @var ?string
-     */
-    private $startDateString;
-
-    /**
-     * @var ?string
-     */
-    private $endDateString;
-
-    /**
      * @var int
      */
     private $members;
@@ -110,8 +100,6 @@ class MangaSearchListItem
         $instance->volumes = $parser->getVolumes();
         $instance->chapters = $parser->getChapters();
         $instance->score = $parser->getScore();
-        $instance->startDateString = $parser->getStartDateString();
-        $instance->endDateString = $parser->getEndDateString();
         $instance->startDate = $parser->getStartDate();
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
@@ -224,22 +212,6 @@ class MangaSearchListItem
     public function getMembers(): int
     {
         return $this->members;
-    }
-
-    /**
-     * @return null|string ?string
-     */
-    public function getStartDateString(): ?string
-    {
-        return $this->startDateString;
-    }
-
-    /**
-     * @return null|string ?string
-     */
-    public function getEndDateString(): ?string
-    {
-        return $this->endDateString;
     }
 
     /**

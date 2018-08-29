@@ -48,6 +48,11 @@ class NewsListItem
     private $imageUrl;
 
     /**
+     * @var int
+     */
+    private $comments;
+
+    /**
      * @var string
      */
     private $intro;
@@ -68,6 +73,7 @@ class NewsListItem
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
         $instance->imageUrl = $parser->getImage();
+        $instance->comments = $parser->getComments();
         $instance->intro = $parser->getIntro();
 
         return $instance;
@@ -127,6 +133,14 @@ class NewsListItem
     public function getImageUrl(): ?string
     {
         return $this->imageUrl;
+    }
+
+    /**
+     * @return int
+     */
+    public function getComments(): int
+    {
+        return $this->comments;
     }
 
     /**

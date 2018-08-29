@@ -3,6 +3,7 @@
 namespace Jikan\Parser\News;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\News\NewsListItem;
@@ -103,11 +104,24 @@ class NewsListItemParser implements ParserInterface
     }
 
     /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getComments() : int
+    {
+        $comments = $this->crawler->filterXPath('//a[last()]')->text();
+        preg_match('~Discuss \((\d+) comments\)~', $comments, $comments);
+        return !empty($comments) ? $comments[1] : 0;
+    }
+
+    /**
      * @return string
      * @throws \InvalidArgumentException
      */
     public function getIntro(): string
     {
-        return Parser::removeChildNodes($this->crawler->filterXPath('//p[2]'))->text();
+        return JString::cleanse(
+            Parser::removeChildNodes($this->crawler->filterXPath('//p[2]'))->text()
+        );
     }
 }

@@ -29,7 +29,7 @@ class PersonSearchTest extends TestCase
      */
     public function it_gets_the_name()
     {
-        self::assertEquals("Ara-chan", $this->person->getName());
+        self::assertEquals("Araizumi, Rui", $this->person->getName());
     }
 
     /**
@@ -38,7 +38,7 @@ class PersonSearchTest extends TestCase
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://myanimelist.cdn-dena.com/r/23x32/images/characters/14/56841.jpg?s=10d5e5f7c810ad4f8e346c243478afba", $this->person->getImageUrl());
+        self::assertEquals("https://myanimelist.cdn-dena.com/r/23x32/images/voiceactors/2/42926.jpg?s=bf7e47ee3e4a1eb93e7ef86afed1c68b", $this->person->getImageUrl());
     }
 
     /**
@@ -47,7 +47,7 @@ class PersonSearchTest extends TestCase
      */
     public function it_gets_the_url()
     {
-        self::assertEquals("https://myanimelist.net/character/23524/Ara-chan", $this->person->getUrl());
+        self::assertEquals("https://myanimelist.net/people/5159/Rui_Araizumi", $this->person->getUrl());
     }
 
     /**
@@ -56,6 +56,6 @@ class PersonSearchTest extends TestCase
      */
     public function it_gets_the_alternative_names()
     {
-        self::assertContains('Hokuto-kun', $this->person->getAlternativeNames());
+        self::assertContains('あらいず☆みるい', $this->person->getAlternativeNames());
     }
 }

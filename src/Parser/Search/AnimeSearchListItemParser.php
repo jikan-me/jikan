@@ -42,15 +42,12 @@ class AnimeSearchListItemParser
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return string
      * @throws \InvalidArgumentException
      */
-    public function getUrl(): MalUrl
+    public function getUrl(): string
     {
-        return new MalUrl(
-            $this->getTitle(),
-            $this->crawler->filterXPath('//td[2]/a')->attr('href')
-        );
+        return $this->crawler->filterXPath('//td[2]/a')->attr('href');
     }
 
     /**

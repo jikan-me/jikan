@@ -14,9 +14,14 @@ class MangaSearchListItem
 {
 
     /**
-     * @var MalUrl
+     * @var int
      */
-    private $malUrl;
+    private $malId;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * @var string
@@ -96,7 +101,8 @@ class MangaSearchListItem
     {
         $instance = new self();
 
-        $instance->malUrl = $parser->getUrl();
+        $instance->url = $parser->getUrl();
+        $instance->malId = \Jikan\Helper\Parser::idFromUrl($instance->url);
         $instance->imageUrl = $parser->getImageUrl();
         $instance->title = $parser->getTitle();
         $instance->synopsis = $parser->getSynopsis();
@@ -125,11 +131,19 @@ class MangaSearchListItem
 
 
     /**
-     * @return MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**

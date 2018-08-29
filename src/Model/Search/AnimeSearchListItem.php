@@ -12,11 +12,15 @@ use Jikan\Parser;
  */
 class AnimeSearchListItem
 {
+    /**
+     * @var int
+     */
+    private $malId;
 
     /**
-     * @var \Jikan\Model\Common\MalUrl
+     * @var string
      */
-    private $malUrl;
+    private $url;
 
     /**
      * @var string
@@ -95,7 +99,8 @@ class AnimeSearchListItem
     {
         $instance = new self();
 
-        $instance->malUrl = $parser->getUrl();
+        $instance->url = $parser->getUrl();
+        $instance->malId = \Jikan\Helper\Parser::idFromUrl($instance->url);
         $instance->imageUrl = $parser->getImageUrl();
         $instance->title = $parser->getTitle();
         $instance->synopsis = $parser->getSynopsis();
@@ -122,13 +127,20 @@ class AnimeSearchListItem
         return $instance;
     }
 
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
+    }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return string
      */
-    public function getMalUrl(): MalUrl
+    public function getUrl(): string
     {
-        return $this->malUrl;
+        return $this->url;
     }
 
     /**

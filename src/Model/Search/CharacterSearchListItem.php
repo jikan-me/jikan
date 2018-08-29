@@ -14,9 +14,14 @@ class CharacterSearchListItem
 {
 
     /**
-     * @var \Jikan\Model\Common\MalUrl
+     * @var int
      */
-    private $malUrl;
+    private $malId;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * @var string
@@ -54,7 +59,8 @@ class CharacterSearchListItem
     {
         $instance = new self();
 
-        $instance->malUrl = $parser->getUrl();
+        $instance->url = $parser->getUrl();
+        $instance->malId = \Jikan\Helper\Parser::idFromUrl($instance->url);
         $instance->imageUrl = $parser->getImageUrl();
         $instance->name = $parser->getName();
         $instance->alternativeNames = $parser->getAlternativeNames();
@@ -66,11 +72,19 @@ class CharacterSearchListItem
 
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**

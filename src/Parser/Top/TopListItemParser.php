@@ -66,7 +66,7 @@ class TopListItemParser
      * @return float
      * @throws \InvalidArgumentException
      */
-    public function getRating(): float
+    public function getScore(): float
     {
         return (float)$this->crawler->filterXPath('//td[3]/div/span')->text();
     }

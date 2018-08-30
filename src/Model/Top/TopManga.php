@@ -50,7 +50,7 @@ class TopManga
     /**
      * @var float
      */
-    private $rating;
+    private $score;
 
     /**
      * @var string
@@ -76,7 +76,7 @@ class TopManga
         $instance->startDate = $parser->getStartDate();
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
-        $instance->rating = $parser->getRating();
+        $instance->score = $parser->getScore();
         $instance->imageUrl = $parser->getImage();
 
         return $instance;
@@ -149,9 +149,9 @@ class TopManga
     /**
      * @return float
      */
-    public function getRating(): float
+    public function getScore(): float
     {
-        return $this->rating;
+        return $this->score;
     }
 
     /**

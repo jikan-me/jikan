@@ -111,12 +111,13 @@ class TopListItemParser
     }
 
     /**
-     * @return int
+     * @return ?int
      * @throws \InvalidArgumentException
      */
-    public function getEpisodes(): int
+    public function getEpisodes(): ?int
     {
-        return (int)preg_replace('/.*\((\d+) eps\).*/', '$1', $this->getTextArray()[0]);
+        $episodes = (int) preg_replace('/.*\((\d+) eps\).*/', '$1', $this->getTextArray()[0]);
+        return $episodes === 0 ? null : $episodes;
     }
 
     /**

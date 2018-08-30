@@ -82,6 +82,14 @@ There's a REST service available, as well as a few wrappers built around it.
 
 ## Changelog
 
+### 2.0.0-rc.2 - Aug 30, 18
+- A lot of bug fixes
+- A lot of Schema improvements and fixes
+- More tests coverage (fixtures added a dev dependencies)
+- Reviewed syntax & usage
+- Added Season List parsing
+- Added more Constants
+
 ### 2.0.0-rc.1 - Aug 5, 18
 - Complete refactor using better dependencies
     - Parser is more robust and stable

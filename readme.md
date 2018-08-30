@@ -16,6 +16,10 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 :exclamation: If you are using `dev-master` and are not ready for v2 yet, require version `~1.0` until you are.
 
+#### Dependencies
+- [Goutte](https://github.com/FriendsOfPHP/Goutte)
+- PHP 7.1+
+
 ## Jikan REST API
 There's a REST service available, as well as a few wrappers built around it.
 
@@ -114,10 +118,6 @@ There's a REST service available, as well as a few wrappers built around it.
 - And a whole lot more!
 
 **You'll have to visit the NEW documentation for v2+ for usage**
-
-## Dependencies
-- [Goutte](https://github.com/FriendsOfPHP/Goutte)
-- PHP ^7.1
 
 ## DISCLAIMER
 - Jikan is not affiliated with MyAnimeList.net 

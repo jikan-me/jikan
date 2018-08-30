@@ -142,10 +142,10 @@ class TopListItemParser
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getStartDate(): string
+    public function getStartDate(): ?string
     {
         $date = JString::cleanse(explode('-', $this->getTextArray()[1])[0]);
 
@@ -153,7 +153,7 @@ class TopListItemParser
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getEndDate(): ?string

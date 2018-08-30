@@ -115,9 +115,9 @@ class TopAnime
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getEpisodes(): int
+    public function getEpisodes(): ?int
     {
         return $this->episodes;
     }

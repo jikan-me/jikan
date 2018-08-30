@@ -404,7 +404,7 @@ class Jikan
      * @return Model\Top\TopAnime[]
      * @throws ParserException
      */
-    public function TopAnime(int $page, ?string $type = null): array
+    public function TopAnime(int $page = 1, ?string $type = null): array
     {
         return $this->myanimelist->getTopAnime(
             new Request\Top\TopAnimeRequest($page, $type)
@@ -418,7 +418,7 @@ class Jikan
      * @return Model\Top\TopManga[]
      * @throws ParserException
      */
-    public function TopManga(int $page, ?string $type = null): array
+    public function TopManga(int $page = 1, ?string $type = null): array
     {
         return $this->myanimelist->getTopManga(
             new Request\Top\TopMangaRequest($page, $type)

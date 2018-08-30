@@ -56,9 +56,9 @@ class TopMangaParserTest extends TestCase
      * @test
      * @vcr TopMangaParserTest.yaml
      */
-    public function it_gets_the_manga_rating()
+    public function it_gets_the_manga_score()
     {
-        self::assertEquals(9.03, $this->parser->getRating());
+        self::assertEquals(9.03, $this->parser->getScore());
     }
 
     /**

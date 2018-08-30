@@ -62,9 +62,9 @@ class TopAnimeParserTest extends TestCase
      * @test
      * @vcr TopAnimeParserTest.yaml
      */
-    public function it_gets_the_anime_rating()
+    public function it_gets_the_anime_score()
     {
-        self::assertEquals(9.04, $this->parser->getRating());
+        self::assertEquals(9.04, $this->parser->getScore());
     }
 
     /**

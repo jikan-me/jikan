@@ -2,6 +2,7 @@
 
 namespace JikanTest;
 
+use Jikan\Exception\BadResponseException;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Model\Forum\ForumTopic;
 use Jikan\Model\News\NewsListItem;
@@ -132,10 +133,9 @@ class JikanTest extends TestCase
         self::assertContains('Seiya', $friends);
 
         // Empty page
-        // Second page
-        $friends = $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 100));
-        self::assertContainsOnlyInstancesOf(Friend::class, $friends);
-        self::assertCount(0, $friends);
+        // Second
+        self::expectException(BadResponseException::class);
+        $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 100));
     }
 
     /**

@@ -11,9 +11,9 @@
 
 namespace Jikan\MyAnimeList;
 
-use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Exception\ParserException;
+use Jikan\Goutte\GoutteWrapper;
 use Jikan\Model;
 use Jikan\Parser;
 use Jikan\Request;
@@ -24,7 +24,7 @@ use Jikan\Request;
 class MalClient
 {
     /**
-     * @var Client
+     * @var GoutteWrapper
      */
     private $ghoutte;
 
@@ -37,7 +37,7 @@ class MalClient
      */
     public function __construct(GuzzleClient $guzzle = null)
     {
-        $this->ghoutte = new Client();
+        $this->ghoutte = new GoutteWrapper();
         if ($guzzle !== null) {
             $this->ghoutte->setClient($guzzle);
         }

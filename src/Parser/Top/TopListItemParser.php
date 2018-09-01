@@ -68,7 +68,7 @@ class TopListItemParser
      */
     public function getScore(): float
     {
-        return (float)$this->crawler->filterXPath('//td[3]/div/span')->text();
+        return (float) $this->crawler->filterXPath('//td[3]/div/span')->text();
     }
 
     /**

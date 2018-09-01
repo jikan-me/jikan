@@ -15,12 +15,22 @@ class TopPerson
     /**
      * @var int
      */
+    private $malId;
+
+    /**
+     * @var int
+     */
     private $rank;
 
     /**
-     * @var \Jikan\Model\Common\MalUrl
+     * @var string
      */
-    private $malUrl;
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * @var string|null
@@ -60,7 +70,9 @@ class TopPerson
     {
         $instance = new self();
         $instance->rank = $parser->getRank();
-        $instance->malUrl = $parser->getMalUrl();
+        $instance->malId = $parser->getMalUrl()->getMalId();
+        $instance->title = $parser->getMalUrl()->getTitle();
+        $instance->url = $parser->getMalUrl()->getUrl();
         $instance->nameKanji = $parser->getKanjiName();
         $instance->favorites = $parser->getPeopleFavorites();
         $instance->image = $parser->getImage();
@@ -74,7 +86,7 @@ class TopPerson
      */
     public function __toString(): string
     {
-        return $this->malUrl->getName();
+        return $this->getTitle();
     }
 
     /**
@@ -86,11 +98,27 @@ class TopPerson
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**

@@ -15,12 +15,22 @@ class TopManga
     /**
      * @var int
      */
+    private $malId;
+
+    /**
+     * @var int
+     */
     private $rank;
 
     /**
-     * @var MalUrl
+     * @var string
      */
-    private $malUrl;
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * @var string
@@ -70,7 +80,9 @@ class TopManga
     {
         $instance = new self();
         $instance->rank = $parser->getRank();
-        $instance->malUrl = $parser->getMalUrl();
+        $instance->malId = $parser->getMalUrl()->getMalId();
+        $instance->title = $parser->getMalUrl()->getTitle();
+        $instance->url = $parser->getMalUrl()->getUrl();
         $instance->type = $parser->getType();
         $instance->volumes = $parser->getVolumes();
         $instance->startDate = $parser->getStartDate();
@@ -87,7 +99,7 @@ class TopManga
      */
     public function __toString(): string
     {
-        return $this->malUrl->getName();
+        return $this->getTitle();
     }
 
     /**
@@ -99,11 +111,27 @@ class TopManga
     }
 
     /**
-     * @return MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**

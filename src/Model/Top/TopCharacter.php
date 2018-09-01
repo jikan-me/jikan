@@ -15,12 +15,22 @@ class TopCharacter
     /**
      * @var int
      */
+    private $malId;
+
+    /**
+     * @var int
+     */
     private $rank;
 
     /**
-     * @var MalUrl
+     * @var string
      */
-    private $malUrl;
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * @var string|null
@@ -60,7 +70,9 @@ class TopCharacter
     {
         $instance = new self();
         $instance->rank = $parser->getRank();
-        $instance->malUrl = $parser->getMalUrl();
+        $instance->malId = $parser->getMalUrl()->getMalId();
+        $instance->title = $parser->getMalUrl()->getTitle();
+        $instance->url = $parser->getMalUrl()->getUrl();
         $instance->nameKanji = $parser->getKanjiName();
         $instance->animeography = $parser->getAnimeography();
         $instance->mangaography = $parser->getMangaography();
@@ -75,7 +87,7 @@ class TopCharacter
      */
     public function __toString(): string
     {
-        return $this->malUrl->getName();
+        return $this->getTitle();
     }
 
     /**
@@ -87,11 +99,27 @@ class TopCharacter
     }
 
     /**
-     * @return MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**

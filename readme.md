@@ -94,6 +94,8 @@ There's a REST service available, as well as a few wrappers built around it.
 - Added Season List parsing
 - Added more Constants
 
+**You'll have to visit the NEW documentation for v2+ for usage**
+
 ### 2.0.0-rc.1 - Aug 5, 18
 - Complete refactor using better dependencies
     - Parser is more robust and stable
@@ -116,8 +118,6 @@ There's a REST service available, as well as a few wrappers built around it.
     - Friends
 - Complete syntax revamp
 - And a whole lot more!
-
-**You'll have to visit the NEW documentation for v2+ for usage**
 
 ## DISCLAIMER
 - Jikan is not affiliated with MyAnimeList.net 

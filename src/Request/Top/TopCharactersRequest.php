@@ -21,7 +21,7 @@ class TopCharactersRequest implements RequestInterface
      *
      * @param int $page
      */
-    public function __construct(int $page = null)
+    public function __construct(int $page = 1)
     {
         $this->page = $page;
     }
@@ -33,6 +33,6 @@ class TopCharactersRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return 'https://myanimelist.net/character.php?'.http_build_query(['limit' => 50 * $this->page]);
+        return 'https://myanimelist.net/character.php?'.http_build_query(['limit' => 50 * ($this->page-1)]);
     }
 }

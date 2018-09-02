@@ -53,11 +53,6 @@ class TopPerson
     private $birthday;
 
     /**
-     * @var string|null
-     */
-    private $image;
-
-    /**
      * Create an instance from an AnimeParser parser
      *
      * @param TopListItemParser $parser
@@ -75,7 +70,7 @@ class TopPerson
         $instance->url = $parser->getMalUrl()->getUrl();
         $instance->nameKanji = $parser->getKanjiName();
         $instance->favorites = $parser->getPeopleFavorites();
-        $instance->image = $parser->getImage();
+        $instance->imageUrl = $parser->getImage();
         $instance->birthday = $parser->getBirthday();
 
         return $instance;
@@ -151,13 +146,5 @@ class TopPerson
     public function getBirthday(): ?\DateTimeImmutable
     {
         return $this->birthday;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getImage(): ?string
-    {
-        return $this->image;
     }
 }

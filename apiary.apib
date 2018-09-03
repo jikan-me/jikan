@@ -1,21 +1,24 @@
 FORMAT: 1A
-HOST: https://api.jikan.moe/
+HOST: https://api.jikan.moe/v3
 
 # Jikan
 [Jikan](https://jikan.moe) is an **Unofficial** MyAnimeList REST-ful API. 
-It's built on the Lumen microframework and uses Redis for caching.
+It's built on the Lumen microframework, uses Redis for caching and is powered by the [Jikan Parser](https://github.com/jikan-me/jikan)
 
-It is powered by [JikanPHP](https://github.com/jikan-me/jikan/) for parsing the data from MyAnimeList.
+Base URL: `https://api.jikan.moe/v3`
 
+[Status](https://status.jikan.moe) | [Bug Report](https://github.com/jikan-me/jikan/issues/new) | **[Discord](https://discord.gg/dDMxFmz)**
 
-Base URL: `http://api.jikan.moe/`
+## Announcement - 2nd Sept, 2019
+**2nd September, 2018**
+REST v3 has been released. There's a lot of changes and additions!
+- [News Post](https://myanimelist.net/forum/?topicid=1616529&show=0#msg50790096)
+- "Extended Requests" are **NO LONGER** supported in v3
+- [MIGRATION NOTES](https://github.com/jikan-me/jikan-rest/blob/master/MIGRATION.MD)
 
-Base URL (SSL): `https://api.jikan.moe/`
-
-## IMPORTANT ANNOUNCEMENT - 11 APRIL 2018
-**Jikan is moving to a new domain! Please use `api.jikan.MOE` in your applciations from now.**
-
-`api.jikan.me` is supported until **May 12th, 2018** - its' expiry.
+From **1st January, 2019**
+- `api.jikan.moe` will point towards the latest v3 endpoint
+- "Extended Request" will be depreciated in V2.
 
 
 
@@ -24,26 +27,34 @@ Base URL (SSL): `https://api.jikan.moe/`
 - [Website](https://jikan.moe)
 - [About](https://jikan.moe/about)
 - [Projects/Apps using Jikan](https://jikan.moe/showcase)
+- [REST API Status](https://status.jikan.moe)
 
 
 - [JikanPHP - Source](https://github.com/jikan-me/jikan/)
 - [JikanPy - Wrapper](https://github.com/AWConant/jikanpy) by Andrew Conant
 - [Jikan.rb - Wrapper](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 - [Jikan.Net - Wrapper](https://github.com/Ervie/jikan.net) by Ervie
+- [JikanJs - Wrapper](https://github.com/zuritor/jikanjs) by zuritor (Sven)
 
 
 # Information
-## Rate Limiting
-To prevent abuse & rate limit blocks from MyAnimeList, there's a rate-limiting of **5,000** requests per IP per 24 hours.
 
-**Note:** As of REST 2.2, cached requests are no longer throttled! This means the rate limit counter won't increase for requests that are already cached!
+## Rate Limiting
+Daily Limit: **Unlimited**
+
+- **30 requests** / minute
+- **2 requests** / second
+
+**Note: Cached requests are NOT throttled**
 
 ### Bulk Requests
 This API serves as a purpose for apps/bots/etc that make consistent amount of requests. **If you're using the API for making bulk requests, keep a 3 second delay between each request. Abuse of the API will result in an IP ban.**
 
-## Additional
-- Anime/Manga/Character/Person Responses are cached for 72 hours (3 days).
-- Search Queries, Top, Schedule, Season endpoints are cached for 6 hours
+## Caching
+All requests are cached for **6 hours**
+
+- `request_cached`(bool) will tell you whether the request is cached
+- `request_cache_expiry` is the cache TTL in seconds
 
 ## Allowed HTTP(s) requests
 <pre>
@@ -53,9 +64,9 @@ GET: All requests are done via GET
 # Response Headers
 - 200 `OK` - the request was successful.
 - 400 `Bad Request` - You've made an invalid request or to an invalid endpoint.
-- 404 `Not Found` - The ID you requested doesn't exist
+- 404 `Not Found` - MyAnimeList responded with a 404
 - 405 `Method Not Allowed` - requested method is not supported for resource.
-- 429 `Too Many Requests` - You've either hit your daily limit or Jikan has hit the rate limit from MyAnimeList
+- 429 `Too Many Requests` - You are being rate limited
 
 # Errors
 If you get an error response, it'll be within the `error` field. Here's an example:
@@ -63,43 +74,30 @@ If you get an error response, it'll be within the `error` field. Here's an examp
 {"error": "Something Happened"}
 ```
 
-Here's a list of errors you can get and what you could do to over come them.
+Here's a list of errors you can get and what you could do to over come them. Appropriate status headers are sent.
 
 ### Invalid extended request / Unsupported parse request
 Check each method for their proper extended requests. For example `/episodes` may exist for anime, but it doesn't exist for manga.
 
-### MyAnimeList Rate Limiting reached
-Jikan has made too many requests to MyAnimeList and there's a rate limit in effect from their side. This only lasts for a few seconds.
-If you're making API calls in bulk, I suggest adding a delay between each request.
-
 ### Invalid or incomplete endpoint
 The endpoint you requested either does not exist or you did not make a proper request.
 
-You won't face this issue if there's enough cache lying around.
-### No ID/Path given
-This message comes from JikanPHP, the core of the REST API. Which pretty much translates to "You haven't provided any anime/manga/character/person `ID` to request.
+### Bad Request
+Same as above
 
-If you get any other error, it's most likely a PHP error from JikanPHP itself. Please file an [issue](https://github.com/jikan-me/jikan/issues) on the GitHub repo.
+### Other errors
+If there's any 404s or the parser is unable to complete the request, you'll get the appropriate status and header for that error.
 
-### Bad Search Request
-You most likely made an invalid search request. Either the type or query is empty. Or perhaps both.
-
-### Server Error
-Something happened on the our side, open an [issue](https://github.com/jikan-me/jikan/issues).
-
-### File does not exist
-The page that Jikan tried to parse on MyAnimeList does not exist and returns a 404.
-This usually happens with item IDs that are non-existent. For example https://myanimelist.net/anime/4 (the anime with this ID does not exist)
 
 # Disclaimer
-- Jikan is in no way affiliated with MyAnimeList.
+- Jikan is not affiliated with MyAnimeList.
 - Jikan is a **free**, open-source API. Use it responsibly.
 - **Any abuse of the REST API instance will lead to temporary IP blocks!**
 
 
 ## Anime [/anime/{id}/{request}/{parameter}]
 A single anime object with all its details
-### Extended Requests
+### Requests
 | Request  | Parameter | Description |
 | ------------- | ------------- | ------------- |
 | characters_staff  | N/A  | Fetches the list of characters & staff members of the anime |
@@ -111,7 +109,7 @@ A single anime object with all its details
 | forum | N/A | Forum topics related to the item |
 | moreinfo | N/A | More info related to the item |
 
-**Remarks:** The field `episode_last_page` will tell you the last page of the paginated episodes list.
+**Remarks:** The field `episodes_last_page` will tell you the last page of the paginated episodes list.
 
 The episodes page on MyAnimeList get paginated after 100 episodes. If there's an anime with more than 100 episodes, you'll have to use the parameter.
 
@@ -230,12 +228,12 @@ Search result object related to the query
 | genre_exclude | boolean : 0/1 | To exlude/include the `genre` you added in your request |
 
 #### Examples
-`https://api.jikan.moe/search/manga/Grand%20Blue/1`
-`https://api.jikan.moe/search/manga?q=Grand%20Blue&page=1`
+`/search/manga/Grand%20Blue/1`
+`/search/manga?q=Grand%20Blue&page=1`
 
 The first way won't work due to the back slash in "Fate/Zero". It's encouraged to use the the GET method below for all queries since it responds more accurately for UTF8 characters and percentage encoding.
 
-`https://api.jikan.moe/search/anime?q=Fate/Zero&page=1`
+`/search/anime?q=Fate/Zero&page=1`
 
 
 ### Search Request Example+Schema [GET]
@@ -296,13 +294,14 @@ Anime of the specified season
         ]
         
 ## Top [/top/{type}/{page}/{subtype}]
-Top items (e.g anime, manga) on MyAnimeList
+Top items on MyAnimeList
 
 **Note:** `subtype` returns a filtered top list of a type `type` item. For example, the top Anime (type) movies (subtype)
+**Note2:** `subtype` is only for `anime` and `manga` types.
 ### Parameters
 | Parameter  | Argument | Description |
 | ------------- | ------------- | ------------- |
-| type | `anime` `manga` | Top items of this type |
+| type | `anime` `manga`, `people` (v3+), `characters` (v3+) | Top items of this type |
 | page (optional) | INTEGER | The Top page on MyAnimeList is paginated offers 50 items per page |
 | subtype (optional) | **Anime:** `airing` `upcoming` `tv` `movie` `ova` `special` **Manga:** `manga` `novels` `oneshots` `doujin` `manhwa` `manhua` **Both:** `bypopularity` `favorite` |
 
@@ -319,6 +318,102 @@ Top items (e.g anime, manga) on MyAnimeList
  
         ]
         
+## Genre [/genre/{type}/{genre_id}/{page}]
+Anime/Manga items (e.g anime, manga) of the genre
+
+**Note:** Genres with their respective IDs are listed [here]()
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| type | `anime` `manga` | Genre of this type |
+| genre_id | INTEGER | Genre ID from MyAnimeList - [Genre Mapping]() |
+| page (optional) | |
+
+### Genre Request Example+Schema [GET]
+
++ Parameters
+    + type (required, String, `anime`) ... Returns anime/manga items of this genre
+    + genre_id (optional, Integer, `1`) ... Genre ID
+    + page (optional, Integer, `1`) ... Pagination
+    
++ Response 200 (application/json)
+
+        [
+ 
+        ] 
+        
+
+        
+## Producer [/producer/{producer_id}/{page}]
+Anime by this Producer/Studio/Licensor
+
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| producer_id | INTEGER | Producer ID from MyAnimeList |
+| page (optional) | |
+
+### Producer Request Example+Schema [GET]
+
++ Parameters
+    + producer_id (optional, Integer, `1`) ... Producer ID
+    + page (optional, Integer, `1`) ... Pagination
+    
++ Response 200 (application/json)
+
+        [
+ 
+        ] 
+    
+## Magazine [/producer/{magazine_id}/{page}]
+Manga by this Magazine/Serializer/Publisher
+
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| magazine_id | INTEGER | Magazine ID from MyAnimeList |
+| page (optional) | |
+
+### Magazine Request Example+Schema [GET]
+
++ Parameters
+    + magazine_id (optional, Integer, `1`) ... Magazine ID
+    + page (optional, Integer, `1`) ... Pagination
+    
++ Response 200 (application/json)
+
+        [
+ 
+        ] 
+        
+## User [/user/{username}/{request}/{argument}]
+User data
+
+### Parameters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| username | string | Username on MyAnimeList |
+| request | `profile`, `history`, `friends` | |
+| data/page (optional) | Additional data for `history` and `friends` |
+
+#### Data/Page
+| Data  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| history | `anime`, `manga` | Returns both combined if these are not passed |
+| friends | INTEGER | Pagination support, returns 404 if there's no next page |
+
+### User Request Example+Schema [GET]
++ Parameters
+    + username (optional, string, `Nekomata1037`) ... Username on MyAnimeList
+    + request (optional, string, `profile`) ... Pagination
+    
++ Response 200 (application/json)
+
+        [
+ 
+        ] 
+        
+        
 ## Meta [/meta/{request}/{type}/{period}]
 Requests related to meta information regarding the Jikan REST Instance.
 Such as the most requested endpoints for a specific period, or just status on the REST API.
@@ -329,6 +424,7 @@ Such as the most requested endpoints for a specific period, or just status on th
 | request | `requests` `status` | |
 | type | `anime` `manga` `character` `person` `search` `top` `schedule` `season`  | This is only for the `requests` endpoint |
 | period  | `today` `weekly` `monthly` | This is only for the `requests` endpoint |
+| offset | int | 1,000 requests are shown per page, you can use the offset to show more |
 
 ### Meta Request Example+Schema [GET]
 

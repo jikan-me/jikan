@@ -31,7 +31,7 @@ class SeasonalRequest implements RequestInterface
      */
     public function __construct(?int $year = null, ?string $season = null)
     {
-        if (!\in_array($season, ['winter', 'spring', 'summer', 'autumn', null], true)) {
+        if (!\in_array($season, ['winter', 'spring', 'summer', 'fall', null], true)) {
             throw new \InvalidArgumentException(sprintf('Season %s is not valid', $season));
         }
         $this->year = $year;

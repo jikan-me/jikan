@@ -201,7 +201,7 @@ A single character object with all its details
         ]
         
         
-## Search [/search/{type}/{query}/{page}]
+## Search [/search/{type}/?q=Fate/Zero&page=1]
 Search result object related to the query
 
 **NOTE: MyAnimeList only processes queries with a minimum of 3 letters**
@@ -209,14 +209,14 @@ Search result object related to the query
 | Parameter  | Argument | Description |
 | ------------- | ------------- | ------------- |
 | type | anime, manga, person, character | Specify where to search |
-| query | STRING | Query you want to search |
+| query **(v2 only)** | STRING | Query you want to search |
 | page | INTEGER | Page number of the results |
 
-### Advanced Search Parameters
+### Advanced Search Parameters (Anime & Manga)
 **Note:** These are search filters which have to be passed as GET `key=value`
 | Parameter  | Argument | Description |
 | ------------- | ------------- | ------------- |
-| q | STRING | For UTF8 characters, percentage encoded and queries including back slashes |
+| q **(required for v3+)** | STRING | For UTF8 characters, percentage encoded and queries including back slashes |
 | page | INTEGER | Page number |
 | type | `tv` `ova` `movie` `special` `ona` `music` `manga` `novel` `oneshot` `doujin` `manhwa` `manhua` | Filter type of results |
 | status | `airing` `completed` `complete` (alias) `tba` `upcoming` (alias) | Filter status of results |
@@ -226,24 +226,30 @@ Search result object related to the query
 | start_date | ISO8601 | Filter start date of results |
 | end_date | ISO8601 | Filter end date of results |
 | genre_exclude | boolean : 0/1 | To exlude/include the `genre` you added in your request |
-| limit | INTEGER | Limits results to the amount you specify |
+
+### Search Filters
+| Parameter  | Argument | Description |
+| ------------- | ------------- | ------------- |
+| limit | INTEGER | Limits item results to the amount specified |
 
 #### Examples
-`/search/manga/Grand%20Blue/1`
-`/search/manga?q=Grand%20Blue&page=1`
+`/search/manga/Grand%20Blue/1` **(DEPRECIATED v3+)**
+
+`/search/manga?q=Grand%20Blue&page=1` **(RECOMMENDED)**
 
 The first way won't work due to the back slash in "Fate/Zero". It's encouraged to use the the GET method below for all queries since it responds more accurately for UTF8 characters and percentage encoding.
 
 `/search/anime?q=Fate/Zero&page=1`
 
+Furthermore, the former method is **depreciated** in v3+. Use `q` for passing queries.
+
+`/search/people/?q=Sawashiro&limit=3`
 
 ### Search Request Example+Schema [GET]
 
 
 + Parameters
-    + type (required, Integer, `anime`) ... Returns result from anime search
-    + query (required, String, `Code`) ... Search query
-    + page (optional, Integer, `1`) ... Page of the results
+    + type (required, String, `anime`) ... Returns result from anime search
    
 + Response 200 (application/json)
 

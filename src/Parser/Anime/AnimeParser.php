@@ -551,8 +551,18 @@ class AnimeParser implements ParserInterface
                 $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]')->text()
             )
         );
+        $items = array_values($items);
 
-        return array_values($items);
+
+        foreach ($items as $key => &$item) {
+            $item = JString::cleanse($item);
+
+            if (preg_match('~No opening themes have been added to this title~', $item)) {
+                unset($items[$key]);
+            }
+        }
+
+        return $items;
     }
 
     /**
@@ -568,8 +578,18 @@ class AnimeParser implements ParserInterface
                 $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]')->text()
             )
         );
+        $items = array_values($items);
 
-        return array_values($items);
+
+        foreach ($items as $key => &$item) {
+            $item = JString::cleanse($item);
+
+            if (preg_match('~No ending themes have been added to this title~', $item)) {
+                unset($items[$key]);
+            }
+        }
+
+        return $items;
     }
 
     /**

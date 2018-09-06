@@ -545,24 +545,20 @@ class AnimeParser implements ParserInterface
      */
     public function getOpeningThemes(): array
     {
+        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]');
+
+        if (preg_match('~No opening themes have been added to this title.~', $node->text())) {
+            return [];
+        }
+
         $items = array_filter(
             preg_split(
                 '/\s?#\d+:\s/m',
-                $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]')->text()
+                $node->text()
             )
         );
-        $items = array_values($items);
 
-
-        foreach ($items as $key => &$item) {
-            $item = JString::cleanse($item);
-
-            if (preg_match('~No opening themes have been added to this title~', $item)) {
-                unset($items[$key]);
-            }
-        }
-
-        return $items;
+        return array_values($items);
     }
 
     /**
@@ -572,24 +568,20 @@ class AnimeParser implements ParserInterface
      */
     public function getEndingThemes(): array
     {
+        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]');
+
+        if (preg_match('~No ending themes have been added to this title~', $node->text())) {
+            return [];
+        }
+
         $items =  array_filter(
             preg_split(
                 '/\s?#\d+:\s/m',
-                $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]')->text()
+                $node->text()
             )
         );
-        $items = array_values($items);
 
-
-        foreach ($items as $key => &$item) {
-            $item = JString::cleanse($item);
-
-            if (preg_match('~No ending themes have been added to this title~', $item)) {
-                unset($items[$key]);
-            }
-        }
-
-        return $items;
+        return array_values($items);
     }
 
     /**

@@ -226,6 +226,7 @@ Search result object related to the query
 | start_date | ISO8601 | Filter start date of results |
 | end_date | ISO8601 | Filter end date of results |
 | genre_exclude | boolean : 0/1 | To exlude/include the `genre` you added in your request |
+| limit | INTEGER | Limits results to the amount you specify |
 
 #### Examples
 `/search/manga/Grand%20Blue/1`
@@ -340,9 +341,7 @@ Anime/Manga items (e.g anime, manga) of the genre
 
         [
  
-        ] 
-        
-
+        ]
         
 ## Producer [/producer/{producer_id}/{page}]
 Anime by this Producer/Studio/Licensor
@@ -363,8 +362,8 @@ Anime by this Producer/Studio/Licensor
 
         [
  
-        ] 
-    
+        ]
+        
 ## Magazine [/producer/{magazine_id}/{page}]
 Manga by this Magazine/Serializer/Publisher
 
@@ -384,7 +383,7 @@ Manga by this Magazine/Serializer/Publisher
 
         [
  
-        ] 
+        ]
         
 ## User [/user/{username}/{request}/{argument}]
 User data
@@ -394,26 +393,40 @@ User data
 | ------------- | ------------- | ------------- |
 | username | string | Username on MyAnimeList |
 | request | `profile`, `history`, `friends` | |
-| data/page (optional) | Additional data for `history` and `friends` |
+| data (optional) | Additional data for `history` and `friends` |
 
-#### Data/Page
+#### Data
 | Data  | Argument | Description |
 | ------------- | ------------- | ------------- |
-| history | `anime`, `manga` | Returns both combined if these are not passed |
-| friends | INTEGER | Pagination support, returns 404 if there's no next page |
+| history | `anime`, `manga` | Returns both combined if neither are passed |
+| friends | INTEGER | Pagination support; Status 404 if there's no friends on the page |
+
+#### Examples
+`/user/nekomata1037` - Parses Profile
+
+`/user/nekomata1037/profile` (alias)
+
+`/user/nekomata1037/history` - Parses user history (anime+manga)
+
+`/user/nekomata1037/history/anime` - Parses user history (anime only)
+
+`/user/nekomata1037/friends` - Parses user friends
+
+The request below will return 404 because I don't have that many friends on MAL to generate a second page.
+`/user/nekomata1037/friends/2` - Parses user friends (from page 2) 
 
 ### User Request Example+Schema [GET]
 + Parameters
-    + username (optional, string, `Nekomata1037`) ... Username on MyAnimeList
-    + request (optional, string, `profile`) ... Pagination
-    
+    + username (required, string, `Nekomata1037`) ... Username on MyAnimeList
+    + request (optional, string, `history`) ... Request
+    + argument (optional, string, `anime`) ... Request argument
+
 + Response 200 (application/json)
 
         [
  
-        ] 
-        
-        
+        ]
+
 ## Meta [/meta/{request}/{type}/{period}]
 Requests related to meta information regarding the Jikan REST Instance.
 Such as the most requested endpoints for a specific period, or just status on the REST API.

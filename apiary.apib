@@ -12,7 +12,7 @@ Base URL: `https://api.jikan.moe/v3`
 ## Announcement - 2nd Sept, 2019
 **2nd September, 2018**
 REST v3 has been released. There's a lot of changes and additions!
-- [News Post](https://myanimelist.net/forum/?topicid=1616529&show=0#msg50790096)
+- [News Post](https://myanimelist.net/forum/?topicid=1616529&show=50#msg55620086)
 - "Extended Requests" are **NO LONGER** supported in v3
 - [MIGRATION NOTES](https://github.com/jikan-me/jikan-rest/blob/master/MIGRATION.MD)
 
@@ -53,7 +53,8 @@ This API serves as a purpose for apps/bots/etc that make consistent amount of re
 ## Caching
 All requests are cached for **6 hours**
 
-- `request_cached`(bool) will tell you whether the request is cached
+- `request_cached` (bool) will tell you whether the request is cached
+
 - `request_cache_expiry` is the cache TTL in seconds
 
 ## Allowed HTTP(s) requests
@@ -136,7 +137,7 @@ The episodes page on MyAnimeList get paginated after 100 episodes. If there's an
 
 ## Manga [/manga/{id}/{request}]
 A single manga object with all its details
-### Extended Requests
+### Requests
 | Request  | Parameter | Description |
 | ------------- | ------------- | ------------- |
 | characters  | N/A  | Fetches the list of characters & staff members of the manga |
@@ -163,7 +164,7 @@ A single manga object with all its details
         
 ## Person [/person/{id}/{request}]
 A single person object with all its details
-### Extended Requests
+### Requests
 | Request  | Parameter | Description |
 | ------------- | ------------- | ------------- |
 | pictures | N/A | Pictures related to the item |
@@ -182,7 +183,7 @@ A single person object with all its details
         
 ## Character [/character/{id}/{request}]
 A single character object with all its details
-### Extended Requests
+### Requests
 | Request  | Parameter | Description |
 | ------------- | ------------- | ------------- |
 | pictures | N/A | Pictures related to the item |

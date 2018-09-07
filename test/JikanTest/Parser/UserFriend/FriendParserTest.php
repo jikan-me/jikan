@@ -47,7 +47,7 @@ class FriendParserTest extends TestCase
     public function it_gets_the_avatar()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/userimages/thumbs/5082596_thumb.jpg',
+            'https://myanimelist.cdn-dena.com/images/userimages/5082596.jpg',
             $this->parser->getAvatar()
         );
     }

@@ -195,10 +195,12 @@ class MangaCardParser implements ParserInterface
         $image = $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
 
         if (null !== $image) {
-            return $image;
+            return Parser::parseImageQuality($image);
         }
 
-        return $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('data-src');
+        return Parser::parseImageQuality(
+            $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('data-src')
+        );
     }
 
     /**

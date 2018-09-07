@@ -87,7 +87,9 @@ class CharacterSearchListItemParser
      */
     public function getImageUrl(): string
     {
-        return $this->crawler->filterXPath('//td[1]/div/a/img')->attr('src');
+        return Parser::parseImageQuality(
+            $this->crawler->filterXPath('//td[1]/div/a/img')->attr('src')
+        );
     }
 
     /**

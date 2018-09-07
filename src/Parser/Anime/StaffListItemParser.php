@@ -91,7 +91,9 @@ class StaffListItemParser implements ParserInterface
      */
     public function getImage(): string
     {
-        return $this->crawler->filterXPath('//img')->attr('data-src');
+        return Parser::parseImageQuality(
+            $this->crawler->filterXPath('//img')->attr('data-src')
+        );
     }
 
     /**

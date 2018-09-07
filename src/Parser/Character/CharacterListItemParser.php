@@ -77,7 +77,9 @@ class CharacterListItemParser implements ParserInterface
      */
     public function getImage(): string
     {
-        return $this->crawler->filterXPath('//img[1]')->attr('data-src');
+        return Parser::parseImageQuality(
+            $this->crawler->filterXPath('//img[1]')->attr('data-src')
+        );
     }
 
     /**

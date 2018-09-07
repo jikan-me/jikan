@@ -41,7 +41,7 @@ class ItemMeta
     public function __construct(string $name, string $url, string $imageUrl)
     {
         $this->url = $url;
-        $this->imageUrl = $imageUrl;
+        $this->imageUrl = Parser::parseImageQuality($imageUrl);
         $this->name = $name;
 
         $this->malId = Parser::idFromUrl($this->url);

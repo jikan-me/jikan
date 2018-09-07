@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Character;
 
+use Jikan\Helper\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -59,7 +60,9 @@ abstract class OgraphyParser
      */
     public function getImage(): string
     {
-        return $this->crawler->filterXPath('//img')->attr('src');
+        return Parser::parseImageQuality(
+            $this->crawler->filterXPath('//img')->attr('src')
+        );
     }
 
     /**

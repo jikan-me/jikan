@@ -73,7 +73,9 @@ class NewsListItemParser implements ParserInterface
             return null;
         }
 
-        return $image->attr('data-src');
+        return Parser::parseImageQuality(
+            $image->attr('data-src')
+        );
     }
 
     /**

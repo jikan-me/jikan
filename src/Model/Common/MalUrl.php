@@ -44,6 +44,10 @@ class MalUrl
      */
     public function getMalId(): int
     {
+        if (preg_match('~^https://myanimelist.net/\w+/(\d+)$~', $this->url, $id)) {
+            return (int) $id[1];
+        }
+
         return
             ctype_digit(
                 preg_replace('#https://myanimelist.net/\w+/(\d+|\w+/(\d+))/.*#', '$1', $this->url)

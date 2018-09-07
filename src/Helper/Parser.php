@@ -135,4 +135,15 @@ class Parser
 
         return $crawler->text();
     }
+
+    /**
+     * @param string
+     *
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public static function parseImageQuality(string $imageUrl) : string
+    {
+        return str_replace(['r/50x70/', 'r/100x140/'], '', $imageUrl);
+    }
 }

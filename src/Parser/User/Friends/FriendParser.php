@@ -46,7 +46,11 @@ class FriendParser implements ParserInterface
      */
     public function getAvatar(): string
     {
-        return $this->crawler->filterXPath('//div/a/img')->attr('src');
+        return str_replace(
+            ['thumbs/', '_thumb'],
+            '',
+            $this->crawler->filterXPath('//div/a/img')->attr('src')
+        );
     }
 
     /**

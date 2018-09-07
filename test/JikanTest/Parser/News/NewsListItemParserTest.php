@@ -49,7 +49,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_image(): void
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/50x78/s/common/uploaded_files/1512787795-f1674d6456f90126448afb689c3224be.jpeg?s=66f1c0637fa3b5b7e90dc0f40f608738',
+            'https://myanimelist.cdn-dena.com/s/common/uploaded_files/1512787795-f1674d6456f90126448afb689c3224be.jpeg?s=66f1c0637fa3b5b7e90dc0f40f608738',
             $this->parser->getImage()
         );
     }

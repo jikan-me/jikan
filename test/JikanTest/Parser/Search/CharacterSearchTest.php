@@ -38,7 +38,7 @@ class CharacterSearchTest extends TestCase
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://myanimelist.cdn-dena.com/r/23x32/images/characters/4/226585.jpg?s=d234ff14c48241f52809684930d5a968", $this->anime->getImageUrl());
+        self::assertEquals("https://myanimelist.cdn-dena.com/images/characters/4/226585.jpg?s=d234ff14c48241f52809684930d5a968", $this->anime->getImageUrl());
     }
 
     /**

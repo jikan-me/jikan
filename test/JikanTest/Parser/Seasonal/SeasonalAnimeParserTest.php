@@ -179,7 +179,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_anime_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/167x242/images/anime/1319/92084.jpg?s=174e33772872a964b6c8b7668b46c2c5',
+            'https://myanimelist.cdn-dena.com/images/anime/1319/92084.jpg?s=174e33772872a964b6c8b7668b46c2c5',
             $this->parser->getAnimeImage()
         );
     }

@@ -60,7 +60,7 @@ class StaffListItemParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/23x32/images/voiceactors/3/33089.jpg?s=81a13198b1b0772a7565e8786b94cfe8',
+            'https://myanimelist.cdn-dena.com/images/voiceactors/3/33089.jpg?s=81a13198b1b0772a7565e8786b94cfe8',
             $this->parser->getImage()
         );
     }

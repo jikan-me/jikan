@@ -45,7 +45,7 @@ class TopCharacterParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/50x78/images/characters/9/310307.jpg?s=1422edf1e44c7b6262386330461eecfd',
+            'https://myanimelist.cdn-dena.com/images/characters/9/310307.jpg?s=1422edf1e44c7b6262386330461eecfd',
             $this->parser->getImage()
         );
     }

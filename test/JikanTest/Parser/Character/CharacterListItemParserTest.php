@@ -69,7 +69,7 @@ class CharacterListItemParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/23x32/images/characters/5/288167.jpg?s=4eb5561fa112e46f87456377a9a997ce',
+            'https://myanimelist.cdn-dena.com/images/characters/5/288167.jpg?s=4eb5561fa112e46f87456377a9a997ce',
             $this->parser->getImage()
         );
     }

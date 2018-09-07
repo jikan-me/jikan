@@ -38,7 +38,7 @@ class AnimeSearchTest extends TestCase
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://myanimelist.cdn-dena.com/r/50x70/images/anime/2/73249.jpg?s=0ddd3d84549e11eda144df33626f97ae", $this->anime->getImageUrl());
+        self::assertEquals("https://myanimelist.cdn-dena.com/images/anime/2/73249.jpg?s=0ddd3d84549e11eda144df33626f97ae", $this->anime->getImageUrl());
     }
 
     /**

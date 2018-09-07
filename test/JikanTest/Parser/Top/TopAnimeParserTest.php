@@ -53,7 +53,7 @@ class TopAnimeParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/50x70/images/anime/3/80136.jpg?s=a3b3a8039e99287c719995e564e3d084',
+            'https://myanimelist.cdn-dena.com/images/anime/3/80136.jpg?s=a3b3a8039e99287c719995e564e3d084',
             $this->parser->getImage()
         );
     }

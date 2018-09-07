@@ -62,7 +62,7 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/50x78/images/voiceactors/3/42163.jpg?s=e7aa2685616307adf04f3d1255e4dba3',
+            'https://myanimelist.cdn-dena.com/images/voiceactors/3/42163.jpg?s=e7aa2685616307adf04f3d1255e4dba3',
             $this->parser->getImage()
         );
     }

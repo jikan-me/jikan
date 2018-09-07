@@ -144,6 +144,10 @@ class Parser
      */
     public static function parseImageQuality(string $imageUrl) : string
     {
-        return str_replace(['r/23x32/', 'r/46x64/', 'r/50x70/', 'r/50x78/', 'r/80x120/', 'r/100x140/', 'r/167x242/'], '', $imageUrl);
+        return str_replace(
+            ['r/23x32/', 'r/46x64/', 'r/50x70/', 'r/50x78/', 'r/80x120/', 'r/100x140/', 'r/167x242/'],
+            '',
+            $imageUrl
+        );
     }
 }

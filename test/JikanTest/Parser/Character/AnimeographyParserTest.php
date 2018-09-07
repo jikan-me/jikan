@@ -56,7 +56,7 @@ class AnimeographyParserTest extends TestCase
     public function it_gets_the_anime_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/23x32/images/anime/7/88019.jpg?s=ff141fea6f6c523c7205ff1957340003',
+            'https://myanimelist.cdn-dena.com/images/anime/7/88019.jpg?s=ff141fea6f6c523c7205ff1957340003',
             $this->parser->getImage()
         );
     }

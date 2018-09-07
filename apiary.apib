@@ -50,6 +50,12 @@ Daily Limit: **Unlimited**
 ### Bulk Requests
 This API serves as a purpose for apps/bots/etc that make consistent amount of requests. **If you're using the API for making bulk requests, keep a 3 second delay between each request. Abuse of the API will result in an IP ban.**
 
+## Response Schema Notes
+- Any property (except arrays) whose value does not exist or is undertermined, will be `null`
+- Any array property whose value does not exist or is undetermined, will be **empty**
+- Any `score` property whose value does not exist or is undetermined, will be `0`
+- All dates and timestamps are in **ISO8601** format and in **UTC**
+
 ## Caching
 All requests are cached for **6 hours**
 
@@ -305,7 +311,9 @@ Anime of the specified season
 Top items on MyAnimeList
 
 **Note:** `subtype` returns a filtered top list of a type `type` item. For example, the top Anime (type) movies (subtype)
-**Note2:** `subtype` is only for `anime` and `manga` types.
+**Note 2:** `subtype` is only for `anime` and `manga` types.
+**Note 3:** Date properties are returned in string as they only consist of the month and year - which is not appropriate for ISO8601
+
 ### Parameters
 | Parameter  | Argument | Description |
 | ------------- | ------------- | ------------- |
@@ -393,7 +401,9 @@ Manga by this Magazine/Serializer/Publisher
         ]
         
 ## User [/user/{username}/{request}/{argument}]
-User data
+User related data
+
+**Note:** About is returned in HTML as MyAnimeList allows custom "about" sections for users that can consist of images, formatting, etc.
 
 ### Parameters
 | Parameter  | Argument | Description |

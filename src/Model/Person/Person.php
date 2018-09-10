@@ -27,7 +27,7 @@ class Person
     public $imageUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $websiteUrl;
 
@@ -37,12 +37,12 @@ class Person
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $givenName;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $familyName;
 
@@ -62,7 +62,7 @@ class Person
     public $memberFavorites;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $about;
 
@@ -135,9 +135,9 @@ class Person
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getWebsiteUrl(): string
+    public function getWebsiteUrl(): ?string
     {
         return $this->websiteUrl;
     }
@@ -151,17 +151,17 @@ class Person
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGivenName(): string
+    public function getGivenName(): ?string
     {
         return $this->givenName;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFamilyName(): string
+    public function getFamilyName(): ?string
     {
         return $this->familyName;
     }
@@ -191,9 +191,9 @@ class Person
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAbout(): string
+    public function getAbout(): ?string
     {
         return $this->about;
     }

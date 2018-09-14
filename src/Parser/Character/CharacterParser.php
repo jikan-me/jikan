@@ -69,17 +69,19 @@ class CharacterParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getNameKanji(): string
+    public function getNameKanji(): ?string
     {
         $kanji = $this->crawler->filterXPath('//div[contains(@class,"breadcrumb")]')
-            ->nextAll()->filter('small')
-            ->text();
+            ->nextAll()->filter('small');
+        if (!$kanji->count()) {
+            return null;
+        }
 
-        return str_replace(['(', ')'], '', $kanji);
+        return str_replace(['(', ')'], '', $kanji->text());
     }
 
     /**

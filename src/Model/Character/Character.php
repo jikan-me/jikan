@@ -27,7 +27,7 @@ class Character
     public $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $nameKanji;
 
@@ -116,9 +116,9 @@ class Character
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getNameKanji(): string
+    public function getNameKanji(): ?string
     {
         return $this->nameKanji;
     }

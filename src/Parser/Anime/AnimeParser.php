@@ -505,14 +505,21 @@ class AnimeParser implements ParserInterface
             ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr')
             ->each(
                 function (Crawler $c) use (&$related) {
-                    $related[JString::cleanse(
+                    $links = $c->filterXPath('//td[2]/a');
+                    $relation = JString::cleanse(
                         str_replace(':', '', $c->filterXPath('//td[1]')->text())
-                    )] = $c->filterXPath('//td[2]/a')
-                        ->each(
-                            function (Crawler $c) {
-                                return (new MalUrlParser($c))->getModel();
-                            }
-                        );
+                    );
+
+                    if ($links->count() == 1 // if it's the only link MAL has listed
+                        && empty($links->first()->text()) // and if its a bugged/empty link
+                    ) {
+                        $related[$relation] = [];
+                        return;
+                    }
+
+                    $related[$relation] = $links->each(function (Crawler $c) {
+                        return (new MalUrlParser($c))->getModel();
+                    });
                 }
             );
 

@@ -50,7 +50,11 @@ class AnimeStatsParser
             return null;
         }
 
-        return Parser::removeChildNodes($node)->text();
+        return str_replace(
+            ',',
+            '',
+            Parser::removeChildNodes($node)->text()
+        );
     }
 
     /**
@@ -83,7 +87,7 @@ class AnimeStatsParser
             return null;
         }
 
-        return $node->text();
+        return str_replace(',', '', $node->text());
     }
 
     /**
@@ -99,7 +103,7 @@ class AnimeStatsParser
             return null;
         }
 
-        return $node->text();
+        return str_replace(',', '', $node->text());
     }
 
     /**
@@ -115,7 +119,7 @@ class AnimeStatsParser
             return null;
         }
 
-        return $node->text();
+        return str_replace(',', '', $node->text());
     }
 
     /**
@@ -131,7 +135,7 @@ class AnimeStatsParser
             return null;
         }
 
-        return $node->text();
+        return str_replace(',', '', $node->text());
     }
 
     /**
@@ -147,7 +151,7 @@ class AnimeStatsParser
             return null;
         }
 
-        return $node->text();
+        return str_replace(',', '', $node->text());
     }
 
     /**
@@ -163,7 +167,7 @@ class AnimeStatsParser
             return null;
         }
 
-        return $node->text();
+        return str_replace(',', '', $node->text());
     }
 
     /**
@@ -179,7 +183,7 @@ class AnimeStatsParser
             return null;
         }
 
-        return $node->text();
+        return str_replace(',', '', $node->text());
     }
 
     /**

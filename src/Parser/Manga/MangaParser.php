@@ -442,6 +442,13 @@ class MangaParser implements ParserInterface
                         return;
                     }
 
+                    // Remove empty/bugged links #justMALThings
+                    foreach ($links as $node) {
+                        if (empty($node->textContent)) {
+                            $node->parentNode->removeChild($node);
+                        }
+                    }
+
                     $related[$relation] = $links->each(function (Crawler $c) {
                         return (new MalUrlParser($c))->getModel();
                     });

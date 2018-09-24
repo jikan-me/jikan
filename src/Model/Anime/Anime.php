@@ -40,12 +40,12 @@ class Anime
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $titleEnglish;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $titleJapanese;
 
@@ -55,12 +55,12 @@ class Anime
     private $titleSynonyms;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $source;
 
@@ -70,7 +70,7 @@ class Anime
     private $episodes;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $status;
 
@@ -85,42 +85,42 @@ class Anime
     private $aired;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $duration;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $rating;
 
     /**
-     * @var string
+     * @var float|null
      */
     private $score;
 
     /**
-     * @var string
+     * @var int|null
      */
     private $scoredBy;
 
     /**
-     * @var string
+     * @var int|null
      */
     private $rank;
 
     /**
-     * @var string
+     * @var int|null
      */
     private $popularity;
 
     /**
-     * @var string
+     * @var int|null
      */
     private $members;
 
     /**
-     * @var string
+     * @var int|null
      */
     private $favorites;
 
@@ -130,17 +130,17 @@ class Anime
     private $synopsis;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $background;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $premiered;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $broadcast;
 
@@ -253,17 +253,17 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitleEnglish(): string
+    public function getTitleEnglish(): ?string
     {
         return $this->titleEnglish;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitleJapanese(): string
+    public function getTitleJapanese(): ?string
     {
         return $this->titleJapanese;
     }
@@ -285,7 +285,7 @@ class Anime
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTrailerUrl(): ?string
     {
@@ -293,17 +293,17 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }
@@ -317,9 +317,9 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -349,57 +349,57 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRating(): string
+    public function getRating(): ?string
     {
         return $this->rating;
     }
 
     /**
-     * @return string
+     * @return float|null
      */
-    public function getScore(): string
+    public function getScore(): ?float
     {
         return $this->score;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getScoredBy(): string
+    public function getScoredBy(): ?int
     {
         return $this->scoredBy;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getRank(): string
+    public function getRank(): ?int
     {
         return $this->rank;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getPopularity(): string
+    public function getPopularity(): ?int
     {
         return $this->popularity;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getMembers(): string
+    public function getMembers(): ?int
     {
         return $this->members;
     }
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getFavorites(): string
+    public function getFavorites(): ?int
     {
         return $this->favorites;
     }
@@ -413,25 +413,25 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBackground(): string
+    public function getBackground(): ?string
     {
         return $this->background;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getPremiered(): string
+    public function getPremiered(): ?string
     {
         return $this->premiered;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBroadcast(): string
+    public function getBroadcast(): ?string
     {
         return $this->broadcast;
     }

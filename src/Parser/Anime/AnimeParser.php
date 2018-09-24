@@ -81,7 +81,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getSynopsis(): ?string
@@ -214,7 +214,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getPremiered(): ?string
@@ -232,7 +232,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getBroadcast(): ?string
@@ -312,7 +312,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getSource(): ?string
@@ -351,7 +351,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getDuration(): ?string
@@ -373,7 +373,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getRating(): ?string
@@ -391,7 +391,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return float
+     * @return float|null
      * @throws \InvalidArgumentException
      */
     public function getScore(): ?float
@@ -400,10 +400,10 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return float
+     * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getScoredBy(): ?float
+    public function getScoredBy(): ?int
     {
         $rating = Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingCount"]'));
         if ($rating === null) {
@@ -414,7 +414,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
     public function getRank(): ?int
@@ -440,7 +440,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
     public function getPopularity(): ?int
@@ -458,7 +458,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
     public function getMembers(): ?int
@@ -476,7 +476,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
     public function getFavorites(): ?int
@@ -527,7 +527,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -601,7 +601,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getAnimeAiredString(): ?string
@@ -613,7 +613,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
     public function getPreview(): ?string

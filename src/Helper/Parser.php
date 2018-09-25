@@ -75,6 +75,7 @@ class Parser
         if (preg_match('/^\d{4}$/', $date)) {
             return \DateTimeImmutable::createFromFormat('Y-m-d', $date.'-01-01', new \DateTimeZone('UTC'));
         }
+
         try {
             return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
         } catch (\Exception $e) {

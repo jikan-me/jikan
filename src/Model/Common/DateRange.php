@@ -63,4 +63,34 @@ class DateRange
 
         return Parser::parseDate($date);
     }
+
+    /**
+     * @return DateProp
+     */
+    public function getFromProp(): ?DateProp
+    {
+        $date = $this->date;
+        if (strpos($date, ' to ') === false || strpos($date, ' to ?') !== false) {
+            return null;
+        }
+        $date = explode(' to ', $date)[0];
+
+        return new DateProp($date);
+    }
+
+    /**
+     * @return DateProp
+     */
+    public function getUntilProp(): ?DateProp
+    {
+        $date = $this->date;
+        if (strpos($date, ' to ') === false || strpos($date, ' to ?') !== false) {
+            return null;
+        }
+        $date = explode(' to ', $date)[1];
+
+        return new DateProp($date);
+    }
+
+
 }

@@ -162,7 +162,7 @@ class MangaListItem
         $instance->priority = $item->priority_string;
         $instance->addedToList = $item->is_added_to_list;
 
-        foreach($item->manga_magazines as $magazine) {
+        foreach ($item->manga_magazines as $magazine) {
             $instance->magazines[] = new MagazineMeta($magazine->id, $magazine->name);
         }
 
@@ -352,5 +352,4 @@ class MangaListItem
     {
         return $this->magazines;
     }
-
 }

@@ -202,11 +202,11 @@ class AnimeListItem
             $instance->seasonYear = $item->anime_season->year;
         }
 
-        foreach($item->anime_studios as $studio) {
+        foreach ($item->anime_studios as $studio) {
             $instance->studios[] = new StudioMeta($studio->id, $studio->name);
         }
 
-        foreach($item->anime_licensors as $licensor) {
+        foreach ($item->anime_licensors as $licensor) {
             $instance->licensors[] = new LicensorMeta($licensor->id, $licensor->name);
         }
 
@@ -436,5 +436,4 @@ class AnimeListItem
     {
         return $this->licensors;
     }
-
 }

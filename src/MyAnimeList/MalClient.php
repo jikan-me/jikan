@@ -730,7 +730,6 @@ class MalClient
                 $model[] = Model\User\AnimeListItem::factory($item);
             }
             return $model;
-
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -755,7 +754,6 @@ class MalClient
                 $model[] = Model\User\MangaListItem::factory($item);
             }
             return $model;
-
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

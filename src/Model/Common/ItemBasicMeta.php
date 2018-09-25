@@ -54,5 +54,4 @@ class ItemBasicMeta
     {
         return $this->name;
     }
-
 }

@@ -36,7 +36,7 @@ class Manga
     private $title;
 
     /**
-     * @var null|string
+     * @var string|null
      */
     private $titleEnglish;
 
@@ -46,7 +46,7 @@ class Manga
     private $titleSynonyms;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $titleJapanese;
 
@@ -61,7 +61,7 @@ class Manga
     private $imageUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $type;
 
@@ -86,32 +86,32 @@ class Manga
     private $published;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $rank;
 
     /**
-     * @var float
+     * @var float|null
      */
     private $score;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $scoredBy;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $popularity;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $members;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $favorites;
 
@@ -121,7 +121,7 @@ class Manga
     private $synopsis;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $background;
 
@@ -213,7 +213,7 @@ class Manga
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTitleEnglish(): ?string
     {
@@ -229,17 +229,17 @@ class Manga
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitleJapanese(): string
+    public function getTitleJapanese(): ?string
     {
         return $this->titleJapanese;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -253,9 +253,9 @@ class Manga
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -293,49 +293,49 @@ class Manga
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRank(): int
+    public function getRank(): ?int
     {
         return $this->rank;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getScore(): float
+    public function getScore(): ?float
     {
         return $this->score;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getScoredBy(): int
+    public function getScoredBy(): ?int
     {
         return $this->scoredBy;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getPopularity(): int
+    public function getPopularity(): ?int
     {
         return $this->popularity;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMembers(): int
+    public function getMembers(): ?int
     {
         return $this->members;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getFavorites(): int
+    public function getFavorites(): ?int
     {
         return $this->favorites;
     }
@@ -349,9 +349,9 @@ class Manga
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getBackground(): string
+    public function getBackground(): ?string
     {
         return $this->background;
     }

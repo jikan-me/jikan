@@ -146,6 +146,11 @@ class AnimeListItem
     private $priority;
 
     /**
+     * @var bool
+     */
+    private $addedToList;
+
+    /**
      * @var array
      */
     private $studios = [];
@@ -190,6 +195,7 @@ class AnimeListItem
         $instance->days = $item->days_string;
         $instance->storage = empty($item->storage_string) ? null : $item->storage_string;
         $instance->priority = $item->priority_string;
+        $instance->addedToList = $item->is_added_to_list;
 
         if (isset($item->anime_season->season)) {
             $instance->seasonName = $item->anime_season->season;

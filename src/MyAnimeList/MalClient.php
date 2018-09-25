@@ -735,4 +735,29 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param Request\User\UserMangaListRequest $request
+     *
+     * @return Model\User\MangaListItem[]
+     * @throws ParserException
+     */
+    public function getUserMangaList(Request\User\UserMangaListRequest $request): array
+    {
+        $client = new \GuzzleHttp\Client();
+
+        try {
+            $response = $client->get($request->getPath());
+            $list = json_decode($response->getBody()->getContents());
+
+            $model = [];
+            foreach ($list as $item) {
+                $model[] = Model\User\MangaListItem::factory($item);
+            }
+            return $model;
+
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

@@ -6,7 +6,7 @@ use Jikan\Helper\Parser;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class AnimeParserTest
+ * Class ParserTest
  */
 class ParserTest extends TestCase
 {

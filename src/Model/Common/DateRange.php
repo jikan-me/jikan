@@ -91,6 +91,4 @@ class DateRange
 
         return new DateProp($date);
     }
-
-
 }

@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Common;
 
-
 class DateProp
 {
 
@@ -81,5 +80,4 @@ class DateProp
     {
         return $this->year;
     }
-
 }

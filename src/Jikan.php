@@ -567,7 +567,7 @@ class Jikan
 
     /**
      * @param string      $username
-     * @param null|string $type
+     * @param string|null $type
      *
      * @return array
      * @throws ParserException
@@ -576,6 +576,21 @@ class Jikan
     {
         return $this->myanimelist->getUserHistory(
             new Request\User\UserHistoryRequest($username, $type)
+        );
+    }
+
+    /**
+     * @param string    $username
+     * @param int       $page
+     * @param int       $status
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function UserAnimeList(string $username, int $page = 1, int $status = 7): array
+    {
+        return $this->myanimelist->getUserAnimeList(
+            new Request\User\UserAnimeListRequest($username, $page, $status)
         );
     }
 }

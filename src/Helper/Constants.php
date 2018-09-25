@@ -171,4 +171,20 @@ class Constants
     public const GENRE_MANGA_JOSEI = 43;
     public const GENRE_MANGA_DOUJINSHI = 43;
     public const GENRE_MANGA_GENDER_BENDER = 44;
+
+    public const USER_ANIME_LIST_ALL = 7;
+    public const USER_ANIME_LIST_WATCHING = 1;
+    public const USER_ANIME_LIST_COMPLETED = 2;
+    public const USER_ANIME_LIST_ONHOLD = 3;
+    public const USER_ANIME_LIST_DROPPED = 4;
+    public const USER_ANIME_LIST_PTW = 6;
+    public const USER_ANIME_LIST_PLANTOWATCH = 6;
+
+    public const USER_MANGA_LIST_ALL = 7;
+    public const USER_MANGA_LIST_READING = 1;
+    public const USER_MANGA_LIST_COMPLETED = 2;
+    public const USER_MANGA_LIST_ONHOLD = 3;
+    public const USER_MANGA_LIST_DROPPED = 4;
+    public const USER_MANGA_LIST_PTR = 6;
+    public const USER_MANGA_LIST_PLANTOREAD = 6;
 }

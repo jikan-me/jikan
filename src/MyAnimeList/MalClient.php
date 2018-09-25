@@ -11,6 +11,7 @@
 
 namespace Jikan\MyAnimeList;
 
+use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Exception\ParserException;
 use Jikan\Goutte\GoutteWrapper;
@@ -705,6 +706,31 @@ class MalClient
             $parser = new Parser\User\History\HistoryParser($crawler);
 
             return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\User\UserAnimeListRequest $request
+     *
+     * @return Model\User\AnimeListItem[]
+     * @throws ParserException
+     */
+    public function getUserAnimeList(Request\User\UserAnimeListRequest $request): array
+    {
+        $client = new \GuzzleHttp\Client();
+
+        try {
+            $response = $client->get($request->getPath());
+            $list = json_decode($response->getBody()->getContents());
+
+            $model = [];
+            foreach ($list as $item) {
+                $model[] = Model\User\AnimeListItem::factory($item);
+            }
+            return $model;
+
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

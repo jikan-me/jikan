@@ -114,6 +114,28 @@ class Parser
     }
 
     /**
+     * @param string|null $date
+     *
+     * @return \DateTimeImmutable|null
+     */
+    public static function parseDateDMY(?string $date): ?\DateTimeImmutable
+    {
+        if ($date === '-' || $date === null) {
+            return null;
+        }
+
+        $dateArray = explode('-', $date);
+
+        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === date('y')) {
+            return null;
+        }
+
+        $date = str_replace('??', '01', $date);
+
+        return \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC')) ?: null;
+    }
+
+    /**
      * @param string $date
      *
      * @return \DateTimeImmutable|null

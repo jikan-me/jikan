@@ -23,6 +23,10 @@ class ParserTest extends TestCase
         self::assertInstanceOf(\DateTimeImmutable::class, $date);
         self::assertEquals('2004-12-01', $date->format('Y-m-d'));
 
+        $date = Parser::parseDate('Dec, 2004');
+        self::assertInstanceOf(\DateTimeImmutable::class, $date);
+        self::assertEquals('2004-12-01', $date->format('Y-m-d'));
+
         $date = Parser::parseDate('?');
         self::assertNull($date);
     }

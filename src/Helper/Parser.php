@@ -73,7 +73,15 @@ class Parser
     public static function parseDate(string $date): ?\DateTimeImmutable
     {
         if (preg_match('/^\d{4}$/', $date)) {
-            return \DateTimeImmutable::createFromFormat('Y-m-d', $date.'-01-01', new \DateTimeZone('UTC'));
+            return \DateTimeImmutable::createFromFormat('!Y-m-d', $date.'-01-01', new \DateTimeZone('UTC'));
+        }
+
+        if (preg_match('/(\w{3}), (\d{4})/', $date, $matches)) {
+            return \DateTimeImmutable::createFromFormat(
+                '!M d, Y',
+                "{$matches[1]} 01, {$matches[2]}",
+                new \DateTimeZone('UTC')
+            );
         }
 
         try {

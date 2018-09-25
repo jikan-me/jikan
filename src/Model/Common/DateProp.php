@@ -9,12 +9,19 @@ class DateProp
     private $month;
     private $year;
 
-    public function __construct(string $date)
+    public function __construct(string $date = null)
     {
-        $this->parse($date);
+        $date === null || $this->parse($date);
     }
 
-    public function parse(string $date) : void
+    public static function fromFactory(?int $day, ?int $month, ?int $year)
+    {
+        $instance = new self();
+        $instance->set($day, $month, $year);
+        return $instance;
+    }
+
+    private function parse(string $date) : void
     {
         if (preg_match('/^\d{4}$/', $date)) {
             $this->set(null, null, (int) $date);

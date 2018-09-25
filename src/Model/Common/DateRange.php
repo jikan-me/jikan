@@ -67,11 +67,11 @@ class DateRange
     /**
      * @return DateProp
      */
-    public function getFromProp(): ?DateProp
+    public function getFromProp(): DateProp
     {
         $date = $this->date;
-        if (strpos($date, ' to ') === false || strpos($date, ' to ?') !== false) {
-            return null;
+        if (strpos($date, ' to ') === false) {
+            return DateProp::fromFactory(null, null, null);
         }
         $date = explode(' to ', $date)[0];
 
@@ -81,11 +81,11 @@ class DateRange
     /**
      * @return DateProp
      */
-    public function getUntilProp(): ?DateProp
+    public function getUntilProp(): DateProp
     {
         $date = $this->date;
         if (strpos($date, ' to ') === false || strpos($date, ' to ?') !== false) {
-            return null;
+            return DateProp::fromFactory(null, null, null);
         }
         $date = explode(' to ', $date)[1];
 

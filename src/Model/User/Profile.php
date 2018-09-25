@@ -33,7 +33,7 @@ class Profile
     private $lastOnline;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $gender;
 
@@ -43,7 +43,7 @@ class Profile
     private $birthday;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $location;
 
@@ -68,7 +68,7 @@ class Profile
     private $favorites;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $about;
 
@@ -115,9 +115,9 @@ class Profile
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getGender(): string
+    public function getGender(): ?string
     {
         return $this->gender;
     }
@@ -171,9 +171,9 @@ class Profile
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAbout(): string
+    public function getAbout(): ?string
     {
         return $this->about;
     }

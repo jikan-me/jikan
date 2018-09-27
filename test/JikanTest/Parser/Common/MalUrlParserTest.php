@@ -25,8 +25,9 @@ class MalUrlParserTest extends TestCase
 
     public function testMalIdParserException()
     {
-        $this->expectException(\RuntimeException::class);
-        MalUrlParser::parseId('https://myanimelist.net/anime/bla');
+//        $this->expectException(\RuntimeException::class);
+//        MalUrlParser::parseId('https://myanimelist.net/anime/bla');
+        $this->assertEquals(0, MalUrlParser::parseId('https://myanimelist.net/anime/blah'));
     }
 
     /**

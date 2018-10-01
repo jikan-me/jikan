@@ -87,10 +87,9 @@ There's a REST service available, as well as a few wrappers built around it.
 
 ## Changelog
 
-### 2.1.0 - Oct 1, 18
+### v2.1.0 stable - Oct 1, 18
 - **[User]** Add Anime/Manga list parsing
 - Bug fixes for MalId parsing
-
 - [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 
 

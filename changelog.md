@@ -1,6 +1,6 @@
 ## Changelog
 
-### 2.1.0 - Oct 1, 18
+### 2.1.0 stable - Oct 1, 18
 - **[User]** Add Anime/Manga list parsing
 - Bug fixes for MalId parsing
 

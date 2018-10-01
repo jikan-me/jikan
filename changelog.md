@@ -1,5 +1,23 @@
 ## Changelog
 
+### 2.1.0 - Oct 1, 18
+- **[User]** Add Anime/Manga list parsing
+- Bug fixes for MalId parsing
+
+### 2.0.0 - Sep 25, 18
+- Lots of bug fixes
+- Schema fixes
+- All images URLs returned are now HQ
+- Added DateProp for DateRange
+
+### 2.0.0-rc.2 - Aug 30, 18
+- A lot of bug fixes
+- A lot of Schema improvements and fixes
+- More tests coverage (fixtures added a dev dependencies)
+- Reviewed syntax & usage
+- Added Season List parsing
+- Added more Constants
+
 ### 2.0.0-rc.1 - Aug 5, 18
 - Complete refactor using better dependencies
     - Parser is more robust and stable

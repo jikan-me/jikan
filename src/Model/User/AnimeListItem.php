@@ -202,12 +202,16 @@ class AnimeListItem
             $instance->seasonYear = $item->anime_season->year;
         }
 
-        foreach ($item->anime_studios as $studio) {
-            $instance->studios[] = new StudioMeta($studio->id, $studio->name);
+        if (!is_null($item->anime_studios)) {
+            foreach ($item->anime_studios as $studio) {
+                $instance->studios[] = new StudioMeta($studio->id, $studio->name);
+            }
         }
 
-        foreach ($item->anime_licensors as $licensor) {
-            $instance->licensors[] = new LicensorMeta($licensor->id, $licensor->name);
+        if (!is_null($item->anime_licensors)) {
+            foreach ($item->anime_licensors as $licensor) {
+                $instance->licensors[] = new LicensorMeta($licensor->id, $licensor->name);
+            }
         }
 
         return $instance;

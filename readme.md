@@ -62,7 +62,7 @@ There's a REST service available, as well as a few wrappers built around it.
     - Pagination Support
     - Advanced Search (Filters)
 - Seasonal Anime (Season + Year)
-- Season List
+- Season List/Archive
 - Anime Scheduling (for current season)
 - Top
     - Anime
@@ -83,41 +83,16 @@ There's a REST service available, as well as a few wrappers built around it.
         - All
         - Anime
         - Manga
+    - Anime & Manga Lists
 
 ## Changelog
 
-### 2.0.0-rc.2 - Aug 30, 18
-- A lot of bug fixes
-- A lot of Schema improvements and fixes
-- More tests coverage (fixtures added a dev dependencies)
-- Reviewed syntax & usage
-- Added Season List parsing
-- Added more Constants
+### 2.1.0 - Oct 1, 18
+- **[User]** Add Anime/Manga list parsing
+- Bug fixes for MalId parsing
 
-**You'll have to visit the NEW documentation for v2+ for usage**
+- [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 
-### 2.0.0-rc.1 - Aug 5, 18
-- Complete refactor using better dependencies
-    - Parser is more robust and stable
-    - Library now implements PSR2
-- Clean data values
-- Added **Season List**
-- Added **Top**
-    - Characters
-    - People
-- Added **Genre**
-    - Anime listing by genre
-    - Manga listing by genre
-- Added **Producers**
-    - Anime listing by producer
-- Added **Magazine**
-    - Manga listing by magazine
-- Added **User**
-    - Profile
-    - History
-    - Friends
-- Complete syntax revamp
-- And a whole lot more!
 
 ## DISCLAIMER
 - Jikan is not affiliated with MyAnimeList.net 

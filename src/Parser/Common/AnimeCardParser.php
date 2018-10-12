@@ -148,7 +148,7 @@ class AnimeCardParser implements ParserInterface
         }
 
         $text = JString::cleanse($text->text());
-        preg_match('/^([\w\.]+)/', $text, $matches);
+        preg_match('/^([a-zA-Z-\.]+)/', $text, $matches);
 
         return $matches[1];
     }

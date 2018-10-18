@@ -58,6 +58,26 @@ class PersonSearchListItem
         return $instance;
     }
 
+    /**
+     * @param Parser\Search\PersonSearchPersonParser $parser
+     *
+     * @return PersonSearchListItem
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public static function fromPersonParser(Parser\Search\PersonSearchPersonParser $parser): self
+    {
+        $instance = new self();
+
+        $instance->url = $parser->getUrl();
+        $instance->malId = \Jikan\Helper\Parser::idFromUrl($instance->url);
+        $instance->imageUrl = $parser->getImageUrl();
+        $instance->name = $parser->getName();
+        $instance->alternativeNames = $parser->getAlternativeNames();
+
+        return $instance;
+    }
+
 
     /**
      * @return int

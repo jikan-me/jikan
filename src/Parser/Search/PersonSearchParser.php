@@ -46,7 +46,7 @@ class PersonSearchParser
      */
     public function getResults(): array
     {
-        return $this->crawler
+        $data = $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr[1]')
             ->nextAll()
             ->each(
@@ -54,6 +54,18 @@ class PersonSearchParser
                     return (new PersonSearchListItemParser($c))->getModel();
                 }
             );
+
+        // If only a single result is found, the $data array will be empty.
+        if (empty($data)) {
+            $data = $this->crawler
+                ->each(
+                    function (Crawler $c) {
+                        return (new PersonSearchPersonParser($c))->getModel();
+                    }
+                );
+        }
+            
+        return $data;
     }
 
     /**

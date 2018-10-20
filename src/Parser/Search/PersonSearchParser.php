@@ -4,6 +4,7 @@ namespace Jikan\Parser\Search;
 
 use Jikan\Model\Search\PersonSearch;
 use Jikan\Model\Search\PersonSearchListItem;
+use Jikan\Parser\Person\PersonParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -60,7 +61,8 @@ class PersonSearchParser
             $data = $this->crawler
                 ->each(
                     function (Crawler $c) {
-                        return (new PersonSearchPersonParser($c))->getModel();
+//                        return (new PersonSearchPersonParser($c))->getModel();
+                        return PersonSearchListItem::fromPersonParser(new PersonParser($c));
                     }
                 );
         }

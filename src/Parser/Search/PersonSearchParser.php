@@ -61,7 +61,7 @@ class PersonSearchParser
             $data = $this->crawler
                 ->each(
                     function (Crawler $c) {
-//                        return (new PersonSearchPersonParser($c))->getModel();
+                    //                        return (new PersonSearchPersonParser($c))->getModel();
                         return PersonSearchListItem::fromPersonParser(new PersonParser($c));
                     }
                 );

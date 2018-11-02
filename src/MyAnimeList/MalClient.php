@@ -758,4 +758,23 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+
+    /**
+     * @param Request\Anime\AnimeRecentlyUpdatedByUsers$request
+     *
+     * @return Model\Anime\AnimeRecentlyUpdatedByUsersItem[]
+     * @throws ParserException
+     */
+    public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsers $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Anime\AnimeRecentlyUpdatedByUsersParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

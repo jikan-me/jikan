@@ -593,4 +593,18 @@ class Jikan
             new Request\User\UserAnimeListRequest($username, $page, $status)
         );
     }
+
+    /**
+     * @param int       $id
+     * @param int       $page
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function AnimeRecentlyUpdatedByUsers(int $id, int $page = 1): array
+    {
+        return $this->myanimelist->getAnimeRecentlyUpdatedByUsers(
+            new Request\Anime\AnimeRecentlyUpdatedByUsers($id, $page)
+        );
+    }
 }

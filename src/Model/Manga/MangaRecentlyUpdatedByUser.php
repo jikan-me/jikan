@@ -1,15 +1,15 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Manga;
 
-use Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersListParser;
+use Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersListParser;
 
 /**
- * Class AnimeRecentlyUpdatedByUser
+ * Class MangaRecentlyUpdatedByUser
  *
- * @package Jikan\Model\Anime\AnimeRecentlyUpdatedByUser
+ * @package Jikan\Model\Manga\MangaRecentlyUpdatedByUser
  */
-class AnimeRecentlyUpdatedByUser
+class MangaRecentlyUpdatedByUser
 {
     /**
      * @var string
@@ -39,12 +39,22 @@ class AnimeRecentlyUpdatedByUser
     /**
      * @var int|null
      */
-    private $episodesSeen;
+    private $volumesRead;
 
     /**
      * @var int|null
      */
-    private $episodesTotal;
+    private $volumesTotal;
+
+    /**
+     * @var int|null
+     */
+    private $chaptersRead;
+
+    /**
+     * @var int|null
+     */
+    private $chaptersTotal;
 
     /**
      * @var \DateTimeImmutable
@@ -52,12 +62,12 @@ class AnimeRecentlyUpdatedByUser
     private $date;
 
     /**
-     * @param AnimeRecentlyUpdatedByUsersListParser $parser
+     * @param MangaRecentlyUpdatedByUsersListParser $parser
      *
      * @return self
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(AnimeRecentlyUpdatedByUsersListParser $parser): self
+    public static function fromParser(MangaRecentlyUpdatedByUsersListParser $parser): self
     {
         $instance = new self();
 
@@ -66,8 +76,10 @@ class AnimeRecentlyUpdatedByUser
         $instance->imageUrl = $parser->getImageUrl();
         $instance->score = $parser->getScore();
         $instance->status = $parser->getStatus();
-        $instance->episodesSeen = $parser->getEpisodesSeen();
-        $instance->episodesTotal = $parser->getEpisodesTotal();
+        $instance->volumesRead = $parser->getVolumesRead();
+        $instance->volumesTotal = $parser->getVolumesTotal();
+        $instance->chaptersRead = $parser->getChaptersRead();
+        $instance->chaptersTotal = $parser->getChaptersTotal();
         $instance->date = $parser->getDate();
 
         return $instance;
@@ -116,17 +128,33 @@ class AnimeRecentlyUpdatedByUser
     /**
      * @return int|null
      */
-    public function getEpisodesSeen(): ?int
+    public function getVolumesRead(): ?int
     {
-        return $this->episodesSeen;
+        return $this->volumesRead;
     }
 
     /**
      * @return int|null
      */
-    public function getEpisodesTotal(): ?int
+    public function getVolumesTotal(): ?int
     {
-        return $this->episodesTotal;
+        return $this->volumesTotal;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getChaptersRead(): ?int
+    {
+        return $this->chaptersRead;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getChaptersTotal(): ?int
+    {
+        return $this->chaptersTotal;
     }
 
     /**

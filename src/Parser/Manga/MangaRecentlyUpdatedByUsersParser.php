@@ -1,16 +1,16 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Manga;
 
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeRecentlyUpdatedByUsersParser
+ * Class MangaRecentlyUpdatedByUsersParser
  *
- * @package Jikan\Parser\Anime
+ * @package Jikan\Parser\Manag
  */
-class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
+class MangaRecentlyUpdatedByUsersParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -18,7 +18,7 @@ class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeRecentlyUpdatedByUsersParser constructor.
+     * MangaRecentlyUpdatedByUsersParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -38,7 +38,7 @@ class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
             ->filterXPath('//table[@class="table-recently-updated"]/tr[1]')
             ->nextAll()
             ->each(function ($c) {
-                return (new AnimeRecentlyUpdatedByUsersListParser($c))->getModel();
+                return (new MangaRecentlyUpdatedByUsersListParser($c))->getModel();
             });
     }
 }

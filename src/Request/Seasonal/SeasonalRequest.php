@@ -22,6 +22,11 @@ class SeasonalRequest implements RequestInterface
     private $season;
 
     /**
+     * @var bool
+     */
+    private $later;
+
+    /**
      * SeasonalRequest constructor.
      *
      * @param ?int    $year
@@ -29,13 +34,15 @@ class SeasonalRequest implements RequestInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(?int $year = null, ?string $season = null)
+    public function __construct(?int $year = null, ?string $season = null, bool $later = false)
     {
         if (!\in_array($season, ['winter', 'spring', 'summer', 'fall', null], true)) {
             throw new \InvalidArgumentException(sprintf('Season %s is not valid', $season));
         }
+
         $this->year = $year;
         $this->season = $season;
+        $this->later = $later;
     }
 
     /**
@@ -43,9 +50,14 @@ class SeasonalRequest implements RequestInterface
      */
     public function getPath(): string
     {
+        if ($this->later) {
+            return sprintf('https://myanimelist.net/anime/season/later');
+        }
+
         if (is_null($this->year) || is_null($this->season)) {
             return sprintf('https://myanimelist.net/anime/season');
         }
+
         return sprintf('https://myanimelist.net/anime/season/%s/%s', $this->year, $this->season);
     }
 }

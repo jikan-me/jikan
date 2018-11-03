@@ -15,12 +15,12 @@ class Seasonal
     /**
      * @var string
      */
-    public $season_name;
+    public $seasonName;
 
     /**
      * @var int
      */
-    public $season_year;
+    public $seasonYear;
 
     /**
      * @var array|SeasonalAnime[]
@@ -37,8 +37,8 @@ class Seasonal
     public static function fromParser(SeasonalParser $parser): self
     {
         $instance = new self();
-        $instance->season_name = explode(" ", $parser->getSeason())[0];
-        $instance->season_year = (int) explode(" ", $parser->getSeason())[1];
+        $instance->seasonName = $parser->getSeasonName();
+        $instance->seasonYear = $parser->getSeasonYear();
         $instance->anime = $parser->getSeasonalAnime();
 
         return $instance;
@@ -49,7 +49,7 @@ class Seasonal
      */
     public function getSeason(): string
     {
-        return $this->season_name . " " . $this->season_year;
+        return $this->seasonName . " " . $this->seasonYear;
     }
 
     /**
@@ -57,7 +57,7 @@ class Seasonal
      */
     public function getSeasonYear(): int
     {
-        return $this->season_year;
+        return $this->seasonYear;
     }
 
     /**
@@ -65,7 +65,7 @@ class Seasonal
      */
     public function getSeasonName(): string
     {
-        return $this->season_name;
+        return $this->seasonName;
     }
 
     /**

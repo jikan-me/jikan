@@ -61,10 +61,36 @@ class SeasonalParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSeason(): string
+    public function getSeasonName(): string
     {
-        $season = $this->crawler->filter('div.navi-seasonal a.on')->text();
+        $season = explode(
+            " ",
+            JString::cleanse(
+                $this->crawler->filter('div.navi-seasonal a.on')->text()
+            )
+        );
 
-        return JString::cleanse($season);
+        return $season[0];
+    }
+
+    /**
+     * @return int|null
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getSeasonYear(): ?int
+    {
+        $season = explode(
+            " ",
+            JString::cleanse(
+                $this->crawler->filter('div.navi-seasonal a.on')->text()
+            )
+        );
+
+        if (!isset($season[1])) {
+            return null;
+        }
+
+        return $season[1];
     }
 }

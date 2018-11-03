@@ -28,7 +28,7 @@ class SeasonalParserTest extends TestCase
      */
     public function it_gets_the_season()
     {
-        self::assertEquals('Spring 2018', $this->springParser->getSeason());
+        self::assertEquals('Spring 2018', $this->springParser->getSeasonName() . " " . $this->springParser->getSeasonYear());
     }
 
     /**

@@ -799,14 +799,33 @@ class MalClient
     /**
      * @param Request\Anime\AnimeRecommendationsRequest $request
      *
-     * @return Model\Anime\AnimeRecommendation[]
+     * @return Model\Common\Recommendation[]
      * @throws ParserException
      */
     public function getAnimeRecommendations(Request\Anime\AnimeRecommendationsRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Anime\AnimeRecommendations($crawler);
+            $parser = new Parser\Common\Recommendations($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\Manga\MangaRecommendationsRequest $request
+     *
+     * @return Model\Common\Recommendation[]
+     * @throws ParserException
+     */
+    public function getMangaRecommendations(Request\Manga\MangaRecommendationsRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+        try {
+            $parser = new Parser\Common\Recommendations($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {

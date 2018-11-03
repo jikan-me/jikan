@@ -621,4 +621,30 @@ class Jikan
             new Request\Manga\MangaRecentlyUpdatedByUsersRequest($id, $page)
         );
     }
+
+    /**
+     * @param int       $id
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function AnimeRecommendations(int $id): array
+    {
+        return $this->myanimelist->getAnimeRecommendations(
+            new Request\Anime\AnimeRecommendationsRequest($id)
+        );
+    }
+
+    /**
+     * @param int       $id
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function MangaRecommendations(int $id): array
+    {
+        return $this->myanimelist->getMangaRecommendations(
+            new Request\Manga\MangaRecommendationsRequest($id)
+        );
+    }
 }

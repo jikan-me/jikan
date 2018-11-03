@@ -1,15 +1,15 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Common;
 
 use Jikan\Helper\Parser;
 
 /**
- * Class AnimeRecommendation
+ * Class Recommendation
  *
- * @package Jikan\Model\Anime\AnimeRecommendation
+ * @package Jikan\Model\Common
  */
-class AnimeRecommendation
+class Recommendation
 {
 
     /**
@@ -43,12 +43,12 @@ class AnimeRecommendation
     private $recommendationCount;
 
     /**
-     * @param \Jikan\Parser\Anime\AnimeRecommendation $parser
+     * @param \Jikan\Parser\Common\Recommendation $parser
      *
      * @return self
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(\Jikan\Parser\Anime\AnimeRecommendation $parser): self
+    public static function fromParser(\Jikan\Parser\Common\Recommendation $parser): self
     {
         $instance = new self();
 
@@ -109,5 +109,4 @@ class AnimeRecommendation
     {
         return $this->recommendationCount;
     }
-
 }

@@ -1,20 +1,18 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Common;
 
 use Jikan\Helper\Constants;
 use Jikan\Helper\Parser;
-use Jikan\Model\Anime\AnimeRecommendations;
 use Jikan\Parser\ParserInterface;
-use function Sodium\crypto_aead_chacha20poly1305_encrypt;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeRecommendation
+ * Class Recommendation
  *
  * @package Jikan\Parser\Common
  */
-class AnimeRecommendation implements ParserInterface
+class Recommendation implements ParserInterface
 {
     /**
      * @var Crawler
@@ -22,7 +20,7 @@ class AnimeRecommendation implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeRecommendation constructor.
+     * Recommendation constructor.
      *
      * @param Crawler $crawler
      */
@@ -90,11 +88,11 @@ class AnimeRecommendation implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Anime\AnimeRecommendation
+     * @return \Jikan\Model\Common\Recommendation
      * @throws \InvalidArgumentException
      */
-    public function getModel(): \Jikan\Model\Anime\AnimeRecommendation
+    public function getModel(): \Jikan\Model\Common\Recommendation
     {
-        return \Jikan\Model\Anime\AnimeRecommendation::fromParser($this);
+        return \Jikan\Model\Common\Recommendation::fromParser($this);
     }
 }

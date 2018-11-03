@@ -1,16 +1,16 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Common;
 
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeRecommendations
+ * Class Recommendations
  *
- * @package Jikan\Parser\Anime
+ * @package Jikan\Parser\Common
  */
-class AnimeRecommendations implements ParserInterface
+class Recommendations implements ParserInterface
 {
     /**
      * @var Crawler
@@ -18,7 +18,7 @@ class AnimeRecommendations implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeRecommendations constructor.
+     * Recommendations constructor.
      *
      * @param Crawler $crawler
      */
@@ -34,9 +34,9 @@ class AnimeRecommendations implements ParserInterface
     public function getModel(): array
     {
         return $this->crawler
-            ->filterXPath('//div[@class="js-scrollfix-bottom-rel"]/div[@class="borderClass"]')
+            ->filterXPath('//div[@class="borderClass"]')
             ->each(function ($c) {
-                return (new AnimeRecommendation($c))->getModel();
+                return (new Recommendation($c))->getModel();
             });
     }
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Jikan\Request\Manga;
+namespace Jikan\Request\Anime;
 
 use Jikan\Request\RequestInterface;
 
 /**
- * Class MangaRecentlyUpdatedByUsers
+ * Class AnimeRecentlyUpdatedByUsersRequest
  *
  * @package Jikan\Request
  */
-class MangaRecentlyUpdatedByUsers implements RequestInterface
+class AnimeRecentlyUpdatedByUsersRequest implements RequestInterface
 {
     /**
      * @var int
@@ -22,7 +22,7 @@ class MangaRecentlyUpdatedByUsers implements RequestInterface
     private $page;
 
     /**
-     * MangaRecentlyUpdatedByUsers constructor.
+     * AnimeRecentlyUpdatedByUsersRequest constructor.
      *
      * @param int $id
      */
@@ -37,6 +37,6 @@ class MangaRecentlyUpdatedByUsers implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/manga/%d/jikan/stats?show=%d', $this->id, $this->page);
+        return sprintf('https://myanimelist.net/anime/%d/jikan/stats?show=%d', $this->id, $this->page);
     }
 }

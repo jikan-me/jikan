@@ -761,12 +761,12 @@ class MalClient
 
 
     /**
-     * @param Request\Anime\AnimeRecentlyUpdatedByUsers$request
+     * @param Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request
      *
      * @return Model\Anime\AnimeRecentlyUpdatedByUser[]
      * @throws ParserException
      */
-    public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsers $request): array
+    public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
@@ -779,16 +779,34 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaRecentlyUpdatedByUsers$request
+     * @param Request\Manga\MangaRecentlyUpdatedByUsersRequest $request
      *
      * @return Model\Manga\MangaRecentlyUpdatedByUser[]
      * @throws ParserException
      */
-    public function getMangaRecentlyUpdatedByUsers(Request\Manga\MangaRecentlyUpdatedByUsers $request): array
+    public function getMangaRecentlyUpdatedByUsers(Request\Manga\MangaRecentlyUpdatedByUsersRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Manga\MangaRecentlyUpdatedByUsersParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\Anime\AnimeRecommendationsRequest $request
+     *
+     * @return Model\Anime\AnimeRecommendation[]
+     * @throws ParserException
+     */
+    public function getAnimeRecommendations(Request\Anime\AnimeRecommendationsRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Anime\AnimeRecommendations($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {

@@ -604,7 +604,7 @@ class Jikan
     public function AnimeRecentlyUpdatedByUsers(int $id, int $page = 1): array
     {
         return $this->myanimelist->getAnimeRecentlyUpdatedByUsers(
-            new Request\Anime\AnimeRecentlyUpdatedByUsers($id, $page)
+            new Request\Anime\AnimeRecentlyUpdatedByUsersRequest($id, $page)
         );
     }
 
@@ -618,7 +618,7 @@ class Jikan
     public function MangaRecentlyUpdatedByUsers(int $id, int $page = 1): array
     {
         return $this->myanimelist->getMangaRecentlyUpdatedByUsers(
-            new Request\Manga\MangaRecentlyUpdatedByUsers($id, $page)
+            new Request\Manga\MangaRecentlyUpdatedByUsersRequest($id, $page)
         );
     }
 }

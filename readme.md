@@ -32,6 +32,7 @@ There's a REST service available, as well as a few wrappers built around it.
 - **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant & Abhinav Kasamsetty
 - **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 - **[JavaScript]** [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor
+- **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs
 
 ## Features
 - Anime Parsing

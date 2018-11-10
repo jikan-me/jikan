@@ -226,9 +226,15 @@ class AnimeParser implements ParserInterface
             return null;
         }
 
-        return JString::cleanse(
+        $premiered = JString::cleanse(
             str_replace($premiered->text(), '', $premiered->parents()->text())
         );
+
+        if ($premiered === '?') {
+            return null;
+        }
+
+        return $premiered;
     }
 
     /**
@@ -396,7 +402,18 @@ class AnimeParser implements ParserInterface
      */
     public function getScore(): ?float
     {
-        return Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingValue"]'));
+        $score = trim(
+            $this->crawler->filterXPath('//div[@class="fl-l score"]')->text()
+        );
+
+        if ($score === "N/A") {
+            return null;
+        }
+
+        return (float) $score;
+
+        // doesn't work for some IDs like `29711`
+        //return Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingValue"]'));
     }
 
     /**
@@ -405,12 +422,20 @@ class AnimeParser implements ParserInterface
      */
     public function getScoredBy(): ?int
     {
-        $rating = Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingCount"]'));
-        if ($rating === null) {
-            return $rating;
-        }
+        $scoredBy = $this->crawler->filterXPath('//div[@class="fl-l score"]')->attr('data-user');
 
-        return str_replace(',', '', $rating);
+        return str_replace(
+            [',', ' users', ' user'],
+            '',
+            $scoredBy
+        );
+
+//        $rating = Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingCount"]'));
+//        if ($rating === null) {
+//            return $rating;
+//        }
+
+//        return str_replace(',', '', $rating);
     }
 
     /**

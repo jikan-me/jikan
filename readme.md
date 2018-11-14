@@ -97,10 +97,11 @@ There's a REST service available, as well as a few wrappers built around it.
 
 ## Changelog
 
-### v2.3.0 stable - Nov 14, 18
+### v2.3.0 Stable - Nov 14, 18
 - **[Anime|Manga]** Add **Recommendations** parsing
 - **[Anime|Manga]** Add **Recently Updated By Users** parsing - 2.2.0
-- **[User List]** Fix manga list parsing - 2.1.3
+- **[Seasonal]** Added parsing for **later** anime - 2.1.4
+- **[User List]** Bug fix for some manga lists parsing - 2.1.3
 
 - [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 

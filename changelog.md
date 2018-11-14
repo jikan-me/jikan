@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.3.0 stable - Nov 14, 18
+- **[Anime|Manga]** Add **Recommendations** parsing
+- **[Anime|Manga]** Add **Recently Updated By Users** parsing - 2.2.0
+- **[User List]** Fix manga list parsing - 2.1.3
+
+### 2.1.2 stable - Oct 20, 18
+- **[Search]** Bug fix [#202](/../../issues/202) (PR[#206](/../../issues/206))
+
+### 2.1.1 stable - Oct 12, 18
+- **[Seasonal]** Parser bug fix [#205](/../../issues/205)
+
 ### 2.1.0 stable - Oct 1, 18
 - **[User]** Add Anime/Manga list parsing
 - Bug fixes for MalId parsing

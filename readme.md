@@ -35,7 +35,8 @@ There's a REST service available, as well as a few wrappers built around it.
 - **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs
 
 ## Features
-- Anime Parsing
+- Anime
+    - Main Information
     - Characters & Staff
     - Episodes
     - News
@@ -44,16 +45,23 @@ There's a REST service available, as well as a few wrappers built around it.
     - Stats
     - Forum Topics
     - More Info
-- Manga Parsing
+    - Recommendations
+    - Recent List Updates By Users
+- Manga
+    - Main Information
     - Characters
     - News
     - Stats
     - Pictures
     - Forum Topics
     - More Info
-- Character Parsing
+    - Recommendations
+    - Recent List Updates By Users
+- Character
+    - Main Information
     - Pictures
-- People Parsing
+- People
+    - Main Information
     - Pictures
 - Search
     - Anime
@@ -86,11 +94,14 @@ There's a REST service available, as well as a few wrappers built around it.
         - Manga
     - Anime & Manga Lists
 
+
 ## Changelog
 
-### v2.1.0 stable - Oct 1, 18
-- **[User]** Add Anime/Manga list parsing
-- Bug fixes for MalId parsing
+### v2.3.0 stable - Nov 14, 18
+- **[Anime|Manga]** Add **Recommendations** parsing
+- **[Anime|Manga]** Add **Recently Updated By Users** parsing - 2.2.0
+- **[User List]** Fix manga list parsing - 2.1.3
+
 - [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 
 

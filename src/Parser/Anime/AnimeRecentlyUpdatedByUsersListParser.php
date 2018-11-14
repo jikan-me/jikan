@@ -120,7 +120,7 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
             return null;
         }
 
-        $episodesTotal = explode('/', $nodeText)[0];
+        $episodesTotal = explode('/', $nodeText)[1];
 
         if ($episodesTotal === '-') {
             return null;

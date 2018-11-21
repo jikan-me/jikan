@@ -23,12 +23,12 @@ class EpisodeListItem
     public $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $titleJapanese;
 
     /**
-     * @var string
+     * @var string|null
      */
     public $titleRomanji;
 
@@ -96,17 +96,17 @@ class EpisodeListItem
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitleJapanese(): string
+    public function getTitleJapanese(): ?string
     {
         return $this->titleJapanese;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitleRomanji(): string
+    public function getTitleRomanji(): ?string
     {
         return $this->titleRomanji;
     }

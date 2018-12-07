@@ -14,7 +14,6 @@ class UserListParserTest extends TestCase
 
     public function setUp()
     {
-        VCR::turnOff();
         $request = new \Jikan\Request\Club\UserListRequest(21349, 20);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());

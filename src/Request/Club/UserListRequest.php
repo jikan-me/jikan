@@ -23,7 +23,7 @@ class UserListRequest implements RequestInterface
      * @param int $clubId
      * @param int $page
      */
-    public function __construct(int $clubId, int $page = 0)
+    public function __construct(int $clubId, int $page = 1)
     {
         $this->clubId = $clubId;
         $this->page = ($page - 1) * 36;

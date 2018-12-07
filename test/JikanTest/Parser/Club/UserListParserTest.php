@@ -14,7 +14,7 @@ class UserListParserTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\Club\UserListRequest(21349, 20);
+        $request = new \Jikan\Request\Club\UserListRequest(21349);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Club\UserListParser($crawler);

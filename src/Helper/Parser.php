@@ -177,4 +177,15 @@ class Parser
     {
         return preg_replace('~/r/\d+x\d+~', '', $imageUrl);
     }
+
+    /**
+     * @param string
+     *
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public static function parseImageThumbToHQ(string $imageUrl) : string
+    {
+        return str_replace(['thumbs/', '_thumb'], '', $imageUrl);
+    }
 }

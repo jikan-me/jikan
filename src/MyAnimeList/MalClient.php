@@ -832,4 +832,41 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param Request\Anime\AnimeReviewsRequest $request
+     *
+     * @return Model\Anime\Review[]
+     * @throws ParserException
+     */
+    public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Anime\AnimeReviewsParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+//    /**
+//     * @param Request\Manga\MangaReviewsRequest $request
+//     *
+//     * @return Model\Manga\Review[]
+//     * @throws ParserException
+//     */
+//    public function getMangaReviews(Request\Manga\MangaReviewsRequest $request): array
+//    {
+//        $crawler = $this->ghoutte->request('GET', $request->getPath());
+//
+//        try {
+//            $parser = new Parser\Manga\MangaReviewsParser($crawler);
+//
+//            return $parser->getModel();
+//        } catch (\Exception $e) {
+//            throw ParserException::fromRequest($request, $e);
+//        }
+//    }
 }

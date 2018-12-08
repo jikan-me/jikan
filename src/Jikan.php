@@ -647,4 +647,18 @@ class Jikan
             new Request\Manga\MangaRecommendationsRequest($id)
         );
     }
+
+    /**
+     * @param int      $id
+     * @param int      $page
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function AnimeReviews(int $id, int $page): array
+    {
+        return $this->myanimelist->getAnimeReviews(
+            new Request\Anime\AnimeReviewsRequest($id, $page)
+        );
+    }
 }

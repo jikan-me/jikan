@@ -46,6 +46,7 @@ There's a REST service available, as well as a few wrappers built around it.
     - Forum Topics
     - More Info
     - Recommendations
+    - Reviews
     - Recent List Updates By Users
 - Manga
     - Main Information
@@ -56,6 +57,7 @@ There's a REST service available, as well as a few wrappers built around it.
     - Forum Topics
     - More Info
     - Recommendations
+    - Reviews
     - Recent List Updates By Users
 - Character
     - Main Information
@@ -93,6 +95,7 @@ There's a REST service available, as well as a few wrappers built around it.
         - Anime
         - Manga
     - Anime & Manga Lists
+        - Pagination Support
 
 
 ## Changelog

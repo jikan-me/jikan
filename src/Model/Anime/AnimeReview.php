@@ -66,5 +66,51 @@ class AnimeReview
         return $instance;
     }
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHelpfulCount(): int
+    {
+        return $this->helpfulCount;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getDate(): \DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return AnimeReviewer
+     */
+    public function getReviewer(): AnimeReviewer
+    {
+        return $this->reviewer;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
 }

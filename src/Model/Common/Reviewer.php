@@ -24,5 +24,4 @@ abstract class Reviewer
      * @var string
      */
     protected $username;
-
 }

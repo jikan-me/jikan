@@ -43,12 +43,12 @@ class AnimeReviewScores
     private $enjoyment;
 
     /**
-     * @param AnimeReviewScoreParser $parser
+     * @param Parser\Anime\AnimeReviewScoresParser $parser
      *
      * @return AnimeReviewScores
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(AnimeReviewScoreParser $parser): AnimeReviewScores
+    public static function fromParser(Parser\Anime\AnimeReviewScoresParser $parser): AnimeReviewScores
     {
         $instance = new self();
 
@@ -62,5 +62,51 @@ class AnimeReviewScores
         return $instance;
     }
 
+    /**
+     * @return int
+     */
+    public function getOverall(): int
+    {
+        return $this->overall;
+    }
 
+    /**
+     * @return int
+     */
+    public function getStory(): int
+    {
+        return $this->story;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnimation(): int
+    {
+        return $this->animation;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSound(): int
+    {
+        return $this->sound;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCharacter(): int
+    {
+        return $this->character;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEnjoyment(): int
+    {
+        return $this->enjoyment;
+    }
 }

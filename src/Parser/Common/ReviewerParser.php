@@ -2,10 +2,12 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Anime\AnimeReviewer;
 use Jikan\Model\Anime\AnimeReviewScores;
+use Jikan\Parser\Anime\AnimeReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -39,7 +41,6 @@ class ReviewerParser implements ParserInterface
     public function getModel(): AnimeReviewer
     {
         return AnimeReviewer::fromParser($this);
-
     }
 
     /**
@@ -78,7 +79,17 @@ class ReviewerParser implements ParserInterface
      */
     public function getEpisodesSeen(): int
     {
-        return 0;
+        $nodeText = JString::cleanse(
+            $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
+        );
+
+        preg_match('~(\d+) of (\d+) episodes seen~', $nodeText, $episodesSeen);
+
+        if (empty($episodesSeen)) {
+            return 0;
+        }
+
+        return (int) $episodesSeen[1];
     }
 
     /**
@@ -94,9 +105,9 @@ class ReviewerParser implements ParserInterface
      * @return AnimeReviewScores
      * @throws \InvalidArgumentException
      */
-    public function getAnimeScores(): ?AnimeReviewScores
+    public function getAnimeScores(): AnimeReviewScores
     {
-        return null;//add
+        return (new AnimeReviewScoresParser($this->crawler))->getModel();
     }
 
     //for manga

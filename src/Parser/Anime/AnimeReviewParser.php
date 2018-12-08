@@ -2,12 +2,14 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Anime\AnimeReviewer;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Parser\Common\ReviewerParser;
 use Jikan\Parser\ParserInterface;
+use PHP_CodeSniffer\Tokenizers\JS;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -40,7 +42,6 @@ class AnimeReviewParser implements ParserInterface
     public function getModel(): AnimeReview
     {
         return AnimeReview::fromParser($this);
-
     }
 
     /**
@@ -49,7 +50,8 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getId(): int
     {
-        return 0;
+        parse_str(parse_url($this->getUrl(), PHP_URL_QUERY), $params);
+        return (int) $params['id'];
     }
 
     /**
@@ -58,7 +60,8 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return "";
+        $node = $this->crawler->filterXPath('//div[1]/div[3]/div/div/a');
+        return $node->attr('href');
     }
 
     /**
@@ -67,7 +70,8 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getHelpfulCount(): int
     {
-        return 0;
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/div/strong/span');
+        return (int) $node->text();
     }
 
     /**
@@ -77,7 +81,9 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getDate(): \DateTimeImmutable
     {
-        return new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+        $date = $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[1]')->text();
+        $time = $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[1]')->attr('title');
+        return new \DateTimeImmutable("{$date} {$time}", new \DateTimeZone('UTC'));
     }
 
     /**
@@ -86,16 +92,29 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getContent(): string
     {
-        echo htmlentities(
-            $this->crawler
-                ->filterXPath('//div[contains(@class, "textReadability")]')
-                ->html()
-        );
-        echo "<br><br>";
+//        echo htmlentities(
+//            $this->crawler
+//                ->filterXPath('//div[contains(@class, "textReadability")]')
+//                ->html()
+//        );
+//        echo "<br><br>";
+//
+//        return $this->crawler
+//            ->filterXPath('//div[2]')
+//            ->text();
+        $node = $this->crawler->filterXPath('//div[1]/div[2]');
+        $nodeExpanded = $node->filterXPath('//span');
 
-        return $this->crawler
-            ->filterXPath('//div[2]')
-            ->text();
+        $node = Parser::removeChildNodes($node);
+
+        $content = JString::cleanse($node->text());
+
+        if ($nodeExpanded->count()) {
+            $expandedContent = JString::cleanse(Parser::removeChildNodes($nodeExpanded)->html());
+            $content .= $expandedContent;
+        }
+
+        return $content;
     }
 
     /**
@@ -107,6 +126,4 @@ class AnimeReviewParser implements ParserInterface
     {
         return (new ReviewerParser($this->crawler))->getModel();
     }
-
-
 }

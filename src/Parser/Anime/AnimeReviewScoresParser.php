@@ -84,5 +84,4 @@ class AnimeReviewScoresParser implements ParserInterface
     {
         return (int) $this->crawler->filterXPath('//table/tr[6]/td[2]')->text();
     }
-
 }

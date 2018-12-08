@@ -580,9 +580,9 @@ class Jikan
     }
 
     /**
-     * @param string    $username
-     * @param int       $page
-     * @param int       $status
+     * @param string $username
+     * @param int    $page
+     * @param int    $status
      *
      * @return array
      * @throws ParserException
@@ -595,8 +595,8 @@ class Jikan
     }
 
     /**
-     * @param int       $id
-     * @param int       $page
+     * @param int $id
+     * @param int $page
      *
      * @return array
      * @throws ParserException
@@ -609,8 +609,8 @@ class Jikan
     }
 
     /**
-     * @param int       $id
-     * @param int       $page
+     * @param int $id
+     * @param int $page
      *
      * @return array
      * @throws ParserException
@@ -623,7 +623,7 @@ class Jikan
     }
 
     /**
-     * @param int       $id
+     * @param int $id
      *
      * @return array
      * @throws ParserException
@@ -636,7 +636,7 @@ class Jikan
     }
 
     /**
-     * @param int       $id
+     * @param int $id
      *
      * @return array
      * @throws ParserException
@@ -645,6 +645,21 @@ class Jikan
     {
         return $this->myanimelist->getMangaRecommendations(
             new Request\Manga\MangaRecommendationsRequest($id)
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param int $page
+     *
+     * @return array|Model\Club\UserProfile[]
+     * @throws ParserException
+     * @throws \HttpResponseException
+     */
+    public function ClubUsers(int $id, int $page = 1)
+    {
+        return $this->myanimelist->getClubUsers(
+            new Request\Club\UserListRequest($id, $page)
         );
     }
 

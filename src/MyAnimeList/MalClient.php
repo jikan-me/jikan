@@ -834,6 +834,26 @@ class MalClient
     }
 
     /**
+     * @param Request\Club\UserListRequest $request
+     *
+     * @return Model\Club\UserProfile[]
+     * @throws ParserException
+     * @throws \HttpResponseException
+     */
+    public function getClubUsers(Request\Club\UserListRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+        try {
+            $parser = new Parser\Club\UserListParser($crawler);
+
+            return $parser->getResults();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
      * @param Request\Anime\AnimeReviewsRequest $request
      *
      * @return Model\Anime\Review[]

@@ -122,6 +122,6 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getReviewer(): AnimeReviewer
     {
-        return (new ReviewerParser($this->crawler))->getModel();
+        return (new AnimeReviewerParser($this->crawler))->getModel();
     }
 }

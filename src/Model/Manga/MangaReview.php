@@ -15,7 +15,7 @@ class MangaReview
     /**
      * @var int
      */
-    private $id;
+    private $malId;
 
     /**
      * @var string
@@ -56,7 +56,7 @@ class MangaReview
     {
         $instance = new self();
 
-        $instance->id = $parser->getId();
+        $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->helpfulCount= $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
@@ -69,9 +69,9 @@ class MangaReview
     /**
      * @return int
      */
-    public function getId(): int
+    public function getMalId(): int
     {
-        return $this->id;
+        return $this->malId;
     }
 
     /**

@@ -4,10 +4,10 @@ namespace Jikan\Parser\Common;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Anime\AnimeReview;
-use Jikan\Model\Anime\AnimeReviewer;
 use Jikan\Model\Anime\AnimeReviewScores;
+use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Parser\Anime\AnimeReviewScoresParser;
+use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -16,7 +16,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser
  */
-class ReviewerParser implements ParserInterface
+abstract class ReviewerParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -31,16 +31,6 @@ class ReviewerParser implements ParserInterface
     public function __construct(Crawler $crawler)
     {
         $this->crawler = $crawler;
-    }
-
-    /**
-     * @return AnimeReviewer
-     * @throws \Exception
-     * @throws \RuntimeException
-     */
-    public function getModel(): AnimeReviewer
-    {
-        return AnimeReviewer::fromParser($this);
     }
 
     /**
@@ -98,7 +88,17 @@ class ReviewerParser implements ParserInterface
      */
     public function getChaptersRead(): int
     {
-        return 0;
+        $nodeText = JString::cleanse(
+            $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
+        );
+
+        preg_match('~(\d+) of (\d+) chapters read~', $nodeText, $chaptersRead);
+
+        if (empty($chaptersRead)) {
+            return 0;
+        }
+
+        return (int) $chaptersRead[1];
     }
 
     /**
@@ -110,13 +110,12 @@ class ReviewerParser implements ParserInterface
         return (new AnimeReviewScoresParser($this->crawler))->getModel();
     }
 
-    //for manga
-//    /**
-//     * @return AnimeReviewScores
-//     * @throws \InvalidArgumentException
-//     */
-//    public function getMangaScores(): AnimeReviewScores
-//    {
-//        return new AnimeReviewScores();
-//    }
+    /**
+     * @return MangaReviewScores
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaScores(): MangaReviewScores
+    {
+        return (new MangaReviewScoresParser($this->crawler))->getModel();
+    }
 }

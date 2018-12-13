@@ -1,21 +1,20 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Manga;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Anime\AnimeReview;
-use Jikan\Model\Anime\AnimeReviewer;
-use Jikan\Parser\Common\ReviewerParser;
+use Jikan\Model\Manga\MangaReview;
+use Jikan\Model\Manga\MangaReviewer;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeReviewParser
+ * Class MangaReviewParser
  *
  * @package Jikan\Parser
  */
-class AnimeReviewParser implements ParserInterface
+class MangaReviewParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -23,7 +22,7 @@ class AnimeReviewParser implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeReviewParser constructor.
+     * MangaReviewParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -33,13 +32,13 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return AnimeReview
+     * @return MangaReview
      * @throws \Exception
      * @throws \RuntimeException
      */
-    public function getModel(): AnimeReview
+    public function getModel(): MangaReview
     {
-        return AnimeReview::fromParser($this);
+        return MangaReview::fromParser($this);
     }
 
     /**
@@ -116,12 +115,12 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return AnimeReviewer
+     * @return MangaReviewer
      * @throws \Exception
      * @throws \InvalidArgumentException
      */
-    public function getReviewer(): AnimeReviewer
+    public function getReviewer(): MangaReviewer
     {
-        return (new ReviewerParser($this->crawler))->getModel();
+        return (new MangaReviewerParser($this->crawler))->getModel();
     }
 }

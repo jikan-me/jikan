@@ -1,17 +1,17 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Manga;
 
-use Jikan\Model\Anime\AnimeReview;
+use Jikan\Model\Manga\MangaReview;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeReviewsParser
+ * Class MangaReviewsParser
  *
  * @package Jikan\Parser
  */
-class AnimeReviewsParser implements ParserInterface
+class MangaReviewsParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -19,7 +19,7 @@ class AnimeReviewsParser implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeReviewsParser constructor.
+     * MangaReviewsParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -38,7 +38,7 @@ class AnimeReviewsParser implements ParserInterface
         return $this->crawler
             ->filterXPath('//div[@class="borderDark"]')
             ->each(function (Crawler $c) {
-                return (new AnimeReviewParser($c))->getModel();
+                return (new MangaReviewParser($c))->getModel();
             });
     }
 }

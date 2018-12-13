@@ -105,8 +105,10 @@ A REST service is available as well.
         - Pagination Support
 - Club
     - User List
+    
+[View RoadMap](https://github.com/jikan-me/jikan/projects/4)
 
-## Tests
+## Running Tests
 `composer require jikan-me/jikan --dev`
 
 This will download [Fixtures](https://github.com/jikan-me/jikan-fixtures) as well.
@@ -116,6 +118,7 @@ This will download [Fixtures](https://github.com/jikan-me/jikan-fixtures) as wel
 
 ###### GrumPHP
 PHPCS, PHPLint & PHPUnit
+
 `php vendor/bin/grumphp run`
 
 
@@ -130,7 +133,7 @@ PHPCS, PHPLint & PHPUnit
 - **[Seasonal]** Added parsing for **later** anime - 2.1.4
 - **[User List]** Bug fix for some manga lists parsing - 2.1.3
 
-- [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
+[Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 
 
 ## DISCLAIMER

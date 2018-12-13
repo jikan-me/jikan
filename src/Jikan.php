@@ -637,9 +637,9 @@ class Jikan
 
     /**
      * @param int $id
-     *
      * @return array
      * @throws ParserException
+     * @throws \HttpResponseException
      */
     public function MangaRecommendations(int $id): array
     {
@@ -664,16 +664,30 @@ class Jikan
     }
 
     /**
-     * @param int      $id
-     * @param int      $page
-     *
+     * @param int $id
+     * @param int $page
      * @return array
      * @throws ParserException
+     * @throws \HttpResponseException
      */
     public function AnimeReviews(int $id, int $page): array
     {
         return $this->myanimelist->getAnimeReviews(
             new Request\Anime\AnimeReviewsRequest($id, $page)
+        );
+    }
+
+    /**
+     * @param int $id
+     * @param int $page
+     * @return array
+     * @throws ParserException
+     * @throws \HttpResponseException
+     */
+    public function MangaReviews(int $id, int $page): array
+    {
+        return $this->myanimelist->getMangaReviews(
+            new Request\Manga\MangaReviewsRequest($id, $page)
         );
     }
 }

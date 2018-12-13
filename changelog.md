@@ -1,5 +1,9 @@
 ## Changelog
 
+### 2.5.0 stable - Dec 13, 18
+- **[Anime|Manga]** Add **Reviews** parsing
+- **[Club]** Add **User List** parsing - 2.4.0
+
 ### 2.3.0 stable - Nov 14, 18
 - **[Anime|Manga]** Add **Recommendations** parsing
 - **[Anime|Manga]** Add **Recently Updated By Users** parsing - 2.2.0

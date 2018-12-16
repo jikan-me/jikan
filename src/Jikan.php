@@ -690,4 +690,16 @@ class Jikan
             new Request\Manga\MangaReviewsRequest($id, $page)
         );
     }
+
+    /**
+     * @param int $id
+     * @return Model\Club\Club
+     * @throws ParserException
+     */
+    public function Club(int $id): Model\Club\Club
+    {
+        return $this->myanimelist->getClub(
+            new Request\Club\ClubRequest($id)
+        );
+    }
 }

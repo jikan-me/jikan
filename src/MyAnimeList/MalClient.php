@@ -888,4 +888,23 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param Request\Club\ClubRequest $request
+     * @return Model\Club\Club
+     * @throws ParserException
+     * @throws \HttpResponseException
+     */
+    public function getClub(Request\Club\ClubRequest $request): Model\Club\Club
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+        try {
+            $parser = new Parser\Club\ClubParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

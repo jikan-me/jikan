@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.6.0 stable - Dec 16, 18
+- **[Club]** Add club parsing
+
 ### 2.5.0 stable - Dec 13, 18
 - **[Anime|Manga]** Add **Reviews** parsing
 - **[Club]** Add **User List** parsing - 2.4.0

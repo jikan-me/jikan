@@ -104,6 +104,7 @@ A REST service is available as well.
     - Anime & Manga Lists
         - Pagination Support
 - Club
+    - Main Information
     - User List
     
 [View RoadMap](https://github.com/jikan-me/jikan/projects/4)
@@ -123,6 +124,10 @@ PHPCS, PHPLint & PHPUnit
 
 
 ## Changelog
+
+### v2.6.0 stable - Dec 16, 18
+- **[Club]** Add club parsing
+
 ### v2.5.0 stable - Dec 13, 18
 - **[Anime|Manga]** Add **Reviews** parsing
 - **[Club]** Add **User List** parsing - 2.4.0

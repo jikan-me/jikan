@@ -695,6 +695,7 @@ class Jikan
      * @param int $id
      * @return Model\Club\Club
      * @throws ParserException
+     * @throws \HttpResponseException
      */
     public function Club(int $id): Model\Club\Club
     {

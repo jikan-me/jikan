@@ -156,8 +156,7 @@ class ClubParser implements ParserInterface
             return [];
         }
 
-        $relationsNode
-            ->nextAll()
+        $relationsNode = $relationsNode->nextAll()
             ->filterXPath('//a')
             ->each(function (Crawler $crawler) {
                 $relation = $crawler->attr('href');
@@ -191,8 +190,7 @@ class ClubParser implements ParserInterface
             return [];
         }
 
-        $relationsNode
-            ->nextAll()
+        $relationsNode = $relationsNode->nextAll()
             ->filterXPath('//a')
             ->each(function (Crawler $crawler) {
                 $relation = $crawler->attr('href');
@@ -226,8 +224,7 @@ class ClubParser implements ParserInterface
             return [];
         }
 
-        $relationsNode
-            ->nextAll()
+        $relationsNode = $relationsNode->nextAll()
             ->filterXPath('//a')
             ->each(function (Crawler $crawler) {
                 $relation = $crawler->attr('href');
@@ -263,13 +260,14 @@ class ClubParser implements ParserInterface
             return [];
         }
 
-        $staffNode->each(function (Crawler $crawler) {
-            $relation = $crawler->attr('href');
+        $staffNode = $staffNode
+            ->each(function (Crawler $crawler) {
+                $relation = $crawler->attr('href');
 
-            if (preg_match('~/profile/(.*?)~', $relation)) {
-                return $crawler;
-            }
-        });
+                if (preg_match('~/profile/(.*?)~', $relation)) {
+                    return $crawler;
+                }
+            });
 
         foreach ($staffNode as $staffMember) {
             if ($staffMember instanceof Crawler) {

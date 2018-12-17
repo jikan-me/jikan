@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.6.1 stable - Dec 17, 18
+- **[Club]** Optimize User list schema
+
 ### 2.6.0 stable - Dec 16, 18
 - **[Club]** Add club parsing
 

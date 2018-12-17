@@ -2,6 +2,8 @@
 
 namespace Jikan\Parser\Club;
 
+use Jikan\Helper\Constants;
+use Jikan\Helper\Parser;
 use Jikan\Model\Club\UserProfile;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -42,9 +44,15 @@ class UserProfileParser implements ParserInterface
      */
     public function getUsername(): string
     {
-        $path = $this->crawler->filterXPath('//a[1]')->attr('href');
+        return $this->crawler->filterXPath('//a[1]')->text();
+    }
 
-        return str_replace('/profile/', '', $path);
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return Constants::BASE_URL . $this->crawler->filterXPath('//a[1]')->attr('href');
     }
 
     /**
@@ -52,6 +60,8 @@ class UserProfileParser implements ParserInterface
      */
     public function getImage(): string
     {
-        return $this->crawler->filterXPath('//img[1]')->attr('src');
+        return Parser::parseImageThumbToHQ(
+            $this->crawler->filterXPath('//img[1]')->attr('src')
+        );
     }
 }

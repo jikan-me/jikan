@@ -19,7 +19,12 @@ class UserProfile
     /**
      * @var string
      */
-    private $image;
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $imageUrl;
 
     /**
      * @param UserProfileParser $parser
@@ -30,7 +35,8 @@ class UserProfile
     {
         $instance = new self();
         $instance->username = $parser->getUsername();
-        $instance->image = $parser->getImage();
+        $instance->imageUrl = $parser->getImage();
+        $instance->url = $parser->getUrl();
 
         return $instance;
     }
@@ -46,8 +52,16 @@ class UserProfile
     /**
      * @return string
      */
-    public function getImage(): string
+    public function getUrl(): string
     {
-        return $this->image;
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
     }
 }

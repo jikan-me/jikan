@@ -132,7 +132,7 @@ class Parser
 
         $date = str_replace('??', '01', $date);
 
-        return \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC')) ?: null;
+        return \DateTimeImmutable::createFromFormat('!d-m-y', $date, new \DateTimeZone('UTC')) ?: null;
     }
 
     /**

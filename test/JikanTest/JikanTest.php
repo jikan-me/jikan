@@ -358,8 +358,8 @@ class JikanTest extends TestCase
         $topics = $this->jikan->getAnimeForum(new AnimeForumRequest(21));
         self::assertCount(15, $topics);
         self::assertContainsOnlyInstancesOf(ForumTopic::class, $topics);
-        self::assertContains('One Piece Episode 461 Discussion', $topics);
-        self::assertContains('One Piece Episode 101 Discussion', $topics);
+        self::assertContains('One Piece Episode 381 Discussion', $topics);
+        self::assertContains('One Piece Episode 380 Discussion', $topics);
     }
 
     /**

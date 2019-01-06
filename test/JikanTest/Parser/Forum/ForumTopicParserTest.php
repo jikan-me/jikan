@@ -31,7 +31,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_id(): void
     {
-        self::assertEquals(251121, $this->parser->getTopicId());
+        self::assertEquals(57389, $this->parser->getTopicId());
     }
 
     /**
@@ -40,7 +40,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_url(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=251121', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=57389', $this->parser->getUrl());
     }
 
     /**
@@ -49,7 +49,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_title(): void
     {
-        self::assertEquals('One Piece Episode 460 Discussion', $this->parser->getTitle());
+        self::assertEquals('One Piece Episode 381 Discussion', $this->parser->getTitle());
     }
 
     /**
@@ -58,7 +58,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_date(): void
     {
-        self::assertEquals('2010-07-31', $this->parser->getPostDate()->format('Y-m-d'));
+        self::assertEquals('2008-12-14', $this->parser->getPostDate()->format('Y-m-d'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_author_name(): void
     {
-        self::assertEquals('JusticeGundam', $this->parser->getAuthorName());
+        self::assertEquals('VK11', $this->parser->getAuthorName());
     }
 
     /**
@@ -76,7 +76,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_author_url(): void
     {
-        self::assertEquals('https://myanimelist.net/profile/JusticeGundam', $this->parser->getAuthorUrl());
+        self::assertEquals('https://myanimelist.net/profile/VK11', $this->parser->getAuthorUrl());
     }
 
     /**
@@ -85,7 +85,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_replies(): void
     {
-        self::assertEquals(83, $this->parser->getReplies());
+        self::assertEquals(69, $this->parser->getReplies());
     }
 
     /**
@@ -96,9 +96,9 @@ class ForumTopicParserTest extends TestCase
     {
         $lastPost = $this->parser->getLastPost();
         self::assertInstanceOf(ForumPost::class, $lastPost);
-        self::assertEquals('Serhiyko', $lastPost->getAuthorName());
-        self::assertEquals('https://myanimelist.net/profile/Serhiyko', $lastPost->getAuthorUrl());
-        self::assertEquals('https://myanimelist.net/forum/?topicid=251121&goto=lastpost', $lastPost->getUrl());
-        self::assertEquals('2018-05-27', $lastPost->getDatePosted()->format('Y-m-d'));
+        self::assertEquals('gfsdfgsdgsdfgs', $lastPost->getAuthorName());
+        self::assertEquals('https://myanimelist.net/profile/gfsdfgsdgsdfgs', $lastPost->getAuthorUrl());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=57389&goto=lastpost', $lastPost->getUrl());
+        self::assertEquals('2019-01-06', $lastPost->getDatePosted()->format('Y-m-d'));
     }
 }

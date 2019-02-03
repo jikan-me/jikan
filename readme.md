@@ -37,6 +37,7 @@ A REST service is available as well.
 - **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 - **[JavaScript]** [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor
 - **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs
+- **[PHP]** [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe
 
 [Add your own wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 

@@ -9,6 +9,7 @@ environment:
   matrix:
     - PHP_VERSION: 7.1
     - PHP_VERSION: 7.2
+    - PHP_VERSION: 7.3
 
 cache:
   - '%APPDATA%\Composer'

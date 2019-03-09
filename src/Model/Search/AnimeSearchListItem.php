@@ -101,16 +101,7 @@ class AnimeSearchListItem
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->rated = $parser->getRated();
-        $instance->airing =
-            null === $instance->endDate
-            && null !== $instance->startDate
-            &&
-            (
-                new \DateTimeImmutable(
-                    'now',
-                    new \DateTimeZone('UTC')
-                ) > $instance->startDate
-            );
+        $instance->airing = $parser->isAiring();
 
         return $instance;
     }

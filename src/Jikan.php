@@ -520,14 +520,14 @@ class Jikan
     /**
      * @param string|null                                                                   $query
      * @param int                                                                           $page
-     * @param Request\Search\CharacterSearchRequest|Request\Search\PersonSearchRequest|null $request
+     * @param Request\Search\PersonSearchRequest|Request\Search\PersonSearchRequest|null $request
      *
      * @return Model\Search\PersonSearch
      */
     public function PersonSearch(
         ?string $query,
         int $page = 1,
-        ?Request\Search\CharacterSearchRequest $request = null
+        ?Request\Search\PersonSearchRequest $request = null
     ): Model\Search\PersonSearch {
         return $this->myanimelist->getPersonSearch(
             null !== $request

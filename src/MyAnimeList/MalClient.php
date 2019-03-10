@@ -13,6 +13,7 @@ namespace Jikan\MyAnimeList;
 
 use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
+use Jikan\Exception\BadResponseException;
 use Jikan\Exception\ParserException;
 use Jikan\Goutte\GoutteWrapper;
 use Jikan\Model;
@@ -116,15 +117,25 @@ class MalClient
         }
     }
 
+
     /**
      * @param Request\Character\CharacterRequest $request
      * @return Model\Character\Character
+     * @throws BadResponseException
      * @throws ParserException
      * @throws \HttpResponseException
      */
     public function getCharacter(Request\Character\CharacterRequest $request): Model\Character\Character
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+        // MAL returns `Invalid ID provided.` instead of 404 on invalid characters
+        $badResult = $crawler->filterXPath('//*[@id="content"]/div[@class="badresult"]');
+
+        if ($badResult->count()) {
+            throw new BadResponseException(sprintf('404 on %s', $request->getPath()), 404);
+        }
+
         try {
             $parser = new Parser\Character\CharacterParser($crawler);
 

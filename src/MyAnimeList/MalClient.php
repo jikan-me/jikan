@@ -478,7 +478,17 @@ class MalClient
      */
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        // Person page for some reason returns 404 when there are no results :facepalm:
+        try {
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
+        } catch (\Exception $e) {
+            if ($e->getCode() === 404) {
+                return new Model\Search\PersonSearch();
+            }
+
+            throw $e;
+        }
+
         try {
             $parser = new Parser\Search\PersonSearchParser($crawler);
 

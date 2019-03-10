@@ -15,12 +15,12 @@ class PersonSearch
     /**
      * @var PersonSearchListItem[]
      */
-    private $results;
+    private $results = [];
 
     /**
      * @var int
      */
-    private $lastPage;
+    private $lastPage = 1;
 
 
     /**

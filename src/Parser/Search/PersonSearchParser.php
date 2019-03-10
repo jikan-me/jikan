@@ -47,29 +47,15 @@ class PersonSearchParser
      */
     public function getResults(): array
     {
-
-        die(
-        $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr[2]/td')
-            ->text()
-        );
-        if (
-            $this->crawler
-                ->filterXPath('//div[@id="content"]/table/tr[2]/td')
-                ->text() === 'There were some probrems:Must have at least 3 byte characters to search'
-        ) {
+        // if the query is empty, MAL returns a ranking of "Most Favorited" people
+        // since that's not the scope of this method, we return empty results
+        // most favorited people are returned via the `TopPeople` API method
+        if ($this->crawler->filterXPath('//*[@id="content"]/table[@class="people-favorites-ranking-table"]')->count()) {
             return [];
         }
 
-        $results = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr[1]');
-
-        if (!$results->count()) {
-            return [];
-        }
-
-
-        $results = $results
+        $data = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr[1]')
             ->nextAll()
             ->each(
                 function (Crawler $c) {
@@ -78,16 +64,16 @@ class PersonSearchParser
             );
 
         // If only a single result is found, the $data array will be empty.
-        if (empty($results)) {
-            $results = $this->crawler
+        if (empty($data)) {
+            $data = $this->crawler
                 ->each(
                     function (Crawler $c) {
                         return PersonSearchListItem::fromPersonParser(new PersonParser($c));
                     }
                 );
         }
-            
-        return $results;
+
+        return $data;
     }
 
     /**

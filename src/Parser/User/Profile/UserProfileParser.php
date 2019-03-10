@@ -48,7 +48,7 @@ class UserProfileParser
      */
     public function getUsername(): string
     {
-        return (string)preg_replace('#.*/(\w+)$#', '$1', $this->getProfileUrl());
+        return (string)preg_replace('#.*/(.*)$#', '$1', $this->getProfileUrl());
     }
 
     /**

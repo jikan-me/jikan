@@ -46,8 +46,7 @@ class CharacterSearchParser
     public function getResults(): array
     {
 
-        if (
-            $this->crawler
+        if ($this->crawler
                 ->filterXPath('//div[@id="content"]/table/tr[2]/td')
                 // Yes, MAL actually has "probrems"
                 ->text() === 'There were some probrems:Must have at least 3 byte characters to search'

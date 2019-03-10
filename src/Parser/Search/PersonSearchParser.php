@@ -47,8 +47,29 @@ class PersonSearchParser
      */
     public function getResults(): array
     {
-        $data = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr[1]')
+
+        die(
+        $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr[2]/td')
+            ->text()
+        );
+        if (
+            $this->crawler
+                ->filterXPath('//div[@id="content"]/table/tr[2]/td')
+                ->text() === 'There were some probrems:Must have at least 3 byte characters to search'
+        ) {
+            return [];
+        }
+
+        $results = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr[1]');
+
+        if (!$results->count()) {
+            return [];
+        }
+
+
+        $results = $results
             ->nextAll()
             ->each(
                 function (Crawler $c) {
@@ -57,8 +78,8 @@ class PersonSearchParser
             );
 
         // If only a single result is found, the $data array will be empty.
-        if (empty($data)) {
-            $data = $this->crawler
+        if (empty($results)) {
+            $results = $this->crawler
                 ->each(
                     function (Crawler $c) {
                         return PersonSearchListItem::fromPersonParser(new PersonParser($c));
@@ -66,7 +87,7 @@ class PersonSearchParser
                 );
         }
             
-        return $data;
+        return $results;
     }
 
     /**

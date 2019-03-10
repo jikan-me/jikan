@@ -47,9 +47,14 @@ class MangaSearchParser
      */
     public function getResults(): array
     {
-        return $this->crawler
-            ->filterXPath('//div[contains(@class, "js-categories-seasonal")]/table/tr[1]')
-            ->nextAll()
+        $results = $this->crawler
+            ->filterXPath('//div[contains(@class, "js-categories-seasonal")]/table/tr[1]');
+
+        if (!$results->count()) {
+            return [];
+        }
+
+        return $results->nextAll()
             ->each(
                 function (Crawler $c) {
                     return (new MangaSearchListItemParser($c))->getModel();

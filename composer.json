@@ -37,5 +37,15 @@
         "jakub-onderka/php-parallel-lint": "^1.0",
         "doctrine/collections": "^1.5",
         "jikan-me/jikan-fixtures": "dev-master"
+    },
+    "scripts": {
+        "link-fixtures": [
+            "git clone https://github.com/jikan-me/jikan-fixtures.git .. || git -C ../jikan-fixtures reset --hard origin/master",
+            "composer config repositories.fixtures path ../jikan-fixtures",
+            "composer update jikan-me/jikan-fixtures",
+            "composer config repositories.fixtures --unset"
+        ]
+    },
+    "repositories": {
     }
 }

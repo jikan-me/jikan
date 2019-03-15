@@ -145,6 +145,11 @@ class AnimeSearchListItemParser
      */
     public function isAiring(): bool
     {
+        // an entry with one episode can't be airing
+        // its either finished airing or hasn't aired yet
+        if (1 === $this->getEpisodes()) {
+            return false;
+        }
         // Start not yet known
         if (null === $this->getStartDate()) {
             return false;

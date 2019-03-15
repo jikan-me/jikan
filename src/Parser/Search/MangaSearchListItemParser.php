@@ -4,7 +4,6 @@ namespace Jikan\Parser\Search;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Search\MangaSearchListItem;
 use Symfony\Component\DomCrawler\Crawler;
 

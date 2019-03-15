@@ -49,7 +49,7 @@ class Seasonal
      */
     public function getSeason(): string
     {
-        return $this->seasonName . " " . $this->seasonYear;
+        return $this->seasonName . ' ' . $this->seasonYear;
     }
 
     /**

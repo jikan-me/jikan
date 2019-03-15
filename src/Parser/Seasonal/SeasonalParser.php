@@ -64,7 +64,7 @@ class SeasonalParser implements ParserInterface
     public function getSeasonName(): string
     {
         $season = explode(
-            " ",
+            ' ',
             JString::cleanse(
                 $this->crawler->filter('div.navi-seasonal a.on')->text()
             )
@@ -81,7 +81,7 @@ class SeasonalParser implements ParserInterface
     public function getSeasonYear(): ?int
     {
         $season = explode(
-            " ",
+            ' ',
             JString::cleanse(
                 $this->crawler->filter('div.navi-seasonal a.on')->text()
             )

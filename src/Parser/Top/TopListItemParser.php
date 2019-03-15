@@ -113,8 +113,7 @@ class TopListItemParser
     }
 
     /**
-     * @return ?int
-     * @throws \InvalidArgumentException
+     * @return int|null ?int
      */
     public function getEpisodes(): ?int
     {

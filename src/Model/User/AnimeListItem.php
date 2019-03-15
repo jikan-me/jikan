@@ -161,11 +161,8 @@ class AnimeListItem
     private $licensors = [];
 
     /**
-     * @param \stdClass $parser
-     *
+     * @param \stdClass $item
      * @return AnimeListItem
-     * @throws \Exception
-     * @throws \InvalidArgumentException
      */
     public static function factory(\stdClass $item): self
     {
@@ -202,13 +199,13 @@ class AnimeListItem
             $instance->seasonYear = $item->anime_season->year;
         }
 
-        if (!is_null($item->anime_studios)) {
+        if ($item->anime_studios !== null) {
             foreach ($item->anime_studios as $studio) {
                 $instance->studios[] = new StudioMeta($studio->id, $studio->name);
             }
         }
 
-        if (!is_null($item->anime_licensors)) {
+        if ($item->anime_licensors !== null) {
             foreach ($item->anime_licensors as $licensor) {
                 $instance->licensors[] = new LicensorMeta($licensor->id, $licensor->name);
             }

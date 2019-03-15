@@ -48,7 +48,7 @@ class UserProfileParser
      */
     public function getUsername(): string
     {
-        return (string)preg_replace('#.*/(.*)$#', '$1', $this->getProfileUrl());
+        return preg_replace('#.*/(.*)$#', '$1', $this->getProfileUrl());
     }
 
     /**
@@ -87,7 +87,7 @@ class UserProfileParser
 
     /**
      * @return \DateTimeImmutable
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getLastOnline(): \DateTimeImmutable
     {

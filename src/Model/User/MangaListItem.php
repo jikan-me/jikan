@@ -129,11 +129,8 @@ class MangaListItem
     private $magazines = [];
 
     /**
-     * @param \stdClass $parser
-     *
-     * @return AnimeListItem
-     * @throws \Exception
-     * @throws \InvalidArgumentException
+     * @param \stdClass $item
+     * @return MangaListItem
      */
     public static function factory(\stdClass $item): self
     {
@@ -162,7 +159,7 @@ class MangaListItem
         $instance->priority = $item->priority_string;
         $instance->addedToList = $item->is_added_to_list;
 
-        if (!is_null($item->manga_magazines)) {
+        if ($item->manga_magazines !== null) {
             foreach ($item->manga_magazines as $magazine) {
                 $instance->magazines[] = new MagazineMeta($magazine->id, $magazine->name);
             }

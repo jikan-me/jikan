@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Search;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser;
 
 /**

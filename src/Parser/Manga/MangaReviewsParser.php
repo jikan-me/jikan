@@ -2,7 +2,6 @@
 
 namespace Jikan\Parser\Manga;
 
-use Jikan\Model\Manga\MangaReview;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

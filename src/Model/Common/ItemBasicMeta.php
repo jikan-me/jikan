@@ -22,8 +22,8 @@ class ItemBasicMeta
     /**
      * ItemBasicMeta constructor.
      *
+     * @param string $malId
      * @param string $name
-     * @param string $url
      */
     public function __construct(string $malId, string $name)
     {

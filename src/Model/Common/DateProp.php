@@ -2,6 +2,10 @@
 
 namespace Jikan\Model\Common;
 
+/**
+ * Class DateProp
+ * @package Jikan\Model\Common
+ */
 class DateProp
 {
 
@@ -9,18 +13,31 @@ class DateProp
     private $month;
     private $year;
 
+    /**
+     * DateProp constructor.
+     * @param string|null $date
+     */
     public function __construct(string $date = null)
     {
         $date === null || $this->parse($date);
     }
 
-    public static function fromFactory(?int $day, ?int $month, ?int $year)
+    /**
+     * @param int|null $day
+     * @param int|null $month
+     * @param int|null $year
+     * @return DateProp
+     */
+    public static function fromFactory(?int $day, ?int $month, ?int $year): DateProp
     {
         $instance = new self();
         $instance->set($day, $month, $year);
         return $instance;
     }
 
+    /**
+     * @param string $date
+     */
     private function parse(string $date) : void
     {
         if (preg_match('/^\d{4}$/', $date)) {

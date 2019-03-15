@@ -25,6 +25,7 @@ class MangaRecentlyUpdatedByUsersRequest implements RequestInterface
      * MangaRecentlyUpdatedByUsersRequest constructor.
      *
      * @param int $id
+     * @param int $page
      */
     public function __construct(int $id, int $page = 1)
     {

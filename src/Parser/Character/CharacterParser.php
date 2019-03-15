@@ -2,7 +2,6 @@
 
 namespace Jikan\Parser\Character;
 
-use Jikan\Exception\BadResponseException;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
@@ -25,7 +24,6 @@ class CharacterParser implements ParserInterface
     /**
      * CharacterParser constructor.
      * @param Crawler $crawler
-     * @throws BadResponseException
      */
     public function __construct(Crawler $crawler)
     {

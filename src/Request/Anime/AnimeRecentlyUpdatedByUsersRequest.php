@@ -25,6 +25,7 @@ class AnimeRecentlyUpdatedByUsersRequest implements RequestInterface
      * AnimeRecentlyUpdatedByUsersRequest constructor.
      *
      * @param int $id
+     * @param int $page
      */
     public function __construct(int $id, int $page = 1)
     {

@@ -92,7 +92,7 @@ class MangaParser implements ParserInterface
             $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
         );
 
-        return (preg_match('~^Looking for information on the manga~', $synopsis)) ? null : $synopsis;
+        return preg_match('~^Looking for information on the manga~', $synopsis) ? null : $synopsis;
     }
 
     /**
@@ -435,7 +435,7 @@ class MangaParser implements ParserInterface
                         str_replace(':', '', $c->filterXPath('//td[1]')->text())
                     );
 
-                    if ($links->count() == 1 // if it's the only link MAL has listed
+                    if ($links->count() === 1 // if it's the only link MAL has listed
                         && empty($links->first()->text()) // and if its a bugged/empty link
                     ) {
                         $related[$relation] = [];

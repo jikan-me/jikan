@@ -6,7 +6,6 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Anime\AnimeReviewer;
-use Jikan\Parser\Common\ReviewerParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

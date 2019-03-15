@@ -34,7 +34,6 @@ class Jikan
      *
      * @param GuzzleClient|null $guzzle
      *
-     * @throws ParserException
      */
     public function __construct(GuzzleClient $guzzle = null)
     {
@@ -45,6 +44,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Anime\Anime
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Anime(int $id): Model\Anime\Anime
@@ -58,6 +58,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Anime\AnimeCharactersAndStaff
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeCharactersAndStaff(int $id): Model\Anime\AnimeCharactersAndStaff
@@ -72,6 +73,7 @@ class Jikan
      * @param int $page
      *
      * @return \Jikan\Model\Anime\Episodes
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeEpisodes(int $id, int $page = 1): Model\Anime\Episodes
@@ -85,6 +87,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Anime\AnimeVideos
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeVideos(int $id): Model\Anime\AnimeVideos
@@ -98,6 +101,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Common\Picture[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimePictures(int $id): array
@@ -112,6 +116,7 @@ class Jikan
      * @param int $id
      *
      * @return Model\News\NewsListItem[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeNews(int $id): array
@@ -125,6 +130,7 @@ class Jikan
      * @param int $id
      *
      * @return Model\Forum\ForumTopic[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeForum(int $id): array
@@ -138,6 +144,7 @@ class Jikan
      * @param int $id
      *
      * @return Model\Anime\AnimeStats
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeStats(int $id): Model\Anime\AnimeStats
@@ -151,6 +158,7 @@ class Jikan
      * @param int $id
      *
      * @return string|null
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeMoreInfo(int $id): ?string
@@ -164,6 +172,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Manga\Manga
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Manga(int $id): Model\Manga\Manga
@@ -177,6 +186,7 @@ class Jikan
      * @param int $id
      *
      * @return Model\Manga\CharacterListItem[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaCharacters(int $id): array
@@ -190,6 +200,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Common\Picture[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaPictures(int $id): array
@@ -203,6 +214,7 @@ class Jikan
      * @param int $id
      *
      * @return Model\News\NewsListItem[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaNews(int $id): array
@@ -216,6 +228,7 @@ class Jikan
      * @param int $id
      *
      * @return Model\Forum\ForumTopic[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaForum(int $id): array
@@ -229,6 +242,7 @@ class Jikan
      * @param int $id
      *
      * @return Model\Manga\MangaStats
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaStats(int $id): Model\Manga\MangaStats
@@ -242,6 +256,7 @@ class Jikan
      * @param int $id
      *
      * @return string|null
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaMoreInfo(int $id): ?string
@@ -255,6 +270,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Character\Character
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Character(int $id): Model\Character\Character
@@ -268,6 +284,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Common\Picture[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function CharacterPictures(int $id): array
@@ -281,6 +298,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Person\Person
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Person(int $id): Model\Person\Person
@@ -294,6 +312,7 @@ class Jikan
      * @param int $id
      *
      * @return \Jikan\Model\Common\Picture[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function PersonPictures(int $id): array
@@ -304,10 +323,10 @@ class Jikan
     }
 
     /**
-     * @param ?int    $year
-     * @param ?string $season
-     *
+     * @param int|null $year
+     * @param string|null $season
      * @return \Jikan\Model\Seasonal\Seasonal
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Seasonal(?int $year = null, ?string $season = null): Model\Seasonal\Seasonal
@@ -320,6 +339,7 @@ class Jikan
     /**
      *
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function SeasonList(): array
@@ -332,6 +352,7 @@ class Jikan
     /**
      *
      * @return \Jikan\Model\Schedule\Schedule
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Schedule(): Model\Schedule\Schedule
@@ -346,6 +367,7 @@ class Jikan
      * @param int $page
      *
      * @return \Jikan\Model\Producer\Producer
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Producer(int $id, int $page = 1): Model\Producer\Producer
@@ -360,6 +382,7 @@ class Jikan
      * @param int $page
      *
      * @return \Jikan\Model\Magazine\Magazine
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function Magazine(int $id, int $page = 1): Model\Magazine\Magazine
@@ -374,6 +397,7 @@ class Jikan
      * @param int $page
      *
      * @return \Jikan\Model\Genre\AnimeGenre
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeGenre(int $id, int $page = 1): Model\Genre\AnimeGenre
@@ -388,6 +412,7 @@ class Jikan
      * @param int $page
      *
      * @return \Jikan\Model\Genre\MangaGenre
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaGenre(int $id, int $page = 1): Model\Genre\MangaGenre
@@ -398,10 +423,11 @@ class Jikan
     }
 
     /**
-     * @param int         $page
+     * @param int $page
      * @param string|null $type
      *
      * @return Model\Top\TopAnime[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function TopAnime(int $page = 1, ?string $type = null): array
@@ -412,10 +438,11 @@ class Jikan
     }
 
     /**
-     * @param int         $page
+     * @param int $page
      * @param string|null $type
      *
      * @return Model\Top\TopManga[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function TopManga(int $page = 1, ?string $type = null): array
@@ -429,6 +456,7 @@ class Jikan
      * @param int $page
      *
      * @return Model\Top\TopCharacter[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function TopCharacters(int $page = 1): array
@@ -442,6 +470,7 @@ class Jikan
      * @param int $page
      *
      * @return Model\Top\TopPerson[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function TopPeople(int $page = 1): array
@@ -452,11 +481,12 @@ class Jikan
     }
 
     /**
-     * @param string|null                            $query
-     * @param int                                    $page
+     * @param string|null $query
+     * @param int $page
      * @param null|Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeSearch(
@@ -474,11 +504,12 @@ class Jikan
     }
 
     /**
-     * @param string|null                            $query
-     * @param int                                    $page
+     * @param string|null $query
+     * @param int $page
      * @param null|Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaSearch(
@@ -496,11 +527,12 @@ class Jikan
     }
 
     /**
-     * @param string|null                                $query
-     * @param int                                        $page
+     * @param string|null $query
+     * @param int $page
      * @param null|Request\Search\CharacterSearchRequest $request
      *
      * @return Model\Search\CharacterSearch
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function CharacterSearch(
@@ -518,11 +550,12 @@ class Jikan
     }
 
     /**
-     * @param string|null                                                                   $query
-     * @param int                                                                           $page
+     * @param string|null $query
+     * @param int $page
      * @param Request\Search\PersonSearchRequest|Request\Search\PersonSearchRequest|null $request
      *
      * @return Model\Search\PersonSearch
+     * @throws ParserException
      */
     public function PersonSearch(
         ?string $query,
@@ -542,6 +575,7 @@ class Jikan
      * @param string $username
      *
      * @return \Jikan\Model\User\Profile
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function UserProfile(string $username): Model\User\Profile
@@ -553,9 +587,10 @@ class Jikan
 
     /**
      * @param string $username
-     * @param int    $page
+     * @param int $page
      *
      * @return Model\User\Friend[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function UserFriends(string $username, int $page = 1): array
@@ -566,10 +601,11 @@ class Jikan
     }
 
     /**
-     * @param string      $username
+     * @param string $username
      * @param string|null $type
      *
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function UserHistory(string $username, ?string $type = null): array
@@ -599,6 +635,7 @@ class Jikan
      * @param int $page
      *
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeRecentlyUpdatedByUsers(int $id, int $page = 1): array
@@ -613,6 +650,7 @@ class Jikan
      * @param int $page
      *
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function MangaRecentlyUpdatedByUsers(int $id, int $page = 1): array
@@ -626,6 +664,7 @@ class Jikan
      * @param int $id
      *
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
      */
     public function AnimeRecommendations(int $id): array
@@ -638,8 +677,8 @@ class Jikan
     /**
      * @param int $id
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function MangaRecommendations(int $id): array
     {
@@ -653,10 +692,10 @@ class Jikan
      * @param int $page
      *
      * @return array|Model\Club\UserProfile[]
+     * @throws Exception\BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
-    public function ClubUsers(int $id, int $page = 1)
+    public function ClubUsers(int $id, int $page = 1): array
     {
         return $this->myanimelist->getClubUsers(
             new Request\Club\UserListRequest($id, $page)
@@ -667,8 +706,8 @@ class Jikan
      * @param int $id
      * @param int $page
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function AnimeReviews(int $id, int $page): array
     {
@@ -681,8 +720,8 @@ class Jikan
      * @param int $id
      * @param int $page
      * @return array
+     * @throws Exception\BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function MangaReviews(int $id, int $page): array
     {
@@ -694,8 +733,8 @@ class Jikan
     /**
      * @param int $id
      * @return Model\Club\Club
+     * @throws Exception\BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function Club(int $id): Model\Club\Club
     {

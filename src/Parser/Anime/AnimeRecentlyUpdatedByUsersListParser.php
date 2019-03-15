@@ -131,7 +131,7 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
 
     /**
      * @return \DateTimeImmutable
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getDate(): \DateTimeImmutable
     {
@@ -143,7 +143,7 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
 
     /**
      * @return AnimeRecentlyUpdatedByUser
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getModel(): AnimeRecentlyUpdatedByUser
     {

@@ -14,7 +14,15 @@ class GoutteWrapper extends Client
 {
     /**
      * @inheritdoc
-     * @throws \HttpResponseException
+     * @param string $method
+     * @param string $uri
+     * @param array $parameters
+     * @param array $files
+     * @param array $server
+     * @param string|null $content
+     * @param bool $changeHistory
+     * @return \Symfony\Component\DomCrawler\Crawler
+     * @throws BadResponseException
      */
     public function request(
         string $method,
@@ -35,7 +43,7 @@ class GoutteWrapper extends Client
             $changeHistory
         );
 
-        $internalResponse = parent::getInternalResponse();
+        $internalResponse = $this->getInternalResponse();
         if ($internalResponse->getStatus() >= 400) {
             throw new BadResponseException(
                 $internalResponse->getStatus().' on '.$response->getUri(),

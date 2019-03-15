@@ -2,7 +2,6 @@
 
 namespace Jikan\Parser\Anime;
 
-use Jikan\Model\Anime\AnimeReview;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 

@@ -41,7 +41,7 @@ class Friend
      * @param FriendParser $parser
      *
      * @return Friend
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public static function fromParser(FriendParser $parser): Friend
     {

@@ -65,7 +65,7 @@ class MangaRecentlyUpdatedByUser
      * @param MangaRecentlyUpdatedByUsersListParser $parser
      *
      * @return self
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public static function fromParser(MangaRecentlyUpdatedByUsersListParser $parser): self
     {

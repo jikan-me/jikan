@@ -83,7 +83,7 @@ class MangaSearchRequest implements RequestInterface
         $this->query = $query;
         $this->page = $page;
 
-        $this->query = $this->query ?? "";
+        $this->query = $this->query ?? '';
     }
 
     /**
@@ -134,7 +134,7 @@ class MangaSearchRequest implements RequestInterface
     public function setQuery(?string $query = null): self
     {
         $this->query = $query;
-        $this->query = $this->query ?? "";
+        $this->query = $this->query ?? '';
 
         return $this;
     }

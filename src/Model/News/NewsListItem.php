@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\News;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\News\NewsListItemParser;
 
 /**

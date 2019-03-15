@@ -33,7 +33,8 @@ class FriendParser implements ParserInterface
     /**
      * Return the model
      *
-     * @throws \InvalidArgumentException
+     * @return Friend
+     * @throws \Exception
      */
     public function getModel(): Friend
     {
@@ -89,7 +90,7 @@ class FriendParser implements ParserInterface
 
     /**
      * @return \DateTimeImmutable
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getLastOnline(): \DateTimeImmutable
     {

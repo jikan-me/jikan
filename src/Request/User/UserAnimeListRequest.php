@@ -32,6 +32,7 @@ class UserAnimeListRequest implements RequestInterface
      *
      * @param string $username
      * @param int $page
+     * @param int $status
      */
     public function __construct(string $username, int $page = 1, int $status = 7)
     {

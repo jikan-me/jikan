@@ -29,10 +29,9 @@ class SeasonalRequest implements RequestInterface
     /**
      * SeasonalRequest constructor.
      *
-     * @param ?int    $year
-     * @param ?string $season
-     *
-     * @throws \InvalidArgumentException
+     * @param int|null $year
+     * @param string|null $season
+     * @param bool $later
      */
     public function __construct(?int $year = null, ?string $season = null, bool $later = false)
     {
@@ -54,7 +53,7 @@ class SeasonalRequest implements RequestInterface
             return sprintf('https://myanimelist.net/anime/season/later');
         }
 
-        if (is_null($this->year) || is_null($this->season)) {
+        if ($this->year === null || $this->season === null) {
             return sprintf('https://myanimelist.net/anime/season');
         }
 

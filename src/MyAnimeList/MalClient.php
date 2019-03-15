@@ -11,7 +11,6 @@
 
 namespace Jikan\MyAnimeList;
 
-use Goutte\Client;
 use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Exception\BadResponseException;
 use Jikan\Exception\ParserException;
@@ -48,8 +47,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeRequest $request
      * @return Model\Anime\Anime
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnime(Request\Anime\AnimeRequest $request): Model\Anime\Anime
     {
@@ -66,8 +65,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeEpisodesRequest $request
      * @return Model\Anime\Episodes
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Anime\Episodes
     {
@@ -84,8 +83,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeVideosRequest $request
      * @return Model\Anime\AnimeVideos
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\Anime\AnimeVideos
     {
@@ -102,8 +101,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaRequest $request
      * @return Model\Manga\Manga
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getManga(Request\Manga\MangaRequest $request): Model\Manga\Manga
     {
@@ -123,7 +122,6 @@ class MalClient
      * @return Model\Character\Character
      * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getCharacter(Request\Character\CharacterRequest $request): Model\Character\Character
     {
@@ -148,8 +146,8 @@ class MalClient
     /**
      * @param Request\Person\PersonRequest $request
      * @return Model\Person\Person
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getPerson(Request\Person\PersonRequest $request): Model\Person\Person
     {
@@ -166,8 +164,8 @@ class MalClient
     /**
      * @param Request\User\UserProfileRequest $request
      * @return Model\User\Profile
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\Profile
     {
@@ -184,8 +182,8 @@ class MalClient
     /**
      * @param Request\User\UserFriendsRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getUserFriends(Request\User\UserFriendsRequest $request): array
     {
@@ -202,8 +200,8 @@ class MalClient
     /**
      * @param Request\Seasonal\SeasonalRequest $request
      * @return Model\Seasonal\Seasonal
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getSeasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal\Seasonal
     {
@@ -220,8 +218,8 @@ class MalClient
     /**
      * @param Request\Producer\ProducerRequest $request
      * @return Model\Producer\Producer
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getProducer(Request\Producer\ProducerRequest $request): Model\Producer\Producer
     {
@@ -238,8 +236,8 @@ class MalClient
     /**
      * @param Request\Magazine\MagazineRequest $request
      * @return Model\Magazine\Magazine
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMagazine(Request\Magazine\MagazineRequest $request): Model\Magazine\Magazine
     {
@@ -256,8 +254,8 @@ class MalClient
     /**
      * @param Request\Genre\AnimeGenreRequest $request
      * @return Model\Genre\AnimeGenre
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Genre\AnimeGenre
     {
@@ -274,8 +272,8 @@ class MalClient
     /**
      * @param Request\Genre\MangaGenreRequest $request
      * @return Model\Genre\MangaGenre
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaGenre(Request\Genre\MangaGenreRequest $request): Model\Genre\MangaGenre
     {
@@ -292,8 +290,8 @@ class MalClient
     /**
      * @param Request\Schedule\ScheduleRequest $request
      * @return Model\Schedule\Schedule
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getSchedule(Request\Schedule\ScheduleRequest $request): Model\Schedule\Schedule
     {
@@ -310,8 +308,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeCharactersAndStaffRequest $request
      * @return Model\Anime\AnimeCharactersAndStaff
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
@@ -329,8 +327,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimePicturesRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimePictures(Request\Anime\AnimePicturesRequest $request): array
     {
@@ -347,8 +345,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaPicturesRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaPictures(Request\Manga\MangaPicturesRequest $request): array
     {
@@ -365,8 +363,8 @@ class MalClient
     /**
      * @param Request\Character\CharacterPicturesRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getCharacterPictures(Request\Character\CharacterPicturesRequest $request): array
     {
@@ -384,6 +382,7 @@ class MalClient
      * @param Request\Person\PersonPicturesRequest $request
      *
      * @return Model\Common\Picture[]
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getPersonPictures(Request\Person\PersonPicturesRequest $request): array
@@ -402,6 +401,7 @@ class MalClient
      * @param Request\RequestInterface $request
      *
      * @return Model\News\NewsListItem[]
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getNewsList(Request\RequestInterface $request): array
@@ -420,6 +420,7 @@ class MalClient
      * @param Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
@@ -438,6 +439,7 @@ class MalClient
      * @param Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getMangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
@@ -456,6 +458,7 @@ class MalClient
      * @param Request\Search\CharacterSearchRequest $request
      *
      * @return Model\Search\CharacterSearch
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
@@ -502,6 +505,7 @@ class MalClient
      * @param Request\Manga\MangaCharactersRequest $request
      *
      * @return Model\Manga\CharacterListItem[]
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getMangaCharacters(Request\Manga\MangaCharactersRequest $request): array
@@ -520,6 +524,7 @@ class MalClient
      * @param Request\Top\TopAnimeRequest $request
      *
      * @return Model\Top\TopAnime[]
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getTopAnime(Request\Top\TopAnimeRequest $request): array
@@ -538,6 +543,7 @@ class MalClient
      * @param Request\Top\TopMangaRequest $request
      *
      * @return Model\Top\TopManga[]
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getTopManga(Request\Top\TopMangaRequest $request): array
@@ -556,6 +562,7 @@ class MalClient
      * @param Request\Top\TopCharactersRequest $request
      *
      * @return Model\Top\TopCharacter[]
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getTopCharacters(Request\Top\TopCharactersRequest $request): array
@@ -574,6 +581,7 @@ class MalClient
      * @param Request\Top\TopPeopleRequest $request
      *
      * @return Model\Top\TopPerson[]
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getTopPeople(Request\Top\TopPeopleRequest $request): array
@@ -592,6 +600,7 @@ class MalClient
      * @param Request\Anime\AnimeStatsRequest $request
      *
      * @return Model\Anime\AnimeStats
+     * @throws BadResponseException
      * @throws ParserException
      */
     public function getAnimeStats(Request\Anime\AnimeStatsRequest $request): Model\Anime\AnimeStats
@@ -609,8 +618,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaStatsRequest $request
      * @return Model\Manga\MangaStats
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaStats(Request\Manga\MangaStatsRequest $request): Model\Manga\MangaStats
     {
@@ -627,8 +636,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeForumRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeForum(Request\Anime\AnimeForumRequest $request): array
     {
@@ -645,8 +654,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaForumRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaForum(Request\Manga\MangaForumRequest $request): array
     {
@@ -663,8 +672,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeMoreInfoRequest $request
      * @return string|null
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): ?string
     {
@@ -681,8 +690,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaMoreInfoRequest $request
      * @return string|null
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaMoreInfo(Request\Manga\MangaMoreInfoRequest $request): ?string
     {
@@ -699,8 +708,8 @@ class MalClient
     /**
      * @param Request\SeasonList\SeasonListRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getSeasonList(Request\SeasonList\SeasonListRequest $request): array
     {
@@ -717,8 +726,8 @@ class MalClient
     /**
      * @param Request\User\UserHistoryRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getUserHistory(Request\User\UserHistoryRequest $request): array
     {
@@ -783,8 +792,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request): array
     {
@@ -801,8 +810,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaRecentlyUpdatedByUsersRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaRecentlyUpdatedByUsers(Request\Manga\MangaRecentlyUpdatedByUsersRequest $request): array
     {
@@ -819,8 +828,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeRecommendationsRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeRecommendations(Request\Anime\AnimeRecommendationsRequest $request): array
     {
@@ -837,8 +846,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaRecommendationsRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaRecommendations(Request\Manga\MangaRecommendationsRequest $request): array
     {
@@ -857,8 +866,8 @@ class MalClient
      * @param Request\Club\UserListRequest $request
      *
      * @return Model\Club\UserProfile[]
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getClubUsers(Request\Club\UserListRequest $request): array
     {
@@ -876,8 +885,8 @@ class MalClient
     /**
      * @param Request\Anime\AnimeReviewsRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): array
     {
@@ -894,8 +903,8 @@ class MalClient
     /**
      * @param Request\Manga\MangaReviewsRequest $request
      * @return array
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getMangaReviews(Request\Manga\MangaReviewsRequest $request): array
     {
@@ -913,8 +922,8 @@ class MalClient
     /**
      * @param Request\Club\ClubRequest $request
      * @return Model\Club\Club
+     * @throws BadResponseException
      * @throws ParserException
-     * @throws \HttpResponseException
      */
     public function getClub(Request\Club\ClubRequest $request): Model\Club\Club
     {

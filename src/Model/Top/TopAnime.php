@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Top;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**

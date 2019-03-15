@@ -4,6 +4,10 @@ namespace Jikan\Request\Club;
 
 use Jikan\Request\RequestInterface;
 
+/**
+ * Class ClubRequest
+ * @package Jikan\Request\Club
+ */
 class ClubRequest implements RequestInterface
 {
 
@@ -16,7 +20,6 @@ class ClubRequest implements RequestInterface
      * ClubRequest constructor.
      *
      * @param int $clubId
-     * @param int $page
      */
     public function __construct(int $clubId)
     {

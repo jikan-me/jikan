@@ -175,7 +175,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
 
     /**
      * @return \DateTimeImmutable
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getDate(): \DateTimeImmutable
     {
@@ -187,7 +187,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
 
     /**
      * @return MangaRecentlyUpdatedByUser
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public function getModel(): MangaRecentlyUpdatedByUser
     {

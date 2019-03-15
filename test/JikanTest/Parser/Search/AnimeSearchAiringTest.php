@@ -7,7 +7,7 @@ use Jikan\Request\Search\AnimeSearchRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class AnimeSearchTest
+ * Class AnimeSearchAiringTest
  */
 class AnimeSearchAiringTest extends TestCase
 {

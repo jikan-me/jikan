@@ -40,7 +40,7 @@
     },
     "scripts": {
         "link-fixtures": [
-            "git clone https://github.com/jikan-me/jikan-fixtures.git .. || git -C ../jikan-fixtures reset --hard origin/master",
+            "git clone https://github.com/jikan-me/jikan-fixtures.git ../jikan-fixtures || git -C ../jikan-fixtures reset --hard origin/master",
             "composer config repositories.fixtures path ../jikan-fixtures",
             "composer update jikan-me/jikan-fixtures",
             "composer config repositories.fixtures --unset"

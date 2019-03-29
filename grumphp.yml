@@ -16,5 +16,6 @@ parameters:
                 - 'ini_set'
                 - 'error_reporting'
                 - 'die'
-        phpunit: ~
+        paratest:
+            always_execute: true
         phplint: ~

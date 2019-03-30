@@ -15,6 +15,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Exception\BadResponseException;
 use Jikan\Exception\ParserException;
 use Jikan\Goutte\GoutteWrapper;
+use Jikan\Helper\TimeProvider;
 use Jikan\Model;
 use Jikan\Parser;
 use Jikan\Request;
@@ -30,15 +31,20 @@ class MalClient
     private $ghoutte;
 
     /**
+     * @var TimeProvider
+     */
+    private $timeProvider;
+
+    /**
      * MalClient constructor.
      *
      * @param GuzzleClient|null $guzzle
-     *
-     * @throws \InvalidArgumentException
+     * @param TimeProvider|null $timeProvider
      */
-    public function __construct(GuzzleClient $guzzle = null)
+    public function __construct(GuzzleClient $guzzle = null, TimeProvider $timeProvider = null)
     {
         $this->ghoutte = new GoutteWrapper();
+        $this->timeProvider = $timeProvider ?? new TimeProvider();
         if ($guzzle !== null) {
             $this->ghoutte->setClient($guzzle);
         }
@@ -427,7 +433,7 @@ class MalClient
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Search\AnimeSearchParser($crawler);
+            $parser = new Parser\Search\AnimeSearchParser($crawler, $this->timeProvider);
 
             return $parser->getModel();
         } catch (\Exception $e) {

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Search;
 
+use Jikan\Helper\TimeProvider;
 use Jikan\Model\Search\AnimeSearch;
 use Jikan\Model\Search\AnimeSearchListItem;
 use Symfony\Component\DomCrawler\Crawler;
@@ -19,13 +20,19 @@ class AnimeSearchParser
     private $crawler;
 
     /**
+     * @var TimeProvider
+     */
+    private $timeProvider;
+
+    /**
      * AnimeSearchParser constructor.
      *
      * @param Crawler $crawler
      */
-    public function __construct(Crawler $crawler)
+    public function __construct(Crawler $crawler, TimeProvider $timeProvider)
     {
         $this->crawler = $crawler;
+        $this->timeProvider = $timeProvider;
     }
 
     /**
@@ -57,7 +64,7 @@ class AnimeSearchParser
         return $results->nextAll()
             ->each(
                 function (Crawler $c) {
-                    return (new AnimeSearchListItemParser($c))->getModel();
+                    return (new AnimeSearchListItemParser($c, $this->timeProvider))->getModel();
                 }
             );
     }

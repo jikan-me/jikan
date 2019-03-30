@@ -4,6 +4,7 @@ namespace Jikan\Parser\Search;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Helper\TimeProvider;
 use Jikan\Model\Search\AnimeSearchListItem;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -20,13 +21,19 @@ class AnimeSearchListItemParser
     private $crawler;
 
     /**
+     * @var TimeProvider
+     */
+    private $timeProvider;
+
+    /**
      * AnimeSearchParser constructor.
      *
      * @param Crawler $crawler
      */
-    public function __construct(Crawler $crawler)
+    public function __construct(Crawler $crawler, TimeProvider $timeProvider)
     {
         $this->crawler = $crawler;
+        $this->timeProvider = $timeProvider;
     }
 
     /**
@@ -94,15 +101,6 @@ class AnimeSearchListItemParser
     }
 
     /**
-     * @return int
-     * @throws \InvalidArgumentException
-     */
-    public function getEpisodes(): int
-    {
-        return (int)$this->crawler->filterXPath('//td[4]')->text();
-    }
-
-    /**
      * @return float
      * @throws \InvalidArgumentException
      */
@@ -158,7 +156,7 @@ class AnimeSearchListItemParser
         if (null === $this->getEndDate()) {
             return true;
         }
-        $now = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+        $now = $this->timeProvider->getDateTimeImmutable();
         // Not yet started
         if ($this->getStartDate() > $now) {
             return false;
@@ -169,6 +167,15 @@ class AnimeSearchListItemParser
         }
 
         return true;
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getEpisodes(): int
+    {
+        return (int)$this->crawler->filterXPath('//td[4]')->text();
     }
 
     /**

@@ -21,6 +21,7 @@ class AnimeSearchAiringTest extends TestCase
         $mockTime = self::createMock(TimeProvider::class);
         $mockTime
             ->method('getDateTimeImmutable')
+            ->with('now', 'UTC')
             ->willReturn(new \DateTimeImmutable('2019-03-26 01:00:00', new \DateTimeZone('UTC')));
         $jikan = new MalClient(null, $mockTime);
         $this->search = $jikan->getAnimeSearch(new AnimeSearchRequest('Kaguya'));

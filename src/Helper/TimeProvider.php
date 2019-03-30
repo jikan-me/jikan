@@ -9,34 +9,24 @@ namespace Jikan\Helper;
 class TimeProvider
 {
     /**
-     * @var string
-     */
-    private $timezone;
-
-    /**
-     * TimeProvider constructor.
-     * @param string $timezone
-     */
-    public function __construct(string $timezone = 'UTC')
-    {
-        $this->timezone = $timezone;
-    }
-
-    /**
+     * @param string $date
+     * @param string $tz
      * @return \DateTime
      * @throws \Exception
      */
-    public function getDateTime(): \DateTime
+    public function getDateTime(string $date = 'now', string $tz = 'UTC'): \DateTime
     {
-        return new \DateTime('now', new \DateTimeZone($this->timezone));
+        return new \DateTime($date, new \DateTimeZone($tz));
     }
 
     /**
+     * @param string $date
+     * @param string $tz
      * @return \DateTimeImmutable
      * @throws \Exception
      */
-    public function getDateTimeImmutable(): \DateTimeImmutable
+    public function getDateTimeImmutable(string $date = 'now', string $tz = 'UTC'): \DateTimeImmutable
     {
-        return new \DateTimeImmutable('now', new \DateTimeZone($this->timezone));
+        return new \DateTimeImmutable($date, new \DateTimeZone($tz));
     }
 }

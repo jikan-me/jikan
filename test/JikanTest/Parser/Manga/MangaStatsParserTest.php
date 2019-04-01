@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Manga;
 
+use Jikan\Model\Manga\MangaStatsScore;
 use Jikan\Parser\Manga\MangaStatsParser;
 use PHPUnit\Framework\TestCase;
 
@@ -41,17 +42,10 @@ class MangaStatsParserTest extends TestCase
      * @test
      * @vcr MangaStats.yaml
      */
-    public function it_gets_score_statistics()
+    public function it_gets_score_attributes()
     {
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[10]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[9]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[8]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[7]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[6]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[5]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[4]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[3]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[2]));
-        self::assertEquals(2, count($this->mangaStatsParser->getScores()[1]));
+        self::assertEquals(
+            1432, $this->mangaStatsParser->getScores()[10]->getVotes()
+        );
     }
 }

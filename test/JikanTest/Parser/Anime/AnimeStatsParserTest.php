@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Anime;
 
+use Jikan\Model\Anime\AnimeStatsScore;
 use Jikan\Parser\Anime\AnimeStatsParser;
 use PHPUnit\Framework\TestCase;
 
@@ -41,17 +42,10 @@ class AnimeStatsParserTest extends TestCase
      * @test
      * @vcr AnimeStats.yaml
      */
-    public function it_gets_score_statistics()
+    public function it_gets_score_attributes()
     {
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[10]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[9]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[8]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[7]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[6]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[5]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[4]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[3]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[2]));
-        self::assertEquals(2, count($this->animeStatsParser->getScores()[1]));
+        self::assertEquals(
+            126, $this->animeStatsParser->getScores()[10]->getVotes()
+        );
     }
 }

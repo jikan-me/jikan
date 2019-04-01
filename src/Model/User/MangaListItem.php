@@ -150,10 +150,10 @@ class MangaListItem
         $instance->totalVolumes = $item->manga_num_volumes;
         $instance->publishingStatus = $item->manga_publishing_status;
         $instance->type = $item->manga_media_type_string;
-        $instance->startDate = Parser::parseDateDMY($item->manga_start_date_string);
-        $instance->endDate = Parser::parseDateDMY($item->manga_end_date_string);
-        $instance->readStartDate = Parser::parseDateDMY($item->start_date_string);
-        $instance->readEndDate = Parser::parseDateDMY($item->finish_date_string);
+        $instance->startDate = Parser::parseDateMDY($item->manga_start_date_string);
+        $instance->endDate = Parser::parseDateMDY($item->manga_end_date_string);
+        $instance->readStartDate = Parser::parseDateMDY($item->start_date_string);
+        $instance->readEndDate = Parser::parseDateMDY($item->finish_date_string);
         $instance->days = $item->days_string;
         $instance->retail= empty($item->retail_string) ? null : $item->retail_string;
         $instance->priority = $item->priority_string;

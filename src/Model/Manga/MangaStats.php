@@ -42,7 +42,7 @@ class MangaStats
     private $total;
 
     /**
-     * @var int
+     * @var array
      */
     private $scores;
 
@@ -115,9 +115,9 @@ class MangaStats
     }
 
     /**
-     * @return int
+     * @return array
      */
-    public function getScores(): int
+    public function getScores(): array
     {
         return $this->scores;
     }

@@ -92,13 +92,13 @@ class Parser
     }
 
     /**
-     * @param string $date
+     * @param string|null $date
      *
      * @return \DateTimeImmutable|null
      */
-    public static function parseDateMDY(string $date): ?\DateTimeImmutable
+    public static function parseDateMDY(?string $date): ?\DateTimeImmutable
     {
-        if ($date === '-') {
+        if ($date === '-' || $date === null) {
             return null;
         }
 

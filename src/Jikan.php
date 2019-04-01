@@ -631,6 +631,22 @@ class Jikan
     }
 
     /**
+     * @param string $username
+     * @param int    $page
+     * @param int    $status
+     *
+     * @return array
+     * @throws ParserException
+     */
+    public function UserMangaList(string $username, int $page = 1, int $status = 7): array
+    {
+        return $this->myanimelist->getUserMangaList(
+            new Request\User\UserMangaListRequest($username, $page, $status)
+        );
+    }
+
+
+    /**
      * @param int $id
      * @param int $page
      *

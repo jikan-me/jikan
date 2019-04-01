@@ -50,5 +50,4 @@ class AnimeStatsScore
     {
         return $this->percentage;
     }
-
 }

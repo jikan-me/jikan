@@ -50,5 +50,4 @@ class MangaStatsScore
     {
         return $this->percentage;
     }
-
 }

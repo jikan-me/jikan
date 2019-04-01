@@ -749,10 +749,8 @@ class MalClient
      */
     public function getUserAnimeList(Request\User\UserAnimeListRequest $request): array
     {
-        $client = new \GuzzleHttp\Client();
-
         try {
-            $response = $client->get($request->getPath());
+            $response = $this->ghoutte->getClient()->get($request->getPath());
             $list = json_decode($response->getBody()->getContents());
 
             $model = [];
@@ -772,10 +770,8 @@ class MalClient
      */
     public function getUserMangaList(Request\User\UserMangaListRequest $request): array
     {
-        $client = new \GuzzleHttp\Client();
-
         try {
-            $response = $client->get($request->getPath());
+            $response = $this->ghoutte->getClient()->get($request->getPath());
             $list = json_decode($response->getBody()->getContents());
 
             $model = [];

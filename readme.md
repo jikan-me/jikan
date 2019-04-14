@@ -127,21 +127,25 @@ PHPCS, PHPLint & PHPUnit
 
 ## Changelog
 
-### v2.6.1 stable - Dec 17, 18
-- **[Club]** Optimize User list schema
-
-### v2.6.0 stable - Dec 16, 18
-- **[Club]** Add club parsing
-
-### v2.5.0 stable - Dec 13, 18
-- **[Anime|Manga]** Add **Reviews** parsing
-- **[Club]** Add **User List** parsing - 2.4.0
-
-### v2.3.0 Stable - Nov 14, 18
-- **[Anime|Manga]** Add **Recommendations** parsing
-- **[Anime|Manga]** Add **Recently Updated By Users** parsing - 2.2.0
-- **[Seasonal]** Added parsing for **later** anime - 2.1.4
-- **[User List]** Bug fix for some manga lists parsing - 2.1.3
+### v2.7.0 - Apr 14, 18
+- **[Anime|Manga]** 
+    - `EpisodeListItem` `aired` property to return `DateTimeImmutable` instead of `DateRange`
+    - [Bug Fix] Stats Score refactoring; returns `AnimeStatsScore`/`MangaStatsScore` object instead of array now - [#216](/../../issues/216)
+    - Fix `AnimeListItem`/`MangaListItem` parsing date formats incorrectly
+- **[Helper]** fix `parseDateMDY` returning incorrect date
+- **[Jikan.php]**
+    - fix `PersonSearch`incorrect Request class hinting
+    - add `UserMangaList`
+- **[MalClient.php]**
+    - `getAnimeEpisodes` with no episodes return empty episodes array now instead of BadResponseException (404)
+    - `getPersonSearch` with no results returns empty array now instead of BadResponseException (404)
+    - `getCharacterSearch` with no results returns empty array now instead of BadResponseException (404)
+    - `getCharacter` returns BadResponseException (404) now if invalid ID is provided
+    - Fix guzzle dep injection being overriden in some cases
+- **[User]**
+    - Fix `UserProfileParser`'s `getUsername()` returning the URL instead of the username
+- Added default values to some models
+- Other minor code and bug fixes
 
 [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 

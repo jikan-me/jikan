@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2.7.0 - Apr 14, 18
+- **[Anime|Manga]** 
+    - `EpisodeListItem` `aired` property to return `DateTimeImmutable` instead of `DateRange`
+    - [Bug Fix] Stats Score refactoring; returns `AnimeStatsScore`/`MangaStatsScore` object instead of array now - [#216](/../../issues/216)
+    - Fix `AnimeListItem`/`MangaListItem` parsing date formats incorrectly
+- **[Helper]** fix `parseDateMDY` returning incorrect date
+- **[Jikan.php]**
+    - fix `PersonSearch`incorrect Request class hinting
+    - add `UserMangaList`
+- **[MalClient.php]**
+    - `getAnimeEpisodes` with no episodes return empty episodes array now instead of BadResponseException (404)
+    - `getPersonSearch` with no results returns empty array now instead of BadResponseException (404)
+    - `getCharacterSearch` with no results returns empty array now instead of BadResponseException (404)
+    - `getCharacter` returns BadResponseException (404) now if invalid ID is provided
+    - Fix guzzle dep injection being overriden in some cases
+- **[User]**
+    - Fix `UserProfileParser`'s `getUsername()` returning the URL instead of the username
+- Added default values to some models
+- Other minor code and bug fixes
+
 ### 2.6.1 stable - Dec 17, 18
 - **[Club]** Optimize User list schema
 

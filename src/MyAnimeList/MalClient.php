@@ -70,6 +70,17 @@ class MalClient
      */
     public function getAnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Anime\Episodes
     {
+        // Episode page returns 404 when there are no results
+        try {
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
+        } catch (\Exception $e) {
+            if ($e->getCode() === 404) {
+                return new Model\Anime\Episodes();
+            }
+
+            throw $e;
+        }
+
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\EpisodesParser($crawler);

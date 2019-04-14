@@ -92,7 +92,7 @@ class AnimeEpisodesParserTest extends TestCase
     public function it_gets_episode_aired(): void
     {
         self::assertInstanceOf(
-            \Jikan\Model\Common\DateRange::class,
+            \DateTimeImmutable::class,
             $this->parser->getEpisodes()[0]->getAired()
         );
     }

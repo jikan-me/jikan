@@ -14,12 +14,12 @@ class Episodes
     /**
      * @var int
      */
-    private $episodesLastPage;
+    private $episodesLastPage = 1;
 
     /**
      * @var EpisodeListItem[]
      */
-    private $episodes;
+    private $episodes = [];
 
     /**
      * @param EpisodesParser $parser

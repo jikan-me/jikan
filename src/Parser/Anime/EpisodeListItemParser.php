@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\Parser;
 use Jikan\Model\Anime\EpisodeListItem;
 use Jikan\Model\Common\DateRange;
 use Jikan\Parser\ParserInterface;
@@ -99,11 +100,12 @@ class EpisodeListItemParser implements ParserInterface
         return (!empty($matches[1]) ? $matches[1] : null);
     }
 
+
     /**
-     * @return DateRange|null ?DateRange
-     * @throws \InvalidArgumentException
+     * @return \DateTimeImmutable|null
+     * @throws \Exception
      */
-    public function getAired(): ?DateRange
+    public function getAired(): ?\DateTimeImmutable
     {
         $aired = $this->crawler->filterXPath('//td[contains(@class, \'episode-aired\')]')->text();
 
@@ -111,7 +113,7 @@ class EpisodeListItemParser implements ParserInterface
             return null;
         }
 
-        return new DateRange($aired);
+        return Parser::parseDateMDYReadable($aired);
     }
 
     /**

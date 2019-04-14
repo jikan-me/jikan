@@ -32,8 +32,9 @@ class EpisodeListItem
      */
     public $titleRomanji;
 
+
     /**
-     * @var DateRange|null
+     * @var \DateTimeImmutable|null
      */
     public $aired;
 
@@ -57,11 +58,11 @@ class EpisodeListItem
      */
     public $forumUrl;
 
+
     /**
      * @param EpisodeListItemParser $parser
-     *
      * @return EpisodeListItem
-     * @throws \InvalidArgumentException
+     * @throws \Exception
      */
     public static function fromParser(EpisodeListItemParser $parser): self
     {
@@ -112,9 +113,9 @@ class EpisodeListItem
     }
 
     /**
-     * @return DateRange|null
+     * @return \DateTimeImmutable|null
      */
-    public function getAired(): ?DateRange
+    public function getAired()
     {
         return $this->aired;
     }

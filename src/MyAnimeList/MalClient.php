@@ -754,9 +754,8 @@ class MalClient
 
     /**
      * @param Request\User\UserAnimeListRequest $request
-     *
-     * @return Model\User\AnimeListItem[]
-     * @throws ParserException
+     * @return array
+     * @throws BadResponseException
      */
     public function getUserAnimeList(Request\User\UserAnimeListRequest $request): array
     {
@@ -770,14 +769,18 @@ class MalClient
             }
             return $model;
         } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
+            throw new BadResponseException(
+                $e->getCode().' on '.$request->getPath(),
+                $e->getCode()
+            );
         }
     }
+
 
     /**
      * @param Request\User\UserMangaListRequest $request
      * @return array
-     * @throws ParserException
+     * @throws BadResponseException
      */
     public function getUserMangaList(Request\User\UserMangaListRequest $request): array
     {
@@ -791,7 +794,10 @@ class MalClient
             }
             return $model;
         } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
+            throw new BadResponseException(
+                $e->getCode().' on '.$request->getPath(),
+                $e->getCode()
+            );
         }
     }
 

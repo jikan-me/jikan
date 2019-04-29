@@ -78,6 +78,16 @@ class AnimeSearchRequest implements RequestInterface
     private $genreExclude = false;
 
     /**
+     * @var int
+     */
+    private $orderBy;
+
+    /**
+     * @var int
+     */
+    private $sort;
+
+    /**
      * AnimeSearchRequest constructor.
      *
      * @param string|null $query
@@ -116,6 +126,8 @@ class AnimeSearchRequest implements RequestInterface
                 'em'     => $this->endDate[1],
                 'ey'     => $this->endDate[2],
                 'gx'     => (int)$this->genreExclude,
+                'o'      => $this->orderBy,
+                'w'      => $this->sort
             ]
         );
 
@@ -281,6 +293,36 @@ class AnimeSearchRequest implements RequestInterface
     {
         $this->genreExclude = $genreExclude;
 
+        return $this;
+    }
+
+    /**
+     * @param string $char
+     * @return AnimeSearchRequest
+     */
+    public function setChar(string $char): AnimeSearchRequest
+    {
+        $this->char = $char;
+        return $this;
+    }
+
+    /**
+     * @param int $orderBy
+     * @return AnimeSearchRequest
+     */
+    public function setOrderBy(int $orderBy): AnimeSearchRequest
+    {
+        $this->orderBy = $orderBy;
+        return $this;
+    }
+
+    /**
+     * @param int $sort
+     * @return AnimeSearchRequest
+     */
+    public function setSort(int $sort): AnimeSearchRequest
+    {
+        $this->sort = $sort;
         return $this;
     }
 }

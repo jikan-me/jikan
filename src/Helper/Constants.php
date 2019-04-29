@@ -82,6 +82,24 @@ class Constants
     public const SEARCH_ANIME_RATING_RX = 6;
     public const SEARCH_ANIME_RATING_HENTAI = 6; // alias
 
+    /*
+     * Search Ordering Explained
+     * https://github.com/jikan-me/jikan/issues/220#issuecomment-487446859
+     */
+
+    public const SEARCH_SORT_ASCENDING = 0;
+    public const SEARCH_SORT_DESCENDING = 1;
+
+    public const SEARCH_ANIME_ORDER_BY_TITLE = 0;
+    public const SEARCH_ANIME_ORDER_BY_START_DATE = 2;
+    public const SEARCH_ANIME_ORDER_BY_SCORE = 3;
+    public const SEARCH_ANIME_ORDER_BY_EPISODES = 4;
+    public const SEARCH_ANIME_ORDER_BY_END_DATE = 5;
+    public const SEARCH_ANIME_ORDER_BY_TYPE = 6;
+    public const SEARCH_ANIME_ORDER_BY_MEMBERS = 7;
+    public const SEARCH_ANIME_ORDER_BY_RATED = 8; // Rx -> R+ -> R -> PG13 -> PG -> G
+    public const SEARCH_ANIME_ORDER_BY_ID = 9;
+
     public const GENRE_ANIME_ACTION = 1;
     public const GENRE_ANIME_ADVENTURE = 2;
     public const GENRE_ANIME_CARS = 3;

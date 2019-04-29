@@ -3,6 +3,7 @@
 namespace Jikan\Model\User;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MagazineMeta;
 use Jikan\Model\Common\MalUrl;
@@ -162,7 +163,12 @@ class MangaListItem
 
         if ($item->manga_magazines !== null) {
             foreach ($item->manga_magazines as $magazine) {
-                $instance->magazines[] = new MalUrl($magazine->name, Constants::BASE_URL . "/manga/magazine/{$magazine->id}/{$magazine->name}");
+                $magazineNameCanonical = JString::strToCanonical($magazine->name);
+
+                $instance->magazines[] = new MalUrl(
+                    $magazine->name,
+                    Constants::BASE_URL . "/manga/magazine/{$magazine->id}/{$magazineNameCanonical}"
+                );
             }
         }
 

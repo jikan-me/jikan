@@ -35,4 +35,17 @@ class JString
     {
         return trim($string, \chr(0xC2).\chr(0xA0));
     }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    public static function strToCanonical(string $string) : string
+    {
+        return str_replace(
+            [' ', '/'],
+            '_',
+            preg_replace("/[^[:alnum:][:space:]\-\/]/u", '', $string)
+        );
+    }
 }

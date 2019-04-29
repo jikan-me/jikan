@@ -3,6 +3,7 @@
 namespace Jikan\Model\User;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\LicensorMeta;
 use Jikan\Model\Common\MalUrl;
@@ -202,13 +203,23 @@ class AnimeListItem
 
         if ($item->anime_studios !== null) {
             foreach ($item->anime_studios as $studio) {
-                $instance->studios[] = new MalUrl($studio->name, Constants::BASE_URL . "/anime/producer/{$studio->id}/{$studio->name}");
+                $studioNameCanonical = JString::strToCanonical($studio->name);
+
+                $instance->studios[] = new MalUrl(
+                    $studio->name,
+                    Constants::BASE_URL . "/anime/producer/{$studio->id}/{$studioNameCanonical}"
+                );
             }
         }
 
         if ($item->anime_licensors !== null) {
             foreach ($item->anime_licensors as $licensor) {
-                $instance->licensors[] = new MalUrl($licensor->name, Constants::BASE_URL . "/anime/producer/{$licensor->id}/{$licensor->name}");
+                $licensorNameCanonical = JString::strToCanonical($licensor->name);
+
+                $instance->licensors[] = new MalUrl(
+                    $licensor->name,
+                    Constants::BASE_URL . "/anime/producer/{$licensor->id}/{$licensorNameCanonical}"
+                );
             }
         }
 

@@ -96,9 +96,19 @@ class Constants
     public const SEARCH_ANIME_ORDER_BY_EPISODES = 4;
     public const SEARCH_ANIME_ORDER_BY_END_DATE = 5;
     public const SEARCH_ANIME_ORDER_BY_TYPE = 6;
-    public const SEARCH_ANIME_ORDER_BY_MEMBERS = 7;
-    public const SEARCH_ANIME_ORDER_BY_RATED = 8; // Rx -> R+ -> R -> PG13 -> PG -> G
+    public const SEARCH_ANIME_ORDER_BY_MEMBERS = 7; // Default: Music -> ONA -> Special -> Movie -> OVA -> TV -> Unknown
+    public const SEARCH_ANIME_ORDER_BY_RATED = 8; // Default: Rx -> R+ -> R -> PG13 -> PG -> G
     public const SEARCH_ANIME_ORDER_BY_ID = 9;
+
+    public const SEARCH_MANGA_ORDER_BY_TITLE = 0;
+    public const SEARCH_MANGA_ORDER_BY_START_DATE = 2;
+    public const SEARCH_MANGA_ORDER_BY_SCORE = 3;
+    public const SEARCH_MANGA_ORDER_BY_VOLUMES = 4;
+    public const SEARCH_MANGA_ORDER_BY_END_DATE = 5;
+    public const SEARCH_MANGA_ORDER_BY_CHAPTERS = 6;
+    public const SEARCH_MANGA_ORDER_BY_MEMBERS = 7;
+    public const SEARCH_MANGA_ORDER_BY_TYPE = 8; // Default: Manhua, Manhwa, Doujinshi, One-shot, Novel, Manga
+    public const SEARCH_MANGA_ORDER_BY_ID = 9;
 
     public const GENRE_ANIME_ACTION = 1;
     public const GENRE_ANIME_ADVENTURE = 2;

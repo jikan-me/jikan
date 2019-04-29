@@ -25,11 +25,11 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 - PHP 7.1+
 
 ## Jikan REST API
-A REST service is available as well.
+A REST API service is available as well
 
-- **[REST DOCUMENTATION](https://jikan.docs.apiary.io)**
-- **[Apps/Projects using JikanREST](https://jikan.moe/showcase)**
-- **[Host your own instance of Jikan REST](https://github.com/jikan-me/jikan-rest)**
+- **[REST API DOCUMENTATION](https://jikan.docs.apiary.io)**
+- **[Apps/Projects using the REST API](https://jikan.moe/showcase)**
+- **[Host the REST API yourself](https://github.com/jikan-me/jikan-rest)**
 
 ### Wrappers
 - **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
@@ -39,8 +39,10 @@ A REST service is available as well.
 - **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs
 - **[PHP]** [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe
 - **[Node.js]** [jikan-node](https://github.com/xy137/jikan-node) by xy137
+- **[Dart]** [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol
+- **[TypeScript]** [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard
 
-[Add your own wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
+[Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 
 
 ## Features
@@ -80,7 +82,10 @@ A REST service is available as well.
     - Character
     - Person
     - Pagination Support
-    - Advanced Search (Filters)
+    - Advanced Search
+        - Filters
+        - Order By
+        - Sorting (Ascending/Descending)
 - Seasonal Anime (Season + Year)
 - Season List/Archive
 - Anime Scheduling (for current season)
@@ -93,8 +98,8 @@ A REST service is available as well.
 - Genre
     - Anime
     - Manga
-- Producers (Anime Listing)
-- Magazines (Manga Listing)
+- Producers (Anime Listing by a Producer)
+- Magazines (Manga Listing by a Magazine)
 - User
     - Profile
     - Friends
@@ -125,7 +130,7 @@ PHPCS, PHPLint & PHPUnit
 `php vendor/bin/grumphp run`
 
 
-## Changelog
+## Release Changelog
 
 ### v2.7.0 - Apr 14, 18
 - **[Anime|Manga]** 

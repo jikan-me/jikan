@@ -73,6 +73,16 @@ class MangaSearchRequest implements RequestInterface
     private $genreExclude = false;
 
     /**
+     * @var int
+     */
+    private $orderBy;
+
+    /**
+     * @var int
+     */
+    private $sort;
+
+    /**
      * MangaSearchRequest constructor.
      *
      * @param string|null $query
@@ -110,6 +120,8 @@ class MangaSearchRequest implements RequestInterface
                 'em'     => $this->endDate[1],
                 'ey'     => $this->endDate[2],
                 'gx'     => (int)$this->genreExclude,
+                'o'      => $this->orderBy,
+                'w'      => $this->sort
             ]
         );
 
@@ -263,6 +275,36 @@ class MangaSearchRequest implements RequestInterface
     {
         $this->genreExclude = $genreExclude;
 
+        return $this;
+    }
+
+    /**
+     * @param string $char
+     * @return MangaSearchRequest
+     */
+    public function setChar(string $char): MangaSearchRequest
+    {
+        $this->char = $char;
+        return $this;
+    }
+
+    /**
+     * @param int $orderBy
+     * @return MangaSearchRequest
+     */
+    public function setOrderBy(int $orderBy): MangaSearchRequest
+    {
+        $this->orderBy = $orderBy;
+        return $this;
+    }
+
+    /**
+     * @param int $sort
+     * @return MangaSearchRequest
+     */
+    public function setSort(int $sort): MangaSearchRequest
+    {
+        $this->sort = $sort;
         return $this;
     }
 }

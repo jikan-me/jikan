@@ -5,6 +5,7 @@ namespace Jikan\Model\User;
 use Jikan\Helper\Constants;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MagazineMeta;
+use Jikan\Model\Common\MalUrl;
 
 /**
  * Class MangaListItem
@@ -161,7 +162,7 @@ class MangaListItem
 
         if ($item->manga_magazines !== null) {
             foreach ($item->manga_magazines as $magazine) {
-                $instance->magazines[] = new MagazineMeta($magazine->id, $magazine->name);
+                $instance->magazines[] = new MalUrl($magazine->name, Constants::BASE_URL . "/manga/magazine/{$magazine->id}/{$magazine->name}");
             }
         }
 

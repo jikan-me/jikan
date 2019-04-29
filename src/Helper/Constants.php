@@ -166,11 +166,11 @@ class Constants
     public const GENRE_MANGA_MILITARY = 38;
     public const GENRE_MANGA_POLICE = 39;
     public const GENRE_MANGA_PSYCHOLOGICAL = 40;
-    public const GENRE_MANGA_THRILLER = 41;
-    public const GENRE_MANGA_SEINEN = 42;
-    public const GENRE_MANGA_JOSEI = 43;
+    public const GENRE_MANGA_SEINEN = 41;
+    public const GENRE_MANGA_JOSEI = 42;
     public const GENRE_MANGA_DOUJINSHI = 43;
     public const GENRE_MANGA_GENDER_BENDER = 44;
+    public const GENRE_MANGA_THRILLER = 45;
 
     public const USER_ANIME_LIST_ALL = 7;
     public const USER_ANIME_LIST_WATCHING = 1;

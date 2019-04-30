@@ -2,6 +2,7 @@
 
 namespace Jikan\Request\User;
 
+use Jikan\Helper\Constants;
 use Jikan\Request\RequestInterface;
 
 /**
@@ -28,6 +29,41 @@ class UserMangaListRequest implements RequestInterface
     private $status;
 
     /**
+     * @var int
+     */
+    private $orderBy;
+
+    /**
+     * @var int
+     */
+    private $orderBy2;
+
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var array
+     */
+    private $publishedFrom = [null, null, null];
+
+    /**
+     * @var array
+     */
+    private $publishedTo = [null, null, null];
+
+    /**
+     * @var int
+     */
+    private $publishingStatus;
+
+    /**
+     * @var int
+     */
+    private $magazine;
+
+    /**
      * UserMangaListRequest constructor.
      *
      * @param string $username
@@ -48,8 +84,125 @@ class UserMangaListRequest implements RequestInterface
     {
         $query = '?'.http_build_query([
             'offset' => $this->page,
-            'status' => $this->status
+            'status' => $this->status,
+            'order' => $this->orderBy,
+            'order2' => $this->orderBy2,
+            's' => $this->title,
+            'published_from_year' => $this->publishedFrom[0],
+            'published_from_month' => $this->publishedFrom[1],
+            'published_from_day' => $this->publishedFrom[2],
+            'published_to_year' => $this->publishedFrom[0],
+            'published_to_month' => $this->publishedFrom[1],
+            'published_to_day' => $this->publishedFrom[2],
+            'magazine' => $this->magazine,
+            'publishing_status' => $this->publishingStatus
         ]);
         return sprintf('https://myanimelist.net/mangalist/%s/load.json%s', $this->username, $query);
+    }
+
+    /**
+     * @param string $username
+     * @return UserMangaListRequest
+     */
+    public function setUsername(string $username): UserMangaListRequest
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    /**
+     * @param int $page
+     * @return UserMangaListRequest
+     */
+    public function setPage(int $page): UserMangaListRequest
+    {
+        $this->page = $page;
+        return $this;
+    }
+
+    /**
+     * @param int $status
+     * @return UserMangaListRequest
+     */
+    public function setStatus(int $status): UserMangaListRequest
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    /**
+     * @param int $orderBy
+     * @param int|null $sort
+     * @return UserMangaListRequest
+     */
+    public function setOrderBy(int $orderBy, ?int $sort = Constants::USER_LIST_SORT_DESCENDING): UserMangaListRequest
+    {
+        $this->orderBy = $sort * $orderBy;
+        return $this;
+    }
+
+    /**
+     * @param int $orderBy2
+     * @param int|null $sort
+     * @return UserMangaListRequest
+     */
+    public function setOrderBy2(int $orderBy2, ?int $sort = Constants::USER_LIST_SORT_DESCENDING): UserMangaListRequest
+    {
+        $this->orderBy2 = $sort * $orderBy2;
+        return $this;
+    }
+
+    /**
+     * @param string $title
+     * @return UserMangaListRequest
+     */
+    public function setTitle(string $title): UserMangaListRequest
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @param int $year
+     * @param int|null $month
+     * @param int|null $day
+     * @return UserMangaListRequest
+     */
+    public function setPublishedFrom(int $year, ?int $month = null, ?int $day = null): UserMangaListRequest
+    {
+        $this->publishedFrom = [$year, $month, $day];
+        return $this;
+    }
+
+    /**
+     * @param int $year
+     * @param int|null $month
+     * @param int|null $day
+     * @return UserMangaListRequest
+     */
+    public function setPublishedTo(int $year, ?int $month = null, ?int $day = null): UserMangaListRequest
+    {
+        $this->publishedTo = [$year, $month, $day];
+        return $this;
+    }
+
+    /**
+     * @param int $publishingStatus
+     * @return UserMangaListRequest
+     */
+    public function setPublishingStatus(int $publishingStatus): UserMangaListRequest
+    {
+        $this->publishingStatus = $publishingStatus;
+        return $this;
+    }
+
+    /**
+     * @param int $magazine
+     * @return UserMangaListRequest
+     */
+    public function setMagazine(int $magazine): UserMangaListRequest
+    {
+        $this->magazine = $magazine;
+        return $this;
     }
 }

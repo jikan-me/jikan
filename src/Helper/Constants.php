@@ -210,7 +210,7 @@ class Constants
 
     public const USER_ANIME_LIST_ORDER_BY_TITLE = 1;
     public const USER_ANIME_LIST_ORDER_BY_FINISHED_DATE = 2;
-    public const USER_ANIME_LIST_ORDER_BY_START_DATE = 3;
+    public const USER_ANIME_LIST_ORDER_BY_STARTED_DATE = 3;
     public const USER_ANIME_LIST_ORDER_BY_SCORE = 4;
     public const USER_ANIME_LIST_ORDER_BY_LAST_UPDATED = 5;
     public const USER_ANIME_LIST_ORDER_BY_TYPE = 6;
@@ -218,8 +218,9 @@ class Constants
     public const USER_ANIME_LIST_ORDER_BY_REWATCH_VALUE = 9;
     public const USER_ANIME_LIST_ORDER_BY_PRIORITY = 11;
     public const USER_ANIME_LIST_ORDER_BY_PROGRESS = 12;
+    public const USER_ANIME_LIST_ORDER_BY_EPISODES = 12; // alias to above
     public const USER_ANIME_LIST_ORDER_BY_STORAGE = 13;
-    public const USER_ANIME_LIST_ORDER_BY_AIR_DATE = 14;
+    public const USER_ANIME_LIST_ORDER_BY_AIR_START = 14;
     public const USER_ANIME_LIST_ORDER_BY_AIR_END = 15;
     public const USER_ANIME_LIST_ORDER_BY_STATUS = 16;
 
@@ -234,6 +235,23 @@ class Constants
     public const USER_MANGA_LIST_DROPPED = 4;
     public const USER_MANGA_LIST_PTR = 6;
     public const USER_MANGA_LIST_PLANTOREAD = 6;
+
+    public const USER_MANGA_LIST_ORDER_BY_TITLE = 1;
+    public const USER_MANGA_LIST_ORDER_BY_FINISHED_DATE = 2;
+    public const USER_MANGA_LIST_ORDER_BY_STARTED_DATE = 3;
+    public const USER_MANGA_LIST_ORDER_BY_SCORE = 4;
+    public const USER_MANGA_LIST_ORDER_BY_LAST_UPDATED = 5;
+    public const USER_MANGA_LIST_ORDER_BY_PRIORITY = 8;
+    public const USER_MANGA_LIST_ORDER_BY_CHAPTERS = 9;
+    public const USER_MANGA_LIST_ORDER_BY_VOLUMES = 10;
+    public const USER_MANGA_LIST_ORDER_BY_TYPE = 11;
+    public const USER_MANGA_LIST_ORDER_BY_PUBLISH_START = 12;
+    public const USER_MANGA_LIST_ORDER_BY_PUBLISH_END = 13;
+    public const USER_MANGA_LIST_ORDER_BY_STATUS = 14;
+
+    public const USER_MANGA_LIST_CURRENTLY_PUBLISHING = 1;
+    public const USER_MANGA_LIST_FINISHED_PUBLISHING = 2;
+    public const USER_MANGA_LIST_NOT_YET_PUBLISHED = 3;
 
     public const USER_LIST_SORT_DESCENDING = 1;
     public const USER_LIST_SORT_ASCENDING = -1;

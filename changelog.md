@@ -1,5 +1,14 @@
 ## Changelog
 
+### 2.8.0 - Apr 30, 18
+- **[User List : Anime|Manga]**
+    - Throw `BadResponseException` instead of `ParserException` when the request fails [#217](/../../issues/217)
+    - Add list filtering & sorting [jikan-rest#49](https://github.com/jikan-me/jikan-rest/issues/49)
+    - Replace `StudioMeta`, `LicensorMeta` & `MagazineMeta` with `MalUrl` intead
+        - This will further provide properties like `type`, `url`
+- **[Search : Anime|Manga]
+    - Add result ordering & sorting [jikan-rest#48](https://github.com/jikan-me/jikan-rest/issues/48)
+    
 ### 2.7.0 - Apr 14, 18
 - **[Anime|Manga]** 
     - `EpisodeListItem` `aired` property to return `DateTimeImmutable` instead of `DateRange`

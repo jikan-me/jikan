@@ -200,6 +200,11 @@ class Constants
     public const GENRE_MANGA_GENDER_BENDER = 44;
     public const GENRE_MANGA_THRILLER = 45;
 
+    /*
+     * User List Ordering Explained
+     * https://github.com/jikan-me/jikan/issues/221#issuecomment-487711031
+     */
+
     public const USER_ANIME_LIST_ALL = 7;
     public const USER_ANIME_LIST_WATCHING = 1;
     public const USER_ANIME_LIST_COMPLETED = 2;

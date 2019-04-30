@@ -208,6 +208,25 @@ class Constants
     public const USER_ANIME_LIST_PTW = 6;
     public const USER_ANIME_LIST_PLANTOWATCH = 6;
 
+    public const USER_ANIME_LIST_ORDER_BY_TITLE = 1;
+    public const USER_ANIME_LIST_ORDER_BY_FINISHED_DATE = 2;
+    public const USER_ANIME_LIST_ORDER_BY_START_DATE = 3;
+    public const USER_ANIME_LIST_ORDER_BY_SCORE = 4;
+    public const USER_ANIME_LIST_ORDER_BY_LAST_UPDATED = 5;
+    public const USER_ANIME_LIST_ORDER_BY_TYPE = 6;
+    public const USER_ANIME_LIST_ORDER_BY_RATED = 8;
+    public const USER_ANIME_LIST_ORDER_BY_REWATCH_VALUE = 9;
+    public const USER_ANIME_LIST_ORDER_BY_PRIORITY = 11;
+    public const USER_ANIME_LIST_ORDER_BY_PROGRESS = 12;
+    public const USER_ANIME_LIST_ORDER_BY_STORAGE = 13;
+    public const USER_ANIME_LIST_ORDER_BY_AIR_DATE = 14;
+    public const USER_ANIME_LIST_ORDER_BY_AIR_END = 15;
+    public const USER_ANIME_LIST_ORDER_BY_STATUS = 16;
+
+    public const USER_ANIME_LIST_CURRENTLY_AIRING = 1;
+    public const USER_ANIME_LIST_FINISHED_AIRING = 2;
+    public const USER_ANIME_LIST_NOT_YET_AIRED = 3;
+
     public const USER_MANGA_LIST_ALL = 7;
     public const USER_MANGA_LIST_READING = 1;
     public const USER_MANGA_LIST_COMPLETED = 2;
@@ -215,4 +234,7 @@ class Constants
     public const USER_MANGA_LIST_DROPPED = 4;
     public const USER_MANGA_LIST_PTR = 6;
     public const USER_MANGA_LIST_PLANTOREAD = 6;
+
+    public const USER_LIST_SORT_DESCENDING = 1;
+    public const USER_LIST_SORT_ASCENDING = -1;
 }

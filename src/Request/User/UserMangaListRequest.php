@@ -116,7 +116,7 @@ class UserMangaListRequest implements RequestInterface
      */
     public function setPage(int $page): UserMangaListRequest
     {
-        $this->page = $page;
+        $this->page = ($page - 1) * 300;
         return $this;
     }
 

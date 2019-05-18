@@ -132,7 +132,7 @@ PHPCS, PHPLint & PHPUnit
 
 ## Release Changelog
 
-### v2.8.0 - Apr 30, 18
+### v2.8.0 - Apr 30, 19
 - **[User List : Anime|Manga]**
     - Throw `BadResponseException` instead of `ParserException` when the request fails [#217](/../../issues/217)
     - Add list filtering & sorting [jikan-rest#49](https://github.com/jikan-me/jikan-rest/issues/49)
@@ -142,7 +142,7 @@ PHPCS, PHPLint & PHPUnit
     - Add result ordering & sorting [jikan-rest#48](https://github.com/jikan-me/jikan-rest/issues/48)
     
 
-### v2.7.0 - Apr 14, 18
+### v2.7.0 - Apr 14, 19
 - **[Anime|Manga]** 
     - `EpisodeListItem` `aired` property to return `DateTimeImmutable` instead of `DateRange`
     - [Bug Fix] Stats Score refactoring; returns `AnimeStatsScore`/`MangaStatsScore` object instead of array now - [#216](/../../issues/216)

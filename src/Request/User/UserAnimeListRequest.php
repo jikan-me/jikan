@@ -129,7 +129,7 @@ class UserAnimeListRequest implements RequestInterface
      */
     public function setPage(int $page): UserAnimeListRequest
     {
-        $this->page = $page;
+        $this->page = ($page - 1) * 300;
         return $this;
     }
 

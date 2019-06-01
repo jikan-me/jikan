@@ -129,6 +129,17 @@ PHPCS, PHPLint & PHPUnit
 
 `php vendor/bin/grumphp run`
 
+---
+
+# Backers
+Thank you to all our backers! 🙏 [[Become a backer](https://patreon.com/jikan)]
+- [PurplePinapples](https://github.com/purplepinapples/)
+
+# Sponsors
+Thank you to all our sponsors! You will get advertisement/promotive perks. [[Become a sponsor](https://patreon.com/jikan)]
+- [Hibiki Matsujo](https://github.com/assintates)
+
+---
 
 ## Release Changelog
 

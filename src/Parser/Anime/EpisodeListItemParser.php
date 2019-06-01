@@ -80,7 +80,7 @@ class EpisodeListItemParser implements ParserInterface
 
         preg_match('~(.*)\((.*)\)~', $title, $matches);
 
-        return $matches[2];
+        return (!empty($matches[2]) ? $matches[2] : null);
     }
 
     /**

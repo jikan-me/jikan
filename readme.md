@@ -134,9 +134,10 @@ PHPCS, PHPLint & PHPUnit
 # Backers
 Thank you to all our backers! 🙏 [[Become a backer](https://patreon.com/jikan)]
 - [PurplePinapples](https://github.com/purplepinapples/)
+- [Barkdoll (Jesse)](https://github.com/barkdoll/)
 
 # Sponsors
-Thank you to all our sponsors! You will get advertisement/promotive perks. [[Become a sponsor](https://patreon.com/jikan)]
+Thank you to all our sponsors! You will recieve advertisement/promotive perks. [[Become a sponsor](https://patreon.com/jikan)]
 - [Hibiki Matsujo](https://github.com/assintates)
 
 ---

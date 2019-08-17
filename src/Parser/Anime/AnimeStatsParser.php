@@ -37,12 +37,16 @@ class AnimeStatsParser implements ParserInterface
      */
     public function getWatching(): int
     {
-        return $this->sanitize(
-            $this->crawler
-                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Watching:\')]')
-                ->parents()
-                ->getNode(0)->textContent
-        );
+        try {
+            return $this->sanitize(
+                $this->crawler
+                    ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Watching:\')]')
+                    ->parents()
+                    ->getNode(0)->textContent
+            );
+        } catch (\Exception $e) {
+            return 0;
+        }
     }
 
     /**
@@ -61,12 +65,16 @@ class AnimeStatsParser implements ParserInterface
      */
     public function getCompleted(): int
     {
-        return $this->sanitize(
-            $this->crawler
-                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Completed:\')]')
-                ->parents()
-                ->getNode(0)->textContent
-        );
+        try {
+            return $this->sanitize(
+                $this->crawler
+                    ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Completed:\')]')
+                    ->parents()
+                    ->getNode(0)->textContent
+            );
+        } catch (\Exception $e) {
+            return 0;
+        }
     }
 
     /**
@@ -75,12 +83,16 @@ class AnimeStatsParser implements ParserInterface
      */
     public function getOnHold(): int
     {
-        return $this->sanitize(
-            $this->crawler
-                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'On-Hold:\')]')
-                ->parents()
-                ->getNode(0)->textContent
-        );
+        try {
+            return $this->sanitize(
+                $this->crawler
+                    ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'On-Hold:\')]')
+                    ->parents()
+                    ->getNode(0)->textContent
+            );
+        } catch (\Exception $e) {
+            return 0;
+        }
     }
 
     /**
@@ -89,12 +101,16 @@ class AnimeStatsParser implements ParserInterface
      */
     public function getDropped(): int
     {
-        return $this->sanitize(
-            $this->crawler
-                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Dropped:\')]')
-                ->parents()
-                ->getNode(0)->textContent
-        );
+        try {
+            return $this->sanitize(
+                $this->crawler
+                    ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Dropped:\')]')
+                    ->parents()
+                    ->getNode(0)->textContent
+            );
+        } catch (\Exception $e) {
+            return 0;
+        }
     }
 
     /**
@@ -103,12 +119,16 @@ class AnimeStatsParser implements ParserInterface
      */
     public function getPlanToWatch(): int
     {
-        return $this->sanitize(
-            $this->crawler
-                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Watch:\')]')
-                ->parents()
-                ->getNode(0)->textContent
-        );
+        try {
+            return $this->sanitize(
+                $this->crawler
+                    ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Watch:\')]')
+                    ->parents()
+                    ->getNode(0)->textContent
+            );
+        } catch (\Exception $e) {
+            return 0;
+        }
     }
 
     /**
@@ -117,12 +137,16 @@ class AnimeStatsParser implements ParserInterface
      */
     public function getTotal(): int
     {
-        return $this->sanitize(
-            $this->crawler
-                ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Total:\')]')
-                ->parents()
-                ->getNode(0)->textContent
-        );
+        try {
+            return $this->sanitize(
+                $this->crawler
+                    ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Total:\')]')
+                    ->parents()
+                    ->getNode(0)->textContent
+            );
+        } catch (\Exception $e) {
+            return 0;
+        }
     }
 
     /**

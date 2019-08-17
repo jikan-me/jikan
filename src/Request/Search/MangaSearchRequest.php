@@ -2,6 +2,7 @@
 
 namespace Jikan\Request\Search;
 
+use Jikan\Exception\BadResponseException;
 use Jikan\Request\RequestInterface;
 
 /**
@@ -94,6 +95,12 @@ class MangaSearchRequest implements RequestInterface
         $this->page = $page;
 
         $this->query = $this->query ?? '';
+
+        $querySize = strlen($this->query);
+
+        if ($querySize > 0 & $querySize < 3) {
+            throw new BadResponseException('Search queries requires at least 3 characters');
+        }
     }
 
     /**

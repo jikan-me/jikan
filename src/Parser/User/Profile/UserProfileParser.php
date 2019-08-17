@@ -94,7 +94,8 @@ class UserProfileParser
     {
         try {
             return new \DateTimeImmutable(
-                $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')->text(),
+                $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')
+                    ->text(),
                 new \DateTimeZone('UTC')
             );
         } catch (\Exception $e) {

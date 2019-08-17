@@ -28,7 +28,7 @@ class Profile
     private $imageUrl;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      */
     private $lastOnline;
 
@@ -107,9 +107,9 @@ class Profile
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
-    public function getLastOnline(): \DateTimeImmutable
+    public function getLastOnline(): ?\DateTimeImmutable
     {
         return $this->lastOnline;
     }

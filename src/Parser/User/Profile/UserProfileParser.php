@@ -85,16 +85,21 @@ class UserProfileParser
         );
     }
 
+
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      * @throws \Exception
      */
-    public function getLastOnline(): \DateTimeImmutable
+    public function getLastOnline(): ?\DateTimeImmutable
     {
-        return new \DateTimeImmutable(
-            $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')->text(),
-            new \DateTimeZone('UTC')
-        );
+        try {
+            return new \DateTimeImmutable(
+                $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')->text(),
+                new \DateTimeZone('UTC')
+            );
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**

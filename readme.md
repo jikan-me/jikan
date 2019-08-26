@@ -131,12 +131,18 @@ PHPCS, PHPLint & PHPUnit
 
 ---
 
+# Sugoi Backers
+Thank you to all our **sugoi** backers! 🙏 [[Become a sugoi backer](https://patreon.com/jikan)]
+- [Jared Allard (jaredallard)](https://github.com/jaredallard)
+
 # Backers
 Thank you to all our backers! 🙏 [[Become a backer](https://patreon.com/jikan)]
 - [PurplePinapples](https://github.com/purplepinapples/)
 - [Barkdoll (Jesse)](https://github.com/barkdoll/)
 - [Piotr Szymczak (Drutol)](https://github.com/Drutol)
 - [Jason Weatherly (jamesthebard)](https://twitter.com/jamesthebard)
+- [Cesar Irad Mendoza (aberuwu)](https://github.com/aberuwu)
+
 
 # Sponsors
 Thank you to all our sponsors! You will recieve advertisement/promotive perks. [[Become a sponsor](https://patreon.com/jikan)]

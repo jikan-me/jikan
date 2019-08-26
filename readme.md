@@ -41,6 +41,7 @@ A REST API service is available as well
 - **[Node.js]** [jikan-node](https://github.com/xy137/jikan-node) by xy137
 - **[Dart]** [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol
 - **[TypeScript]** [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard
+- **[TypeScript]** [jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco
 
 [Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 

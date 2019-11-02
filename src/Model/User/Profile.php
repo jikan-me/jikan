@@ -13,6 +13,11 @@ class Profile
 {
 
     /**
+     * @var int|null
+     */
+    private $userId;
+
+    /**
      * @var string
      */
     private $username;
@@ -82,6 +87,7 @@ class Profile
     public static function fromParser(UserProfileParser $parser): self
     {
         $instance = new self();
+        $instance->userId = $parser->getUserId();
         $instance->username = $parser->getUsername();
         $instance->url = $parser->getProfileUrl();
         $instance->imageUrl = $parser->getImageUrl();
@@ -96,6 +102,14 @@ class Profile
         $instance->favorites = $parser->getFavorites();
 
         return $instance;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
     }
 
     /**

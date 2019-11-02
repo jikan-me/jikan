@@ -42,6 +42,22 @@ class UserProfileParser
         return Model\User\Profile::fromParser($this);
     }
 
+    public function getUserId() : ?int
+    {
+        $node = $this->crawler->filterXPath("//a[contains(@class, 'header-right')]");
+        if (!$node->count()) {
+            return null;
+        }
+
+        preg_match('#id=(.*)#', $node->attr('href'), $id);
+
+        if (!empty($id)) {
+            return (int) $id[1];
+        }
+
+        return null;
+    }
+
     /**
      * @return string
      * @throws \InvalidArgumentException

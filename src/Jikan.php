@@ -758,4 +758,18 @@ class Jikan
             new Request\Club\ClubRequest($id)
         );
     }
+
+    /**
+     * @param int $id
+     * @param int $episodeId
+     * @return Model\Anime\AnimeEpisode
+     * @throws Exception\BadResponseException
+     * @throws ParserException
+     */
+    public function AnimeEpisode(int $id, int $episodeId): Model\Anime\AnimeEpisode
+    {
+        return $this->myanimelist->getAnimeEpisode(
+            new Request\Anime\AnimeEpisodeRequest($id, $episodeId)
+        );
+    }
 }

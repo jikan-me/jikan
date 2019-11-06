@@ -2,79 +2,90 @@
 
 namespace Jikan\Model\Anime;
 
-use Jikan\Model\Common\DateRange;
-use Jikan\Parser\Anime\EpisodeListItemParser;
+use Jikan\Parser\Anime\AnimeEpisodeParser;
 
 /**
- * Class EpisodeParser
+ * Class AnimeEpisode
  *
  * @package Jikan\Model
  */
-class EpisodeListItem
+class AnimeEpisode
 {
+
     /**
      * @var int
      */
-    public $episodeId;
+    private $episodeId;
 
     /**
      * @var string
      */
-    public $title;
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $title;
 
     /**
      * @var string|null
      */
-    public $titleJapanese;
+    private $titleJapanese;
 
     /**
      * @var string|null
      */
-    public $titleRomanji;
+    private $titleRomanji;
+
+    /**
+     * @var int|null
+     */
+    private $duration;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    public $aired;
+    private $aired;
 
     /**
      * @var bool
      */
-    public $filler;
+    private $filler;
 
     /**
      * @var bool
      */
-    public $recap;
+    private $recap;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public $videoUrl;
-
-    /**
-     * @var string
-     */
-    public $forumUrl;
+    private $synopsis;
 
 
     /**
-     * @param EpisodeListItemParser $parser
-     * @return EpisodeListItem
+     * @param AnimeEpisodeParser $parser
+     * @return AnimeEpisode
      * @throws \Exception
      */
-    public static function fromParser(EpisodeListItemParser $parser): self
+    public static function fromParser(AnimeEpisodeParser $parser): self
     {
         $instance = new self();
+
         $instance->episodeId = $parser->getEpisodeId();
+        $instance->url = $parser->getEpisodeUrl();
+        $instance->filler = $parser->getFiller();
+        $instance->recap = $parser->getRecap();
         $instance->title = $parser->getTitle();
         $instance->titleJapanese = $parser->getTitleJapanese();
         $instance->titleRomanji = $parser->getTitleRomanji();
+        $instance->duration = $parser->getDuration();
         $instance->aired = $parser->getAired();
-        $instance->filler = $parser->getFiller();
-        $instance->recap = $parser->getRecap();
-        $instance->videoUrl = $parser->getVideoUrl();
-        $instance->forumUrl = $parser->getForumUrl();
+        $instance->synopsis = $parser->getSynopsis();
+
+//        $instance->characters = $parser->getCharacters();
+//        $instance->staff = $parser->getStaff();
+//        $instance->forumUrl = $parser->getForumUrl();
 
         return $instance;
     }
@@ -85,6 +96,14 @@ class EpisodeListItem
     public function getEpisodeId(): int
     {
         return $this->episodeId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
     /**
@@ -112,9 +131,17 @@ class EpisodeListItem
     }
 
     /**
+     * @return int|null
+     */
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    /**
      * @return \DateTimeImmutable|null
      */
-    public function getAired()
+    public function getAired(): ?\DateTimeImmutable
     {
         return $this->aired;
     }
@@ -136,18 +163,11 @@ class EpisodeListItem
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getVideoUrl(): string
+    public function getSynopsis(): ?string
     {
-        return $this->videoUrl;
+        return $this->synopsis;
     }
 
-    /**
-     * @return string
-     */
-    public function getForumUrl(): string
-    {
-        return $this->forumUrl;
-    }
 }

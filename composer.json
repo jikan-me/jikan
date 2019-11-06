@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Irfan",
-            "email": "irfan@dahir.co"
+            "email": "irfan.dahir@gmail.com"
         }
     ],
     "autoload": {
@@ -32,6 +32,7 @@
         "brianium/paratest": "1.*",
         "doctrine/collections": "^1.5",
         "jakub-onderka/php-parallel-lint": "^1.0",
+        "jikan-me/jikan": "^2.8",
         "jikan-me/jikan-fixtures": "dev-master",
         "php-vcr/php-vcr": "~1.3.2",
         "php-vcr/phpunit-testlistener-vcr": "^3.0",

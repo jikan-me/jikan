@@ -188,4 +188,18 @@ class Parser
     {
         return str_replace(['thumbs/', '_thumb'], '', $imageUrl);
     }
+
+    public static function parseDurationToSeconds(string $duration): ?int
+    {
+        preg_match('~([0-9]{2}):([0-9]{2}):([0-9]{2})~', $duration, $match);
+        if (empty($match)) {
+            return null;
+        }
+
+        $hours = $match[1] ?? 0;
+        $minutes = $match[2] ?? 0;
+        $seconds = $match[3] ?? 0;
+
+        return ($hours*60*60) + ($minutes*60) + $seconds;
+    }
 }

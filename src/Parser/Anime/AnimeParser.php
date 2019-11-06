@@ -430,12 +430,12 @@ class AnimeParser implements ParserInterface
             $scoredBy
         );
 
-//        $rating = Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingCount"]'));
-//        if ($rating === null) {
-//            return $rating;
-//        }
+        //        $rating = Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingCount"]'));
+        //        if ($rating === null) {
+        //            return $rating;
+        //        }
 
-//        return str_replace(',', '', $rating);
+        //        return str_replace(',', '', $rating);
     }
 
     /**
@@ -549,9 +549,11 @@ class AnimeParser implements ParserInterface
                         }
                     }
 
-                    $related[$relation] = $links->each(function (Crawler $c) {
-                        return (new MalUrlParser($c))->getModel();
-                    });
+                    $related[$relation] = $links->each(
+                        function (Crawler $c) {
+                            return (new MalUrlParser($c))->getModel();
+                        }
+                    );
                 }
             );
 

@@ -38,7 +38,7 @@ class MangaReviewScores
     private $enjoyment;
 
     /**
-     * @param Parser\Manga\MangaReviewScoresParser $parser
+     * @param  Parser\Manga\MangaReviewScoresParser $parser
      * @return MangaReviewScores
      */
     public static function fromParser(Parser\Manga\MangaReviewScoresParser $parser): MangaReviewScores

@@ -8,7 +8,6 @@ use Jikan\Request\RequestInterface;
 /**
  * Class AnimeSearchRequest
  *
- *
  * @package Jikan\Request\Search
  */
 class AnimeSearchRequest implements RequestInterface
@@ -92,7 +91,7 @@ class AnimeSearchRequest implements RequestInterface
      * AnimeSearchRequest constructor.
      *
      * @param string|null $query
-     * @param int    $page
+     * @param int         $page
      */
     public function __construct(?string $query = null, int $page = 1)
     {
@@ -249,7 +248,7 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day , int $month, int $year
+     * @param int $day   , int $month, int $year
      * @param int $month
      * @param int $year
      *
@@ -263,7 +262,7 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day , int $month, int $year
+     * @param int $day   , int $month, int $year
      * @param int $month
      * @param int $year
      *
@@ -304,7 +303,7 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param string $char
+     * @param  string $char
      * @return AnimeSearchRequest
      */
     public function setChar(string $char): AnimeSearchRequest
@@ -314,7 +313,7 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $orderBy
+     * @param  int $orderBy
      * @return AnimeSearchRequest
      */
     public function setOrderBy(int $orderBy): AnimeSearchRequest
@@ -324,7 +323,7 @@ class AnimeSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $sort
+     * @param  int $sort
      * @return AnimeSearchRequest
      */
     public function setSort(int $sort): AnimeSearchRequest

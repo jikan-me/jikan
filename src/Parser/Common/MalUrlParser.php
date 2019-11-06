@@ -36,7 +36,7 @@ class MalUrlParser
     {
         if (!preg_match_all('#/(\d+)#', $url, $matches)) {
             return 0;
-//            throw new \RuntimeException(sprintf('Unable to parse id from mal url: %s', $url ?? 'null'));
+            //            throw new \RuntimeException(sprintf('Unable to parse id from mal url: %s', $url ?? 'null'));
         }
 
         return (int) $matches[1][0];

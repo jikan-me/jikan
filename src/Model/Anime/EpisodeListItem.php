@@ -59,7 +59,7 @@ class EpisodeListItem
 
 
     /**
-     * @param EpisodeListItemParser $parser
+     * @param  EpisodeListItemParser $parser
      * @return EpisodeListItem
      * @throws \Exception
      */

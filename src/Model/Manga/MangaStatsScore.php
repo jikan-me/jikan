@@ -21,8 +21,8 @@ class MangaStatsScore
 
 
     /**
-     * @param int $votes
-     * @param float $percentage
+     * @param  int   $votes
+     * @param  float $percentage
      * @return MangaStatsScore
      */
     public static function setProperties(int $votes, float $percentage): MangaStatsScore

@@ -56,7 +56,11 @@ class MalUrlExtractor
             $this->crawler->filterXPath('//a/img')->each(
                 function (Crawler $c) {
                     $node = $c->parents()->first()->getNode(0);
-                    /** @noinspection NullPointerExceptionInspection */
+                    /**
+                *
+                     *
+                * @noinspection NullPointerExceptionInspection
+                */
                     $node->parentNode->removeChild($node);
                 }
             );

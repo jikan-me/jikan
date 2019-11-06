@@ -35,8 +35,10 @@ class Recommendations implements ParserInterface
     {
         return $this->crawler
             ->filterXPath('//div[@class="borderClass"]')
-            ->each(function ($c) {
-                return (new Recommendation($c))->getModel();
-            });
+            ->each(
+                function ($c) {
+                    return (new Recommendation($c))->getModel();
+                }
+            );
     }
 }

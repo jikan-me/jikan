@@ -8,7 +8,6 @@ use Jikan\Request\RequestInterface;
 /**
  * Class PersonSearchRequest
  *
- *
  * @package Jikan\Request\Search
  */
 class PersonSearchRequest implements RequestInterface
@@ -37,7 +36,7 @@ class PersonSearchRequest implements RequestInterface
      * PersonSearchRequest constructor.
      *
      * @param string|null $query
-     * @param int    $page
+     * @param int         $page
      */
     public function __construct(?string $query = null, int $page = 1)
     {

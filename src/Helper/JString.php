@@ -37,7 +37,7 @@ class JString
     }
 
     /**
-     * @param string $string
+     * @param  string $string
      * @return string
      */
     public static function strToCanonical(string $string) : string

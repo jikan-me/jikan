@@ -14,15 +14,15 @@ class GoutteWrapper extends Client
 {
     /**
      * @inheritdoc
-     * @param string $method
-     * @param string $uri
-     * @param array $parameters
-     * @param array $files
-     * @param array $server
-     * @param string|null $content
-     * @param bool $changeHistory
-     * @return \Symfony\Component\DomCrawler\Crawler
-     * @throws BadResponseException
+     * @param      string      $method
+     * @param      string      $uri
+     * @param      array       $parameters
+     * @param      array       $files
+     * @param      array       $server
+     * @param      string|null $content
+     * @param      bool        $changeHistory
+     * @return     \Symfony\Component\DomCrawler\Crawler
+     * @throws     BadResponseException
      */
     public function request(
         string $method,

@@ -105,8 +105,8 @@ class AnimeEpisodeParserTest extends TestCase
     public function it_gets_aired_date(): void
     {
         self::assertEquals(
-            "1999-10-20 00:00:00.000000",
-            (string) $this->parser->getAired()
+            940345200,
+            $this->parser->getAired()->getTimestamp()
         );
     }
 

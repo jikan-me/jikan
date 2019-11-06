@@ -8,7 +8,6 @@ use Jikan\Request\RequestInterface;
 /**
  * Class CharacterSearchRequest
  *
- *
  * @package Jikan\Request\Search
  */
 class CharacterSearchRequest implements RequestInterface
@@ -37,7 +36,7 @@ class CharacterSearchRequest implements RequestInterface
      * CharacterSearchRequest constructor.
      *
      * @param string|null $query
-     * @param int    $page
+     * @param int         $page
      */
     public function __construct(?string $query = null, int $page = 1)
     {

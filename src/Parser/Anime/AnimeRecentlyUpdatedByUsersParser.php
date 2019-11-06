@@ -38,9 +38,11 @@ class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
             return $this->crawler
                 ->filterXPath('//table[@class="table-recently-updated"]/tr[1]')
                 ->nextAll()
-                ->each(function ($c) {
-                    return (new AnimeRecentlyUpdatedByUsersListParser($c))->getModel();
-                });
+                ->each(
+                    function ($c) {
+                        return (new AnimeRecentlyUpdatedByUsersListParser($c))->getModel();
+                    }
+                );
         } catch (\Exception $e) {
             return [];
         }

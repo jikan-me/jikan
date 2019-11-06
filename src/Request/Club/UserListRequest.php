@@ -6,6 +6,7 @@ use Jikan\Request\RequestInterface;
 
 /**
  * Class UserListRequest
+ *
  * @package Jikan\Request\Club
  */
 class UserListRequest implements RequestInterface

@@ -45,11 +45,13 @@ class AnimeEpisodeParser implements ParserInterface
      */
     public function getEpisodeId(): int
     {
-        return (int) trim(str_replace(
-            ['-', '#'],
-            '',
-            $this->crawler->filterXPath('//h2[contains(@class, \'fs18\')]/span')->text()
-        ));
+        return (int) trim(
+            str_replace(
+                ['-', '#'],
+                '',
+                $this->crawler->filterXPath('//h2[contains(@class, \'fs18\')]/span')->text()
+            )
+        );
     }
 
     /**

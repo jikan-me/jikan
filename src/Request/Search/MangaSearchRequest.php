@@ -8,7 +8,6 @@ use Jikan\Request\RequestInterface;
 /**
  * Class MangaSearchRequest
  *
- *
  * @package Jikan\Request\Search
  */
 class MangaSearchRequest implements RequestInterface
@@ -87,7 +86,7 @@ class MangaSearchRequest implements RequestInterface
      * MangaSearchRequest constructor.
      *
      * @param string|null $query
-     * @param int    $page
+     * @param int         $page
      */
     public function __construct(?string $query = null, int $page = 1)
     {
@@ -231,7 +230,7 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day , int $month, int $year
+     * @param int $day   , int $month, int $year
      * @param int $month
      * @param int $year
      *
@@ -245,7 +244,7 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $day , int $month, int $year
+     * @param int $day   , int $month, int $year
      * @param int $month
      * @param int $year
      *
@@ -286,7 +285,7 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param string $char
+     * @param  string $char
      * @return MangaSearchRequest
      */
     public function setChar(string $char): MangaSearchRequest
@@ -296,7 +295,7 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $orderBy
+     * @param  int $orderBy
      * @return MangaSearchRequest
      */
     public function setOrderBy(int $orderBy): MangaSearchRequest
@@ -306,7 +305,7 @@ class MangaSearchRequest implements RequestInterface
     }
 
     /**
-     * @param int $sort
+     * @param  int $sort
      * @return MangaSearchRequest
      */
     public function setSort(int $sort): MangaSearchRequest

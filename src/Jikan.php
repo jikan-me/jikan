@@ -33,7 +33,6 @@ class Jikan
      * Jikan constructor.
      *
      * @param GuzzleClient|null $guzzle
-     *
      */
     public function __construct(GuzzleClient $guzzle = null)
     {
@@ -323,8 +322,8 @@ class Jikan
     }
 
     /**
-     * @param int|null $year
-     * @param string|null $season
+     * @param  int|null    $year
+     * @param  string|null $season
      * @return \Jikan\Model\Seasonal\Seasonal
      * @throws Exception\BadResponseException
      * @throws ParserException
@@ -423,7 +422,7 @@ class Jikan
     }
 
     /**
-     * @param int $page
+     * @param int         $page
      * @param string|null $type
      *
      * @return Model\Top\TopAnime[]
@@ -438,7 +437,7 @@ class Jikan
     }
 
     /**
-     * @param int $page
+     * @param int         $page
      * @param string|null $type
      *
      * @return Model\Top\TopManga[]
@@ -481,8 +480,8 @@ class Jikan
     }
 
     /**
-     * @param string|null $query
-     * @param int $page
+     * @param string|null                            $query
+     * @param int                                    $page
      * @param null|Request\Search\AnimeSearchRequest $request
      *
      * @return Model\Search\AnimeSearch
@@ -504,8 +503,8 @@ class Jikan
     }
 
     /**
-     * @param string|null $query
-     * @param int $page
+     * @param string|null                            $query
+     * @param int                                    $page
      * @param null|Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
@@ -527,8 +526,8 @@ class Jikan
     }
 
     /**
-     * @param string|null $query
-     * @param int $page
+     * @param string|null                                $query
+     * @param int                                        $page
      * @param null|Request\Search\CharacterSearchRequest $request
      *
      * @return Model\Search\CharacterSearch
@@ -550,8 +549,8 @@ class Jikan
     }
 
     /**
-     * @param string|null $query
-     * @param int $page
+     * @param string|null                                                                $query
+     * @param int                                                                        $page
      * @param Request\Search\PersonSearchRequest|Request\Search\PersonSearchRequest|null $request
      *
      * @return Model\Search\PersonSearch
@@ -587,7 +586,7 @@ class Jikan
 
     /**
      * @param string $username
-     * @param int $page
+     * @param int    $page
      *
      * @return Model\User\Friend[]
      * @throws Exception\BadResponseException
@@ -601,7 +600,7 @@ class Jikan
     }
 
     /**
-     * @param string $username
+     * @param string      $username
      * @param string|null $type
      *
      * @return array
@@ -691,7 +690,7 @@ class Jikan
     }
 
     /**
-     * @param int $id
+     * @param  int $id
      * @return array
      * @throws Exception\BadResponseException
      * @throws ParserException
@@ -719,8 +718,8 @@ class Jikan
     }
 
     /**
-     * @param int $id
-     * @param int $page
+     * @param  int $id
+     * @param  int $page
      * @return array
      * @throws Exception\BadResponseException
      * @throws ParserException
@@ -733,8 +732,8 @@ class Jikan
     }
 
     /**
-     * @param int $id
-     * @param int $page
+     * @param  int $id
+     * @param  int $page
      * @return array
      * @throws Exception\BadResponseException
      * @throws ParserException
@@ -747,7 +746,7 @@ class Jikan
     }
 
     /**
-     * @param int $id
+     * @param  int $id
      * @return Model\Club\Club
      * @throws Exception\BadResponseException
      * @throws ParserException
@@ -760,8 +759,8 @@ class Jikan
     }
 
     /**
-     * @param int $id
-     * @param int $episodeId
+     * @param  int $id
+     * @param  int $episodeId
      * @return Model\Anime\AnimeEpisode
      * @throws Exception\BadResponseException
      * @throws ParserException

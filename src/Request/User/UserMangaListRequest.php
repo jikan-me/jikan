@@ -67,8 +67,8 @@ class UserMangaListRequest implements RequestInterface
      * UserMangaListRequest constructor.
      *
      * @param string $username
-     * @param int $page
-     * @param int $status
+     * @param int    $page
+     * @param int    $status
      */
     public function __construct(string $username, int $page = 1, int $status = 7)
     {
@@ -82,7 +82,8 @@ class UserMangaListRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        $query = '?'.http_build_query([
+        $query = '?'.http_build_query(
+            [
             'offset' => $this->page,
             'status' => $this->status,
             'order' => $this->orderBy,
@@ -96,12 +97,13 @@ class UserMangaListRequest implements RequestInterface
             'published_to_day' => $this->publishedFrom[2],
             'magazine' => $this->magazine,
             'publishing_status' => $this->publishingStatus
-        ]);
+            ]
+        );
         return sprintf('https://myanimelist.net/mangalist/%s/load.json%s', $this->username, $query);
     }
 
     /**
-     * @param string $username
+     * @param  string $username
      * @return UserMangaListRequest
      */
     public function setUsername(string $username): UserMangaListRequest
@@ -111,7 +113,7 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $page
+     * @param  int $page
      * @return UserMangaListRequest
      */
     public function setPage(int $page): UserMangaListRequest
@@ -121,7 +123,7 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $status
+     * @param  int $status
      * @return UserMangaListRequest
      */
     public function setStatus(int $status): UserMangaListRequest
@@ -131,8 +133,8 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $orderBy
-     * @param int|null $sort
+     * @param  int      $orderBy
+     * @param  int|null $sort
      * @return UserMangaListRequest
      */
     public function setOrderBy(int $orderBy, ?int $sort = Constants::USER_LIST_SORT_DESCENDING): UserMangaListRequest
@@ -142,8 +144,8 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $orderBy2
-     * @param int|null $sort
+     * @param  int      $orderBy2
+     * @param  int|null $sort
      * @return UserMangaListRequest
      */
     public function setOrderBy2(int $orderBy2, ?int $sort = Constants::USER_LIST_SORT_DESCENDING): UserMangaListRequest
@@ -153,7 +155,7 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param string $title
+     * @param  string $title
      * @return UserMangaListRequest
      */
     public function setTitle(string $title): UserMangaListRequest
@@ -163,9 +165,9 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $year
-     * @param int|null $month
-     * @param int|null $day
+     * @param  int      $year
+     * @param  int|null $month
+     * @param  int|null $day
      * @return UserMangaListRequest
      */
     public function setPublishedFrom(int $year, ?int $month = null, ?int $day = null): UserMangaListRequest
@@ -175,9 +177,9 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $year
-     * @param int|null $month
-     * @param int|null $day
+     * @param  int      $year
+     * @param  int|null $month
+     * @param  int|null $day
      * @return UserMangaListRequest
      */
     public function setPublishedTo(int $year, ?int $month = null, ?int $day = null): UserMangaListRequest
@@ -187,7 +189,7 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $publishingStatus
+     * @param  int $publishingStatus
      * @return UserMangaListRequest
      */
     public function setPublishingStatus(int $publishingStatus): UserMangaListRequest
@@ -197,7 +199,7 @@ class UserMangaListRequest implements RequestInterface
     }
 
     /**
-     * @param int $magazine
+     * @param  int $magazine
      * @return UserMangaListRequest
      */
     public function setMagazine(int $magazine): UserMangaListRequest

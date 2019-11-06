@@ -21,8 +21,8 @@ class AnimeStatsScore
 
 
     /**
-     * @param int $votes
-     * @param float $percentage
+     * @param  int   $votes
+     * @param  float $percentage
      * @return AnimeStats
      */
     public static function setProperties(int $votes, float $percentage): AnimeStatsScore

@@ -158,24 +158,26 @@ class AnimeStatsParser implements ParserInterface
         $scores = [];
         $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::table[1]/tr');
 
-        $table->each(function (Crawler $crawler) use (&$scores) {
-            $score = (int) $crawler->filterXPath('//td[1]')->text();
+        $table->each(
+            function (Crawler $crawler) use (&$scores) {
+                $score = (int) $crawler->filterXPath('//td[1]')->text();
 
-            $votes = (int) $this->sanitize(
-                $crawler->filterXPath('//td[2]/div/span/small')
-                    ->text()
-            );
+                $votes = (int) $this->sanitize(
+                    $crawler->filterXPath('//td[2]/div/span/small')
+                        ->text()
+                );
 
-            $percentage = Parser::removeChildNodes(
-                $crawler->filterXPath('//td[2]/div/span')
-            )->text();
-            $percentage = JString::UTF8NbspTrim(
-                str_replace('%', '', $percentage)
-            );
-            $percentage = (float) JString::cleanse($percentage);
+                $percentage = Parser::removeChildNodes(
+                    $crawler->filterXPath('//td[2]/div/span')
+                )->text();
+                $percentage = JString::UTF8NbspTrim(
+                    str_replace('%', '', $percentage)
+                );
+                $percentage = (float) JString::cleanse($percentage);
 
-            $scores[$score] = AnimeStatsScore::setProperties($votes, $percentage);
-        });
+                $scores[$score] = AnimeStatsScore::setProperties($votes, $percentage);
+            }
+        );
 
         for ($i=1; $i<=10; $i++) {
             if (!array_key_exists($i, $scores)) {

@@ -64,7 +64,7 @@ class AnimeEpisode
 
 
     /**
-     * @param AnimeEpisodeParser $parser
+     * @param  AnimeEpisodeParser $parser
      * @return AnimeEpisode
      * @throws \Exception
      */
@@ -83,9 +83,9 @@ class AnimeEpisode
         $instance->aired = $parser->getAired();
         $instance->synopsis = $parser->getSynopsis();
 
-//        $instance->characters = $parser->getCharacters();
-//        $instance->staff = $parser->getStaff();
-//        $instance->forumUrl = $parser->getForumUrl();
+        //        $instance->characters = $parser->getCharacters();
+        //        $instance->staff = $parser->getStaff();
+        //        $instance->forumUrl = $parser->getForumUrl();
 
         return $instance;
     }
@@ -169,5 +169,4 @@ class AnimeEpisode
     {
         return $this->synopsis;
     }
-
 }

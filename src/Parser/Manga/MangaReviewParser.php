@@ -89,16 +89,16 @@ class MangaReviewParser implements ParserInterface
      */
     public function getContent(): string
     {
-//        echo htmlentities(
-//            $this->crawler
-//                ->filterXPath('//div[contains(@class, "textReadability")]')
-//                ->html()
-//        );
-//        echo "<br><br>";
-//
-//        return $this->crawler
-//            ->filterXPath('//div[2]')
-//            ->text();
+        //        echo htmlentities(
+        //            $this->crawler
+        //                ->filterXPath('//div[contains(@class, "textReadability")]')
+        //                ->html()
+        //        );
+        //        echo "<br><br>";
+        //
+        //        return $this->crawler
+        //            ->filterXPath('//div[2]')
+        //            ->text();
         $node = $this->crawler->filterXPath('//div[1]/div[2]');
         $nodeExpanded = $node->filterXPath('//span');
 

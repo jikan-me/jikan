@@ -4,6 +4,7 @@ namespace Jikan\Model\Common;
 
 /**
  * Class DateProp
+ *
  * @package Jikan\Model\Common
  */
 class DateProp
@@ -15,6 +16,7 @@ class DateProp
 
     /**
      * DateProp constructor.
+     *
      * @param string|null $date
      */
     public function __construct(string $date = null)
@@ -23,9 +25,9 @@ class DateProp
     }
 
     /**
-     * @param int|null $day
-     * @param int|null $month
-     * @param int|null $year
+     * @param  int|null $day
+     * @param  int|null $month
+     * @param  int|null $year
      * @return DateProp
      */
     public static function fromFactory(?int $day, ?int $month, ?int $year): DateProp

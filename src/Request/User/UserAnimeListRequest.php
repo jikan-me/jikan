@@ -77,8 +77,8 @@ class UserAnimeListRequest implements RequestInterface
      * UserAnimeListRequest constructor.
      *
      * @param string $username
-     * @param int $page
-     * @param int $status
+     * @param int    $page
+     * @param int    $status
      */
     public function __construct(string $username, int $page = 1, int $status = Constants::USER_ANIME_LIST_ALL)
     {
@@ -92,7 +92,8 @@ class UserAnimeListRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        $query = '?'.http_build_query([
+        $query = '?'.http_build_query(
+            [
             'offset' => $this->page,
             'status' => $this->status,
             'order' => $this->orderBy,
@@ -108,13 +109,14 @@ class UserAnimeListRequest implements RequestInterface
             'aired_to_day' => $this->airedTo[2],
             'producer' => $this->producer,
             'airing_status' => $this->airingStatus
-        ]);
+            ]
+        );
 
         return sprintf('https://myanimelist.net/animelist/%s/load.json%s', $this->username, $query);
     }
 
     /**
-     * @param string $username
+     * @param  string $username
      * @return UserAnimeListRequest
      */
     public function setUsername(string $username): UserAnimeListRequest
@@ -124,7 +126,7 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param int $page
+     * @param  int $page
      * @return UserAnimeListRequest
      */
     public function setPage(int $page): UserAnimeListRequest
@@ -134,7 +136,7 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param int $status
+     * @param  int $status
      * @return UserAnimeListRequest
      */
     public function setStatus(int $status): UserAnimeListRequest
@@ -145,8 +147,8 @@ class UserAnimeListRequest implements RequestInterface
 
 
     /**
-     * @param int $orderBy
-     * @param int|null $sort
+     * @param  int      $orderBy
+     * @param  int|null $sort
      * @return UserAnimeListRequest
      */
     public function setOrderBy(int $orderBy, ?int $sort = Constants::USER_LIST_SORT_DESCENDING): UserAnimeListRequest
@@ -156,8 +158,8 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param int $orderBy2
-     * @param int|null $sort
+     * @param  int      $orderBy2
+     * @param  int|null $sort
      * @return UserAnimeListRequest
      */
     public function setOrderBy2(int $orderBy2, ?int $sort = Constants::USER_LIST_SORT_DESCENDING): UserAnimeListRequest
@@ -167,7 +169,7 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param string $title
+     * @param  string $title
      * @return UserAnimeListRequest
      */
     public function setTitle(string $title): UserAnimeListRequest
@@ -177,7 +179,7 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param string $season
+     * @param  string $season
      * @return UserAnimeListRequest
      */
     public function setSeason(string $season): UserAnimeListRequest
@@ -187,7 +189,7 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param int $seasonYear
+     * @param  int $seasonYear
      * @return UserAnimeListRequest
      */
     public function setSeasonYear(int $seasonYear): UserAnimeListRequest
@@ -198,9 +200,9 @@ class UserAnimeListRequest implements RequestInterface
 
 
     /**
-     * @param int $year
-     * @param int|null $month
-     * @param int|null $day
+     * @param  int      $year
+     * @param  int|null $month
+     * @param  int|null $day
      * @return UserAnimeListRequest
      */
     public function setAiredFrom(int $year, ?int $month = null, ?int $day = null): UserAnimeListRequest
@@ -210,9 +212,9 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param int $year
-     * @param int|null $month
-     * @param int|null $day
+     * @param  int      $year
+     * @param  int|null $month
+     * @param  int|null $day
      * @return UserAnimeListRequest
      */
     public function setAiredTo(int $year, ?int $month = null, ?int $day = null): UserAnimeListRequest
@@ -222,7 +224,7 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param int $airingStatus
+     * @param  int $airingStatus
      * @return UserAnimeListRequest
      */
     public function setAiringStatus(int $airingStatus): UserAnimeListRequest
@@ -232,7 +234,7 @@ class UserAnimeListRequest implements RequestInterface
     }
 
     /**
-     * @param int $producer
+     * @param  int $producer
      * @return UserAnimeListRequest
      */
     public function setProducer(int $producer): UserAnimeListRequest

@@ -163,7 +163,7 @@ class AnimeListItem
     private $licensors = [];
 
     /**
-     * @param \stdClass $item
+     * @param  \stdClass $item
      * @return AnimeListItem
      */
     public static function factory(\stdClass $item): self

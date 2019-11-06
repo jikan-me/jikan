@@ -23,6 +23,7 @@ class CharacterParser implements ParserInterface
 
     /**
      * CharacterParser constructor.
+     *
      * @param Crawler $crawler
      */
     public function __construct(Crawler $crawler)

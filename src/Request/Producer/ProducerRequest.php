@@ -26,7 +26,6 @@ class ProducerRequest implements RequestInterface
      *
      * @param int $id
      * @param int $page
-     *
      */
     public function __construct(int $id, int $page = 1)
     {

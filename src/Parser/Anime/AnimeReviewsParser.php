@@ -36,8 +36,10 @@ class AnimeReviewsParser implements ParserInterface
     {
         return $this->crawler
             ->filterXPath('//div[@class="borderDark"]')
-            ->each(function (Crawler $c) {
-                return (new AnimeReviewParser($c))->getModel();
-            });
+            ->each(
+                function (Crawler $c) {
+                    return (new AnimeReviewParser($c))->getModel();
+                }
+            );
     }
 }

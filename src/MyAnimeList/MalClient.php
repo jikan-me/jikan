@@ -45,7 +45,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeRequest $request
+     * @param  Request\Anime\AnimeRequest $request
      * @return Model\Anime\Anime
      * @throws BadResponseException
      * @throws ParserException
@@ -63,7 +63,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeEpisodesRequest $request
+     * @param  Request\Anime\AnimeEpisodesRequest $request
      * @return Model\Anime\Episodes
      * @throws BadResponseException
      * @throws ParserException
@@ -92,7 +92,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeVideosRequest $request
+     * @param  Request\Anime\AnimeVideosRequest $request
      * @return Model\Anime\AnimeVideos
      * @throws BadResponseException
      * @throws ParserException
@@ -110,7 +110,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaRequest $request
+     * @param  Request\Manga\MangaRequest $request
      * @return Model\Manga\Manga
      * @throws BadResponseException
      * @throws ParserException
@@ -129,7 +129,7 @@ class MalClient
 
 
     /**
-     * @param Request\Character\CharacterRequest $request
+     * @param  Request\Character\CharacterRequest $request
      * @return Model\Character\Character
      * @throws BadResponseException
      * @throws ParserException
@@ -155,7 +155,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Person\PersonRequest $request
+     * @param  Request\Person\PersonRequest $request
      * @return Model\Person\Person
      * @throws BadResponseException
      * @throws ParserException
@@ -173,7 +173,7 @@ class MalClient
     }
 
     /**
-     * @param Request\User\UserProfileRequest $request
+     * @param  Request\User\UserProfileRequest $request
      * @return Model\User\Profile
      * @throws BadResponseException
      * @throws ParserException
@@ -191,7 +191,7 @@ class MalClient
     }
 
     /**
-     * @param Request\User\UserFriendsRequest $request
+     * @param  Request\User\UserFriendsRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -209,7 +209,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Seasonal\SeasonalRequest $request
+     * @param  Request\Seasonal\SeasonalRequest $request
      * @return Model\Seasonal\Seasonal
      * @throws BadResponseException
      * @throws ParserException
@@ -227,7 +227,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Producer\ProducerRequest $request
+     * @param  Request\Producer\ProducerRequest $request
      * @return Model\Producer\Producer
      * @throws BadResponseException
      * @throws ParserException
@@ -245,7 +245,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Magazine\MagazineRequest $request
+     * @param  Request\Magazine\MagazineRequest $request
      * @return Model\Magazine\Magazine
      * @throws BadResponseException
      * @throws ParserException
@@ -263,7 +263,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Genre\AnimeGenreRequest $request
+     * @param  Request\Genre\AnimeGenreRequest $request
      * @return Model\Genre\AnimeGenre
      * @throws BadResponseException
      * @throws ParserException
@@ -281,7 +281,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Genre\MangaGenreRequest $request
+     * @param  Request\Genre\MangaGenreRequest $request
      * @return Model\Genre\MangaGenre
      * @throws BadResponseException
      * @throws ParserException
@@ -299,7 +299,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Schedule\ScheduleRequest $request
+     * @param  Request\Schedule\ScheduleRequest $request
      * @return Model\Schedule\Schedule
      * @throws BadResponseException
      * @throws ParserException
@@ -317,7 +317,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeCharactersAndStaffRequest $request
+     * @param  Request\Anime\AnimeCharactersAndStaffRequest $request
      * @return Model\Anime\AnimeCharactersAndStaff
      * @throws BadResponseException
      * @throws ParserException
@@ -336,7 +336,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimePicturesRequest $request
+     * @param  Request\Anime\AnimePicturesRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -354,7 +354,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaPicturesRequest $request
+     * @param  Request\Manga\MangaPicturesRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -372,7 +372,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Character\CharacterPicturesRequest $request
+     * @param  Request\Character\CharacterPicturesRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -627,7 +627,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaStatsRequest $request
+     * @param  Request\Manga\MangaStatsRequest $request
      * @return Model\Manga\MangaStats
      * @throws BadResponseException
      * @throws ParserException
@@ -645,7 +645,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeForumRequest $request
+     * @param  Request\Anime\AnimeForumRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -663,7 +663,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaForumRequest $request
+     * @param  Request\Manga\MangaForumRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -681,7 +681,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeMoreInfoRequest $request
+     * @param  Request\Anime\AnimeMoreInfoRequest $request
      * @return string|null
      * @throws BadResponseException
      * @throws ParserException
@@ -699,7 +699,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaMoreInfoRequest $request
+     * @param  Request\Manga\MangaMoreInfoRequest $request
      * @return string|null
      * @throws BadResponseException
      * @throws ParserException
@@ -717,7 +717,7 @@ class MalClient
     }
 
     /**
-     * @param Request\SeasonList\SeasonListRequest $request
+     * @param  Request\SeasonList\SeasonListRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -735,7 +735,7 @@ class MalClient
     }
 
     /**
-     * @param Request\User\UserHistoryRequest $request
+     * @param  Request\User\UserHistoryRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -753,7 +753,7 @@ class MalClient
     }
 
     /**
-     * @param Request\User\UserAnimeListRequest $request
+     * @param  Request\User\UserAnimeListRequest $request
      * @return array
      * @throws BadResponseException
      */
@@ -778,7 +778,7 @@ class MalClient
 
 
     /**
-     * @param Request\User\UserMangaListRequest $request
+     * @param  Request\User\UserMangaListRequest $request
      * @return array
      * @throws BadResponseException
      */
@@ -803,7 +803,7 @@ class MalClient
 
 
     /**
-     * @param Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request
+     * @param  Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -821,7 +821,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaRecentlyUpdatedByUsersRequest $request
+     * @param  Request\Manga\MangaRecentlyUpdatedByUsersRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -839,7 +839,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeRecommendationsRequest $request
+     * @param  Request\Anime\AnimeRecommendationsRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -857,7 +857,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaRecommendationsRequest $request
+     * @param  Request\Manga\MangaRecommendationsRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -896,7 +896,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeReviewsRequest $request
+     * @param  Request\Anime\AnimeReviewsRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -914,7 +914,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Manga\MangaReviewsRequest $request
+     * @param  Request\Manga\MangaReviewsRequest $request
      * @return array
      * @throws BadResponseException
      * @throws ParserException
@@ -933,7 +933,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Club\ClubRequest $request
+     * @param  Request\Club\ClubRequest $request
      * @return Model\Club\Club
      * @throws BadResponseException
      * @throws ParserException
@@ -952,7 +952,7 @@ class MalClient
     }
 
     /**
-     * @param Request\Anime\AnimeEpisodeRequest $request
+     * @param  Request\Anime\AnimeEpisodeRequest $request
      * @return Model\Anime\AnimeEpisode
      * @throws BadResponseException
      * @throws ParserException

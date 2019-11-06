@@ -48,7 +48,8 @@ class TopAnimeRequest implements RequestInterface
                     Constants::TOP_BY_FAVORITES,
                 ],
                 true
-            )) {
+            )
+            ) {
                 throw new \InvalidArgumentException(sprintf('Type %s is not valid', $type));
             }
 

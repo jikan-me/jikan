@@ -25,7 +25,7 @@ class UserFriendsRequest implements RequestInterface
      * UserProfileRequest constructor.
      *
      * @param string $username
-     * @param int    $page starts at 1
+     * @param int    $page     starts at 1
      */
     public function __construct(string $username, int $page = 1)
     {

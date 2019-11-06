@@ -36,8 +36,10 @@ class MangaReviewsParser implements ParserInterface
     {
         return $this->crawler
             ->filterXPath('//div[@class="borderDark"]')
-            ->each(function (Crawler $c) {
-                return (new MangaReviewParser($c))->getModel();
-            });
+            ->each(
+                function (Crawler $c) {
+                    return (new MangaReviewParser($c))->getModel();
+                }
+            );
     }
 }

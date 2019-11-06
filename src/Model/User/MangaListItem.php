@@ -131,7 +131,7 @@ class MangaListItem
     private $magazines = [];
 
     /**
-     * @param \stdClass $item
+     * @param  \stdClass $item
      * @return MangaListItem
      */
     public static function factory(\stdClass $item): self

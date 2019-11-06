@@ -79,7 +79,7 @@ class Club
     private $characterRelations;
 
     /**
-     * @param ClubParser $parser
+     * @param  ClubParser $parser
      * @return Club
      * @throws \Exception
      */

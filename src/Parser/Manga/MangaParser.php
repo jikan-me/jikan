@@ -449,9 +449,11 @@ class MangaParser implements ParserInterface
                         }
                     }
 
-                    $related[$relation] = $links->each(function (Crawler $c) {
-                        return (new MalUrlParser($c))->getModel();
-                    });
+                    $related[$relation] = $links->each(
+                        function (Crawler $c) {
+                            return (new MalUrlParser($c))->getModel();
+                        }
+                    );
                 }
             );
 

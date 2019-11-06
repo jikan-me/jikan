@@ -38,7 +38,7 @@ abstract class Ography
 
     /**
      * @param OgraphyParser $parser
-     * @param               $instance
+     * @param $instance
      *
      * @throws \InvalidArgumentException
      */

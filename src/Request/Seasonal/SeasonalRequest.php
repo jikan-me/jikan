@@ -29,9 +29,9 @@ class SeasonalRequest implements RequestInterface
     /**
      * SeasonalRequest constructor.
      *
-     * @param int|null $year
+     * @param int|null    $year
      * @param string|null $season
-     * @param bool $later
+     * @param bool        $later
      */
     public function __construct(?int $year = null, ?string $season = null, bool $later = false)
     {

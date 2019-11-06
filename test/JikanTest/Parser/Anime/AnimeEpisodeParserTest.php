@@ -13,7 +13,7 @@ class AnimeEpisodeParserTest extends TestCase
 
     public function setUp()
     {
-        $request = new \Jikan\Request\Anime\AnimeEpisodeRequest(1, 1);
+        $request = new \Jikan\Request\Anime\AnimeEpisodeRequest(21, 1);
         $client = new \Goutte\Client();
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime\AnimeEpisodeParser($crawler);

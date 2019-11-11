@@ -42,6 +42,7 @@ A REST API service is available as well
 - **[Dart]** [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol
 - **[TypeScript]** [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard
 - **[TypeScript]** [jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco
+- **[Go]** [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang
 
 [Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 
@@ -51,6 +52,7 @@ A REST API service is available as well
     - Main Information
     - Characters & Staff
     - Episodes
+    - Episode Details
     - News
     - Videos/PV/Episodes
     - Pictures
@@ -115,12 +117,9 @@ A REST API service is available as well
     - Main Information
     - User List
     
-[View RoadMap](https://github.com/jikan-me/jikan/projects/4)
+[View RoadMap](https://trello.com/b/Jw1rs467/jikan-api)
 
 ## Running Tests
-`composer require jikan-me/jikan --dev`
-
-This will download [Fixtures](https://github.com/jikan-me/jikan-fixtures) as well.
 
 ###### PHPUnit
 `php vendor/bin/phpunit`
@@ -146,42 +145,19 @@ Thank you to all our backers! 🙏 [[Become a backer](https://patreon.com/jikan)
 
 
 # Sponsors
-Thank you to all our sponsors! You will recieve advertisement/promotive perks. [[Become a sponsor](https://patreon.com/jikan)]
+Thank you to all our sponsors! [[Become a sponsor](https://patreon.com/jikan)]
 - [Hibiki Matsujo](https://github.com/assintates)
 
 ---
 
 ## Release Changelog
 
-### v2.8.0 - Apr 30, 19
-- **[User List : Anime|Manga]**
-    - Throw `BadResponseException` instead of `ParserException` when the request fails [#217](/../../issues/217)
-    - Add list filtering & sorting [jikan-rest#49](https://github.com/jikan-me/jikan-rest/issues/49)
-    - Replace `StudioMeta`, `LicensorMeta` & `MagazineMeta` with `MalUrl` intead
-        - This will further provide properties like `type`, `url`
-- **[Search : Anime|Manga]**
-    - Add result ordering & sorting [jikan-rest#48](https://github.com/jikan-me/jikan-rest/issues/48)
+### 2.9.0 - Nov 11, 19
+- **[Anime Episode Details]**
+    - Added feature request [jikan#229](https://github.com/jikan-me/jikan/issues/229)
+- **[User Profile]**
+    - Added `userId` property [jikan-rest#74](https://github.com/jikan-me/jikan-rest/issues/74)
     
-
-### v2.7.0 - Apr 14, 19
-- **[Anime|Manga]** 
-    - `EpisodeListItem` `aired` property to return `DateTimeImmutable` instead of `DateRange`
-    - [Bug Fix] Stats Score refactoring; returns `AnimeStatsScore`/`MangaStatsScore` object instead of array now - [#216](/../../issues/216)
-    - Fix `AnimeListItem`/`MangaListItem` parsing date formats incorrectly
-- **[Helper]** fix `parseDateMDY` returning incorrect date
-- **[Jikan.php]**
-    - fix `PersonSearch`incorrect Request class hinting
-    - add `UserMangaList`
-- **[MalClient.php]**
-    - `getAnimeEpisodes` with no episodes return empty episodes array now instead of BadResponseException (404)
-    - `getPersonSearch` with no results returns empty array now instead of BadResponseException (404)
-    - `getCharacterSearch` with no results returns empty array now instead of BadResponseException (404)
-    - `getCharacter` returns BadResponseException (404) now if invalid ID is provided
-    - Fix guzzle dep injection being overriden in some cases
-- **[User]**
-    - Fix `UserProfileParser`'s `getUsername()` returning the URL instead of the username
-- Added default values to some models
-- Other minor code and bug fixes
 
 [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 

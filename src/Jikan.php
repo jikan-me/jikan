@@ -132,10 +132,10 @@ class Jikan
      * @throws Exception\BadResponseException
      * @throws ParserException
      */
-    public function AnimeForum(int $id): array
+    public function AnimeForum(int $id, ?string $topic = null): array
     {
         return $this->myanimelist->getAnimeForum(
-            new Request\Anime\AnimeForumRequest($id)
+            new Request\Anime\AnimeForumRequest($id, $topic)
         );
     }
 

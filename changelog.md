@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2.9.0 - Nov 11, 19
+- **[Anime Episode Details]**
+    - Added feature request [jikan#229](https://github.com/jikan-me/jikan/issues/229)
+- **[User Profile]**
+    - Added `userId` property [jikan-rest#74](https://github.com/jikan-me/jikan-rest/issues/74)
+    
+### 2.8.6 - Aug 18, 19
+- Bug fixes
+- **[Search]**
+    - Throws `BadResponseException` if search query is < 3
+
 ### 2.8.0 - Apr 30, 19
 - **[User List : Anime|Manga]**
     - Throw `BadResponseException` instead of `ParserException` when the request fails [#217](/../../issues/217)

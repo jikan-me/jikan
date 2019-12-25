@@ -784,4 +784,16 @@ class Jikan
             new Request\Producer\ProducersRequest()
         );
     }
+
+    /**
+     * @return Model\Magazine\MagazineList
+     * @throws Exception\BadResponseException
+     * @throws ParserException
+     */
+    public function Magazines(): Model\Magazine\MagazineList
+    {
+        return $this->myanimelist->getMagazines(
+            new Request\Magazine\MagazinesRequest()
+        );
+    }
 }

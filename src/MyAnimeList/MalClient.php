@@ -988,4 +988,23 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param  Request\Magazine\MagazinesRequest  $request
+     * @return Model\Magazine\MagazineList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getMagazines(Request\Magazine\MagazinesRequest $request): Model\Magazine\MagazineList
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+        try {
+            $parser = new Parser\Magazine\MagazineListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

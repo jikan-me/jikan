@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Producer;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Producer\ProducerListParser;
 use Jikan\Parser\Producer\ProducerParser;
 

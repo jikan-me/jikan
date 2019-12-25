@@ -771,4 +771,17 @@ class Jikan
             new Request\Anime\AnimeEpisodeRequest($id, $episodeId)
         );
     }
+
+
+    /**
+     * @return Model\Producer\ProducerList
+     * @throws Exception\BadResponseException
+     * @throws ParserException
+     */
+    public function Producers(): Model\Producer\ProducerList
+    {
+        return $this->myanimelist->getProducers(
+            new Request\Producer\ProducersRequest()
+        );
+    }
 }

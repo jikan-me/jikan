@@ -1,0 +1,78 @@
+<?php
+
+namespace Jikan\Parser\Producer;
+
+use Jikan\Helper\Constants;
+use Jikan\Helper\JString;
+use Jikan\Helper\Parser;
+use Jikan\Model;
+use Jikan\Parser\Common\AnimeCardParser;
+use Jikan\Parser\ParserInterface;
+use Symfony\Component\DomCrawler\Crawler;
+
+/**
+ * Class ProducerParser
+ *
+ * @package Jikan\Parser
+ */
+class ProducerListItemParser implements ParserInterface
+{
+    /**
+     * @var Crawler
+     */
+    private $crawler;
+
+    /**
+     * ProducerParser constructor.
+     *
+     * @param Crawler $crawler
+     */
+    public function __construct(Crawler $crawler)
+    {
+        $this->crawler = $crawler;
+    }
+
+    /**
+     * @return \Jikan\Model\Producer\ProducerListItem
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getModel(): Model\Producer\ProducerListItem
+    {
+        return Model\Producer\ProducerListItem::fromParser($this);
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getUrl(): string
+    {
+        return Constants::BASE_URL . $this->crawler->attr('href');
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getName(): string
+    {
+        preg_match('~(.+)\s\(\d+\)~', $this->crawler->text(), $node);
+
+        return $node[1];
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getCount(): string
+    {
+        preg_match('~.+\s\((\d+)\)~', $this->crawler->text(), $node);
+
+        return $node[1];
+    }
+}

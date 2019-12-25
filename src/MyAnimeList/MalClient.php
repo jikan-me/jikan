@@ -969,4 +969,23 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param  Request\Producer\ProducersRequest $request
+     * @return Model\Producer\ProducerList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getProducers(Request\Producer\ProducersRequest $request): Model\Producer\ProducerList
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+        try {
+            $parser = new Parser\Producer\ProducerListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

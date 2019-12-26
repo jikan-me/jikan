@@ -796,4 +796,16 @@ class Jikan
             new Request\Magazine\MagazinesRequest()
         );
     }
+
+    /**
+     * @return Model\Genre\AnimeGenreList
+     * @throws Exception\BadResponseException
+     * @throws ParserException
+     */
+    public function AnimeGenres(): Model\Genre\AnimeGenreList
+    {
+        return $this->myanimelist->getAnimeGenres(
+            new Request\Genre\AnimeGenresRequest()
+        );
+    }
 }

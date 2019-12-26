@@ -22,7 +22,9 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 #### Dependencies
 - [Goutte](https://github.com/FriendsOfPHP/Goutte)
-- PHP 7.1+
+- PHP 7.1-7.3
+
+:exclamation: PHP 7.4 is not fully tested yet.
 
 ## Jikan REST API
 A REST API service is available as well

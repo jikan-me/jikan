@@ -15,7 +15,8 @@ class MagazinesRequest implements RequestInterface
      * ProducersRequest constructor.
      */
     public function __construct()
-    { }
+    {
+    }
 
     /**
      * @return string

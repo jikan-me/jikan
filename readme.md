@@ -101,10 +101,15 @@ A REST API service is available as well
     - People
     - Sub Types & Pagination Support
 - Genre
-    - Anime
-    - Manga
-- Producers (Anime Listing by a Producer)
-- Magazines (Manga Listing by a Magazine)
+    - Anime Listing (All Anime by Genre)
+    - Anime Genre Listing (All Genres + metadata) 
+    - Manga Listing (All Anime by Genre)
+    - Manga Genre Listing (All Genres + metadata)
+- Producer
+    - Anime Listing (All Anime by a Producer)
+    - Producers Listing (All Producers + metadata)
+    - Manga Listing (All Manga by a Producer)
+    - Magazines Listing (All Magazines + metadata)
 - User
     - Profile
     - Friends

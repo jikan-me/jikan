@@ -44,10 +44,10 @@ class GoutteWrapper extends Client
         );
 
         $internalResponse = $this->getInternalResponse();
-        if ($internalResponse->getStatus() >= 400) {
+        if ($internalResponse->getStatusCode() >= 400) {
             throw new BadResponseException(
-                $internalResponse->getStatus().' on '.$response->getUri(),
-                $internalResponse->getStatus()
+                $internalResponse->getStatusCode().' on '.$response->getUri(),
+                $internalResponse->getStatusCode()
             );
         }
 

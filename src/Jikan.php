@@ -808,4 +808,16 @@ class Jikan
             new Request\Genre\AnimeGenresRequest()
         );
     }
+
+    /**
+     * @return Model\Genre\MangaGenreList
+     * @throws Exception\BadResponseException
+     * @throws ParserException
+     */
+    public function MangaGenres(): Model\Genre\MangaGenreList
+    {
+        return $this->myanimelist->getMangaGenres(
+            new Request\Genre\MangaGenresRequest()
+        );
+    }
 }

@@ -65,14 +65,15 @@ class ProducerListItemParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return int
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getCount(): string
+    public function getCount(): int
     {
-        preg_match('~.+\s\((\d+)\)~', $this->crawler->text(), $node);
+        preg_match('~.+\s\((.+)\)~', $this->crawler->text(), $node);
+        $count = str_replace(',', '', $node[1]);
 
-        return $node[1];
+        return $count;
     }
 }

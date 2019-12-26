@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser\Magazine;
+namespace Jikan\Parser\Genre;
 
 use Jikan\Helper\Constants;
 use Jikan\Model;
@@ -8,11 +8,11 @@ use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class MagazineParser
+ * Class GenreParser
  *
  * @package Jikan\Parser
  */
-class MagazineListItemParser implements ParserInterface
+class AnimeGenreListItemParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -20,7 +20,7 @@ class MagazineListItemParser implements ParserInterface
     private $crawler;
 
     /**
-     * MagazineParser constructor.
+     * GenreParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -30,14 +30,15 @@ class MagazineListItemParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Magazine\MagazineListItem
+     * @return \Jikan\Model\Genre\AnimeGenre
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): Model\Magazine\MagazineListItem
+    public function getModel(): Model\Genre\AnimeGenreListItem
     {
-        return Model\Magazine\MagazineListItem::fromParser($this);
+        return Model\Genre\AnimeGenreListItem::fromParser($this);
     }
+
 
     /**
      * @return string
@@ -56,9 +57,10 @@ class MagazineListItemParser implements ParserInterface
      */
     public function getName(): string
     {
-        preg_match('~(.+)\s\(\d+\)~', $this->crawler->text(), $node);
+        preg_match('~(.+)\s\(.+\)~', $this->crawler->text(), $node);
+        $count = str_replace(',', '', $node[1]);
 
-        return $node[1];
+        return $count;
     }
 
     /**

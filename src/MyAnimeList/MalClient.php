@@ -1007,4 +1007,23 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param  Request\Genre\AnimeGenresRequest  $request
+     * @return Model\Genre\AnimeGenreList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getAnimeGenres(Request\Genre\AnimeGenresRequest $request): Model\Genre\AnimeGenreList
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+        try {
+            $parser = new Parser\Genre\AnimeGenreListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

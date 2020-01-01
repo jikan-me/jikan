@@ -89,6 +89,7 @@ class TopListItemParser
     private function getTextArray(): array
     {
         $parts = explode("\n", $this->getText());
+        $parts = str_replace(["\n", "<br>"], '', $parts);
         $parts = array_map('trim', $parts);
         $parts = array_filter($parts);
 
@@ -108,7 +109,7 @@ class TopListItemParser
         return JString::cleanse(
             $this->animeText = $this->crawler
                 ->filterXPath('//div[contains(@class, "information")]')
-                ->text()
+                ->html()
         );
     }
 

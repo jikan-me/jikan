@@ -191,16 +191,25 @@ class MangaCardParser implements ParserInterface
      */
     public function getMangaImage(): ?string
     {
-        //bypass lazyloading
-        $image = $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('src');
+        $image = $this->crawler->filterXPath('//div[contains(@class, "image")]/img');
 
-        if (null !== $image) {
-            return Parser::parseImageQuality($image);
+        if (!$image->count()) {
+            return null;
         }
 
-        return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//div[contains(@class, "image")]/img')->first()->attr('data-src')
-        );
+        if ($image->attr('src') !== null) {
+            return Parser::parseImageQuality(
+                $image->attr('src')
+            );
+        }
+
+        if ($image->attr('data-src') !== null) {
+            return Parser::parseImageQuality(
+                $image->attr('data-src')
+            );
+        }
+
+        return null;
     }
 
     /**

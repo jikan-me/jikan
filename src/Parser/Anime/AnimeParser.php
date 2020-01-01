@@ -454,11 +454,7 @@ class AnimeParser implements ParserInterface
         $ranked = str_replace(
             '#',
             '',
-            substr(
-                explode("\n", trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
-                0,
-                -1
-            )
+            Parser::removeChildNodes($rank->parents())->text()
         );
 
         return $ranked !== 'N/A' ? $ranked : null;
@@ -640,7 +636,7 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeAiredString(): ?string
     {
-        $aired = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..')->text();
+        $aired = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..')->html();
         $aired = explode("\n", trim($aired))[1];
 
         return trim($aired);

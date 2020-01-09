@@ -450,11 +450,15 @@ class AnimeParser implements ParserInterface
         if (!$rank->count()) {
             return null;
         }
-
+        
         $ranked = str_replace(
             '#',
             '',
-            Parser::removeChildNodes($rank->parents())->text()
+            substr(
+                explode("\n", trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
+                0,
+                -1
+            )
         );
 
         return $ranked !== 'N/A' ? $ranked : null;

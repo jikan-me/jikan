@@ -55,7 +55,8 @@ class FavoritesParser
                     return new AnimeMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')->attr('data-src'))
+                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
+                            ->attr('data-src'))
                     );
                 }
             );
@@ -74,7 +75,8 @@ class FavoritesParser
                     return new MangaMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')->attr('data-src'))
+                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
+                            ->attr('data-src'))
                     );
                 }
             );
@@ -93,7 +95,8 @@ class FavoritesParser
                     return new CharacterMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')->attr('data-src'))
+                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
+                            ->attr('data-src'))
                     );
                 }
             );
@@ -112,7 +115,8 @@ class FavoritesParser
                     return new PersonMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')->attr('data-src'))
+                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
+                            ->attr('data-src'))
                     );
                 }
             );

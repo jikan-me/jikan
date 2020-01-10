@@ -175,7 +175,8 @@ class Parser
      */
     public static function parseImageQuality(string $imageUrl) : string
     {
-        $imageUrl = str_replace(['v.jpg'], '.jpg', $imageUrl); // adding `v` prefix returns a very small thumbnail, as opposed to adding `l`
+        // adding `v` prefix returns a very small thumbnail, as opposed to adding `l`
+        $imageUrl = str_replace(['v.jpg'], '.jpg', $imageUrl);
         return preg_replace('~/r/\d+x\d+~', '', $imageUrl);
     }
 

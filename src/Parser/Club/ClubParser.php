@@ -66,7 +66,7 @@ class ClubParser implements ParserInterface
         return Parser::parseImageQuality(
             $this->crawler
                 ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[1]/img')
-                ->attr('src')
+                ->attr('data-src')
         );
     }
 

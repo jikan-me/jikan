@@ -87,7 +87,7 @@ class PersonSearchListItemParser
     public function getImageUrl(): string
     {
         return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//td[1]/div/a/img')->attr('src')
+            $this->crawler->filterXPath('//td[1]/div/a/img')->attr('data-src')
         );
     }
 }

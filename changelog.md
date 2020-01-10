@@ -1,5 +1,37 @@
 ## Changelog
 
+### 2.15.0 - Jan 10, 20
+- Add **Producer List** parsing
+```php
+$producers = $jikan->getProducers(
+    new \Jikan\Request\Producer\ProducersRequest()
+);
+```
+- Add **Magazine List** parsing
+```php
+$magazines = $jikan->getMagazines(
+    new \Jikan\Request\Magazine\MagazinesRequest()
+);
+```
+- Add **Anime Genre List** parsing
+```php
+$genres = $jikan->getAnimeGenres(
+    new \Jikan\Request\Genre\AnimeGenresRequest()
+);
+```
+
+- Add **Manga Genre List** parsing
+```php
+$genres = $jikan->getMangaGenres(
+    new \Jikan\Request\Genre\MangaGenresRequest()
+);
+```
+
+- Parser bug fixes
+- Improved image quality parsing for some requests
+    `\Jikan\Helper\Parser::parseImageQuality($imageUrl)` now removes `v` from the end of images, which resulted in a smaller thumbnail
+
+
 ### 2.9.0 - Nov 11, 19
 - **[Anime Episode Details]**
     - Added feature request [jikan#229](https://github.com/jikan-me/jikan/issues/229)

@@ -61,7 +61,7 @@ abstract class OgraphyParser
     public function getImage(): string
     {
         return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//img')->attr('src')
+            $this->crawler->filterXPath('//img')->attr('data-src')
         );
     }
 

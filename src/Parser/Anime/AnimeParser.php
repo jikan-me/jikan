@@ -450,7 +450,7 @@ class AnimeParser implements ParserInterface
         if (!$rank->count()) {
             return null;
         }
-        
+
         $ranked = str_replace(
             '#',
             '',

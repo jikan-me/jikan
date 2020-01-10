@@ -43,7 +43,7 @@ class PictureParser implements ParserInterface
      */
     public function getSmall(): string
     {
-        return $this->crawler->filterXPath('//img')->attr('src');
+        return $this->crawler->filterXPath('//img')->attr('data-src');
     }
 
     /**

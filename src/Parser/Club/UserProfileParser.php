@@ -61,7 +61,7 @@ class UserProfileParser implements ParserInterface
     public function getImage(): string
     {
         return Parser::parseImageThumbToHQ(
-            $this->crawler->filterXPath('//img[1]')->attr('src')
+            $this->crawler->filterXPath('//img[1]')->attr('data-src')
         );
     }
 }

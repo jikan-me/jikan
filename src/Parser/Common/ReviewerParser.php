@@ -39,7 +39,15 @@ abstract class ReviewerParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/a')->attr('href');
+        // works on Anime/Manga Review pages
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/a');
+        if ($node->count()) {
+            return $node->attr('href');
+        }
+
+        // works on Top Reviews pages, the div is shifted
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/a');
+        return $node->attr('href');
     }
 
     /**
@@ -48,7 +56,16 @@ abstract class ReviewerParser implements ParserInterface
      */
     public function getUsername(): string
     {
-        return $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/a')->text();
+        // works on Anime/Manga Review pages
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/a');
+        if ($node->count()) {
+            return $node->text();
+        }
+
+        // works on Top Reviews pages, the div is shifted
+        return $this->crawler
+            ->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/a')
+            ->text();
     }
 
     /**
@@ -57,8 +74,18 @@ abstract class ReviewerParser implements ParserInterface
      */
     public function getImageUrl(): string
     {
+        // works on Anime/Manga Review pages
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[1]/div/a/img');
+        if ($node->count()) {
+            return Parser::parseImageThumbToHQ(
+                $node->attr('data-src')
+            );
+        }
+
+        // works on Top Reviews pages, the div is shifted
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[1]/div/a/img');
         return Parser::parseImageThumbToHQ(
-            $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[1]/div/a/img')
+            $node
                 ->attr('src')
         );
     }
@@ -73,7 +100,7 @@ abstract class ReviewerParser implements ParserInterface
             $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
         );
 
-        preg_match('~(\d+) of (\d+) episodes seen~', $nodeText, $episodesSeen);
+        preg_match('~(\d+) of (.*) episodes seen~', $nodeText, $episodesSeen);
 
         if (empty($episodesSeen)) {
             return 0;
@@ -92,7 +119,7 @@ abstract class ReviewerParser implements ParserInterface
             $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
         );
 
-        preg_match('~(\d+) of (\d+) chapters read~', $nodeText, $chaptersRead);
+        preg_match('~(\d+) of (.*) chapters read~', $nodeText, $chaptersRead);
 
         if (empty($chaptersRead)) {
             return 0;

@@ -23,6 +23,11 @@ class AnimeReview
     private $url;
 
     /**
+     * @var string
+     */
+    private $type;
+
+    /**
      * @var int
      */
     private $helpfulCount;
@@ -58,6 +63,7 @@ class AnimeReview
 
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
+        $instance->type = $parser->getType();
         $instance->helpfulCount= $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
         $instance->reviewer = $parser->getReviewer();
@@ -112,5 +118,13 @@ class AnimeReview
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
     }
 }

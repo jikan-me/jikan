@@ -1045,4 +1045,23 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param Request\Top\TopReviewsRequest $request
+     *
+     * @return
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getTopReviews(Request\Top\TopReviewsRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Top\TopReviewsParser($crawler);
+
+            return $parser->getTopReviews();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

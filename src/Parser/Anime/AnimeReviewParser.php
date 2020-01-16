@@ -67,8 +67,15 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getHelpfulCount(): int
     {
+        // works on Anime/Manga Review pages
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/div/strong/span');
-        return (int) $node->text();
+        if ($node->count()) {
+            return $node->text();
+        }
+
+        // works on Top Reviews pages, the div is shifted
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/div/strong/span');
+        return $node->text();
     }
 
     /**
@@ -122,5 +129,25 @@ class AnimeReviewParser implements ParserInterface
     public function getReviewer(): AnimeReviewer
     {
         return (new AnimeReviewerParser($this->crawler))->getModel();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getType(): ?string
+    {
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/small');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return strtolower(
+            str_replace(
+                ['(', ')'],
+                '',
+                $node->text()
+            )
+        );
     }
 }

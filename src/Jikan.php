@@ -13,6 +13,7 @@ namespace Jikan;
 
 use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Exception\ParserException;
+use Jikan\Helper\Constants;
 use Jikan\Model;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request;
@@ -818,6 +819,21 @@ class Jikan
     {
         return $this->myanimelist->getMangaGenres(
             new Request\Genre\MangaGenresRequest()
+        );
+    }
+
+    /**
+     * @param int         $page
+     * @param string|null $type
+     *
+     * @return array
+     * @throws Exception\BadResponseException
+     * @throws ParserException
+     */
+    public function TopReviews(?string $type = Constants::TOP_REVIEW_BEST_VOTED, int $page = 1): array
+    {
+        return $this->myanimelist->getTopReviews(
+            new Request\Top\TopReviewsRequest($type, $page)
         );
     }
 }

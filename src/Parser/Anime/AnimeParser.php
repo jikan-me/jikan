@@ -451,17 +451,19 @@ class AnimeParser implements ParserInterface
             return null;
         }
 
-        $ranked = str_replace(
-            '#',
-            '',
-            substr(
-                explode("\n", trim(str_replace($rank->text(), '', $rank->parents()->text())))[0],
-                0,
-                -1
-            )
+        $ranked = JString::cleanse(
+            Parser::removeChildNodes($rank->parents())->text()
         );
 
-        return $ranked !== 'N/A' ? $ranked : null;
+        if ($ranked === 'N/A') {
+            return null;
+        }
+
+        return str_replace(
+            '#',
+            '',
+            $ranked
+        );
     }
 
     /**

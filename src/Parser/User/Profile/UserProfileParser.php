@@ -83,7 +83,7 @@ class UserProfileParser
     public function getImageUrl(): ?string
     {
         try {
-            return $this->crawler->filterXPath('//div[contains(@class, "user-image")]/img')->attr('src');
+            return $this->crawler->filterXPath('//div[contains(@class, "user-image")]/img')->attr('data-src');
         } catch (\Exception $e) {
             return null;
         }

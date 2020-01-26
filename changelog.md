@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2.16.0 - Jan 27, 20
+- Added **Top Reviews**(Anime, Manga & Best Voted (includes both)) parsing [#251](/../../issues/251)
+```php
+
+/**
+ * Type Constants
+ * Anime: \Jikan\Helper\Constants::TOP_REVIEW_ANIME
+ * Manga: \Jikan\Helper\Constants::TOP_REVIEW_MANGA
+ * Best Voted (Anime + Manga): \Jikan\Helper\Constants::TOP_REVIEW_BEST_VOTED 
+ */
+$type = \Jikan\Helper\Constants::TOP_REVIEW_ANIME;
+$page = 1;
+
+$topReviews = $jikan->getTopReviews(
+    new \Jikan\Request\Top\TopReviewsRequest($type, $page)
+);
+```
+
+- Bug fixes [#249](/../../issues/249), [#250](/../../issues/250), [#259](/../../issues/259)
+
 ### 2.15.0 - Jan 10, 20
 - Add **Producer List** parsing
 ```php

@@ -159,36 +159,26 @@ Thank you to all our sponsors! [[Become a sponsor](https://patreon.com/jikan)]
 
 ## Release Changelog
 
-### 2.15.0 - Jan 10, 20
-- Add **Producer List** parsing
+### 2.16.0 - Jan 27, 20
+- Added **Top Reviews**(Anime, Manga & Best Voted (includes both)) parsing [#251](/../../issues/251)
 ```php
-$producers = $jikan->getProducers(
-    new \Jikan\Request\Producer\ProducersRequest()
-);
-```
-- Add **Magazine List** parsing
-```php
-$magazines = $jikan->getMagazines(
-    new \Jikan\Request\Magazine\MagazinesRequest()
-);
-```
-- Add **Anime Genre List** parsing
-```php
-$genres = $jikan->getAnimeGenres(
-    new \Jikan\Request\Genre\AnimeGenresRequest()
+
+/**
+ * Type Constants
+ * Anime: \Jikan\Helper\Constants::TOP_REVIEW_ANIME
+ * Manga: \Jikan\Helper\Constants::TOP_REVIEW_MANGA
+ * Best Voted (Anime + Manga): \Jikan\Helper\Constants::TOP_REVIEW_BEST_VOTED 
+ */
+$type = \Jikan\Helper\Constants::TOP_REVIEW_ANIME;
+$page = 1;
+
+$topReviews = $jikan->getTopReviews(
+    new \Jikan\Request\Top\TopReviewsRequest($type, $page)
 );
 ```
 
-- Add **Manga Genre List** parsing
-```php
-$genres = $jikan->getMangaGenres(
-    new \Jikan\Request\Genre\MangaGenresRequest()
-);
-```
+- Bug fixes [#249](/../../issues/249), [#250](/../../issues/250), [#259](/../../issues/259)
 
-- Parser bug fixes
-- Improved image quality parsing for some requests
-    `\Jikan\Helper\Parser::parseImageQuality($imageUrl)` now removes `v` from the end of images, which resulted in a smaller thumbnail
 
 [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 

@@ -56,7 +56,7 @@ class FavoritesParser
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('data-src'))
+                            ->attr('src'))
                     );
                 }
             );
@@ -76,7 +76,7 @@ class FavoritesParser
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('data-src'))
+                            ->attr('src'))
                     );
                 }
             );
@@ -96,7 +96,7 @@ class FavoritesParser
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('data-src'))
+                            ->attr('src'))
                     );
                 }
             );
@@ -116,7 +116,7 @@ class FavoritesParser
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('data-src'))
+                            ->attr('src'))
                     );
                 }
             );

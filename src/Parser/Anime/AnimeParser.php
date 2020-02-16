@@ -424,18 +424,17 @@ class AnimeParser implements ParserInterface
     {
         $scoredBy = $this->crawler->filterXPath('//div[@class="fl-l score"]')->attr('data-user');
 
-        return str_replace(
+        $scoredByNum = str_replace(
             [',', ' users', ' user'],
             '',
             $scoredBy
         );
 
-        //        $rating = Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingCount"]'));
-        //        if ($rating === null) {
-        //            return $rating;
-        //        }
+        if (!is_numeric($scoredByNum)) {
+            return null;
+        }
 
-        //        return str_replace(',', '', $rating);
+        return (int) $scoredByNum;
     }
 
     /**

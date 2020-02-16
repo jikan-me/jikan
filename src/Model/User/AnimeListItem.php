@@ -187,10 +187,10 @@ class AnimeListItem
         $instance->hasVideo = $item->has_video;
         $instance->type = $item->anime_media_type_string;
         $instance->rating = $item->anime_mpaa_rating_string;
-        $instance->startDate = Parser::parseDateMDY($item->anime_start_date_string);
-        $instance->endDate = Parser::parseDateMDY($item->anime_end_date_string);
-        $instance->watchStartDate = Parser::parseDateMDY($item->start_date_string);
-        $instance->watchEndDate = Parser::parseDateMDY($item->finish_date_string);
+        $instance->startDate = Parser::parseDateDMY($item->anime_start_date_string);
+        $instance->endDate = Parser::parseDateDMY($item->anime_end_date_string);
+        $instance->watchStartDate = Parser::parseDateDMY($item->start_date_string);
+        $instance->watchEndDate = Parser::parseDateDMY($item->finish_date_string);
         $instance->days = $item->days_string;
         $instance->storage = empty($item->storage_string) ? null : $item->storage_string;
         $instance->priority = $item->priority_string;

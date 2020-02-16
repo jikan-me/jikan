@@ -2,7 +2,9 @@
 
 namespace JikanTest;
 
+use DateTimeImmutable;
 use Jikan\Exception\BadResponseException;
+use Jikan\Helper\Constants;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Model\Forum\ForumTopic;
 use Jikan\Model\News\NewsListItem;
@@ -396,5 +398,32 @@ class JikanTest extends TestCase
         self::assertCount(100, $episodes->getEpisodes());
         self::assertEquals(9, $episodes->getEpisodesLastPage());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Anime\EpisodeListItem::class, $episodes->getEpisodes());
+    }
+
+    /**
+     * @test
+     * @vcr UserAnimeListParserTest.yaml
+     */
+    public function it_gets_user_anime_list() // TODO: Add more test cases
+    {
+        $expectedStartDate = new DateTimeImmutable('2017-10-14');
+        $expectedUserStartDate = new DateTimeImmutable('2017-10-14');
+        $expectedEndDate = new DateTimeImmutable('2018-03-31');
+        $expectedUserEndDate = new DateTimeImmutable('2018-03-31');
+
+        $animeList = $this->jikan->getUserAnimeList(
+            new \Jikan\Request\User\UserAnimeListRequest('ivanovishado', 1, Constants::USER_ANIME_LIST_COMPLETED)
+        );
+
+        foreach ($animeList as $anime) {
+            $title = $anime->getTitle();
+            if ($title === '3-gatsu no Lion 2nd Season') {
+                self::assertEquals($expectedStartDate, $anime->getStartDate());
+                self::assertEquals($expectedUserStartDate, $anime->getWatchStartDate());
+                self::assertEquals($expectedEndDate, $anime->getEndDate());
+                self::assertEquals($expectedUserEndDate, $anime->getWatchEndDate());
+                return;
+            }
+        }
     }
 }

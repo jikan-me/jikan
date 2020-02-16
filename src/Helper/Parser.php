@@ -11,7 +11,7 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class Parser
 {
-    private const ALLOWED_NODES = ['p', 'i', 'b', 'br', 'strong'];
+    private const ALLOWED_NODES = ['p', 'i', 'b', 'br', 'strong', 'u'];
 
     /**
      * Removes all html elements so the text is left over

@@ -112,9 +112,15 @@ class CharacterParser implements ParserInterface
      */
     public function getAbout(): string
     {
-        $crawler = Parser::removeChildNodes($this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]'));
+        $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]');
+        $aboutHtml = $crawler->html();
 
-        return JString::cleanse($crawler->text());
+        $aboutHtml = str_replace(['<br>'], '\n', $aboutHtml);
+        $about = Parser::removeChildNodes((new Crawler($aboutHtml))->filterXPath('//body'));
+
+        return JString::cleanse(
+            str_replace(['\n\n\n'], '', $about->text())
+        );
     }
 
     /**

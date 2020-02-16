@@ -76,8 +76,9 @@ class CharacterParser implements ParserInterface
      */
     public function getNameKanji(): ?string
     {
-        $kanji = $this->crawler->filterXPath('//div[contains(@class,"breadcrumb")]')
-            ->nextAll()->filter('small');
+        $kanji = $this->crawler
+            ->filterXPath('//div[contains(@class, "normal_header") and contains(@style, "height: 15px")]/span/small');
+
         if (!$kanji->count()) {
             return null;
         }

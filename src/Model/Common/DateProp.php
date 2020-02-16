@@ -19,7 +19,7 @@ class DateProp
      *
      * @param string|null $date
      */
-    public function __construct(string $date = null)
+    public function __construct($date = null)
     {
         $date === null || $this->parse($date);
     }
@@ -33,6 +33,28 @@ class DateProp
     public static function fromFactory(?int $day, ?int $month, ?int $year): DateProp
     {
         $instance = new self();
+        $instance->set($day, $month, $year);
+        return $instance;
+    }
+
+    /**
+     * @param  int|null $day
+     * @param  int|null $month
+     * @param  int|null $year
+     * @return DateProp
+     */
+    public static function fromDateTime(?\DateTimeImmutable $dateTimeImmutable): DateProp
+    {
+        $instance = new self();
+
+        if ($dateTimeImmutable === null) {
+            return $instance;
+        }
+
+        $day = $dateTimeImmutable->format('j') === false ? null : (int) $dateTimeImmutable->format('j');
+        $month = $dateTimeImmutable->format('n') === false ? null : (int) $dateTimeImmutable->format('n');
+        $year = $dateTimeImmutable->format('Y') === false ? null : (int) $dateTimeImmutable->format('Y');
+
         $instance->set($day, $month, $year);
         return $instance;
     }

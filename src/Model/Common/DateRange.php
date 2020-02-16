@@ -69,13 +69,9 @@ class DateRange
      */
     public function getFromProp(): DateProp
     {
-        $date = $this->date;
-        if (strpos($date, ' to ') === false) {
-            return DateProp::fromFactory(null, null, null);
-        }
-        $date = explode(' to ', $date)[0];
+        $date = $this->getFrom();
 
-        return new DateProp($date);
+        return DateProp::fromDateTime($date);
     }
 
     /**
@@ -83,12 +79,8 @@ class DateRange
      */
     public function getUntilProp(): DateProp
     {
-        $date = $this->date;
-        if (strpos($date, ' to ') === false || strpos($date, ' to ?') !== false) {
-            return DateProp::fromFactory(null, null, null);
-        }
-        $date = explode(' to ', $date)[1];
+        $date = $this->getUntil();
 
-        return new DateProp($date);
+        return DateProp::fromDateTime($date);
     }
 }

@@ -142,11 +142,11 @@ PHPCS, PHPLint & PHPUnit
 
 ---
 
-# Sugoi Backers
+## Sugoi (すごい) Backers
 
-Thank you to all our **sugoi** backers! 🙏 [[Become a sugoi backer](https://patreon.com/jikan)]
-
+Thank you to all our **Sugoi (すごい)** backers! 🙏 [[Become a sugoi backer](https://patreon.com/jikan)]
 - [Jared Allard (jaredallard)](https://github.com/jaredallard)
+- [hugonun (hug_onun)](https://twitter.com/hug_onun)
 
 # Backers
 

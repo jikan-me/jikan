@@ -47,6 +47,7 @@ A REST API service is available as well
 - **[TypeScript]** [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard
 - **[TypeScript]** [jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco
 - **[Go]** [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang
+- **[Elixir]** [JikanEx](https://github.com/seanbreckenridge/jikan_ex) by Sean Breckenridge
 
 [Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 

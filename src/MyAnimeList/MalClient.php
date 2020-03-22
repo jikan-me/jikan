@@ -1053,15 +1053,16 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getRecentReviews(Request\Reviews\RecentReviewsRequest $request): array
+    public function getRecentReviews(Request\Reviews\RecentReviewsRequest $request): Model\Reviews\RecentReviews
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Reviews\RecentReviewsParser($crawler);
 
-            return $parser->getRecentReviews();
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
     }
+
 }

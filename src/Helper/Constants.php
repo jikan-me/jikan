@@ -47,9 +47,9 @@ class Constants
     public const TOP_BY_POPULARITY = 'bypopularity';
     public const TOP_BY_FAVORITES = 'favorite';
 
-    public const TOP_REVIEW_ANIME = 'anime';
-    public const TOP_REVIEW_MANGA = 'manga';
-    public const TOP_REVIEW_BEST_VOTED = 'bestvoted';
+    public const RECENT_REVIEW_ANIME = 'anime';
+    public const RECENT_REVIEW_MANGA = 'manga';
+    public const RECENT_REVIEW_BEST_VOTED = 'bestvoted';
 
     public const SEARCH_ANIME_TV = 1;
     public const SEARCH_ANIME_OVA = 2;

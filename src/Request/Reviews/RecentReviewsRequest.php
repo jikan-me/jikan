@@ -30,7 +30,7 @@ class RecentReviewsRequest implements RequestInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $type = Constants::TOP_REVIEW_BEST_VOTED, int $page = 1)
+    public function __construct(string $type = Constants::RECENT_REVIEW_BEST_VOTED, int $page = 1)
     {
         $this->page = $page;
 
@@ -38,9 +38,9 @@ class RecentReviewsRequest implements RequestInterface
             if (!\in_array(
                 $type,
                 [
-                    Constants::TOP_REVIEW_BEST_VOTED,
-                    Constants::TOP_REVIEW_ANIME,
-                    Constants::TOP_REVIEW_MANGA,
+                    Constants::RECENT_REVIEW_BEST_VOTED,
+                    Constants::RECENT_REVIEW_ANIME,
+                    Constants::RECENT_REVIEW_MANGA,
                 ],
                 true
             )
@@ -59,7 +59,7 @@ class RecentReviewsRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        if ($this->type === Constants::TOP_REVIEW_BEST_VOTED) {
+        if ($this->type === Constants::RECENT_REVIEW_BEST_VOTED) {
             return 'https://myanimelist.net/reviews.php?'.http_build_query(
                 [
                         'p' => $this->page,

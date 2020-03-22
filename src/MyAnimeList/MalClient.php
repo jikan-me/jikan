@@ -1047,19 +1047,19 @@ class MalClient
     }
 
     /**
-     * @param Request\Top\TopReviewsRequest $request
+     * @param Request\Reviews\RecentReviewsRequest $request
      *
      * @return
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopReviews(Request\Top\TopReviewsRequest $request): array
+    public function getRecentReviews(Request\Reviews\RecentReviewsRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Top\TopReviewsParser($crawler);
+            $parser = new Parser\Reviews\RecentReviewsParser($crawler);
 
-            return $parser->getTopReviews();
+            return $parser->getRecentReviews();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

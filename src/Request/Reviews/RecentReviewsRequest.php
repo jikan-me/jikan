@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Request\Top;
+namespace Jikan\Request\Reviews;
 
 use Jikan\Helper\Constants;
 use Jikan\Request\RequestInterface;
@@ -10,7 +10,7 @@ use Jikan\Request\RequestInterface;
  *
  * @package Jikan\Request\Top
  */
-class TopReviewsRequest implements RequestInterface
+class RecentReviewsRequest implements RequestInterface
 {
     /**
      * @var int

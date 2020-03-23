@@ -70,7 +70,14 @@ class RecommendationListItemParser implements ParserInterface
 
         preg_match('~- (.*)$~', $node->text(), $time);
 
-        return new \DateTimeImmutable($time[1]);
+        try {
+            return new \DateTimeImmutable(
+                $time[1],
+                new \DateTimeZone('UTC')
+            );
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function getRecommender(): Model\Recommendations\Recommender

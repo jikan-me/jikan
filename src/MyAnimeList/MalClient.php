@@ -1076,4 +1076,32 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param Request\Search\UserSearchRequest $request
+     *
+     * @return Model\Search\UserSearch
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getUserSearch(Request\Search\UserSearchRequest $request): Model\Search\UserSearch
+    {
+        // Returns 404 when there are no results
+        try {
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
+        } catch (\Exception $e) {
+            if ($e->getCode() === 404) {
+                return new Model\Search\UserSearch();
+            }
+            throw $e;
+        }
+
+        try {
+            $parser = new Parser\Search\UserSearchParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

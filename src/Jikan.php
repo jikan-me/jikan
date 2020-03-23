@@ -1,5 +1,7 @@
 <?php
 /**
+ * @deprecated
+ *
  *    Jikan - MyAnimeList.net Unofficial API v2
  *
  *    This is an unofficial MAL API that stands in for the lackluster features of the official API.

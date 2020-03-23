@@ -1065,4 +1065,15 @@ class MalClient
         }
     }
 
+    public function getRecentRecommendations(Request\Recommendations\RecentRecommendationsRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Recommendations\RecentRecommendationsParser($crawler);
+
+            return $parser->getRecentRecommendations();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

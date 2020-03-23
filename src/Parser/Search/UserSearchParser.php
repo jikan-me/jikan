@@ -48,8 +48,16 @@ class UserSearchParser
      */
     public function getResults(): array
     {
+        // Check if it's the main page
+        // For `getRecentlyOnlineUsers`
         $node = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td');
+            ->filterXPath('//*[@id="content"]/table/tr/td[1]/table/tr/td');
+
+        // User search page
+        if (!$node->count()) {
+            $node = $this->crawler
+                ->filterXPath('//*[@id="content"]/table/tr/td');
+        }
 
         $data = $node
             ->each(function (Crawler $c) {

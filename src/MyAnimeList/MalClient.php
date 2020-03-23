@@ -1104,4 +1104,16 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    public function getRecentlyOnlineUsers(Request\User\RecentlyOnlineUsersRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Search\UserSearchParser($crawler);
+
+            return $parser->getResults();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

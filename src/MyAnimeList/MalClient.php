@@ -1116,4 +1116,16 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    public function getUsernameById(Request\User\UsernameByIdRequest $request) : Model\Common\UserMeta
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\User\UsernameByIdParser($crawler);
+
+            return $parser->getUser();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

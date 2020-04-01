@@ -64,6 +64,16 @@ class MangaStatsParser
     public function getMeanScore(): ?float
     {
         $node = $this->crawler
+            ->filterXPath(
+                '//*[@id="statistics"]/div[contains(@class, "user-statistics-stats")][2]
+                /div[contains(@class, "stats manga")]/div[1]/div[2]/span[contains(@class, "score-label")]'
+            );
+
+        if ($node->count()) {
+            return (float) $node->text();
+        }
+
+        $node = $this->crawler
             ->filterXPath('//div[@class=\'di-tc ar pr8 fs12 fw-b\'][2]');
 
         if (!$node->count()) {

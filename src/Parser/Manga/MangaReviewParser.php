@@ -73,8 +73,14 @@ class MangaReviewParser implements ParserInterface
             return $node->text();
         }
 
-        // works on Top Reviews pages, the div is shifted
+        // works on Top ReviewsParser pages, the div is shifted
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/div/strong/span');
+        if ($node->count()) {
+            return $node->text();
+        }
+
+        // works on User Reviews pages
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td/div/strong/span');
         return $node->text();
     }
 

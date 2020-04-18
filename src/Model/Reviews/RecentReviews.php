@@ -7,7 +7,7 @@ use Jikan\Parser;
 /**
  * Class RecentReviews
  *
- * @package Jikan\Model\Reviews\RecentReviews
+ * @package Jikan\Model\ReviewsParser\RecentReviews
  */
 class RecentReviews
 {

@@ -27,7 +27,8 @@ class AnimeReviewer extends Reviewer
      * @param ReviewerParser $parser
      *
      * @return AnimeReviewer
-     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentExc
+     * eption
      */
     public static function fromParser(ReviewerParser $parser): AnimeReviewer
     {

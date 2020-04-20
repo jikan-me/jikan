@@ -6,6 +6,7 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Manga\MangaReview;
 use Jikan\Model\Manga\MangaReviewer;
+use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -137,6 +138,14 @@ class MangaReviewParser implements ParserInterface
         return (new MangaReviewerParser($this->crawler))->getModel();
     }
 
+    /**
+     * @return MangaReviewScores
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaScores(): MangaReviewScores
+    {
+        return (new MangaReviewScoresParser($this->crawler))->getModel();
+    }
 
     /**
      * @return string|null

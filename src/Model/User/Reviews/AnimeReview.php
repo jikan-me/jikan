@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\User\Reviews;
 
 use Jikan\Parser\Anime\AnimeReviewParser;
 
@@ -11,10 +11,6 @@ use Jikan\Parser\Anime\AnimeReviewParser;
  */
 class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 {
-    /**
-     * @var AnimeReviewer
-     */
-    private $reviewer;
 
     /**
      * Create an instance from an AnimeReviewParser parser
@@ -35,18 +31,9 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
         $instance->type = $parser->getType();
         $instance->helpfulCount= $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->reviewer = $parser->getReviewer();
         $instance->scores = $parser->getAnimeScores();
         $instance->content = $parser->getContent();
 
         return $instance;
-    }
-
-    /**
-     * @return AnimeReviewer
-     */
-    public function getReviewer(): AnimeReviewer
-    {
-        return $this->reviewer;
     }
 }

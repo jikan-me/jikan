@@ -3,8 +3,6 @@
 namespace Jikan\Parser\User;
 
 use Jikan\Model;
-use Jikan\Model\Anime\AnimeReview;
-use Jikan\Model\Manga\MangaReview;
 use Jikan\Parser\Anime\AnimeReviewParser;
 use Jikan\Parser\Manga\MangaReviewParser;
 use Symfony\Component\DomCrawler\Crawler;
@@ -48,12 +46,12 @@ class ReviewsParser
 
             // Anime Review
             if ($crawler->filterXPath('//div[2]/div[2]/small[1]')->text() === '(Anime)') {
-                return AnimeReview::fromParser(new AnimeReviewParser($crawler));
+                return Model\User\Reviews\AnimeReview::fromParser(new AnimeReviewParser($crawler));
             }
 
             // Manga Review
             if ($crawler->filterXPath('//div[2]/div[2]/small[1]')->text() === '(Manga)') {
-                return MangaReview::fromParser(new MangaReviewParser($crawler));
+                return Model\User\Reviews\MangaReview::fromParser(new MangaReviewParser($crawler));
             }
         });
     }

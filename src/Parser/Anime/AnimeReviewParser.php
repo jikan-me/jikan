@@ -6,6 +6,9 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Anime\AnimeReviewer;
+use Jikan\Model\Anime\AnimeReviewScores;
+use Jikan\Model\Manga\MangaReviewScores;
+use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -67,6 +70,12 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getHelpfulCount(): int
     {
+        // works on Profile pages
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[1]/div/strong/span');
+        if ($node->count()) {
+            return $node->text();
+        }
+
         // works on Anime/Manga Review pages
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/div/strong/span');
         if ($node->count()) {
@@ -129,6 +138,15 @@ class AnimeReviewParser implements ParserInterface
     public function getReviewer(): AnimeReviewer
     {
         return (new AnimeReviewerParser($this->crawler))->getModel();
+    }
+
+    /**
+     * @return AnimeReviewScores
+     * @throws \InvalidArgumentException
+     */
+    public function getAnimeScores(): AnimeReviewScores
+    {
+        return (new AnimeReviewScoresParser($this->crawler))->getModel();
     }
 
     /**

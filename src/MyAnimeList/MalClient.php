@@ -447,6 +447,25 @@ class MalClient
     }
 
     /**
+     * @param Request\Search\AnimeSearchRequest $request
+     *
+     * @return Model\Search\AnimeSearch
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getAnimeSearchAlt(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearchAlt
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Search\AnimeSearchParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
      * @param Request\Search\MangaSearchRequest $request
      *
      * @return Model\Search\MangaSearch
@@ -1105,7 +1124,7 @@ class MalClient
         }
     }
 
-    public function getRecentlyOnlineUsers(Request\User\RecentlyOnlineUsersRequest $request): array
+    public function getRecentOnlineUsers(Request\User\RecentlyOnlineUsersRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
@@ -1130,6 +1149,54 @@ class MalClient
     }
 
     public function getUserReviews(Request\User\UserReviewsRequest $request) : Model\User\Reviews
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\User\ReviewsParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    public function getRecentEpisodes(Request\Watch\RecentEpisodesRequest $request) : Model\Watch\Episodes
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Watch\WatchEpisodesParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    public function getPopularEpisodes(Request\Watch\PopularEpisodesRequest $request) : Model\Watch\Episodes
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Watch\WatchEpisodesParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    public function getRecentPromotionalVideos(Request\Watch\RecentPromotionalVideosRequest $request) : Model\Watch\PromotionalVideos
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    public function getPopularPromotionalVideos(Request\Watch\PopularPromotionalVideosRequest $request) : Model\User\Reviews
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

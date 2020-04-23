@@ -52,6 +52,18 @@ class Parser
     }
 
     /**
+     * Extract the last property id from a mal url (e.g episode ID)
+     *
+     * @param string $url
+     *
+     * @return int
+     */
+    public static function suffixIdFromUrl(string $url): int
+    {
+        return (int) preg_replace('#https://myanimelist.net/.*/(\d+)#', '$1', $url);
+    }
+
+    /**
      * @param string $date
      *
      * @return \DateTimeImmutable|null

@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Search;
 
 use Jikan\Model\Search\AnimeSearch;
+use Jikan\Model\Search\AnimeSearchAlt;
 use Jikan\Model\Search\AnimeSearchListItem;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -34,9 +35,9 @@ class AnimeSearchParser
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): AnimeSearch
+    public function getModel(): AnimeSearchAlt
     {
-        return AnimeSearch::fromParser($this);
+        return AnimeSearchAlt::fromParser($this);
     }
 
     /**

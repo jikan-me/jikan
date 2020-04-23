@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Model\Common;
+namespace Jikan\Model\Common\Collection;
 
 /**
  * Class Pagination

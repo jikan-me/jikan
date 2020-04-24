@@ -11,6 +11,9 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class Parser
 {
+    /**
+     *
+     */
     private const ALLOWED_NODES = ['p', 'i', 'b', 'br', 'strong', 'u'];
 
     /**
@@ -49,6 +52,17 @@ class Parser
     public static function idFromUrl(string $url): int
     {
         return (int)preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
+    }
+
+    /**
+     * Extract club ID from MAL URl
+     *
+     * @param string $url
+     * @return int
+     */
+    public static function clubIdFromUrl(string $url) : int
+    {
+        return (int) preg_replace('~.*\.php\?cid=([\d]+)$~', '$1', $url);
     }
 
     /**
@@ -203,6 +217,10 @@ class Parser
         return str_replace(['thumbs/', '_thumb'], '', $imageUrl);
     }
 
+    /**
+     * @param string $duration
+     * @return int|null
+     */
     public static function parseDurationToSeconds(string $duration): ?int
     {
         preg_match('~([0-9]{2}):([0-9]{2}):([0-9]{2})~', $duration, $match);

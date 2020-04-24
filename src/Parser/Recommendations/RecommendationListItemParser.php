@@ -57,6 +57,15 @@ class RecommendationListItemParser implements ParserInterface
 
     public function getContent(): string
     {
+        // User Profile Recommendations
+        $node = $this->crawler
+            ->filterXPath('//p[contains(@class, "profile-user-recs-text")]');
+
+        if ($node->count()) {
+            return $node->text();
+        }
+
+        // Recent Recommendations
         return $this->crawler
             ->filterXPath('//div[contains(@class, "recommendations-user-recs-text")]')->text();
     }

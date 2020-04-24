@@ -1207,4 +1207,16 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    public function getUserRecommendations(Request\User\UserRecommendationsRequest $request): array
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Recommendations\RecentRecommendationsParser($crawler);
+
+            return $parser->getUserRecommendations();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

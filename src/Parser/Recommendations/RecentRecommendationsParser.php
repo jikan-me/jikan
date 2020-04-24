@@ -59,6 +59,23 @@ class RecentRecommendationsParser
     }
 
     /**
+     * @return array
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getUserRecommendations(): array
+    {
+
+        return $this->crawler
+            ->filterXPath('//*[@id="content"]/div/div[2]/div/div[2]/div[contains(@class, "spaceit borderClass")]')
+            ->each(
+                function (Crawler $crawler) {
+                    return RecommendationListItem::fromParser(new RecommendationListItemParser($crawler));
+                }
+            );
+    }
+
+    /**
      * @return bool
      */
     public function hasNextPage(): bool

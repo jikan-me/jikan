@@ -34,7 +34,9 @@ class WatchPromotionalVideosParser
 
     public function getResults() : array
     {
-        $node = $this->crawler->filterXPath('//*[@id="content"]/div[3]/div/div[contains(@class, "video-list-outer-vertical")]');
+        $node = $this->crawler->filterXPath(
+            '//*[@id="content"]/div[3]/div/div[contains(@class, "video-list-outer-vertical")]'
+        );
 
         if (!$node->count()) {
             return [];
@@ -47,7 +49,9 @@ class WatchPromotionalVideosParser
 
     public function getHasNextPage() : bool
     {
-        $node = $this->crawler->filterXPath('//*[@id="content"]/div[contains(@class, "pagination")]/a[contains(text(), "More")]');
+        $node = $this->crawler->filterXPath(
+            '//*[@id="content"]/div[contains(@class, "pagination")]/a[contains(text(), "More")]'
+        );
 
         if ($node->count()) {
             return true;
@@ -58,7 +62,9 @@ class WatchPromotionalVideosParser
 
     public function getLastVisiblePage() : int
     {
-        $node = $this->crawler->filterXPath('//*[@id="content"]/div[contains(@class, "pagination")]/span[@class="link-blue-box"]');
+        $node = $this->crawler->filterXPath(
+            '//*[@id="content"]/div[contains(@class, "pagination")]/span[@class="link-blue-box"]'
+        );
 
         if (!$node->count()) {
             return 1;

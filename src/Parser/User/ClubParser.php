@@ -38,7 +38,7 @@ class ClubParser
         $node = $this->crawler
             ->filterXPath('//*[@id="content"]/table/tr/td[2]/ol/li');
 
-        return $node->each(function(Crawler $crawler) {
+        return $node->each(function (Crawler $crawler) {
             return Model\Common\ClubMeta::factory(
                 Parser::clubIdFromUrl(
                     $crawler->filterXPath('//a')->attr('href')

@@ -106,7 +106,9 @@ class PromotionalVideoListItemParser implements ParserInterface
 
     public function getPromoTitle(): string
     {
-        $node = $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a/div[contains(@class, "info-container")]/span');
+        $node = $this->crawler->filterXPath('
+        //div[contains(@class, "video-list")]/a/div[contains(@class, "info-container")]/span
+        ');
         return $node->text();
     }
 }

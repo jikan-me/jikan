@@ -100,7 +100,10 @@ class EpisodeListItemParser implements ParserInterface
     {
         $episodes = [];
 
-        $node = $this->crawler->filterXPath('//div[contains(@class, "video-list")]/div[contains(@class, "info-container")]/div[contains(@class, "title")]/a');
+        $node = $this->crawler->filterXPath(
+            '//div[contains(@class, "video-list")]
+            /div[contains(@class, "info-container")]/div[contains(@class, "title")]/a'
+        );
 
         $episodes = $node->each(function (Crawler $crawler) {
 

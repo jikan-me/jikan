@@ -19,8 +19,8 @@ class Media
     {
         /**
          *  https://gist.github.com/ghalusa/6c7f3a00fd2383e5ef33
-         *  Here is a sample of the URLs this regex matches: (there can be more content after the given URL that will be ignored)
-
+         *  Here is a sample of the URLs this regex matches:
+         * (there can be more content after the given URL that will be ignored)
          *  http://youtu.be/dQw4w9WgXcQ
          *  http://www.youtube.com/embed/dQw4w9WgXcQ
          *  http://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -34,7 +34,11 @@ class Media
          *  It also works on the youtube-nocookie.com URL with the same above options.
          *  It will also pull the ID from the URL in an embed code (both iframe and object tags)
          */
-        preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+        preg_match(
+            '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i',
+            $url,
+            $match
+        );
 
         return $match[1];
     }

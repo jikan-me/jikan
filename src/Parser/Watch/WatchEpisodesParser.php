@@ -34,7 +34,10 @@ class WatchEpisodesParser
 
     public function getResults() : array
     {
-        $node = $this->crawler->filterXPath('//*[@id="content"]/div[3]/div/div[contains(@class, "video-list-outer-vertical")]');
+        $node = $this->crawler->filterXPath(
+            '//*[@id="content"]/div[3]/div/div[contains(@class, "video-list-outer-vertical")]
+        '
+        );
 
         if (!$node->count()) {
             return [];

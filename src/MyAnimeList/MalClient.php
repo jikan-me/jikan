@@ -1226,8 +1226,9 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getRecentPromotionalVideos(Request\Watch\RecentPromotionalVideosRequest $request) : Model\Watch\PromotionalVideos
-    {
+    public function getRecentPromotionalVideos(
+        Request\Watch\RecentPromotionalVideosRequest $request
+    ) : Model\Watch\PromotionalVideos {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
@@ -1244,8 +1245,9 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getPopularPromotionalVideos(Request\Watch\PopularPromotionalVideosRequest $request) : Model\Watch\PromotionalVideos
-    {
+    public function getPopularPromotionalVideos(
+        Request\Watch\PopularPromotionalVideosRequest $request
+    ) : Model\Watch\PromotionalVideos {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
@@ -1274,6 +1276,12 @@ class MalClient
         }
     }
 
+    /**
+     * @param Request\User\UserClubsRequest $request
+     * @return array
+     * @throws BadResponseException
+     * @throws ParserException
+     */
     public function getUserClubs(Request\User\UserClubsRequest $request) : array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());

@@ -15,7 +15,7 @@ class UserClubsRequest implements RequestInterface
     /**
      * @var string
      */
-    private  $username;
+    private $username;
 
     /**
      * UserClubsRequest constructor.

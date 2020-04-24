@@ -102,13 +102,7 @@ class EpisodeListItemParser implements ParserInterface
 
         $node = $this->crawler->filterXPath('//div[contains(@class, "video-list")]/div[contains(@class, "info-container")]/div[contains(@class, "title")]/a');
 
-        $episodes = $node->each(function (Crawler $crawler){
-
-            var_dump(
-                Parser::suffixIdFromUrl(
-                    $crawler->attr('href')
-                )
-            );
+        $episodes = $node->each(function (Crawler $crawler) {
 
             return RecentEpisodeListItem::factory(
                 Parser::suffixIdFromUrl(
@@ -129,5 +123,4 @@ class EpisodeListItemParser implements ParserInterface
 
         return $node->count();
     }
-
 }

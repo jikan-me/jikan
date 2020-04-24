@@ -14,6 +14,16 @@ use Jikan\Parser\Watch\WatchPromotionalVideosParser;
 class PromotionalVideos extends Results implements Pagination
 {
     /**
+     * @var string
+     */
+    private $hasNextPage = false;
+
+    /**
+     * @var string
+     */
+    private $lastVisiblePage = 1;
+
+    /**
      * @param WatchPromotionalVideosParser $parser
      *
      * @return PromotionalVideos
@@ -23,6 +33,8 @@ class PromotionalVideos extends Results implements Pagination
     {
         $instance = new self();
         $instance->results = $parser->getResults();
+        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->lastVisiblePage = $parser->getLastVisiblePage();
 
         return $instance;
     }

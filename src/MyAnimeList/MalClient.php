@@ -1196,11 +1196,11 @@ class MalClient
         }
     }
 
-    public function getPopularPromotionalVideos(Request\Watch\PopularPromotionalVideosRequest $request) : Model\User\Reviews
+    public function getPopularPromotionalVideos(Request\Watch\PopularPromotionalVideosRequest $request) : Model\Watch\PromotionalVideos
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\User\ReviewsParser($crawler);
+            $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {

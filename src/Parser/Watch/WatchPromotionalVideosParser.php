@@ -41,7 +41,35 @@ class WatchPromotionalVideosParser
         }
 
         return $node->each(function (Crawler $crawler) {
-            return Model\Watch\EpisodeListItem::fromParser(new EpisodeListItemParser($crawler));
+            return Model\Watch\PromotionalVideoListItem::fromParser(new PromotionalVideoListItemParser($crawler));
         });
+    }
+
+    public function getHasNextPage() : bool
+    {
+        $node = $this->crawler->filterXPath('//*[@id="content"]/div[contains(@class, "pagination")]/a[contains(text(), "More")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getLastVisiblePage() : int
+    {
+        $node = $this->crawler->filterXPath('//*[@id="content"]/div[contains(@class, "pagination")]/span[@class="link-blue-box"]');
+
+        if (!$node->count()) {
+            return 1;
+        }
+
+        $currentPage = (int) $node->text();
+
+        if (!$this->getHasNextpage()) {
+            return $currentPage;
+        }
+
+        return $currentPage + 1;
     }
 }

@@ -4,6 +4,7 @@ namespace Jikan\Parser\Watch;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Model\Common\YoutubeMeta;
 use Jikan\Model\Watch\EpisodeListItem;
 use Jikan\Model\Watch\RecentEpisodeListItem;
 use Jikan\Parser\ParserInterface;
@@ -77,7 +78,7 @@ class PromotionalVideoListItemParser implements ParserInterface
     public function getImageUrl(): string
     {
         return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//div[contains(@class, "video-list")]/img')->attr('data-src')
+            $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a')->attr('data-bg')
         );
     }
 
@@ -88,23 +89,24 @@ class PromotionalVideoListItemParser implements ParserInterface
     public function getImages(): string
     {
         return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//div[contains(@class, "video-list")]/img')->attr('data-src')
+            $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a')->attr('data-bg')
         );
     }
 
     /**
-     * @return string
+     * @return YoutubeMeta
      * @throws \InvalidArgumentException
      */
-    public function getPromoMedia(): array
+    public function getPromoMedia(): YoutubeMeta
     {
-        return [];
+        return YoutubeMeta::factory(
+            $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a')->attr('href')
+        );
     }
 
     public function getPromoTitle(): string
     {
-        return "";
+        $node = $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a/div[contains(@class, "info-container")]/span');
+        return $node->text();
     }
-
-
 }

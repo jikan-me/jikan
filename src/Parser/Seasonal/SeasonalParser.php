@@ -48,7 +48,7 @@ class SeasonalParser implements ParserInterface
     public function getSeasonalAnime(): array
     {
         return $this->crawler
-            ->filter('div.seasonal-anime')
+            ->filter('div.seasonal-anime.js-seasonal-anime')
             ->each(
                 function (Crawler $animeCrawler) {
                     return (new AnimeCardParser($animeCrawler))->getSeasonalModel();

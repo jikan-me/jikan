@@ -37,7 +37,7 @@ A REST API service is available as well
 ### Wrappers
 
 - **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
-- **[Python]** [JikanPy](https://github.com/AWConant/jikanpy) by Andrew Conant & Abhinav Kasamsetty
+- **[Python]** [JikanPy](https://github.com/abhinavk99/jikanpy) by Abhinav Kasamsetty
 - **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
 - **[JavaScript]** [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor
 - **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs

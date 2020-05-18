@@ -437,6 +437,11 @@ class MalClient
     public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
+
+//        if ($this->ghoutte->getInternalResponse()->getStatusCode()) {
+//            return Model\Search\AnimeSearch::mock();
+//        }
+
         try {
             $parser = new Parser\Search\AnimeSearchParser($crawler);
 

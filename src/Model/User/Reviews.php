@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\User;
 
-use Jikan\Model\Common\Pagination;
+use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Reviews\RecentReviews;
 use Jikan\Parser\Reviews\RecentReviewsParser;
 use Jikan\Parser\User\ReviewsParser;

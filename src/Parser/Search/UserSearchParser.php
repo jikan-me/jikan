@@ -85,12 +85,29 @@ class UserSearchParser
     public function getLastPage(): int
     {
         $pages = $this->crawler
-            ->filterXPath('//div[contains(@class, "normal_header")]/div/div/span/a');
+            ->filterXPath('//div[@id="content"]/div[@class="borderClass"][1]/div/span');
 
         if (!$pages->count()) {
             return 1;
         }
 
-        return (int)$pages->last()->text();
+        $pages = explode(' ', $pages->text());
+
+        return (int) str_replace(['[', ']'], '', end($pages));
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasNextPage(): bool
+    {
+        $pages = $this->crawler
+            ->filterXPath('//div[@id="content"]/div[@class="borderClass"][1]/div/span');
+
+        if (preg_match('~\[\d+]\s(\d+)~', $pages->text())) {
+            return true;
+        }
+
+        return false;
     }
 }

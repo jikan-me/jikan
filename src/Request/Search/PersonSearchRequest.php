@@ -47,7 +47,7 @@ class PersonSearchRequest implements RequestInterface
 
         $querySize = strlen($this->query);
 
-        if ($querySize < 3) {
+        if ($querySize > 0 & $querySize < 3) {
             throw new BadResponseException('Search queries requires at least 3 characters');
         }
     }

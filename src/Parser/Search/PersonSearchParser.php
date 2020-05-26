@@ -102,6 +102,10 @@ class PersonSearchParser
         $pages = $this->crawler
             ->filterXPath('//div[contains(@class, "normal_header")]/div/div/span');
 
+        if (!$pages->count()) {
+            return false;
+        }
+
         if (preg_match('~\[\d+]\s(\d+)~', $pages->text())) {
             return true;
         }

@@ -104,6 +104,10 @@ class UserSearchParser
         $pages = $this->crawler
             ->filterXPath('//div[@id="content"]/div[@class="borderClass"][1]/div/span');
 
+        if (!$pages->count()) {
+            return false;
+        }
+
         if (preg_match('~\[\d+]\s(\d+)~', $pages->text())) {
             return true;
         }

@@ -498,7 +498,14 @@ class MalClient
      */
     public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
+        } catch (BadResponseException $e) {
+            if ($e->getCode() === 404) {
+                return Model\Search\CharacterSearch::mock();
+            }
+        }
+
         try {
             $parser = new Parser\Search\CharacterSearchParser($crawler);
 
@@ -516,15 +523,13 @@ class MalClient
      */
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
-        // Person page for some reason returns 404 when there are no results :facepalm:
+
         try {
             $crawler = $this->ghoutte->request('GET', $request->getPath());
-        } catch (\Exception $e) {
+        } catch (BadResponseException $e) {
             if ($e->getCode() === 404) {
-                return new Model\Search\PersonSearch();
+                return Model\Search\PersonSearch::mock();
             }
-
-            throw $e;
         }
 
         try {

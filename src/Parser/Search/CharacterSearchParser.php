@@ -45,6 +45,13 @@ class CharacterSearchParser
      */
     public function getResults(): array
     {
+        $probrem = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[1][contains(text(), "There were some probrems")]');
+
+        if ($probrem->count()) {
+            return [];
+        }
+
         return $this->crawler
             ->filterXPath('//div[@id="content"]/table/tr')
             ->each(

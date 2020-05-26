@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Model\Common\YoutubeMeta;
 use Jikan\Parser\Anime\PromoListItemParser;
 
 /**
@@ -22,9 +23,9 @@ class PromoListItem
     public $imageUrl;
 
     /**
-     * @var string
+     * @var YoutubeMeta
      */
-    public $videoUrl;
+    public $trailer;
 
     /**
      * @param PromoListItemParser $parser
@@ -36,7 +37,7 @@ class PromoListItem
     {
         $instance = new self();
         $instance->title = $parser->getTitle();
-        $instance->videoUrl = $parser->getVideoUrl();
+        $instance->trailer = YoutubeMeta::factory($parser->getVideoUrl());
         $instance->imageUrl = $parser->getImageUrl();
 
         return $instance;
@@ -59,10 +60,10 @@ class PromoListItem
     }
 
     /**
-     * @return string
+     * @return YoutubeMeta
      */
-    public function getVideoUrl(): string
+    public function getTrailer(): YoutubeMeta
     {
-        return $this->videoUrl;
+        return $this->trailer;
     }
 }

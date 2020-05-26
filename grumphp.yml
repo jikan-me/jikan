@@ -7,7 +7,6 @@ parameters:
             standard: 'PSR2'
             ignore_patterns:
                 - 'test/*.php'
-                - 'src/Jikan.php'
         git_blacklist:
             keywords:
                 - 'var_dump'

@@ -58,8 +58,8 @@ class UserSearchRequest implements RequestInterface
 
         $querySize = strlen($this->query);
 
-        if ($querySize > 0 & $querySize < 3) {
-            throw new BadResponseException('Search queries requires at least 3 characters');
+        if ($querySize > 0 && $querySize < 3) {
+            throw new BadResponseException('Search with queries require at least 3 characters');
         }
     }
 

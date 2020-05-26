@@ -15,7 +15,7 @@ class EpisodeListItem
     /**
      * @var int
      */
-    public $episodeId;
+    public $malId;
 
     /**
      * @var string
@@ -66,7 +66,7 @@ class EpisodeListItem
     public static function fromParser(EpisodeListItemParser $parser): self
     {
         $instance = new self();
-        $instance->episodeId = $parser->getEpisodeId();
+        $instance->malId = $parser->getEpisodeId();
         $instance->title = $parser->getTitle();
         $instance->titleJapanese = $parser->getTitleJapanese();
         $instance->titleRomanji = $parser->getTitleRomanji();
@@ -82,9 +82,9 @@ class EpisodeListItem
     /**
      * @return int
      */
-    public function getEpisodeId(): int
+    public function getMalId(): int
     {
-        return $this->episodeId;
+        return $this->malId;
     }
 
     /**

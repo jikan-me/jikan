@@ -1,46 +1,51 @@
 <?php
 
-namespace Jikan\Model\Search;
+namespace Jikan\Model\Top;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
 /**
- * Class AnimeSearch
+ * Class TopPeople
  *
  * @package Jikan\Model\Search\Search
  */
-class AnimeSearchAlt extends Results implements Pagination
+class TopPeople extends Results implements Pagination
 {
 
     /**
      * @var bool
      */
-    private $hasNextPage;
+    private $hasNextPage = false;
 
     /**
      * @var int
      */
-    private $lastVisiblePage;
+    private $lastVisiblePage = 1;
 
     /**
      * @param Parser\Search\AnimeSearchParser $parser
      *
-     * @return AnimeSearch
+     * @return TopPeople
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\Search\AnimeSearchParser $parser): self
+    public static function fromParser(Parser\Top\TopPeopleParser $parser): self
     {
         $instance = new self();
 
         $instance->results = $parser->getResults();
-        $instance->hasNextPage = true;
-        $instance->lastVisiblePage = 20;
+        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->lastVisiblePage = $parser->getLastPage();
 
         return $instance;
+    }
+
+    public static function mock() : self
+    {
+        return new self();
     }
 
     /**
@@ -57,5 +62,13 @@ class AnimeSearchAlt extends Results implements Pagination
     public function getLastVisiblePage(): int
     {
         return $this->lastVisiblePage;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 }

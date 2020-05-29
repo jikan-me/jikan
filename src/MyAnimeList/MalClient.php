@@ -563,17 +563,17 @@ class MalClient
     /**
      * @param Request\Top\TopAnimeRequest $request
      *
-     * @return Model\Top\TopAnime[]
+     * @return Model\Top\TopAnimeListItem[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopAnime(Request\Top\TopAnimeRequest $request): array
+    public function getTopAnime(Request\Top\TopAnimeRequest $request): Model\Top\TopAnime
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopAnimeParser($crawler);
 
-            return $parser->getTopAnime();
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -582,17 +582,17 @@ class MalClient
     /**
      * @param Request\Top\TopMangaRequest $request
      *
-     * @return Model\Top\TopManga[]
+     * @return Model\Top\TopMangaListItem[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopManga(Request\Top\TopMangaRequest $request): array
+    public function getTopManga(Request\Top\TopMangaRequest $request): Model\Top\TopManga
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopMangaParser($crawler);
 
-            return $parser->getTopManga();
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -601,17 +601,17 @@ class MalClient
     /**
      * @param Request\Top\TopCharactersRequest $request
      *
-     * @return Model\Top\TopCharacter[]
+     * @return Model\Top\TopCharacterListItem[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopCharacters(Request\Top\TopCharactersRequest $request): array
+    public function getTopCharacters(Request\Top\TopCharactersRequest $request): Model\Top\TopCharacters
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopCharactersParser($crawler);
 
-            return $parser->getTopCharacters();
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -620,17 +620,17 @@ class MalClient
     /**
      * @param Request\Top\TopPeopleRequest $request
      *
-     * @return Model\Top\TopPerson[]
+     * @return Model\Top\TopPersonListItem[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopPeople(Request\Top\TopPeopleRequest $request): array
+    public function getTopPeople(Request\Top\TopPeopleRequest $request): Model\Top\TopPeople
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopPeopleParser($crawler);
 
-            return $parser->getTopPeople();
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

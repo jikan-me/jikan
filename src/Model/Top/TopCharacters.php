@@ -7,11 +7,11 @@ use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
 /**
- * Class AnimeSearch
+ * Class TopCharacters
  *
  * @package Jikan\Model\Search\Search
  */
-class TopAnime extends Results implements Pagination
+class TopCharacters extends Results implements Pagination
 {
 
     /**
@@ -24,15 +24,12 @@ class TopAnime extends Results implements Pagination
      */
     private $lastVisiblePage = 1;
 
+
     /**
-     * @param Parser\Search\AnimeSearchParser $parser
-     *
-     * @return AnimeSearch
-     * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @param Parser\Top\TopCharactersParser $parser
+     * @return TopCharacters
      */
-    public static function fromParser(Parser\Top\TopAnimeParser $parser): self
+    public static function fromParser(Parser\Top\TopCharactersParser $parser): self
     {
         $instance = new self();
 
@@ -43,6 +40,9 @@ class TopAnime extends Results implements Pagination
         return $instance;
     }
 
+    /**
+     * @return TopCharacters
+     */
     public static function mock() : self
     {
         return new self();

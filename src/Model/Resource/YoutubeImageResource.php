@@ -10,27 +10,27 @@ class YoutubeImageResource
 {
 
     /**
-     * @var string
+     * @var string|null
      */
     private $defaultImageUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $smallImageUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $mediumImageUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $highImageUrl;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $maximumImageUrl;
 
@@ -39,15 +39,17 @@ class YoutubeImageResource
      * @param string $id
      * @return YoutubeImageResource
      */
-    public static function factory(string $id) : self
+    public static function factory(?string $id) : self
     {
         $instance = new self;
 
-        $instance->defaultImageUrl = sprintf('http://img.youtube.com/vi/%s/default.jpg', $id);
-        $instance->smallImageUrl = sprintf('http://img.youtube.com/vi/%s/sddefault.jpg', $id);
-        $instance->mediumImageUrl = sprintf('http://img.youtube.com/vi/%s/mqdefault.jpg', $id);
-        $instance->highImageUrl = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
-        $instance->maximumImageUrl = sprintf('http://img.youtube.com/vi/%s/maxresdefault.jpg', $id);
+        if ($id !== null) {
+            $instance->defaultImageUrl = sprintf('http://img.youtube.com/vi/%s/default.jpg', $id);
+            $instance->smallImageUrl = sprintf('http://img.youtube.com/vi/%s/sddefault.jpg', $id);
+            $instance->mediumImageUrl = sprintf('http://img.youtube.com/vi/%s/mqdefault.jpg', $id);
+            $instance->highImageUrl = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
+            $instance->maximumImageUrl = sprintf('http://img.youtube.com/vi/%s/maxresdefault.jpg', $id);
+        }
 
         return $instance;
     }
@@ -55,7 +57,7 @@ class YoutubeImageResource
     /**
      * @return string
      */
-    public function getDefaultImageUrl(): string
+    public function getDefaultImageUrl(): ?string
     {
         return $this->defaultImageUrl;
     }
@@ -63,7 +65,7 @@ class YoutubeImageResource
     /**
      * @return string
      */
-    public function getSmallImageUrl(): string
+    public function getSmallImageUrl(): ?string
     {
         return $this->smallImageUrl;
     }
@@ -71,7 +73,7 @@ class YoutubeImageResource
     /**
      * @return string
      */
-    public function getMediumImageUrl(): string
+    public function getMediumImageUrl(): ?string
     {
         return $this->mediumImageUrl;
     }
@@ -79,7 +81,7 @@ class YoutubeImageResource
     /**
      * @return string
      */
-    public function getHighImageUrl(): string
+    public function getHighImageUrl(): ?string
     {
         return $this->highImageUrl;
     }
@@ -87,7 +89,7 @@ class YoutubeImageResource
     /**
      * @return string
      */
-    public function getMaximumImageUrl(): string
+    public function getMaximumImageUrl(): ?string
     {
         return $this->maximumImageUrl;
     }

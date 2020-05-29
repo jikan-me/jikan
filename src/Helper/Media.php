@@ -15,7 +15,7 @@ class Media
      * @param string $url
      * @return string
      */
-    public static function youtubeIdFromUrl(string $url) : string
+    public static function youtubeIdFromUrl(?string $url) : ?string
     {
         /**
          *  https://gist.github.com/ghalusa/6c7f3a00fd2383e5ef33
@@ -34,6 +34,11 @@ class Media
          *  It also works on the youtube-nocookie.com URL with the same above options.
          *  It will also pull the ID from the URL in an embed code (both iframe and object tags)
          */
+
+        if ($url === null) {
+            return null;
+        }
+
         preg_match(
             '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i',
             $url,
@@ -47,8 +52,12 @@ class Media
      * @param string $id
      * @return string
      */
-    public static function generateYoutubeUrlFromId(string $id) : string
+    public static function generateYoutubeUrlFromId(?string $id) : ?string
     {
+        if ($id === null) {
+            return null;
+        }
+
         return sprintf('https://www.youtube.com/watch?v=%s', $id);
     }
 
@@ -56,7 +65,7 @@ class Media
      * @param string $id
      * @return YoutubeImageResource
      */
-    public static function generateYoutubeImageResource(string $id) : YoutubeImageResource
+    public static function generateYoutubeImageResource(?string $id) : YoutubeImageResource
     {
         return YoutubeImageResource::factory($id);
     }

@@ -13,17 +13,17 @@ use Jikan\Model\Resource\YoutubeImageResource;
 class YoutubeMeta
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $youtubeId;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $url;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $embedUrl;
 
@@ -36,7 +36,7 @@ class YoutubeMeta
      * @param string $embedUrl
      * @return YoutubeMeta
      */
-    public static function factory(string $embedUrl) : self
+    public static function factory(?string $embedUrl) : self
     {
         $instance = new self;
 
@@ -49,25 +49,25 @@ class YoutubeMeta
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getYoutubeId(): string
+    public function getYoutubeId(): ?string
     {
         return $this->youtubeId;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getEmbedUrl(): string
+    public function getEmbedUrl(): ?string
     {
         return $this->embedUrl;
     }

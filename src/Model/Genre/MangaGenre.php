@@ -2,31 +2,46 @@
 
 namespace Jikan\Model\Genre;
 
+use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser\Genre\MangaGenreParser;
-use Jikan\Model\Common\MalUrl;
 
 /**
  * Class MangaGenre
  *
  * @package Jikan\Model
  */
-class MangaGenre
+class MangaGenre extends Results implements Pagination
 {
+    /**
+     * @var int
+     */
+    private $malId;
 
     /**
-     * @var \Jikan\Model\Common\MalUrl
+     * @var string
      */
-    public $malUrl;
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * @var int
      */
-    public $itemCount;
+    public $count;
 
     /**
-     * @var array|MangaGenre[]
+     * @var bool
      */
-    public $manga = [];
+    private $hasNextPage = false;
+
+    /**
+     * @var int
+     */
+    private $lastVisiblePage = 1;
 
     /**
      * @param MangaGenreParser $parser
@@ -38,37 +53,71 @@ class MangaGenre
     public static function fromParser(MangaGenreParser $parser): self
     {
         $instance = new self();
-        $instance->itemCount = $parser->getCount();
-        $instance->manga = $parser->getGenreManga();
-        $instance->malUrl = new MalUrl(
-            $parser->getName(),
-            $parser->getUrl()
-        );
+
+        $instance->count = $parser->getCount();
+        $instance->results = $parser->getResults();
+        $instance->name = $parser->getName();
+        $instance->malId = $parser->getMalId();
+        $instance->url = $parser->getUrl();
+        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->lastVisiblePage = $parser->getLastPage();
 
         return $instance;
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**
      * @return int
      */
-    public function getItemCount(): int
+    public function getCount(): int
     {
-        return $this->itemCount;
+        return $this->count;
     }
 
     /**
-     * @return array|MangaGenre[]
+     * @return bool
      */
-    public function getManga(): array
+    public function hasNextPage(): bool
     {
-        return $this->manga;
+        return $this->hasNextPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        return $this->lastVisiblePage;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 }

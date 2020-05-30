@@ -30,7 +30,7 @@ class YoutubeMeta
     /**
      * @var YoutubeImageResource
      */
-    private $imageResource;
+    private $images;
 
     /**
      * @param string $embedUrl
@@ -43,7 +43,7 @@ class YoutubeMeta
         $instance->embedUrl = $embedUrl;
         $instance->youtubeId = Media::youtubeIdFromUrl($embedUrl);
         $instance->url = Media::generateYoutubeUrlFromId($instance->youtubeId);
-        $instance->imageResource = Media::generateYoutubeImageResource($instance->youtubeId);
+        $instance->images = Media::generateYoutubeImageResource($instance->youtubeId);
 
         return $instance;
     }
@@ -75,8 +75,8 @@ class YoutubeMeta
     /**
      * @return YoutubeImageResource
      */
-    public function getImageResource(): YoutubeImageResource
+    public function getImages(): YoutubeImageResource
     {
-        return $this->imageResource;
+        return $this->images;
     }
 }

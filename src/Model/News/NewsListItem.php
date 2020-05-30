@@ -54,7 +54,7 @@ class NewsListItem
     /**
      * @var string
      */
-    private $intro;
+    private $excerpt;
 
     /**
      * @param NewsListItemParser $parser
@@ -73,7 +73,7 @@ class NewsListItem
         $instance->forumUrl = $parser->getDiscussionLink();
         $instance->imageUrl = $parser->getImage();
         $instance->comments = $parser->getComments();
-        $instance->intro = $parser->getIntro();
+        $instance->excerpt = $parser->getIntro();
 
         return $instance;
     }
@@ -145,8 +145,8 @@ class NewsListItem
     /**
      * @return string
      */
-    public function getIntro(): string
+    public function getExcerpt(): string
     {
-        return $this->intro;
+        return $this->excerpt;
     }
 }

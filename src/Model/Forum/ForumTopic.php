@@ -14,7 +14,7 @@ class ForumTopic
     /**
      * @var int
      */
-    private $topicId;
+    private $malId;
 
     /**
      * @var string
@@ -29,7 +29,7 @@ class ForumTopic
     /**
      * @var \DateTimeImmutable
      */
-    private $datePosted;
+    private $date;
 
     /**
      * @var string
@@ -44,12 +44,12 @@ class ForumTopic
     /**
      * @var int
      */
-    private $replies = 0;
+    private $comments = 0;
 
     /**
      * @var ForumPost
      */
-    private $lastPost;
+    private $lastComment;
 
     /**
      * @param ForumTopicParser $parser
@@ -60,32 +60,24 @@ class ForumTopic
     public static function fromParser(ForumTopicParser $parser): self
     {
         $instance = new self();
-        $instance->topicId = $parser->getTopicId();
+        $instance->malId = $parser->getTopicId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
-        $instance->datePosted = $parser->getPostDate();
-        $instance->replies = $parser->getReplies();
+        $instance->date = $parser->getPostDate();
+        $instance->comments = $parser->getReplies();
         $instance->authorName = $parser->getAuthorName();
         $instance->authorUrl = $parser->getAuthorUrl();
-        $instance->lastPost = $parser->getLastPost();
+        $instance->lastComment = $parser->getLastPost();
 
         return $instance;
     }
 
     /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->title;
-    }
-
-    /**
      * @return int
      */
-    public function getTopicId(): int
+    public function getMalId(): int
     {
-        return $this->topicId;
+        return $this->malId;
     }
 
     /**
@@ -107,9 +99,9 @@ class ForumTopic
     /**
      * @return \DateTimeImmutable
      */
-    public function getDatePosted(): \DateTimeImmutable
+    public function getDate(): \DateTimeImmutable
     {
-        return $this->datePosted;
+        return $this->date;
     }
 
     /**
@@ -131,16 +123,16 @@ class ForumTopic
     /**
      * @return int
      */
-    public function getReplies(): int
+    public function getComments(): int
     {
-        return $this->replies;
+        return $this->comments;
     }
 
     /**
      * @return ForumPost
      */
-    public function getLastPost(): ForumPost
+    public function getLastComment(): ForumPost
     {
-        return $this->lastPost;
+        return $this->lastComment;
     }
 }

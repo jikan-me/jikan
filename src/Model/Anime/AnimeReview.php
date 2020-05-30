@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Model\Reviews\AnimeReviewScores;
 use Jikan\Parser\Anime\AnimeReviewParser;
 
 /**
@@ -11,20 +12,16 @@ use Jikan\Parser\Anime\AnimeReviewParser;
  */
 class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 {
+
     /**
      * @var AnimeReviewer
      */
-    private $reviewer;
+    private $author;
 
     /**
-     * Create an instance from an AnimeReviewParser parser
-     *
      * @param AnimeReviewParser $parser
-     *
      * @return AnimeReview
      * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
      */
     public static function fromParser(AnimeReviewParser $parser): AnimeReview
     {
@@ -33,11 +30,11 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();
-        $instance->helpfulCount= $parser->getHelpfulCount();
+        $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->reviewer = $parser->getReviewer();
+        $instance->author = $parser->getReviewer();
         $instance->scores = $parser->getAnimeScores();
-        $instance->content = $parser->getContent();
+        $instance->review = $parser->getContent();
 
         return $instance;
     }
@@ -45,8 +42,80 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     /**
      * @return AnimeReviewer
      */
-    public function getReviewer(): AnimeReviewer
+    public function getAuthor(): AnimeReviewer
     {
-        return $this->reviewer;
+        return $this->author;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getDate(): \DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHelpfulCount(): int
+    {
+        return $this->helpfulCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVotes(): int
+    {
+        return $this->votes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReview(): string
+    {
+        return $this->review;
+    }
+
+    /**
+     * @return AnimeReviewScores
+     */
+    public function getScores(): AnimeReviewScores
+    {
+        return $this->scores;
     }
 }

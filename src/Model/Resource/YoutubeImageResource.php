@@ -27,7 +27,7 @@ class YoutubeImageResource
     /**
      * @var string|null
      */
-    private $highImageUrl;
+    private $largeImageUrl;
 
     /**
      * @var string|null
@@ -47,7 +47,7 @@ class YoutubeImageResource
             $instance->defaultImageUrl = sprintf('http://img.youtube.com/vi/%s/default.jpg', $id);
             $instance->smallImageUrl = sprintf('http://img.youtube.com/vi/%s/sddefault.jpg', $id);
             $instance->mediumImageUrl = sprintf('http://img.youtube.com/vi/%s/mqdefault.jpg', $id);
-            $instance->highImageUrl = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
+            $instance->largeImageUrl = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
             $instance->maximumImageUrl = sprintf('http://img.youtube.com/vi/%s/maxresdefault.jpg', $id);
         }
 
@@ -55,7 +55,7 @@ class YoutubeImageResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getDefaultImageUrl(): ?string
     {
@@ -63,7 +63,7 @@ class YoutubeImageResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getSmallImageUrl(): ?string
     {
@@ -71,7 +71,7 @@ class YoutubeImageResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getMediumImageUrl(): ?string
     {
@@ -79,15 +79,15 @@ class YoutubeImageResource
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getHighImageUrl(): ?string
+    public function getLargeImageUrl(): ?string
     {
-        return $this->highImageUrl;
+        return $this->largeImageUrl;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getMaximumImageUrl(): ?string
     {

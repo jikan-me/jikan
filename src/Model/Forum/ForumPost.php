@@ -28,7 +28,7 @@ class ForumPost
     /**
      * @var \DateTimeImmutable|null
      */
-    private $datePosted;
+    private $date;
 
     /**
      * ForumPost constructor.
@@ -43,7 +43,7 @@ class ForumPost
         $this->url = $url;
         $this->authorName = $authorName;
         $this->authorUrl = $authorUrl;
-        $this->datePosted = $relativeDate;
+        $this->date = $relativeDate;
     }
 
     /**
@@ -73,8 +73,9 @@ class ForumPost
     /**
      * @return \DateTimeImmutable|null
      */
-    public function getDatePosted(): ?\DateTimeImmutable
+    public function getDate(): ?\DateTimeImmutable
     {
-        return $this->datePosted;
+        return $this->date;
     }
+
 }

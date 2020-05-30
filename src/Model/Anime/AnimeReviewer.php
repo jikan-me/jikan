@@ -16,19 +16,17 @@ class AnimeReviewer extends Reviewer
     /**
      * @var int
      */
-    private $episodesSeen;
+    private  $episodesSeen;
 
     /**
      * @var AnimeReviewScores
      */
-    private $scores;
+    private  $scores;
+
 
     /**
      * @param ReviewerParser $parser
-     *
      * @return AnimeReviewer
-     * @throws \InvalidArgumentExc
-     * eption
      */
     public static function fromParser(ReviewerParser $parser): AnimeReviewer
     {
@@ -41,6 +39,30 @@ class AnimeReviewer extends Reviewer
         $instance->scores = $parser->getAnimeScores();
 
         return $instance;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
     }
 
     /**
@@ -57,29 +79,5 @@ class AnimeReviewer extends Reviewer
     public function getScores(): AnimeReviewScores
     {
         return $this->scores;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername(): string
-    {
-        return $this->username;
     }
 }

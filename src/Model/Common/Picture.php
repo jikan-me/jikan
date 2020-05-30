@@ -14,13 +14,12 @@ class Picture
     /**
      * @var string
      */
-    private $large;
+    private $imageUrl;
 
     /**
      * @var string
      */
-    private $small;
-
+    private $largeImageUrl;
 
     /**
      * @param PictureParser $parser
@@ -31,8 +30,8 @@ class Picture
     public static function fromParser(PictureParser $parser): Picture
     {
         $instance = new self();
-        $instance->large = $parser->getLarge();
-        $instance->small = $parser->getSmall();
+        $instance->largeImageUrl = $parser->getLarge();
+        $instance->imageUrl = $parser->getSmall();
 
         return $instance;
     }
@@ -40,16 +39,16 @@ class Picture
     /**
      * @return string
      */
-    public function getLarge(): string
+    public function getImageUrl(): string
     {
-        return $this->large;
+        return $this->imageUrl;
     }
 
     /**
      * @return string
      */
-    public function getSmall(): string
+    public function getLargeImageUrl(): string
     {
-        return $this->small;
+        return $this->largeImageUrl;
     }
 }

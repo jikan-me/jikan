@@ -43,6 +43,7 @@ A REST API service is available as well
 - **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs
 - **[PHP]** [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe
 - **[Node.js]** [jikan-node](https://github.com/xy137/jikan-node) by xy137
+- **[Node.js]** [jikan-nodejs](https://github.com/ribeirogab/jikan-nodejs) by ribeirogab
 - **[Dart]** [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol
 - **[TypeScript]** [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard
 - **[TypeScript]** [jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco

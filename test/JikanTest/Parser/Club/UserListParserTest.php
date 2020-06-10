@@ -12,7 +12,7 @@ class UserListParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Club\UserListRequest(21349);
         $client = new \Goutte\Client();

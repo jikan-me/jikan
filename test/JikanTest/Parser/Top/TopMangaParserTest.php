@@ -22,7 +22,7 @@ class TopMangaParserTest extends TestCase
      */
     private $crawler;
 
-    public function setUp()
+    public function setUp(): void
     {
         $client = new Client();
         $this->crawler = $crawler = $client->request('GET', 'https://myanimelist.net/topmanga.php');

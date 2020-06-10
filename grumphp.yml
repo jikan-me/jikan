@@ -1,13 +1,8 @@
-parameters:
-    git_dir: .
-    bin_dir: ./vendor/bin
+grumphp:
     process_timeout: 180
     tasks:
-        phpcs:
-            standard: 'PSR2'
-            ignore_patterns:
-                - 'test/*.php'
-                - 'src/Jikan.php'
+        phpcsfixer2:
+            config: .php_cs.dist
         git_blacklist:
             keywords:
                 - 'var_dump'

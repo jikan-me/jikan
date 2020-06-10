@@ -14,7 +14,7 @@ class CharacterParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Character\CharacterRequest(116281);
         $client = new \Goutte\Client();

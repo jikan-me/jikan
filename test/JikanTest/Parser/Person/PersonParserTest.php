@@ -14,7 +14,7 @@ class PersonParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Person\PersonRequest(99);
         $client = new \Goutte\Client();

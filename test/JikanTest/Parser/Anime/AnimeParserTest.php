@@ -22,7 +22,7 @@ class AnimeParserTest extends TestCase
      */
     private $anime;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Anime\AnimeRequest(21);
         $client = new \Goutte\Client();

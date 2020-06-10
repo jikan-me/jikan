@@ -16,7 +16,7 @@ class MangaStatsParserTest extends TestCase
      */
     private $mangaStatsParser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Manga\MangaStatsRequest(99314);
         $client = new \Goutte\Client();

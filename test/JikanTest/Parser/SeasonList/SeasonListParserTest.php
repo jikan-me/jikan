@@ -17,7 +17,7 @@ class SeasonListParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\SeasonList\SeasonListRequest();
         $client = new Client();

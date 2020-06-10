@@ -16,7 +16,7 @@ class ProducerParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $client = new Client();
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/producer/1');

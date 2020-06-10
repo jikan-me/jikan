@@ -19,7 +19,7 @@ class MangaReviewsParserTest extends TestCase
      */
     private $review;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new MangaReviewsRequest(1);
         $client = new \Goutte\Client();

@@ -11,7 +11,7 @@ class AnimeMoreInfoParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Anime\AnimeMoreInfoRequest(21);
         $client = new \Goutte\Client();

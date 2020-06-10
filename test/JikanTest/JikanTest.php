@@ -29,7 +29,7 @@ class JikanTest extends TestCase
      */
     private $jikan;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->jikan = new MalClient;
     }

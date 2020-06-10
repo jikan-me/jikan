@@ -51,7 +51,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new AnimeMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -71,7 +70,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list manga\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new MangaMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -91,7 +89,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list characters\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new CharacterMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -111,7 +108,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list people\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new PersonMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),

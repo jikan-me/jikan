@@ -11,7 +11,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Anime\AnimeRecentlyUpdatedByUsersRequest(1);
         $client = new \Goutte\Client();

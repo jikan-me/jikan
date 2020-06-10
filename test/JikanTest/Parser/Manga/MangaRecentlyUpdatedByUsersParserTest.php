@@ -11,7 +11,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Manga\MangaRecentlyUpdatedByUsersRequest(1);
         $client = new \Goutte\Client();

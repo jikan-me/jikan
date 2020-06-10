@@ -9,5 +9,4 @@ namespace Jikan\Model\Common;
  */
 class PersonMeta extends ItemMeta
 {
-
 }

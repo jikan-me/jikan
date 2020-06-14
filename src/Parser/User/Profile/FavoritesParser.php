@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\Profile;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\Parser;
 use Jikan\Model\User\FavoriteAnime;
 use Jikan\Model\User\FavoriteCharacter;
@@ -101,8 +102,8 @@ class FavoritesParser
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
                             ->attr('src')),
                         new MalUrl(
-                            $crawler->filterXPath('//div[position() = 2]/span/a')-text(),
-                            $crawler->filterXPath('//div[position() = ]/span/a')->attr('href'))
+                            trim($crawler->filterXPath('//div[position() = 2]/span/a')->text()),
+                        Constants::BASE_URL . $crawler->filterXPath('//div[position() = 2]/span/a')->attr('href'))
                     );
                 }
             );
@@ -117,7 +118,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list people\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new PersonMeta(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),

@@ -121,10 +121,10 @@ class UserProfileParserTest extends TestCase
     public function it_gets_the_favorites()
     {
         self::assertInstanceOf(\Jikan\Model\User\Favorites::class, $this->parser->getFavorites());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeMeta::class, $this->parser->getFavorites()->getAnime());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MangaMeta::class, $this->parser->getFavorites()->getManga());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteAnime::class, $this->parser->getFavorites()->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteManga::class, $this->parser->getFavorites()->getManga());
         self::assertContainsOnlyInstancesOf(
-            \Jikan\Model\Common\CharacterMeta::class,
+            \Jikan\Model\User\FavoriteCharacter::class,
             $this->parser->getFavorites()->getCharacters()
         );
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\PersonMeta::class, $this->parser->getFavorites()->getPeople());

@@ -3,10 +3,11 @@
 namespace Jikan\Parser\User\Profile;
 
 use Jikan\Helper\Parser;
-use Jikan\Model\Common\AnimeMeta;
-use Jikan\Model\Common\CharacterMeta;
-use Jikan\Model\Common\MangaMeta;
+use Jikan\Model\User\FavoriteAnime;
+use Jikan\Model\User\FavoriteCharacter;
+use Jikan\Model\User\FavoriteManga;
 use Jikan\Model\Common\PersonMeta;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Model\User\Favorites;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -52,11 +53,12 @@ class FavoritesParser
             ->each(
                 function (Crawler $crawler) {
 
-                    return new AnimeMeta(
+                    return new FavoriteAnime(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('src'))
+                            ->attr('src')),
+                        $crawler->filterXPath('//div[position() = 2]/span')->text()
                     );
                 }
             );
@@ -72,11 +74,12 @@ class FavoritesParser
             ->each(
                 function (Crawler $crawler) {
 
-                    return new MangaMeta(
+                    return new FavoriteManga(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('src'))
+                            ->attr('src')),
+                        $crawler->filterXPath('//div[position() = 2]/span')->text()
                     );
                 }
             );
@@ -92,11 +95,14 @@ class FavoritesParser
             ->each(
                 function (Crawler $crawler) {
 
-                    return new CharacterMeta(
+                    return new FavoriteCharacter(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('src'))
+                            ->attr('src')),
+                        new MalUrl(
+                            $crawler->filterXPath('//div[position() = 2]/span/a')-text(),
+                            $crawler->filterXPath('//div[position() = ]/span/a')->attr('href'))
                     );
                 }
             );

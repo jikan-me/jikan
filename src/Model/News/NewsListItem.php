@@ -12,7 +12,7 @@ use Jikan\Parser\News\NewsListItemParser;
 class NewsListItem
 {
     /**
-     * @var int
+     * @var int|null
      */
     private $malId;
 
@@ -82,6 +82,14 @@ class NewsListItem
         $instance->excerpt = $parser->getIntro();
 
         return $instance;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMalId(): ?int
+    {
+        return $this->malId;
     }
 
     /**

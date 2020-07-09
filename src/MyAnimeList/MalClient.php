@@ -411,11 +411,11 @@ class MalClient
     /**
      * @param Request\RequestInterface $request
      *
-     * @return Model\News\NewsListItem[]
+     * @return Model\News\NewsList
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getNewsList(Request\RequestInterface $request): array
+    public function getNewsList(Request\RequestInterface $request): Model\News\NewsList
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

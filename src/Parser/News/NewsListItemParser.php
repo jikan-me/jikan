@@ -52,6 +52,17 @@ class NewsListItemParser implements ParserInterface
         return $this->crawler->filterXPath('//p/a/strong')->text();
     }
 
+    public function getMalId() : ?int
+    {
+        preg_match('~([\d]+)$~', $this->getUrl(), $matches);
+
+        if (!empty($matches)) {
+            return $matches[1];
+        }
+
+        return null;
+    }
+
     /**
      * @return string
      * @throws \InvalidArgumentException

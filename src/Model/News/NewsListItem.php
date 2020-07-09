@@ -12,6 +12,11 @@ use Jikan\Parser\News\NewsListItemParser;
 class NewsListItem
 {
     /**
+     * @var int
+     */
+    private $malId;
+
+    /**
      * @var string
      */
     private $url;
@@ -29,7 +34,7 @@ class NewsListItem
     /**
      * @var string
      */
-    private $authorName;
+    private $authorUsername;
 
     /**
      * @var string
@@ -65,10 +70,11 @@ class NewsListItem
     public static function fromParser(NewsListItemParser $parser): self
     {
         $instance = new self();
+        $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
         $instance->date = $parser->getDate();
-        $instance->authorName = $parser->getAuthor()->getName();
+        $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
         $instance->imageUrl = $parser->getImage();
@@ -105,9 +111,9 @@ class NewsListItem
     /**
      * @return string
      */
-    public function getAuthorName(): string
+    public function getAuthorUsername(): string
     {
-        return $this->authorName;
+        return $this->authorUsername;
     }
 
     /**

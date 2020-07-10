@@ -620,7 +620,7 @@ class AnimeParser implements ParserInterface
 
         $items =  array_filter(
             preg_split(
-                '/\s?#\d+:/m',
+                '/\s?#\d+(:|)/m',
                 $node
             )
         );

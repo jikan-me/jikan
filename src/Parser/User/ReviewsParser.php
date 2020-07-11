@@ -65,6 +65,6 @@ class ReviewsParser
     public function getLastVisiblePage() : ?int
     {
         // TODO: Add implementation
-        return null;
+        return 1;
     }
 }

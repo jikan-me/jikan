@@ -3,6 +3,7 @@
 namespace Jikan\Model\User;
 
 use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
 use Jikan\Model\Reviews\RecentReviews;
 use Jikan\Parser\Reviews\RecentReviewsParser;
 use Jikan\Parser\User\ReviewsParser;
@@ -12,21 +13,18 @@ use Jikan\Parser\User\ReviewsParser;
  *
  * @package Jikan\Model
  */
-class Reviews implements Pagination
+class Reviews extends Results implements Pagination
 {
-    /**
-     * @var int|null
-     */
-    private $lastVisiblePage;
+
     /**
      * @var bool
      */
     private $hasNextPage = false;
 
     /**
-     * @var array
+     * @var int
      */
-    private $reviews = [];
+    private $lastVisiblePage = 1;
 
     /**
      * @param ReviewsParser $parser
@@ -35,7 +33,7 @@ class Reviews implements Pagination
     public static function fromParser(ReviewsParser $parser): Reviews
     {
         $instance = new self();
-        $instance->reviews = $parser->getReviews();
+        $instance->results = $parser->getReviews();
         $instance->lastVisiblePage = $parser->getLastVisiblePage();
         $instance->hasNextPage = $parser->hasNextPage();
 
@@ -43,11 +41,11 @@ class Reviews implements Pagination
     }
 
     /**
-     * @return int|null
+     * @return array
      */
-    public function getLastVisiblePage(): ?int
+    public function getResults(): array
     {
-        // TODO: Implement getLastVisiblePage() method.
+        return $this->results;
     }
 
     /**
@@ -55,6 +53,14 @@ class Reviews implements Pagination
      */
     public function hasNextPage(): bool
     {
-        // TODO: Implement hasNextPage() method.
+        return $this->hasNextPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        return $this->lastVisiblePage;
     }
 }

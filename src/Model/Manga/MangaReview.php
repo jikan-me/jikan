@@ -9,43 +9,12 @@ use Jikan\Parser\Manga\MangaReviewParser;
  *
  * @package Jikan\Model
  */
-class MangaReview
+class MangaReview extends \Jikan\Model\Reviews\MangaReview
 {
-
-    /**
-     * @var int
-     */
-    private $malId;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var int
-     */
-    private $helpfulCount;
-
-    /**
-     * @var \DateTimeImmutable
-     */
-    private $date;
-
     /**
      * @var MangaReviewer
      */
     private $reviewer;
-
-    /**
-     * @var string
-     */
-    private $content;
 
     /**
      * Create an instance from an MangaReviewParser parser
@@ -67,41 +36,10 @@ class MangaReview
         $instance->helpfulCount= $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
         $instance->reviewer = $parser->getReviewer();
+        $instance->scores = $parser->getMangaScores();
         $instance->content = $parser->getContent();
 
         return $instance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHelpfulCount(): int
-    {
-        return $this->helpfulCount;
-    }
-
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getDate(): \DateTimeImmutable
-    {
-        return $this->date;
     }
 
     /**
@@ -110,21 +48,5 @@ class MangaReview
     public function getReviewer(): MangaReviewer
     {
         return $this->reviewer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
     }
 }

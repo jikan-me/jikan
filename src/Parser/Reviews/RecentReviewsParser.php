@@ -1,11 +1,11 @@
 <?php
 
-namespace Jikan\Parser\Top;
+namespace Jikan\Parser\Reviews;
 
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Manga\MangaReview;
+use Jikan\Model\Reviews\RecentReviews;
 use Jikan\Parser\Anime\AnimeReviewParser;
-use Jikan\Parser\Anime\AnimeReviewsParser;
 use Jikan\Parser\Manga\MangaReviewParser;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -14,7 +14,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser\Top
  */
-class TopReviewsParser
+class RecentReviewsParser
 {
     /**
      * @var Crawler
@@ -33,11 +33,20 @@ class TopReviewsParser
     }
 
     /**
-     * @return TopAnime[]
+     * @return RecentReviews
+     * @throws \Exception
+     */
+    public function getModel(): RecentReviews
+    {
+        return RecentReviews::fromParser($this);
+    }
+
+    /**
+     * @return array
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getTopReviews(): array
+    public function getRecentReviews(): array
     {
         return $this->crawler
             ->filterXPath('//*[@id="content"]/div[@class="borderDark"]')
@@ -57,5 +66,20 @@ class TopReviewsParser
                     }
                 }
             );
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool
+    {
+        $node = $this->crawler
+            ->filterXPath('//*[@id="horiznav_nav"]/div/a[contains(text(), "Next")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
     }
 }

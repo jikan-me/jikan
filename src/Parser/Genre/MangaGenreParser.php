@@ -46,7 +46,7 @@ class MangaGenreParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getGenreManga(): array
+    public function getResults(): array
     {
         return $this->crawler
             ->filter('div.seasonal-anime')
@@ -107,5 +107,55 @@ class MangaGenreParser implements ParserInterface
             '',
             $count->text()
         );
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getLastPage(): int
+    {
+        $pages = $this->crawler
+            ->filterXPath('//*[@id="content"]/div[5]/div/a[contains(@class, "link")]');
+
+        if (!$pages->count()) {
+            return 1;
+        }
+
+        $pages = $pages
+            ->nextAll()
+            ->last();
+
+        if (!$pages->count()) {
+            return 1;
+        }
+
+        preg_match('~\?page=(\d+)$~', $pages->attr('href'), $page);
+
+        return $page[1];
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasNextPage(): bool
+    {
+        $pages = $this->crawler
+            ->filterXPath('//*[@id="content"]/div[5]/div/a[contains(@class, "link")]');
+
+        if (!$pages->count()) {
+            return false;
+        }
+
+        $pages = $pages
+            ->nextAll()
+            ->last()
+            ->filterXPath('//a[not(contains(@class, "current"))]');
+
+        if (!$pages->count()) {
+            return false;
+        }
+
+        return true;
     }
 }

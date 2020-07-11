@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Search;
 
+use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
 /**
@@ -9,24 +11,24 @@ use Jikan\Parser;
  *
  * @package Jikan\Model\Search\Search
  */
-class CharacterSearch
+class CharacterSearch extends Results implements Pagination
 {
 
     /**
-     * @var CharacterSearchListItem[]
+     * @var bool
      */
-    private $results;
+    private $hasNextPage = false;
 
     /**
      * @var int
      */
-    private $lastPage;
-
+    private $lastVisiblePage = 1;
 
     /**
      * @param Parser\Search\CharacterSearchParser $parser
      *
      * @return CharacterSearch
+     * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -35,24 +37,38 @@ class CharacterSearch
         $instance = new self();
 
         $instance->results = $parser->getResults();
-        $instance->lastPage = $parser->getLastPage();
+        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->lastVisiblePage = $parser->getLastPage();
 
         return $instance;
     }
 
-    /**
-     * @return CharacterSearchListItem[]
-     */
-    public function getResults(): array
+    public static function mock() : self
     {
-        return $this->results;
+        return new self();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool
+    {
+        return $this->hasNextPage;
     }
 
     /**
      * @return int
      */
-    public function getLastPage(): int
+    public function getLastVisiblePage(): int
     {
-        return $this->lastPage;
+        return $this->lastVisiblePage;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 }

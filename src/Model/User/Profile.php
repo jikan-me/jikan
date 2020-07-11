@@ -15,7 +15,7 @@ class Profile
     /**
      * @var int|null
      */
-    private $userId;
+    private $malId;
 
     /**
      * @var string
@@ -87,7 +87,7 @@ class Profile
     public static function fromParser(UserProfileParser $parser): self
     {
         $instance = new self();
-        $instance->userId = $parser->getUserId();
+        $instance->malId = $parser->getUserId();
         $instance->username = $parser->getUsername();
         $instance->url = $parser->getProfileUrl();
         $instance->imageUrl = $parser->getImageUrl();
@@ -107,9 +107,9 @@ class Profile
     /**
      * @return int|null
      */
-    public function getUserId(): int
+    public function getMalId(): ?int
     {
-        return $this->userId;
+        return $this->malId;
     }
 
     /**

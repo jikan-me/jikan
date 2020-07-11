@@ -19,7 +19,7 @@ class AnimeReviewsParserTest extends TestCase
      */
     private $review;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new AnimeReviewsRequest(1);
         $client = new \Goutte\Client();

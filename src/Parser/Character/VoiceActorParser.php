@@ -81,7 +81,6 @@ class VoiceActorParser implements ParserInterface
      */
     public function getImage(): string
     {
-
         $img = $this->crawler->filterXPath('//img');
 
         return $img->attr('src') ?? $img->attr('data-src');

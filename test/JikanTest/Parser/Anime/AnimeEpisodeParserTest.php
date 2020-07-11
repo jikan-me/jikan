@@ -11,7 +11,7 @@ class AnimeEpisodeParserTest extends TestCase
      */
     private $parser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Anime\AnimeEpisodeRequest(21, 1);
         $client = new \Goutte\Client();

@@ -52,7 +52,12 @@ class HistoryItemParser implements ParserInterface
         $url = $this->crawler->filterXPath('//td[1]/a')->attr('href');
         $name = $this->crawler->filterXPath('//td[1]/a')->text();
 
-        preg_match('~/(.\w+).php\?id=(.\d+)~', $url, $matches);
+        preg_match('~/(.\w+).php\?id=(\d+)~', $url, $matches);
+
+        if (empty($matches)) {
+            var_dump($url)  ;
+        }
+
         $url = Constants::BASE_URL.'/'.$matches[1].'/'.$matches[2];
 
         return new MalUrl($name, $url);

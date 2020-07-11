@@ -14,7 +14,7 @@ class PersonSearchTest extends TestCase
     private $search;
     private $person;
 
-    public function setUp()
+    public function setUp(): void
     {
         $jikan = new MalClient;
         $this->search = $jikan->getPersonSearch(

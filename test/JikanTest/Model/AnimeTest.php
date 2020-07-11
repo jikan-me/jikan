@@ -17,7 +17,7 @@ class AnimeTest extends TestCase
      */
     private $anime;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Anime\AnimeRequest(21);
         $jikan = new MalClient;

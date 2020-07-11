@@ -9,7 +9,6 @@ namespace Jikan\Model\Common;
  */
 class DateProp
 {
-
     private $day;
     private $month;
     private $year;

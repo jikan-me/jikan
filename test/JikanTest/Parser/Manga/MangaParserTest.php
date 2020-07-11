@@ -22,7 +22,7 @@ class MangaParserTest extends TestCase
      */
     private $manga;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Manga\MangaRequest(11);
         $client = new \Goutte\Client();

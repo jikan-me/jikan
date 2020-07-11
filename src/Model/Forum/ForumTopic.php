@@ -14,7 +14,7 @@ class ForumTopic
     /**
      * @var int
      */
-    private $malId;
+    private $topicId;
 
     /**
      * @var string
@@ -29,12 +29,12 @@ class ForumTopic
     /**
      * @var \DateTimeImmutable
      */
-    private $date;
+    private $datePosted;
 
     /**
      * @var string
      */
-    private $authorUsername;
+    private $authorName;
 
     /**
      * @var string
@@ -44,12 +44,12 @@ class ForumTopic
     /**
      * @var int
      */
-    private $comments = 0;
+    private $replies = 0;
 
     /**
      * @var ForumPost
      */
-    private $lastComment;
+    private $lastPost;
 
     /**
      * @param ForumTopicParser $parser
@@ -60,24 +60,32 @@ class ForumTopic
     public static function fromParser(ForumTopicParser $parser): self
     {
         $instance = new self();
-        $instance->malId = $parser->getTopicId();
+        $instance->topicId = $parser->getTopicId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
-        $instance->date = $parser->getPostDate();
-        $instance->comments = $parser->getReplies();
-        $instance->authorUsername = $parser->getAuthorName();
+        $instance->datePosted = $parser->getPostDate();
+        $instance->replies = $parser->getReplies();
+        $instance->authorName = $parser->getAuthorName();
         $instance->authorUrl = $parser->getAuthorUrl();
-        $instance->lastComment = $parser->getLastPost();
+        $instance->lastPost = $parser->getLastPost();
 
         return $instance;
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->title;
+    }
+
+    /**
      * @return int
      */
-    public function getMalId(): int
+    public function getTopicId(): int
     {
-        return $this->malId;
+        return $this->topicId;
     }
 
     /**
@@ -99,17 +107,17 @@ class ForumTopic
     /**
      * @return \DateTimeImmutable
      */
-    public function getDate(): \DateTimeImmutable
+    public function getDatePosted(): \DateTimeImmutable
     {
-        return $this->date;
+        return $this->datePosted;
     }
 
     /**
      * @return string
      */
-    public function getAuthorUsername(): string
+    public function getAuthorName(): string
     {
-        return $this->authorUsername;
+        return $this->authorName;
     }
 
     /**
@@ -123,16 +131,16 @@ class ForumTopic
     /**
      * @return int
      */
-    public function getComments(): int
+    public function getReplies(): int
     {
-        return $this->comments;
+        return $this->replies;
     }
 
     /**
      * @return ForumPost
      */
-    public function getLastComment(): ForumPost
+    public function getLastPost(): ForumPost
     {
-        return $this->lastComment;
+        return $this->lastPost;
     }
 }

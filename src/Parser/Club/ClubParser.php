@@ -7,7 +7,6 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Club\Club;
 use Jikan\Model\Common\MalUrl;
-use Jikan\Model\Common\UserMeta;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -280,7 +279,7 @@ class ClubParser implements ParserInterface
 
         foreach ($staffNode as $staffMember) {
             if ($staffMember instanceof Crawler) {
-                $staff[] = UserMeta::fromMeta(
+                $staff[] = new MalUrl(
                     $staffMember->text(),
                     Constants::BASE_URL . $staffMember->attr('href')
                 );

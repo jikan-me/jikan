@@ -2,10 +2,7 @@
 
 namespace Jikan\Model\Producer;
 
-use Jikan\Model\Common\Collection\Pagination;
-use Jikan\Model\Common\Collection\Results;
 use Jikan\Model\Common\MalUrl;
-use Jikan\Model\Top\TopPeople;
 use Jikan\Parser\Producer\ProducerParser;
 
 /**
@@ -13,33 +10,18 @@ use Jikan\Parser\Producer\ProducerParser;
  *
  * @package Jikan\Model
  */
-class Producer extends Results implements Pagination
+class Producer
 {
 
     /**
-     * @var int
+     * @var MalUrl
      */
-    private $malId;
+    public $malUrl;
 
     /**
-     * @var string
+     * @var array|ProducerAnime[]
      */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var bool
-     */
-    private $hasNextPage = false;
-
-    /**
-     * @var int
-     */
-    private $lastVisiblePage = 1;
+    public $anime = [];
 
     /**
      * @param ProducerParser $parser
@@ -51,62 +33,25 @@ class Producer extends Results implements Pagination
     public static function fromParser(ProducerParser $parser): self
     {
         $instance = new self();
-
-        $instance->malId = $parser->getUrl()->getMalId();
-        $instance->url = $parser->getUrl()->getUrl();
-        $instance->name = $parser->getUrl()->getName();
-        $instance->results = $parser->getResults();
-        $instance->hasNextPage = $parser->getHasNextPage();
-        $instance->lastVisiblePage = $parser->getLastPage();
+        $instance->malUrl = $parser->getUrl();
+        $instance->anime = $parser->getProducerAnime();
 
         return $instance;
     }
 
     /**
-     * @return int
+     * @return MalUrl
      */
-    public function getMalId(): int
+    public function getMalUrl(): MalUrl
     {
-        return $this->malId;
+        return $this->malUrl;
     }
 
     /**
-     * @return string
+     * @return array|ProducerAnime[]
      */
-    public function getUrl(): string
+    public function getAnime(): array
     {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasNextPage(): bool
-    {
-        return $this->hasNextPage;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLastVisiblePage(): int
-    {
-        return $this->lastVisiblePage;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults(): array
-    {
-        return $this->results;
+        return $this->anime;
     }
 }

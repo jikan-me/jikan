@@ -12,10 +12,6 @@ use Jikan\Parser\Genre\AnimeGenreListParser;
  */
 class AnimeGenreListItem
 {
-    /**
-     * @var int
-     */
-    private $malId;
 
     /**
      * @var string
@@ -41,20 +37,11 @@ class AnimeGenreListItem
     {
         $instance = new self();
 
-        $instance->malId = $parser->getMalId();
         $instance->name = $parser->getName();
         $instance->url = $parser->getUrl();
         $instance->count = $parser->getCount();
 
         return $instance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
     }
 
     /**

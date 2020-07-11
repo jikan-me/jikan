@@ -411,11 +411,11 @@ class MalClient
     /**
      * @param Request\RequestInterface $request
      *
-     * @return Model\News\NewsList
+     * @return Model\News\NewsListItem[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getNewsList(Request\RequestInterface $request): Model\News\NewsList
+    public function getNewsList(Request\RequestInterface $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
@@ -435,30 +435,6 @@ class MalClient
      * @throws ParserException
      */
     public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-
-//        if ($this->ghoutte->getInternalResponse()->getStatusCode()) {
-//            return Model\Search\AnimeSearch::mock();
-//        }
-
-        try {
-            $parser = new Parser\Search\AnimeSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\Search\AnimeSearchRequest $request
-     *
-     * @return Model\Search\AnimeSearch
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getAnimeSearchAlt(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearchAlt
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
@@ -498,14 +474,7 @@ class MalClient
      */
     public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
-        try {
-            $crawler = $this->ghoutte->request('GET', $request->getPath());
-        } catch (BadResponseException $e) {
-            if ($e->getCode() === 404) {
-                return Model\Search\CharacterSearch::mock();
-            }
-        }
-
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Search\CharacterSearchParser($crawler);
 
@@ -523,13 +492,15 @@ class MalClient
      */
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
-
+        // Person page for some reason returns 404 when there are no results :facepalm:
         try {
             $crawler = $this->ghoutte->request('GET', $request->getPath());
-        } catch (BadResponseException $e) {
+        } catch (\Exception $e) {
             if ($e->getCode() === 404) {
-                return Model\Search\PersonSearch::mock();
+                return new Model\Search\PersonSearch();
             }
+
+            throw $e;
         }
 
         try {
@@ -563,17 +534,17 @@ class MalClient
     /**
      * @param Request\Top\TopAnimeRequest $request
      *
-     * @return Model\Top\TopAnimeListItem[]
+     * @return Model\Top\TopAnime[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopAnime(Request\Top\TopAnimeRequest $request): Model\Top\TopAnime
+    public function getTopAnime(Request\Top\TopAnimeRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopAnimeParser($crawler);
 
-            return $parser->getModel();
+            return $parser->getTopAnime();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -582,17 +553,17 @@ class MalClient
     /**
      * @param Request\Top\TopMangaRequest $request
      *
-     * @return Model\Top\TopMangaListItem[]
+     * @return Model\Top\TopManga[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopManga(Request\Top\TopMangaRequest $request): Model\Top\TopManga
+    public function getTopManga(Request\Top\TopMangaRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopMangaParser($crawler);
 
-            return $parser->getModel();
+            return $parser->getTopManga();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -601,17 +572,17 @@ class MalClient
     /**
      * @param Request\Top\TopCharactersRequest $request
      *
-     * @return Model\Top\TopCharacterListItem[]
+     * @return Model\Top\TopCharacter[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopCharacters(Request\Top\TopCharactersRequest $request): Model\Top\TopCharacters
+    public function getTopCharacters(Request\Top\TopCharactersRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopCharactersParser($crawler);
 
-            return $parser->getModel();
+            return $parser->getTopCharacters();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -620,17 +591,17 @@ class MalClient
     /**
      * @param Request\Top\TopPeopleRequest $request
      *
-     * @return Model\Top\TopPersonListItem[]
+     * @return Model\Top\TopPerson[]
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getTopPeople(Request\Top\TopPeopleRequest $request): Model\Top\TopPeople
+    public function getTopPeople(Request\Top\TopPeopleRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopPeopleParser($crawler);
 
-            return $parser->getModel();
+            return $parser->getTopPeople();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }
@@ -1076,230 +1047,19 @@ class MalClient
     }
 
     /**
-     * @param Request\Reviews\RecentReviewsRequest $request
+     * @param Request\Top\TopReviewsRequest $request
      *
      * @return
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getRecentReviews(Request\Reviews\RecentReviewsRequest $request): Model\Reviews\RecentReviews
+    public function getTopReviews(Request\Top\TopReviewsRequest $request): array
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Reviews\RecentReviewsParser($crawler);
+            $parser = new Parser\Top\TopReviewsParser($crawler);
 
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\Recommendations\RecentRecommendationsRequest $request
-     * @return array
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getRecentRecommendations(Request\Recommendations\RecentRecommendationsRequest $request): array
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Recommendations\RecentRecommendationsParser($crawler);
-
-            return $parser->getRecentRecommendations();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\Search\UserSearchRequest $request
-     *
-     * @return Model\Search\UserSearch
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getUserSearch(Request\Search\UserSearchRequest $request): Model\Search\UserSearch
-    {
-        // Returns 404 when there are no results
-        try {
-            $crawler = $this->ghoutte->request('GET', $request->getPath());
-        } catch (\Exception $e) {
-            if ($e->getCode() === 404) {
-                return new Model\Search\UserSearch();
-            }
-            throw $e;
-        }
-
-        try {
-            $parser = new Parser\Search\UserSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\User\RecentlyOnlineUsersRequest $request
-     * @return array
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getRecentOnlineUsers(Request\User\RecentlyOnlineUsersRequest $request): array
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Search\UserSearchParser($crawler);
-
-            return $parser->getResults();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\User\UsernameByIdRequest $request
-     * @return Model\Common\UserMeta
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getUsernameById(Request\User\UsernameByIdRequest $request) : Model\Common\UserMeta
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\User\UsernameByIdParser($crawler);
-
-            return $parser->getUser();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\User\UserReviewsRequest $request
-     * @return Model\User\Reviews
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getUserReviews(Request\User\UserReviewsRequest $request) : Model\User\Reviews
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\User\ReviewsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\Watch\RecentEpisodesRequest $request
-     * @return Model\Watch\Episodes
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getRecentEpisodes(Request\Watch\RecentEpisodesRequest $request) : Model\Watch\Episodes
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchEpisodesParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\Watch\PopularEpisodesRequest $request
-     * @return Model\Watch\Episodes
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getPopularEpisodes(Request\Watch\PopularEpisodesRequest $request) : Model\Watch\Episodes
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchEpisodesParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\Watch\RecentPromotionalVideosRequest $request
-     * @return Model\Watch\PromotionalVideos
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getRecentPromotionalVideos(
-        Request\Watch\RecentPromotionalVideosRequest $request
-    ) : Model\Watch\PromotionalVideos {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\Watch\PopularPromotionalVideosRequest $request
-     * @return Model\Watch\PromotionalVideos
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getPopularPromotionalVideos(
-        Request\Watch\PopularPromotionalVideosRequest $request
-    ) : Model\Watch\PromotionalVideos {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\User\UserRecommendationsRequest $request
-     * @return array
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getUserRecommendations(Request\User\UserRecommendationsRequest $request): array
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Recommendations\RecentRecommendationsParser($crawler);
-
-            return $parser->getUserRecommendations();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
-    }
-
-    /**
-     * @param Request\User\UserClubsRequest $request
-     * @return array
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getUserClubs(Request\User\UserClubsRequest $request) : array
-    {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\User\ClubParser($crawler);
-
-            return $parser->getClubs();
+            return $parser->getTopReviews();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

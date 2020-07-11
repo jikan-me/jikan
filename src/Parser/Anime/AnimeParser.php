@@ -658,7 +658,6 @@ class AnimeParser implements ParserInterface
     public function getPreview(): ?string
     {
         $video = $this->crawler->filterXPath('//div[contains(@class, "video-promotion")]/a');
-
         if (!$video->count()) {
             return null;
         }

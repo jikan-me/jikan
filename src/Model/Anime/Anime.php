@@ -4,7 +4,6 @@ namespace Jikan\Model\Anime;
 
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
-use Jikan\Model\Common\YoutubeMeta;
 use Jikan\Parser\Anime\AnimeParser;
 
 /**
@@ -31,9 +30,9 @@ class Anime
     private $imageUrl;
 
     /**
-     * @var YoutubeMeta
+     * @var string|null
      */
-    private $trailer;
+    private $trailerUrl;
 
     /**
      * @var string
@@ -192,7 +191,7 @@ class Anime
     public static function fromParser(AnimeParser $parser): Anime
     {
         $instance = new self();
-        $instance->trailer = YoutubeMeta::factory($parser->getPreview());
+        $instance->trailerUrl = $parser->getPreview();
         $instance->title = $parser->getTitle();
         $instance->url = $parser->getURL();
         $instance->malId = $parser->getId();
@@ -286,11 +285,11 @@ class Anime
     }
 
     /**
-     * @return YoutubeMeta
+     * @return string|null
      */
-    public function getTrailer(): YoutubeMeta
+    public function getTrailerUrl(): ?string
     {
-        return $this->trailer;
+        return $this->trailerUrl;
     }
 
     /**

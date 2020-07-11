@@ -8,10 +8,10 @@ use Jikan\Helper\Constants;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Model\Forum\ForumTopic;
 use Jikan\Model\News\NewsListItem;
-use Jikan\Model\Top\TopAnimeListItem;
-use Jikan\Model\Top\TopCharacterListItem;
-use Jikan\Model\Top\TopMangaListItem;
-use Jikan\Model\Top\TopPersonListItem;
+use Jikan\Model\Top\TopAnime;
+use Jikan\Model\Top\TopCharacter;
+use Jikan\Model\Top\TopManga;
+use Jikan\Model\Top\TopPerson;
 use Jikan\Model\User\Friend;
 use Jikan\Request\Anime\AnimeForumRequest;
 use Jikan\Request\Manga\MangaForumRequest;
@@ -307,7 +307,7 @@ class JikanTest extends TestCase
     {
         $anime = $this->jikan->getTopAnime(new \Jikan\Request\Top\TopAnimeRequest());
         self::assertCount(50, $anime);
-        self::assertContainsOnlyInstancesOf(TopAnimeListItem::class, $anime);
+        self::assertContainsOnlyInstancesOf(TopAnime::class, $anime);
         self::assertContains('Fullmetal Alchemist: Brotherhood', $anime);
         self::assertContains('Mushishi Zoku Shou: Suzu no Shizuku', $anime);
     }
@@ -320,7 +320,7 @@ class JikanTest extends TestCase
     {
         $manga = $this->jikan->getTopManga(new \Jikan\Request\Top\TopMangaRequest());
         self::assertCount(50, $manga);
-        self::assertContainsOnlyInstancesOf(TopMangaListItem::class, $manga);
+        self::assertContainsOnlyInstancesOf(TopManga::class, $manga);
         self::assertContains('Berserk', $manga);
         self::assertContains('Shigatsu wa Kimi no Uso', $manga);
     }
@@ -333,7 +333,7 @@ class JikanTest extends TestCase
     {
         $characters = $this->jikan->getTopCharacters(new \Jikan\Request\Top\TopCharactersRequest());
         self::assertCount(50, $characters);
-        self::assertContainsOnlyInstancesOf(TopCharacterListItem::class, $characters);
+        self::assertContainsOnlyInstancesOf(TopCharacter::class, $characters);
         self::assertContains('Lamperouge, Lelouch', $characters);
         self::assertContains('Usui, Takumi', $characters);
     }
@@ -346,7 +346,7 @@ class JikanTest extends TestCase
     {
         $people = $this->jikan->getTopPeople(new \Jikan\Request\Top\TopPeopleRequest());
         self::assertCount(50, $people);
-        self::assertContainsOnlyInstancesOf(TopPersonListItem::class, $people);
+        self::assertContainsOnlyInstancesOf(TopPerson::class, $people);
         self::assertContains('Hanazawa, Kana', $people);
         self::assertContains('Asano, Inio', $people);
     }

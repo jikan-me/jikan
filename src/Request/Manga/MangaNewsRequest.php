@@ -17,19 +17,13 @@ class MangaNewsRequest implements RequestInterface
     private $id;
 
     /**
-     * @var int
-     */
-    private $page;
-
-    /**
      * MangaNewsRequest constructor.
      *
      * @param int $id
      */
-    public function __construct(int $id, ?int $page = 1)
+    public function __construct(int $id)
     {
         $this->id = $id;
-        $this->page = $page;
     }
 
     /**
@@ -37,6 +31,6 @@ class MangaNewsRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/manga/%s/_/news?p=%d', $this->id, $this->page);
+        return sprintf('https://myanimelist.net/manga/%s/_/news', $this->id);
     }
 }

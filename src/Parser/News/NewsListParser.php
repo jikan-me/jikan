@@ -2,9 +2,7 @@
 
 namespace Jikan\Parser\News;
 
-use Jikan\Model\News\NewsList;
 use Jikan\Model\News\NewsListItem;
-use Jikan\Model\Search\AnimeSearch;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -31,22 +29,11 @@ class NewsListParser implements ParserInterface
     }
 
     /**
-     * @return NewsList
-     * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function getModel(): NewsList
-    {
-        return NewsList::fromParser($this);
-    }
-
-    /**
      * @return NewsListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getResults(): array
+    public function getModel(): array
     {
         return $this->crawler
             ->filterXPath('//div[@class="js-scrollfix-bottom-rel"]/div[@class="clearfix"]')
@@ -55,20 +42,5 @@ class NewsListParser implements ParserInterface
                     return (new NewsListItemParser($crawler))->getModel();
                 }
             );
-    }
-
-    /**
-     * @return bool
-     */
-    public function getHasNextPage(): bool
-    {
-        $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[1]/a[contains(text(), "More News")]');
-
-        if ($pages->count()) {
-            return true;
-        }
-
-        return false;
     }
 }

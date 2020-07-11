@@ -2,15 +2,14 @@
 
 namespace Jikan\Model\Top;
 
-use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopCharacterListItem
+ * Class TopPerson
  *
  * @package Jikan\Model
  */
-class TopCharacterListItem
+class TopPerson
 {
     /**
      * @var int
@@ -38,16 +37,6 @@ class TopCharacterListItem
     private $nameKanji;
 
     /**
-     * @var \Jikan\Model\Common\MalUrl[]
-     */
-    private $animeography;
-
-    /**
-     * @var MalUrl[]
-     */
-    private $mangaography;
-
-    /**
      * @var int
      */
     private $favorites;
@@ -56,6 +45,11 @@ class TopCharacterListItem
      * @var string
      */
     private $imageUrl;
+
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    private $birthday;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -74,10 +68,9 @@ class TopCharacterListItem
         $instance->title = $parser->getMalUrl()->getTitle();
         $instance->url = $parser->getMalUrl()->getUrl();
         $instance->nameKanji = $parser->getKanjiName();
-        $instance->animeography = $parser->getAnimeography();
-        $instance->mangaography = $parser->getMangaography();
-        $instance->favorites = $parser->getFavorites();
+        $instance->favorites = $parser->getPeopleFavorites();
         $instance->imageUrl = $parser->getImage();
+        $instance->birthday = $parser->getBirthday();
 
         return $instance;
     }
@@ -131,22 +124,6 @@ class TopCharacterListItem
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl[]
-     */
-    public function getAnimeography(): array
-    {
-        return $this->animeography;
-    }
-
-    /**
-     * @return MalUrl[]
-     */
-    public function getMangaography(): array
-    {
-        return $this->mangaography;
-    }
-
-    /**
      * @return int
      */
     public function getFavorites(): int
@@ -160,5 +137,13 @@ class TopCharacterListItem
     public function getImageUrl(): string
     {
         return $this->imageUrl;
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getBirthday(): ?\DateTimeImmutable
+    {
+        return $this->birthday;
     }
 }

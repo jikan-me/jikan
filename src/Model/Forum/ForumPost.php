@@ -18,7 +18,7 @@ class ForumPost
     /**
      * @var string
      */
-    private $authorUsername;
+    private $authorName;
 
     /**
      * @var string
@@ -28,22 +28,22 @@ class ForumPost
     /**
      * @var \DateTimeImmutable|null
      */
-    private $date;
+    private $datePosted;
 
     /**
      * ForumPost constructor.
      *
      * @param string                  $url
-     * @param string                  $authorUsername
+     * @param string                  $authorName
      * @param string                  $authorUrl
      * @param \DateTimeImmutable|null $relativeDate
      */
-    public function __construct(string $url, string $authorUsername, string $authorUrl, ?\DateTimeImmutable $relativeDate)
+    public function __construct(string $url, string $authorName, string $authorUrl, ?\DateTimeImmutable $relativeDate)
     {
         $this->url = $url;
-        $this->authorUsername = $authorUsername;
+        $this->authorName = $authorName;
         $this->authorUrl = $authorUrl;
-        $this->date = $relativeDate;
+        $this->datePosted = $relativeDate;
     }
 
     /**
@@ -57,9 +57,9 @@ class ForumPost
     /**
      * @return string
      */
-    public function getAuthorUsername(): string
+    public function getAuthorName(): string
     {
-        return $this->authorUsername;
+        return $this->authorName;
     }
 
     /**
@@ -73,9 +73,8 @@ class ForumPost
     /**
      * @return \DateTimeImmutable|null
      */
-    public function getDate(): ?\DateTimeImmutable
+    public function getDatePosted(): ?\DateTimeImmutable
     {
-        return $this->date;
+        return $this->datePosted;
     }
-
 }

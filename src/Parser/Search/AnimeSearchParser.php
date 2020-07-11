@@ -3,7 +3,6 @@
 namespace Jikan\Parser\Search;
 
 use Jikan\Model\Search\AnimeSearch;
-use Jikan\Model\Search\AnimeSearchAlt;
 use Jikan\Model\Search\AnimeSearchListItem;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -70,33 +69,12 @@ class AnimeSearchParser
     public function getLastPage(): int
     {
         $pages = $this->crawler
-            ->filterXPath('//div[contains(@class, "normal_header")]/div/div/span');
+            ->filterXPath('//div[contains(@class, "normal_header")]/div/div/span/a');
 
         if (!$pages->count()) {
             return 1;
         }
 
-        $pages = explode(' ', $pages->text());
-
-        return (int) str_replace(['[', ']'], '', end($pages));
-    }
-
-    /**
-     * @return bool
-     */
-    public function getHasNextPage(): bool
-    {
-        $pages = $this->crawler
-            ->filterXPath('//div[contains(@class, "normal_header")]/div/div/span');
-
-        if (!$pages->count()) {
-            return false;
-        }
-
-        if (preg_match('~\[\d+]\s(\d+)~', $pages->text())) {
-            return true;
-        }
-
-        return false;
+        return (int)$pages->last()->text();
     }
 }

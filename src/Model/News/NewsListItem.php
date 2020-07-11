@@ -12,11 +12,6 @@ use Jikan\Parser\News\NewsListItemParser;
 class NewsListItem
 {
     /**
-     * @var int|null
-     */
-    private $malId;
-
-    /**
      * @var string
      */
     private $url;
@@ -34,7 +29,7 @@ class NewsListItem
     /**
      * @var string
      */
-    private $authorUsername;
+    private $authorName;
 
     /**
      * @var string
@@ -59,7 +54,7 @@ class NewsListItem
     /**
      * @var string
      */
-    private $excerpt;
+    private $intro;
 
     /**
      * @param NewsListItemParser $parser
@@ -70,26 +65,17 @@ class NewsListItem
     public static function fromParser(NewsListItemParser $parser): self
     {
         $instance = new self();
-        $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
         $instance->date = $parser->getDate();
-        $instance->authorUsername = $parser->getAuthor()->getName();
+        $instance->authorName = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
         $instance->imageUrl = $parser->getImage();
         $instance->comments = $parser->getComments();
-        $instance->excerpt = $parser->getIntro();
+        $instance->intro = $parser->getIntro();
 
         return $instance;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getMalId(): ?int
-    {
-        return $this->malId;
     }
 
     /**
@@ -119,9 +105,9 @@ class NewsListItem
     /**
      * @return string
      */
-    public function getAuthorUsername(): string
+    public function getAuthorName(): string
     {
-        return $this->authorUsername;
+        return $this->authorName;
     }
 
     /**
@@ -159,8 +145,8 @@ class NewsListItem
     /**
      * @return string
      */
-    public function getExcerpt(): string
+    public function getIntro(): string
     {
-        return $this->excerpt;
+        return $this->intro;
     }
 }

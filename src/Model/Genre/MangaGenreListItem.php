@@ -14,11 +14,6 @@ class MangaGenreListItem
 {
 
     /**
-     * @var int
-     */
-    private $malId;
-
-    /**
      * @var string
      */
     private $name;
@@ -42,20 +37,11 @@ class MangaGenreListItem
     {
         $instance = new self();
 
-        $instance->malId = $parser->getMalId();
         $instance->name = $parser->getName();
         $instance->url = $parser->getUrl();
         $instance->count = $parser->getCount();
 
         return $instance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
     }
 
     /**

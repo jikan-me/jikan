@@ -2,14 +2,15 @@
 
 namespace Jikan\Model\Top;
 
+use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopAnimeListItem
+ * Class TopCharacter
  *
  * @package Jikan\Model
  */
-class TopAnimeListItem
+class TopCharacter
 {
     /**
      * @var int
@@ -32,39 +33,29 @@ class TopAnimeListItem
     private $url;
 
     /**
+     * @var string|null
+     */
+    private $nameKanji;
+
+    /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    private $animeography;
+
+    /**
+     * @var MalUrl[]
+     */
+    private $mangaography;
+
+    /**
+     * @var int
+     */
+    private $favorites;
+
+    /**
      * @var string
      */
     private $imageUrl;
-
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var int
-     */
-    private $episodes;
-
-    /**
-     * @var string|null
-     */
-    private $startDate;
-
-    /**
-     * @var string|null
-     */
-    private $endDate;
-
-    /**
-     * @var int
-     */
-    private $members;
-
-    /**
-     * @var float
-     */
-    private $score;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -82,12 +73,10 @@ class TopAnimeListItem
         $instance->malId = $parser->getMalUrl()->getMalId();
         $instance->title = $parser->getMalUrl()->getTitle();
         $instance->url = $parser->getMalUrl()->getUrl();
-        $instance->type = $parser->getType();
-        $instance->episodes = $parser->getEpisodes();
-        $instance->startDate = $parser->getStartDate();
-        $instance->endDate = $parser->getEndDate();
-        $instance->members = $parser->getMembers();
-        $instance->score = $parser->getScore();
+        $instance->nameKanji = $parser->getKanjiName();
+        $instance->animeography = $parser->getAnimeography();
+        $instance->mangaography = $parser->getMangaography();
+        $instance->favorites = $parser->getFavorites();
         $instance->imageUrl = $parser->getImage();
 
         return $instance;
@@ -134,51 +123,35 @@ class TopAnimeListItem
     }
 
     /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getEpisodes(): ?int
-    {
-        return $this->episodes;
-    }
-
-    /**
      * @return string|null
      */
-    public function getStartDate(): ?string
+    public function getNameKanji(): ?string
     {
-        return $this->startDate;
+        return $this->nameKanji;
     }
 
     /**
-     * @return string|null
+     * @return \Jikan\Model\Common\MalUrl[]
      */
-    public function getEndDate(): ?string
+    public function getAnimeography(): array
     {
-        return $this->endDate;
+        return $this->animeography;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getMangaography(): array
+    {
+        return $this->mangaography;
     }
 
     /**
      * @return int
      */
-    public function getMembers(): int
+    public function getFavorites(): int
     {
-        return $this->members;
-    }
-
-    /**
-     * @return float
-     */
-    public function getScore(): float
-    {
-        return $this->score;
+        return $this->favorites;
     }
 
     /**

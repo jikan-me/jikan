@@ -13,10 +13,6 @@ use Jikan\Parser\Producer\ProducerParser;
  */
 class ProducerListItem
 {
-    /**
-     * @var int
-     */
-    private $malId;
 
     /**
      * @var string
@@ -43,20 +39,11 @@ class ProducerListItem
     public static function fromParser(ProducerListItemParser $parser): self
     {
         $instance = new self();
-        $instance->malId = $parser->getMalId();
         $instance->name = $parser->getName();
         $instance->url = $parser->getUrl();
         $instance->count = $parser->getCount();
 
         return $instance;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
     }
 
     /**

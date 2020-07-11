@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Anime;
 
-use Jikan\Model\Reviews\AnimeReviewScores;
 use Jikan\Parser\Anime\AnimeReviewParser;
 
 /**
@@ -10,18 +9,53 @@ use Jikan\Parser\Anime\AnimeReviewParser;
  *
  * @package Jikan\Model
  */
-class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
+class AnimeReview
 {
+
+    /**
+     * @var int
+     */
+    private $malId;
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var int
+     */
+    private $helpfulCount;
+
+    /**
+     * @var \DateTimeImmutable
+     */
+    private $date;
 
     /**
      * @var AnimeReviewer
      */
-    private $author;
+    private $reviewer;
 
     /**
+     * @var string
+     */
+    private $content;
+
+    /**
+     * Create an instance from an AnimeReviewParser parser
+     *
      * @param AnimeReviewParser $parser
+     *
      * @return AnimeReview
      * @throws \Exception
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
      */
     public static function fromParser(AnimeReviewParser $parser): AnimeReview
     {
@@ -30,53 +64,12 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();
-        $instance->votes = $parser->getHelpfulCount();
+        $instance->helpfulCount= $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->author = $parser->getReviewer();
-        $instance->scores = $parser->getAnimeScores();
-        $instance->review = $parser->getContent();
+        $instance->reviewer = $parser->getReviewer();
+        $instance->content = $parser->getContent();
 
         return $instance;
-    }
-
-    /**
-     * @return AnimeReviewer
-     */
-    public function getAuthor(): AnimeReviewer
-    {
-        return $this->author;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getDate(): \DateTimeImmutable
-    {
-        return $this->date;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHelpfulCount(): int
-    {
-        return $this->helpfulCount;
     }
 
     /**
@@ -98,24 +91,40 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     /**
      * @return int
      */
-    public function getVotes(): int
+    public function getHelpfulCount(): int
     {
-        return $this->votes;
+        return $this->helpfulCount;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getDate(): \DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    /**
+     * @return AnimeReviewer
+     */
+    public function getReviewer(): AnimeReviewer
+    {
+        return $this->reviewer;
     }
 
     /**
      * @return string
      */
-    public function getReview(): string
+    public function getContent(): string
     {
-        return $this->review;
+        return $this->content;
     }
 
     /**
-     * @return AnimeReviewScores
+     * @return string
      */
-    public function getScores(): AnimeReviewScores
+    public function getType(): string
     {
-        return $this->scores;
+        return $this->type;
     }
 }

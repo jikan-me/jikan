@@ -2,8 +2,6 @@
 
 namespace Jikan\Model\Search;
 
-use Jikan\Model\Common\Collection\Pagination;
-use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
 /**
@@ -11,18 +9,19 @@ use Jikan\Parser;
  *
  * @package Jikan\Model\Search\Search
  */
-class PersonSearch extends Results implements Pagination
+class PersonSearch
 {
 
     /**
-     * @var bool
+     * @var PersonSearchListItem[]
      */
-    private $hasNextPage = false;
+    private $results = [];
 
     /**
      * @var int
      */
-    private $lastVisiblePage = 1;
+    private $lastPage = 1;
+
 
     /**
      * @param Parser\Search\PersonSearchParser $parser
@@ -37,38 +36,24 @@ class PersonSearch extends Results implements Pagination
         $instance = new self();
 
         $instance->results = $parser->getResults();
-        $instance->hasNextPage = $parser->getHasNextPage();
-        $instance->lastVisiblePage = $parser->getLastPage();
+        $instance->lastPage = $parser->getLastPage();
 
         return $instance;
     }
 
-    public static function mock() : self
-    {
-        return new self();
-    }
-
     /**
-     * @return bool
+     * @return PersonSearchListItem[]
      */
-    public function hasNextPage(): bool
+    public function getResults(): array
     {
-        return $this->hasNextPage;
+        return $this->results;
     }
 
     /**
      * @return int
      */
-    public function getLastVisiblePage(): int
+    public function getLastPage(): int
     {
-        return $this->lastVisiblePage;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults(): array
-    {
-        return $this->results;
+        return $this->lastPage;
     }
 }

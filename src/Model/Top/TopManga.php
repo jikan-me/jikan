@@ -2,73 +2,190 @@
 
 namespace Jikan\Model\Top;
 
-use Jikan\Model\Common\Collection\Pagination;
-use Jikan\Model\Common\Collection\Results;
-use Jikan\Parser;
+use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class AnimeSearch
+ * Class TopManga
  *
- * @package Jikan\Model\Search\Search
+ * @package Jikan\Model
  */
-class TopManga extends Results implements Pagination
+class TopManga
 {
-
     /**
-     * @var bool
+     * @var int
      */
-    private $hasNextPage = false;
+    private $malId;
 
     /**
      * @var int
      */
-    private $lastVisiblePage = 1;
+    private $rank;
 
     /**
-     * @param Parser\Search\AnimeSearchParser $parser
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $type;
+
+    /**
+     * @var int|null
+     */
+    private $volumes;
+
+    /**
+     * @var string|null
+     */
+    private $startDate;
+
+    /**
+     * @var string|null
+     */
+    private $endDate;
+
+    /**
+     * @var int
+     */
+    private $members;
+
+    /**
+     * @var float
+     */
+    private $score;
+
+    /**
+     * @var string
+     */
+    private $imageUrl;
+
+    /**
+     * Create an instance from an AnimeParser parser
      *
-     * @return TopManga
-     * @throws \Exception
+     * @param TopListItemParser $parser
+     *
+     * @return self
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\Top\TopMangaParser $parser): self
+    public static function fromParser(TopListItemParser $parser): self
     {
         $instance = new self();
-
-        $instance->results = $parser->getResults();
-        $instance->hasNextPage = $parser->getHasNextPage();
-        $instance->lastVisiblePage = $parser->getLastPage();
+        $instance->rank = $parser->getRank();
+        $instance->malId = $parser->getMalUrl()->getMalId();
+        $instance->title = $parser->getMalUrl()->getTitle();
+        $instance->url = $parser->getMalUrl()->getUrl();
+        $instance->type = $parser->getType();
+        $instance->volumes = $parser->getVolumes();
+        $instance->startDate = $parser->getStartDate();
+        $instance->endDate = $parser->getEndDate();
+        $instance->members = $parser->getMembers();
+        $instance->score = $parser->getScore();
+        $instance->imageUrl = $parser->getImage();
 
         return $instance;
     }
 
-    public static function mock() : self
-    {
-        return new self();
-    }
-
     /**
-     * @return bool
+     * @return string
      */
-    public function hasNextPage(): bool
+    public function __toString(): string
     {
-        return $this->hasNextPage;
+        return $this->getTitle();
     }
 
     /**
      * @return int
      */
-    public function getLastVisiblePage(): int
+    public function getRank(): int
     {
-        return $this->lastVisiblePage;
+        return $this->rank;
     }
 
     /**
-     * @return array
+     * @return int
      */
-    public function getResults(): array
+    public function getMalId(): int
     {
-        return $this->results;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getVolumes(): ?int
+    {
+        return $this->volumes;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStartDate(): ?string
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getEndDate(): ?string
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMembers(): int
+    {
+        return $this->members;
+    }
+
+    /**
+     * @return float
+     */
+    public function getScore(): float
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl(): string
+    {
+        return $this->imageUrl;
     }
 }

@@ -47,12 +47,9 @@ class Constants
     public const TOP_BY_POPULARITY = 'bypopularity';
     public const TOP_BY_FAVORITES = 'favorite';
 
-    public const RECENT_REVIEW_ANIME = 'anime';
-    public const RECENT_REVIEW_MANGA = 'manga';
-    public const RECENT_REVIEW_BEST_VOTED = 'bestvoted';
-
-    public const RECENT_RECOMMENDATION_ANIME = 'anime';
-    public const RECENT_RECOMMENDATION_MANGA = 'manga';
+    public const TOP_REVIEW_ANIME = 'anime';
+    public const TOP_REVIEW_MANGA = 'manga';
+    public const TOP_REVIEW_BEST_VOTED = 'bestvoted';
 
     public const SEARCH_ANIME_TV = 1;
     public const SEARCH_ANIME_OVA = 2;
@@ -116,11 +113,6 @@ class Constants
     public const SEARCH_MANGA_ORDER_BY_MEMBERS = 7;
     public const SEARCH_MANGA_ORDER_BY_TYPE = 8; // Default: Manhua, Manhwa, Doujinshi, One-shot, Novel, Manga
     public const SEARCH_MANGA_ORDER_BY_ID = 9;
-
-    public const SEARCH_USER_GENDER_ANY = -1;
-    public const SEARCH_USER_GENDER_MALE = 1;
-    public const SEARCH_USER_GENDER_FEMALE = 2;
-    public const SEARCH_USER_GENDER_NONBINARY = 3;
 
     public const GENRE_ANIME_ACTION = 1;
     public const GENRE_ANIME_ADVENTURE = 2;

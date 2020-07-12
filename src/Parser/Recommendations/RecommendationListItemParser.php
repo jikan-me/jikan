@@ -77,7 +77,9 @@ class RecommendationListItemParser implements ParserInterface
                 ->filterXPath('//div[contains(@class, "lightLink")]')
         );
 
-        preg_match('~- (.*)$~', $node->text(), $time);
+        $date = JString::cleanse($node->text());
+
+        preg_match('~- (.*)$~', $date, $time);
 
         try {
             return new \DateTimeImmutable(

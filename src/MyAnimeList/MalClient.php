@@ -191,12 +191,12 @@ class MalClient
     }
 
     /**
-     * @param  Request\User\UserFriendsRequest $request
-     * @return array
+     * @param Request\User\UserFriendsRequest $request
+     * @return Model\User\Friends
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUserFriends(Request\User\UserFriendsRequest $request): array
+    public function getUserFriends(Request\User\UserFriendsRequest $request): Model\User\Friends
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

@@ -2,6 +2,9 @@
 
 namespace Jikan\Model\Reviews;
 
+use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
+use Jikan\Model\Recommendations\UserRecommendations;
 use Jikan\Parser;
 
 /**
@@ -9,18 +12,18 @@ use Jikan\Parser;
  *
  * @package Jikan\Model\ReviewsParser\RecentReviews
  */
-class RecentReviews
+class RecentReviews extends Results implements Pagination
 {
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $hasNextPage = false;
 
     /**
-     * @var array
+     * @var int
      */
-    private $reviews;
+    private $lastVisiblePage = 1;
 
     /**
      * @param Parser\Reviews\RecentReviewsParser $parser
@@ -34,18 +37,26 @@ class RecentReviews
     {
         $instance = new self();
 
-        $instance->reviews = $parser->getRecentReviews();
+        $instance->results = $parser->getRecentReviews();
         $instance->hasNextPage = $parser->hasNextPage();
 
         return $instance;
     }
 
     /**
+     * @return static
+     */
+    public static function mock() : self
+    {
+        return new self();
+    }
+
+    /**
      * @return array
      */
-    public function getReviews(): array
+    public function getResults(): array
     {
-        return $this->reviews;
+        return $this->results;
     }
 
     /**
@@ -54,5 +65,13 @@ class RecentReviews
     public function hasNextPage(): bool
     {
         return $this->hasNextPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        return $this->lastVisiblePage;
     }
 }

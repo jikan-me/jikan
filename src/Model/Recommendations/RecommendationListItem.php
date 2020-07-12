@@ -22,7 +22,7 @@ class RecommendationListItem
     private $content;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      */
     private $date;
 
@@ -66,7 +66,7 @@ class RecommendationListItem
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
     public function getDate(): \DateTimeImmutable
     {

@@ -70,7 +70,7 @@ class RecommendationListItemParser implements ParserInterface
             ->filterXPath('//div[contains(@class, "recommendations-user-recs-text")]')->text();
     }
 
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): ?\DateTimeImmutable
     {
         $node = Parser::removeChildNodes(
             $this->crawler

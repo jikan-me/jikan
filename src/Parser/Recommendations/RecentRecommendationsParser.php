@@ -80,10 +80,14 @@ class RecentRecommendationsParser
      */
     public function hasNextPage(): bool
     {
-        $node = $this->crawler
-            ->filterXPath('//*[@id="content"]/div/div[2]/div/div[2]/div[1]/a[contains(text(), "More Recommendations")]');
+        $pages = $this->crawler
+            ->filterXPath('//*[@id="horiznav_nav"]/div/span');
 
-        if ($node->count()) {
+        if (!$pages->count()) {
+            return false;
+        }
+
+        if (preg_match('~\[\d+]\s(\d+)~', $pages->text())) {
             return true;
         }
 
@@ -96,24 +100,15 @@ class RecentRecommendationsParser
      */
     public function getLastPage(): int
     {
-        return 1;
         $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[contains(@class, "mt12 mb12")]/div[contains(@class, "pagination")]');
+            ->filterXPath('//*[@id="horiznav_nav"]/div/span');
 
         if (!$pages->count()) {
             return 1;
         }
 
-        $pages = $pages
-            ->filterXPath('//a[contains(@class, "link")]')
-            ->last();
+        $pages = explode(' ', $pages->text());
 
-        if (empty($pages)) {
-            return 1;
-        }
-
-        preg_match('~\?offset=(\d+)$~', $pages->attr('href'), $page);
-
-        return ((int) $page[1]/100) + 1;
+        return (int) str_replace(['[', ']'], '', end($pages));
     }
 }

@@ -41,6 +41,14 @@ class Reviews extends Results implements Pagination
     }
 
     /**
+     * @return static
+     */
+    public static function mock() : self
+    {
+        return new self();
+    }
+
+    /**
      * @return array
      */
     public function getResults(): array

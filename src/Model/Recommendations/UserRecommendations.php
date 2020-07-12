@@ -4,15 +4,14 @@ namespace Jikan\Model\Recommendations;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
-use Jikan\Model\User\Reviews;
 use Jikan\Parser;
 
 /**
- * Class RecentRecommendations
+ * Class UserRecommendations
  *
  * @package Jikan\Model\ReviewsParser\RecentReviews
  */
-class RecentRecommendations extends Results implements Pagination
+class UserRecommendations extends Results implements Pagination
 {
 
     /**
@@ -25,16 +24,15 @@ class RecentRecommendations extends Results implements Pagination
      */
     private $lastVisiblePage = 1;
 
-
     /**
-     * @param Parser\Recommendations\RecentRecommendationsParser $parser
+     * @param Parser\Recommendations\UserRecommendationsParser $parser
      * @return static
      */
-    public static function fromParser(Parser\Recommendations\RecentRecommendationsParser $parser): self
+    public static function fromParser(Parser\Recommendations\UserRecommendationsParser $parser): self
     {
         $instance = new self();
 
-        $instance->results = $parser->getRecentRecommendations();
+        $instance->results = $parser->getUserRecommendations();
         $instance->lastVisiblePage = $parser->getLastPage();
         $instance->hasNextPage = $parser->hasNextPage();
 

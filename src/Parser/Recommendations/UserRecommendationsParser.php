@@ -6,6 +6,7 @@ use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Manga\MangaReview;
 use Jikan\Model\Recommendations\RecentRecommendations;
 use Jikan\Model\Recommendations\RecommendationListItem;
+use Jikan\Model\Recommendations\UserRecommendations;
 use Jikan\Model\Reviews\RecentReviews;
 use Jikan\Parser\Anime\AnimeReviewParser;
 use Jikan\Parser\Manga\MangaReviewParser;
@@ -16,7 +17,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser\Top
  */
-class RecentRecommendationsParser
+class UserRecommendationsParser
 {
     /**
      * @var Crawler
@@ -37,25 +38,9 @@ class RecentRecommendationsParser
      * @return RecentReviews
      * @throws \Exception
      */
-    public function getModel(): RecentRecommendations
+    public function getModel(): UserRecommendations
     {
-        return RecentRecommendations::fromParser($this);
-    }
-
-    /**
-     * @return array
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
-    public function getRecentRecommendations(): array
-    {
-        return $this->crawler
-            ->filterXPath('//*[@id="content"]/div[3]/div[contains(@class, "spaceit borderClass")]')
-            ->each(
-                function (Crawler $crawler) {
-                    return RecommendationListItem::fromParser(new RecommendationListItemParser($crawler));
-                }
-            );
+        return UserRecommendations::fromParser($this);
     }
 
     /**
@@ -96,24 +81,21 @@ class RecentRecommendationsParser
      */
     public function getLastPage(): int
     {
-        return 1;
         $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[contains(@class, "mt12 mb12")]/div[contains(@class, "pagination")]');
+            ->filterXPath('//*[@id="content"]/div/div[2]/div/div[2]/div[2]/div[contains(text(), "Total Recommendations:")]');
 
         if (!$pages->count()) {
             return 1;
         }
 
-        $pages = $pages
-            ->filterXPath('//a[contains(@class, "link")]')
-            ->last();
+        preg_match('~Total Recommendations: (.*)$~', $pages->text(), $pages);
 
         if (empty($pages)) {
             return 1;
         }
 
-        preg_match('~\?offset=(\d+)$~', $pages->attr('href'), $page);
+        $recommendationsCount = (int) str_replace(',', '', $pages[1]);
 
-        return ((int) $page[1]/100) + 1;
+        return ceil($recommendationsCount/30);
     }
 }

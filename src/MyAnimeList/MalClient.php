@@ -1268,19 +1268,20 @@ class MalClient
         }
     }
 
+
     /**
      * @param Request\User\UserRecommendationsRequest $request
-     * @return array
+     * @return Model\Recommendations\UserRecommendations
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUserRecommendations(Request\User\UserRecommendationsRequest $request): array
+    public function getUserRecommendations(Request\User\UserRecommendationsRequest $request): Model\Recommendations\UserRecommendations
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Recommendations\RecentRecommendationsParser($crawler);
+            $parser = new Parser\Recommendations\UserRecommendationsParser($crawler);
 
-            return $parser->getUserRecommendations();
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

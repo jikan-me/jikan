@@ -12,7 +12,7 @@ class YoutubeImageResource
     /**
      * @var string|null
      */
-    private $defaultImageUrl;
+    private $imageUrl;
 
     /**
      * @var string|null
@@ -44,7 +44,7 @@ class YoutubeImageResource
         $instance = new self;
 
         if ($id !== null) {
-            $instance->defaultImageUrl = sprintf('http://img.youtube.com/vi/%s/default.jpg', $id);
+            $instance->imageUrl = sprintf('http://img.youtube.com/vi/%s/default.jpg', $id);
             $instance->smallImageUrl = sprintf('http://img.youtube.com/vi/%s/sddefault.jpg', $id);
             $instance->mediumImageUrl = sprintf('http://img.youtube.com/vi/%s/mqdefault.jpg', $id);
             $instance->largeImageUrl = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
@@ -57,9 +57,19 @@ class YoutubeImageResource
     /**
      * @return string|null
      */
-    public function getDefaultImageUrl(): ?string
+    public function getImageUrl(): ?string
     {
-        return $this->defaultImageUrl;
+        return $this->imageUrl;
+    }
+
+    /**
+     * @param string|null $imageUrl
+     * @return YoutubeImageResource
+     */
+    public function setImageUrl(?string $imageUrl): YoutubeImageResource
+    {
+        $this->imageUrl = $imageUrl;
+        return $this;
     }
 
     /**

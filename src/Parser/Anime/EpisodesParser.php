@@ -95,9 +95,9 @@ class EpisodesParser implements ParserInterface
 
         if (!$pages->count()) {
             return false;
-        }
+    }
 
-        return true;
+return true;
     }
 
     /**

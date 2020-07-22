@@ -2,6 +2,9 @@
 
 namespace Jikan\Model\Watch;
 
+use Jikan\Model\Common\AnimeMeta;
+use Jikan\Model\Common\YoutubeMeta;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Watch\EpisodeListItemParser;
 use Jikan\Parser\Watch\PromotionalVideoListItemParser;
 
@@ -12,36 +15,20 @@ use Jikan\Parser\Watch\PromotionalVideoListItemParser;
  */
 class PromotionalVideoListItem
 {
-
-    /**
-     * @var int
-     */
-    private $malId;
-
     /**
      * @var string
-     */
-    private $url;
-
-    /**
-     * @var strin
      */
     private $title;
 
     /**
-     * @var AnimeImageResource
+     * @var AnimeMeta
      */
-    private $images;
-
-    /**
-     * @var string
-     */
-    private $promoTitle;
+    private $anime;
 
     /**
      * @var YoutubeMeta
      */
-    private $promoMedia;
+    private $trailer;
 
     /**
      * @param EpisodeListItemParser $parser
@@ -52,13 +39,39 @@ class PromotionalVideoListItem
     public static function fromParser(PromotionalVideoListItemParser $parser): self
     {
         $instance = new self();
-        $instance->malId = $parser->getId();
-        $instance->url = $parser->getUrl();
-        $instance->title = $parser->getTitle();
-        $instance->images = $parser->getImages();
-        $instance->promoTitle = $parser->getPromoTitle();
-        $instance->promoMedia = $parser->getPromoMedia();
+        $instance->anime = new AnimeMeta(
+            $parser->getTitle(),
+            $parser->getUrl(),
+            $parser->getImages()
+        );
+        $instance->title = $parser->getPromoTitle();
+        $instance->trailer = $parser->getPromoMedia();
 
         return $instance;
     }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return AnimeMeta
+     */
+    public function getAnime(): AnimeMeta
+    {
+        return $this->anime;
+    }
+
+    /**
+     * @return YoutubeMeta
+     */
+    public function getTrailer(): YoutubeMeta
+    {
+        return $this->trailer;
+    }
+
 }

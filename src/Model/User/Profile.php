@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\User;
 
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\User\Profile\UserProfileParser;
 
 /**
@@ -28,9 +29,9 @@ class Profile
     private $url;
 
     /**
-     * @var string|null
+     * @var UserImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var \DateTimeImmutable|null
@@ -90,7 +91,7 @@ class Profile
         $instance->malId = $parser->getUserId();
         $instance->username = $parser->getUsername();
         $instance->url = $parser->getProfileUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->joined = $parser->getJoinDate();
         $instance->lastOnline = $parser->getLastOnline();
         $instance->gender = $parser->getGender();
@@ -201,10 +202,10 @@ class Profile
     }
 
     /**
-     * @return null|string
+     * @return UserImageResource
      */
-    public function getImageUrl(): ?string
+    public function getImages(): UserImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 }

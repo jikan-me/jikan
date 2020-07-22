@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Watch;
 
-use Jikan\Model\Resource\AnimeImageResource\CommonImageResource;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Watch\EpisodeListItemParser;
 
 /**
@@ -29,7 +29,7 @@ class EpisodeListItem
     private $name;
 
     /**
-     * @var AnimeResourceImages
+     * @var CommonImageResource
      */
     private $images;
 

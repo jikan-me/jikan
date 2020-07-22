@@ -23,9 +23,9 @@ class EpisodeListItem
     private $url;
 
     /**
-     * @var strin
+     * @var string
      */
-    private $title;
+    private $name;
 
     /**
      * @var AnimeResourceImages

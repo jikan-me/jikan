@@ -175,13 +175,13 @@ class MangaStatsParser implements ParserInterface
                 );
                 $percentage = (float) JString::cleanse($percentage);
 
-                $scores[$score] = MangaStatsScore::setProperties($votes, $percentage);
+                $scores[$score] = MangaStatsScore::setProperties($score, $votes, $percentage);
             }
         );
 
         for ($i=1; $i<=10; $i++) {
             if (!array_key_exists($i, $scores)) {
-                $scores[$i] = MangaStatsScore::setProperties(0, 0);
+                $scores[$i] = MangaStatsScore::setProperties(0, 0, 0);
             }
         }
 

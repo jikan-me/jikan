@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\News;
 
+use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
 use Jikan\Parser\News\NewsListItemParser;
 
 /**
@@ -47,9 +48,9 @@ class NewsListItem
     private $forumUrl;
 
     /**
-     * @var string|null
+     * @var WrapImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var int
@@ -77,7 +78,7 @@ class NewsListItem
         $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = WrapImageResource::factory($parser->getImage());
         $instance->comments = $parser->getComments();
         $instance->excerpt = $parser->getIntro();
 
@@ -141,11 +142,11 @@ class NewsListItem
     }
 
     /**
-     * @return string|null
+     * @return WrapImageResource
      */
-    public function getImageUrl(): ?string
+    public function getImages(): WrapImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

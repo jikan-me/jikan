@@ -4,7 +4,7 @@ namespace Jikan\Model\Resource\UserImageResource;
 
 /**
  * Class CommonImageResource
- * @package Jikan\Model\Resource\CommonImageResource
+ * @package Jikan\Model\Resource\UserImageResource
  */
 class UserImageResource
 {
@@ -21,7 +21,7 @@ class UserImageResource
 
     /**
      * @param string $imageUrl
-     * @return CommonImageResource
+     * @return UserImageResource
      */
     public static function factory(?string $imageUrl) : self
     {

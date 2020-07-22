@@ -21,7 +21,7 @@ class AnimeImageResource
 
     /**
      * @param string $imageUrl
-     * @return CommonImageResource
+     * @return AnimeImageResource
      */
     public static function factory(?string $imageUrl) : self
     {

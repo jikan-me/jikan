@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\User\Reviews;
 
+use Jikan\Model\Common\AnimeMeta;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Anime\AnimeReviewParser;
 
 /**
@@ -11,6 +13,15 @@ use Jikan\Parser\Anime\AnimeReviewParser;
  */
 class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 {
+
+    /**
+     * @var string
+     */
+    private $title;
+    /**
+     * @var CommonImageResource
+     */
+    private $images;
 
     /**
      * Create an instance from an AnimeReviewParser parser
@@ -28,11 +39,13 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
+        $instance->title = $parser->getTitle();
+        $instance->images = CommonImageResource::factory($parser->getImageUrl());
         $instance->type = $parser->getType();
-        $instance->helpfulCount= $parser->getHelpfulCount();
+        $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
         $instance->scores = $parser->getAnimeScores();
-        $instance->content = $parser->getContent();
+        $instance->review = $parser->getContent();
 
         return $instance;
     }

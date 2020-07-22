@@ -30,7 +30,7 @@ abstract class MangaReview
     /**
      * @var int
      */
-    protected $helpfulCount;
+    protected $votes;
 
     /**
      * @var \DateTimeImmutable
@@ -45,8 +45,7 @@ abstract class MangaReview
     /**
      * @var string
      */
-    protected $content;
-
+    protected $review;
 
     /**
      * @return int
@@ -65,11 +64,19 @@ abstract class MangaReview
     }
 
     /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
      * @return int
      */
-    public function getHelpfulCount(): int
+    public function getVotes(): int
     {
-        return $this->helpfulCount;
+        return $this->votes;
     }
 
     /**
@@ -81,18 +88,18 @@ abstract class MangaReview
     }
 
     /**
-     * @return string
+     * @return MangaReviewScores
      */
-    public function getContent(): string
+    public function getScores(): MangaReviewScores
     {
-        return $this->content;
+        return $this->scores;
     }
 
     /**
      * @return string
      */
-    public function getType(): string
+    public function getReview(): string
     {
-        return $this->type;
+        return $this->review;
     }
 }

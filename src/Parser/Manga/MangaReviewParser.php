@@ -166,4 +166,36 @@ class MangaReviewParser implements ParserInterface
             )
         );
     }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getTitle(): string
+    {
+        return $this->crawler
+            ->filterXPath('//div[1]/div[3]/div/div/a')
+            ->text();
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getImageUrl(): string
+    {
+        // User Reviews page
+        $node = $this->crawler
+            ->filterXPath('//div[12]/div[1]/div[1]/a/img');
+
+        if ($node->count()) {
+            return $node->attr('data-src');
+        }
+
+        // Recent Reviews page
+        $node = $this->crawler
+            ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a/img');
+
+        return $node->attr('data-src');
+    }
 }

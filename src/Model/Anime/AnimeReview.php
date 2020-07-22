@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Model\Reviews\AnimeReviewScores;
 use Jikan\Parser\Anime\AnimeReviewParser;
 
@@ -16,7 +17,12 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     /**
      * @var AnimeReviewer
      */
-    private $author;
+    private $reviewer;
+
+    /**
+     * @var CommonImageResource
+     */
+    private $images;
 
     /**
      * @param AnimeReviewParser $parser
@@ -29,38 +35,15 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
+        $instance->images = CommonImageResource::factory($parser->getImageUrl());
         $instance->type = $parser->getType();
         $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->author = $parser->getReviewer();
+        $instance->reviewer = $parser->getReviewer();
         $instance->scores = $parser->getAnimeScores();
         $instance->review = $parser->getContent();
 
         return $instance;
-    }
-
-    /**
-     * @return AnimeReviewer
-     */
-    public function getAuthor(): AnimeReviewer
-    {
-        return $this->author;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContent(): string
-    {
-        return $this->content;
     }
 
     /**
@@ -72,11 +55,11 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     }
 
     /**
-     * @return int
+     * @return CommonImageResource
      */
-    public function getHelpfulCount(): int
+    public function getImages(): CommonImageResource
     {
-        return $this->helpfulCount;
+        return $this->images;
     }
 
     /**
@@ -96,11 +79,11 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getVotes(): int
+    public function getType(): string
     {
-        return $this->votes;
+        return $this->type;
     }
 
     /**
@@ -109,6 +92,22 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     public function getReview(): string
     {
         return $this->review;
+    }
+
+    /**
+     * @return AnimeReviewer
+     */
+    public function getReviewer(): AnimeReviewer
+    {
+        return $this->reviewer;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVotes(): int
+    {
+        return $this->votes;
     }
 
     /**

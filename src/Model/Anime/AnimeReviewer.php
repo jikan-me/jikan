@@ -21,7 +21,7 @@ class AnimeReviewer extends Reviewer
     /**
      * @var AnimeReviewScores
      */
-    private  $scores;
+//    private $scores;
 
 
     /**
@@ -36,7 +36,7 @@ class AnimeReviewer extends Reviewer
         $instance->imageUrl = $parser->getImageUrl();
         $instance->username = $parser->getUsername();
         $instance->episodesSeen = $parser->getEpisodesSeen();
-        $instance->scores = $parser->getAnimeScores();
+//        $instance->scores = $parser->getAnimeScores();
 
         return $instance;
     }

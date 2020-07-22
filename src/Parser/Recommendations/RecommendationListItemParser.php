@@ -42,12 +42,12 @@ class RecommendationListItemParser implements ParserInterface
         return Model\Recommendations\RecommendationListItem::fromParser($this);
     }
 
-    public function getAnime(): array
+    public function getRecommendations(): array
     {
         return $this->crawler
             ->filterXPath('//table/tr/td')
             ->each(function (Crawler $crawler) {
-                return new Model\Common\AnimeMeta(
+                return new Model\Common\CommonMeta(
                     $crawler->filterXPath('//a/strong')->text(),
                     $crawler->filterXPath('//a')->attr('href'),
                     $crawler->filterXPath('//div[1]/a/img')->attr('data-src')

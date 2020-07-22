@@ -3,6 +3,7 @@
 namespace Jikan\Model\Recommendations;
 
 use Jikan\Helper\Parser;
+use Jikan\Model\Common\CommonMeta;
 
 /**
  * Class Recommendation
@@ -12,9 +13,9 @@ use Jikan\Helper\Parser;
 class RecommendationListItem
 {
     /**
-     * @var AnimeMeta[]
+     * @var CommonMeta[]
      */
-    private $anime;
+    private $recommendations;
 
     /**
      * @var string
@@ -27,7 +28,7 @@ class RecommendationListItem
     private $date;
 
     /**
-     * @var User
+     * @var Recommender
      */
     private $recommender;
 
@@ -41,7 +42,7 @@ class RecommendationListItem
     {
         $instance = new self();
 
-        $instance->anime = $parser->getAnime();
+        $instance->recommendations = $parser->getRecommendations();
         $instance->content = $parser->getContent();
         $instance->recommender = $parser->getRecommender();
         $instance->date = $parser->getDate();
@@ -49,35 +50,5 @@ class RecommendationListItem
         return $instance;
     }
 
-    /**
-     * @return AnimeMeta[]
-     */
-    public function getAnime(): array
-    {
-        return $this->anime;
-    }
 
-    /**
-     * @return string
-     */
-    public function getContent(): string
-    {
-        return $this->content;
-    }
-
-    /**
-     * @return \DateTimeImmutable|null
-     */
-    public function getDate(): \DateTimeImmutable
-    {
-        return $this->date;
-    }
-
-    /**
-     * @return User
-     */
-    public function getRecommender(): User
-    {
-        return $this->recommender;
-    }
 }

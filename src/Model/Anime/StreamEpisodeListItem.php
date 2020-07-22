@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
 use Jikan\Parser\Anime\StreamEpisodeListItemParser;
 
 /**
@@ -32,9 +33,9 @@ class StreamEpisodeListItem
     public $url;
 
     /**
-     * @var string
+     * @var WrapImageResource
      */
-    public $imageUrl;
+    public $images;
 
     /**
      * @param StreamEpisodeListItemParser $parser
@@ -49,7 +50,7 @@ class StreamEpisodeListItem
         $instance->title = $parser->getTitle();
         $instance->episode = $parser->getEpisode();
         $instance->url = $parser->getUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = WrapImageResource::factory($parser->getImageUrl());
 
         return $instance;
     }
@@ -87,10 +88,10 @@ class StreamEpisodeListItem
     }
 
     /**
-     * @return string
+     * @return WrapImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): WrapImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 }

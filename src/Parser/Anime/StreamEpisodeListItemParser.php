@@ -80,11 +80,17 @@ class StreamEpisodeListItemParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-        return $this->crawler->filterXPath('//a/img')->attr('data-src');
+        $imageUrl = $this->crawler->filterXPath('//a/img')->attr('data-src');
+
+        if ($imageUrl === 'https://cdn.myanimelist.net/images/icon-banned-youtube.png') {
+            return null;
+        }
+
+        return $imageUrl;
     }
 }

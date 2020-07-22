@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
+
 /**
  * Class Reviewer
  *
@@ -16,9 +18,9 @@ abstract class Reviewer
     protected $url;
 
     /**
-     * @var string
+     * @var UserImageResource
      */
-    protected $imageUrl;
+    protected $images;
 
     /**
      * @var string

@@ -3,6 +3,7 @@
 namespace Jikan\Model\Anime;
 
 use Jikan\Model\Common\Reviewer;
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\Common\ReviewerParser;
 
 /**
@@ -33,7 +34,7 @@ class AnimeReviewer extends Reviewer
         $instance = new self();
 
         $instance->url= $parser->getUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->username = $parser->getUsername();
         $instance->episodesSeen = $parser->getEpisodesSeen();
 //        $instance->scores = $parser->getAnimeScores();

@@ -3,6 +3,7 @@
 namespace Jikan\Model\Manga;
 
 use Jikan\Model\Common\Reviewer;
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\Manga\MangaReviewerParser;
 
 /**
@@ -34,7 +35,7 @@ class MangaReviewer extends Reviewer
         $instance = new self();
 
         $instance->url= $parser->getUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->username = $parser->getUsername();
         $instance->chaptersRead = $parser->getChaptersRead();
 //        $instance->scores = $parser->getMangaScores();

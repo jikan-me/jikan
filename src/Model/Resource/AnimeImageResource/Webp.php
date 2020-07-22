@@ -4,7 +4,7 @@ namespace Jikan\Model\Resource\AnimeImageResource;
 
 /**
  * Class Webp
- * @package Jikan\Model\Resource\AnimeImageResource
+ * @package Jikan\Model\Resource\CommonImageResource
  */
 class Webp
 {
@@ -39,8 +39,8 @@ class Webp
             return $instance;
         }
 
-        $instance->smallImageUrl = str_replace('.webp', 't.webp', $imageUrl);
-        $instance->largeImageUrl = str_replace('.webp', 'l.webp', $imageUrl);
+        $instance->smallImageUrl = str_replace('.jpg', 't.webp', $imageUrl);
+        $instance->largeImageUrl = str_replace('.jpg', 'l.webp', $imageUrl);
 
         return $instance;
     }

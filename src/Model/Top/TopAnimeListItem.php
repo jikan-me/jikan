@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Top;
 
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
@@ -32,9 +33,9 @@ class TopAnimeListItem
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -88,7 +89,7 @@ class TopAnimeListItem
         $instance->endDate = $parser->getEndDate();
         $instance->members = $parser->getMembers();
         $instance->score = $parser->getScore();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = CommonImageResource::factory($parser->getImage());
 
         return $instance;
     }
@@ -182,10 +183,10 @@ class TopAnimeListItem
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 }

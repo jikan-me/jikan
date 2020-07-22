@@ -4,7 +4,7 @@ namespace Jikan\Model\Resource\AnimeImageResource;
 
 /**
  * Class Jpg
- * @package Jikan\Model\Resource\AnimeImageResource
+ * @package Jikan\Model\Resource\CommonImageResource
  */
 class Jpg
 {

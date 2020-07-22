@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Watch;
 
-use Jikan\Model\Resource\AnimeImageResource\AnimeImageResource;
+use Jikan\Model\Resource\AnimeImageResource\CommonImageResource;
 use Jikan\Parser\Watch\EpisodeListItemParser;
 
 /**
@@ -55,7 +55,7 @@ class EpisodeListItem
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->name = $parser->getTitle();
-        $instance->images = AnimeImageResource::factory($parser->getImages());
+        $instance->images = CommonImageResource::factory($parser->getImages());
         $instance->episodes = $parser->getEpisodes();
         $instance->regionLocked = $parser->getRegionLocked();
 

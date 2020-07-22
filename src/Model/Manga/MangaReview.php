@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Manga;
 
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Manga\MangaReviewParser;
 
 /**
@@ -17,6 +18,11 @@ class MangaReview extends \Jikan\Model\Reviews\MangaReview
     private $reviewer;
 
     /**
+     * @var CommonImageResource
+     */
+    private $images;
+
+    /**
      * Create an instance from an MangaReviewParser parser
      *
      * @param MangaReviewParser $parser
@@ -30,14 +36,15 @@ class MangaReview extends \Jikan\Model\Reviews\MangaReview
     {
         $instance = new self();
 
+        $instance->images = CommonImageResource::factory($parser->getImageUrl());
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();
-        $instance->helpfulCount= $parser->getHelpfulCount();
+        $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
         $instance->reviewer = $parser->getReviewer();
         $instance->scores = $parser->getMangaScores();
-        $instance->content = $parser->getContent();
+        $instance->review = $parser->getContent();
 
         return $instance;
     }

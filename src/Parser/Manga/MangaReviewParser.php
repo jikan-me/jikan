@@ -174,7 +174,7 @@ class MangaReviewParser implements ParserInterface
     public function getTitle(): string
     {
         return $this->crawler
-            ->filterXPath('//div[1]/div[3]/div/div/a')
+            ->filterXPath('//div[1]/div[1]/div[2]/strong/a')
             ->text();
     }
 
@@ -189,13 +189,15 @@ class MangaReviewParser implements ParserInterface
             ->filterXPath('//div[12]/div[1]/div[1]/a/img');
 
         if ($node->count()) {
-            return $node->attr('data-src');
+            return Parser::parseImageQuality($node->attr('data-src'));
         }
 
-        // Recent Reviews page
+        // Recent Reviews Anime page
         $node = $this->crawler
             ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a/img');
 
-        return $node->attr('data-src');
+        if ($node->count()) {
+            return Parser::parseImageQuality($node->attr('data-src'));
+        }
     }
 }

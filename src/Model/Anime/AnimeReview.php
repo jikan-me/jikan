@@ -13,6 +13,10 @@ use Jikan\Parser\Anime\AnimeReviewParser;
  */
 class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 {
+    /**
+     * @var string
+     */
+    private $title;
 
     /**
      * @var AnimeReviewer
@@ -33,9 +37,10 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     {
         $instance = new self();
 
+        $instance->images = CommonImageResource::factory($parser->getImageUrl());
+        $instance->title = $parser->getTitle();
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
-        $instance->images = CommonImageResource::factory($parser->getImageUrl());
         $instance->type = $parser->getType();
         $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();

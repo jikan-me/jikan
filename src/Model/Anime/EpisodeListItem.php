@@ -20,6 +20,11 @@ class EpisodeListItem
     /**
      * @var string
      */
+    private $url;
+
+    /**
+     * @var string
+     */
     public $title;
 
     /**
@@ -50,11 +55,6 @@ class EpisodeListItem
     /**
      * @var string
      */
-    public $episodeUrl;
-
-    /**
-     * @var string
-     */
     public $forumUrl;
 
 
@@ -73,7 +73,7 @@ class EpisodeListItem
         $instance->aired = $parser->getAired();
         $instance->filler = $parser->getFiller();
         $instance->recap = $parser->getRecap();
-        $instance->episodeUrl = $parser->getVideoUrl();
+        $instance->url = $parser->getVideoUrl();
         $instance->forumUrl = $parser->getForumUrl();
 
         return $instance;
@@ -138,9 +138,9 @@ class EpisodeListItem
     /**
      * @return string
      */
-    public function getEpisodeUrl(): string
+    public function getUrl(): string
     {
-        return $this->episodeUrl;
+        return $this->url;
     }
 
     /**

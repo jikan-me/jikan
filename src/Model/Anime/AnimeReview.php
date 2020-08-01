@@ -3,8 +3,8 @@
 namespace Jikan\Model\Anime;
 
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
-use Jikan\Model\Reviews\AnimeReviewScores;
-use Jikan\Parser\Anime\AnimeReviewParser;
+use Jikan\Model\Reviews\Reviewer;
+use Jikan\Parser\Reviews\AnimeReviewParser;
 
 /**
  * Class AnimeReview
@@ -14,19 +14,9 @@ use Jikan\Parser\Anime\AnimeReviewParser;
 class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 {
     /**
-     * @var string
+     * @var Reviewer
      */
-    private $title;
-
-    /**
-     * @var AnimeReviewer
-     */
-    private $reviewer;
-
-    /**
-     * @var CommonImageResource
-     */
-    private $images;
+    private $user;
 
     /**
      * @param AnimeReviewParser $parser
@@ -37,34 +27,41 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     {
         $instance = new self();
 
-        $instance->images = CommonImageResource::factory($parser->getImageUrl());
-        $instance->title = $parser->getTitle();
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
-        $instance->type = $parser->getType();
+        $instance->type = $parser->getType() ?? 'anime';
         $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->reviewer = $parser->getReviewer();
+        $instance->user = $parser->getReviewer();
         $instance->scores = $parser->getAnimeScores();
         $instance->review = $parser->getContent();
+        $instance->episodesWatched = $parser->getEpisodesWatched();
 
         return $instance;
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return string
      */
-    public function getDate(): \DateTimeImmutable
+    public function getEpisodesWatched(): string
     {
-        return $this->date;
+        return $this->episodesWatched;
     }
 
     /**
-     * @return CommonImageResource
+     * @return AnimeReviewScores
      */
-    public function getImages(): CommonImageResource
+    public function getScores(): AnimeReviewScores
     {
-        return $this->images;
+        return $this->scores;
+    }
+
+    /**
+     * @return Reviewer
+     */
+    public function getUser(): Reviewer
+    {
+        return $this->user;
     }
 
     /**
@@ -92,22 +89,6 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     }
 
     /**
-     * @return string
-     */
-    public function getReview(): string
-    {
-        return $this->review;
-    }
-
-    /**
-     * @return AnimeReviewer
-     */
-    public function getReviewer(): AnimeReviewer
-    {
-        return $this->reviewer;
-    }
-
-    /**
      * @return int
      */
     public function getVotes(): int
@@ -116,10 +97,19 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     }
 
     /**
-     * @return AnimeReviewScores
+     * @return \DateTimeImmutable
      */
-    public function getScores(): AnimeReviewScores
+    public function getDate(): \DateTimeImmutable
     {
-        return $this->scores;
+        return $this->date;
     }
+
+    /**
+     * @return string
+     */
+    public function getReview(): string
+    {
+        return $this->review;
+    }
+
 }

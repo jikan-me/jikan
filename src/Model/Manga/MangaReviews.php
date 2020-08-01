@@ -1,12 +1,12 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Manga;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
-class AnimeReviews extends Results implements Pagination
+class MangaReviews extends Results implements Pagination
 {
 
     /**
@@ -20,11 +20,11 @@ class AnimeReviews extends Results implements Pagination
     private $lastVisiblePage = 1;
 
     /**
-     * @param Parser\Anime\AnimeReviewsParser $parser
+     * @param Parser\Manga\MangaReviewsParser $parser
      *
-     * @return AnimeReviews
+     * @return MangaReviews
      */
-    public static function fromParser(Parser\Anime\AnimeReviewsParser $parser): self
+    public static function fromParser(Parser\Manga\MangaReviewsParser $parser): self
     {
         $instance = new self();
 

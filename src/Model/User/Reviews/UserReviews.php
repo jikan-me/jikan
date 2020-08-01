@@ -1,19 +1,17 @@
 <?php
 
-namespace Jikan\Model\User;
+namespace Jikan\Model\User\Reviews;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
-use Jikan\Model\Reviews\RecentReviews;
-use Jikan\Parser\Reviews\RecentReviewsParser;
-use Jikan\Parser\User\ReviewsParser;
+use Jikan\Parser\User\Reviews\UserReviewsParser;
 
 /**
- * Class ReviewsParser
+ * Class UserReviewsParser
  *
  * @package Jikan\Model
  */
-class Reviews extends Results implements Pagination
+class UserReviews extends Results implements Pagination
 {
 
     /**
@@ -27,10 +25,10 @@ class Reviews extends Results implements Pagination
     private $lastVisiblePage = 1;
 
     /**
-     * @param ReviewsParser $parser
-     * @return Reviews
+     * @param UserReviewsParser $parser
+     * @return UserReviews
      */
-    public static function fromParser(ReviewsParser $parser): Reviews
+    public static function fromParser(UserReviewsParser $parser): UserReviews
     {
         $instance = new self();
         $instance->results = $parser->getReviews();

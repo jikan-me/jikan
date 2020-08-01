@@ -7,7 +7,7 @@ use Jikan\Model\Reviews\Reviewer;
 use Jikan\Parser\Reviews\MangaReviewParser;
 
 /**
- * Class MangaReview
+ * Class UserMangaReview
  *
  * @package Jikan\Model
  */

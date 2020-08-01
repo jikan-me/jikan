@@ -87,13 +87,13 @@ class MangaReviewParser implements ParserInterface
             return $node->text();
         }
 
-        // works on Top ReviewsParser pages, the div is shifted
+        // works on Top UserReviewsParser pages, the div is shifted
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/div/strong/span');
         if ($node->count()) {
             return $node->text();
         }
 
-        // works on User Reviews pages
+        // works on User UserReviews pages
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td/div/strong/span');
         return $node->text();
     }
@@ -195,7 +195,7 @@ class MangaReviewParser implements ParserInterface
      */
     public function getReviewedImageUrl(): string
     {
-        // User Reviews page
+        // User UserReviews page
         $node = $this->crawler
             ->filterXPath('//div[12]/div[1]/div[1]/a/img');
 
@@ -203,7 +203,7 @@ class MangaReviewParser implements ParserInterface
             return Parser::parseImageQuality($node->attr('data-src'));
         }
 
-        // Recent Reviews Anime page
+        // Recent UserReviews Anime page
         $node = $this->crawler
             ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a/img');
 
@@ -218,7 +218,7 @@ class MangaReviewParser implements ParserInterface
      */
     public function getReviewedUrl(): string
     {
-        // User Reviews page
+        // User UserReviews page
         $node = $this->crawler
             ->filterXPath('//div[12]/div[1]/div[1]/a');
 
@@ -226,7 +226,7 @@ class MangaReviewParser implements ParserInterface
             return $node->attr('href');
         }
 
-        // Recent Reviews Anime page
+        // Recent UserReviews Anime page
         $node = $this->crawler
             ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a');
 

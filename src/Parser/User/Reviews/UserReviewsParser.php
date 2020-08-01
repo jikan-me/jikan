@@ -1,18 +1,18 @@
 <?php
 
-namespace Jikan\Parser\User;
+namespace Jikan\Parser\User\Reviews;
 
 use Jikan\Model;
-use Jikan\Parser\Anime\AnimeReviewParser;
-use Jikan\Parser\Manga\MangaReviewParser;
+use Jikan\Parser\Reviews\AnimeReviewParser;
+use Jikan\Parser\Reviews\MangaReviewParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class ReviewsParser
+ * Class UserReviewsParser
  *
  * @package Jikan\Parser
  */
-class ReviewsParser
+class UserReviewsParser
 {
     /**
      * @var Crawler
@@ -29,9 +29,9 @@ class ReviewsParser
         $this->crawler = $crawler;
     }
 
-    public function getModel(): Model\User\Reviews
+    public function getModel(): Model\User\Reviews\UserReviews
     {
-        return Model\User\Reviews::fromParser($this);
+        return Model\User\Reviews\UserReviews::fromParser($this);
     }
 
     public function getReviews() : array
@@ -46,12 +46,12 @@ class ReviewsParser
 
             // Anime Review
             if ($crawler->filterXPath('//div[2]/div[2]/small[1]')->text() === '(Anime)') {
-                return Model\User\Reviews\AnimeReview::fromParser(new AnimeReviewParser($crawler));
+                return Model\User\Reviews\UserAnimeReview::fromParser(new AnimeReviewParser($crawler));
             }
 
             // Manga Review
             if ($crawler->filterXPath('//div[2]/div[2]/small[1]')->text() === '(Manga)') {
-                return Model\User\Reviews\MangaReview::fromParser(new MangaReviewParser($crawler));
+                return Model\User\Reviews\UserMangaReview::fromParser(new MangaReviewParser($crawler));
             }
         });
     }

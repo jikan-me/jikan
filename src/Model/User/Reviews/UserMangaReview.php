@@ -1,27 +1,20 @@
 <?php
 
-namespace Jikan\Model\Reviews;
+namespace Jikan\Model\User\Reviews;
 
+
+use Jikan\Model\Common\MangaMeta;
 use Jikan\Model\Manga\MangaReviewScores;
+use Jikan\Model\Reviews\MangaReview;
+use Jikan\Parser\Reviews\MangaReviewParser;
 
 /**
  * Class UserAnimeReview
  *
  * @package Jikan\Model
  */
-abstract class MangaReview extends Review
+class UserMangaReview extends MangaReview
 {
-
-    /**
-     * @var string
-     */
-    protected $chaptersRead;
-
-    /**
-     * @var MangaReviewScores
-     */
-    protected $scores;
-
     /**
      * @return string
      */
@@ -84,5 +77,40 @@ abstract class MangaReview extends Review
     public function getReview(): string
     {
         return $this->review;
+    }
+
+    /**
+     * @return MangaMeta
+     */
+    public function getManga(): MangaMeta
+    {
+        return $this->manga;
+    }
+
+    /**
+     * @var MangaMeta
+     */
+    private $manga;
+
+    /**
+     * @param MangaReviewParser $parser
+     * @return UserAnimeReview
+     * @throws \Exception
+     */
+    public static function fromParser(MangaReviewParser $parser): UserMangaReview
+    {
+        $instance = new self();
+
+        $instance->manga = $parser->getManga();
+        $instance->malId = $parser->getId();
+        $instance->url = $parser->getUrl();
+        $instance->type = $parser->getType();
+        $instance->votes = $parser->getHelpfulCount();
+        $instance->date = $parser->getDate();
+        $instance->scores = $parser->getMangaScores();
+        $instance->review = $parser->getContent();
+        $instance->chaptersRead = $parser->getChaptersRead();
+
+        return $instance;
     }
 }

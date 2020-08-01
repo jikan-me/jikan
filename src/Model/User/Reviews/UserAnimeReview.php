@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Model\Reviews\Recent;
+namespace Jikan\Model\User\Reviews;
 
 use Jikan\Model\Common\AnimeMeta;
 use Jikan\Model\Reviews\AnimeReview;
@@ -12,24 +12,21 @@ use Jikan\Parser\Reviews\AnimeReviewParser;
  *
  * @package Jikan\Model
  */
-class RecentAnimeReview extends AnimeReview
+class UserAnimeReview extends AnimeReview
 {
+
     /**
      * @var AnimeMeta
      */
     private $anime;
 
-    /**
-     * @var Reviewer
-     */
-    private $user;
 
     /**
      * @param AnimeReviewParser $parser
-     * @return RecentAnimeReview
+     * @return UserAnimeReview
      * @throws \Exception
      */
-    public static function fromParser(AnimeReviewParser $parser): RecentAnimeReview
+    public static function fromParser(AnimeReviewParser $parser): UserAnimeReview
     {
         $instance = new self();
 
@@ -39,12 +36,10 @@ class RecentAnimeReview extends AnimeReview
         $instance->type = $parser->getType();
         $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->user = $parser->getReviewer();
         $instance->scores = $parser->getAnimeScores();
         $instance->review = $parser->getContent();
         $instance->episodesWatched = $parser->getEpisodesWatched();
 
         return $instance;
     }
-
 }

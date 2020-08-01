@@ -4,13 +4,13 @@ namespace Jikan\Model\Recommendations;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
-use Jikan\Model\User\Reviews;
+use Jikan\Model\User\UserReviews;
 use Jikan\Parser;
 
 /**
  * Class RecentRecommendations
  *
- * @package Jikan\Model\ReviewsParser\RecentReviews
+ * @package Jikan\Model\UserReviewsParser\RecentReviews
  */
 class RecentRecommendations extends Results implements Pagination
 {

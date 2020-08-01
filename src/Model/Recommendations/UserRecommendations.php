@@ -9,7 +9,7 @@ use Jikan\Parser;
 /**
  * Class UserRecommendations
  *
- * @package Jikan\Model\ReviewsParser\RecentReviews
+ * @package Jikan\Model\UserReviewsParser\RecentReviews
  */
 class UserRecommendations extends Results implements Pagination
 {

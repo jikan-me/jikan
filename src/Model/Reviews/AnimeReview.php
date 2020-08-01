@@ -5,7 +5,7 @@ namespace Jikan\Model\Reviews;
 use Jikan\Model\Anime\AnimeReviewScores;
 
 /**
- * Class AnimeReview
+ * Class UserAnimeReview
  *
  * @package Jikan\Model
  */

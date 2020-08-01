@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
-use Jikan\Model\Common\Reviewer;
+use Jikan\Model\Reviews\Reviewer
 use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\Common\ReviewerParser;
 
@@ -17,7 +17,7 @@ class AnimeReviewer extends Reviewer
     /**
      * @var int
      */
-    private  $episodesSeen;
+    private $episodesWatched;
 
     /**
      * @var AnimeReviewScores
@@ -36,49 +36,10 @@ class AnimeReviewer extends Reviewer
         $instance->url= $parser->getUrl();
         $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->username = $parser->getUsername();
-        $instance->episodesSeen = $parser->getEpisodesSeen();
+//        $instance->episodesWatched = $parser->getEpisodesSeen();
 //        $instance->scores = $parser->getAnimeScores();
 
         return $instance;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImageUrl()
-    {
-        return $this->imageUrl;
-    }
-
-    /**
-     * @return int
-     */
-    public function getEpisodesSeen(): int
-    {
-        return $this->episodesSeen;
-    }
-
-    /**
-     * @return AnimeReviewScores
-     */
-    public function getScores(): AnimeReviewScores
-    {
-        return $this->scores;
-    }
 }

@@ -1,8 +1,10 @@
 <?php
 
-namespace Jikan\Model\Manga;
+namespace Jikan\Model\Reviews\Recent;
 
-use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Model\Common\MangaMeta;
+use Jikan\Model\Reviews\MangaReview;
+use Jikan\Model\Reviews\Reviewer;
 use Jikan\Parser\Reviews\MangaReviewParser;
 
 /**
@@ -10,50 +12,44 @@ use Jikan\Parser\Reviews\MangaReviewParser;
  *
  * @package Jikan\Model
  */
-class MangaReview extends \Jikan\Model\Reviews\MangaReview
+class RecentMangaReview extends MangaReview
 {
     /**
-     * @var MangaReviewer
+     * @var MangaMeta
      */
-    private $reviewer;
+    private $manga;
 
     /**
-     * @var CommonImageResource
+     * @var Reviewer
      */
-    private $images;
+    private $user;
 
     /**
      * Create an instance from an MangaReviewParser parser
      *
      * @param MangaReviewParser $parser
      *
-     * @return MangaReview
+     * @return RecentMangaReview
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(MangaReviewParser $parser): MangaReview
+    public static function fromParser(MangaReviewParser $parser): RecentMangaReview
     {
         $instance = new self();
 
-        $instance->images = CommonImageResource::factory($parser->getImageUrl());
+        $instance->manga = $parser->getManga();
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();
         $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->reviewer = $parser->getReviewer();
+        $instance->user = $parser->getReviewer();
         $instance->scores = $parser->getMangaScores();
         $instance->review = $parser->getContent();
+        $instance->chaptersRead = $parser->getChaptersRead();
 
         return $instance;
     }
 
-    /**
-     * @return MangaReviewer
-     */
-    public function getReviewer(): MangaReviewer
-    {
-        return $this->reviewer;
-    }
 }

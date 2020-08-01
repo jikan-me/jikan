@@ -924,13 +924,8 @@ class MalClient
         }
     }
 
-    /**
-     * @param  Request\Anime\AnimeReviewsRequest $request
-     * @return array
-     * @throws BadResponseException
-     * @throws ParserException
-     */
-    public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): array
+
+    public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): Model\Anime\AnimeReviews
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

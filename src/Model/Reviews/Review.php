@@ -2,41 +2,46 @@
 
 namespace Jikan\Model\Reviews;
 
+use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Manga\MangaReviewScores;
 
 /**
- * Class AnimeReview
+ * Class Review
  *
  * @package Jikan\Model
  */
-abstract class MangaReview extends Review
+abstract class Review
 {
+
+    /**
+     * @var int
+     */
+    protected $malId;
 
     /**
      * @var string
      */
-    protected $chaptersRead;
+    protected $url;
 
     /**
-     * @var MangaReviewScores
+     * @var string
      */
-    protected $scores;
+    protected $type;
 
     /**
-     * @return string
+     * @var int
      */
-    public function getChaptersRead(): string
-    {
-        return $this->chaptersRead;
-    }
+    protected $votes;
 
     /**
-     * @return MangaReviewScores
+     * @var \DateTimeImmutable
      */
-    public function getScores(): MangaReviewScores
-    {
-        return $this->scores;
-    }
+    protected $date;
+
+    /**
+     * @var string
+     */
+    protected $review;
 
     /**
      * @return int
@@ -85,4 +90,5 @@ abstract class MangaReview extends Review
     {
         return $this->review;
     }
+
 }

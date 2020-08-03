@@ -12,6 +12,11 @@ class MangaStatsScore
     /**
      * @var int
      */
+    private $score;
+
+    /**
+     * @var int
+     */
     private $votes;
 
     /**
@@ -25,14 +30,23 @@ class MangaStatsScore
      * @param  float $percentage
      * @return MangaStatsScore
      */
-    public static function setProperties(int $votes, float $percentage): MangaStatsScore
+    public static function setProperties(int $score, int $votes, float $percentage): MangaStatsScore
     {
         $instance = new self();
 
+        $instance->score = $score;
         $instance->votes = $votes;
         $instance->percentage = $percentage;
 
         return $instance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getScore(): int
+    {
+        return $this->score;
     }
 
     /**

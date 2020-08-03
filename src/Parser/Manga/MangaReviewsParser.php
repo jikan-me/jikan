@@ -2,7 +2,9 @@
 
 namespace Jikan\Parser\Manga;
 
+use Jikan\Model\Manga\MangaReviews;
 use Jikan\Parser\ParserInterface;
+use Jikan\Parser\Reviews\MangaReviewParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -27,12 +29,17 @@ class MangaReviewsParser implements ParserInterface
         $this->crawler = $crawler;
     }
 
+    public function getModel() : MangaReviews
+    {
+        return MangaReviews::fromParser($this);
+    }
+
     /**
      * @return array
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): array
+    public function getResults(): array
     {
         return $this->crawler
             ->filterXPath('//div[@class="borderDark"]')
@@ -41,5 +48,20 @@ class MangaReviewsParser implements ParserInterface
                     return (new MangaReviewParser($c))->getModel();
                 }
             );
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool // @TODO WIP
+    {
+        $node = $this->crawler
+            ->filterXPath('//*[@id="horiznav_nav"]/div/a[contains(text(), "Next")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
     }
 }

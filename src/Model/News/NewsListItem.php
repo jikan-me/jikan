@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\News;
 
+use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
 use Jikan\Parser\News\NewsListItemParser;
 
 /**
@@ -11,6 +12,11 @@ use Jikan\Parser\News\NewsListItemParser;
  */
 class NewsListItem
 {
+    /**
+     * @var int|null
+     */
+    private $malId;
+
     /**
      * @var string
      */
@@ -29,7 +35,7 @@ class NewsListItem
     /**
      * @var string
      */
-    private $authorName;
+    private $authorUsername;
 
     /**
      * @var string
@@ -42,9 +48,9 @@ class NewsListItem
     private $forumUrl;
 
     /**
-     * @var string|null
+     * @var WrapImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var int
@@ -65,17 +71,26 @@ class NewsListItem
     public static function fromParser(NewsListItemParser $parser): self
     {
         $instance = new self();
+        $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
         $instance->date = $parser->getDate();
-        $instance->authorName = $parser->getAuthor()->getName();
+        $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = WrapImageResource::factory($parser->getImage());
         $instance->comments = $parser->getComments();
         $instance->excerpt = $parser->getIntro();
 
         return $instance;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMalId(): ?int
+    {
+        return $this->malId;
     }
 
     /**
@@ -105,9 +120,9 @@ class NewsListItem
     /**
      * @return string
      */
-    public function getAuthorName(): string
+    public function getAuthorUsername(): string
     {
-        return $this->authorName;
+        return $this->authorUsername;
     }
 
     /**
@@ -127,11 +142,11 @@ class NewsListItem
     }
 
     /**
-     * @return string|null
+     * @return WrapImageResource
      */
-    public function getImageUrl(): ?string
+    public function getImages(): WrapImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

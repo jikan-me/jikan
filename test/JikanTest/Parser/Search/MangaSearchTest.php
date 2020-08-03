@@ -14,7 +14,7 @@ class MangaSearchTest extends TestCase
     private $search;
     private $manga;
 
-    public function setUp()
+    public function setUp(): void
     {
         $jikan = new MalClient;
         $this->search = $jikan->getMangaSearch(

@@ -34,7 +34,7 @@ class ForumTopic
     /**
      * @var string
      */
-    private $authorName;
+    private $authorUsername;
 
     /**
      * @var string
@@ -65,7 +65,7 @@ class ForumTopic
         $instance->title = $parser->getTitle();
         $instance->date = $parser->getPostDate();
         $instance->comments = $parser->getReplies();
-        $instance->authorName = $parser->getAuthorName();
+        $instance->authorUsername = $parser->getAuthorName();
         $instance->authorUrl = $parser->getAuthorUrl();
         $instance->lastComment = $parser->getLastPost();
 
@@ -107,9 +107,9 @@ class ForumTopic
     /**
      * @return string
      */
-    public function getAuthorName(): string
+    public function getAuthorUsername(): string
     {
-        return $this->authorName;
+        return $this->authorUsername;
     }
 
     /**

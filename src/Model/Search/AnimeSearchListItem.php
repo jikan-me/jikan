@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Search;
 
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser;
 
 /**
@@ -22,9 +23,9 @@ class AnimeSearchListItem
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -90,7 +91,7 @@ class AnimeSearchListItem
 
         $instance->url = $parser->getUrl();
         $instance->malId = \Jikan\Helper\Parser::idFromUrl($instance->url);
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = CommonImageResource::factory($parser->getImageUrl());
         $instance->title = $parser->getTitle();
         $instance->synopsis = $parser->getSynopsis();
         $instance->type = $parser->getType();
@@ -122,11 +123,11 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

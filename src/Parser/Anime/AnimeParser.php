@@ -595,10 +595,12 @@ class AnimeParser implements ParserInterface
 
         $items = array_filter(
             preg_split(
-                '/\s?#\d+:\s/m',
+                '/\s?#\d+:/m',
                 $node
             )
         );
+
+        $items = array_map('trim', $items);
 
         return array_values($items);
     }
@@ -618,10 +620,12 @@ class AnimeParser implements ParserInterface
 
         $items =  array_filter(
             preg_split(
-                '/\s?#\d+:\s/m',
+                '/\s?#\d+(:|)/m',
                 $node
             )
         );
+
+        $items = array_map('trim', $items);
 
         return array_values($items);
     }

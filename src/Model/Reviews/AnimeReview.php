@@ -2,38 +2,20 @@
 
 namespace Jikan\Model\Reviews;
 
+use Jikan\Model\Anime\AnimeReviewScores;
+
 /**
- * Class AnimeReview
+ * Class UserAnimeReview
  *
  * @package Jikan\Model
  */
-abstract class AnimeReview
+abstract class AnimeReview extends Review
 {
 
     /**
-     * @var int
-     */
-    protected $malId;
-
-    /**
      * @var string
      */
-    protected $url;
-
-    /**
-     * @var string
-     */
-    protected $type;
-
-    /**
-     * @var int
-     */
-    protected $votes;
-
-    /**
-     * @var \DateTimeImmutable
-     */
-    protected $date;
+    protected $episodesWatched;
 
     /**
      * @var AnimeReviewScores
@@ -41,9 +23,20 @@ abstract class AnimeReview
     protected $scores;
 
     /**
-     * @var string
+     * @return string
      */
-    protected $review;
+    public function getEpisodesWatched(): string
+    {
+        return $this->episodesWatched;
+    }
+
+    /**
+     * @return AnimeReviewScores
+     */
+    public function getScores(): AnimeReviewScores
+    {
+        return $this->scores;
+    }
 
     /**
      * @return int
@@ -86,19 +79,10 @@ abstract class AnimeReview
     }
 
     /**
-     * @return AnimeReviewScores
-     */
-    public function getScores(): AnimeReviewScores
-    {
-        return $this->scores;
-    }
-
-    /**
      * @return string
      */
     public function getReview(): string
     {
         return $this->review;
     }
-
 }

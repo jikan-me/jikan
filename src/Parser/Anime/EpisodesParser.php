@@ -54,39 +54,50 @@ class EpisodesParser implements ParserInterface
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getEpisodesLastPage(): int
+    public function getLastPage(): int
     {
-        $episodesLastPage = $this->crawler
-            ->filterXPath('//div[contains(@class, \'pagination\')]');
+        $pages = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div/a[contains(@class, "link")]');
 
-        if (!$episodesLastPage->count()) {
+        if (!$pages->count()) {
             return 1;
         }
 
-        $episodesLastPage = $episodesLastPage->children();
-
-
-        if ($episodesLastPage->getNode(1)->tagName === 'span') {
-            $episodesLastPage = $episodesLastPage
-                ->filterXPath('//a')
-                ->last();
-
-            preg_match('~(\d+) - (\d+)~', $episodesLastPage->text(), $matches);
-
-            return ceil((int)$matches[2] / 100);
-        }
-
-        $episodesLastPage = $this->crawler
-            ->filterXPath('//div[contains(@class, \'pagination\')]/a')
+        $pages = $pages
+            ->nextAll()
             ->last();
 
-        if (!$episodesLastPage->count()) {
+        if (!$pages->count()) {
             return 1;
         }
 
-        preg_match('~(\d+) - (\d+)~', $episodesLastPage->text(), $matches);
+        preg_match('~\?offset=(\d+)$~', $pages->getUri(), $page);
 
-        return ceil((int)$matches[2] / 100);
+        return ((int) $page[1]/100) + 1;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasNextPage(): bool
+    {
+        $pages = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div/a[contains(@class, "link")]');
+
+        if (!$pages->count()) {
+            return false;
+        }
+
+        $pages = $pages
+            ->nextAll()
+            ->last()
+            ->filterXPath('//a[not(contains(@class, "current"))]');
+
+        if (!$pages->count()) {
+            return false;
+    }
+
+return true;
     }
 
     /**

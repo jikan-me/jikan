@@ -33,7 +33,6 @@ class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
      */
     public function getModel(): array
     {
-
         try {
             return $this->crawler
                 ->filterXPath('//table[@class="table-recently-updated"]/tr[1]')

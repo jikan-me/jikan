@@ -18,11 +18,6 @@ class PromoListItem
     public $title;
 
     /**
-     * @var string
-     */
-    public $imageUrl;
-
-    /**
      * @var YoutubeMeta
      */
     public $trailer;
@@ -38,7 +33,6 @@ class PromoListItem
         $instance = new self();
         $instance->title = $parser->getTitle();
         $instance->trailer = YoutubeMeta::factory($parser->getVideoUrl());
-        $instance->imageUrl = $parser->getImageUrl();
 
         return $instance;
     }
@@ -49,14 +43,6 @@ class PromoListItem
     public function getTitle(): string
     {
         return $this->title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
     }
 
     /**

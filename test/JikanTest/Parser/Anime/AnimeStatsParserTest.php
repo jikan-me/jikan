@@ -16,7 +16,7 @@ class AnimeStatsParserTest extends TestCase
      */
     private $animeStatsParser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $request = new \Jikan\Request\Anime\AnimeStatsRequest(37405);
         $client = new \Goutte\Client();

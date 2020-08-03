@@ -14,7 +14,7 @@ class SeasonalParserTest extends TestCase
      */
     private $springParser;
 
-    public function setUp()
+    public function setUp(): void
     {
         $client = new \Goutte\Client();
         $request = new \Jikan\Request\Seasonal\SeasonalRequest(2018, 'spring');

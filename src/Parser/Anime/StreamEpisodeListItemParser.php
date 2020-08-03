@@ -30,6 +30,20 @@ class StreamEpisodeListItemParser implements ParserInterface
     }
 
     /**
+     * @return int|null
+     */
+    public function getMalId() : ?int
+    {
+        preg_match('~([\d]+)$~', $this->getUrl(), $matches);
+
+        if (!empty($matches)) {
+            return $matches[1];
+        }
+
+        return null;
+    }
+
+    /**
      * @return StreamEpisodeListItem
      * @throws \InvalidArgumentException
      */
@@ -66,11 +80,17 @@ class StreamEpisodeListItemParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-        return $this->crawler->filterXPath('//a/img')->attr('data-src');
+        $imageUrl = $this->crawler->filterXPath('//a/img')->attr('data-src');
+
+        if ($imageUrl === 'https://cdn.myanimelist.net/images/icon-banned-youtube.png') {
+            return null;
+        }
+
+        return $imageUrl;
     }
 }

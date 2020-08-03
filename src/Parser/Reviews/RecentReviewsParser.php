@@ -2,11 +2,9 @@
 
 namespace Jikan\Parser\Reviews;
 
-use Jikan\Model\Anime\AnimeReview;
-use Jikan\Model\Manga\MangaReview;
+use Jikan\Model\Reviews\Recent\RecentAnimeReview;
+use Jikan\Model\Reviews\Recent\RecentMangaReview;
 use Jikan\Model\Reviews\RecentReviews;
-use Jikan\Parser\Anime\AnimeReviewParser;
-use Jikan\Parser\Manga\MangaReviewParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -57,12 +55,12 @@ class RecentReviewsParser
 
                     // Anime Review
                     if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Anime)') {
-                        return AnimeReview::fromParser(new AnimeReviewParser($crawler));
+                        return RecentAnimeReview::fromParser(new AnimeReviewParser($crawler));
                     }
 
                     // Manga Review
                     if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Manga)') {
-                        return MangaReview::fromParser(new MangaReviewParser($crawler));
+                        return RecentMangaReview::fromParser(new MangaReviewParser($crawler));
                     }
                 }
             );

@@ -2,7 +2,10 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Helper\MalUrlExtractor;
 use Jikan\Helper\Parser;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Parser\Common\MalUrlParser;
 
 /**
  * Class Recommendation
@@ -23,9 +26,9 @@ class Recommendation
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -54,7 +57,7 @@ class Recommendation
 
         $instance->url = $parser->getUrl();
         $instance->malId = Parser::idFromUrl($instance->url);
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = CommonImageResource::factory($parser->getImageUrl());
         $instance->recommendationUrl = $parser->getRecommendationurl();
         $instance->title = $parser->getTitle();
         $instance->recommendationCount = $parser->getRecommendationCount();
@@ -79,11 +82,11 @@ class Recommendation
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

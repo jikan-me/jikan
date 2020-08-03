@@ -10,6 +10,7 @@ namespace Jikan\Model\Manga;
 
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Manga\MangaParser;
 
 /**
@@ -56,9 +57,9 @@ class Manga
     private $status;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string|null
@@ -162,7 +163,7 @@ class Manga
         $instance->title = $parser->getMangaTitle();
         $instance->url = $parser->getMangaURL();
         $instance->malId = $parser->getMangaId();
-        $instance->imageUrl = $parser->getMangaImageURL();
+        $instance->images = CommonImageResource::factory($parser->getMangaImageURL());
         $instance->synopsis = $parser->getMangaSynopsis();
         $instance->titleEnglish = $parser->getMangaTitleEnglish();
         $instance->titleSynonyms = $parser->getMangaTitleSynonyms();
@@ -245,12 +246,13 @@ class Manga
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
+
 
     /**
      * @return string|null

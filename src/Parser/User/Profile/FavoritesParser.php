@@ -74,7 +74,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list manga\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new FavoriteManga(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -95,7 +94,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list characters\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new FavoriteCharacter(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),

@@ -3,6 +3,7 @@
 namespace Jikan\Model\Recommendations;
 
 use Jikan\Helper\Parser;
+use Jikan\Model\Common\CommonMeta;
 
 /**
  * Class Recommendation
@@ -12,9 +13,14 @@ use Jikan\Helper\Parser;
 class RecommendationListItem
 {
     /**
-     * @var AnimeMeta[]
+     * @var string
      */
-    private $anime;
+    private $malId;
+
+    /**
+     * @var CommonMeta[]
+     */
+    private $recommendations;
 
     /**
      * @var string
@@ -22,12 +28,12 @@ class RecommendationListItem
     private $content;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      */
     private $date;
 
     /**
-     * @var User
+     * @var Recommender
      */
     private $recommender;
 
@@ -41,7 +47,8 @@ class RecommendationListItem
     {
         $instance = new self();
 
-        $instance->anime = $parser->getAnime();
+        $instance->recommendations = $parser->getRecommendations();
+        $instance->malId = $instance->getRecommendations()[0]->getMalId() . '-' . $instance->getRecommendations()[1]->getMalId();
         $instance->content = $parser->getContent();
         $instance->recommender = $parser->getRecommender();
         $instance->date = $parser->getDate();
@@ -50,11 +57,19 @@ class RecommendationListItem
     }
 
     /**
-     * @return AnimeMeta[]
+     * @return string
      */
-    public function getAnime(): array
+    public function getMalId(): string
     {
-        return $this->anime;
+        return $this->malId;
+    }
+
+    /**
+     * @return CommonMeta[]
+     */
+    public function getRecommendations(): array
+    {
+        return $this->recommendations;
     }
 
     /**
@@ -66,18 +81,19 @@ class RecommendationListItem
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }
 
     /**
-     * @return User
+     * @return Recommender
      */
-    public function getRecommender(): User
+    public function getRecommender(): Recommender
     {
         return $this->recommender;
     }
+
 }

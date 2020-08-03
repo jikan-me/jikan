@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
 use Jikan\Parser\Anime\StreamEpisodeListItemParser;
 
 /**
@@ -11,6 +12,11 @@ use Jikan\Parser\Anime\StreamEpisodeListItemParser;
  */
 class StreamEpisodeListItem
 {
+    /**
+     * @var int
+     */
+    public $malId;
+
     /**
      * @var string
      */
@@ -27,9 +33,9 @@ class StreamEpisodeListItem
     public $url;
 
     /**
-     * @var string
+     * @var WrapImageResource
      */
-    public $imageUrl;
+    public $images;
 
     /**
      * @param StreamEpisodeListItemParser $parser
@@ -40,12 +46,21 @@ class StreamEpisodeListItem
     public static function fromParser(StreamEpisodeListItemParser $parser): self
     {
         $instance = new self();
+        $instance->malId = $parser->getMalId();
         $instance->title = $parser->getTitle();
         $instance->episode = $parser->getEpisode();
         $instance->url = $parser->getUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = WrapImageResource::factory($parser->getImageUrl());
 
         return $instance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
     }
 
     /**
@@ -73,10 +88,10 @@ class StreamEpisodeListItem
     }
 
     /**
-     * @return string
+     * @return WrapImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): WrapImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 }

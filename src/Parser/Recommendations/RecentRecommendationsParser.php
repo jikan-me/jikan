@@ -80,16 +80,35 @@ class RecentRecommendationsParser
      */
     public function hasNextPage(): bool
     {
-//        $node = $this->crawler
-//            ->filterXPath('//*[@id="horiznav_nav"]/div/a[contains(text(), "Next")]');
-//
-//        if ($node->count()) {
-//            return true;
-//        }
+        $pages = $this->crawler
+            ->filterXPath('//*[@id="horiznav_nav"]/div/span');
 
-        // TODO: return true until I figure out how to process this
-        // (there's like 760+ pages and a page that does not exist, returns HTTP 404)
-        // Same implementation for Search Results
-        return true;
+        if (!$pages->count()) {
+            return false;
+        }
+
+        if (preg_match('~\[\d+]\s(\d+)~', $pages->text())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getLastPage(): int
+    {
+        $pages = $this->crawler
+            ->filterXPath('//*[@id="horiznav_nav"]/div/span');
+
+        if (!$pages->count()) {
+            return 1;
+        }
+
+        $pages = explode(' ', $pages->text());
+
+        return (int) str_replace(['[', ']'], '', end($pages));
     }
 }

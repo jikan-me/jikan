@@ -2,50 +2,59 @@
 
 namespace Jikan\Model\Recommendations;
 
+use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
+use Jikan\Model\User\UserReviews;
 use Jikan\Parser;
 
 /**
  * Class RecentRecommendations
  *
- * @package Jikan\Model\ReviewsParser\RecentReviews
+ * @package Jikan\Model\UserReviewsParser\RecentReviews
  */
-class RecentRecommendations
+class RecentRecommendations extends Results implements Pagination
 {
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $hasNextPage = false;
 
     /**
-     * @var array
+     * @var int
      */
-    private $recommendations;
+    private $lastVisiblePage = 1;
+
 
     /**
-     * @param Parser\Reviews\RecentReviewsParser $parser
-     *
-     * @return RecentRecommendations
-     * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @param Parser\Recommendations\RecentRecommendationsParser $parser
+     * @return static
      */
     public static function fromParser(Parser\Recommendations\RecentRecommendationsParser $parser): self
     {
         $instance = new self();
 
-        $instance->recommendations = $parser->getRecentRecommendations();
+        $instance->results = $parser->getRecentRecommendations();
+        $instance->lastVisiblePage = $parser->getLastPage();
         $instance->hasNextPage = $parser->hasNextPage();
 
         return $instance;
     }
 
     /**
+     * @return static
+     */
+    public static function mock() : self
+    {
+        return new self();
+    }
+
+    /**
      * @return array
      */
-    public function getRecommendations(): array
+    public function getResults(): array
     {
-        return $this->recommendations;
+        return $this->results;
     }
 
     /**
@@ -54,5 +63,13 @@ class RecentRecommendations
     public function hasNextPage(): bool
     {
         return $this->hasNextPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        return $this->lastVisiblePage;
     }
 }

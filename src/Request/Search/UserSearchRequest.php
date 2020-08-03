@@ -102,47 +102,47 @@ class UserSearchRequest implements RequestInterface
      * @param int $page
      * @return UserSearchRequest
      */
-    public function setPage(int $page): UserSearchRequest
+    public function setPage(?int $page): UserSearchRequest
     {
         $this->page = $page;
         return $this;
     }
 
     /**
-     * @param string $location
+     * @param string|null $location
      * @return UserSearchRequest
      */
-    public function setLocation(string $location): UserSearchRequest
+    public function setLocation(?string $location): UserSearchRequest
     {
         $this->location = $location;
         return $this;
     }
 
     /**
-     * @param int $minAge
+     * @param int|null $minAge
      * @return UserSearchRequest
      */
-    public function setMinAge(int $minAge): UserSearchRequest
+    public function setMinAge(?int $minAge): UserSearchRequest
     {
         $this->minAge = $minAge;
         return $this;
     }
 
     /**
-     * @param int $maxAge
+     * @param int|null $maxAge
      * @return UserSearchRequest
      */
-    public function setMaxAge(int $maxAge): UserSearchRequest
+    public function setMaxAge(?int $maxAge): UserSearchRequest
     {
         $this->maxAge = $maxAge;
         return $this;
     }
 
     /**
-     * @param int $gender
+     * @param int|null $gender
      * @return UserSearchRequest
      */
-    public function setGender(int $gender): UserSearchRequest
+    public function setGender(?int $gender): UserSearchRequest
     {
         $this->gender = $gender;
         return $this;

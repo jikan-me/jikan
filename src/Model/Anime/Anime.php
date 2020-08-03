@@ -5,6 +5,7 @@ namespace Jikan\Model\Anime;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\YoutubeMeta;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Anime\AnimeParser;
 
 /**
@@ -26,9 +27,9 @@ class Anime
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var YoutubeMeta
@@ -196,7 +197,7 @@ class Anime
         $instance->title = $parser->getTitle();
         $instance->url = $parser->getURL();
         $instance->malId = $parser->getId();
-        $instance->imageUrl = $parser->getImageURL();
+        $instance->images = CommonImageResource::factory($parser->getImageURL());
         $instance->synopsis = $parser->getSynopsis();
         $instance->titleEnglish = $parser->getTitleEnglish();
         $instance->titleSynonyms = $parser->getTitleSynonyms();
@@ -278,11 +279,11 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

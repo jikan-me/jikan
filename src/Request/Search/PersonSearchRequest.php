@@ -59,7 +59,6 @@ class PersonSearchRequest implements RequestInterface
      */
     public function getPath(): string
     {
-
         $query = http_build_query(
             [
                 'q'      => $this->query,

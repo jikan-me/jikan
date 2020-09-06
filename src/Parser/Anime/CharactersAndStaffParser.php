@@ -38,7 +38,8 @@ class CharactersAndStaffParser implements ParserInterface
     public function getCharacters(): array
     {
         return $this->crawler
-            ->filterXPath('//h2[text()="Characters & Voice Actors"]/following-sibling::table')
+            ->filterXPath('//h2[text()="Characters & Voice Actors"]')
+            ->parents()->nextAll()
             ->reduce(
                 function (Crawler $crawler) {
                     return (bool)$crawler->filterXPath(
@@ -71,7 +72,8 @@ class CharactersAndStaffParser implements ParserInterface
     public function getStaff(): array
     {
         return $this->crawler
-            ->filterXPath('//h2/div/../following-sibling::table')
+            ->filterXPath('//h2[text()="Staff"]')
+            ->parents()->nextAll()
             ->reduce(
                 function (Crawler $crawler) {
                     return !(bool)$crawler->filterXPath(

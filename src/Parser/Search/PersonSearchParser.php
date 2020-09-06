@@ -54,17 +54,17 @@ class PersonSearchParser
             return [];
         }
 
-        $data = $this->crawler
-            ->filterXPath('//div[@id="content"]/table/tr[1]')
-            ->nextAll()
-            ->each(
-                function (Crawler $c) {
-                    return (new PersonSearchListItemParser($c))->getModel();
-                }
-            );
+        if ($this->crawler->filterXPath('//div[@id="content"]/table/tr[1]/td[@class="borderClass"]/a')->count()) {
+            $data = $this->crawler
+                ->filterXPath('//div[@id="content"]/table/tr')
+                ->each(
+                    function (Crawler $c) {
+                        return (new PersonSearchListItemParser($c))->getModel();
+                    }
+                );
+        }
 
-        // If only a single result is found, the $data array will be empty.
-        if (empty($data)) {
+        if ($this->crawler->filterXPath('//div[@id="contentWrapper"]/div/h1[@class="h1 edit-info"]')->count()) {
             $data = $this->crawler
                 ->each(
                     function (Crawler $c) {

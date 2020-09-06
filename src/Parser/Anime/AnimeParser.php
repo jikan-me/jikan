@@ -587,22 +587,10 @@ class AnimeParser implements ParserInterface
      */
     public function getOpeningThemes(): array
     {
-        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]')->text();
-
-        if (preg_match('~No opening themes have been added to this title.~', $node)) {
-            return [];
-        }
-
-        $items = array_filter(
-            preg_split(
-                '/\s?#\d+:/m',
-                $node
-            )
-        );
-
-        $items = array_map('trim', $items);
-
-        return array_values($items);
+        return $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]/span[@class="theme-song"]')
+            ->each(function (Crawler $crawler) {
+                return $crawler->text();
+            });
     }
 
     /**
@@ -612,22 +600,10 @@ class AnimeParser implements ParserInterface
      */
     public function getEndingThemes(): array
     {
-        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]')->text();
-
-        if (preg_match('~No ending themes have been added to this title~', $node)) {
-            return [];
-        }
-
-        $items =  array_filter(
-            preg_split(
-                '/\s?#\d+(:|)/m',
-                $node
-            )
-        );
-
-        $items = array_map('trim', $items);
-
-        return array_values($items);
+        return $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]/span[@class="theme-song"]')
+            ->each(function (Crawler $crawler) {
+                return $crawler->text();
+            });
     }
 
     /**

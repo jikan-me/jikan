@@ -751,7 +751,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getSeasonList(Request\SeasonList\SeasonListRequest $request): array
+    public function getSeasonList(Request\SeasonList\SeasonListRequest $request): Model\SeasonList\SeasonArchive
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

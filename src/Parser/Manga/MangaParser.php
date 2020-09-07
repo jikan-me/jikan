@@ -128,7 +128,7 @@ class MangaParser implements ParserInterface
         }
 
         $titles = str_replace($title->text(), '', $title->parents()->text());
-        $titles = explode(',', $titles);
+        $titles = explode(', ', $titles);
 
         foreach ($titles as &$title) {
             $title = JString::cleanse($title);

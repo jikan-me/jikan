@@ -23,7 +23,7 @@ class RecentEpisodeListItem
     /**
      * @var string
      */
-    private $title;
+    private $name;
 
     /**
      * @var bool
@@ -45,7 +45,7 @@ class RecentEpisodeListItem
 
         $instance->malId = $malId;
         $instance->url = $url;
-        $instance->title = $title;
+        $instance->name = $title;
         $instance->premium = $premium;
 
         return $instance;

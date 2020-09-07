@@ -34,7 +34,7 @@ class EpisodeListItem
     private $images;
 
     /**
-     * @var NewEpisodeListItem
+     * @var RecentEpisodeListItem
      */
     private $episodes;
 

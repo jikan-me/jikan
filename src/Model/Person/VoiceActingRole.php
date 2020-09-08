@@ -21,12 +21,12 @@ class VoiceActingRole
     /**
      * @var AnimeMeta
      */
-    private $animeMeta;
+    private $anime;
 
     /**
      * @var CharacterMeta
      */
-    private $characterMeta;
+    private $character;
 
     /**
      * @param VoiceActingRoleParser $parser
@@ -39,8 +39,8 @@ class VoiceActingRole
     {
         $instance = new self();
         $instance->role = $parser->getRole();
-        $instance->animeMeta = $parser->getAnimeMeta();
-        $instance->characterMeta = $parser->getCharacterMeta();
+        $instance->anime = $parser->getAnimeMeta();
+        $instance->character = $parser->getCharacterMeta();
 
         return $instance;
     }

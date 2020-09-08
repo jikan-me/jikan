@@ -16,7 +16,7 @@ class Animeography extends Ography
     /**
      * @var AnimeMeta
      */
-    private $animeMeta;
+    private $anime;
 
     /**
      * @param AnimeographyParser $parser
@@ -28,9 +28,25 @@ class Animeography extends Ography
     {
         $instance = new self();
 
-        $instance->animeMeta = $parser->getAnimeMeta();
+        $instance->anime = $parser->getAnimeMeta();
         $instance->role = $parser->getRole();
 
         return $instance;
+    }
+
+    /**
+     * @return AnimeMeta
+     */
+    public function getAnime(): AnimeMeta
+    {
+        return $this->anime;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->role;
     }
 }

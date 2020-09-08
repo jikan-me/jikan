@@ -16,7 +16,7 @@ class Mangaography extends Ography
     /**
      * @var MangaMeta
      */
-    private $mangaMeta;
+    private $manga;
 
     /**
      * @param MangaographyParser $parser
@@ -28,9 +28,25 @@ class Mangaography extends Ography
     {
         $instance = new self();
 
-        $instance->mangaMeta = $parser->getMangaMeta();
+        $instance->manga = $parser->getMangaMeta();
         $instance->role = $parser->getRole();
 
         return $instance;
+    }
+
+    /**
+     * @return MangaMeta
+     */
+    public function getManga(): MangaMeta
+    {
+        return $this->manga;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->role;
     }
 }

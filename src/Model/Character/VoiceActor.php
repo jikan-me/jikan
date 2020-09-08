@@ -16,7 +16,7 @@ class VoiceActor
     /**
      * @var PersonMeta
      */
-    private $personMeta;
+    private $person;
 
     /**
      * @var string
@@ -33,50 +33,18 @@ class VoiceActor
     public static function fromParser(VoiceActorParser $parser): VoiceActor
     {
         $instance = new self();
-        $instance->personMeta = $parser->getPersonMeta();
+        $instance->person = $parser->getPersonMeta();
         $instance->language = $parser->getLanguage();
 
         return $instance;
     }
 
     /**
-     * @return string
+     * @return PersonMeta
      */
-    public function __toString()
+    public function getPerson(): PersonMeta
     {
-        return $this->getName();
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
+        return $this->person;
     }
 
     /**
@@ -86,4 +54,5 @@ class VoiceActor
     {
         return $this->language;
     }
+
 }

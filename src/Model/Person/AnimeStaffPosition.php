@@ -20,7 +20,7 @@ class AnimeStaffPosition
     /**
      * @var AnimeMeta
      */
-    private $animeMeta;
+    private $anime;
 
     /**
      * @param AnimeStaffPositionParser $parser
@@ -33,7 +33,7 @@ class AnimeStaffPosition
     {
         $instance = new self();
         $instance->position = $parser->getPosition();
-        $instance->animeMeta = $parser->getAnimeMeta();
+        $instance->anime = $parser->getAnimeMeta();
 
         return $instance;
     }

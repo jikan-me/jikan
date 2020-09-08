@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Common\MangaMeta;
 use Jikan\Model\Common\Ography;
 use Jikan\Parser\Character\MangaographyParser;
 
@@ -13,6 +14,11 @@ use Jikan\Parser\Character\MangaographyParser;
 class Mangaography extends Ography
 {
     /**
+     * @var MangaMeta
+     */
+    private $mangaMeta;
+
+    /**
      * @param MangaographyParser $parser
      *
      * @return Mangaography
@@ -21,7 +27,9 @@ class Mangaography extends Ography
     public static function fromParser(MangaographyParser $parser): Mangaography
     {
         $instance = new self();
-        parent::setProperties($parser, $instance);
+
+        $instance->mangaMeta = $parser->getMangaMeta();
+        $instance->role = $parser->getRole();
 
         return $instance;
     }

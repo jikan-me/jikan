@@ -111,4 +111,17 @@ class VoiceActorParser implements ParserInterface
                 )
         ))->getModel();
     }
+
+    /**
+     * @return \Jikan\Model\Common\PersonMeta
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonMeta(): Model\Common\PersonMeta
+    {
+        return new Model\Common\PersonMeta(
+            $this->getName(),
+            $this->getUrl(),
+            $this->getImage()
+        );
+    }
 }

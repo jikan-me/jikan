@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Common\PersonMeta;
 use Jikan\Parser\Character\VoiceActorParser;
 
 /**
@@ -11,25 +12,11 @@ use Jikan\Parser\Character\VoiceActorParser;
  */
 class VoiceActor
 {
-    /**
-     * @var int
-     */
-    private $malId;
 
     /**
-     * @var string
+     * @var PersonMeta
      */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $imageUrl;
+    private $personMeta;
 
     /**
      * @var string
@@ -46,12 +33,8 @@ class VoiceActor
     public static function fromParser(VoiceActorParser $parser): VoiceActor
     {
         $instance = new self();
-        $instance->malId = $parser->getMalId();
-        $instance->url = $parser->getUrl();
-        $instance->name = $parser->getName();
-        $instance->imageUrl = $parser->getImage();
+        $instance->personMeta = $parser->getPersonMeta();
         $instance->language = $parser->getLanguage();
-        $instance->url = $parser->getUrl();
 
         return $instance;
     }

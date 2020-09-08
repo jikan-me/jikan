@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Common\AnimeMeta;
 use Jikan\Model\Common\Ography;
 use Jikan\Parser\Character\AnimeographyParser;
 
@@ -13,6 +14,11 @@ use Jikan\Parser\Character\AnimeographyParser;
 class Animeography extends Ography
 {
     /**
+     * @var AnimeMeta
+     */
+    private $animeMeta;
+
+    /**
      * @param AnimeographyParser $parser
      *
      * @return Animeography
@@ -21,7 +27,9 @@ class Animeography extends Ography
     public static function fromParser(AnimeographyParser $parser): Animeography
     {
         $instance = new self();
-        parent::setProperties($parser, $instance);
+
+        $instance->animeMeta = $parser->getAnimeMeta();
+        $instance->role = $parser->getRole();
 
         return $instance;
     }

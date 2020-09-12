@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Manga;
 
+use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser\Character\CharacterListItemParser;
 
 /**
@@ -22,9 +23,9 @@ class CharacterListItem
     private $url;
 
     /**
-     * @var string
+     * @var CharacterImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -49,17 +50,9 @@ class CharacterListItem
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getCharacterUrl();
         $instance->name = $parser->getName();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = CharacterImageResource::factory($parser->getImage());
 
         return $instance;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
     }
 
     /**
@@ -79,19 +72,19 @@ class CharacterListItem
     }
 
     /**
-     * @return string
+     * @return CharacterImageResource
      */
-    public function getName(): string
+    public function getImages(): CharacterImageResource
     {
-        return $this->name;
+        return $this->images;
     }
 
     /**
      * @return string
      */
-    public function getImageUrl(): string
+    public function getName(): string
     {
-        return $this->imageUrl;
+        return $this->name;
     }
 
     /**

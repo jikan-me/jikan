@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Person;
 
-use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
+use Jikan\Model\Resource\PersonImageResource\ClubImageResource;
 use Jikan\Parser\Person\PersonParser;
 
 /**
@@ -23,7 +23,7 @@ class Person
     public $url;
 
     /**
-     * @var PersonImageResource
+     * @var ClubImageResource
      */
     public $images;
 
@@ -95,7 +95,7 @@ class Person
         $instance = new self();
         $instance->malId = $parser->getPersonId();
         $instance->url = $parser->getPersonURL();
-        $instance->images = PersonImageResource::factory($parser->getPersonImageUrl());
+        $instance->images = ClubImageResource::factory($parser->getPersonImageUrl());
         $instance->name = $parser->getPersonName();
         $instance->givenName = $parser->getPersonGivenName();
         $instance->familyName = $parser->getPersonFamilyName();
@@ -128,9 +128,9 @@ class Person
     }
 
     /**
-     * @return PersonImageResource
+     * @return ClubImageResource
      */
-    public function getImages(): PersonImageResource
+    public function getImages(): ClubImageResource
     {
         return $this->images;
     }

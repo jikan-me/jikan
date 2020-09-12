@@ -3,6 +3,7 @@
 namespace Jikan\Model\Club;
 
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Resource\ClubImageResource\ClubImageResource;
 use Jikan\Parser\Club\ClubParser;
 
 /**
@@ -24,9 +25,9 @@ class Club
     private $url;
 
     /**
-     * @var string
+     * @var ClubImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -90,7 +91,7 @@ class Club
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = ClubImageResource::factory($parser->getImageUrl());
         $instance->membersCount = $parser->getMembersCount();
         $instance->picturesCount = $parser->getPicturesCount();
         $instance->category = $parser->getCategory();
@@ -121,11 +122,11 @@ class Club
     }
 
     /**
-     * @return string
+     * @return ClubImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): ClubImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

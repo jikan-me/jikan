@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Model\Resource\PersonImageResource;
+namespace Jikan\Model\Resource\ClubImageResource;
 
 /**
  * Class Jpg

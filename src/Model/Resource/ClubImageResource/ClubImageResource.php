@@ -1,12 +1,12 @@
 <?php
 
-namespace Jikan\Model\Resource\PersonImageResource;
+namespace Jikan\Model\Resource\ClubImageResource;
 
 /**
  * Class PersonImageResource
  * @package Jikan\Model\Resource\PersonImageResource
  */
-class PersonImageResource
+class ClubImageResource
 {
 
     /**
@@ -17,7 +17,7 @@ class PersonImageResource
 
     /**
      * @param string $imageUrl
-     * @return PersonImageResource
+     * @return ClubImageResource
      */
     public static function factory(?string $imageUrl) : self
     {

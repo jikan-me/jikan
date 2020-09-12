@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Person;
 
+use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 use Jikan\Parser\Person\PersonParser;
 
 /**
@@ -22,9 +23,9 @@ class Person
     public $url;
 
     /**
-     * @var string
+     * @var PersonImageResource
      */
-    public $imageUrl;
+    public $images;
 
     /**
      * @var string|null
@@ -94,7 +95,7 @@ class Person
         $instance = new self();
         $instance->malId = $parser->getPersonId();
         $instance->url = $parser->getPersonURL();
-        $instance->imageUrl = $parser->getPersonImageUrl();
+        $instance->images = PersonImageResource::factory($parser->getPersonImageUrl());
         $instance->name = $parser->getPersonName();
         $instance->givenName = $parser->getPersonGivenName();
         $instance->familyName = $parser->getPersonFamilyName();
@@ -127,11 +128,11 @@ class Person
     }
 
     /**
-     * @return string
+     * @return PersonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): PersonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**
@@ -207,14 +208,6 @@ class Person
     }
 
     /**
-     * @param VoiceActingRole[] $voiceActingRoles
-     */
-    public function setVoiceActingRoles(array $voiceActingRoles): void
-    {
-        $this->voiceActingRoles = $voiceActingRoles;
-    }
-
-    /**
      * @return AnimeStaffPosition[]
      */
     public function getAnimeStaffPositions(): array
@@ -223,26 +216,10 @@ class Person
     }
 
     /**
-     * @param AnimeStaffPosition[] $animeStaffPositions
-     */
-    public function setAnimeStaffPositions(array $animeStaffPositions): void
-    {
-        $this->animeStaffPositions = $animeStaffPositions;
-    }
-
-    /**
      * @return PublishedManga[]
      */
     public function getPublishedManga(): array
     {
         return $this->publishedManga;
-    }
-
-    /**
-     * @param PublishedManga[] $publishedManga
-     */
-    public function setPublishedManga(array $publishedManga): void
-    {
-        $this->publishedManga = $publishedManga;
     }
 }

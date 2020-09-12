@@ -3,7 +3,6 @@
 namespace Jikan\Model\Common;
 
 use Jikan\Helper\Parser;
-use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 
 /**

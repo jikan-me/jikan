@@ -1,12 +1,12 @@
 <?php
 
-namespace Jikan\Model\Resource\PersonImageResource;
+namespace Jikan\Model\Resource\CharacterImageResource;
 
 /**
- * Class Jpg
- * @package Jikan\Model\Resource\PersonImageResource
+ * Class Webp
+ * @package Jikan\Model\Resource\CommonImageResource
  */
-class PersonImageResource
+class Webp
 {
 
     /**
@@ -20,12 +20,6 @@ class PersonImageResource
     private $smallImageUrl;
 
     /**
-     * @var string|null
-     */
-    private $largeImageUrl;
-
-
-    /**
      * @param string $imageUrl
      * @return Jpg
      */
@@ -33,14 +27,13 @@ class PersonImageResource
     {
         $instance = new self;
 
-        $instance->imageUrl = $imageUrl;
+        $instance->imageUrl = str_replace('.jpg', '.webp', $imageUrl);
 
         if ($instance->imageUrl === null) {
             return $instance;
         }
 
-        $instance->smallImageUrl = str_replace('.jpg', 'v.jpg', $imageUrl);
-        $instance->largeImageUrl = str_replace('.jpg', 'l.jpg', $imageUrl);
+        $instance->smallImageUrl = str_replace('.jpg', 't.webp', $imageUrl);
 
         return $instance;
     }
@@ -61,11 +54,4 @@ class PersonImageResource
         return $this->smallImageUrl;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLargeImageUrl(): ?string
-    {
-        return $this->largeImageUrl;
-    }
 }

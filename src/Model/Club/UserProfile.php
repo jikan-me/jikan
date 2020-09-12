@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Club;
 
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\Club\UserProfileParser;
 
 /**
@@ -22,9 +23,9 @@ class UserProfile
     private $url;
 
     /**
-     * @var string
+     * @var UserImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @param UserProfileParser $parser
@@ -35,7 +36,7 @@ class UserProfile
     {
         $instance = new self();
         $instance->username = $parser->getUsername();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = UserImageResource::factory($parser->getImage());
         $instance->url = $parser->getUrl();
 
         return $instance;
@@ -58,10 +59,10 @@ class UserProfile
     }
 
     /**
-     * @return string
+     * @return UserImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): UserImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 }

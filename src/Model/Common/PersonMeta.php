@@ -3,7 +3,7 @@
 namespace Jikan\Model\Common;
 
 use Jikan\Helper\Parser;
-use Jikan\Model\Resource\PersonImageResource\ClubImageResource;
+use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 
 /**
  * Class PersonMeta
@@ -23,7 +23,7 @@ class PersonMeta
     private $url;
 
     /**
-     * @var ClubImageResource
+     * @var PersonImageResource
      */
     private $images;
 
@@ -42,7 +42,7 @@ class PersonMeta
     public function __construct(string $name, string $url, string $imageUrl)
     {
         $this->url = $url;
-        $this->images = ClubImageResource::factory(Parser::parseImageQuality($imageUrl));
+        $this->images = PersonImageResource::factory(Parser::parseImageQuality($imageUrl));
         $this->name = $name;
 
         $this->malId = Parser::idFromUrl($this->url);
@@ -65,9 +65,9 @@ class PersonMeta
     }
 
     /**
-     * @return ClubImageResource
+     * @return PersonImageResource
      */
-    public function getImages(): ClubImageResource
+    public function getImages(): PersonImageResource
     {
         return $this->images;
     }

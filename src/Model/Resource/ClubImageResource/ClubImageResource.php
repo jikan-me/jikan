@@ -3,8 +3,8 @@
 namespace Jikan\Model\Resource\ClubImageResource;
 
 /**
- * Class PersonImageResource
- * @package Jikan\Model\Resource\PersonImageResource
+ * Class ClubImageResource
+ * @package Jikan\Model\Resource\ClubImageResource
  */
 class ClubImageResource
 {

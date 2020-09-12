@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\User;
 
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\User\Friends\FriendParser;
 
 /**
@@ -22,10 +23,9 @@ class Friend
     private $username;
 
     /**
-     * @var string
+     * @var UserImageResource
      */
-    private $imageUrl;
-
+    private $images;
 
     /**
      * @var \DateTimeImmutable
@@ -48,7 +48,7 @@ class Friend
         $instance = new self();
         $instance->url = $parser->getUrl();
         $instance->username = $parser->getName();
-        $instance->imageUrl = $parser->getAvatar();
+        $instance->images = UserImageResource::factory($parser->getAvatar());
         $instance->friendsSince = $parser->getFriendsSince();
         $instance->lastOnline = $parser->getLastOnline();
 
@@ -80,11 +80,11 @@ class Friend
     }
 
     /**
-     * @return string
+     * @return UserImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): UserImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

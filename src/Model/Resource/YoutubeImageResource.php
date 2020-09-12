@@ -44,11 +44,11 @@ class YoutubeImageResource
         $instance = new self;
 
         if ($id !== null) {
-            $instance->imageUrl = sprintf('http://img.youtube.com/vi/%s/default.jpg', $id);
-            $instance->smallImageUrl = sprintf('http://img.youtube.com/vi/%s/sddefault.jpg', $id);
-            $instance->mediumImageUrl = sprintf('http://img.youtube.com/vi/%s/mqdefault.jpg', $id);
-            $instance->largeImageUrl = sprintf('http://img.youtube.com/vi/%s/hqdefault.jpg', $id);
-            $instance->maximumImageUrl = sprintf('http://img.youtube.com/vi/%s/maxresdefault.jpg', $id);
+            $instance->imageUrl = sprintf('https://img.youtube.com/vi/%s/default.jpg', $id);
+            $instance->smallImageUrl = sprintf('https://img.youtube.com/vi/%s/sddefault.jpg', $id);
+            $instance->mediumImageUrl = sprintf('https://img.youtube.com/vi/%s/mqdefault.jpg', $id);
+            $instance->largeImageUrl = sprintf('https://img.youtube.com/vi/%s/hqdefault.jpg', $id);
+            $instance->maximumImageUrl = sprintf('https://img.youtube.com/vi/%s/maxresdefault.jpg', $id);
         }
 
         return $instance;

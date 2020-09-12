@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Search;
 
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser;
 
 /**
@@ -22,9 +23,9 @@ class UserSearchListItem
     private $url;
 
     /**
-     * @var string
+     * @var UserImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var \DateTimeImmutable
@@ -45,7 +46,7 @@ class UserSearchListItem
 
         $instance->username = $parser->getUsername();
         $instance->url = $parser->getUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->lastOnline = $parser->getLastOnline();
 
         return $instance;
@@ -58,7 +59,7 @@ class UserSearchListItem
 
         $instance->username = $parser->getUsername();
         $instance->url = $parser->getProfileUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->lastOnline = $parser->getLastOnline();
 
         return $instance;
@@ -81,11 +82,11 @@ class UserSearchListItem
     }
 
     /**
-     * @return string
+     * @return UserImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): UserImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

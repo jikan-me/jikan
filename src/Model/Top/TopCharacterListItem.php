@@ -3,6 +3,7 @@
 namespace Jikan\Model\Top;
 
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
@@ -33,6 +34,11 @@ class TopCharacterListItem
     private $url;
 
     /**
+     * @var CharacterImageResource
+     */
+    private $images;
+
+    /**
      * @var string|null
      */
     private $nameKanji;
@@ -51,11 +57,6 @@ class TopCharacterListItem
      * @var int
      */
     private $favorites;
-
-    /**
-     * @var string
-     */
-    private $imageUrl;
 
     /**
      * Create an instance from an AnimeParser parser
@@ -77,7 +78,7 @@ class TopCharacterListItem
         $instance->animeography = $parser->getAnimeography();
         $instance->mangaography = $parser->getMangaography();
         $instance->favorites = $parser->getFavorites();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = CharacterImageResource::factory($parser->getImage());
 
         return $instance;
     }
@@ -155,10 +156,10 @@ class TopCharacterListItem
     }
 
     /**
-     * @return string
+     * @return CharacterImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CharacterImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 }

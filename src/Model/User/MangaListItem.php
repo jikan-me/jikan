@@ -7,6 +7,7 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MagazineMeta;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 
 /**
  * Class MangaListItem
@@ -31,9 +32,9 @@ class MangaListItem
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -140,7 +141,7 @@ class MangaListItem
 
         $instance->malId = $item->manga_id;
         $instance->title = $item->manga_title;
-        $instance->imageUrl = Parser::parseImageQuality($item->manga_image_path);
+        $instance->images = CommonImageResource::factory($item->manga_image_path);
         $instance->url = Constants::BASE_URL . $item->manga_url;
         $instance->readingStatus = $item->status;
         $instance->score = $item->score;
@@ -200,11 +201,11 @@ class MangaListItem
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**
@@ -280,7 +281,7 @@ class MangaListItem
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getTags(): ?string
     {
@@ -320,7 +321,7 @@ class MangaListItem
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getDays(): ?string
     {
@@ -328,7 +329,7 @@ class MangaListItem
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getRetail(): ?string
     {

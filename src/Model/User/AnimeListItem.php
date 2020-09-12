@@ -8,6 +8,7 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Common\LicensorMeta;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\StudioMeta;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 
 /**
  * Class AnimeListItem
@@ -20,7 +21,6 @@ class AnimeListItem
      * @var int
      */
     private $malId;
-
 
     /**
      * @var string
@@ -38,9 +38,9 @@ class AnimeListItem
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -172,7 +172,7 @@ class AnimeListItem
 
         $instance->malId = $item->anime_id;
         $instance->title = $item->anime_title;
-        $instance->imageUrl = Parser::parseImageQuality($item->anime_image_path);
+        $instance->images = CommonImageResource::factory($item->anime_image_path);
         $instance->url = Constants::BASE_URL . $item->anime_url;
         $instance->videoUrl = Constants::BASE_URL . $item->video_url;
         $instance->watchingStatus = $item->status;
@@ -259,11 +259,19 @@ class AnimeListItem
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAddedToList(): bool
+    {
+        return $this->addedToList;
     }
 
     /**

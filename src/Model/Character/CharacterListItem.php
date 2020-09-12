@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser\Character\CharacterListItemParser;
 
 /**
@@ -22,9 +23,9 @@ class CharacterListItem
     public $url;
 
     /**
-     * @var string
+     * @var CharacterImageResource
      */
-    public $imageUrl;
+    public $images;
 
     /**
      * @var string
@@ -56,17 +57,9 @@ class CharacterListItem
         $instance->url = $parser->getCharacterUrl();
         $instance->name = $parser->getName();
         $instance->role = $parser->getRole();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = CharacterImageResource::factory($parser->getImage());
 
         return $instance;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
     }
 
     /**
@@ -86,6 +79,14 @@ class CharacterListItem
     }
 
     /**
+     * @return CharacterImageResource
+     */
+    public function getImages(): CharacterImageResource
+    {
+        return $this->images;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
@@ -102,18 +103,11 @@ class CharacterListItem
     }
 
     /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
-    }
-
-    /**
      * @return VoiceActor[]
      */
     public function getVoiceActors(): array
     {
         return $this->voiceActors;
     }
+
 }

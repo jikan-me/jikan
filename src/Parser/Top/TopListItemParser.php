@@ -43,15 +43,22 @@ class TopListItemParser
      */
     public function getMalUrl(): MalUrl
     {
-        // For Anime/Manga
-        $node = $this->crawler->filterXPath('//td[contains(@class, "title")]/a');
+        // For Anime
+        $node = $this->crawler->filterXPath('//td[contains(@class, "title")]/div/div/h3/a');
+
+        if ($node->count()) {
+            return (new MalUrlParser($node))->getModel();
+        }
+
+        // For Manga
+        $node = $this->crawler->filterXPath('//td[contains(@class, "title")]/div/h3/a');
 
         if ($node->count()) {
             return (new MalUrlParser($node))->getModel();
         }
 
         // For Characters/People
-        $node = $this->crawler->filterXPath('//td[contains(@class, "people")]/a');
+        $node = $this->crawler->filterXPath('//td[contains(@class, "people")]/div/a');
 
         if ($node->count()) {
             return (new MalUrlParser($node))->getModel();

@@ -65,7 +65,7 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAnimeUrl(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
+        return $this->crawler->filterXPath('//div/div/h2/a')->attr('href');
     }
 
     /**
@@ -206,7 +206,7 @@ class AnimeCardParser implements ParserInterface
      */
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//p[contains(@class,"title-text")]/a')->text();
+        return $this->crawler->filterXPath('//div/div/h2/a')->text();
     }
 
     /**

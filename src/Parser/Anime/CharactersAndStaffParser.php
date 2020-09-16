@@ -71,16 +71,19 @@ class CharactersAndStaffParser implements ParserInterface
      */
     public function getStaff(): array
     {
-        return $this->crawler
+        $node = $this->crawler
             ->filterXPath('//h2[text()="Staff"]')
             ->parents()->nextAll()
             ->reduce(
                 function (Crawler $crawler) {
-                    return !(bool)$crawler->filterXPath(
-                        '//a[contains(@href, "https://myanimelist.net/character")]'
+                    return (bool)$crawler->filterXPath(
+                        '//a[contains(@href, "https://myanimelist.net/people")]'
                     )->count();
                 }
-            )
+            );
+
+
+        return $node
             ->each(
                 function (Crawler $crawler) {
                     return (new StaffListItemParser($crawler))->getModel();

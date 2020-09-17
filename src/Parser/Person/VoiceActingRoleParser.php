@@ -48,13 +48,17 @@ class VoiceActingRoleParser implements ParserInterface
      */
     public function getRole(): ?string
     {
+
         $role = $this->crawler
-            ->filterXPath('//td[3]/div')
-            ->text();
+            ->filterXPath('//h3[contains(@class, "h3_character_name")]');
+
+        if (!$role->count()) {
+            return null;
+        }
 
         return JString::UTF8NbspTrim(
             JString::cleanse(
-                $role
+                $role->siblings()->text()
             )
         );
     }
@@ -65,10 +69,13 @@ class VoiceActingRoleParser implements ParserInterface
      */
     public function getAnimeMeta(): Model\Common\AnimeMeta
     {
+        $imageUrl = $this->crawler->filterXPath('//td[1]/div/a/img');
+        $url = $this->crawler->filterXPath('//td[2]/a');
+
         return new Model\Common\AnimeMeta(
-            $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
-            $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
-            $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')
+            $url->text(),
+            $url->attr('href'),
+            $imageUrl->attr('data-src')
         );
     }
 
@@ -79,10 +86,13 @@ class VoiceActingRoleParser implements ParserInterface
      */
     public function getCharacterMeta(): Model\Common\CharacterMeta
     {
+        $imageUrl = $this->crawler->filterXPath('//td[4]/div/a/img');
+        $url = $this->crawler->filterXPath('//td[3]/h3/a');
+
         return new Model\Common\CharacterMeta(
-            $this->crawler->filterXPath('//td[position() = 3]/a')->text(),
-            $this->crawler->filterXPath('//td[position() = 3]/a')->attr('href'),
-            $this->crawler->filterXPath('//td[position() = 4]/div/a/img')->attr('data-src')
+            $url->text(),
+            $url->attr('href'),
+            $imageUrl->attr('data-src')
         );
     }
 }

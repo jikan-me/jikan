@@ -54,18 +54,8 @@ class PersonSearchParser
             return [];
         }
 
-        if ($this->crawler->filterXPath('//div[@id="content"]/table/tr[1]/td[@class="borderClass"]/a')->count()) {
-            $data = $this->crawler
-                ->filterXPath('//div[@id="content"]/table/tr')
-                ->each(
-                    function (Crawler $c) {
-                        return (new PersonSearchListItemParser($c))->getModel();
-                    }
-                );
-        }
-
-        if ($this->crawler->filterXPath('//div[@id="contentWrapper"]/div/h1[@class="h1 edit-info"]')->count()) {
-            $data = $this->crawler
+        if ($this->crawler->filterXPath('//div[@id="contentWrapper"]/div[1]/div[@class="h1 edit-info"]')->count()) {
+            return $this->crawler
                 ->each(
                     function (Crawler $c) {
                         return PersonSearchListItem::fromPersonParser(new PersonParser($c));
@@ -73,7 +63,15 @@ class PersonSearchParser
                 );
         }
 
-        return $data;
+        if ($this->crawler->filterXPath('//div[@id="content"]/table/tr[1]/td[@class="borderClass"]/a')->count()) {
+            return $this->crawler
+                ->filterXPath('//div[@id="content"]/table/tr')
+                ->each(
+                    function (Crawler $c) {
+                        return (new PersonSearchListItemParser($c))->getModel();
+                    }
+                );
+        }
     }
 
     /**

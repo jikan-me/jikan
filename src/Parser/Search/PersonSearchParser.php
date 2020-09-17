@@ -63,15 +63,14 @@ class PersonSearchParser
                 );
         }
 
-        if ($this->crawler->filterXPath('//div[@id="content"]/table/tr[1]/td[@class="borderClass"]/a')->count()) {
-            return $this->crawler
-                ->filterXPath('//div[@id="content"]/table/tr')
-                ->each(
-                    function (Crawler $c) {
-                        return (new PersonSearchListItemParser($c))->getModel();
-                    }
-                );
-        }
+        return $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr')
+            ->each(
+                function (Crawler $c) {
+                    return (new PersonSearchListItemParser($c))->getModel();
+                }
+            );
+
     }
 
     /**

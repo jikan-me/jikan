@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\Person;
 
-use Jikan\Model\Resource\PersonImageResource\ClubImageResource;
 use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 use Jikan\Parser\Person\PersonParser;
 

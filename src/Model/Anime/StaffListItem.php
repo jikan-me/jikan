@@ -2,11 +2,11 @@
 
 namespace Jikan\Model\Anime;
 
-use Jikan\Model\Resource\PersonImageResource\ClubImageResource;
+use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 use Jikan\Parser\Anime\StaffListItemParser;
 
 /**
- * Class CharacterParser
+ * Class StaffListItem
  *
  * @package Jikan\Model
  */
@@ -28,7 +28,7 @@ class StaffListItem
     public $name;
 
     /**
-     * @var ClubImageResource
+     * @var PersonImageResource
      */
     public $images;
 
@@ -50,7 +50,7 @@ class StaffListItem
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->name = $parser->getName();
-        $instance->images = ClubImageResource::factory($parser->getImage());
+        $instance->images = PersonImageResource::factory($parser->getImage());
 
         return $instance;
     }
@@ -80,9 +80,9 @@ class StaffListItem
     }
 
     /**
-     * @return ClubImageResource
+     * @return PersonImageResource
      */
-    public function getImages(): ClubImageResource
+    public function getImages(): PersonImageResource
     {
         return $this->images;
     }

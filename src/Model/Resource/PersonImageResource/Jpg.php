@@ -4,7 +4,7 @@ namespace Jikan\Model\Resource\PersonImageResource;
 
 /**
  * Class Jpg
- * @package Jikan\Model\Resource\ClubImageResource
+ * @package Jikan\Model\Resource\PersonImageResource
  */
 class Jpg
 {

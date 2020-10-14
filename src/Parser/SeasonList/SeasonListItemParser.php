@@ -65,7 +65,7 @@ class SeasonListItemParser implements ParserInterface
         return array_filter(
             Constants::SEASONS,
             function ($season) use ($seasons) {
-                return preg_match("/$season/", $seasons) !== false;
+                return preg_match("/$season/", $seasons);
             }
         );
     }

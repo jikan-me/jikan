@@ -62,11 +62,13 @@ class SeasonListItemParser implements ParserInterface
     {
         $seasons = $this->crawler->text();
 
-        return array_filter(
+        $seasons = array_filter(
             Constants::SEASONS,
             function ($season) use ($seasons) {
                 return preg_match("/$season/", $seasons);
             }
         );
+
+        return array_map('strtolower', $seasons);
     }
 }

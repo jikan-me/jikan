@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Top;
 
+use Jikan\Exception\ParserException;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
@@ -41,7 +42,28 @@ class TopListItemParser
      */
     public function getMalUrl(): MalUrl
     {
-        return (new MalUrlParser($this->crawler->filterXPath('//a[contains(@class,"fs14 fw-b")][1]')))->getModel();
+        // For Anime
+        $node = $this->crawler->filterXPath('//td[contains(@class, "title")]/div/div/h3/a');
+
+        if ($node->count()) {
+            return (new MalUrlParser($node))->getModel();
+        }
+
+        // For Manga
+        $node = $this->crawler->filterXPath('//td[contains(@class, "title")]/div/h3/a');
+
+        if ($node->count()) {
+            return (new MalUrlParser($node))->getModel();
+        }
+
+        // For Characters/People
+        $node = $this->crawler->filterXPath('//td[contains(@class, "people")]/div/a');
+
+        if ($node->count()) {
+            return (new MalUrlParser($node))->getModel();
+        }
+
+        throw new ParserException('Failed to parse MalUrl');
     }
 
     /**

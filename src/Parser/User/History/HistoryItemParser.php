@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\History;
 
+use Jikan\Exception\ParserException;
 use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
@@ -55,7 +56,7 @@ class HistoryItemParser implements ParserInterface
         preg_match('~/(.\w+).php\?id=(\d+)~', $url, $matches);
 
         if (empty($matches)) {
-            var_dump($url)  ;
+            throw new ParserException('Could not parse MalUrl');
         }
 
         $url = Constants::BASE_URL.'/'.$matches[1].'/'.$matches[2];

@@ -57,16 +57,22 @@ class SeasonalParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSeasonName(): string
+    public function getSeasonName(): ?string
     {
+        $node = $this->crawler->filter('div.navi-seasonal a.on');
+
+        if (!$node->count()) {
+            return null;
+        }
+
         $season = explode(
             ' ',
             JString::cleanse(
-                $this->crawler->filter('div.navi-seasonal a.on')->text()
+                $node->text()
             )
         );
 
@@ -80,6 +86,12 @@ class SeasonalParser implements ParserInterface
      */
     public function getSeasonYear(): ?int
     {
+        $node = $this->crawler->filter('div.navi-seasonal a.on');
+
+        if (!$node->count()) {
+            return null;
+        }
+
         $season = explode(
             ' ',
             JString::cleanse(

@@ -13,12 +13,12 @@ class Seasonal
 {
 
     /**
-     * @var string
+     * @var string|null
      */
     public $seasonName;
 
     /**
-     * @var int
+     * @var int|null
      */
     public $seasonYear;
 
@@ -45,33 +45,25 @@ class Seasonal
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSeason(): string
-    {
-        return $this->seasonName . ' ' . $this->seasonYear;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSeasonYear(): int
-    {
-        return $this->seasonYear;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSeasonName(): string
+    public function getSeasonName(): ?string
     {
         return $this->seasonName;
     }
 
     /**
+     * @return int|null
+     */
+    public function getSeasonYear(): ?int
+    {
+        return $this->seasonYear;
+    }
+
+    /**
      * @return array|SeasonalAnime[]
      */
-    public function getAnime(): array
+    public function getAnime()
     {
         return $this->anime;
     }

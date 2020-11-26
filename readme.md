@@ -36,19 +36,20 @@ A REST API service is available as well
 
 ### Wrappers
 
-- **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
-- **[Python]** [JikanPy](https://github.com/abhinavk99/jikanpy) by Abhinav Kasamsetty
-- **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
-- **[JavaScript]** [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor
-- **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs
-- **[PHP]** [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe
-- **[Node.js]** [jikan-node](https://github.com/xy137/jikan-node) by xy137
-- **[Node.js]** [jikan-nodejs](https://github.com/ribeirogab/jikan-nodejs) by ribeirogab
-- **[Dart]** [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol
-- **[TypeScript]** [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard
-- **[TypeScript]** [jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco
-- **[Go]** [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang
-- **[Elixir]** [JikanEx](https://github.com/seanbreckenridge/jikan_ex) by Sean Breckenridge
+| Language   | Wrappers |
+|------------|----------|
+| JavaScript | [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor |
+| Java       | [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs<br>[reactive-jikan](https://github.com/SandroHc/reactive-jikan) by Sandro Marques |
+| Python     | [JikanPy](https://github.com/abhinavk99/jikanpy) by Abhinav Kasamsetty |
+| Node.js    | [jikan-node](https://github.com/xy137/jikan-node) by xy137<br>[jikan-nodejs](https://github.com/ribeirogab/jikan-nodejs) by ribeirogab |
+| TypeScript | [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard<br>[jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco |
+| PHP        | [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe |
+| .NET       | [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie |
+| Elixir     | [JikanEx](https://github.com/seanbreckenridge/jikan_ex) by Sean Breckenridge |
+| Go         | [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang<br>[jikan2go](https://github.com/nokusukun/jikan2go) by nokusukun |
+| Ruby       | [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi |
+| Dart       | [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol |
+| Kotlin     | [JikanKt](https://github.com/GSculerlor/JikanKt) by Ganedra Afrasya |
 
 [Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 

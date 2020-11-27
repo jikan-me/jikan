@@ -54,6 +54,17 @@ class Constants
     public const RECENT_RECOMMENDATION_ANIME = 'anime';
     public const RECENT_RECOMMENDATION_MANGA = 'manga';
 
+    // v3 status const // remove old ones
+    public const STATUS_ANIME_AIRING = 1;
+    public const STATUS_ANIME_FINISHED = 2;
+    public const STATUS_ANIME_NOT_YET_AIRED = 3;
+    public const STATUS_MANGA_PUBLISHING = 1;
+    public const STATUS_MANGA_FINISHED = 2;
+    public const STATUS_MANGA_NOT_YET_PUBLISHED = 3;
+    public const STATUS_MANGA_ON_HIATUS = 4;
+    public const STATUS_MANGA_DISCONTINUED = 5;
+
+
     public const SEARCH_ANIME_TV = 1;
     public const SEARCH_ANIME_OVA = 2;
     public const SEARCH_ANIME_MOVIE = 3;
@@ -71,7 +82,7 @@ class Constants
     public const SEARCH_ANIME_STATUS_AIRING = 1;
     public const SEARCH_ANIME_STATUS_FINISHED_AIRING = 2;
     public const SEARCH_ANIME_STATUS_COMPLETED = 2; // alias
-    public const SEARCH_ANIME_STATUS_TO_BE_AIRD = 3;
+    public const SEARCH_ANIME_STATUS_TO_BE_AIRED = 3;
     public const SEARCH_ANIME_STATUS_TBA = 3; // alias
 
     public const SEARCH_MANGA_STATUS_PUBLISHING = 1;
@@ -269,8 +280,6 @@ class Constants
     public const USER_MANGA_LIST_CURRENTLY_PUBLISHING = 1;
     public const USER_MANGA_LIST_FINISHED_PUBLISHING = 2;
     public const USER_MANGA_LIST_NOT_YET_PUBLISHED = 3;
-    public const USER_MANGA_LIST_ON_HIATUS = 4;
-    public const USER_MANGA_LIST_DISCONTINUED = 5;
 
     public const USER_LIST_SORT_DESCENDING = 1;
     public const USER_LIST_SORT_ASCENDING = -1;

@@ -141,7 +141,9 @@ class MangaListItem
 
         $instance->malId = $item->manga_id;
         $instance->title = $item->manga_title;
-        $instance->images = CommonImageResource::factory($item->manga_image_path);
+        $instance->images = CommonImageResource::factory(
+            Parser::parseImageQuality($item->manga_image_path)
+        );
         $instance->url = Constants::BASE_URL . $item->manga_url;
         $instance->readingStatus = $item->status;
         $instance->score = $item->score;

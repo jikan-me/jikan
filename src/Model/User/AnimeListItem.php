@@ -172,7 +172,9 @@ class AnimeListItem
 
         $instance->malId = $item->anime_id;
         $instance->title = $item->anime_title;
-        $instance->images = CommonImageResource::factory($item->anime_image_path);
+        $instance->images = CommonImageResource::factory(
+            Parser::parseImageQuality($item->anime_image_path)
+        );
         $instance->url = Constants::BASE_URL . $item->anime_url;
         $instance->videoUrl = Constants::BASE_URL . $item->video_url;
         $instance->watchingStatus = $item->status;

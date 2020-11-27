@@ -790,7 +790,7 @@ class MalClient
     {
         try {
             $response = $this->ghoutte->getClient()->get($request->getPath());
-            $list = json_decode($response->getBody()->getContents());
+            $list = \json_decode($response->getBody()->getContents());
 
             $model = [];
             foreach ($list as $item) {
@@ -815,7 +815,7 @@ class MalClient
     {
         try {
             $response = $this->ghoutte->getClient()->get($request->getPath());
-            $list = json_decode($response->getBody()->getContents());
+            $list = \json_decode($response->getBody()->getContents());
 
             $model = [];
             foreach ($list as $item) {

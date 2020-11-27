@@ -269,6 +269,8 @@ class Constants
     public const USER_MANGA_LIST_CURRENTLY_PUBLISHING = 1;
     public const USER_MANGA_LIST_FINISHED_PUBLISHING = 2;
     public const USER_MANGA_LIST_NOT_YET_PUBLISHED = 3;
+    public const USER_MANGA_LIST_ON_HIATUS = 4;
+    public const USER_MANGA_LIST_DISCONTINUED = 5;
 
     public const USER_LIST_SORT_DESCENDING = 1;
     public const USER_LIST_SORT_ASCENDING = -1;

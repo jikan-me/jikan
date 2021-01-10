@@ -51,7 +51,9 @@ class HistoryItemParser implements ParserInterface
     public function getUrl(): MalUrl
     {
         $url = $this->crawler->filterXPath('//td[1]/a')->attr('href');
-        $name = $this->crawler->filterXPath('//td[1]/a')->text();
+        $name = JString::cleanse(
+            $this->crawler->filterXPath('//td[1]/a')->text()
+        );
 
         preg_match('~/(.\w+).php\?id=(\d+)~', $url, $matches);
 

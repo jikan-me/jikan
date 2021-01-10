@@ -80,10 +80,12 @@ class HistoryItemParser implements ParserInterface
      */
     public function getDate(): \DateTimeImmutable
     {
-        $date = JString::cleanse(
-            Parser::removeChildNodes(
-                $this->crawler->filterXPath('//td[2]')
-            )->text()
+        $date = JString::UTF8NbspTrim(
+            JString::cleanse(
+                Parser::removeChildNodes(
+                    $this->crawler->filterXPath('//td[2]')
+                )->text()
+            )
         );
 
         return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));

@@ -837,7 +837,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request): array
+    public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request): Model\Anime\AnimeUserUpdates
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
@@ -855,7 +855,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getMangaRecentlyUpdatedByUsers(Request\Manga\MangaRecentlyUpdatedByUsersRequest $request): array
+    public function getMangaRecentlyUpdatedByUsers(Request\Manga\MangaRecentlyUpdatedByUsersRequest $request): Model\Manga\MangaUserUpdates
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

@@ -51,7 +51,9 @@ class HistoryItemParser implements ParserInterface
     public function getUrl(): MalUrl
     {
         $url = $this->crawler->filterXPath('//td[1]/a')->attr('href');
-        $name = $this->crawler->filterXPath('//td[1]/a')->text();
+        $name = JString::cleanse(
+            $this->crawler->filterXPath('//td[1]/a')->text()
+        );
 
         preg_match('~/(.\w+).php\?id=(\d+)~', $url, $matches);
 
@@ -80,10 +82,12 @@ class HistoryItemParser implements ParserInterface
      */
     public function getDate(): \DateTimeImmutable
     {
-        $date = JString::cleanse(
-            Parser::removeChildNodes(
-                $this->crawler->filterXPath('//td[2]')
-            )->text()
+        $date = JString::UTF8NbspTrim(
+            JString::cleanse(
+                Parser::removeChildNodes(
+                    $this->crawler->filterXPath('//td[2]')
+                )->text()
+            )
         );
 
         return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));

@@ -82,7 +82,6 @@ class CharactersAndStaffParser implements ParserInterface
                 }
             );
 
-
         return $node
             ->each(
                 function (Crawler $crawler) {

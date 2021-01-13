@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Common\CharacterMeta;
 use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser\Character\CharacterListItemParser;
 
@@ -13,24 +14,9 @@ use Jikan\Parser\Character\CharacterListItemParser;
 class CharacterListItem
 {
     /**
-     * @var int
+     * @var CharacterMeta
      */
-    public $malId;
-
-    /**
-     * @var string
-     */
-    public $url;
-
-    /**
-     * @var CharacterImageResource
-     */
-    public $images;
-
-    /**
-     * @var string
-     */
-    public $name;
+    public $character;
 
     /**
      * @var string
@@ -53,11 +39,8 @@ class CharacterListItem
     {
         $instance = new self();
         $instance->voiceActors = $parser->getVoiceActors();
-        $instance->malId = $parser->getMalId();
-        $instance->url = $parser->getCharacterUrl();
-        $instance->name = $parser->getName();
+        $instance->character = $parser->getCharacterMeta();
         $instance->role = $parser->getRole();
-        $instance->images = CharacterImageResource::factory($parser->getImage());
 
         return $instance;
     }

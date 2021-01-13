@@ -5,6 +5,7 @@ namespace Jikan\Parser\Character;
 use Jikan\Helper\Parser;
 use Jikan\Model\Character\CharacterListItem;
 use Jikan\Model\Character\VoiceActor;
+use Jikan\Model\Common\CharacterMeta;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -100,5 +101,18 @@ class CharacterListItemParser implements ParserInterface
     {
         //echo $this->crawler->filterXPath('//td[2]/div/small')->text();
         return $this->crawler->filterXPath('//td[2]/div/small')->text();
+    }
+
+    /**
+     * @return CharacterMeta
+     * @throws \InvalidArgumentException
+     */
+    public function getCharacterMeta(): CharacterMeta
+    {
+        return new CharacterMeta(
+            $this->getName(),
+            $this->getCharacterUrl(),
+            $this->getImage()
+        );
     }
 }

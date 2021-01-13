@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\User;
 
+use Jikan\Model\Common\CommonMeta;
 use Jikan\Model\Common\ItemMeta;
 
 /**
@@ -9,7 +10,7 @@ use Jikan\Model\Common\ItemMeta;
  *
  * @package Jikan\Model\User
  */
-class FavoriteListEntry extends ItemMeta
+class FavoriteListEntry extends CommonMeta
 {
     /**
      * @var string

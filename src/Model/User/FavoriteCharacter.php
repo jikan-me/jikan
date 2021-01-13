@@ -15,24 +15,9 @@ class FavoriteCharacter extends ItemMeta
 {
 
     /**
-     * @var string
+     * @var FavoriteCharacterRelatedEntry
      */
-    private $titleName;
-
-    /**
-     * @var string
-     */
-    private $titleUrl;
-
-    /**
-     * @var string
-     */
-    private $titleType;
-
-    /**
-     * @var int
-     */
-    private $titleMalId;
+    private $entry;
 
 
     /**
@@ -46,41 +31,7 @@ class FavoriteCharacter extends ItemMeta
     public function __construct(string $name, string $url, string $imageUrl, MalUrl $malUrl)
     {
         parent::__construct($name, $url, $imageUrl);
-        $this->titleName = $malUrl->getTitle();
-        $this->titleUrl = $malUrl->getUrl();
-        $this->titleType = $malUrl->getType();
-        $this->titleMalId = $malUrl->getMalId();
+        $this->entry = new FavoriteCharacterRelatedEntry($malUrl);
     }
 
-    /**
-     * @return string
-     */
-    public function getTitleUrl(): string
-    {
-        return $this->titleUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitleName(): string
-    {
-        return $this->titleName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitleType(): string
-    {
-        return $this->titleType;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTitleMalId(): int
-    {
-        return $this->titleMalId;
-    }
 }

@@ -67,17 +67,17 @@ class Club
     /**
      * @var MalUrl[]
      */
-    private $animeRelations;
+    private $anime;
 
     /**
      * @var MalUrl[]
      */
-    private $mangaRelations;
+    private $manga;
 
     /**
      * @var MalUrl[]
      */
-    private $characterRelations;
+    private $characters;
 
     /**
      * @param  ClubParser $parser
@@ -96,9 +96,9 @@ class Club
         $instance->picturesCount = $parser->getPicturesCount();
         $instance->category = $parser->getCategory();
         $instance->created = $parser->getCreated();
-        $instance->animeRelations = $parser->getAnimeRelations();
-        $instance->mangaRelations = $parser->getMangaRelations();
-        $instance->characterRelations = $parser->getCharacterRelations();
+        $instance->anime = $parser->getAnimeRelations();
+        $instance->manga = $parser->getMangaRelations();
+        $instance->characters = $parser->getCharacterRelations();
         $instance->type = $parser->getType();
         $instance->staff = $parser->getStaff();
 
@@ -188,24 +188,25 @@ class Club
     /**
      * @return MalUrl[]
      */
-    public function getAnimeRelations(): array
+    public function getAnime(): array
     {
-        return $this->animeRelations;
+        return $this->anime;
     }
 
     /**
      * @return MalUrl[]
      */
-    public function getMangaRelations(): array
+    public function getManga(): array
     {
-        return $this->mangaRelations;
+        return $this->manga;
     }
 
     /**
      * @return MalUrl[]
      */
-    public function getCharacterRelations(): array
+    public function getCharacters(): array
     {
-        return $this->characterRelations;
+        return $this->characters;
     }
+
 }

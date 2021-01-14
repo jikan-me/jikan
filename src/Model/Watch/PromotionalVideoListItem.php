@@ -23,7 +23,7 @@ class PromotionalVideoListItem
     /**
      * @var AnimeMeta
      */
-    private $anime;
+    private $entry;
 
     /**
      * @var YoutubeMeta
@@ -39,7 +39,7 @@ class PromotionalVideoListItem
     public static function fromParser(PromotionalVideoListItemParser $parser): self
     {
         $instance = new self();
-        $instance->anime = new AnimeMeta(
+        $instance->entry = new AnimeMeta(
             $parser->getTitle(),
             $parser->getUrl(),
             $parser->getImages()
@@ -61,9 +61,9 @@ class PromotionalVideoListItem
     /**
      * @return AnimeMeta
      */
-    public function getAnime(): AnimeMeta
+    public function getEntry(): AnimeMeta
     {
-        return $this->anime;
+        return $this->entry;
     }
 
     /**
@@ -73,5 +73,6 @@ class PromotionalVideoListItem
     {
         return $this->trailer;
     }
+
 
 }

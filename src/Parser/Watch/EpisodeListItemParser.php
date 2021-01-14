@@ -4,6 +4,7 @@ namespace Jikan\Parser\Watch;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Model\Common\AnimeMeta;
 use Jikan\Model\Watch\EpisodeListItem;
 use Jikan\Model\Watch\RecentEpisodeListItem;
 use Jikan\Parser\ParserInterface;
@@ -125,5 +126,14 @@ class EpisodeListItemParser implements ParserInterface
         $node = $this->crawler->filterXPath('//div[contains(@class, "is_blocked")]');
 
         return $node->count();
+    }
+
+    public function getAnimeMeta() : AnimeMeta
+    {
+        return new AnimeMeta(
+            $this->getTitle(),
+            $this->getUrl(),
+            $this->getImageUrl()
+        );
     }
 }

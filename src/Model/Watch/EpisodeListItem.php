@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Watch;
 
+use Jikan\Model\Common\AnimeMeta;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Watch\EpisodeListItemParser;
 
@@ -14,24 +15,9 @@ class EpisodeListItem
 {
 
     /**
-     * @var int
+     * @var AnimeMeta
      */
-    private $malId;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var CommonImageResource
-     */
-    private $images;
+    private $entry;
 
     /**
      * @var RecentEpisodeListItem
@@ -52,10 +38,7 @@ class EpisodeListItem
     public static function fromParser(EpisodeListItemParser $parser): EpisodeListItem
     {
         $instance = new self();
-        $instance->malId = $parser->getId();
-        $instance->url = $parser->getUrl();
-        $instance->name = $parser->getTitle();
-        $instance->images = CommonImageResource::factory($parser->getImages());
+        $instance->entry = $parser->getAnimeMeta();
         $instance->episodes = $parser->getEpisodes();
         $instance->regionLocked = $parser->getRegionLocked();
 
@@ -63,41 +46,17 @@ class EpisodeListItem
     }
 
     /**
-     * @return int
+     * @return AnimeMeta
      */
-    public function getMalId(): int
+    public function getEntry(): AnimeMeta
     {
-        return $this->malId;
+        return $this->entry;
     }
 
     /**
-     * @return string
+     * @return RecentEpisodeListItem
      */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return AnimeResourceImages
-     */
-    public function getImages(): AnimeResourceImages
-    {
-        return $this->images;
-    }
-
-    /**
-     * @return NewEpisodeListItem
-     */
-    public function getEpisodes(): NewEpisodeListItem
+    public function getEpisodes(): RecentEpisodeListItem
     {
         return $this->episodes;
     }
@@ -109,4 +68,5 @@ class EpisodeListItem
     {
         return $this->regionLocked;
     }
+
 }

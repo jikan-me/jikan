@@ -20,7 +20,7 @@ class RecommendationListItem
     /**
      * @var CommonMeta[]
      */
-    private $recommendations;
+    private $entry;
 
     /**
      * @var string
@@ -47,7 +47,7 @@ class RecommendationListItem
     {
         $instance = new self();
 
-        $instance->recommendations = $parser->getRecommendations();
+        $instance->entry = $parser->getRecommendations();
         $instance->malId = $instance->getRecommendations()[0]->getMalId() . '-' . $instance->getRecommendations()[1]->getMalId();
         $instance->content = $parser->getContent();
         $instance->recommender = $parser->getRecommender();

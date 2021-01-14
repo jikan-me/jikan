@@ -2,21 +2,74 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Helper\Parser;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+
 /**
  * Class UserMeta
  *
  * @package Jikan\Model
  */
-class UserMeta extends User
+class UserMeta
 {
+    /**
+     * @var string
+     */
+    private $username;
 
-    public static function fromMeta($username, $url)
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var CommonImageResource
+     */
+    private $images;
+
+    /**
+     * Genre constructor.
+     *
+     * @param string $username
+     * @param string $url
+     * @param string $imageUrl
+     */
+    public function __construct(string $username, string $url, string $imageUrl)
     {
-        $instance = new self();
+        $this->url = $url;
+        $this->images = CommonImageResource::factory(Parser::parseImageQuality($imageUrl));
+        $this->username = $username;
+    }
 
-        $instance->username = $username;
-        $instance->url = $url;
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->username;
+    }
 
-        return $instance;
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return CommonImageResource
+     */
+    public function getImages(): CommonImageResource
+    {
+        return $this->images;
     }
 }

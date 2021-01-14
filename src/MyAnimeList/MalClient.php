@@ -1150,11 +1150,11 @@ class MalClient
 
     /**
      * @param Request\User\UsernameByIdRequest $request
-     * @return Model\Common\UserMeta
+     * @return Model\Common\UserMetaBasic
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUsernameById(Request\User\UsernameByIdRequest $request) : Model\Common\UserMeta
+    public function getUsernameById(Request\User\UsernameByIdRequest $request) : Model\Common\UserMetaBasic
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {

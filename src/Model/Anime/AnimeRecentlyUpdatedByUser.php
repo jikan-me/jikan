@@ -2,7 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
-use Jikan\Model\Resource\UserImageResource\UserImageResource;
+use Jikan\Model\Common\UserMeta;
 use Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersListParser;
 
 /**
@@ -13,19 +13,9 @@ use Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersListParser;
 class AnimeRecentlyUpdatedByUser
 {
     /**
-     * @var string
+     * @var UserMeta
      */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var UserImageResource
-     */
-    private $images;
+    private $user;
 
     /**
      * @var int|null
@@ -62,9 +52,7 @@ class AnimeRecentlyUpdatedByUser
     {
         $instance = new self();
 
-        $instance->username = $parser->getUsername();
-        $instance->url = $parser->getUrl();
-        $instance->images = UserImageResource::factory($parser->getImageUrl());
+        $instance->user = $parser->getUserMeta();
         $instance->score = $parser->getScore();
         $instance->status = $parser->getStatus();
         $instance->episodesSeen = $parser->getEpisodesSeen();
@@ -75,27 +63,11 @@ class AnimeRecentlyUpdatedByUser
     }
 
     /**
-     * @return string
+     * @return UserMeta
      */
-    public function getUsername(): string
+    public function getUser(): UserMeta
     {
-        return $this->username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return UserImageResource
-     */
-    public function getImages(): UserImageResource
-    {
-        return $this->images;
+        return $this->user;
     }
 
     /**

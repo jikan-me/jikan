@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Manga;
 
+use Jikan\Model\Common\UserMeta;
 use Jikan\Model\Manga\MangaRecentlyUpdatedByUser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -192,5 +193,14 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
     public function getModel(): MangaRecentlyUpdatedByUser
     {
         return MangaRecentlyUpdatedByUser::fromParser($this);
+    }
+
+    public function getUserMeta() : UserMeta
+    {
+        return new UserMeta(
+            $this->getUsername(),
+            $this->getUrl(),
+            $this->getImageUrl()
+        );
     }
 }

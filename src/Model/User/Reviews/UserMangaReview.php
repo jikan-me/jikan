@@ -15,6 +15,34 @@ use Jikan\Parser\Reviews\MangaReviewParser;
  */
 class UserMangaReview extends MangaReview
 {
+
+    /**
+     * @var MangaMeta
+     */
+    private $entry;
+
+    /**
+     * @param MangaReviewParser $parser
+     * @return UserAnimeReview
+     * @throws \Exception
+     */
+    public static function fromParser(MangaReviewParser $parser): UserMangaReview
+    {
+        $instance = new self();
+
+        $instance->entry = $parser->getManga();
+        $instance->malId = $parser->getId();
+        $instance->url = $parser->getUrl();
+        $instance->type = $parser->getType();
+        $instance->votes = $parser->getHelpfulCount();
+        $instance->date = $parser->getDate();
+        $instance->scores = $parser->getMangaScores();
+        $instance->review = $parser->getContent();
+        $instance->chaptersRead = $parser->getChaptersRead();
+
+        return $instance;
+    }
+
     /**
      * @return string
      */
@@ -82,35 +110,9 @@ class UserMangaReview extends MangaReview
     /**
      * @return MangaMeta
      */
-    public function getManga(): MangaMeta
+    public function getEntry(): MangaMeta
     {
-        return $this->manga;
+        return $this->entry;
     }
 
-    /**
-     * @var MangaMeta
-     */
-    private $manga;
-
-    /**
-     * @param MangaReviewParser $parser
-     * @return UserAnimeReview
-     * @throws \Exception
-     */
-    public static function fromParser(MangaReviewParser $parser): UserMangaReview
-    {
-        $instance = new self();
-
-        $instance->manga = $parser->getManga();
-        $instance->malId = $parser->getId();
-        $instance->url = $parser->getUrl();
-        $instance->type = $parser->getType();
-        $instance->votes = $parser->getHelpfulCount();
-        $instance->date = $parser->getDate();
-        $instance->scores = $parser->getMangaScores();
-        $instance->review = $parser->getContent();
-        $instance->chaptersRead = $parser->getChaptersRead();
-
-        return $instance;
-    }
 }

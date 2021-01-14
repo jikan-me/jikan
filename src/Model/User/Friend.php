@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\User;
 
+use Jikan\Model\Common\UserMeta;
 use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\User\Friends\FriendParser;
 
@@ -13,19 +14,9 @@ use Jikan\Parser\User\Friends\FriendParser;
 class Friend
 {
     /**
-     * @var string
+     * @var UserMeta
      */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $username;
-
-    /**
-     * @var UserImageResource
-     */
-    private $images;
+    private $user;
 
     /**
      * @var \DateTimeImmutable
@@ -46,9 +37,7 @@ class Friend
     public static function fromParser(FriendParser $parser): Friend
     {
         $instance = new self();
-        $instance->url = $parser->getUrl();
-        $instance->username = $parser->getName();
-        $instance->images = UserImageResource::factory($parser->getAvatar());
+        $instance->user = $parser->getUserMeta();
         $instance->friendsSince = $parser->getFriendsSince();
         $instance->lastOnline = $parser->getLastOnline();
 
@@ -56,35 +45,11 @@ class Friend
     }
 
     /**
-     * @return string
+     * @return UserMeta
      */
-    public function __toString()
+    public function getUser(): UserMeta
     {
-        return $this->username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    /**
-     * @return UserImageResource
-     */
-    public function getImages(): UserImageResource
-    {
-        return $this->images;
+        return $this->user;
     }
 
     /**
@@ -102,4 +67,5 @@ class Friend
     {
         return $this->friendsSince;
     }
+
 }

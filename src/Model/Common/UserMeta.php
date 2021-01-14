@@ -4,6 +4,7 @@ namespace Jikan\Model\Common;
 
 use Jikan\Helper\Parser;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 
 /**
  * Class UserMeta
@@ -37,7 +38,7 @@ class UserMeta
     public function __construct(string $username, string $url, string $imageUrl)
     {
         $this->url = $url;
-        $this->images = CommonImageResource::factory(Parser::parseImageQuality($imageUrl));
+        $this->images = UserImageResource::factory(Parser::parseImageQuality($imageUrl));
         $this->username = $username;
     }
 
@@ -66,9 +67,9 @@ class UserMeta
     }
 
     /**
-     * @return CommonImageResource
+     * @return UserImageResource
      */
-    public function getImages(): CommonImageResource
+    public function getImages(): UserImageResource
     {
         return $this->images;
     }

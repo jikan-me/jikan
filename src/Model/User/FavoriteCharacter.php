@@ -3,7 +3,7 @@
 
 namespace Jikan\Model\User;
 
-use Jikan\Model\Common\ItemMeta;
+use Jikan\Model\Common\CharacterMeta;
 use Jikan\Model\Common\MalUrl;
 
 /**
@@ -11,7 +11,7 @@ use Jikan\Model\Common\MalUrl;
  *
  * @package Jikan\Model\User
  */
-class FavoriteCharacter extends ItemMeta
+class FavoriteCharacter extends CharacterMeta
 {
 
     /**

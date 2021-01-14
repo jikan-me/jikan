@@ -35,7 +35,7 @@ class RecommendationListItem
     /**
      * @var Recommender
      */
-    private $recommender;
+    private $user;
 
     /**
      * @param \Jikan\Parser\Common\Recommendation $parser
@@ -50,7 +50,7 @@ class RecommendationListItem
         $instance->entry = $parser->getRecommendations();
         $instance->malId = $instance->getRecommendations()[0]->getMalId() . '-' . $instance->getRecommendations()[1]->getMalId();
         $instance->content = $parser->getContent();
-        $instance->recommender = $parser->getRecommender();
+        $instance->user = $parser->getRecommender();
         $instance->date = $parser->getDate();
 
         return $instance;
@@ -67,9 +67,9 @@ class RecommendationListItem
     /**
      * @return CommonMeta[]
      */
-    public function getRecommendations(): array
+    public function getEntry(): array
     {
-        return $this->recommendations;
+        return $this->entry;
     }
 
     /**
@@ -91,9 +91,9 @@ class RecommendationListItem
     /**
      * @return Recommender
      */
-    public function getRecommender(): Recommender
+    public function getUser(): Recommender
     {
-        return $this->recommender;
+        return $this->user;
     }
 
 }

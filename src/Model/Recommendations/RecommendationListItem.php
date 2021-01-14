@@ -48,7 +48,7 @@ class RecommendationListItem
         $instance = new self();
 
         $instance->entry = $parser->getRecommendations();
-        $instance->malId = $instance->getRecommendations()[0]->getMalId() . '-' . $instance->getRecommendations()[1]->getMalId();
+        $instance->malId = $instance->getEntry()[0]->getMalId() . '-' . $instance->getEntry()[1]->getMalId();
         $instance->content = $parser->getContent();
         $instance->user = $parser->getRecommender();
         $instance->date = $parser->getDate();

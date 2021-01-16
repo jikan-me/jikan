@@ -49,5 +49,4 @@ class CharacterImageResource
     {
         return $this->jpg;
     }
-
 }

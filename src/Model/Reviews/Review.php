@@ -90,5 +90,4 @@ abstract class Review
     {
         return $this->review;
     }
-
 }

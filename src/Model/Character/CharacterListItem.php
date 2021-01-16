@@ -92,5 +92,4 @@ class CharacterListItem
     {
         return $this->voiceActors;
     }
-
 }

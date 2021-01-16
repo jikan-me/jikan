@@ -77,5 +77,4 @@ class FavoriteCharacterRelatedEntry
     {
         return $this->url;
     }
-
 }

@@ -111,5 +111,4 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
     {
         return $this->review;
     }
-
 }

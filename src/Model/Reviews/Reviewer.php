@@ -6,7 +6,6 @@ use Jikan\Model\Common\User;
 use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\Reviews\ReviewerParser;
 
-
 /**
  * Class Reviewer
  *

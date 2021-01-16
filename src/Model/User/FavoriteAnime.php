@@ -10,5 +10,4 @@ namespace Jikan\Model\User;
  */
 class FavoriteAnime extends FavoriteListEntry
 {
-
 }

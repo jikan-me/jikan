@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\User\Reviews;
 
-
 use Jikan\Model\Common\MangaMeta;
 use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Model\Reviews\MangaReview;
@@ -114,5 +113,4 @@ class UserMangaReview extends MangaReview
     {
         return $this->entry;
     }
-
 }

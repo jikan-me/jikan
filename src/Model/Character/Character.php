@@ -179,5 +179,4 @@ class Character
     {
         return $this->voiceActors;
     }
-
 }

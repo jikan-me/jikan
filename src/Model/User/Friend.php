@@ -67,5 +67,4 @@ class Friend
     {
         return $this->friendsSince;
     }
-
 }

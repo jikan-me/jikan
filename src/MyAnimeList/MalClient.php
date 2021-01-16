@@ -523,7 +523,6 @@ class MalClient
      */
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
-
         try {
             $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (BadResponseException $e) {

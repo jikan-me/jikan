@@ -132,5 +132,4 @@ class RecentMangaReview extends MangaReview
     {
         return $this->review;
     }
-
 }

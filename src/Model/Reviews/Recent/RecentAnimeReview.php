@@ -127,5 +127,4 @@ class RecentAnimeReview extends AnimeReview
     {
         return $this->review;
     }
-
 }

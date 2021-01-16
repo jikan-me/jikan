@@ -50,7 +50,6 @@ class UserRecommendationsParser
      */
     public function getUserRecommendations(): array
     {
-
         return $this->crawler
             ->filterXPath('//*[@id="content"]/div/div[2]/div/div[2]/div[contains(@class, "spaceit borderClass")]')
             ->each(

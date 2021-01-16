@@ -68,5 +68,4 @@ class EpisodeListItem
     {
         return $this->regionLocked;
     }
-
 }

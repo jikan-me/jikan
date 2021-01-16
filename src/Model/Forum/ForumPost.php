@@ -77,5 +77,4 @@ class ForumPost
     {
         return $this->date;
     }
-
 }

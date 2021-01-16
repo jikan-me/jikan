@@ -95,5 +95,4 @@ class RecommendationListItem
     {
         return $this->user;
     }
-
 }

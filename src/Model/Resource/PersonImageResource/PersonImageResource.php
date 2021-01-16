@@ -35,5 +35,4 @@ class PersonImageResource
     {
         return $this->jpg;
     }
-
 }

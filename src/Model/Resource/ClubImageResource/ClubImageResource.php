@@ -35,5 +35,4 @@ class ClubImageResource
     {
         return $this->jpg;
     }
-
 }

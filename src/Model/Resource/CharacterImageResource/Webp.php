@@ -53,5 +53,4 @@ class Webp
     {
         return $this->smallImageUrl;
     }
-
 }

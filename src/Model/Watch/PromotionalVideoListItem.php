@@ -73,6 +73,4 @@ class PromotionalVideoListItem
     {
         return $this->trailer;
     }
-
-
 }

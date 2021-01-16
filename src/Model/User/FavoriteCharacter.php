@@ -33,5 +33,4 @@ class FavoriteCharacter extends CharacterMeta
         parent::__construct($name, $url, $imageUrl);
         $this->entry = new FavoriteCharacterRelatedEntry($malUrl);
     }
-
 }

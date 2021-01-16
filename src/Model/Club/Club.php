@@ -208,5 +208,4 @@ class Club
     {
         return $this->characters;
     }
-
 }

@@ -53,7 +53,6 @@ class FavoritesParser
         return $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
             ->each(
                 function (Crawler $crawler) {
-
                     return new FavoriteAnime(
                         $crawler->filterXPath('//div[position() = 2]/a')->text(),
                         $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
@@ -101,7 +100,8 @@ class FavoritesParser
                             ->attr('src')),
                         new MalUrl(
                             trim($crawler->filterXPath('//div[position() = 2]/span/a')->text()),
-                        Constants::BASE_URL . $crawler->filterXPath('//div[position() = 2]/span/a')->attr('href'))
+                            Constants::BASE_URL . $crawler->filterXPath('//div[position() = 2]/span/a')->attr('href')
+                        )
                     );
                 }
             );

@@ -107,7 +107,6 @@ class EpisodeListItemParser implements ParserInterface
         );
 
         $episodes = $node->each(function (Crawler $crawler) {
-
             return RecentEpisodeListItem::factory(
                 Parser::suffixIdFromUrl(
                     $crawler->attr('href')

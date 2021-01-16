@@ -54,5 +54,4 @@ class VoiceActor
     {
         return $this->language;
     }
-
 }

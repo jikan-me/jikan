@@ -77,7 +77,6 @@ class UserSearchListItemParser
      */
     public function getLastOnline(): ?\DateTimeImmutable
     {
-
         $lastOnline = JString::UTF8NbspTrim(
             $this->crawler->filterXPath('//div[3]/small')->text()
         );

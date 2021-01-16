@@ -19,16 +19,21 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 :exclamation: Version `~1.0` is no longer maintained, it's required you use `^2.0`.
 
+| Version   | Remarks |
+|------------|----------|
+| Parser v`~1.0` | Discontinued |
+| Parser v`~2.0` | Stable - Maintenance only (use this) |
+| Parser v`~3.0` | Alpha |
+
 ### Dependencies
 
 - [Goutte](https://github.com/FriendsOfPHP/Goutte)
-- PHP 7.1-7.3
+- PHP 7.4
 
-:exclamation: PHP 7.4 is not fully tested yet.
 
 ## Jikan REST API
 
-A REST API service is available as well
+A Free REST API service is available as well which uses this parser
 
 - **[REST API DOCUMENTATION](https://jikan.docs.apiary.io)**
 - **[Apps/Projects using the REST API](https://jikan.moe/showcase)**
@@ -36,19 +41,20 @@ A REST API service is available as well
 
 ### Wrappers
 
-- **[.NET]** [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie
-- **[Python]** [JikanPy](https://github.com/abhinavk99/jikanpy) by Abhinav Kasamsetty
-- **[Ruby]** [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi
-- **[JavaScript]** [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor
-- **[Java]** [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs
-- **[PHP]** [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe
-- **[Node.js]** [jikan-node](https://github.com/xy137/jikan-node) by xy137
-- **[Node.js]** [jikan-nodejs](https://github.com/ribeirogab/jikan-nodejs) by ribeirogab
-- **[Dart]** [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol
-- **[TypeScript]** [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard
-- **[TypeScript]** [jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco
-- **[Go]** [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang
-- **[Elixir]** [JikanEx](https://github.com/seanbreckenridge/jikan_ex) by Sean Breckenridge
+| Language   | Wrappers |
+|------------|----------|
+| JavaScript | [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor |
+| Java       | [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs<br>[reactive-jikan](https://github.com/SandroHc/reactive-jikan) by Sandro Marques |
+| Python     | [JikanPy](https://github.com/abhinavk99/jikanpy) by Abhinav Kasamsetty |
+| Node.js    | [jikan-node](https://github.com/xy137/jikan-node) by xy137<br>[jikan-nodejs](https://github.com/ribeirogab/jikan-nodejs) by ribeirogab |
+| TypeScript | [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard<br>[jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco |
+| PHP        | [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe |
+| .NET       | [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie |
+| Elixir     | [JikanEx](https://github.com/seanbreckenridge/jikan_ex) by Sean Breckenridge |
+| Go         | [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang<br>[jikan2go](https://github.com/nokusukun/jikan2go) by nokusukun |
+| Ruby       | [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi |
+| Dart       | [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol |
+| Kotlin     | [JikanKt](https://github.com/GSculerlor/JikanKt) by Ganedra Afrasya |
 
 [Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 
@@ -128,8 +134,6 @@ A REST API service is available as well
   - Main Information
   - User List
 
-[View RoadMap](https://trello.com/b/Jw1rs467/jikan-api)
-
 ## Running Tests
 
 ### PHPUnit
@@ -160,37 +164,10 @@ Thank you to all our backers! 🙏 [[Become a backer](https://patreon.com/jikan)
 - [Jason Weatherly (jamesthebard)](https://twitter.com/jamesthebard)
 - [Cesar Irad Mendoza (aberuwu)](https://github.com/aberuwu)
 
-# Sponsors
-
-Thank you to all our sponsors! [[Become a sponsor](https://patreon.com/jikan)]
-
-- [Hibiki Matsujo](https://github.com/assintates)
-
----
 
 ## Release Changelog
 
-### 2.16.0 - Jan 27, 20
-
-- Added **Top Reviews**(Anime, Manga & Best Voted (includes both)) parsing [#251](/../../issues/251)
-
-```php
-
-/**
- * Type Constants
- * Anime: \Jikan\Helper\Constants::TOP_REVIEW_ANIME
- * Manga: \Jikan\Helper\Constants::TOP_REVIEW_MANGA
- * Best Voted (Anime + Manga): \Jikan\Helper\Constants::TOP_REVIEW_BEST_VOTED
- */
-$type = \Jikan\Helper\Constants::TOP_REVIEW_ANIME;
-$page = 1;
-
-$topReviews = $jikan->getTopReviews(
-    new \Jikan\Request\Top\TopReviewsRequest($type, $page)
-);
-```
-
-- Bug fixes [#249](/../../issues/249), [#250](/../../issues/250), [#259](/../../issues/259)
+### 3.0.0 - TBA
 
 [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 

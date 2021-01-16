@@ -46,7 +46,7 @@ class UserProfileParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/userimages/3600201.jpg',
+            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1610489400',
             $this->parser->getImageUrl()
         );
     }
@@ -93,7 +93,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_location()
     {
-        self::assertEquals('101', $this->parser->getLocation());
+        self::assertEquals('The wired', $this->parser->getLocation());
     }
 
     /**

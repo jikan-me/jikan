@@ -31,7 +31,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_id(): void
     {
-        self::assertEquals(57389, $this->parser->getTopicId());
+        self::assertEquals(1881620, $this->parser->getTopicId());
     }
 
     /**
@@ -40,7 +40,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_url(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=57389', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=1881620', $this->parser->getUrl());
     }
 
     /**
@@ -49,7 +49,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_title(): void
     {
-        self::assertEquals('One Piece Episode 381 Discussion', $this->parser->getTitle());
+        self::assertEquals('One Piece Episode 954 Discussion', $this->parser->getTitle());
     }
 
     /**
@@ -58,7 +58,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_date(): void
     {
-        self::assertEquals('2008-12-14', $this->parser->getPostDate()->format('Y-m-d'));
+        self::assertEquals('2020-12-12', $this->parser->getPostDate()->format('Y-m-d'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_author_name(): void
     {
-        self::assertEquals('VK11', $this->parser->getAuthorName());
+        self::assertEquals('xeonite', $this->parser->getAuthorName());
     }
 
     /**
@@ -76,7 +76,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_author_url(): void
     {
-        self::assertEquals('https://myanimelist.net/profile/VK11', $this->parser->getAuthorUrl());
+        self::assertEquals('https://myanimelist.net/profile/xeonite', $this->parser->getAuthorUrl());
     }
 
     /**
@@ -85,7 +85,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_replies(): void
     {
-        self::assertEquals(69, $this->parser->getReplies());
+        self::assertEquals(39, $this->parser->getReplies());
     }
 
     /**

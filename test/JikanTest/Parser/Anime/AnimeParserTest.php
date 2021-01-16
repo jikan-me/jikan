@@ -92,7 +92,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_image_url(): void
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/anime/6/73245.jpg',
+            'https://cdn.myanimelist.net/images/anime/6/73245.jpg',
             $this->parser->getImageURL()
         );
     }
@@ -284,7 +284,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_score(): void
     {
         self::assertEquals(
-            8.54,
+            8.51,
             $this->parser->getScore()
         );
     }
@@ -296,7 +296,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_scored_by(): void
     {
         self::assertEquals(
-            428921,
+            705505,
             $this->parser->getScoredBy()
         );
     }
@@ -308,7 +308,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_rank(): void
     {
         self::assertEquals(
-            89,
+            100,
             $this->parser->getRank()
         );
     }
@@ -320,7 +320,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_popularity(): void
     {
         self::assertEquals(
-            37,
+            31,
             $this->parser->getPopularity()
         );
     }
@@ -332,7 +332,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_members(): void
     {
         self::assertEquals(
-            730240,
+            1270781,
             $this->parser->getMembers()
         );
     }
@@ -344,7 +344,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_favorites(): void
     {
         self::assertEquals(
-            70500,
+            117688,
             $this->parser->getFavorites()
         );
     }
@@ -366,10 +366,7 @@ class AnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_background(): void
     {
-        self::assertEquals(
-            'Several anime-original arcs have been adapted into light novels, and the series has inspired 40 video games as of 2016.',
-            $this->parser->getBackground()
-        );
+        self::assertNull($this->parser->getBackground());
     }
 
     /**
@@ -379,7 +376,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_opening(): void
     {
         $ops = $this->parser->getOpeningThemes();
-        self::assertCount(19, $ops);
+        self::assertCount(23, $ops);
         self::assertContains('"We Are! (ウィーアー!)" by Hiroshi Kitadani (eps 1-47)', $ops);
         self::assertContains('"We Are (ウィーアー! 〜10周年Ver.〜)" by TVXQ (eps 373-394)', $ops);
     }
@@ -391,7 +388,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_ending(): void
     {
         $eds = $this->parser->getEndingThemes();
-        self::assertCount(21, $eds);
+        self::assertCount(22, $eds);
         self::assertContains('"memories" by Maki Otsuki (eps 1-30)', $eds);
         self::assertContains('"We go! (ウィーゴー!)" by Hiroshi Kitadani (eps 542, 590)', $eds);
     }
@@ -403,6 +400,6 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_preview_video()
     {
         $preview = $this->parser->getPreview();
-        self::assertEquals('https://www.youtube.com/embed/um-tFlVamOI?enablejsapi=1&wmode=opaque&autoplay=1', $preview);
+        self::assertEquals('https://www.youtube.com/embed/l_98K4_6UQ0?enablejsapi=1&wmode=opaque&autoplay=1', $preview);
     }
 }

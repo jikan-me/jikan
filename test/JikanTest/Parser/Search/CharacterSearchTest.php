@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
+use Jikan\Model\Common\MalUrl;
 use PHPUnit\Framework\TestCase;
 use Jikan\MyAnimeList\MalClient;
 
@@ -67,8 +68,8 @@ class CharacterSearchTest extends TestCase
     public function it_gets_the_anime()
     {
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $this->anime->getAnime());
-        self::assertEquals("Mahou Shoujo Lyrical Nanoha: The Movie 1st", $this->anime->getAnime()[0]->getName());
-        self::assertEquals("https://myanimelist.net/anime/4985/Mahou_Shoujo_Lyrical_Nanoha__The_Movie_1st", $this->anime->getAnime()[0]->getUrl());
+        self::assertEquals("Mahou Shoujo Lyrical Nanoha ViVid", $this->anime->getAnime()[0]->getName());
+        self::assertEquals("https://myanimelist.net/anime/25939/Mahou_Shoujo_Lyrical_Nanoha_ViVid", $this->anime->getAnime()[0]->getUrl());
     }
 
     /**
@@ -77,6 +78,6 @@ class CharacterSearchTest extends TestCase
      */
     public function it_gets_the_manga()
     {
-        self::assertEquals([], $this->anime->getManga());
+        self::assertContainsOnlyInstancesOf(MalUrl::class, $this->anime->getManga());
     }
 }

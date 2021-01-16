@@ -33,8 +33,8 @@ class TopAnimeParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Koe no Katachi', $url);
-        self::assertEquals('https://myanimelist.net/anime/28851/Koe_no_Katachi', $url->getUrl());
+        self::assertEquals('Gintama: The Final', $url);
+        self::assertEquals('https://myanimelist.net/anime/39486/Gintama__The_Final', $url->getUrl());
     }
 
     /**
@@ -53,7 +53,7 @@ class TopAnimeParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/anime/3/80136.jpg?s=a3b3a8039e99287c719995e564e3d084',
+            'https://cdn.myanimelist.net/images/anime/1027/109706.jpg?s=29712c4254f5acc66580a2107fe6643d',
             $this->parser->getImage()
         );
     }
@@ -64,7 +64,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_score()
     {
-        self::assertEquals(9.04, $this->parser->getScore());
+        self::assertEquals(9.0, $this->parser->getScore());
     }
 
     /**
@@ -91,7 +91,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_members()
     {
-        self::assertEquals(533061, $this->parser->getMembers());
+        self::assertEquals(22172, $this->parser->getMembers());
     }
 
     /**
@@ -100,7 +100,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_start_date()
     {
-        self::assertEquals('Sep 2016', $this->parser->getStartDate());
+        self::assertEquals('Jan 2021', $this->parser->getStartDate());
     }
 
     /**
@@ -109,6 +109,6 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_end_date()
     {
-        self::assertEquals('Sep 2016', $this->parser->getEndDate());
+        self::assertEquals('Jan 2021', $this->parser->getEndDate());
     }
 }

@@ -47,7 +47,7 @@ class MangaRecommendationParserTest extends TestCase
     public function it_gets_url(): void
     {
         self::assertEquals(
-            "https://myanimelist.net/manga/21/Death_Note",
+            "hhttps://myanimelist.net/recommendations/manga/1-3",
             $this->parser[0]->getUrl()
         );
     }
@@ -99,7 +99,7 @@ class MangaRecommendationParserTest extends TestCase
     public function it_gets_recommendation_count(): void
     {
         self::assertEquals(
-            10,
+            41,
             $this->parser[0]->getRecommendationCount()
         );
     }

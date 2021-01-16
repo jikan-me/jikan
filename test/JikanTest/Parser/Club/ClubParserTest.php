@@ -80,7 +80,7 @@ class ClubParserTest extends TestCase
     public function it_gets_members_count(): void
     {
         self::assertEquals(
-            1297,
+            1347,
             $this->parser->getMembersCount()
         );
     }
@@ -134,16 +134,6 @@ class ClubParserTest extends TestCase
         self::assertContainsOnlyInstancesOf(
             MalUrl::class,
             $this->parser->getStaff()
-        );
-
-        self::assertEquals(
-            'daya',
-            $this->parser->getStaff()[0]->getName()
-        );
-
-        self::assertEquals(
-            'https://myanimelist.net/profile/daya',
-            $this->parser->getStaff()[0]->getUrl()
         );
     }
 

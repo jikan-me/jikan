@@ -31,7 +31,7 @@ class JikanTest extends TestCase
 
     public function setUp(): void
     {
-        $this->jikan = new MalClient;
+        $this->jikan = new MalClient();
     }
 
     /**
@@ -62,9 +62,9 @@ class JikanTest extends TestCase
     {
         $character = $this->jikan->getCharacter(new \Jikan\Request\Character\CharacterRequest(116281));
         self::assertInstanceOf(\Jikan\Model\Character\Character::class, $character);
-        self::assertCount(9, $character->getAnimeography());
+        self::assertCount(11, $character->getAnimeography());
         self::assertCount(2, $character->getMangaography());
-        self::assertCount(4, $character->getVoiceActors());
+        self::assertCount(5, $character->getVoiceActors());
     }
 
     /**
@@ -224,7 +224,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_manga_news()
     {
-        $items = $this->jikan->getNewsList(new MangaNewsRequest(2));
+        $items = $this->jikan->getNewsList(new MangaNewsRequest(2))->getResults();
         self::assertCount(14, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
@@ -235,7 +235,7 @@ class JikanTest extends TestCase
      */
     public function it_gets_anime_news()
     {
-        $items = $this->jikan->getNewsList(new AnimeNewsRequest(21));
+        $items = $this->jikan->getNewsList(new AnimeNewsRequest(21))->getResults();
         self::assertCount(30, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
@@ -249,7 +249,7 @@ class JikanTest extends TestCase
         $search = $this->jikan->getAnimeSearch(new \Jikan\Request\Search\AnimeSearchRequest('Fate'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\AnimeSearchListItem::class, $search->getResults());
-        self::assertEquals(17, $search->getLastPage());
+        self::assertEquals(17, $search->getLastVisiblePage());
     }
 
     /**
@@ -261,7 +261,7 @@ class JikanTest extends TestCase
         $search = $this->jikan->getMangaSearch(new \Jikan\Request\Search\MangaSearchRequest('Fate'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\MangaSearchListItem::class, $search->getResults());
-        self::assertEquals(20, $search->getLastPage());
+        self::assertEquals(20, $search->getLastVisiblePage());
     }
 
     /**
@@ -273,7 +273,7 @@ class JikanTest extends TestCase
         $search = $this->jikan->getCharacterSearch(new \Jikan\Request\Search\CharacterSearchRequest('Fate'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\CharacterSearchListItem::class, $search->getResults());
-        self::assertEquals(11, $search->getLastPage());
+        self::assertEquals(11, $search->getLastVisiblePage());
     }
 
     /**
@@ -285,7 +285,7 @@ class JikanTest extends TestCase
         $search = $this->jikan->getPersonSearch(new \Jikan\Request\Search\PersonSearchRequest('Ara'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\PersonSearchListItem::class, $search->getResults());
-        self::assertEquals(20, $search->getLastPage());
+        self::assertEquals(20, $search->getLastVisiblePage());
     }
 
     /**

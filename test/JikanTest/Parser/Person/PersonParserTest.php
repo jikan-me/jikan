@@ -83,7 +83,7 @@ class PersonParserTest extends TestCase
      */
     public function it_gets_the_member_favorites()
     {
-        self::assertEquals(26537, $this->parser->getPersonFavorites());
+        self::assertEquals(38369, $this->parser->getPersonFavorites());
     }
 
     /**
@@ -93,7 +93,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/voiceactors/1/41394.jpg',
+            'https://cdn.myanimelist.net/images/voiceactors/1/54600.jpg',
             $this->parser->getPersonImageUrl()
         );
     }
@@ -105,7 +105,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_voice_acting_roles()
     {
         $voiceActingRoles = $this->parser->getPersonVoiceActingRoles();
-        self::assertCount(439, $voiceActingRoles);
+        self::assertCount(488, $voiceActingRoles);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\VoiceActingRole::class, $voiceActingRoles);
     }
 
@@ -116,7 +116,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_anime_staff_positions()
     {
         $animeStaffPositions = $this->parser->getPersonAnimeStaffPositions();
-        self::assertCount(42, $animeStaffPositions);
+        self::assertCount(43, $animeStaffPositions);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\AnimeStaffPosition::class, $animeStaffPositions);
     }
 

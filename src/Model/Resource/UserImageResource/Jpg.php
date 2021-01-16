@@ -28,6 +28,14 @@ class Jpg
     }
 
     /**
+     * @return string
+     */
+    public function __toString() : string
+    {
+        return $this->getJpg()->getImageUrl();
+    }
+
+    /**
      * @return string|null
      */
     public function getImageUrl(): ?string

@@ -28,6 +28,14 @@ class WrapImageResource
     }
 
     /**
+     * @return string
+     */
+    public function __toString() : string
+    {
+        return $this->getJpg()->getImageUrl();
+    }
+
+    /**
      * @return Jpg
      */
     public function getJpg(): Jpg

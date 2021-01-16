@@ -35,6 +35,14 @@ class CharacterImageResource
     }
 
     /**
+     * @return string
+     */
+    public function __toString() : string
+    {
+        return $this->getJpg()->getImageUrl();
+    }
+
+    /**
      * @return Webp
      */
     public function getWebp(): Webp

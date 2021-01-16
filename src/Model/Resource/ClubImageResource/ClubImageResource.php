@@ -14,7 +14,6 @@ class ClubImageResource
      */
     private $jpg;
 
-
     /**
      * @param string $imageUrl
      * @return ClubImageResource
@@ -26,6 +25,14 @@ class ClubImageResource
         $instance->jpg = Jpg::factory($imageUrl);
 
         return $instance;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() : string
+    {
+        return $this->getJpg()->getImageUrl();
     }
 
     /**

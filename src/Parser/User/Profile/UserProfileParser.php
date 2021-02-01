@@ -217,4 +217,12 @@ class UserProfileParser
 
         return (new FavoritesParser($node))->getModel();
     }
+
+    /**
+     * @return Model\User\LastUpdates
+     */
+    public function getUserLastUpdates(): Model\User\LastUpdates
+    {
+        return (new LastUpdatesParser($this->crawler))->getModel();
+    }
 }

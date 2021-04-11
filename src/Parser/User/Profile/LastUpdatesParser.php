@@ -14,7 +14,7 @@ class LastUpdatesParser
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * LastUpdates constructor.
@@ -41,7 +41,7 @@ class LastUpdatesParser
     public function getLastAnimeUpdates(): array
     {
         $arr = $this->parseBaseListUpdates('anime');
-        $results = array();
+        $results = [];
         /**
          * @var $baseLastUpdate BaseLastUpdate
          */
@@ -58,7 +58,7 @@ class LastUpdatesParser
     public function getLastMangaUpdates(): array
     {
         $arr = $this->parseBaseListUpdates('manga');
-        $results = array();
+        $results = [];
         /**
          * @var $baseLastUpdate BaseLastUpdate
          */
@@ -88,7 +88,6 @@ class LastUpdatesParser
                 /** @var  $progressed int|null */
                 $progressed = null;
 
-                $status = "";
                 $progressedTotalSeparatorIndex = strpos($progressTypeValueUnparsed, '/');
                 if ($progressedTotalSeparatorIndex != false) {
                     $totalUnparsed = substr($progressTypeValueUnparsed, $progressedTotalSeparatorIndex + 1);
@@ -97,6 +96,7 @@ class LastUpdatesParser
                     $progressed = ctype_digit($progressedUnparsed) ? intval($progressedUnparsed) : null;
                     $status = trim(substr($progressTypeValueUnparsed, 0, $progressedTotalSeparatorIndex - 2));
                 } else {
+                    $progressTypeValueUnparsed = str_replace(" -", "", $progressTypeValueUnparsed);
                     $status = trim($progressTypeValueUnparsed);
                 }
                 return new BaseLastUpdate($url, $title, $imageUrl, $progressed, $total, $status, $score, $date);

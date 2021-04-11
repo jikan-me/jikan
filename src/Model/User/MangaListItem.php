@@ -139,12 +139,12 @@ class MangaListItem
         $instance = new self();
 
         $instance->malId = $item->manga_id;
-        $instance->title = $item->manga_title;
+        $instance->title = (string) $item->manga_title;
         $instance->imageUrl = Parser::parseImageQuality($item->manga_image_path);
         $instance->url = Constants::BASE_URL . $item->manga_url;
         $instance->readingStatus = $item->status;
         $instance->score = $item->score;
-        $instance->tags = empty($item->tags) ? null : $item->tags;
+        $instance->tags = empty($item->tags) ? null : (string) $item->tags;
         $instance->isRereading = (bool) $item->is_rereading;
         $instance->readChapters = $item->num_read_chapters;
         $instance->readVolumes = $item->num_read_volumes;
@@ -171,7 +171,6 @@ class MangaListItem
                 );
             }
         }
-
         return $instance;
     }
 

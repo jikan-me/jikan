@@ -171,13 +171,13 @@ class AnimeListItem
         $instance = new self();
 
         $instance->malId = $item->anime_id;
-        $instance->title = $item->anime_title;
+        $instance->title = (string) $item->anime_title;
         $instance->imageUrl = Parser::parseImageQuality($item->anime_image_path);
         $instance->url = Constants::BASE_URL . $item->anime_url;
         $instance->videoUrl = Constants::BASE_URL . $item->video_url;
         $instance->watchingStatus = $item->status;
         $instance->score = $item->score;
-        $instance->tags = empty($item->tags) ? null : $item->tags;
+        $instance->tags = empty($item->tags) ? null : (string) $item->tags;
         $instance->isRewatching = (bool) $item->is_rewatching;
         $instance->watchedEpisodes = $item->num_watched_episodes;
         $instance->totalEpisodes = $item->anime_num_episodes;
@@ -220,6 +220,17 @@ class AnimeListItem
                     $licensor->name,
                     Constants::BASE_URL . "/anime/producer/{$licensor->id}/{$licensorNameCanonical}"
                 );
+            }
+        }
+
+        /**
+         * https://github.com/jikan-me/jikan/issues/343
+         *
+         * Serialize potential number tags to string since MAL sends them over as integers
+         */
+        if ($item->tags !== null) {
+            foreach ($item->tags as &$tag) {
+                $tag = (string) $tag;
             }
         }
 

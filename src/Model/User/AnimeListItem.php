@@ -223,17 +223,6 @@ class AnimeListItem
             }
         }
 
-        /**
-         * https://github.com/jikan-me/jikan/issues/343
-         *
-         * Serialize potential number tags to string since MAL sends them over as integers
-         */
-        if ($item->tags !== null) {
-            foreach ($item->tags as &$tag) {
-                $tag = (string) $tag;
-            }
-        }
-
         return $instance;
     }
 

@@ -74,6 +74,11 @@ class Profile
     private $favorites;
 
     /**
+     * @var LastUpdates
+     */
+    private $lastUpdates;
+
+    /**
      * @var string|null
      */
     private $about;
@@ -101,6 +106,7 @@ class Profile
         $instance->mangaStats = $parser->getMangaStats();
         $instance->about = $parser->getAbout();
         $instance->favorites = $parser->getFavorites();
+        $instance->lastUpdates = $parser->getUserLastUpdates();
 
         return $instance;
     }

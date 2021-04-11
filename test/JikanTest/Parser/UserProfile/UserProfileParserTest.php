@@ -133,6 +133,16 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
+     * @vcr ProfileParserTest.yaml
+     */
+    public function it_gets_last_updates(){
+        $updates = $this->parser->getUserLastUpdates();
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\LastAnimeUpdate::class, $updates->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\LastMangaUpdate::class, $updates->getManga());
+    }
+
+    /**
+     * @test
      * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_about()

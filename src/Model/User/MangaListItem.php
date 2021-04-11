@@ -144,7 +144,7 @@ class MangaListItem
         $instance->url = Constants::BASE_URL . $item->manga_url;
         $instance->readingStatus = $item->status;
         $instance->score = $item->score;
-        $instance->tags = empty($item->tags) ? null : (string) $item->tags;
+        $instance->tags = $item->tags === "" ? null : (string) $item->tags;
         $instance->isRereading = (bool) $item->is_rereading;
         $instance->readChapters = $item->num_read_chapters;
         $instance->readVolumes = $item->num_read_volumes;

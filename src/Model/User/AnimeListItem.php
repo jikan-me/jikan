@@ -177,7 +177,7 @@ class AnimeListItem
         $instance->videoUrl = Constants::BASE_URL . $item->video_url;
         $instance->watchingStatus = $item->status;
         $instance->score = $item->score;
-        $instance->tags = empty($item->tags) ? null : (string) $item->tags;
+        $instance->tags = $item->tags === "" ? null : (string) $item->tags;
         $instance->isRewatching = (bool) $item->is_rewatching;
         $instance->watchedEpisodes = $item->num_watched_episodes;
         $instance->totalEpisodes = $item->anime_num_episodes;

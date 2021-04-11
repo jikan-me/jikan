@@ -4,3 +4,5 @@
 /test.php
 /jikan-fixtures
 /.php_cs.cache
+composer.phar
+.phpunit.result.cache

@@ -119,7 +119,7 @@ class CharacterParser implements ParserInterface
         $about = Parser::removeChildNodes((new Crawler($aboutHtml))->filterXPath('//body'));
 
         return JString::cleanse(
-            str_replace(['\n\n\n'], '', $about->text())
+            $about->html()
         );
     }
 

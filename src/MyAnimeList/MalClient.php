@@ -11,13 +11,13 @@
 
 namespace Jikan\MyAnimeList;
 
-use GuzzleHttp\Client as GuzzleClient;
 use Jikan\Exception\BadResponseException;
 use Jikan\Exception\ParserException;
 use Jikan\Goutte\GoutteWrapper;
 use Jikan\Model;
 use Jikan\Parser;
 use Jikan\Request;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * Class MalClient
@@ -32,16 +32,13 @@ class MalClient
     /**
      * MalClient constructor.
      *
-     * @param GuzzleClient|null $guzzle
+     * @param HttpClientInterfac|null $httpClient
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(GuzzleClient $guzzle = null)
+    public function __construct(HttpClientInterface $httpClient = null)
     {
-        $this->ghoutte = new GoutteWrapper();
-        if ($guzzle !== null) {
-            $this->ghoutte->setClient($guzzle);
-        }
+        $this->ghoutte = new GoutteWrapper($httpClient);
     }
 
     /**

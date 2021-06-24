@@ -38,7 +38,7 @@ class Character
     public $nicknames = [];
 
     /**
-     * @var string
+     * @var string|null
      */
     public $about;
 
@@ -133,9 +133,9 @@ class Character
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAbout(): string
+    public function getAbout(): ?string
     {
         return $this->about;
     }

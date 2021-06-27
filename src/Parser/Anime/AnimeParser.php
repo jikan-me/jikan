@@ -568,7 +568,8 @@ class AnimeParser implements ParserInterface
      */
     public function getBackground(): ?string
     {
-        $background = Parser::removeChildNodes($this->crawler->filterXPath('//span[@itemprop="description"]/..'));
+        $background = Parser::removeChildNodes($this->crawler->filterXPath('//p[@itemprop="description"]/..'));
+
         if (!$background->count()) {
             return null;
         }

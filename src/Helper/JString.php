@@ -16,24 +16,15 @@ class JString
      */
     public static function cleanse(string $string): string
     {
-        // convert any html before hand to new line
-        $string = str_replace(['<br>', '<br/>', '<br />'], '\n', $string);
-
         // remove control characters
-        $string = preg_replace('~[.[:cntrl:]]~', '', $string);
+        $string = preg_replace('~[[:cntrl:]]~', "", $string);
 
         // strip any leftover tags
-        $string = htmlspecialchars_decode(strip_tags($string), ENT_QUOTES);
-
-        // trim Nbsp
-        $string = self::UTF8NbspTrim($string);
+        $string = strip_tags($string);
 
         // trim
+        $string = str_replace('\\n', "\n", $string);
         $string = trim($string);
-
-        // remove any newlines at the end
-        $string = preg_replace('~([\\\\n]+)$~', '', $string);
-
 
         return $string;
     }

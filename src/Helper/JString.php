@@ -23,6 +23,7 @@ class JString
 
         // strip any leftover tags
 //        $string = htmlspecialchars_decode(strip_tags($string));
+        $string = strip_tags($string);
 
         // trim Nbsp // causing serializer issues
 //        $string = self::UTF8NbspTrim($string);

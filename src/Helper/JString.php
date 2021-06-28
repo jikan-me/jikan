@@ -16,6 +16,11 @@ class JString
      */
     public static function cleanse(string $string): string
     {
+        // <br> to new line
+        $string = str_replace(
+            ["<br>", "<br />", "<br/>", "<br >"], "\\n", $string
+        );
+
         // remove control characters
         $string = preg_replace('~[[:cntrl:]]~', "", $string);
 

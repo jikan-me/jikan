@@ -90,15 +90,16 @@ class LastUpdatesParser
 
                 $progressedTotalSeparatorIndex = strpos($progressTypeValueUnparsed, '/');
                 if ($progressedTotalSeparatorIndex != false) {
-                    $totalUnparsed = substr($progressTypeValueUnparsed, $progressedTotalSeparatorIndex + 1);
-                    $total = ctype_digit($totalUnparsed) ? intval($scoreUnparsed) : null;
-                    $progressedUnparsed = trim(substr($progressTypeValueUnparsed, $progressedTotalSeparatorIndex - 2, 2));
+                    $totalUnparsed = trim(substr($progressTypeValueUnparsed, $progressedTotalSeparatorIndex + 1));
+                    $total = ctype_digit($totalUnparsed) ? intval($totalUnparsed) : null;
+                    $lastSpace = strpos($progressTypeValueUnparsed, " ", -0);
+                    $progressedUnparsed = trim(substr($progressTypeValueUnparsed, $lastSpace, $progressedTotalSeparatorIndex - $lastSpace));
                     $progressed = ctype_digit($progressedUnparsed) ? intval($progressedUnparsed) : null;
-                    $status = trim(substr($progressTypeValueUnparsed, 0, $progressedTotalSeparatorIndex - 2));
-                } else {
-                    $progressTypeValueUnparsed = str_replace(" -", "", $progressTypeValueUnparsed);
-                    $status = trim($progressTypeValueUnparsed);
+                    $status = trim(substr($progressTypeValueUnparsed, 0, $progressedTotalSeparatorIndex - strlen($progressedUnparsed)));
+                    return new BaseLastUpdate($url, $title, $imageUrl, $progressed, $total, $status, $score, $date);
                 }
+                $progressTypeValueUnparsed = str_replace(" -", "", $progressTypeValueUnparsed);
+                $status = trim($progressTypeValueUnparsed);
                 return new BaseLastUpdate($url, $title, $imageUrl, $progressed, $total, $status, $score, $date);
             });
     }

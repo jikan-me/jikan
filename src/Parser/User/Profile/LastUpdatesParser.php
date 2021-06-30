@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\Profile;
 
+use Jikan\Helper\JString;
 use Jikan\Model\User\BaseLastUpdate;
 use Jikan\Model\User\LastAnimeUpdate;
 use Jikan\Model\User\LastMangaUpdate;
@@ -91,11 +92,19 @@ class LastUpdatesParser
                 $progressedTotalSeparatorIndex = strpos($progressTypeValueUnparsed, '/');
                 if ($progressedTotalSeparatorIndex != false) {
                     $totalUnparsed = trim(substr($progressTypeValueUnparsed, $progressedTotalSeparatorIndex + 1));
-                    $total = ctype_digit($totalUnparsed) ? intval($totalUnparsed) : null;
-                    $lastSpace = strpos($progressTypeValueUnparsed, " ", -0);
-                    $progressedUnparsed = trim(substr($progressTypeValueUnparsed, $lastSpace, $progressedTotalSeparatorIndex - $lastSpace));
-                    $progressed = ctype_digit($progressedUnparsed) ? intval($progressedUnparsed) : null;
-                    $status = trim(substr($progressTypeValueUnparsed, 0, $progressedTotalSeparatorIndex - strlen($progressedUnparsed)));
+
+                    preg_match('~(\d+)\/(\d+)~', $progressTypeValueUnparsed, $progress);
+
+                    $progressed = $progress[1] ?? null;
+                    $total = $progress[2] ?? null;
+
+                    preg_match('~([a-zA-Z\s]+)~', $progressTypeValueUnparsed, $status);
+                    $status = $status[1] ?? null;
+
+                    if ($status !== null) {
+                        $status = JString::cleanse($status);
+                    }
+
                     return new BaseLastUpdate($url, $title, $imageUrl, $progressed, $total, $status, $score, $date);
                 }
                 $progressTypeValueUnparsed = str_replace(" -", "", $progressTypeValueUnparsed);

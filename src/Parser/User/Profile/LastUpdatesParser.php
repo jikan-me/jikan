@@ -82,7 +82,7 @@ class LastUpdatesParser
                 $progressScoreDiv = $crawler->filterXPath('//div/div[2]');
                 $text = $progressScoreDiv->text();
                 $scoreUnparsed = trim(substr($text, strpos($text, 'Scored') + strlen('Scored')));
-                $score = ctype_digit($scoreUnparsed) ? intval($scoreUnparsed) : null;
+                $score = ctype_digit($scoreUnparsed) ? intval($scoreUnparsed) : 0;
                 $progressTypeValueUnparsed = explode('·', $text)[0];
                 /** @var  $total int|null */
                 $total = null;

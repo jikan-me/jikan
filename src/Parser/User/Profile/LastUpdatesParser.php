@@ -98,7 +98,7 @@ class LastUpdatesParser
                     $progressed = $progress[1] ?? null;
                     $total = $progress[2] ?? null;
 
-                    preg_match('~([a-zA-Z\s]+)~', $progressTypeValueUnparsed, $status);
+                    preg_match('~([a-zA-Z\s\-]+)~', $progressTypeValueUnparsed, $status);
                     $status = $status[1] ?? null;
 
                     if ($status !== null) {

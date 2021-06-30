@@ -214,4 +214,12 @@ class Profile
     {
         return $this->images;
     }
+
+    /**
+     * @return LastUpdates
+     */
+    public function getLastUpdates(): LastUpdates
+    {
+        return $this->lastUpdates;
+    }
 }

@@ -14,6 +14,9 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 ## Getting Started
 
+### ℹ v`^3` is currently in Beta.
+---
+
 | Version   | Support |
 |------------|----------|
 | [`^3` (in Beta)](https://github.com/jikan-me/jikan/tree/3.0.0) | ✅ New features |
@@ -26,9 +29,7 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 ### Dependencies
 
 - [Goutte](https://github.com/FriendsOfPHP/Goutte)
-- PHP 7.1-7.3
-
-⚠️ PHP 7.4 is not tested with `^2`, please use `^3`
+- PHP 7.4
 
 # Jikan REST API
 

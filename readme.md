@@ -17,46 +17,24 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 ### ℹ v`^3` is currently in Beta.
 ---
 
-| Version   | Support |
-|------------|----------|
-| [`^3` (in Beta)](https://github.com/jikan-me/jikan/tree/3.0.0) | ✅ New features |
-| [`^2` (master)](https://github.com/jikan-me/jikan)      | ⚠️ Maintaince only |
-| [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported |
+| Version   | Support | PHP | Lumen/Laravel |
+|------------|----------|----------|----------| 
+| [`^3` (in Beta)](https://github.com/jikan-me/jikan/tree/3.0.0) | ✅ New features | [![beta](https://img.shields.io/badge/PHP-^%207.4-blue.svg?style=flat)]() | `^8` |
+| [`^2` (master)](https://github.com/jikan-me/jikan)      | ⚠️ Maintaince only | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6` 
+| [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*` |
 
-1. `composer require jikan-me/jikan` (This will install  version `^2`)
+1. `composer require jikan-me/jikan:3.0.0.x-dev`
 2. [Documentation](http://docs.jikan.moe)
 
-### Dependencies
-
-- [Goutte](https://github.com/FriendsOfPHP/Goutte)
-- PHP 7.4
 
 # Jikan REST API
 
 A REST API service is available as well
 
-- **[REST API DOCUMENTATION](https://jikan.docs.apiary.io)**
+- **[REST API DOCUMENTATION](https://docs.api.jikan.moe/)**
 - **[Apps/Projects using the REST API](https://jikan.moe/showcase)**
-- **[Host the REST API yourself](https://github.com/jikan-me/jikan-rest)**
+- **[Host the REST API yourself](https://github.com/jikan-me/jikan-rest/tree/v4)**
 
-## Wrappers
-
-| Language   | Wrappers |
-|------------|----------|
-| JavaScript | [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor |
-| Java       | [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs<br>[reactive-jikan](https://github.com/SandroHc/reactive-jikan) by Sandro Marques<br>[Jaikan](https://github.com/ShindouMihou/Jaikan) by ShindouMihou |
-| Python     | [JikanPy](https://github.com/abhinavk99/jikanpy) by Abhinav Kasamsetty |
-| Node.js    | [jikan-node](https://github.com/xy137/jikan-node) by xy137<br>[jikan-nodejs](https://github.com/ribeirogab/jikan-nodejs) by ribeirogab |
-| TypeScript | [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard<br>[jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco |
-| PHP        | [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe |
-| .NET       | [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie |
-| Elixir     | [JikanEx](https://github.com/seanbreckenridge/jikan_ex) by Sean Breckenridge |
-| Go         | [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang<br>[jikan2go](https://github.com/nokusukun/jikan2go) by nokusukun |
-| Ruby       | [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi |
-| Dart       | [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol |
-| Kotlin     | [JikanKt](https://github.com/GSculerlor/JikanKt) by Ganedra Afrasya |
-
-[Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 
 # Features
 

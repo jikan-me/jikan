@@ -65,28 +65,35 @@ A REST API service is available as well
   - Recent List Updates By Users
 - Character
   - Main Information
+  - Relations entries (Anime/Manga/People)
   - Pictures
 - People
   - Main Information
+  - Relations entries (Anime/Manga/Characters)
   - Pictures
 - Search
   - Anime
   - Manga
   - Character
   - Person
+  - User
+  - Clubs
   - Pagination Support
   - Advanced Search
     - Filters
     - Order By
     - Sorting (Ascending/Descending)
-- Seasonal Anime (Season + Year)
-- Season List/Archive
+- Seasonal Anime
+  - Season + Year
+  - Season List/Archive 
+  - Current and Upcoming
 - Anime Scheduling (for current season)
 - Top
   - Anime
   - Manga
   - Characters
   - People
+  - Reviews
   - Sub Types & Pagination Support
 - Genre
   - Anime Listing (All Anime by Genre)
@@ -108,9 +115,20 @@ A REST API service is available as well
     - Manga
   - Anime & Manga Lists
     - Pagination Support
+  - Get Username by internal user ID
+  - Recently Online
+  - Clubs
+  - Recommendations
+  - Reviews
 - Club
   - Main Information
-  - User List
+  - Members
+- Recent Anime/Manga Recommendations
+- Recent Anime/Manga Reviews
+- Watch
+  - Recent + popular episodes
+  - Recent + popular promotional videos 
+
 
 [View RoadMap](https://github.com/jikan-me/jikan/projects/4)
 

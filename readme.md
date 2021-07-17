@@ -136,7 +136,7 @@ A REST API service is available as well
   - Main Information
   - User List
 
-[View RoadMap](https://trello.com/b/Jw1rs467/jikan-api)
+[View RoadMap](https://github.com/jikan-me/jikan/projects/4)
 
 # Running Tests
 

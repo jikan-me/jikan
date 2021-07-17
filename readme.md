@@ -14,32 +14,31 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 ## Getting Started
 
-1. `composer install`
-2. [Documentation](http://docs.jikan.moe)
-
-:exclamation: Version `~1.0` is no longer maintained, it's required you use `^2.0`.
-
-| Version   | Remarks |
+| Version   | Support |
 |------------|----------|
-| Parser v`~1.0` | Discontinued |
-| Parser v`~2.0` | Stable - Maintenance only (use this) |
-| Parser v`~3.0` | Alpha |
+| [`^3` (in Beta)](https://github.com/jikan-me/jikan/tree/3.0.0) | ✅ New features |
+| [`^2` (master)](https://github.com/jikan-me/jikan)      | ⚠️ Maintaince only |
+| [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported |
+
+1. `composer require jikan-me/jikan` (This will install  version `^2`)
+2. [Documentation](http://docs.jikan.moe)
 
 ### Dependencies
 
 - [Goutte](https://github.com/FriendsOfPHP/Goutte)
-- PHP 7.4
+- PHP 7.1-7.3
 
+⚠️ PHP 7.4 is not tested with `^2`, please use `^3`
 
-## Jikan REST API
+# Jikan REST API
 
-A Free REST API service is available as well which uses this parser
+A REST API service is available as well
 
 - **[REST API DOCUMENTATION](https://jikan.docs.apiary.io)**
 - **[Apps/Projects using the REST API](https://jikan.moe/showcase)**
 - **[Host the REST API yourself](https://github.com/jikan-me/jikan-rest)**
 
-### Wrappers
+## Wrappers
 
 | Language   | Wrappers |
 |------------|----------|
@@ -58,7 +57,7 @@ A Free REST API service is available as well which uses this parser
 
 [Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 
-## Features
+# Features
 
 - Anime
   - Main Information
@@ -134,13 +133,15 @@ A Free REST API service is available as well which uses this parser
   - Main Information
   - User List
 
-## Running Tests
+[View RoadMap](https://trello.com/b/Jw1rs467/jikan-api)
 
-### PHPUnit
+# Running Tests
+
+## PHPUnit
 
 `php vendor/bin/phpunit`
 
-### GrumPHP
+## GrumPHP
 
 PHPCS, PHPLint & PHPUnit
 

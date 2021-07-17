@@ -131,13 +131,13 @@ A REST API service is available as well
 
 [View RoadMap](https://trello.com/b/Jw1rs467/jikan-api)
 
-## Running Tests
+# Running Tests
 
-### PHPUnit
+## PHPUnit
 
 `php vendor/bin/phpunit`
 
-### GrumPHP
+## GrumPHP
 
 PHPCS, PHPLint & PHPUnit
 
@@ -145,33 +145,42 @@ PHPCS, PHPLint & PHPUnit
 
 ---
 
-## Sugoi (すごい) Backers
+# Backers
 
-Thank you to all our **Sugoi (すごい)** backers! 🙏 [[Become a sugoi backer](https://patreon.com/jikan)]
+A huge thank you to all our Patrons! 🙏 This project wouldn't be running without your support.
+
+We have a free [REST API service](https://jikan.moe), if you wish to support us you can [become a Patron!](https://patreon.com/jikan)
+
+## Sugoi (すごい) Patrons
+
 - [Jared Allard (jaredallard)](https://github.com/jaredallard)
 - [hugonun (hug_onun)](https://twitter.com/hug_onun)
 
-# Backers
+## Patrons
 
-Thank you to all our backers! 🙏 [[Become a backer](https://patreon.com/jikan)]
+- Aaron Treinish
+- Cesar Irad Mendoza
+- Jason Weatherly
+- Jesse
+- Kundan Chintamaneni
+- Kururin
+- Purplepinapples
+- Sakamotodesu
+- TeraNovaLP
 
-- [PurplePinapples](https://github.com/purplepinapples/)
-- [Barkdoll (Jesse)](https://github.com/barkdoll/)
-- [Piotr Szymczak (Drutol)](https://github.com/Drutol)
-- [Jason Weatherly (jamesthebard)](https://twitter.com/jamesthebard)
-- [Cesar Irad Mendoza (aberuwu)](https://github.com/aberuwu)
+## Development
 
-# Sponsors
+|||
+|------------|----------|
+| ![JetBrain](https://user-images.githubusercontent.com/9166451/126047249-9e5bdc63-ae91-4082-bca5-ffe271b421da.png) | Jikan's development is powered by [JetBrain's Open Source License](https://jb.gg/OpenSource) |
 
-Thank you to all our sponsors! [[Become a sponsor](https://patreon.com/jikan)]
-
-- [Hibiki Matsujo](https://github.com/assintates)
+A shoutout to their amazing products and for supporting Jikan since early versions!
 
 ---
 
-## Release Changelog
+# Release Changelog
 
-### 2.16.0 - Jan 27, 20
+## 2.16.0 - Jan 27, 20
 
 - Added **Top Reviews**(Anime, Manga & Best Voted (includes both)) parsing [#251](/../../issues/251)
 
@@ -195,7 +204,7 @@ $topReviews = $jikan->getTopReviews(
 
 [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 
-## DISCLAIMER
+# DISCLAIMER
 
 - Jikan is not affiliated with MyAnimeList.net
 - You are responsible for the usage of this API. Please be respectful towards MyAnimeList's [Terms Of Service](https://myanimelist.net/about/terms_of_use)

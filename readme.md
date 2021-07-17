@@ -14,11 +14,14 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 ## Getting Started
 
-| Version   | Support |
-|------------|----------|
-| [`^3` (in Beta)](https://github.com/jikan-me/jikan/tree/3.0.0) | ✅ New features |
-| [`^2` (master)](https://github.com/jikan-me/jikan)      | ⚠️ Maintaince only |
-| [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported |
+| Version   | Support | PHP | Lumen/Laravel |
+|------------|----------|----------|----------| 
+| [`^3` (in Beta)](https://github.com/jikan-me/jikan/tree/3.0.0) | ✅ New features | [![beta](https://img.shields.io/badge/PHP-^%207.4-blue.svg?style=flat)]() | `^8` |
+| [`^2` (master)](https://github.com/jikan-me/jikan)      | ⚠️ Maintaince only | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6` 
+| [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*` |
+
+1. `composer require jikan-me/jikan:3.0.0.x-dev`
+2. [Documentation](http://docs.jikan.moe)
 
 1. `composer require jikan-me/jikan` (This will install  version `^2`)
 2. [Documentation](http://docs.jikan.moe)

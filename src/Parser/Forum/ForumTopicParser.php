@@ -7,7 +7,6 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Forum\ForumPost;
 use Symfony\Component\DomCrawler\Crawler;
-use function GuzzleHttp\Psr7\parse_query;
 
 /**
  * Class ForumPostParser
@@ -37,7 +36,7 @@ class ForumTopicParser
      */
     public function getTopicId(): int
     {
-        $query = parse_query(explode('?', $this->getUrl())[1]);
+        parse_str(explode('?', $this->getUrl())[1], $query);
 
         return (int)$query['topicid'];
     }

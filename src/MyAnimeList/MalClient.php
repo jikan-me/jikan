@@ -1,6 +1,6 @@
 <?php
 /**
- *    Jikan - MyAnimeList.net Unofficial API v2
+ *    Jikan - MyAnimeList.net Unofficial API v3
  *
  *    This is an unofficial MAL API that stands in for the lackluster features of the official API.
  *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.
@@ -11,7 +11,6 @@
 
 namespace Jikan\MyAnimeList;
 
-use http\Client;
 use Jikan\Exception\BadResponseException;
 use Jikan\Exception\ParserException;
 use Jikan\Goutte\GoutteWrapper;

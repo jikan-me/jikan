@@ -11,12 +11,14 @@
 
 namespace Jikan\MyAnimeList;
 
+use http\Client;
 use Jikan\Exception\BadResponseException;
 use Jikan\Exception\ParserException;
 use Jikan\Goutte\GoutteWrapper;
 use Jikan\Model;
 use Jikan\Parser;
 use Jikan\Request;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -27,18 +29,24 @@ class MalClient
     /**
      * @var GoutteWrapper
      */
-    private $ghoutte;
+    protected $ghoutte;
+
+    /**
+     * @var HttpClientInterface|HttpClientInterface
+     */
+    protected $httpClient;
 
     /**
      * MalClient constructor.
      *
-     * @param HttpClientInterfac|null $httpClient
+     * @param HttpClientInterface|null $httpClient
      *
      * @throws \InvalidArgumentException
      */
     public function __construct(HttpClientInterface $httpClient = null)
     {
-        $this->ghoutte = new GoutteWrapper($httpClient);
+        $this->httpClient = $httpClient ?? HttpClient::create();
+        $this->ghoutte = new GoutteWrapper($this->httpClient);
     }
 
     /**
@@ -785,8 +793,17 @@ class MalClient
     public function getUserAnimeList(Request\User\UserAnimeListRequest $request): array
     {
         try {
-            $response = $this->ghoutte->getClient()->get($request->getPath());
-            $list = \json_decode($response->getBody()->getContents());
+            $response = $this->httpClient
+                ->request('GET', $request->getPath());
+
+            if ($response->getStatusCode() >= 400) {
+                throw new BadResponseException(
+                    $response->getStatusCode().' on '.$response->getInfo('url'),
+                    $response->getStatusCode()
+                );
+            }
+
+            $list = \json_decode($response->getContent());
 
             $model = [];
             foreach ($list as $item) {
@@ -810,8 +827,17 @@ class MalClient
     public function getUserMangaList(Request\User\UserMangaListRequest $request): array
     {
         try {
-            $response = $this->ghoutte->getClient()->get($request->getPath());
-            $list = \json_decode($response->getBody()->getContents());
+            $response = $this->httpClient
+                ->request('GET', $request->getPath());
+
+            if ($response->getStatusCode() >= 400) {
+                throw new BadResponseException(
+                    $response->getStatusCode().' on '.$response->getInfo('url'),
+                    $response->getStatusCode()
+                );
+            }
+
+            $list = \json_decode($response->getContent());
 
             $model = [];
             foreach ($list as $item) {
@@ -921,6 +947,12 @@ class MalClient
     }
 
 
+    /**
+     * @param Request\Anime\AnimeReviewsRequest $request
+     * @return Model\Anime\AnimeReviews
+     * @throws BadResponseException
+     * @throws ParserException
+     */
     public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): Model\Anime\AnimeReviews
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
@@ -934,6 +966,12 @@ class MalClient
     }
 
 
+    /**
+     * @param Request\Manga\MangaReviewsRequest $request
+     * @return Model\Manga\MangaReviews
+     * @throws BadResponseException
+     * @throws ParserException
+     */
     public function getMangaReviews(Request\Manga\MangaReviewsRequest $request): Model\Manga\MangaReviews
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());

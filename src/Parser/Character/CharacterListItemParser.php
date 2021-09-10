@@ -101,7 +101,9 @@ class CharacterListItemParser implements ParserInterface
     public function getRole(): string
     {
         return JString::UTF8NbspTrim(
-            $this->crawler->filterXPath('//td[2]/div[4]')->text()
+            JString::cleanse(
+                $this->crawler->filterXPath('//td[2]/div[4]')->text()
+            )
         );
     }
 

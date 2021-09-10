@@ -92,7 +92,7 @@ class VoiceActorParser implements ParserInterface
      */
     public function getLanguage(): string
     {
-        return $this->crawler->filterXPath('//small')->last()->text();
+        return $this->crawler->filterXPath('//div[contains(@class, "js-anime-character-language")]')->text();
     }
 
     /**

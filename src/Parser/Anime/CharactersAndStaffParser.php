@@ -37,16 +37,9 @@ class CharactersAndStaffParser implements ParserInterface
      */
     public function getCharacters(): array
     {
+
         return $this->crawler
-            ->filterXPath('//h2[text()="Characters & Voice Actors"]')
-            ->parents()->nextAll()
-            ->reduce(
-                function (Crawler $crawler) {
-                    return (bool)$crawler->filterXPath(
-                        '//a[contains(@href, "https://myanimelist.net/character")]'
-                    )->count();
-                }
-            )
+            ->filterXPath('//div[contains(@class, "anime-character-container")]/table')
             ->each(
                 function (Crawler $crawler) {
                     return (new CharacterListItemParser($crawler))->getModel();

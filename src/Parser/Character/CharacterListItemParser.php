@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Character;
 
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Character\CharacterListItem;
 use Jikan\Model\Character\VoiceActor;
@@ -60,7 +61,7 @@ class CharacterListItemParser implements ParserInterface
      */
     public function getCharacterUrl(): string
     {
-        return $this->crawler->filterXPath('//td[2]/a')->attr('href');
+        return $this->crawler->filterXPath('//td[2]/div[3]/a')->attr('href');
     }
 
     /**
@@ -69,7 +70,7 @@ class CharacterListItemParser implements ParserInterface
      */
     public function getName(): string
     {
-        return $this->crawler->filterXPath('//td[2]/a')->text();
+        return $this->crawler->filterXPath('//h3[contains(@class, "h3_character_name")]')->text();
     }
 
     /**
@@ -99,8 +100,9 @@ class CharacterListItemParser implements ParserInterface
      */
     public function getRole(): string
     {
-        //echo $this->crawler->filterXPath('//td[2]/div/small')->text();
-        return $this->crawler->filterXPath('//td[2]/div/small')->text();
+        return JString::UTF8NbspTrim(
+            $this->crawler->filterXPath('//td[2]/div[4]')->text()
+        );
     }
 
     /**

@@ -125,7 +125,9 @@ class UserProfileParser
      */
     public function getGender(): ?string
     {
-        $gender = $this->crawler->filterXPath('//span[contains(text(), \'Gender\')]/following-sibling::span');
+        $gender = $this->crawler
+            ->filterXPath('//ul[contains(@class, "user-status")]/li/span[contains(text(), "Gender")]/following-sibling::span');
+
         if (!$gender->count()) {
             return null;
         }
@@ -156,7 +158,9 @@ class UserProfileParser
      */
     public function getLocation(): ?string
     {
-        $gender = $this->crawler->filterXPath('//span[contains(text(), \'Location\')]/following-sibling::span');
+        $gender = $this->crawler
+            ->filterXPath('//ul[contains(@class, "user-status")]/li/span[contains(text(), "Location")]/following-sibling::span');
+
         if (!$gender->count()) {
             return null;
         }

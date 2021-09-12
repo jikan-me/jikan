@@ -35,18 +35,16 @@ class CharactersParser
     public function getCharacters(): array
     {
         return $this->crawler
-            ->filterXPath('//h2[text()="Characters"]/following-sibling::table')
-            ->reduce(
-                function (Crawler $crawler) {
-                    return (bool)$crawler->filterXPath(
-                        '//a[contains(@href, "https://myanimelist.net/character")]'
-                    )->count();
-                }
-            )
+            ->filterXPath('//div[contains(@class, "anime-character-container")]/table')
             ->each(
                 function (Crawler $crawler) {
                     return CharacterListItem::fromParser(new CharacterListItemParser($crawler));
                 }
             );
+//            ->each(
+//                function (Crawler $crawler) {
+//                    return CharacterListItem::fromParser(new CharacterListItemParser($crawler));
+//                }
+//            );
     }
 }

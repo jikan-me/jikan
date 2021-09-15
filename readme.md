@@ -179,27 +179,13 @@ A shoutout to their amazing products and for supporting Jikan since early versio
 
 # Release Changelog
 
-## 2.16.0 - Jan 27, 20
+## 2.17.0 - Sep 16, 21
 
-- Added **Top Reviews**(Anime, Manga & Best Voted (includes both)) parsing [#251](/../../issues/251)
-
-```php
-
-/**
- * Type Constants
- * Anime: \Jikan\Helper\Constants::TOP_REVIEW_ANIME
- * Manga: \Jikan\Helper\Constants::TOP_REVIEW_MANGA
- * Best Voted (Anime + Manga): \Jikan\Helper\Constants::TOP_REVIEW_BEST_VOTED
- */
-$type = \Jikan\Helper\Constants::TOP_REVIEW_ANIME;
-$page = 1;
-
-$topReviews = $jikan->getTopReviews(
-    new \Jikan\Request\Top\TopReviewsRequest($type, $page)
-);
-```
-
-- Bug fixes [#249](/../../issues/249), [#250](/../../issues/250), [#259](/../../issues/259)
+- Added support for MAL's new [genre overhaul](https://myanimelist.net/forum/?topicid=1956762): `themes`, `demographics`, `explicitGenres`
+- Updated Constants to reflect new and modified genres (while retaining BC). Some genres have been deleted or merged with others so they may return 404, check [Constants](https://github.com/jikan-me/jikan/blob/62f3e12cbcc8d841b3f923e4317f0b50f28f0574/src/Helper/Constants.php) for details
+- Anime/Manga Genres List now returns additional arrays for `themes`, `demographics`, `explicitGenres` as they have been split up from `genres`
+- Added parser support for Anime and Manga External Links https://github.com/jikan-me/jikan/issues/353
+- Parser bug fixes
 
 [Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 

@@ -60,4 +60,29 @@ class AnimeGenreList
     {
         return $this->genres;
     }
+
+    /**
+     * @return array|AnimeGenreListItem[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return array|AnimeGenreListItem[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return array|AnimeGenreListItem[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
+    }
+
 }

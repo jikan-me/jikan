@@ -20,6 +20,21 @@ class MangaGenreList
     public $genres = [];
 
     /**
+     * @var array|MangaGenreListItem[]
+     */
+    public $explicitGenres = [];
+
+    /**
+     * @var array|MangaGenreListItem[]
+     */
+    public $themes = [];
+
+    /**
+     * @var array|MangaGenreListItem[]
+     */
+    public $demographics = [];
+
+    /**
      * @param MangaGenreListParser $parser
      *
      * @return MangaGenre
@@ -31,6 +46,9 @@ class MangaGenreList
         $instance = new self();
 
         $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
+        $instance->themes = $parser->getThemes();
+        $instance->demographics = $parser->getDemographics();
 
         return $instance;
     }
@@ -42,4 +60,30 @@ class MangaGenreList
     {
         return $this->genres;
     }
+
+    /**
+     * @return array|MangaGenreListItem[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return array|MangaGenreListItem[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return array|MangaGenreListItem[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
+    }
+
+
 }

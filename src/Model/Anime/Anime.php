@@ -170,6 +170,11 @@ class Anime
     private $genres = [];
 
     /**
+     * @var MalUrl[]
+     */
+    private $explicitGenres = [];
+
+    /**
      * @var string[]
      */
     private $openingThemes = [];
@@ -212,6 +217,7 @@ class Anime
         $instance->studios = $parser->getStudios();
         $instance->source = $parser->getSource();
         $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
         $instance->duration = $parser->getDuration();
         $instance->rating = $parser->getRating();
         $instance->score = $parser->getScore();

@@ -357,6 +357,27 @@ class AnimeParser implements ParserInterface
     }
 
     /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getExplicitGenres(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Explicit Genres:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return []; // If `No genres have been added yet`
+    }
+
+    /**
      * @return string|null
      * @throws \InvalidArgumentException
      */

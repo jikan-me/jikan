@@ -1,5 +1,15 @@
 ## Changelog
 
+### 
+
+## 2.17.0 - Sep 16, 21
+
+- Added support for MAL's new [genre overhaul](https://myanimelist.net/forum/?topicid=1956762): `themes`, `demographics`, `explicitGenres`
+- Updated Constants to reflect new and modified genres (while retaining BC). Some genres have been deleted or merged with others so they may return 404, check [Constants](https://github.com/jikan-me/jikan/blob/62f3e12cbcc8d841b3f923e4317f0b50f28f0574/src/Helper/Constants.php) for details
+- Anime/Manga Genres List now returns additional arrays for `themes`, `demographics`, `explicitGenres` as they have been split up from `genres`
+- Added parser support for Anime and Manga External Links https://github.com/jikan-me/jikan/issues/353
+- Parser bug fixes
+
 ### 2.16.0 - Jan 27, 20
 - Added **Top Reviews**(Anime, Manga & Best Voted (includes both)) parsing [#251](/../../issues/251)
 ```php

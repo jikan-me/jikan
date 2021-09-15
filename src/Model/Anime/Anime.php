@@ -509,4 +509,29 @@ class Anime
     {
         return $this->endingThemes;
     }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
 }

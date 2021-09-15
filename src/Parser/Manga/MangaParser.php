@@ -8,6 +8,7 @@ use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Manga\Manga;
 use Jikan\Parser\Common\MalUrlParser;
+use Jikan\Parser\Common\UrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -529,6 +530,25 @@ class MangaParser implements ParserInterface
         return JString::cleanse(
             str_replace([$favorite->text(), ','], '', $favorite->parents()->text())
         );
+    }
+
+    /**
+     * @return array|MalUrl[]
+     * @throws \InvalidArgumentException
+     */
+    public function getExternalLinks(): array
+    {
+        $links = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[1]/div/h2[contains(text(), "External Links")]');
+
+        if (!$links->count()) {
+            return [];
+        }
+
+        return $links->nextAll()->filterXPath('//div[contains(@class, "pb16")]/a')
+            ->each(function(Crawler  $c) {
+                return (new UrlParser($c))->getModel();
+            });
     }
 
     /**

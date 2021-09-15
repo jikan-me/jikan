@@ -4,6 +4,7 @@ namespace Jikan\Model\Anime;
 
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Url;
 use Jikan\Parser\Anime\AnimeParser;
 
 /**
@@ -195,6 +196,11 @@ class Anime
     private $endingThemes = [];
 
     /**
+     * @var Url[]
+     */
+    private $externalLinks = [];
+
+    /**
      * Create an instance from an AnimeParser parser
      *
      * @param AnimeParser $parser
@@ -238,6 +244,7 @@ class Anime
         $instance->popularity = $parser->getPopularity();
         $instance->members = $parser->getMembers();
         $instance->favorites = $parser->getFavorites();
+        $instance->externalLinks = $parser->getExternalLinks();
         $instance->related = $parser->getRelated();
         $instance->openingThemes = $parser->getOpeningThemes();
         $instance->endingThemes = $parser->getEndingThemes();

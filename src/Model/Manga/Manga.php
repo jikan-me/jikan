@@ -10,6 +10,7 @@ namespace Jikan\Model\Manga;
 
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Url;
 use Jikan\Parser\Manga\MangaParser;
 
 /**
@@ -160,6 +161,11 @@ class Manga
      */
     private $serializations = [];
 
+    /**
+     * @var Url[]
+     */
+    private $externalLinks = [];
+
 
     /**
      * Create an instance from an MangaParser parser
@@ -198,6 +204,7 @@ class Manga
         $instance->popularity = $parser->getMangaPopularity();
         $instance->members = $parser->getMangaMembers();
         $instance->favorites = $parser->getMangaFavorites();
+        $instance->externalLinks = $parser->getExternalLinks();
         $instance->related = $parser->getMangaRelated();
         $instance->background = $parser->getMangaBackground();
         $instance->authors = $parser->getMangaAuthors();

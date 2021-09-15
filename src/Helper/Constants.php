@@ -170,7 +170,8 @@ class Constants
     public const GENRE_MANGA_ADVENTURE = 2;
     public const GENRE_MANGA_CARS = 3;
     public const GENRE_MANGA_COMEDY = 4;
-    public const GENRE_MANGA_DEMENTIA = 5;
+    public const GENRE_MANGA_DEMENTIA = 5; // Renamed to the above by MAL
+    public const GENRE_MANGA_AVANT_GARDE = 5;
     public const GENRE_MANGA_DEMONS = 6;
     public const GENRE_MANGA_MYSTERY = 7;
     public const GENRE_MANGA_DRAMA = 8;
@@ -181,7 +182,7 @@ class Constants
     public const GENRE_MANGA_HISTORICAL = 13;
     public const GENRE_MANGA_HORROR = 14;
     public const GENRE_MANGA_KIDS = 15;
-    public const GENRE_MANGA_MAGIC = 16;
+    public const GENRE_MANGA_MAGIC = 16; // Removed by MAL - will throw BadResponseException (404)
     public const GENRE_MANGA_MARTIAL_ARTS = 17;
     public const GENRE_MANGA_MECHA = 18;
     public const GENRE_MANGA_MUSIC = 19;
@@ -191,15 +192,17 @@ class Constants
     public const GENRE_MANGA_SCHOOL = 23;
     public const GENRE_MANGA_SCI_FI = 24;
     public const GENRE_MANGA_SHOUJO = 25;
-    public const GENRE_MANGA_SHOUJO_AI = 26;
+    public const GENRE_MANGA_GIRLS_LOVE = 26;
+    public const GENRE_MANGA_SHOUJO_AI = 26; // Renamed to the above by MAL
     public const GENRE_MANGA_SHOUNEN = 27;
-    public const GENRE_MANGA_SHOUNEN_AI = 28;
+    public const GENRE_MANGA_BOYS_LOVE = 28;
+    public const GENRE_MANGA_SHOUNEN_AI = 28; // Renamed to the above by MAL
     public const GENRE_MANGA_SPACE = 29;
     public const GENRE_MANGA_SPORTS = 30;
     public const GENRE_MANGA_SUPER_POWER = 31;
     public const GENRE_MANGA_VAMPIRE = 32;
-    public const GENRE_MANGA_YAOI = 33;
-    public const GENRE_MANGA_YURI = 34;
+    public const GENRE_MANGA_YAOI = 33; // Merged into GENRE_MANGA_BOYS_LOVE by MAL - will throw BadResponseException (404)
+    public const GENRE_MANGA_YURI = 34; // Merged into GENRE_MANGA_GIRLS_LOVE by MAL - will throw BadResponseException (404)
     public const GENRE_MANGA_HAREM = 35;
     public const GENRE_MANGA_SLICE_OF_LIFE = 36;
     public const GENRE_MANGA_SUPERNATURAL = 37;
@@ -210,7 +213,12 @@ class Constants
     public const GENRE_MANGA_JOSEI = 42;
     public const GENRE_MANGA_DOUJINSHI = 43;
     public const GENRE_MANGA_GENDER_BENDER = 44;
-    public const GENRE_MANGA_THRILLER = 45;
+    public const GENRE_MANGA_SUSPENSE = 45;
+    public const GENRE_MANGA_THRILLER = 45; // Renamed to the above by MAL
+    public const GENRE_MANGA_AWARD_WINNING = 46;
+    public const GENRE_MANGA_GOURMET = 47;
+    public const GENRE_MANGA_WORK_LIFE = 48;
+    public const GENRE_MANGA_EROTICA = 49;
 
     /*
      * User List Ordering Explained

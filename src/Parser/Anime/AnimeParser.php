@@ -407,7 +407,7 @@ class AnimeParser implements ParserInterface
     public function getDemographics(): array
     {
         $genre = $this->crawler
-            ->filterXPath('//span[text()="Demographic:"]');
+            ->filterXPath('//span[text()="Demographics:"]');
 
         if ($genre->count()) {
             return $genre->parents()->first()->filterXPath('//a')->each(
@@ -418,7 +418,7 @@ class AnimeParser implements ParserInterface
         }
 
         $genre = $this->crawler
-            ->filterXPath('//span[text()="Explicit Genre:"]');
+            ->filterXPath('//span[text()="Demographics:"]');
 
         if ($genre->count()) {
             return $genre->parents()->first()->filterXPath('//a')->each(

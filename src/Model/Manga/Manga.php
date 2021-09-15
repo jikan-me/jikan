@@ -138,6 +138,21 @@ class Manga
     /**
      * @var MalUrl[]
      */
+    private $explicitGenres = [];
+
+    /**
+     * @var MalUrl[]
+     */
+    private $demographics = [];
+
+    /**
+     * @var MalUrl[]
+     */
+    private $themes = [];
+
+    /**
+     * @var MalUrl[]
+     */
     private $authors = [];
 
     /**
@@ -173,7 +188,10 @@ class Manga
         $instance->status = $parser->getMangaStatus();
         $instance->publishing = $instance->status === 'Publishing';
         $instance->published = $parser->getPublished();
-        $instance->genres = $parser->getMangaGenre();
+        $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
+        $instance->demographics = $parser->getDemographics();
+        $instance->themes = $parser->getThemes();
         $instance->score = $parser->getMangaScore();
         $instance->scoredBy = $parser->getMangaScoredBy();
         $instance->rank = $parser->getMangaRank();

@@ -284,17 +284,130 @@ class MangaParser implements ParserInterface
 
     /**
      * @return MalUrl[]
-     * @throws \RuntimeException
      * @throws \InvalidArgumentException
+     * @throws \RuntimeException
      */
-    public function getMangaGenre(): array
+    public function getGenres(): array
     {
-        return $this->crawler
-            ->filterXPath('//span[text()="Genres:"]/following-sibling::a')->each(
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Genres:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
             );
+        }
+
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Genre:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getExplicitGenres(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Explicit Genres:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Explicit Genre:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getDemographics(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Demographics:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Demographic:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getThemes(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Theme:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Themes:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
     }
 
     /**

@@ -353,7 +353,18 @@ class AnimeParser implements ParserInterface
             );
         }
 
-        return []; // If `No genres have been added yet`
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Genre:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
     }
 
     /**

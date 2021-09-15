@@ -62,6 +62,21 @@ class MangaCard
     protected $genres;
 
     /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $explicitGenres;
+
+    /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $themes;
+
+    /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $demographics;
+
+    /**
      * @var MalUrl[]
      */
     protected $authors;
@@ -110,6 +125,9 @@ class MangaCard
         $instance->volumes = $parser->getVolumes();
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
+        $instance->themes = $parser->getThemes();
+        $instance->demographics = $parser->getDemographics();
         $instance->type = $parser->getType();
         $instance->authors = $parser->getAuthor();
         $instance->score = $parser->getMangaScore();

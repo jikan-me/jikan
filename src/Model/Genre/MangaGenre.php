@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Genre;
 
+use Jikan\Model\Common\MangaCard;
 use Jikan\Parser\Genre\MangaGenreParser;
 use Jikan\Model\Common\MalUrl;
 
@@ -24,7 +25,7 @@ class MangaGenre
     public $itemCount;
 
     /**
-     * @var array|MangaGenre[]
+     * @var array|MangaCard[]
      */
     public $manga = [];
 
@@ -65,10 +66,12 @@ class MangaGenre
     }
 
     /**
-     * @return array|MangaGenre[]
+     * @return array|MangaCard[]
      */
     public function getManga(): array
     {
         return $this->manga;
     }
+
+
 }

@@ -115,8 +115,6 @@ class AnimeCardParser implements ParserInterface
      */
     public function getGenres(): array
     {
-        $node = $this->crawler->filterXPath('//span[@class="genre"]/a');
-
         return $this->crawler->filterXPath('//span[@class="genre"]/a')
             ->each(
                 function (Crawler $crawler) {

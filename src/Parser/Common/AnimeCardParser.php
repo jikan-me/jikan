@@ -279,20 +279,72 @@ class AnimeCardParser implements ParserInterface
         // if anyone can fix this spaghetti code, most welcome
         $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
 
-        $licensors = [];
+        $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$licensors) {
+        $node->each(function(Crawler $c) use(&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Licensor")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$licensors) {
-                    $licensors[] = $c->text();
+                    ->each(function(Crawler $c) use(&$malUrl) {
+                        $malUrl[] = $c->text();
                 });
             }
         });
 
-        return $licensors;
+        return $malUrl;
+    }
+
+    /**
+     * @return string[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getThemes(): array
+    {
+        // if anyone can fix this spaghetti code, most welcome
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
+
+        $malUrl = [];
+
+        $node->each(function(Crawler $c) use(&$malUrl) {
+            $node = $c->filterXPath('//span');
+
+            if (str_contains($node->text(), "Theme")) {
+                $node->nextAll()->filterXPath('//a')
+                    ->each(function(Crawler $c) use(&$malUrl) {
+                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                    });
+            }
+        });
+
+        return $malUrl;
+    }
+
+    /**
+     * @return string[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getDemographics(): array
+    {
+        // if anyone can fix this spaghetti code, most welcome
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
+
+        $malUrl = [];
+
+        $node->each(function(Crawler $c) use(&$malUrl) {
+            $node = $c->filterXPath('//span');
+
+            if (str_contains($node->text(), "Demographic")) {
+                $node->nextAll()->filterXPath('//a')
+                    ->each(function(Crawler $c) use(&$malUrl) {
+                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                    });
+            }
+        });
+
+        return $malUrl;
     }
 
     /**

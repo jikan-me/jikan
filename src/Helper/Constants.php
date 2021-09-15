@@ -118,8 +118,8 @@ class Constants
     public const GENRE_ANIME_ADVENTURE = 2;
     public const GENRE_ANIME_CARS = 3;
     public const GENRE_ANIME_COMEDY = 4;
-    public const GENRE_ANIME_DEMENTIA = 5;
     public const GENRE_ANIME_AVANT_GARDE = 5;
+    public const GENRE_ANIME_DEMENTIA = 5; // Renamed to the above by MAL
     public const GENRE_ANIME_DEMONS = 6;
     public const GENRE_ANIME_MYSTERY = 7;
     public const GENRE_ANIME_DRAMA = 8;

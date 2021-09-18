@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\JString;
 use Jikan\Model\Common\MalUrl;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -52,7 +53,7 @@ class MalUrlParser
         $href = str_replace('https://myanimelist.net', '', $href);
 
         return new MalUrl(
-            $this->crawler->text(),
+            JString::cleanse($this->crawler->text()),
             'https://myanimelist.net'.$href
         );
     }

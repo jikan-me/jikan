@@ -21,7 +21,6 @@ class AnimeListItem
      */
     private $malId;
 
-
     /**
      * @var string
      */

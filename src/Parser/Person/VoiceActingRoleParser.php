@@ -50,7 +50,7 @@ class VoiceActingRoleParser implements ParserInterface
     {
 
         $role = $this->crawler
-            ->filterXPath('//h3[contains(@class, "h3_character_name")]');
+            ->filterXPath('//td[3]/div[2]');
 
         if (!$role->count()) {
             return null;
@@ -58,7 +58,7 @@ class VoiceActingRoleParser implements ParserInterface
 
         return JString::UTF8NbspTrim(
             JString::cleanse(
-                $role->siblings()->text()
+                $role->text()
             )
         );
     }

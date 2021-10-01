@@ -32,6 +32,6 @@ class CharacterPicturesRequest implements RequestInterface
     public function getPath(): string
     {
         // MyAnimeList wants <something> after /<id>/... it happily accepts jikan as a valid parameter though
-        return sprintf('https://myanimelist.net/character/%d/jikan/pictures', $this->id);
+        return sprintf('https://myanimelist.net/character/%d/jikan/pics', $this->id);
     }
 }

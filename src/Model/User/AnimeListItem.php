@@ -236,7 +236,7 @@ class AnimeListItem
             foreach ($item->genres as $genre) {
                 $instance->genres[] = new MalUrl(
                     $genre->name,
-                    Constants::BASE_URL . "/anime/genre/{$genre->name}"
+                    Constants::BASE_URL . "/anime/genre/{$genre->id}/{$genre->name}"
                 );
             }
         }
@@ -245,7 +245,7 @@ class AnimeListItem
             foreach ($item->demographics as $demographic) {
                 $instance->demographics[] = new MalUrl(
                     $demographic->name,
-                    Constants::BASE_URL . "/anime/genre/{$demographic->name}"
+                    Constants::BASE_URL . "/anime/genre/{$demographic->id}/{$demographic->name}"
                 );
             }
         }

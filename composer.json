@@ -26,7 +26,7 @@
     },
     "require": {
         "fabpot/goutte": "^4.0",
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "ext-json": "*"
     },
     "require-dev": {

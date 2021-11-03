@@ -6,7 +6,7 @@
  *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.
  *
  *    Jikan is NOT affiliated with MyAnimeList.net
- *    This library does not perform any rate limitations, so use it responsibly.
+ *    This library does not perform any rate limitations or caching, so use it responsibly.
  */
 
 namespace Jikan\MyAnimeList;
@@ -1207,7 +1207,14 @@ class MalClient
      */
     public function getUserReviews(Request\User\UserReviewsRequest $request) : Model\User\Reviews\UserReviews
     {
+        try {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
+        } catch (\Exception $e) {
+            if ($e->getCode() === 404) {
+                return Model\User\Reviews\UserReviews::mock();
+            }
+            throw $e;
+        }
         try {
             $parser = new Parser\User\Reviews\UserReviewsParser($crawler);
             return $parser->getModel();

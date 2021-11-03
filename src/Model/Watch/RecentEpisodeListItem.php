@@ -23,7 +23,7 @@ class RecentEpisodeListItem
     /**
      * @var string
      */
-    private $name;
+    private $title;
 
     /**
      * @var bool
@@ -45,9 +45,41 @@ class RecentEpisodeListItem
 
         $instance->malId = $malId;
         $instance->url = $url;
-        $instance->name = $title;
+        $instance->title = $title;
         $instance->premium = $premium;
 
         return $instance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPremium(): bool
+    {
+        return $this->premium;
     }
 }

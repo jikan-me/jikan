@@ -404,7 +404,7 @@ class MalClient
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Common\PicturesPageParser($crawler);
+            $parser = new Parser\Common\DefaultPicturesPageParser($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {

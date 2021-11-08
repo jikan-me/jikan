@@ -35,7 +35,7 @@ class CharactersParser
     public function getCharacters(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(@class, "anime-character-container")]/table')
+            ->filterXPath('//div[contains(@class, "manga-character-container")]/table')
             ->each(
                 function (Crawler $crawler) {
                     return CharacterListItem::fromParser(new CharacterListItemParser($crawler));

@@ -49,7 +49,7 @@ class VoiceActingRoleParser implements ParserInterface
     public function getRole(): ?string
     {
         $role = $this->crawler
-            ->filterXPath('//h3[contains(@class, "h3_character_name")]');
+            ->filterXPath('//td[3]/div[2]');
 
         if (!$role->count()) {
             return null;
@@ -57,7 +57,7 @@ class VoiceActingRoleParser implements ParserInterface
 
         return JString::UTF8NbspTrim(
             JString::cleanse(
-                $role->siblings()->text()
+                $role->text()
             )
         );
     }
@@ -69,7 +69,7 @@ class VoiceActingRoleParser implements ParserInterface
     public function getAnimeMeta(): Model\Common\AnimeMeta
     {
         $imageUrl = $this->crawler->filterXPath('//td[1]/div/a/img');
-        $url = $this->crawler->filterXPath('//td[2]/a');
+        $url = $this->crawler->filterXPath('//td[2]/div/a');
 
         return new Model\Common\AnimeMeta(
             $url->text(),
@@ -86,7 +86,7 @@ class VoiceActingRoleParser implements ParserInterface
     public function getCharacterMeta(): Model\Common\CharacterMeta
     {
         $imageUrl = $this->crawler->filterXPath('//td[4]/div/a/img');
-        $url = $this->crawler->filterXPath('//td[3]/h3/a');
+        $url = $this->crawler->filterXPath('//td[3]/div/a');
 
         return new Model\Common\CharacterMeta(
             $url->text(),

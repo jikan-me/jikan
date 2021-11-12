@@ -723,7 +723,13 @@ class AnimeParser implements ParserInterface
      */
     public function getOpeningThemes(): array
     {
-        return $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]/table/tr')
+        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]/table/tr');
+
+        if (preg_match('~No opening themes have been added to this title~', $node->text())) {
+            return [];
+        }
+
+        return $node
             ->each(function (Crawler $crawler) {
                 return JString::cleanse($crawler->text());
             });
@@ -736,7 +742,13 @@ class AnimeParser implements ParserInterface
      */
     public function getEndingThemes(): array
     {
-        return $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]/table/tr')
+        $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]/table/tr');
+
+        if (preg_match('~No ending themes have been added to this title~', $node->text())) {
+            return [];
+        }
+
+        return $node
             ->each(function (Crawler $crawler) {
                 return JString::cleanse($crawler->text());
             });

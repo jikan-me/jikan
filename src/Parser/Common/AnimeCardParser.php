@@ -115,7 +115,22 @@ class AnimeCardParser implements ParserInterface
      */
     public function getGenres(): array
     {
-        return $this->crawler->filterXPath('//span[contains(@class, "genre")]/a')
+        return $this->crawler->filterXPath('//span[@class="genre"]/a')
+            ->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+    }
+
+    /**
+     * @return array|\Jikan\Model\Common\MalUrl[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->crawler->filterXPath('//span[@class="genre explicit"]/a')
             ->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
@@ -259,15 +274,75 @@ class AnimeCardParser implements ParserInterface
      */
     public function getLicensors(): array
     {
-        $licensors = $this->crawler->filterXPath('//p[contains(@class, "licensors")]');
+        // if anyone can fix this spaghetti code, most welcome
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
 
-        if (!$licensors->count()) {
-            return [];
-        }
-        $licensors = JString::cleanse($licensors->attr('data-licensors'));
-        $licensors = explode(',', $licensors);
+        $malUrl = [];
 
-        return array_filter($licensors);
+        $node->each(function(Crawler $c) use(&$malUrl) {
+            $node = $c->filterXPath('//span');
+
+            if (str_contains($node->text(), "Licensor")) {
+                $node->nextAll()->filterXPath('//a')
+                    ->each(function(Crawler $c) use(&$malUrl) {
+                        $malUrl[] = $c->text();
+                    });
+            }
+        });
+
+        return $malUrl;
+    }
+
+    /**
+     * @return string[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getThemes(): array
+    {
+        // if anyone can fix this spaghetti code, most welcome
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
+
+        $malUrl = [];
+
+        $node->each(function(Crawler $c) use(&$malUrl) {
+            $node = $c->filterXPath('//span');
+
+            if (str_contains($node->text(), "Theme")) {
+                $node->nextAll()->filterXPath('//a')
+                    ->each(function(Crawler $c) use(&$malUrl) {
+                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                    });
+            }
+        });
+
+        return $malUrl;
+    }
+
+    /**
+     * @return string[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getDemographics(): array
+    {
+        // if anyone can fix this spaghetti code, most welcome
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
+
+        $malUrl = [];
+
+        $node->each(function(Crawler $c) use(&$malUrl) {
+            $node = $c->filterXPath('//span');
+
+            if (str_contains($node->text(), "Demographic")) {
+                $node->nextAll()->filterXPath('//a')
+                    ->each(function(Crawler $c) use(&$malUrl) {
+                        $malUrl[] = (new MalUrlParser($c))->getModel();
+                    });
+            }
+        });
+
+        return $malUrl;
     }
 
     /**

@@ -63,6 +63,21 @@ class MangaCard
     protected $genres;
 
     /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $explicitGenres;
+
+    /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $themes;
+
+    /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $demographics;
+
+    /**
      * @var MalUrl[]
      */
     protected $authors;
@@ -111,6 +126,9 @@ class MangaCard
         $instance->volumes = $parser->getVolumes();
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
+        $instance->themes = $parser->getThemes();
+        $instance->demographics = $parser->getDemographics();
         $instance->type = $parser->getType();
         $instance->authors = $parser->getAuthor();
         $instance->score = $parser->getMangaScore();
@@ -123,6 +141,30 @@ class MangaCard
     public function __toString()
     {
         return (string)$this->url;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
     }
 
     /**

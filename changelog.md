@@ -1,5 +1,15 @@
 ## Changelog
 
+### 
+
+## 2.17.0 - Sep 16, 21
+
+- Added support for MAL's new [genre overhaul](https://myanimelist.net/forum/?topicid=1956762): `themes`, `demographics`, `explicitGenres`
+- Updated Constants to reflect new and modified genres (while retaining BC). Some genres have been deleted or merged with others so they may return 404, check [Constants](https://github.com/jikan-me/jikan/blob/62f3e12cbcc8d841b3f923e4317f0b50f28f0574/src/Helper/Constants.php) for details
+- Anime/Manga Genres List now returns additional arrays for `themes`, `demographics`, `explicitGenres` as they have been split up from `genres`
+- Added parser support for Anime and Manga External Links https://github.com/jikan-me/jikan/issues/353
+- Parser bug fixes
+
 ### 2.16.0 - Jan 27, 20
 - Added **Top Reviews**(Anime, Manga & Best Voted (includes both)) parsing [#251](/../../issues/251)
 ```php
@@ -49,46 +59,46 @@ $genres = $jikan->getMangaGenres(
 
 - Parser bug fixes
 - Improved image quality parsing for some requests
-    `\Jikan\Helper\Parser::parseImageQuality($imageUrl)` now removes `v` from the end of images, which resulted in a smaller thumbnail
+  `\Jikan\Helper\Parser::parseImageQuality($imageUrl)` now removes `v` from the end of images, which resulted in a smaller thumbnail
 
 
 ### 2.9.0 - Nov 11, 19
 - **[Anime Episode Details]**
-    - Added feature request [jikan#229](https://github.com/jikan-me/jikan/issues/229)
+	- Added feature request [jikan#229](https://github.com/jikan-me/jikan/issues/229)
 - **[User Profile]**
-    - Added `userId` property [jikan-rest#74](https://github.com/jikan-me/jikan-rest/issues/74)
-    
+	- Added `userId` property [jikan-rest#74](https://github.com/jikan-me/jikan-rest/issues/74)
+
 ### 2.8.6 - Aug 18, 19
 - Bug fixes
 - **[Search]**
-    - Throws `BadResponseException` if search query is < 3
+	- Throws `BadResponseException` if search query is < 3
 
 ### 2.8.0 - Apr 30, 19
 - **[User List : Anime|Manga]**
-    - Throw `BadResponseException` instead of `ParserException` when the request fails [#217](/../../issues/217)
-    - Add list filtering & sorting [jikan-rest#49](https://github.com/jikan-me/jikan-rest/issues/49)
-    - Replace `StudioMeta`, `LicensorMeta` & `MagazineMeta` with `MalUrl` intead
-        - This will further provide properties like `type`, `url`
+	- Throw `BadResponseException` instead of `ParserException` when the request fails [#217](/../../issues/217)
+	- Add list filtering & sorting [jikan-rest#49](https://github.com/jikan-me/jikan-rest/issues/49)
+	- Replace `StudioMeta`, `LicensorMeta` & `MagazineMeta` with `MalUrl` intead
+		- This will further provide properties like `type`, `url`
 - **[Search : Anime|Manga]**
-    - Add result ordering & sorting [jikan-rest#48](https://github.com/jikan-me/jikan-rest/issues/48)
-    
+	- Add result ordering & sorting [jikan-rest#48](https://github.com/jikan-me/jikan-rest/issues/48)
+
 ### 2.7.0 - Apr 14, 19
-- **[Anime|Manga]** 
-    - `EpisodeListItem` `aired` property to return `DateTimeImmutable` instead of `DateRange`
-    - [Bug Fix] Stats Score refactoring; returns `AnimeStatsScore`/`MangaStatsScore` object instead of array now - [#216](/../../issues/216)
-    - Fix `AnimeListItem`/`MangaListItem` parsing date formats incorrectly
+- **[Anime|Manga]**
+	- `EpisodeListItem` `aired` property to return `DateTimeImmutable` instead of `DateRange`
+	- [Bug Fix] Stats Score refactoring; returns `AnimeStatsScore`/`MangaStatsScore` object instead of array now - [#216](/../../issues/216)
+	- Fix `AnimeListItem`/`MangaListItem` parsing date formats incorrectly
 - **[Helper]** fix `parseDateMDY` returning incorrect date
 - **[Jikan.php]**
-    - fix `PersonSearch`incorrect Request class hinting
-    - add `UserMangaList`
+	- fix `PersonSearch`incorrect Request class hinting
+	- add `UserMangaList`
 - **[MalClient.php]**
-    - `getAnimeEpisodes` with no episodes return empty episodes array now instead of BadResponseException (404)
-    - `getPersonSearch` with no results returns empty array now instead of BadResponseException (404)
-    - `getCharacterSearch` with no results returns empty array now instead of BadResponseException (404)
-    - `getCharacter` returns BadResponseException (404) now if invalid ID is provided
-    - Fix guzzle dep injection being overriden in some cases
+	- `getAnimeEpisodes` with no episodes return empty episodes array now instead of BadResponseException (404)
+	- `getPersonSearch` with no results returns empty array now instead of BadResponseException (404)
+	- `getCharacterSearch` with no results returns empty array now instead of BadResponseException (404)
+	- `getCharacter` returns BadResponseException (404) now if invalid ID is provided
+	- Fix guzzle dep injection being overriden in some cases
 - **[User]**
-    - Fix `UserProfileParser`'s `getUsername()` returning the URL instead of the username
+	- Fix `UserProfileParser`'s `getUsername()` returning the URL instead of the username
 - Added default values to some models
 - Other minor code and bug fixes
 
@@ -134,24 +144,24 @@ $genres = $jikan->getMangaGenres(
 
 ### 2.0.0-rc.1 - Aug 5, 18
 - Complete refactor using better dependencies
-    - Parser is more robust and stable
-    - Library now implements PSR2
+	- Parser is more robust and stable
+	- Library now implements PSR2
 - Clean data values
 - Added **Season List**
 - Added **Top**
-    - Characters
-    - People
+	- Characters
+	- People
 - Added **Genre**
-    - Anime listing by genre
-    - Manga listing by genre
+	- Anime listing by genre
+	- Manga listing by genre
 - Added **Producers**
-    - Anime listing by producer
+	- Anime listing by producer
 - Added **Magazine**
-    - Manga listing by magazine
+	- Manga listing by magazine
 - Added **User**
-    - Profile
-    - History
-    - Friends
+	- Profile
+	- History
+	- Friends
 - Complete syntax revamp
 - And a whole lot more!
 
@@ -174,14 +184,14 @@ $genres = $jikan->getMangaGenres(
 		- Only supported for `ANIME` and `MANGA` type searches
 
 ### 1.15.9 stable - May 14, 18
-- **[Search]** 
+- **[Search]**
 	- Bug fix for `genre`, `genreInclude`, `startDate` & `endDate`
 - **[SearchConfig]** `Jikan\Helpers\SearchConfig`
 	- `setGenre` now no longer takes an array for multiple genres, but rather Variadic arguments.
-		e.g `setGenre(1, 18)`
+	  e.g `setGenre(1, 18)`
 
 ### 1.15.8 stable - May 12, 18
-- **[Search]** 
+- **[Search]**
 	- Bug fix for [#139](/../../issues/139) - 1.15.6
 	- Bug fix for [#138](/../../issues/138) - 1.15.7
 	- HTML special character decode for some titles
@@ -230,7 +240,7 @@ $genres = $jikan->getMangaGenres(
 
 ### 1.9.0 stable - March 3, 18
 - **[Anime|Manga]**
-	- Add extended data "forum topics" parsing [#19](/../../issues/19) - 1.8.0 
+	- Add extended data "forum topics" parsing [#19](/../../issues/19) - 1.8.0
 	- Add extended data "more_info" parsing [#17](/../../issues/17)
 
 ### 1.7.2 stable - February 25, 18
@@ -250,7 +260,7 @@ $genres = $jikan->getMangaGenres(
 ### 1.6.2 stable - January 26, 18
 - **[Anime|Manga]**
 	- Add stats parsing - 1.6.0
-- **[Core]**	
+- **[Core]**
 	- Fixed an impactful bug which had the parser requesting the page *twice* in some extend cases (was i drunk coding this part?!) - 1.6.1
 		- Was doubling chances of rate limiting
 		- Slowing down the script 2x
@@ -308,7 +318,7 @@ $genres = $jikan->getMangaGenres(
 	- Fixed parsing bug for anime and manga that only have one `aired` and `published` date.
 
 ### 1.2.0 stable - December 2, 17
-- **[Anime|Manga]** 
+- **[Anime|Manga]**
 	- Convert Dates to ISO Format - Enhancement [#72](/../../issues/72)
 	- `aired` will now be an array returning ISO 8601
 		- You can find the string version of the date, like before, in a new field; `aired_string`
@@ -317,7 +327,7 @@ $genres = $jikan->getMangaGenres(
 	- Remmoved extra forward slash in the related item URL
 	- Added boolean field `airing` & `publishing` for anime & manga respectively
 	- **[Manga]** Removed extra whitespace for `title_japanese`
-- **[Person]** 
+- **[Person]**
 	- Fixed `More` field not parsing - Issue [#61](/../../issues/61)
 	- Changed `website` to `website_url`
 
@@ -336,7 +346,7 @@ $genres = $jikan->getMangaGenres(
 - **[Character]** Added `link_canonical`
 
 ### 1.1.0 stable - November 9, 17
-- **[Character]** 
+- **[Character]**
 	- Fixed name having whitespace appended to it
 	- Fixed name not showing up for characters without kanji names
 	- Rename name_japanese -> name_kanji (since that's what it actually is)
@@ -346,18 +356,18 @@ $genres = $jikan->getMangaGenres(
 
 ### 1.0.1 stable - October 5, 17
 - **[Anime]**
-    - Fixed [#65](/../../issues/65)
+	- Fixed [#65](/../../issues/65)
 
 ### 1.0.0 stable - July 11, 17
 - **Added** Composer
 - **Refactored** entire code base to meet with proper PSR compliants
-- **[Person]** 
-    - Name Parsing [#44](/../../issues/44)
-    - Alternate name issue fixed [#47](/../../issues/47)
-- **[Anime/Manga]** 
-    - Adaption contains HTML tags [#45](/../../issues/45)
-    - Related anime/manga parse the ID now [#52](/../../issues/52)
-    - **[Episodes]** Romanji/Japanese titles swapped now fixed [#46](/../../issues/46)
+- **[Person]**
+	- Name Parsing [#44](/../../issues/44)
+	- Alternate name issue fixed [#47](/../../issues/47)
+- **[Anime/Manga]**
+	- Adaption contains HTML tags [#45](/../../issues/45)
+	- Related anime/manga parse the ID now [#52](/../../issues/52)
+	- **[Episodes]** Romanji/Japanese titles swapped now fixed [#46](/../../issues/46)
 - **Fixed** Some responses showing HTML tags
 - HTML special characters are now decoded to Unicode
 - **[Character]** Canonical Link parsing [#50](/../../issues/50)
@@ -398,9 +408,9 @@ $genres = $jikan->getMangaGenres(
 	- Check response types @ [http://jikan.me/docs#rest-manga](http://jikan.me/docs#rest-manga)
 	- Returns empty array if there's no authors set
 	- `authors` is renamed to `author`
-- Refactors `genres` array response 
+- Refactors `genres` array response
 	- Check response types @ [http://jikan.me/docs#rest-manga](http://jikan.me/docs#rest-manga)
-	- `genres` is renamed to `genre` 
+	- `genres` is renamed to `genre`
 - `background` returns empty string if there's no background available
 
 ### 0.2.2 alpha - June 2, 17
@@ -441,11 +451,11 @@ $genres = $jikan->getMangaGenres(
 ### 0.1.4 alpha - May 16, 17
 - Jikan library is renamed from **mal-uapi.php** to **jikan.php**
 - Namespace changed from **MAL** to **Jikan**
-	```php
-	$jikan = new \Jikan\GET;
-	$jikan->anime(1);
-	$anime = $jikan->data;
-	```
+  ```php
+  $jikan = new \Jikan\GET;
+  $jikan->anime(1);
+  $anime = $jikan->data;
+  ```
 - Main class is changed from **GET** to **Get**
 - Completed person fetch
 - Added canonical link for Characters in the return data
@@ -486,10 +496,10 @@ $genres = $jikan->getMangaGenres(
 ### 0.1.3 alpha - May 15, 17
 - Completed character fetch data
 	- You can now fetch animeography, mangaography, voice actors and member favorites of that character
-	```php
-	$mal = new \MAL\GET;
-	$character = $mal->character(1)->data;
-	```
+  ```php
+  $mal = new \MAL\GET;
+  $character = $mal->character(1)->data;
+  ```
 
 ### 0.1.2 alpha - May 12, 17
 - Added Character fetch, you can now get character data.
@@ -499,23 +509,23 @@ $genres = $jikan->getMangaGenres(
 - Added chaining methods (return $this)
 	- Note that this only works for similar type gets, for example Anime, Manga, Characters
 	- So you can fetch extra stuff such as videos, episodes, reviews, etc from their own respective pages like this:
-	```php
-		$mal = new \MAL\GET;
-		$anime = $mal->anime(1)->videos()->episode()->reviews();
-	```
+  ```php
+      $mal = new \MAL\GET;
+      $anime = $mal->anime(1)->videos()->episode()->reviews();
+  ```
 	- This will be slower as every method is fetching a completely new page dedicated to that data
 - Simply calling the anime or manga method like this,
-	```php
-		$anime = $mal->anime(1)
-	```
-	will no longer return the data! The data will be saved to its array, which you'll need to use a new method to return it.
-	The reason for this is chained methods to fetch other related data as stated above!
-	```php
-		$anime = $mal->anime(1)->return();
-		//or
-		$anime = $mail->anime(1)->data;
-		//same stuff
-	```
+  ```php
+      $anime = $mal->anime(1)
+  ```
+  will no longer return the data! The data will be saved to its array, which you'll need to use a new method to return it.
+  The reason for this is chained methods to fetch other related data as stated above!
+  ```php
+      $anime = $mal->anime(1)->return();
+      //or
+      $anime = $mail->anime(1)->data;
+      //same stuff
+  ```
 
 
 ### 0.1.1 alpha - Apr 17, 17

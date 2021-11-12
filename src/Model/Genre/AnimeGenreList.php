@@ -20,6 +20,22 @@ class AnimeGenreList
     public $genres = [];
 
     /**
+     * @var array|AnimeGenreListItem[]
+     */
+    public $explicitGenres = [];
+
+    /**
+     * @var array|AnimeGenreListItem[]
+     */
+    public $themes = [];
+
+    /**
+     * @var array|AnimeGenreListItem[]
+     */
+    public $demographics = [];
+
+
+    /**
      * @param AnimeGenreListParser $parser
      *
      * @return AnimeGenre
@@ -31,8 +47,35 @@ class AnimeGenreList
         $instance = new self();
 
         $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
+        $instance->themes = $parser->getThemes();
+        $instance->demographics = $parser->getDemographics();
 
         return $instance;
+    }
+
+    /**
+     * @return array|AnimeGenreListItem[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return array|AnimeGenreListItem[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return array|AnimeGenreListItem[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
     }
 
     /**

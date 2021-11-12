@@ -63,6 +63,21 @@ class AnimeCard
     protected $genres;
 
     /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $explicitGenres;
+
+    /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $themes;
+
+    /**
+     * @var \Jikan\Model\Common\MalUrl[]
+     */
+    protected $demographics;
+
+    /**
      * @var string
      */
     protected $source;
@@ -126,12 +141,39 @@ class AnimeCard
         $instance->episodes = $parser->getEpisodes();
         $instance->members = $parser->getMembers();
         $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
+        $instance->themes = $parser->getThemes();
+        $instance->demographics = $parser->getDemographics();
         $instance->source = $parser->getSource();
         $instance->producers = $parser->getProducer();
         $instance->score = $parser->getAnimeScore();
         $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
         $instance->kids = $parser->isKids();
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
     }
 
     /**

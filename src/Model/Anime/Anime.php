@@ -4,6 +4,7 @@ namespace Jikan\Model\Anime;
 
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Url;
 use Jikan\Model\Common\YoutubeMeta;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Anime\AnimeParser;
@@ -172,6 +173,21 @@ class Anime
     private $genres = [];
 
     /**
+     * @var MalUrl[]
+     */
+    private $explicitGenres = [];
+
+    /**
+     * @var MalUrl[]
+     */
+    private $demographics = [];
+
+    /**
+     * @var MalUrl[]
+     */
+    private $themes = [];
+
+    /**
      * @var string[]
      */
     private $openingThemes = [];
@@ -180,6 +196,11 @@ class Anime
      * @var string[]
      */
     private $endingThemes = [];
+
+    /**
+     * @var Url[]
+     */
+    private $externalLinks = [];
 
     /**
      * Create an instance from an AnimeParser parser
@@ -214,6 +235,9 @@ class Anime
         $instance->studios = $parser->getStudios();
         $instance->source = $parser->getSource();
         $instance->genres = $parser->getGenres();
+        $instance->explicitGenres = $parser->getExplicitGenres();
+        $instance->demographics = $parser->getDemographics();
+        $instance->themes = $parser->getThemes();
         $instance->duration = $parser->getDuration();
         $instance->rating = $parser->getRating();
         $instance->score = $parser->getScore();
@@ -222,12 +246,45 @@ class Anime
         $instance->popularity = $parser->getPopularity();
         $instance->members = $parser->getMembers();
         $instance->favorites = $parser->getFavorites();
+        $instance->externalLinks = $parser->getExternalLinks();
         $instance->related = $parser->getRelated();
         $instance->openingThemes = $parser->getOpeningThemes();
         $instance->endingThemes = $parser->getEndingThemes();
         $instance->background = $parser->getBackground();
 
         return $instance;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return Url[]
+     */
+    public function getExternalLinks(): array
+    {
+        return $this->externalLinks;
     }
 
     /**

@@ -92,9 +92,9 @@ class UserMangaListRequest implements RequestInterface
             'published_from_year' => $this->publishedFrom[0],
             'published_from_month' => $this->publishedFrom[1],
             'published_from_day' => $this->publishedFrom[2],
-            'published_to_year' => $this->publishedFrom[0],
-            'published_to_month' => $this->publishedFrom[1],
-            'published_to_day' => $this->publishedFrom[2],
+            'published_to_year' => $this->publishedTo[0],
+            'published_to_month' => $this->publishedTo[1],
+            'published_to_day' => $this->publishedTo[2],
             'magazine' => $this->magazine,
             'publishing_status' => $this->publishingStatus
             ]

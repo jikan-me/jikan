@@ -8,6 +8,7 @@ use Jikan\Model\Anime\Anime;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Common\MalUrlParser;
+use Jikan\Parser\Common\UrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -353,7 +354,114 @@ class AnimeParser implements ParserInterface
             );
         }
 
-        return []; // If `No genres have been added yet`
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Genre:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getExplicitGenres(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Explicit Genres:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Explicit Genre:"]');
+
+        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getDemographics(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Demographic:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Demographics:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
+    }
+
+    /**
+     * @return MalUrl[]
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getThemes(): array
+    {
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Theme:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        $genre = $this->crawler
+            ->filterXPath('//span[text()="Themes:"]');
+
+        if ($genre->count()) {
+            return $genre->parents()->first()->filterXPath('//a')->each(
+                function (Crawler $crawler) {
+                    return (new MalUrlParser($crawler))->getModel();
+                }
+            );
+        }
+
+        return [];
     }
 
     /**
@@ -517,6 +625,25 @@ class AnimeParser implements ParserInterface
         return JString::cleanse(
             str_replace([$favorite->text(), ','], '', $favorite->parents()->text())
         );
+    }
+
+    /**
+     * @return array|MalUrl[]
+     * @throws \InvalidArgumentException
+     */
+    public function getExternalLinks(): array
+    {
+        $links = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[1]/div/h2[contains(text(), "External Links")]');
+
+        if (!$links->count()) {
+            return [];
+        }
+
+        return $links->nextAll()->filterXPath('//div[contains(@class, "pb16")]/a')
+            ->each(function(Crawler  $c) {
+                return (new UrlParser($c))->getModel();
+            });
     }
 
     /**

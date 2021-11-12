@@ -39,7 +39,7 @@ class RecentMangaReview extends MangaReview
     {
         $instance = new self();
 
-        $instance->manga = $parser->getManga();
+        $instance->entry = $parser->getManga();
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();

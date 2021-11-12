@@ -132,6 +132,16 @@ class MangaListItem
     private $magazines = [];
 
     /**
+     * @var array|MalUrl
+     */
+    private $genres = [];
+
+    /**
+     * @var array|MalUrl
+     */
+    private $demographics = [];
+
+    /**
      * @param  \stdClass $item
      * @return MangaListItem
      */
@@ -175,6 +185,24 @@ class MangaListItem
             }
         }
 
+        if ($item->genres !== null && !empty($item->genres)) {
+            foreach ($item->genres as $genre) {
+                $instance->genres[] = new MalUrl(
+                    $genre->name,
+                    Constants::BASE_URL . "/manga/genre/{$genre->id}/{$genre->name}"
+                );
+            }
+        }
+
+        if ($item->demographics !== null && !empty($item->demographics)) {
+            foreach ($item->demographics as $demographic) {
+                $instance->demographics[] = new MalUrl(
+                    $demographic->name,
+                    Constants::BASE_URL . "/manga/genre/{$demographic->id}/{$demographic->name}"
+                );
+            }
+        }
+
         return $instance;
     }
 
@@ -208,6 +236,22 @@ class MangaListItem
     public function getImages(): CommonImageResource
     {
         return $this->images;
+    }
+
+    /**
+     * @return array|MalUrl
+     */
+    public function getGenres()
+    {
+        return $this->genres;
+    }
+
+    /**
+     * @return array|MalUrl
+     */
+    public function getDemographics()
+    {
+        return $this->demographics;
     }
 
     /**

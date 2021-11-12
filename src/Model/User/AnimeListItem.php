@@ -163,6 +163,16 @@ class AnimeListItem
     private $licensors = [];
 
     /**
+     * @var array|MalUrl
+     */
+    private $genres = [];
+
+    /**
+     * @var array|MalUrl
+     */
+    private $demographics = [];
+
+    /**
      * @param  \stdClass $item
      * @return AnimeListItem
      */
@@ -225,6 +235,24 @@ class AnimeListItem
             }
         }
 
+        if ($item->genres !== null && !empty($item->genres)) {
+            foreach ($item->genres as $genre) {
+                $instance->genres[] = new MalUrl(
+                    $genre->name,
+                    Constants::BASE_URL . "/anime/genre/{$genre->id}/{$genre->name}"
+                );
+            }
+        }
+
+        if ($item->demographics !== null && !empty($item->demographics)) {
+            foreach ($item->demographics as $demographic) {
+                $instance->demographics[] = new MalUrl(
+                    $demographic->name,
+                    Constants::BASE_URL . "/anime/genre/{$demographic->id}/{$demographic->name}"
+                );
+            }
+        }
+
         return $instance;
     }
 
@@ -242,6 +270,22 @@ class AnimeListItem
     public function getTitle(): string
     {
         return $this->title;
+    }
+
+    /**
+     * @return array|MalUrl
+     */
+    public function getGenres()
+    {
+        return $this->genres;
+    }
+
+    /**
+     * @return array|MalUrl
+     */
+    public function getDemographics()
+    {
+        return $this->demographics;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Jikan\Parser\User\Profile;
 
 use Jikan\Helper\Constants;
 use Jikan\Helper\Parser;
+use Jikan\Model\Common\CharacterMeta;
 use Jikan\Model\User\FavoriteAnime;
 use Jikan\Model\User\FavoriteCharacter;
 use Jikan\Model\User\FavoriteManga;
@@ -50,15 +51,15 @@ class FavoritesParser
      */
     public function getAnime(): array
     {
-        return $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
+        return $this->crawler->filterXPath('//div[@id=\'anime_favorites\']/div[@class=\'fav-slide-outer\']/ul/li')
             ->each(
                 function (Crawler $crawler) {
                     return new FavoriteAnime(
-                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
-                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('src')),
-                        $crawler->filterXPath('//div[position() = 2]/span')->text()
+                        $crawler->filterXPath('//a/span[contains(@class, \'title\')]')->text(),
+                        $crawler->filterXPath('//a')->attr('href'),
+                        Parser::parseImageQuality($crawler->filterXPath('//a/img')
+                            ->attr('data-src')),
+                        $crawler->filterXPath('//a/span[contains(@class, \'users\')]')->text()
                     );
                 }
             );
@@ -70,15 +71,16 @@ class FavoritesParser
      */
     public function getManga(): array
     {
-        return $this->crawler->filterXPath('//ul[@class=\'favorites-list manga\']/li')
+
+        return $this->crawler->filterXPath('//div[@id=\'manga_favorites\']/div[@class=\'fav-slide-outer\']/ul/li')
             ->each(
                 function (Crawler $crawler) {
                     return new FavoriteManga(
-                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
-                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('src')),
-                        $crawler->filterXPath('//div[position() = 2]/span')->text()
+                        $crawler->filterXPath('//a/span[contains(@class, \'title\')]')->text(),
+                        $crawler->filterXPath('//a')->attr('href'),
+                        Parser::parseImageQuality($crawler->filterXPath('//a/img')
+                            ->attr('data-src')),
+                        $crawler->filterXPath('//a/span[contains(@class, \'users\')]')->text()
                     );
                 }
             );
@@ -90,18 +92,14 @@ class FavoritesParser
      */
     public function getCharacters(): array
     {
-        return $this->crawler->filterXPath('//ul[@class=\'favorites-list characters\']/li')
+        return $this->crawler->filterXPath('//div[@id=\'character_favorites\']/div[@class=\'fav-slide-outer\']/ul/li')
             ->each(
                 function (Crawler $crawler) {
-                    return new FavoriteCharacter(
-                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
-                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('src')),
-                        new MalUrl(
-                            trim($crawler->filterXPath('//div[position() = 2]/span/a')->text()),
-                            Constants::BASE_URL . $crawler->filterXPath('//div[position() = 2]/span/a')->attr('href')
-                        )
+                    return new CharacterMeta(
+                        $crawler->filterXPath('//a/span[contains(@class, \'title\')]')->text(),
+                        Constants::BASE_URL.$crawler->filterXPath('//a')->attr('href'),
+                        Parser::parseImageQuality($crawler->filterXPath('//a/img')
+                            ->attr('data-src')),
                     );
                 }
             );
@@ -113,14 +111,14 @@ class FavoritesParser
      */
     public function getPeople(): array
     {
-        return $this->crawler->filterXPath('//ul[@class=\'favorites-list people\']/li')
+        return $this->crawler->filterXPath('//div[@id=\'person_favorites\']/div[@class=\'fav-slide-outer\']/ul/li')
             ->each(
                 function (Crawler $crawler) {
                     return new PersonMeta(
-                        $crawler->filterXPath('//div[position() = 2]/a')->text(),
-                        $crawler->filterXPath('//div[position() = 2]/a')->attr('href'),
-                        Parser::parseImageQuality($crawler->filterXPath('//div[position() = 1]/a/img')
-                            ->attr('src'))
+                        $crawler->filterXPath('//a/span[contains(@class, \'title\')]')->text(),
+                        Constants::BASE_URL.$crawler->filterXPath('//a')->attr('href'),
+                        Parser::parseImageQuality($crawler->filterXPath('//a/img')
+                            ->attr('data-src')),
                     );
                 }
             );

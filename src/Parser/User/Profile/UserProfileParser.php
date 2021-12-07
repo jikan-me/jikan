@@ -217,7 +217,7 @@ class UserProfileParser
     public function getFavorites(): Model\User\Favorites
     {
         // $node = $this->crawler->filterXPath('//ul[@class=\'favorites-list anime\']/li')
-        $node = $this->crawler->filterXPath('//div[contains(@class, \'user-favorites\')]');
+        $node = $this->crawler->filterXPath('//div[contains(@class, \'container-right\')]');
 
         return (new FavoritesParser($node))->getModel();
     }

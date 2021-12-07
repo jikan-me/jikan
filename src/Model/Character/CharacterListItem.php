@@ -46,43 +46,19 @@ class CharacterListItem
     }
 
     /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return CharacterImageResource
-     */
-    public function getImages(): CharacterImageResource
-    {
-        return $this->images;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
      * @return string
      */
     public function getRole(): string
     {
         return $this->role;
+    }
+
+    /**
+     * @return CharacterMeta
+     */
+    public function getCharacter(): CharacterMeta
+    {
+        return $this->character;
     }
 
     /**

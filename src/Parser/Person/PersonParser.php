@@ -280,17 +280,13 @@ class PersonParser implements ParserInterface
     public function getPersonAnimeStaffPositions(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[contains(text(), \'Anime Staff Positions\')]');
-
-        if (strpos($node->parents()->text(), 'No staff positions have been added to this person.')) {
-            return [];
-        }
+            ->filterXPath('//table[contains(@class, "js-table-people-staff")]/tr[contains(@class, "js-people-staff")]');
 
         if (!$node->count()) {
             return [];
         }
 
-        return $node->nextAll()->children()->each(
+        return $node->each(
             function (Crawler $c) {
                 return (new AnimeStaffPositionParser($c))->getModel();
             }

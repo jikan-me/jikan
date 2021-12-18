@@ -47,10 +47,11 @@ class AnimeStaffPositionParser implements ParserInterface
      */
     public function getPosition(): string
     {
+        $role = $this->crawler
+            ->filterXPath('//td[2]/div[2]');
+
         return JString::cleanse(
-            $this->crawler
-                ->filterXPath('//small')
-                ->text()
+            $role->text()
         );
     }
 
@@ -61,8 +62,8 @@ class AnimeStaffPositionParser implements ParserInterface
     public function getAnimeMeta(): Model\Common\AnimeMeta
     {
         return new Model\Common\AnimeMeta(
-            $this->crawler->filterXPath('//td[position() = 2]/a')->text(),
-            $this->crawler->filterXPath('//td[position() = 2]/a')->attr('href'),
+            $this->crawler->filterXPath('//td[position() = 2]/div/a')->text(),
+            $this->crawler->filterXPath('//td[position() = 2]/div/a')->attr('href'),
             $this->crawler->filterXPath('//td[position() = 1]/div/a/img')->attr('data-src')
         );
     }

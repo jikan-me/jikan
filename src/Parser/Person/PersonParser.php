@@ -259,7 +259,7 @@ class PersonParser implements ParserInterface
     public function getPersonVoiceActingRoles(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, "js-table-people-anime")]/tr[contains(@class, "js-people-anime")]');
+            ->filterXPath('//table[contains(@class, "js-table-people-character")]/tr[contains(@class, "js-people-character")]');
 
         if (!$node->count()) {
             return [];

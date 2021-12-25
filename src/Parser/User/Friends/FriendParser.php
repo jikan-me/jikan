@@ -60,7 +60,7 @@ class FriendParser implements ParserInterface
      */
     public function getName(): string
     {
-        return $this->crawler->filterXPath('//div[3]/a/strong')->text();
+        return $this->crawler->filterXPath('//div[3]/div/a')->text();
     }
 
     /**
@@ -69,7 +69,7 @@ class FriendParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return $this->crawler->filterXPath('//div[3]/a')->attr('href');
+        return $this->crawler->filterXPath('//div[3]/div/a')->attr('href');
     }
 
     /**
@@ -95,7 +95,7 @@ class FriendParser implements ParserInterface
     public function getLastOnline(): \DateTimeImmutable
     {
         return new \DateTimeImmutable(
-            JString::cleanse($this->crawler->filterXPath('//div[4]')->text()),
+            JString::cleanse($this->crawler->filterXPath('//div[contains(@class, "data")]/div[2]')->text()),
             new \DateTimeZone('UTC')
         );
     }

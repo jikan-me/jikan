@@ -259,7 +259,7 @@ class PersonParser implements ParserInterface
     public function getPersonVoiceActingRoles(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, "js-table-people-anime")]/tr[contains(@class, "js-people-anime")]');
+            ->filterXPath('//table[contains(@class, "js-table-people-character")]/tr[contains(@class, "js-people-character")]');
 
         if (!$node->count()) {
             return [];
@@ -280,17 +280,13 @@ class PersonParser implements ParserInterface
     public function getPersonAnimeStaffPositions(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[contains(text(), \'Anime Staff Positions\')]');
-
-        if (strpos($node->parents()->text(), 'No staff positions have been added to this person.')) {
-            return [];
-        }
+            ->filterXPath('//table[contains(@class, "js-table-people-staff")]/tr[contains(@class, "js-people-staff")]');
 
         if (!$node->count()) {
             return [];
         }
 
-        return $node->nextAll()->children()->each(
+        return $node->each(
             function (Crawler $c) {
                 return (new AnimeStaffPositionParser($c))->getModel();
             }
@@ -305,17 +301,13 @@ class PersonParser implements ParserInterface
     public function getPersonPublishedManga(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[contains(text(), \'Published Manga\')]');
-
-        if (strpos($node->parents()->text(), 'No published manga have been added to this person.')) {
-            return [];
-        }
+            ->filterXPath('//table[contains(@class, "js-table-people-manga")]/tr[contains(@class, "js-people-manga")]');
 
         if (!$node->count()) {
             return [];
         }
 
-        return $node->nextAll()->children()->each(
+        return $node->each(
             function (Crawler $c) {
                 return (new PublishedMangaParser($c))->getModel();
             }

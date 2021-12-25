@@ -50,7 +50,7 @@ class FriendParser implements ParserInterface
         return str_replace(
             ['thumbs/', '_thumb'],
             '',
-            $this->crawler->filterXPath('//div/a/img')->attr('src')
+            $this->crawler->filterXPath('//div/a/img')->attr('data-src')
         );
     }
 
@@ -79,8 +79,15 @@ class FriendParser implements ParserInterface
     public function getFriendsSince(): ?\DateTimeImmutable
     {
         $count = 0;
-        $text = $this->crawler->filterXPath('//div[last()]')->text();
+        $node = $this->crawler->filterXPath('//div[contains(@class, "data")]/div[3]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        $text = JString::cleanse($node->text());
         $text = preg_replace('/^Friends since (.*)$/', '$1', $text, -1, $count);
+
         if (!$count) {
             return null;
         }

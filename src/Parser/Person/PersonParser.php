@@ -301,17 +301,14 @@ class PersonParser implements ParserInterface
     public function getPersonPublishedManga(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[contains(text(), \'Published Manga\')]');
-
-        if (strpos($node->parents()->text(), 'No published manga have been added to this person.')) {
-            return [];
-        }
+            ->filterXPath('//table[contains(@class, \'js-table-people-manga\')]/tr');
 
         if (!$node->count()) {
             return [];
         }
 
-        return $node->nextAll()->children()->each(
+
+        return $node->each(
             function (Crawler $c) {
                 return (new PublishedMangaParser($c))->getModel();
             }

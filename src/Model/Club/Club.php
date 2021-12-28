@@ -32,17 +32,12 @@ class Club
     /**
      * @var string
      */
-    private $title;
+    private $name;
 
     /**
      * @var int
      */
-    private $membersCount;
-
-    /**
-     * @var int
-     */
-    private $picturesCount;
+    private $members;
 
     /**
      * @var string
@@ -57,7 +52,7 @@ class Club
     /**
      * @var string
      */
-    private $type;
+    private $access;
 
     /**
      * @var MalUrl[]
@@ -90,16 +85,16 @@ class Club
 
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
-        $instance->title = $parser->getTitle();
+        $instance->name = $parser->getTitle();
         $instance->images = ClubImageResource::factory($parser->getImageUrl());
-        $instance->membersCount = $parser->getMembersCount();
-        $instance->picturesCount = $parser->getPicturesCount();
+        $instance->members = $parser->getMembersCount();
+//        $instance->picturesCount = $parser->getPicturesCount();
         $instance->category = $parser->getCategory();
         $instance->created = $parser->getCreated();
         $instance->anime = $parser->getAnimeRelations();
         $instance->manga = $parser->getMangaRelations();
         $instance->characters = $parser->getCharacterRelations();
-        $instance->type = $parser->getType();
+        $instance->access = $parser->getType();
         $instance->staff = $parser->getStaff();
 
         return $instance;
@@ -132,25 +127,17 @@ class Club
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
      * @return int
      */
-    public function getMembersCount(): int
+    public function getMembers(): int
     {
-        return $this->membersCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPicturesCount(): int
-    {
-        return $this->picturesCount;
+        return $this->members;
     }
 
     /**
@@ -172,9 +159,9 @@ class Club
     /**
      * @return string
      */
-    public function getType(): string
+    public function getAccess(): string
     {
-        return $this->type;
+        return $this->access;
     }
 
     /**

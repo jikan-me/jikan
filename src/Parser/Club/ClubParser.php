@@ -106,12 +106,14 @@ class ClubParser implements ParserInterface
      */
     public function getCategory(): string
     {
-        return JString::cleanse(
+        $category = JString::cleanse(
             Parser::removeChildNodes(
                 $this->crawler
                     ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[6]')
             )->text()
         );
+
+        return strtolower($category);
     }
 
     /**

@@ -157,12 +157,15 @@ We have a free [REST API service](https://jikan.moe), if you wish to support us 
 ## Patrons
 
 - Aaron Treinish
+- Aika Fujiwara
 - Cesar Irad Mendoza
+- Fro116
 - Jason Weatherly
 - Jesse
 - Kundan Chintamaneni
 - Kururin
 - Purplepinapples
+- Ryo Ando
 - Sakamotodesu
 - TeraNovaLP
 

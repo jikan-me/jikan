@@ -1,4 +1,4 @@
-[![Jikan](http://i.imgur.com/ctoJ3Jp.png)](#jikan---unofficial-myanimelistnet-php-api)
+[![Jikan](https://i.imgur.com/ccx3pxo.png)](#jikan---unofficial-myanimelistnet-php-api)
 
 # Jikan - Unofficial MyAnimeList.net PHP API
 

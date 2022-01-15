@@ -39,6 +39,7 @@ class Constants
 
     public const TOP_MANGA = 'manga';
     public const TOP_NOVEL = 'novels';
+    public const TOP_LIGHT_NOVEL = 'lightnovels';
     public const TOP_ONE_SHOT = 'oneshots';
     public const TOP_DOUJINSHI = 'doujin';
     public const TOP_MANHWA = 'manhwa';

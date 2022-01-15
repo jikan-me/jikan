@@ -40,6 +40,7 @@ class TopMangaRequest implements RequestInterface
                 [
                     Constants::TOP_MANGA,
                     Constants::TOP_NOVEL,
+                    Constants::TOP_LIGHT_NOVEL,
                     Constants::TOP_ONE_SHOT,
                     Constants::TOP_DOUJINSHI,
                     Constants::TOP_MANHWA,

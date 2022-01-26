@@ -57,7 +57,7 @@ class MangaCardParser implements ParserInterface
      */
     public function getMangaUrl(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "title")]/p/a')->attr('href');
+        return $this->crawler->filterXPath('//div/div/h2/a')->attr('href');
     }
 
     /**
@@ -83,21 +83,51 @@ class MangaCardParser implements ParserInterface
      */
     public function getVolumes(): ?int
     {
-        $vols = $this->crawler->filterXPath('//div[contains(@class, "eps")]')->text();
-        $vols = JString::cleanse($vols);
-        $vols = str_replace(' eps', '', $vols);
+        $node = $this->crawler->filterXPath('//div/div[2]/div/span[contains(@class, "item")][3]');
 
-        return $vols === '?' ? null : (int)$vols;
+        if (!$node->count()) {
+            $node = $this->crawler->filterXPath('//div/div[2]/div/span[contains(@class, "item")][2]');
+        }
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        $text = JString::cleanse($node->text());
+
+        if (!preg_match('~([0-9]{1,})~', $text, $matches)) {
+            return null;
+        }
+
+        return $matches[1];
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getType(): string
+    public function getType(): ?string
     {
-        return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "source")]')->text());
+        // this information is no longer available
+        return null;
+
+        $text = $this->crawler->filterXPath('//div[contains(@class, "info")]');
+
+        if (!$text->count()) {
+            return null;
+        }
+
+        $text = JString::cleanse($text->text());
+        preg_match('/^([a-zA-Z-\.]+)/', $text, $matches);
+
+        $type = $matches[1];
+
+        if ($type === '-') {
+            $type = 'Unknown';
+        }
+
+        return $type;
     }
 
     /**
@@ -137,7 +167,7 @@ class MangaCardParser implements ParserInterface
      */
     public function getDescription(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/span')->text();
+        return $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/p')->text();
     }
 
     /**
@@ -146,16 +176,19 @@ class MangaCardParser implements ParserInterface
      */
     public function getPublishDates(): ?\DateTimeImmutable
     {
-        $date = str_replace(
-            '(JST)',
-            '',
-            JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "remain-time")]')->text())
-        );
+        $node = $this->crawler->filterXPath('//div/div[2]/div/span[contains(@class, "item")][1]');
+
+        if (
+            !preg_match('~(.*), ([0-9]{1,})~', $node->text(), $matches)
+        ) {
+            return null;
+        }
+
+        $date = $matches[2];
 
         try {
             return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
-                ->setTimezone(new \DateTimeZone('UTC'))
-                ->setTime(0, 0);
+                ->setTimezone(new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;
         }
@@ -168,10 +201,15 @@ class MangaCardParser implements ParserInterface
      */
     public function getMembers(): int
     {
-        $count = $this->crawler->filterXPath('//div[contains(@class, "scormem")]/span')->text();
+        $count = $this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[2]')->text();
+
         $count = JString::cleanse($count);
 
-        return (int)str_replace(',', '', $count);
+        $count = str_replace('K', '000', $count);
+        $count = str_replace('M', '000000', $count);
+
+
+        return (int)str_replace([',', '.'], '', $count);
     }
 
     /**
@@ -195,7 +233,7 @@ class MangaCardParser implements ParserInterface
      */
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//p[contains(@class,"title-text")]/a')->text();
+        return $this->crawler->filterXPath('//div/div/h2/a')->text();
     }
 
     /**
@@ -233,7 +271,8 @@ class MangaCardParser implements ParserInterface
      */
     public function getMangaScore(): ?float
     {
-        $score = JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "score")]')->text());
+        $score = JString::cleanse($this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[1]')->text());
+
         if ($score === 'N/A') {
             return null;
         }
@@ -274,15 +313,14 @@ class MangaCardParser implements ParserInterface
      */
     public function getThemes(): array
     {
-        // if anyone can fix this spaghetti code, most welcome
-        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/div[contains(@class, "properties")]/div[3]/span');
 
         $malUrl = [];
 
         $node->each(function(Crawler $c) use(&$malUrl) {
             $node = $c->filterXPath('//span');
 
-            if (str_contains($node->text(), "Theme")) {
+            if (str_contains($node->text(), "Theme") || str_contains($node->text(), "Themes")) {
                 $node->nextAll()->filterXPath('//a')
                     ->each(function(Crawler $c) use(&$malUrl) {
                         $malUrl[] = (new MalUrlParser($c))->getModel();
@@ -300,15 +338,14 @@ class MangaCardParser implements ParserInterface
      */
     public function getDemographics(): array
     {
-        // if anyone can fix this spaghetti code, most welcome
-        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/div[contains(@class, "properties")]/div[4]/span');
 
         $malUrl = [];
 
         $node->each(function(Crawler $c) use(&$malUrl) {
             $node = $c->filterXPath('//span');
 
-            if (str_contains($node->text(), "Demographic")) {
+            if (str_contains($node->text(), "Demographic") || str_contains($node->text(), "Demographics")) {
                 $node->nextAll()->filterXPath('//a')
                     ->each(function(Crawler $c) use(&$malUrl) {
                         $malUrl[] = (new MalUrlParser($c))->getModel();

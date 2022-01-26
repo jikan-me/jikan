@@ -9,7 +9,7 @@ use Jikan\Request\RequestInterface;
  *
  * @package Jikan\Request
  */
-class MagazinesRequest implements RequestInterface
+class MagazinesRequest extends \Jikan\Request\Magazine\MagazineRequest implements RequestInterface
 {
     /**
      * ProducersRequest constructor.

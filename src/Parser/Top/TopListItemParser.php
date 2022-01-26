@@ -101,7 +101,7 @@ class TopListItemParser
      */
     public function getType(): string
     {
-        return preg_replace('/^(\w+).*$/', '$1', $this->getTextArray()[0]);
+        return preg_replace('~(.*)\s\(.*~', '$1', $this->getTextArray()[0]);
     }
 
     /**

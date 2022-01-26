@@ -38,7 +38,7 @@ class MangaCard
     protected $synopsis;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $type;
 
@@ -129,7 +129,6 @@ class MangaCard
         $instance->explicitGenres = $parser->getExplicitGenres();
         $instance->themes = $parser->getThemes();
         $instance->demographics = $parser->getDemographics();
-        $instance->type = $parser->getType();
         $instance->authors = $parser->getAuthor();
         $instance->score = $parser->getMangaScore();
         $instance->serialization = $parser->getSerialization();
@@ -208,9 +207,9 @@ class MangaCard
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }

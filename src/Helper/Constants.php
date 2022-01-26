@@ -36,6 +36,7 @@ class Constants
     public const TOP_MOVIE = 'movie';
     public const TOP_OVA = 'ova';
     public const TOP_SPECIAL = 'special';
+    public const TOP_ONA = 'ona';
 
     public const TOP_MANGA = 'manga';
     public const TOP_NOVEL = 'novels';
@@ -43,6 +44,7 @@ class Constants
     public const TOP_DOUJINSHI = 'doujin';
     public const TOP_MANHWA = 'manhwa';
     public const TOP_MANHUA = 'manhua';
+    public const TOP_LIGHTNOVELS = 'lightnovels';
 
     public const TOP_BY_POPULARITY = 'bypopularity';
     public const TOP_BY_FAVORITES = 'favorite';

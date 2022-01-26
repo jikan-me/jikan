@@ -46,6 +46,7 @@ class TopMangaRequest implements RequestInterface
                     Constants::TOP_MANHUA,
                     Constants::TOP_BY_POPULARITY,
                     Constants::TOP_BY_FAVORITES,
+                    Constants::TOP_LIGHTNOVELS
                 ],
                 true
             )

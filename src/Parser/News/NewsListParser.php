@@ -49,7 +49,7 @@ class NewsListParser implements ParserInterface
     public function getResults(): array
     {
         return $this->crawler
-            ->filterXPath('//div[@class="js-scrollfix-bottom-rel"]/div[@class="clearfix"]')
+            ->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')
             ->each(
                 function (Crawler $crawler) {
                     return (new NewsListItemParser($crawler))->getModel();

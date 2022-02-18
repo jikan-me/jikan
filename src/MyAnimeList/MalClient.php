@@ -141,10 +141,7 @@ class MalClient
     public function getCharacter(Request\Character\CharacterRequest $request): Model\Character\Character
     {
         if ($request->getId() === 0) {
-            throw new BadResponseException(
-                '404 on '.$request->getPath(),
-                404
-            );
+            throw new BadResponseException(sprintf('404 on %s', $request->getPath()), 404);
         }
 
         $crawler = $this->ghoutte->request('GET', $request->getPath());
@@ -174,10 +171,7 @@ class MalClient
     public function getPerson(Request\Person\PersonRequest $request): Model\Person\Person
     {
         if ($request->getId() === 0) {
-            throw new BadResponseException(
-                '404 on '.$request->getPath(),
-                404
-            );
+            throw new BadResponseException(sprintf('404 on %s', $request->getPath()), 404);
         }
 
         $crawler = $this->ghoutte->request('GET', $request->getPath());

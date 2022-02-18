@@ -140,6 +140,13 @@ class MalClient
      */
     public function getCharacter(Request\Character\CharacterRequest $request): Model\Character\Character
     {
+        if ($request->getId() === 0) {
+            throw new BadResponseException(
+                '404 on '.$request->getPath(),
+                404
+            );
+        }
+
         $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         // MAL returns `Invalid ID provided.` instead of 404 on invalid characters
@@ -166,6 +173,13 @@ class MalClient
      */
     public function getPerson(Request\Person\PersonRequest $request): Model\Person\Person
     {
+        if ($request->getId() === 0) {
+            throw new BadResponseException(
+                '404 on '.$request->getPath(),
+                404
+            );
+        }
+
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Person\PersonParser($crawler);

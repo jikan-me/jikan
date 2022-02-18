@@ -35,4 +35,12 @@ class TopPeopleRequest implements RequestInterface
     {
         return 'https://myanimelist.net/people.php?'.http_build_query(['limit' => 50 * ($this->page-1)]);
     }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
 }

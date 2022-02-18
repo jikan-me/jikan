@@ -33,4 +33,12 @@ class AnimeRecommendationsRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime/%d/jikan/userrecs', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

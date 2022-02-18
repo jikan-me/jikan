@@ -35,4 +35,12 @@ class CharacterRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/character/%s', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

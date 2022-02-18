@@ -40,4 +40,20 @@ class UserRecommendationsRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/profile/%s/recommendations?p=%d', $this->username, $this->page);
     }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): ?int
+    {
+        return $this->page;
+    }
 }

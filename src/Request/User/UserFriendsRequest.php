@@ -45,4 +45,20 @@ class UserFriendsRequest implements RequestInterface
 
         return sprintf('https://myanimelist.net/profile/%s/friends%s', $this->username, $query);
     }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
 }

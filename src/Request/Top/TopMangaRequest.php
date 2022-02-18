@@ -72,4 +72,20 @@ class TopMangaRequest implements RequestInterface
                 ]
         );
     }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 }

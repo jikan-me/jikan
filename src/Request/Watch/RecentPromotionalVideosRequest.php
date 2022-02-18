@@ -34,4 +34,12 @@ class RecentPromotionalVideosRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/watch/promotion?p=%d', $this->page);
     }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
 }

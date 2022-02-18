@@ -33,4 +33,12 @@ class AnimeCharactersAndStaffRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime/%s/_/characters', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

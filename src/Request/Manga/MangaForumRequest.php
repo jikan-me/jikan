@@ -50,4 +50,28 @@ class MangaForumRequest implements RequestInterface
 
         return sprintf('https://myanimelist.net/manga/%s/_/forum%s', $this->id, $query);
     }
+
+    /**
+     * @return array
+     */
+    public static function getValidTypes(): array
+    {
+        return self::$validTypes;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTopic(): ?string
+    {
+        return $this->topic;
+    }
 }

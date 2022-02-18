@@ -146,4 +146,52 @@ class UserSearchRequest implements RequestInterface
         $this->gender = $gender;
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getQuery(): ?string
+    {
+        return $this->query;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation(): string
+    {
+        return $this->location;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMinAge(): int
+    {
+        return $this->minAge;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaxAge(): int
+    {
+        return $this->maxAge;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGender(): int
+    {
+        return $this->gender;
+    }
 }

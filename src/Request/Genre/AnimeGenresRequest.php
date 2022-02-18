@@ -12,14 +12,6 @@ use Jikan\Request\RequestInterface;
 class AnimeGenresRequest implements RequestInterface
 {
     /**
-     * AnimeGenreRequest constructor.
-
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * @return string
      */
     public function getPath(): string

@@ -47,4 +47,20 @@ class UserListRequest implements RequestInterface
             $this->page
         );
     }
+
+    /**
+     * @return int
+     */
+    public function getClubId(): int
+    {
+        return $this->clubId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
 }

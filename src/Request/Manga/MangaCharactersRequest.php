@@ -33,4 +33,12 @@ class MangaCharactersRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/manga/%s/_/characters', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

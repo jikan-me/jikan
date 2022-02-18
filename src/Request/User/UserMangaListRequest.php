@@ -207,4 +207,84 @@ class UserMangaListRequest implements RequestInterface
         $this->magazine = $magazine;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderBy(): int
+    {
+        return $this->orderBy;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderBy2(): int
+    {
+        return $this->orderBy2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPublishedFrom(): array
+    {
+        return $this->publishedFrom;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPublishedTo(): array
+    {
+        return $this->publishedTo;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPublishingStatus(): int
+    {
+        return $this->publishingStatus;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMagazine(): int
+    {
+        return $this->magazine;
+    }
 }

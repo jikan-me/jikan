@@ -312,4 +312,109 @@ class MangaSearchRequest implements RequestInterface
         $this->sort = $sort;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getQuery(): string
+    {
+        return $this->query;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChar(): string
+    {
+        return $this->char;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return float
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMagazine(): int
+    {
+        return $this->magazine;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getStartDate(): array
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getEndDate(): array
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getGenre(): array
+    {
+        return $this->genre;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGenreExclude(): bool
+    {
+        return $this->genreExclude;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderBy(): int
+    {
+        return $this->orderBy;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSort(): int
+    {
+        return $this->sort;
+    }
+
 }

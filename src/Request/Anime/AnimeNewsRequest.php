@@ -39,4 +39,20 @@ class AnimeNewsRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime/%d/_/news?p=%d', $this->id, $this->page);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): ?int
+    {
+        return $this->page;
+    }
 }

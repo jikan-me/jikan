@@ -1338,8 +1338,16 @@ class MalClient
      */
     public function getUserClubs(Request\User\UserClubsRequest $request) : array
     {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        // user clubs page returns 404 when there are none added
+        try {
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
+        } catch (\Exception $e) {
+            if ($e->getCode() === 404) {
+                return [];
+            }
 
+            throw $e;
+        }
         try {
             $parser = new Parser\User\ClubParser($crawler);
 

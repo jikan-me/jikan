@@ -49,7 +49,7 @@ class MoreInfoParser implements ParserInterface
     {
         $moreinfo = JString::cleanse(
             Parser::removeChildNodes(
-                $this->crawler->filterXPath('//div[@class="js-scrollfix-bottom-rel"]')
+                $this->crawler->filterXPath('//div[contains(@class, "rightside")]')
             )->text()
         );
 

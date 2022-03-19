@@ -34,7 +34,7 @@ A REST API service is available as well
 
 ## Wrappers
 
-[View available wrappers](https://github.com/jikan-me/jikan-rest/edit/master/README.MD#wrappers)
+[View available wrappers](https://github.com/jikan-me/jikan-rest/blob/master/README.MD#wrappers)
 
 # Features
 

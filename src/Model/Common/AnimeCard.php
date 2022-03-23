@@ -33,7 +33,7 @@ class AnimeCard
     protected $images;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $synopsis;
 
@@ -78,7 +78,7 @@ class AnimeCard
     protected $demographics;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $source;
 
@@ -217,9 +217,9 @@ class AnimeCard
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSynopsis(): string
+    public function getSynopsis(): ?string
     {
         return $this->synopsis;
     }
@@ -265,9 +265,9 @@ class AnimeCard
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }

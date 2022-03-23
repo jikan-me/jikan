@@ -65,7 +65,14 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAnimeUrl(): string
     {
-        return $this->crawler->filterXPath('//div/div/h2/a')->attr('href');
+
+        $node = $this->crawler->filterXPath('//div/div/h2/a');
+
+        if ($node->count()) {
+            return $node->attr('href');
+        }
+
+        return $this->crawler->filterXPath('//div[contains(@class, "title")]/a')->attr('href');
     }
 
     /**
@@ -76,6 +83,11 @@ class AnimeCardParser implements ParserInterface
     public function getProducer(): array
     {
         $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/div[contains(@class, "properties")]/div[1]/span');
+
+        if (!$node->count()) {
+            // this information is no longer available on the producer page
+            return [];
+        }
 
         $malUrl = [];
 
@@ -117,13 +129,19 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/div[contains(@class, "properties")]/div[2]/span[2]')->text();
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/div[contains(@class, "properties")]/div[2]/span[2]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return $node->text();
     }
 
     /**
@@ -157,13 +175,20 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
-        return $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/p')->text();
+        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/p');
+
+        if (!$node->count()) {
+            // this information is no longer available on the producer page
+            return null;
+        }
+
+        return $node->text();
     }
 
     /**
@@ -200,10 +225,17 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAirDates(): ?\DateTimeImmutable
     {
+        $node = $this->crawler->filterXPath('//div/div[2]/div[2]/span[contains(@class, "item")][1]');
+
+        if (!$node->count()) {
+            // this information is no longer available on the producer page
+            return null;
+        }
+
         $date = str_replace(
             '(JST)',
             '',
-            JString::cleanse($this->crawler->filterXPath('//div/div[2]/div[2]/span[contains(@class, "item")][1]')->text())
+            JString::cleanse($node->text())
         );
 
         try {
@@ -221,15 +253,24 @@ class AnimeCardParser implements ParserInterface
      */
     public function getMembers(): int
     {
-        $count = $this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[2]')->text();
+        $node = $this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[2]');
 
-        $count = JString::cleanse($count);
+        if ($node->count()) {
+            $count = JString::cleanse($node->text());
 
-        $count = str_replace('K', '000', $count);
-        $count = str_replace('M', '000000', $count);
+            $count = str_replace('K', '000', $count);
+            $count = str_replace('M', '000000', $count);
 
+            return (int)str_replace([',', '.'], '', $count);
+        }
 
-        return (int)str_replace([',', '.'], '', $count);
+        // producers page
+        $node = $this->crawler->filterXPath('//div[contains(@class, "widget")]/div[@class="users"]');
+
+        if ($node->count()) {
+            $count = JString::cleanse($node->text());
+            return (int)str_replace([',', '.'], '', $count);
+        }
     }
 
     /**
@@ -253,7 +294,13 @@ class AnimeCardParser implements ParserInterface
      */
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//div/div/h2/a')->text();
+        $node = $this->crawler->filterXPath('//div/div/h2/a');
+
+        if ($node->count()) {
+            return $node->text();
+        }
+
+        return $this->crawler->filterXPath('//div[contains(@class, "title")]/a')->text();
     }
 
     /**
@@ -291,13 +338,20 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAnimeScore(): ?float
     {
-        $score = JString::cleanse($this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[1]')->text());
+        $node = $this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[1]');
+        if ($node->count()) {
+            $score = JString::cleanse($node->text());
 
-        if ($score === 'N/A') {
-            return null;
+            if ($score === 'N/A') return null;
         }
 
-        return (float)$score;
+        // producers page
+        $node = $this->crawler->filterXPath('//div[contains(@class, "widget")]/div[@class="stars"]');
+        if ($node->count()) {
+            $score = JString::cleanse($node->text());
+            if ($score === 'N/A') return null;
+        }
+        return (float) $score;
     }
 
     /**

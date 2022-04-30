@@ -25,9 +25,9 @@
         }
     },
     "require": {
-        "fabpot/goutte": "4.0.1",
         "php": "^7.4|^8.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "fabpot/goutte": "^4.0"
     },
     "require-dev": {
         "brianium/paratest": "^6.4.1",

@@ -66,7 +66,7 @@ class CharactersAndStaffParser implements ParserInterface
     {
         $node = $this->crawler
             ->filterXPath('//h2[text()="Staff"]')
-            ->parents()->nextAll()
+            ->ancestors()->nextAll()
             ->reduce(
                 function (Crawler $crawler) {
                     return (bool)$crawler->filterXPath(

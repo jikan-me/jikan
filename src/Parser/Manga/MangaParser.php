@@ -110,7 +110,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
+            str_replace($title->text(), '', $title->ancestors()->text())
         );
     }
 
@@ -128,7 +128,7 @@ class MangaParser implements ParserInterface
             return [];
         }
 
-        $titles = str_replace($title->text(), '', $title->parents()->text());
+        $titles = str_replace($title->text(), '', $title->ancestors()->text());
         $titles = explode(', ', $titles);
 
         foreach ($titles as &$title) {
@@ -152,7 +152,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
+            str_replace($title->text(), '', $title->ancestors()->text())
         );
     }
 
@@ -170,7 +170,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($type->text(), '', $type->parents()->text())
+            str_replace($type->text(), '', $type->ancestors()->text())
         );
     }
 
@@ -191,7 +191,7 @@ class MangaParser implements ParserInterface
         return
             (
                 trim(
-                    str_replace($chapters->text(), '', $chapters->parents()->text())
+                    str_replace($chapters->text(), '', $chapters->ancestors()->text())
                 ) === 'Unknown'
             )
                 ?
@@ -200,7 +200,7 @@ class MangaParser implements ParserInterface
                 (int)str_replace(
                     $chapters->text(),
                     '',
-                    $chapters->parents()->text()
+                    $chapters->ancestors()->text()
                 );
     }
 
@@ -221,7 +221,7 @@ class MangaParser implements ParserInterface
         return
             (
                 trim(
-                    str_replace($volumes->text(), '', $volumes->parents()->text())
+                    str_replace($volumes->text(), '', $volumes->ancestors()->text())
                 ) === 'Unknown'
             )
                 ?
@@ -230,7 +230,7 @@ class MangaParser implements ParserInterface
                 (int)str_replace(
                     $volumes->text(),
                     '',
-                    $volumes->parents()->text()
+                    $volumes->ancestors()->text()
                 );
     }
 
@@ -248,7 +248,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($status->text(), '', $status->parents()->text())
+            str_replace($status->text(), '', $status->ancestors()->text())
         );
     }
 
@@ -293,8 +293,8 @@ class MangaParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Genres:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -304,8 +304,8 @@ class MangaParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Genre:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -325,8 +325,8 @@ class MangaParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Explicit Genres:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -336,8 +336,8 @@ class MangaParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Explicit Genre:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -358,7 +358,7 @@ class MangaParser implements ParserInterface
             ->filterXPath('//span[text()="Demographics:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -369,7 +369,7 @@ class MangaParser implements ParserInterface
             ->filterXPath('//span[text()="Demographic:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -390,7 +390,7 @@ class MangaParser implements ParserInterface
             ->filterXPath('//span[text()="Theme:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -401,7 +401,7 @@ class MangaParser implements ParserInterface
             ->filterXPath('//span[text()="Themes:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -463,7 +463,7 @@ class MangaParser implements ParserInterface
             return null;
         }
 
-        $rank = Parser::removeChildNodes($rank->parents());
+        $rank = Parser::removeChildNodes($rank->ancestors());
         $ranked = trim(
             str_replace(
                 '#',
@@ -490,7 +490,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace([$popularity->text(), '#'], '', $popularity->parents()->text())
+            str_replace([$popularity->text(), '#'], '', $popularity->ancestors()->text())
         );
     }
 
@@ -509,7 +509,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace([$member->text(), ','], '', $member->parents()->text())
+            str_replace([$member->text(), ','], '', $member->ancestors()->text())
         );
     }
 
@@ -528,7 +528,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace([$favorite->text(), ','], '', $favorite->parents()->text())
+            str_replace([$favorite->text(), ','], '', $favorite->ancestors()->text())
         );
     }
 
@@ -636,7 +636,7 @@ class MangaParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($aired->text(), '', $aired->parents()->text())
+            str_replace($aired->text(), '', $aired->ancestors()->text())
         );
     }
 }

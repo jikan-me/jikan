@@ -97,7 +97,7 @@ class PersonParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($node->text(), '', $node->parents()->text())
+            str_replace($node->text(), '', $node->ancestors()->text())
         );
     }
 
@@ -117,7 +117,7 @@ class PersonParser implements ParserInterface
         // MAL screwed up the HTML here
         preg_match(
             '~Family name:(.*?)(Alternate names|Birthday|Website|Member Favorites|More)~',
-            $node->parents()->text(),
+            $node->ancestors()->text(),
             $matches
         );
 
@@ -149,7 +149,7 @@ class PersonParser implements ParserInterface
 
         $names = explode(
             ',',
-            str_replace($node->text(), '', $node->parents()->text())
+            str_replace($node->text(), '', $node->ancestors()->text())
         );
 
         foreach ($names as &$name) {
@@ -202,7 +202,7 @@ class PersonParser implements ParserInterface
 
         return Parser::parseDateMDYReadable(
             JString::cleanse(
-                str_replace($node->text(), '', $node->parents()->text())
+                str_replace($node->text(), '', $node->ancestors()->text())
             )
         );
     }
@@ -222,7 +222,7 @@ class PersonParser implements ParserInterface
         }
 
         return (int)JString::cleanse(
-            str_replace([$node->text(), ','], '', $node->parents()->text())
+            str_replace([$node->text(), ','], '', $node->ancestors()->text())
         );
     }
 

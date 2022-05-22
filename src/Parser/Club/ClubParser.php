@@ -122,12 +122,14 @@ class ClubParser implements ParserInterface
      */
     public function getCreated(): \DateTimeImmutable
     {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[contains(., "Created")]');
+
         $date = JString::cleanse(
-            Parser::removeChildNodes(
-                $this->crawler
-                    ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[7]')
-            )->text()
+            Parser::removeChildNodes($node)
+                ->text()
         );
+
         return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
     }
 

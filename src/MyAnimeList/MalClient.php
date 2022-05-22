@@ -936,18 +936,18 @@ class MalClient
     /**
      * @param Request\Club\UserListRequest $request
      *
-     * @return Model\Club\UserProfile[]
+     * @return Model\Club\UserList
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getClubUsers(Request\Club\UserListRequest $request): array
+    public function getClubUsers(Request\Club\UserListRequest $request): Model\Club\UserList
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Club\UserListParser($crawler);
 
-            return $parser->getResults();
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

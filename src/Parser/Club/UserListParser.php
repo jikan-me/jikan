@@ -51,4 +51,38 @@ class UserListParser implements ParserInterface
                 }
             );
     }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool
+    {
+        $node = $this->crawler
+            ->filterXPath('//*[@id="content"]/div/a[contains(., "Last")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getLastPage(): int
+    {
+        $node = $this->crawler
+            ->filterXPath('//*[@id="content"]/div/a[contains(., "Last")]');
+
+        if (!$node->count()) {
+            return 1;
+        }
+
+        $pages = $node->attr('href');
+        preg_match('~show=(.*)~', $pages, $pages);
+
+        return ((int) $pages[1] / 36) + 1;
+    }
 }

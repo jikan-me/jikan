@@ -64,6 +64,13 @@ class UserListParser implements ParserInterface
             return true;
         }
 
+        $node = $this->crawler
+            ->filterXPath('//*[@id="content"]/div/a[contains(., "»")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
         return false;
     }
 
@@ -74,15 +81,9 @@ class UserListParser implements ParserInterface
     public function getLastPage(): int
     {
         $node = $this->crawler
-            ->filterXPath('//*[@id="content"]/div/a[contains(., "Last")]');
+            ->filterXPath('//*[@id="content"]/div');
 
-        if (!$node->count()) {
-            return 1;
-        }
-
-        $pages = $node->attr('href');
-        preg_match('~show=(.*)~', $pages, $pages);
-
-        return ((int) $pages[1] / 36) + 1;
+        preg_match('~Pages \((.*)\)~', $node->text(), $pages);
+        return (int) $pages[1];
     }
 }

@@ -16,12 +16,12 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 | Version   | Support | PHP | Lumen/Laravel |
 |------------|----------|----------|----------| 
-| [`^3` (RC)](https://github.com/jikan-me/jikan/tree/3.0.0) | ✅ New features | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]() | `^8` |
-| [`^2` (master)](https://github.com/jikan-me/jikan)      | ⚠️ Maintenance only | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`
+| [`^3` (master)]([https://github.com/jikan-me/jikan/tree/3.0.0](https://github.com/jikan-me/jikan)) | ✅ New features | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]() | `^8`, `^9` |
+| [`^2`](https://github.com/jikan-me/jikan/tree/2.19.4)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`
 | [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*` |
 
 
-1. `composer require jikan-me/jikan:dev-master`
+1. `composer require jikan-me/jikan ^3`
 2. [Documentation](http://docs.jikan.moe)
 
 # Jikan REST API
@@ -51,81 +51,6 @@ A REST API service is available as well
 
 [Add your wrapper here](https://github.com/jikan-me/jikan/edit/master/readme.md)
 
-# Features
-
-- Anime
-  - Main Information
-  - Characters & Staff
-  - Episodes
-  - Episode Details
-  - News
-  - Videos/PV/Episodes
-  - Pictures
-  - Stats
-  - Forum Topics
-  - More Info
-  - Recommendations
-  - Reviews
-  - Recent List Updates By Users
-- Manga
-  - Main Information
-  - Characters
-  - News
-  - Stats
-  - Pictures
-  - Forum Topics
-  - More Info
-  - Recommendations
-  - Reviews
-  - Recent List Updates By Users
-- Character
-  - Main Information
-  - Pictures
-- People
-  - Main Information
-  - Pictures
-- Search
-  - Anime
-  - Manga
-  - Character
-  - Person
-  - Pagination Support
-  - Advanced Search
-    - Filters
-    - Order By
-    - Sorting (Ascending/Descending)
-- Seasonal Anime (Season + Year)
-- Season List/Archive
-- Anime Scheduling (for current season)
-- Top
-  - Anime
-  - Manga
-  - Characters
-  - People
-  - Sub Types & Pagination Support
-- Genre
-  - Anime Listing (All Anime by Genre)
-  - Anime Genre Listing (All Genres + metadata)
-  - Manga Listing (All Anime by Genre)
-  - Manga Genre Listing (All Genres + metadata)
-- Producer
-  - Anime Listing (All Anime by a Producer)
-  - Producers Listing (All Producers + metadata)
-  - Manga Listing (All Manga by a Producer)
-  - Magazines Listing (All Magazines + metadata)
-- User
-  - Profile
-  - Friends
-    - Pagination support
-  - History
-    - All
-    - Anime
-    - Manga
-  - Anime & Manga Lists
-    - Pagination Support
-- Club
-  - Main Information
-  - User List
 
 [View RoadMap](https://github.com/jikan-me/jikan/projects/4)
 
@@ -178,18 +103,6 @@ We have a free [REST API service](https://jikan.moe), if you wish to support us 
 A shoutout to their amazing products and for supporting Jikan since early versions!
 
 ---
-
-# Release Changelog
-
-## 2.17.0 - Sep 16, 21
-
-- Added support for MAL's new [genre overhaul](https://myanimelist.net/forum/?topicid=1956762): `themes`, `demographics`, `explicitGenres`
-- Updated Constants to reflect new and modified genres (while retaining BC). Some genres have been deleted or merged with others so they may return 404, check [Constants](https://github.com/jikan-me/jikan/blob/62f3e12cbcc8d841b3f923e4317f0b50f28f0574/src/Helper/Constants.php) for details
-- Anime/Manga Genres List now returns additional arrays for `themes`, `demographics`, `explicitGenres` as they have been split up from `genres`
-- Added parser support for Anime and Manga External Links https://github.com/jikan-me/jikan/issues/353
-- Parser bug fixes
-
-[Read More](https://github.com/jikan-me/jikan/blob/master/changelog.md)
 
 # DISCLAIMER
 

@@ -39,4 +39,12 @@ class ClubRequest implements RequestInterface
             $this->clubId
         );
     }
+
+    /**
+     * @return int
+     */
+    public function getClubId(): int
+    {
+        return $this->clubId;
+    }
 }

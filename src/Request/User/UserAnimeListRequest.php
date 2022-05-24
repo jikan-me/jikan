@@ -242,4 +242,100 @@ class UserAnimeListRequest implements RequestInterface
         $this->producer = $producer;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderBy(): int
+    {
+        return $this->orderBy;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderBy2(): int
+    {
+        return $this->orderBy2;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSeason(): string
+    {
+        return $this->season;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSeasonYear(): int
+    {
+        return $this->seasonYear;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAiredFrom(): array
+    {
+        return $this->airedFrom;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAiredTo(): array
+    {
+        return $this->airedTo;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAiringStatus(): int
+    {
+        return $this->airingStatus;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProducer(): int
+    {
+        return $this->producer;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser;
 
 /**
@@ -27,9 +28,9 @@ class MangaCard
     protected $title;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    protected $imageUrl;
+    protected $images;
 
     /**
      * @var string
@@ -118,7 +119,7 @@ class MangaCard
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getMangaUrl();
         $instance->title = $parser->getTitle();
-        $instance->imageUrl = $parser->getMangaImage();
+        $instance->images = CommonImageResource::factory($parser->getMangaImage());
         $instance->synopsis = $parser->getDescription();
         $instance->type = $parser->getType();
         $instance->publishingStart = $parser->getPublishDates();
@@ -139,6 +140,30 @@ class MangaCard
     public function __toString()
     {
         return (string)$this->url;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
     }
 
     /**
@@ -166,11 +191,11 @@ class MangaCard
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

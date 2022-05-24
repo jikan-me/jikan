@@ -2,7 +2,10 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Helper\MalUrlExtractor;
 use Jikan\Helper\Parser;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Parser\Common\MalUrlParser;
 
 /**
  * Class Recommendation
@@ -13,9 +16,9 @@ class Recommendation
 {
 
     /**
-     * @var int
+     * @var CommonMeta
      */
-    private $malId;
+    private $entry;
 
     /**
      * @var string
@@ -23,24 +26,9 @@ class Recommendation
     private $url;
 
     /**
-     * @var string
-     */
-    private $imageUrl;
-
-    /**
-     * @var string
-     */
-    private $recommendationUrl;
-
-    /**
-     * @var string
-     */
-    private $title;
-
-    /**
      * @var int
      */
-    private $recommendationCount;
+    private $votes;
 
     /**
      * @param \Jikan\Parser\Common\Recommendation $parser
@@ -52,22 +40,19 @@ class Recommendation
     {
         $instance = new self();
 
-        $instance->url = $parser->getUrl();
-        $instance->malId = Parser::idFromUrl($instance->url);
-        $instance->imageUrl = $parser->getImageUrl();
-        $instance->recommendationUrl = $parser->getRecommendationurl();
-        $instance->title = $parser->getTitle();
-        $instance->recommendationCount = $parser->getRecommendationCount();
+        $instance->entry = $parser->getEntryMeta();
+        $instance->url = $parser->getRecommendationurl();
+        $instance->votes = $parser->getRecommendationCount();
 
         return $instance;
     }
 
     /**
-     * @return int
+     * @return CommonMeta
      */
-    public function getMalId(): int
+    public function getEntry(): CommonMeta
     {
-        return $this->malId;
+        return $this->entry;
     }
 
     /**
@@ -79,34 +64,10 @@ class Recommendation
     }
 
     /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRecommendationUrl(): string
-    {
-        return $this->recommendationUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
      * @return int
      */
-    public function getRecommendationCount(): int
+    public function getVotes(): int
     {
-        return $this->recommendationCount;
+        return $this->votes;
     }
 }

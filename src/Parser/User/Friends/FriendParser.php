@@ -4,6 +4,7 @@ namespace Jikan\Parser\User\Friends;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
+use Jikan\Model\Common\UserMeta;
 use Jikan\Model\User\Friend;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -104,6 +105,15 @@ class FriendParser implements ParserInterface
         return new \DateTimeImmutable(
             JString::cleanse($this->crawler->filterXPath('//div[contains(@class, "data")]/div[2]')->text()),
             new \DateTimeZone('UTC')
+        );
+    }
+
+    public function getUserMeta() : UserMeta
+    {
+        return new UserMeta(
+            $this->getName(),
+            $this->getUrl(),
+            $this->getAvatar()
         );
     }
 }

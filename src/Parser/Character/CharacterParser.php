@@ -77,7 +77,7 @@ class CharacterParser implements ParserInterface
     public function getNameKanji(): ?string
     {
         $kanji = $this->crawler
-            ->filterXPath('//h2[contains(@class, "normal_header") and contains(@style, "height: 15px")]/span/small');
+            ->filterXPath('//h2[contains(@class, "normal_header")]/span/small');
 
         if (!$kanji->count()) {
             return null;
@@ -107,10 +107,10 @@ class CharacterParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAbout(): string
+    public function getAbout(): ?string
     {
         $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]');
         $aboutHtml = $crawler->html();
@@ -118,9 +118,15 @@ class CharacterParser implements ParserInterface
         $aboutHtml = str_replace(['<br>'], '\n', $aboutHtml);
         $about = Parser::removeChildNodes((new Crawler($aboutHtml))->filterXPath('//body'));
 
-        return JString::cleanse(
+        $string = JString::cleanse(
             $about->html()
         );
+
+        if (preg_match('~No biography written.~', $string)) {
+            return null;
+        }
+
+        return $string;
     }
 
     /**

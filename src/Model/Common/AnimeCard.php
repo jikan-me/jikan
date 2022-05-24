@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser;
 
 /**
@@ -27,9 +28,9 @@ class AnimeCard
     protected $title;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    protected $imageUrl;
+    protected $images;
 
     /**
      * @var string|null
@@ -133,7 +134,7 @@ class AnimeCard
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getAnimeUrl();
         $instance->title = $parser->getTitle();
-        $instance->imageUrl = $parser->getAnimeImage();
+        $instance->images = CommonImageResource::factory($parser->getAnimeImage());
         $instance->synopsis = $parser->getDescription();
         $instance->type = $parser->getType();
         $instance->airingStart = $parser->getAirDates();
@@ -208,11 +209,11 @@ class AnimeCard
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

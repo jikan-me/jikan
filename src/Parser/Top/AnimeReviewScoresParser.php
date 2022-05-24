@@ -1,6 +1,6 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Reviews;
 
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Parser\ParserInterface;

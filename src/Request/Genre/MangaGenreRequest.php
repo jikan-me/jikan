@@ -40,4 +40,20 @@ class MangaGenreRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/manga/genre/%s?page=%s', $this->id, $this->page);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
 }

@@ -106,7 +106,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
+            str_replace($title->text(), '', $title->ancestors()->text())
         );
     }
 
@@ -123,7 +123,7 @@ class AnimeParser implements ParserInterface
             return [];
         }
 
-        $titles = str_replace($title->text(), '', $title->parents()->text());
+        $titles = str_replace($title->text(), '', $title->ancestors()->text());
         $titles = explode(', ', $titles);
 
         foreach ($titles as &$title) {
@@ -146,7 +146,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($title->text(), '', $title->parents()->text())
+            str_replace($title->text(), '', $title->ancestors()->text())
         );
     }
 
@@ -163,7 +163,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($type->text(), '', $type->parents()->text())
+            str_replace($type->text(), '', $type->ancestors()->text())
         );
     }
 
@@ -184,7 +184,7 @@ class AnimeParser implements ParserInterface
         return
             (
                 trim(
-                    str_replace($episodes->text(), '', $episodes->parents()->text())
+                    str_replace($episodes->text(), '', $episodes->ancestors()->text())
                 ) === 'Unknown'
             )
                 ?
@@ -193,7 +193,7 @@ class AnimeParser implements ParserInterface
                 (int)str_replace(
                     $episodes->text(),
                     '',
-                    $episodes->parents()->text()
+                    $episodes->ancestors()->text()
                 );
     }
 
@@ -210,7 +210,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($status->text(), '', $status->parents()->text())
+            str_replace($status->text(), '', $status->ancestors()->text())
         );
     }
 
@@ -228,7 +228,7 @@ class AnimeParser implements ParserInterface
         }
 
         $premiered = JString::cleanse(
-            str_replace($premiered->text(), '', $premiered->parents()->text())
+            str_replace($premiered->text(), '', $premiered->ancestors()->text())
         );
 
         if ($premiered === '?') {
@@ -252,7 +252,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($broadcast->text(), '', $broadcast->parents()->text())
+            str_replace($broadcast->text(), '', $broadcast->ancestors()->text())
         );
     }
 
@@ -266,8 +266,8 @@ class AnimeParser implements ParserInterface
         $producer = $this->crawler
             ->filterXPath('//span[text()="Producers:"]');
 
-        if ($producer->count() && strpos($producer->parents()->text(), 'None found') === false) {
-            return $producer->parents()->first()->filterXPath('//a')->each(
+        if ($producer->count() && strpos($producer->ancestors()->text(), 'None found') === false) {
+            return $producer->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -287,8 +287,8 @@ class AnimeParser implements ParserInterface
         $licensor = $this->crawler
             ->filterXPath('//span[text()="Licensors:"]');
 
-        if ($licensor->count() && strpos($licensor->parents()->text(), 'None found') === false) {
-            return $licensor->parents()->first()->filterXPath('//a')->each(
+        if ($licensor->count() && strpos($licensor->ancestors()->text(), 'None found') === false) {
+            return $licensor->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -307,8 +307,8 @@ class AnimeParser implements ParserInterface
     {
         $studio = $this->crawler->filterXPath('//span[text()="Studios:"]');
 
-        if ($studio->count() && strpos($studio->parents()->text(), 'None found') === false) {
-            return $studio->parents()->first()->filterXPath('//a')->each(
+        if ($studio->count() && strpos($studio->ancestors()->text(), 'None found') === false) {
+            return $studio->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -332,7 +332,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($source->text(), '', $source->parents()->text())
+            str_replace($source->text(), '', $source->ancestors()->text())
         );
     }
 
@@ -346,8 +346,8 @@ class AnimeParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Genres:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -357,8 +357,8 @@ class AnimeParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Genre:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -378,8 +378,8 @@ class AnimeParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Explicit Genres:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -389,8 +389,8 @@ class AnimeParser implements ParserInterface
         $genre = $this->crawler
             ->filterXPath('//span[text()="Explicit Genre:"]');
 
-        if ($genre->count() && strpos($genre->parents()->text(), 'No genres have been added yet') === false) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+        if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -411,7 +411,7 @@ class AnimeParser implements ParserInterface
             ->filterXPath('//span[text()="Demographic:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -422,7 +422,7 @@ class AnimeParser implements ParserInterface
             ->filterXPath('//span[text()="Demographics:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -443,7 +443,7 @@ class AnimeParser implements ParserInterface
             ->filterXPath('//span[text()="Theme:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -454,7 +454,7 @@ class AnimeParser implements ParserInterface
             ->filterXPath('//span[text()="Themes:"]');
 
         if ($genre->count()) {
-            return $genre->parents()->first()->filterXPath('//a')->each(
+            return $genre->ancestors()->first()->filterXPath('//a')->each(
                 function (Crawler $crawler) {
                     return (new MalUrlParser($crawler))->getModel();
                 }
@@ -481,7 +481,7 @@ class AnimeParser implements ParserInterface
             str_replace(
                 '.',
                 '',
-                str_replace($duration->text(), '', $duration->parents()->text())
+                str_replace($duration->text(), '', $duration->ancestors()->text())
             )
         );
     }
@@ -500,7 +500,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($rating->text(), '', $rating->parents()->text())
+            str_replace($rating->text(), '', $rating->ancestors()->text())
         );
     }
 
@@ -559,7 +559,7 @@ class AnimeParser implements ParserInterface
         }
 
         $ranked = JString::cleanse(
-            Parser::removeChildNodes($rank->parents())->text()
+            Parser::removeChildNodes($rank->ancestors())->text()
         );
 
         if ($ranked === 'N/A') {
@@ -587,7 +587,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace([$popularity->text(), '#'], '', $popularity->parents()->text())
+            str_replace([$popularity->text(), '#'], '', $popularity->ancestors()->text())
         );
     }
 
@@ -605,7 +605,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace([$member->text(), ','], '', $member->parents()->text())
+            str_replace([$member->text(), ','], '', $member->ancestors()->text())
         );
     }
 
@@ -623,7 +623,7 @@ class AnimeParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace([$favorite->text(), ','], '', $favorite->parents()->text())
+            str_replace([$favorite->text(), ','], '', $favorite->ancestors()->text())
         );
     }
 
@@ -641,9 +641,9 @@ class AnimeParser implements ParserInterface
         }
 
         return $links->nextAll()->filterXPath('//div[contains(@class, "pb16")]/a')
-        ->each(function(Crawler  $c) {
-            return (new UrlParser($c))->getModel();
-        });
+            ->each(function(Crawler  $c) {
+                return (new UrlParser($c))->getModel();
+            });
     }
 
     /**
@@ -782,6 +782,7 @@ class AnimeParser implements ParserInterface
     public function getPreview(): ?string
     {
         $video = $this->crawler->filterXPath('//div[contains(@class, "video-promotion")]/a');
+
         if (!$video->count()) {
             return null;
         }

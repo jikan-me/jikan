@@ -95,7 +95,7 @@ class MangaCardParser implements ParserInterface
 
         $text = JString::cleanse($node->text());
 
-        if (!preg_match('~([0-9]{1,})~', $text, $matches)) {
+        if (!preg_match('~([0-9]+)~', $text, $matches)) {
             return null;
         }
 
@@ -109,25 +109,9 @@ class MangaCardParser implements ParserInterface
      */
     public function getType(): ?string
     {
-        // this information is no longer available
+        // This information is no longer available
         return null;
-
-        $text = $this->crawler->filterXPath('//div[contains(@class, "info")]');
-
-        if (!$text->count()) {
-            return null;
-        }
-
-        $text = JString::cleanse($text->text());
-        preg_match('/^([a-zA-Z-\.]+)/', $text, $matches);
-
-        $type = $matches[1];
-
-        if ($type === '-') {
-            $type = 'Unknown';
-        }
-
-        return $type;
+        return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "source")]')->text());
     }
 
     /**
@@ -179,7 +163,7 @@ class MangaCardParser implements ParserInterface
         $node = $this->crawler->filterXPath('//div/div[2]/div/span[contains(@class, "item")][1]');
 
         if (
-            !preg_match('~(.*), ([0-9]{1,})~', $node->text(), $matches)
+        !preg_match('~(.*), ([0-9]{1,})~', $node->text(), $matches)
         ) {
             return null;
         }
@@ -188,7 +172,8 @@ class MangaCardParser implements ParserInterface
 
         try {
             return (new \DateTimeImmutable($date, new \DateTimeZone('JST')))
-                ->setTimezone(new \DateTimeZone('UTC'));
+                ->setTimezone(new \DateTimeZone('UTC'))
+                ->setTime(0, 0);
         } catch (\Exception $e) {
             return null;
         }
@@ -204,7 +189,6 @@ class MangaCardParser implements ParserInterface
         $count = $this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[2]')->text();
 
         $count = JString::cleanse($count);
-
         $count = str_replace('K', '000', $count);
         $count = str_replace('M', '000000', $count);
 
@@ -272,7 +256,6 @@ class MangaCardParser implements ParserInterface
     public function getMangaScore(): ?float
     {
         $score = JString::cleanse($this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[1]')->text());
-
         if ($score === 'N/A') {
             return null;
         }

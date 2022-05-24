@@ -52,7 +52,7 @@ class TopPeopleParserTest extends TestCase
      */
     public function it_gets_the_favorites()
     {
-        self::assertEquals(24588, $this->parser->getPeopleFavorites());
+        self::assertEquals(39630, $this->parser->getPeopleFavorites());
     }
 
     /**
@@ -62,7 +62,7 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/voiceactors/3/42163.jpg?s=e7aa2685616307adf04f3d1255e4dba3',
+            'https://cdn.myanimelist.net/images/voiceactors/2/60638.jpg?s=5b39d822cfe1fe7c5dd164a0d4684a41',
             $this->parser->getImage()
         );
     }

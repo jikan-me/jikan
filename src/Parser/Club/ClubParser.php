@@ -7,6 +7,7 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Club\Club;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\UserMetaBasic;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -105,12 +106,14 @@ class ClubParser implements ParserInterface
      */
     public function getCategory(): string
     {
-        return JString::cleanse(
+        $category = JString::cleanse(
             Parser::removeChildNodes(
                 $this->crawler
                     ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[6]')
             )->text()
         );
+
+        return strtolower($category);
     }
 
     /**
@@ -119,12 +122,14 @@ class ClubParser implements ParserInterface
      */
     public function getCreated(): \DateTimeImmutable
     {
+        $node = $this->crawler
+            ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[contains(., "Created")]');
+
         $date = JString::cleanse(
-            Parser::removeChildNodes(
-                $this->crawler
-                    ->filterXPath('//div[@id="content"]/table/tr/td[2]/div/div[7]')
-            )->text()
+            Parser::removeChildNodes($node)
+                ->text()
         );
+
         return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
     }
 
@@ -279,7 +284,7 @@ class ClubParser implements ParserInterface
 
         foreach ($staffNode as $staffMember) {
             if ($staffMember instanceof Crawler) {
-                $staff[] = new MalUrl(
+                $staff[] = UserMetaBasic::fromMeta(
                     $staffMember->text(),
                     Constants::BASE_URL . $staffMember->attr('href')
                 );

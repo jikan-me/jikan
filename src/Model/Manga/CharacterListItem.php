@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Manga;
 
+use Jikan\Model\Common\CharacterMeta;
+use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser\Character\CharacterListItemParser;
 
 /**
@@ -12,24 +14,9 @@ use Jikan\Parser\Character\CharacterListItemParser;
 class CharacterListItem
 {
     /**
-     * @var int
+     * @var CharacterMeta
      */
-    private $malId;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $imageUrl;
-
-    /**
-     * @var string
-     */
-    private $name;
+    private $character;
 
     /**
      * @var string
@@ -46,52 +33,17 @@ class CharacterListItem
     {
         $instance = new self();
         $instance->role = $parser->getRole();
-        $instance->malId = $parser->getMalId();
-        $instance->url = $parser->getCharacterUrl();
-        $instance->name = $parser->getName();
-        $instance->imageUrl = $parser->getImage();
+        $instance->character = $parser->getCharacterMeta();
 
         return $instance;
     }
 
     /**
-     * @return string
+     * @return CharacterMeta
      */
-    public function __toString()
+    public function getCharacter(): CharacterMeta
     {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
+        return $this->character;
     }
 
     /**

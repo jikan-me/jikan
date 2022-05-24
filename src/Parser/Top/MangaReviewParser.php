@@ -1,20 +1,25 @@
 <?php
 
-namespace Jikan\Parser\Anime;
+namespace Jikan\Parser\Reviews;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Anime\AnimeReview;
-use Jikan\Model\Anime\AnimeReviewer;
+use Jikan\Model\Common\AnimeMeta;
+use Jikan\Model\Common\MangaMeta;
+use Jikan\Model\Manga\MangaReview;
+use Jikan\Model\Manga\MangaReviewer;
+use Jikan\Model\Manga\MangaReviewScores;
+use Jikan\Model\Reviews\Reviewer;
+use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class AnimeReviewParser
+ * Class MangaReviewParser
  *
  * @package Jikan\Parser
  */
-class AnimeReviewParser implements ParserInterface
+class MangaReviewParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -22,7 +27,7 @@ class AnimeReviewParser implements ParserInterface
     private $crawler;
 
     /**
-     * AnimeReviewParser constructor.
+     * MangaReviewParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -32,13 +37,22 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return AnimeReview
+     * @return MangaReview
      * @throws \Exception
      * @throws \RuntimeException
      */
-    public function getModel(): AnimeReview
+    public function getModel(): MangaReview
     {
-        return AnimeReview::fromParser($this);
+        return MangaReview::fromParser($this);
+    }
+
+    public function getManga() : MangaMeta
+    {
+        return new MangaMeta(
+            $this->getReviewedTitle(),
+            $this->getReviewedUrl(),
+            $this->getReviewedImageUrl()
+        );
     }
 
     /**
@@ -73,8 +87,14 @@ class AnimeReviewParser implements ParserInterface
             return $node->text();
         }
 
-        // works on Top Reviews pages, the div is shifted
+        // works on Top UserReviewsParser pages, the div is shifted
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/div/strong/span');
+        if ($node->count()) {
+            return $node->text();
+        }
+
+        // works on User UserReviews pages
+        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td/div/strong/span');
         return $node->text();
     }
 
@@ -122,13 +142,20 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return AnimeReviewer
-     * @throws \Exception
+     * @return Reviewer
+     */
+    public function getReviewer(): Reviewer
+    {
+        return (new ReviewerParser($this->crawler))->getModel();
+    }
+
+    /**
+     * @return MangaReviewScores
      * @throws \InvalidArgumentException
      */
-    public function getReviewer(): AnimeReviewer
+    public function getMangaScores(): MangaReviewScores
     {
-        return (new AnimeReviewerParser($this->crawler))->getModel();
+        return (new MangaReviewScoresParser($this->crawler))->getModel();
     }
 
     /**
@@ -149,5 +176,79 @@ class AnimeReviewParser implements ParserInterface
                 $node->text()
             )
         );
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getReviewedTitle(): string
+    {
+        return $this->crawler
+            ->filterXPath('//div[1]/div[1]/div[2]/strong/a')
+            ->text();
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getReviewedImageUrl(): string
+    {
+        // User UserReviews page
+        $node = $this->crawler
+            ->filterXPath('//div[12]/div[1]/div[1]/a/img');
+
+        if ($node->count()) {
+            return Parser::parseImageQuality($node->attr('data-src'));
+        }
+
+        // Recent UserReviews Anime page
+        $node = $this->crawler
+            ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a/img');
+
+        if ($node->count()) {
+            return Parser::parseImageQuality($node->attr('data-src'));
+        }
+    }
+
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
+    public function getReviewedUrl(): string
+    {
+        // User UserReviews page
+        $node = $this->crawler
+            ->filterXPath('//div[12]/div[1]/div[1]/a');
+
+        if ($node->count()) {
+            return $node->attr('href');
+        }
+
+        // Recent UserReviews Anime page
+        $node = $this->crawler
+            ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a');
+
+        return $node->attr('href');
+    }
+
+    /**
+     * @return int
+     * @throws \InvalidArgumentException
+     */
+    public function getChaptersRead(): int
+    {
+        $nodeText = JString::cleanse(
+            $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
+        );
+
+        preg_match('~(\d+) of (.*) chapters read~', $nodeText, $chaptersRead);
+
+        if (empty($chaptersRead)) {
+            return 0;
+        }
+
+        return (int) $chaptersRead[1];
     }
 }

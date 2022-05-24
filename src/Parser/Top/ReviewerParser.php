@@ -1,11 +1,12 @@
 <?php
 
-namespace Jikan\Parser\Common;
+namespace Jikan\Parser\Reviews;
 
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Manga\MangaReviewScores;
+use Jikan\Model\Reviews\Reviewer;
 use Jikan\Parser\Anime\AnimeReviewScoresParser;
 use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
@@ -16,7 +17,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser
  */
-abstract class ReviewerParser implements ParserInterface
+class ReviewerParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -33,6 +34,11 @@ abstract class ReviewerParser implements ParserInterface
         $this->crawler = $crawler;
     }
 
+    public function getModel()
+    {
+        return Reviewer::fromParser($this);
+    }
+
     /**
      * @return string
      * @throws \InvalidArgumentException
@@ -45,9 +51,11 @@ abstract class ReviewerParser implements ParserInterface
             return $node->attr('href');
         }
 
-        // works on Top Reviews pages, the div is shifted
+        // works on Top UserReviewsParser pages, the div is shifted
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/a');
-        return $node->attr('href');
+        if ($node->count()) {
+            return $node->attr('href');
+        }
     }
 
     /**
@@ -62,7 +70,7 @@ abstract class ReviewerParser implements ParserInterface
             return $node->text();
         }
 
-        // works on Top Reviews pages, the div is shifted
+        // works on Top UserReviewsParser pages, the div is shifted
         return $this->crawler
             ->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[2]/a')
             ->text();
@@ -82,50 +90,12 @@ abstract class ReviewerParser implements ParserInterface
             );
         }
 
-        // works on Top Reviews pages, the div is shifted
+        // works on Top UserReviewsParser pages, the div is shifted
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[1]/div/a/img');
         return Parser::parseImageThumbToHQ(
             $node
                 ->attr('src')
         );
-    }
-
-    /**
-     * @return int
-     * @throws \InvalidArgumentException
-     */
-    public function getEpisodesSeen(): int
-    {
-        $nodeText = JString::cleanse(
-            $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
-        );
-
-        preg_match('~(\d+) of (.*) episodes seen~', $nodeText, $episodesSeen);
-
-        if (empty($episodesSeen)) {
-            return 0;
-        }
-
-        return (int) $episodesSeen[1];
-    }
-
-    /**
-     * @return int
-     * @throws \InvalidArgumentException
-     */
-    public function getChaptersRead(): int
-    {
-        $nodeText = JString::cleanse(
-            $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
-        );
-
-        preg_match('~(\d+) of (.*) chapters read~', $nodeText, $chaptersRead);
-
-        if (empty($chaptersRead)) {
-            return 0;
-        }
-
-        return (int) $chaptersRead[1];
     }
 
     /**

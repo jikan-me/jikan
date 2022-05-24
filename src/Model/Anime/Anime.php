@@ -5,6 +5,8 @@ namespace Jikan\Model\Anime;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Url;
+use Jikan\Model\Common\YoutubeMeta;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Anime\AnimeParser;
 
 /**
@@ -26,14 +28,14 @@ class Anime
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
-     * @var string|null
+     * @var YoutubeMeta
      */
-    private $trailerUrl;
+    private $trailer;
 
     /**
      * @var string
@@ -212,11 +214,11 @@ class Anime
     public static function fromParser(AnimeParser $parser): Anime
     {
         $instance = new self();
-        $instance->trailerUrl = $parser->getPreview();
+        $instance->trailer = YoutubeMeta::factory($parser->getPreview());
         $instance->title = $parser->getTitle();
         $instance->url = $parser->getURL();
         $instance->malId = $parser->getId();
-        $instance->imageUrl = $parser->getImageURL();
+        $instance->images = CommonImageResource::factory($parser->getImageURL());
         $instance->synopsis = $parser->getSynopsis();
         $instance->titleEnglish = $parser->getTitleEnglish();
         $instance->titleSynonyms = $parser->getTitleSynonyms();
@@ -251,6 +253,38 @@ class Anime
         $instance->background = $parser->getBackground();
 
         return $instance;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getExplicitGenres(): array
+    {
+        return $this->explicitGenres;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getDemographics(): array
+    {
+        return $this->demographics;
+    }
+
+    /**
+     * @return MalUrl[]
+     */
+    public function getThemes(): array
+    {
+        return $this->themes;
+    }
+
+    /**
+     * @return Url[]
+     */
+    public function getExternalLinks(): array
+    {
+        return $this->externalLinks;
     }
 
     /**
@@ -302,19 +336,19 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**
-     * @return string|null
+     * @return YoutubeMeta
      */
-    public function getTrailerUrl(): ?string
+    public function getTrailer(): YoutubeMeta
     {
-        return $this->trailerUrl;
+        return $this->trailer;
     }
 
     /**
@@ -516,29 +550,4 @@ class Anime
     {
         return $this->endingThemes;
     }
-
-    /**
-     * @return MalUrl[]
-     */
-    public function getExplicitGenres(): array
-    {
-        return $this->explicitGenres;
-    }
-
-    /**
-     * @return MalUrl[]
-     */
-    public function getDemographics(): array
-    {
-        return $this->demographics;
-    }
-
-    /**
-     * @return MalUrl[]
-     */
-    public function getThemes(): array
-    {
-        return $this->themes;
-    }
-
 }

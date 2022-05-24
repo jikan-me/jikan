@@ -33,4 +33,12 @@ class MangaMoreInfoRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/manga/%d/_/moreinfo', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

@@ -2,60 +2,28 @@
 
 namespace Jikan\Model\Manga;
 
-use Jikan\Parser\Manga\MangaReviewParser;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Model\Reviews\Reviewer;
+use Jikan\Parser\Reviews\MangaReviewParser;
 
 /**
- * Class MangaReview
+ * Class UserMangaReview
  *
  * @package Jikan\Model
  */
-class MangaReview
+class MangaReview extends \Jikan\Model\Reviews\MangaReview
 {
 
     /**
-     * @var int
+     * @var Reviewer
      */
-    private $malId;
+    private $user;
+
 
     /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var int
-     */
-    private $helpfulCount;
-
-    /**
-     * @var \DateTimeImmutable
-     */
-    private $date;
-
-    /**
-     * @var MangaReviewer
-     */
-    private $reviewer;
-
-    /**
-     * @var string
-     */
-    private $content;
-
-    /**
-     * Create an instance from an MangaReviewParser parser
-     *
      * @param MangaReviewParser $parser
-     *
      * @return MangaReview
      * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
      */
     public static function fromParser(MangaReviewParser $parser): MangaReview
     {
@@ -63,13 +31,39 @@ class MangaReview
 
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
-        $instance->type = $parser->getType();
-        $instance->helpfulCount= $parser->getHelpfulCount();
+        $instance->type = $parser->getType() ?? 'manga';
+        $instance->votes = $parser->getHelpfulCount();
         $instance->date = $parser->getDate();
-        $instance->reviewer = $parser->getReviewer();
-        $instance->content = $parser->getContent();
+        $instance->user = $parser->getReviewer();
+        $instance->scores = $parser->getMangaScores();
+        $instance->review = $parser->getContent();
+        $instance->chaptersRead = $parser->getChaptersRead();
 
         return $instance;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChaptersRead(): string
+    {
+        return $this->chaptersRead;
+    }
+
+    /**
+     * @return MangaReviewScores
+     */
+    public function getScores(): MangaReviewScores
+    {
+        return $this->scores;
+    }
+
+    /**
+     * @return Reviewer
+     */
+    public function getUser(): Reviewer
+    {
+        return $this->user;
     }
 
     /**
@@ -89,11 +83,19 @@ class MangaReview
     }
 
     /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
      * @return int
      */
-    public function getHelpfulCount(): int
+    public function getVotes(): int
     {
-        return $this->helpfulCount;
+        return $this->votes;
     }
 
     /**
@@ -105,26 +107,10 @@ class MangaReview
     }
 
     /**
-     * @return MangaReviewer
-     */
-    public function getReviewer(): MangaReviewer
-    {
-        return $this->reviewer;
-    }
-
-    /**
      * @return string
      */
-    public function getContent(): string
+    public function getReview(): string
     {
-        return $this->content;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
+        return $this->review;
     }
 }

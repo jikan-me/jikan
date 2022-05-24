@@ -109,4 +109,28 @@ class PersonSearchRequest implements RequestInterface
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getQuery(): string
+    {
+        return $this->query;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): int
+    {
+        return $this->page;
+    }
+
+    /**
+     * @return string
+     */
+    public function getChar(): string
+    {
+        return $this->char;
+    }
 }

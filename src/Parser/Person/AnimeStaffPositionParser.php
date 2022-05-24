@@ -47,10 +47,11 @@ class AnimeStaffPositionParser implements ParserInterface
      */
     public function getPosition(): string
     {
+        $role = $this->crawler
+            ->filterXPath('//td[2]/div[2]');
+
         return JString::cleanse(
-            $this->crawler
-                ->filterXPath('//small')
-                ->text()
+            $role->text()
         );
     }
 

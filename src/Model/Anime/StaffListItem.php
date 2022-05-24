@@ -2,34 +2,21 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Model\Common\PersonMeta;
+use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 use Jikan\Parser\Anime\StaffListItemParser;
 
 /**
- * Class CharacterParser
+ * Class StaffListItem
  *
  * @package Jikan\Model
  */
 class StaffListItem
 {
     /**
-     * @var int
+     * @var PersonMeta
      */
-    public $malId;
-
-    /**
-     * @var string
-     */
-    public $url;
-
-    /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $imageUrl;
+    public $person;
 
     /**
      * @var string[]
@@ -46,44 +33,17 @@ class StaffListItem
     {
         $instance = new self();
         $instance->positions = $parser->getPositions();
-        $instance->malId = $parser->getMalId();
-        $instance->url = $parser->getUrl();
-        $instance->name = $parser->getName();
-        $instance->imageUrl = $parser->getImage();
+        $instance->person = $parser->getPersonMeta();
 
         return $instance;
     }
 
     /**
-     * @return int
+     * @return PersonMeta
      */
-    public function getMalId(): int
+    public function getPerson(): PersonMeta
     {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
+        return $this->person;
     }
 
     /**

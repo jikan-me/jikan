@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Top;
 
+use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
@@ -42,9 +43,9 @@ class TopPerson
     private $favorites;
 
     /**
-     * @var string
+     * @var PersonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var \DateTimeImmutable|null
@@ -69,7 +70,7 @@ class TopPerson
         $instance->url = $parser->getMalUrl()->getUrl();
         $instance->nameKanji = $parser->getKanjiName();
         $instance->favorites = $parser->getPeopleFavorites();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = PersonImageResource::factory($parser->getImage());
         $instance->birthday = $parser->getBirthday();
 
         return $instance;
@@ -132,11 +133,11 @@ class TopPerson
     }
 
     /**
-     * @return string
+     * @return PersonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): PersonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Irfan",
-            "email": "irfan.dahir@gmail.com"
+            "email": "neko@jikan.moe"
         }
     ],
     "autoload": {
@@ -25,19 +25,18 @@
         }
     },
     "require": {
-        "fabpot/goutte": "^3.2",
-        "php": "^7.1",
-        "ext-json": "*"
+        "php": "^8.0",
+        "ext-json": "*",
+        "fabpot/goutte": "^4.0"
     },
     "require-dev": {
-        "brianium/paratest": "~4.0",
+        "brianium/paratest": "^6.4.1",
         "doctrine/collections": "^1.5",
         "friendsofphp/php-cs-fixer": "^2.16",
         "jakub-onderka/php-parallel-lint": "^1.0",
         "jikan-me/jikan-fixtures": "dev-master",
-        "php-vcr/php-vcr": "~1.4",
-        "php-vcr/phpunit-testlistener-vcr": "~3.2",
-        "phpro/grumphp": "^0.19",
+        "php-vcr/php-vcr": "^1.6",
+        "phpro/grumphp": "^1.7.0",
         "phpunit/phpunit": "~9.0",
         "squizlabs/php_codesniffer": "^3.3"
     },
@@ -51,7 +50,10 @@
         ]
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
     },
     "repositories": {
     }

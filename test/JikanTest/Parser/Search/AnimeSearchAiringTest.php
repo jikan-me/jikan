@@ -36,6 +36,6 @@ class AnimeSearchAiringTest extends TestCase
         $this->search = $jikan->getAnimeSearch(new AnimeSearchRequest('Aikatsu Friends'));
         $anime = $this->search->getResults()[0];
         self::assertEquals('Aikatsu Friends!', $anime->getTitle());
-        self::assertTrue($anime->isAiring());
+        self::assertFalse($anime->isAiring());
     }
 }

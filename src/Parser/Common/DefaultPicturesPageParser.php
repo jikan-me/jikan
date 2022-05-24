@@ -3,6 +3,8 @@
 namespace Jikan\Parser\Common;
 
 use Jikan\Model\Common\DefaultPicture;
+use Jikan\Model\Common\Picture;
+use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -41,7 +43,10 @@ class DefaultPicturesPageParser implements ParserInterface
             ->filterXPath('//a[@class="js-picture-gallery"]')
             ->each(
                 function (Crawler $crawler) {
-                    return DefaultPicture::fromParser(new PictureParser($crawler));
+                    return PersonImageResource::factory(
+                        DefaultPicture::fromParser(new PictureParser($crawler))
+                        ->getImageUrl()
+                    );
                 }
             );
     }

@@ -1,12 +1,10 @@
 <?php
 
-namespace Jikan\Parser\Top;
+namespace Jikan\Parser\Reviews;
 
-use Jikan\Model\Anime\AnimeReview;
-use Jikan\Model\Manga\MangaReview;
-use Jikan\Parser\Anime\AnimeReviewParser;
-use Jikan\Parser\Anime\AnimeReviewsParser;
-use Jikan\Parser\Manga\MangaReviewParser;
+use Jikan\Model\Reviews\Recent\RecentAnimeReview;
+use Jikan\Model\Reviews\Recent\RecentMangaReview;
+use Jikan\Model\Reviews\RecentReviews;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -14,7 +12,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser\Top
  */
-class TopReviewsParser
+class RecentReviewsParser
 {
     /**
      * @var Crawler
@@ -33,11 +31,20 @@ class TopReviewsParser
     }
 
     /**
-     * @return TopAnime[]
+     * @return RecentReviews
+     * @throws \Exception
+     */
+    public function getModel(): RecentReviews
+    {
+        return RecentReviews::fromParser($this);
+    }
+
+    /**
+     * @return array
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getTopReviews(): array
+    public function getRecentReviews(): array
     {
         return $this->crawler
             ->filterXPath('//*[@id="content"]/div[@class="borderDark"]')
@@ -48,14 +55,29 @@ class TopReviewsParser
 
                     // Anime Review
                     if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Anime)') {
-                        return AnimeReview::fromParser(new AnimeReviewParser($crawler));
+                        return RecentAnimeReview::fromParser(new AnimeReviewParser($crawler));
                     }
 
                     // Manga Review
                     if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Manga)') {
-                        return MangaReview::fromParser(new MangaReviewParser($crawler));
+                        return RecentMangaReview::fromParser(new MangaReviewParser($crawler));
                     }
                 }
             );
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool
+    {
+        $node = $this->crawler
+            ->filterXPath('//*[@id="horiznav_nav"]/div/a[contains(text(), "Next")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
     }
 }

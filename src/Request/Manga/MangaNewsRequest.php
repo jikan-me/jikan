@@ -33,4 +33,20 @@ class MangaNewsRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/manga/%s/_/news', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage(): ?int
+    {
+        return $this->page;
+    }
 }

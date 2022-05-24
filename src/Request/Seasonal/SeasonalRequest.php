@@ -59,4 +59,28 @@ class SeasonalRequest implements RequestInterface
 
         return sprintf('https://myanimelist.net/anime/season/%s/%s', $this->year, $this->season);
     }
+
+    /**
+     * @return int|null
+     */
+    public function getYear(): ?int
+    {
+        return $this->year;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLater(): bool
+    {
+        return $this->later;
+    }
 }

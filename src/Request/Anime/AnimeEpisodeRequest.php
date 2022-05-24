@@ -40,4 +40,20 @@ class AnimeEpisodeRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime/%s/_/episode/%s', $this->id, $this->episodeId);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEpisodeId(): int
+    {
+        return $this->episodeId;
+    }
 }

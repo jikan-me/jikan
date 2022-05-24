@@ -4,6 +4,8 @@ namespace Jikan\Parser\Common;
 
 use Jikan\Helper\Constants;
 use Jikan\Helper\Parser;
+use Jikan\Model\Common\CommonMeta;
+use Jikan\Model\Common\ItemMeta;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -94,5 +96,14 @@ class Recommendation implements ParserInterface
     public function getModel(): \Jikan\Model\Common\Recommendation
     {
         return \Jikan\Model\Common\Recommendation::fromParser($this);
+    }
+
+    public function getEntryMeta() : CommonMeta
+    {
+        return new CommonMeta(
+            $this->getTitle(),
+            $this->getUrl(),
+            $this->getImageUrl()
+        );
     }
 }

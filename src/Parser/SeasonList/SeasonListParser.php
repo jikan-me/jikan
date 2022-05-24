@@ -2,6 +2,8 @@
 
 namespace Jikan\Parser\SeasonList;
 
+use Jikan\Model\Anime\AnimeReviews;
+use Jikan\Model\SeasonList\SeasonArchive;
 use Jikan\Model\SeasonList\SeasonListItem;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -11,7 +13,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser\SeasonList
  */
-class SeasonListParser implements ParserInterface
+class SeasonListParser
 {
     /**
      * @var Crawler
@@ -29,11 +31,19 @@ class SeasonListParser implements ParserInterface
     }
 
     /**
+     * @return SeasonArchive
+     */
+    public function getModel() : SeasonArchive
+    {
+        return SeasonArchive::fromParser($this);
+    }
+
+    /**
      * @return SeasonListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): array
+    public function getResults(): array
     {
         return $this->crawler
             ->filterXPath('//table[contains(@class, "anime-seasonal-byseason")]//tr')

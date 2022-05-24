@@ -41,7 +41,7 @@ class AnimeStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Watching:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -69,7 +69,7 @@ class AnimeStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Completed:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class AnimeStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'On-Hold:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -105,7 +105,7 @@ class AnimeStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Dropped:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -123,7 +123,7 @@ class AnimeStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Watch:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -141,7 +141,7 @@ class AnimeStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Total:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -183,13 +183,13 @@ class AnimeStatsParser implements ParserInterface
                     );
                     $percentage = (float) JString::cleanse($percentage);
 
-                    $scores[$score] = AnimeStatsScore::setProperties($votes, $percentage);
+                    $scores[$score] = AnimeStatsScore::setProperties($score, $votes, $percentage);
                 }
             );
 
         for ($i=1; $i<=10; $i++) {
             if (!array_key_exists($i, $scores)) {
-                $scores[$i] = AnimeStatsScore::setProperties(0, 0);
+                $scores[$i] = AnimeStatsScore::setProperties($i, 0, 0);
             }
         }
 

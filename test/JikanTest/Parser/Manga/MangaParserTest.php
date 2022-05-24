@@ -97,7 +97,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_image_url()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/manga/3/117681.jpg',
+            'https://cdn.myanimelist.net/images/manga/3/117681.jpg',
             $this->parser->getMangaImageURL()
         );
     }
@@ -236,7 +236,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_score()
     {
         self::assertEquals(
-            8.11,
+            8.06,
             $this->manga->getScore()
         );
     }
@@ -248,7 +248,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_scored_by()
     {
         self::assertEquals(
-            177655,
+            217694,
             $this->manga->getScoredBy()
         );
     }
@@ -260,7 +260,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_rank()
     {
         self::assertEquals(
-            706,
+            572,
             $this->manga->getRank()
         );
     }
@@ -272,7 +272,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_popularity()
     {
         self::assertEquals(
-            1,
+            4,
             $this->manga->getPopularity()
         );
     }
@@ -284,7 +284,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_members()
     {
         self::assertEquals(
-            258896,
+            323346,
             $this->manga->getMembers()
         );
     }
@@ -296,7 +296,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_favorites()
     {
         self::assertEquals(
-            39966,
+            47385,
             $this->manga->getFavorites()
         );
     }

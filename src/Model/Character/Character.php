@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser;
 
 /**
@@ -37,7 +38,7 @@ class Character
     public $nicknames = [];
 
     /**
-     * @var string
+     * @var string|null
      */
     public $about;
 
@@ -47,9 +48,9 @@ class Character
     public $memberFavorites;
 
     /**
-     * @var string
+     * @var CharacterImageResource
      */
-    public $imageUrl;
+    public $images;
 
     /**
      * @var Animeography[]
@@ -86,7 +87,7 @@ class Character
         $instance->nicknames = $parser->getNameNicknames();
         $instance->about = $parser->getAbout();
         $instance->memberFavorites = $parser->getMemberFavorites();
-        $instance->imageUrl = $parser->getImage();
+        $instance->images = CharacterImageResource::factory($parser->getImage());
 
         return $instance;
     }
@@ -102,7 +103,7 @@ class Character
     /**
      * @return string
      */
-    public function getCharacterUrl(): string
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -124,7 +125,7 @@ class Character
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getNicknames(): array
     {
@@ -132,9 +133,9 @@ class Character
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAbout(): string
+    public function getAbout(): ?string
     {
         return $this->about;
     }
@@ -148,11 +149,11 @@ class Character
     }
 
     /**
-     * @return string
+     * @return CharacterImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CharacterImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

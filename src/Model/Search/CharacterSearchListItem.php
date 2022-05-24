@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Search;
 
+use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser;
 
 /**
@@ -23,9 +24,9 @@ class CharacterSearchListItem
     private $url;
 
     /**
-     * @var string
+     * @var CharacterImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -60,7 +61,7 @@ class CharacterSearchListItem
 
         $instance->url = $parser->getUrl();
         $instance->malId = \Jikan\Helper\Parser::idFromUrl($instance->url);
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = CharacterImageResource::factory($parser->getImageUrl());
         $instance->name = $parser->getName();
         $instance->alternativeNames = $parser->getAlternativeNames();
         $instance->anime = $parser->getAnime();
@@ -87,11 +88,11 @@ class CharacterSearchListItem
     }
 
     /**
-     * @return string
+     * @return CharacterImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CharacterImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**

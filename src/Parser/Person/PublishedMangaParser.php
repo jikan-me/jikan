@@ -47,10 +47,11 @@ class PublishedMangaParser implements ParserInterface
      */
     public function getPosition(): string
     {
+        $role = $this->crawler
+            ->filterXPath('//td[2]/div[2]/small');
+
         return JString::cleanse(
-            $this->crawler
-                ->filterXPath('//small')
-                ->text()
+            $role->text()
         );
     }
 

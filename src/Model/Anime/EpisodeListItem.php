@@ -15,7 +15,12 @@ class EpisodeListItem
     /**
      * @var int
      */
-    public $episodeId;
+    public $malId;
+
+    /**
+     * @var string
+     */
+    private $url;
 
     /**
      * @var string
@@ -50,11 +55,6 @@ class EpisodeListItem
     /**
      * @var string
      */
-    public $videoUrl;
-
-    /**
-     * @var string
-     */
     public $forumUrl;
 
 
@@ -66,14 +66,14 @@ class EpisodeListItem
     public static function fromParser(EpisodeListItemParser $parser): self
     {
         $instance = new self();
-        $instance->episodeId = $parser->getEpisodeId();
+        $instance->malId = $parser->getEpisodeId();
         $instance->title = $parser->getTitle();
         $instance->titleJapanese = $parser->getTitleJapanese();
         $instance->titleRomanji = $parser->getTitleRomanji();
         $instance->aired = $parser->getAired();
         $instance->filler = $parser->getFiller();
         $instance->recap = $parser->getRecap();
-        $instance->videoUrl = $parser->getVideoUrl();
+        $instance->url = $parser->getVideoUrl();
         $instance->forumUrl = $parser->getForumUrl();
 
         return $instance;
@@ -82,9 +82,9 @@ class EpisodeListItem
     /**
      * @return int
      */
-    public function getEpisodeId(): int
+    public function getMalId(): int
     {
-        return $this->episodeId;
+        return $this->malId;
     }
 
     /**
@@ -138,9 +138,9 @@ class EpisodeListItem
     /**
      * @return string
      */
-    public function getVideoUrl(): string
+    public function getUrl(): string
     {
-        return $this->videoUrl;
+        return $this->url;
     }
 
     /**

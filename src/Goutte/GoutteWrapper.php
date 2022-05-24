@@ -4,6 +4,7 @@ namespace Jikan\Goutte;
 
 use Goutte\Client;
 use Jikan\Exception\BadResponseException;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class GoutteWrapper
@@ -21,7 +22,7 @@ class GoutteWrapper extends Client
      * @param      array       $server
      * @param      string|null $content
      * @param      bool        $changeHistory
-     * @return     \Symfony\Component\DomCrawler\Crawler
+     * @return     Crawler
      * @throws     BadResponseException
      */
     public function request(
@@ -32,7 +33,8 @@ class GoutteWrapper extends Client
         array $server = [],
         string $content = null,
         bool $changeHistory = true
-    ) {
+    ) : Crawler
+    {
         $response = parent::request(
             $method,
             $uri,

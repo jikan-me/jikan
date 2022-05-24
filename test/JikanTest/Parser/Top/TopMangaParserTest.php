@@ -39,8 +39,8 @@ class TopMangaParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('One Piece', $url);
-        self::assertEquals('https://myanimelist.net/manga/13/One_Piece', $url->getUrl());
+        self::assertEquals('Vagabond', $url);
+        self::assertEquals('https://myanimelist.net/manga/656/Vagabond', $url->getUrl());
     }
 
     /**
@@ -58,7 +58,7 @@ class TopMangaParserTest extends TestCase
      */
     public function it_gets_the_manga_score()
     {
-        self::assertEquals(9.03, $this->parser->getScore());
+        self::assertEquals(9.09, $this->parser->getScore());
     }
 
     /**
@@ -79,8 +79,7 @@ class TopMangaParserTest extends TestCase
         $parser2 = new TopListItemParser(
             $this->crawler->filterXPath('//tr[@class="ranking-list"]')->eq(1)
         );
-        self::assertNull($this->parser->getVolumes());
-        self::assertEquals(24, $parser2->getVolumes());
+        self::assertEquals(37, $this->parser->getVolumes());
     }
 
     /**
@@ -89,7 +88,7 @@ class TopMangaParserTest extends TestCase
      */
     public function it_gets_the_manga_members()
     {
-        self::assertEquals(212645, $this->parser->getMembers());
+        self::assertEquals(160324, $this->parser->getMembers());
     }
 
     /**
@@ -98,7 +97,7 @@ class TopMangaParserTest extends TestCase
      */
     public function it_gets_the_manga_start_date()
     {
-        self::assertEquals('Jul 1997', $this->parser->getStartDate());
+        self::assertEquals('Sep 1998', $this->parser->getStartDate());
     }
 
     /**
@@ -107,7 +106,7 @@ class TopMangaParserTest extends TestCase
      */
     public function it_gets_the_manga_end_date()
     {
-        self::assertEquals('', $this->parser->getEndDate());
+        self::assertEquals('May 2015', $this->parser->getEndDate());
     }
 
     /**
@@ -117,7 +116,7 @@ class TopMangaParserTest extends TestCase
     public function it_gets_the_manga_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/manga/3/55539.jpg?s=b4d9e935b7152f0c9e69b34a7797fe02',
+            'https://cdn.myanimelist.net/images/manga/2/181787.jpg?s=bbd3ff81b5d8e50781531c60cd68773f',
             $this->parser->getImage()
         );
     }

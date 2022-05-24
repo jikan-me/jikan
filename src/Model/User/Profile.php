@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\User;
 
+use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\User\Profile\UserProfileParser;
 
 /**
@@ -15,7 +16,7 @@ class Profile
     /**
      * @var int|null
      */
-    private $userId;
+    private $malId;
 
     /**
      * @var string
@@ -28,9 +29,9 @@ class Profile
     private $url;
 
     /**
-     * @var string|null
+     * @var UserImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var \DateTimeImmutable|null
@@ -73,6 +74,11 @@ class Profile
     private $favorites;
 
     /**
+     * @var LastUpdates
+     */
+    private $lastUpdates;
+
+    /**
      * @var string|null
      */
     private $about;
@@ -87,10 +93,10 @@ class Profile
     public static function fromParser(UserProfileParser $parser): self
     {
         $instance = new self();
-        $instance->userId = $parser->getUserId();
+        $instance->malId = $parser->getUserId();
         $instance->username = $parser->getUsername();
         $instance->url = $parser->getProfileUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->joined = $parser->getJoinDate();
         $instance->lastOnline = $parser->getLastOnline();
         $instance->gender = $parser->getGender();
@@ -100,6 +106,7 @@ class Profile
         $instance->mangaStats = $parser->getMangaStats();
         $instance->about = $parser->getAbout();
         $instance->favorites = $parser->getFavorites();
+        $instance->lastUpdates = $parser->getUserLastUpdates();
 
         return $instance;
     }
@@ -107,9 +114,9 @@ class Profile
     /**
      * @return int|null
      */
-    public function getUserId(): int
+    public function getMalId(): ?int
     {
-        return $this->userId;
+        return $this->malId;
     }
 
     /**
@@ -201,10 +208,18 @@ class Profile
     }
 
     /**
-     * @return null|string
+     * @return UserImageResource
      */
-    public function getImageUrl(): ?string
+    public function getImages(): UserImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
+    }
+
+    /**
+     * @return LastUpdates
+     */
+    public function getLastUpdates(): LastUpdates
+    {
+        return $this->lastUpdates;
     }
 }

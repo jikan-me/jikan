@@ -6,6 +6,7 @@ namespace Jikan\Parser\Anime;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\StaffListItem;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\PersonMeta;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -104,5 +105,18 @@ class StaffListItemParser implements ParserInterface
     public function getModel(): StaffListItem
     {
         return StaffListItem::fromParser($this);
+    }
+
+    /**
+     * @return PersonMeta
+     * @throws \InvalidArgumentException
+     */
+    public function getPersonMeta(): PersonMeta
+    {
+        return new PersonMeta(
+            $this->getName(),
+            $this->getUrl(),
+            $this->getImage()
+        );
     }
 }

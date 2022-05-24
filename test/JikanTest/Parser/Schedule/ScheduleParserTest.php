@@ -54,7 +54,7 @@ class ScheduleParserTest extends TestCase
     {
         $wednesday = $this->parser->getShedule('wednesday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $wednesday);
-        self::assertCount(5, $wednesday);
+        self::assertCount(13, $wednesday);
     }
 
     /**
@@ -65,7 +65,7 @@ class ScheduleParserTest extends TestCase
     {
         $thursday = $this->parser->getShedule('thursday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $thursday);
-        self::assertCount(11, $thursday);
+        self::assertCount(9, $thursday);
     }
 
     /**
@@ -87,7 +87,7 @@ class ScheduleParserTest extends TestCase
     {
         $saturday = $this->parser->getShedule('saturday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $saturday);
-        self::assertCount(14, $saturday);
+        self::assertCount(15, $saturday);
     }
 
     /**
@@ -98,7 +98,7 @@ class ScheduleParserTest extends TestCase
     {
         $sunday = $this->parser->getShedule('sunday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $sunday);
-        self::assertCount(18, $sunday);
+        self::assertCount(21, $sunday);
     }
 
     /**
@@ -109,7 +109,7 @@ class ScheduleParserTest extends TestCase
     {
         $all = $this->parser->getShedule('all');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $all);
-        self::assertCount(148, $all);
+        self::assertCount(141, $all);
     }
 
     /**
@@ -120,7 +120,7 @@ class ScheduleParserTest extends TestCase
     {
         $other = $this->parser->getShedule('other');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $other);
-        self::assertCount(17, $other);
+        self::assertCount(10, $other);
     }
 
     /**
@@ -131,6 +131,6 @@ class ScheduleParserTest extends TestCase
     {
         $unknown = $this->parser->getShedule('unknown');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $unknown);
-        self::assertCount(36, $unknown);
+        self::assertCount(20, $unknown);
     }
 }

@@ -55,7 +55,7 @@ class MalUrlExtractor
         if (!$this->imageLinks) {
             $this->crawler->filterXPath('//a/img')->each(
                 function (Crawler $c) {
-                    $node = $c->parents()->first()->getNode(0);
+                    $node = $c->ancestors()->first()->getNode(0);
                     /**
                 *
                      *

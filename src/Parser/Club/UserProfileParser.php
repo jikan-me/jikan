@@ -60,8 +60,14 @@ class UserProfileParser implements ParserInterface
      */
     public function getImage(): string
     {
-        return Parser::parseImageThumbToHQ(
+        $imageUrl = Parser::parseImageThumbToHQ(
             $this->crawler->filterXPath('//img[1]')->attr('data-src')
         );
+
+        if (!preg_match("~^".Constants::BASE_URL."~", $imageUrl)) {
+            $imageUrl = Constants::BASE_URL.$imageUrl;
+        }
+
+        return $imageUrl;
     }
 }

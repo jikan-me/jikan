@@ -63,7 +63,7 @@ class SeasonalAnimeParserTest extends TestCase
         self::assertEquals('https://myanimelist.net/anime/producer/4/Bones', $producer->getUrl());
 
         $producer = $this->parser2->getProducer();
-        self::assertCount(2, $producer);
+        self::assertCount(1, $producer);
         self::assertContainsOnly(\Jikan\Model\Common\MalUrl::class, $producer);
         self::assertContains('Pierrot Plus', $producer);
         self::assertContains('Studio Pierrot', $producer);
@@ -77,7 +77,7 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         self::assertEquals(25, $this->parser->getEpisodes());
-        self::assertEquals(12, $this->parser2->getEpisodes());
+        self::assertEquals(23, $this->parser2->getEpisodes());
     }
 
     /**
@@ -88,7 +88,7 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         self::assertEquals('Manga', $this->parser->getSource());
-        self::assertEquals('Manga', $this->parser2->getSource());
+        self::assertEquals('Visual novel', $this->parser2->getSource());
     }
 
     /**
@@ -99,11 +99,9 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $genres = $this->parser->getGenres();
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $genres);
-        self::assertContains('Action', $genres);
-        self::assertContains('Comedy', $genres);
-        self::assertContains('School', $genres);
-        self::assertContains('Shounen', $genres);
-        self::assertContains('Super Power', $genres);
+        self::assertContains('Action', $genres[0]->getName());
+        self::assertContains('Comedy', $genres[1]->getName());
+        self::assertContains('Super Power', $genres[2]->getName());
     }
 
     /**
@@ -121,7 +119,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_description()
     {
-        self::assertEquals('Third season of Boku no Hero Academia.', $this->parser->getDescription());
+        self::assertContains('As summer arrives for the students at UA Academy, each of these superheroes', $this->parser->getDescription());
     }
 
     /**
@@ -148,7 +146,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_air_members()
     {
-        self::assertEquals(329324, $this->parser->getMembers());
+        self::assertEquals(1247636, $this->parser->getMembers());
     }
 
     /**
@@ -179,7 +177,7 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_anime_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/anime/1319/92084.jpg?s=174e33772872a964b6c8b7668b46c2c5',
+            'https://cdn.myanimelist.net/images/anime/1319/92084.jpg',
             $this->parser->getAnimeImage()
         );
     }
@@ -192,7 +190,7 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         self::assertEquals(
-            7.57,
+            8.52,
             $this->parser2->getAnimeScore()
         );
     }

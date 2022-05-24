@@ -56,7 +56,7 @@ class MagazineListItemParser implements ParserInterface
      */
     public function getName(): string
     {
-        preg_match('~(.+)\s\(\d+\)~', $this->crawler->text(), $node);
+        preg_match('~(.+)\s\(.*\)~', $this->crawler->text(), $node);
 
         return $node[1];
     }
@@ -69,6 +69,11 @@ class MagazineListItemParser implements ParserInterface
     public function getCount(): int
     {
         preg_match('~.+\s\((.+)\)~', $this->crawler->text(), $node);
+
+        if ($node[1] === '-') {
+            return 0;
+        }
+
         $count = str_replace(',', '', $node[1]);
 
         return $count;

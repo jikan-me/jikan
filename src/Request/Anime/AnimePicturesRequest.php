@@ -34,4 +34,12 @@ class AnimePicturesRequest implements RequestInterface
         // MyAnimeList wants <something> after /<id>/... it happily accepts jikan as a valid parameter though
         return sprintf('https://myanimelist.net/anime/%d/jikan/pics', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

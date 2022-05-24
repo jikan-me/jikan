@@ -3,6 +3,7 @@
 namespace Jikan\Model\Club;
 
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Resource\ClubImageResource\ClubImageResource;
 use Jikan\Parser\Club\ClubParser;
 
 /**
@@ -24,24 +25,19 @@ class Club
     private $url;
 
     /**
-     * @var string
+     * @var ClubImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
      */
-    private $title;
+    private $name;
 
     /**
      * @var int
      */
-    private $membersCount;
-
-    /**
-     * @var int
-     */
-    private $picturesCount;
+    private $members;
 
     /**
      * @var string
@@ -56,7 +52,7 @@ class Club
     /**
      * @var string
      */
-    private $type;
+    private $access;
 
     /**
      * @var MalUrl[]
@@ -66,17 +62,17 @@ class Club
     /**
      * @var MalUrl[]
      */
-    private $animeRelations;
+    private $anime;
 
     /**
      * @var MalUrl[]
      */
-    private $mangaRelations;
+    private $manga;
 
     /**
      * @var MalUrl[]
      */
-    private $characterRelations;
+    private $characters;
 
     /**
      * @param  ClubParser $parser
@@ -89,16 +85,16 @@ class Club
 
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
-        $instance->title = $parser->getTitle();
-        $instance->imageUrl = $parser->getImageUrl();
-        $instance->membersCount = $parser->getMembersCount();
-        $instance->picturesCount = $parser->getPicturesCount();
+        $instance->name = $parser->getTitle();
+        $instance->images = ClubImageResource::factory($parser->getImageUrl());
+        $instance->members = $parser->getMembersCount();
+//        $instance->picturesCount = $parser->getPicturesCount();
         $instance->category = $parser->getCategory();
         $instance->created = $parser->getCreated();
-        $instance->animeRelations = $parser->getAnimeRelations();
-        $instance->mangaRelations = $parser->getMangaRelations();
-        $instance->characterRelations = $parser->getCharacterRelations();
-        $instance->type = $parser->getType();
+        $instance->anime = $parser->getAnimeRelations();
+        $instance->manga = $parser->getMangaRelations();
+        $instance->characters = $parser->getCharacterRelations();
+        $instance->access = $parser->getType();
         $instance->staff = $parser->getStaff();
 
         return $instance;
@@ -121,35 +117,27 @@ class Club
     }
 
     /**
-     * @return string
+     * @return ClubImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): ClubImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
     }
 
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getName(): string
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
      * @return int
      */
-    public function getMembersCount(): int
+    public function getMembers(): int
     {
-        return $this->membersCount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPicturesCount(): int
-    {
-        return $this->picturesCount;
+        return $this->members;
     }
 
     /**
@@ -171,9 +159,9 @@ class Club
     /**
      * @return string
      */
-    public function getType(): string
+    public function getAccess(): string
     {
-        return $this->type;
+        return $this->access;
     }
 
     /**
@@ -187,24 +175,24 @@ class Club
     /**
      * @return MalUrl[]
      */
-    public function getAnimeRelations(): array
+    public function getAnime(): array
     {
-        return $this->animeRelations;
+        return $this->anime;
     }
 
     /**
      * @return MalUrl[]
      */
-    public function getMangaRelations(): array
+    public function getManga(): array
     {
-        return $this->mangaRelations;
+        return $this->manga;
     }
 
     /**
      * @return MalUrl[]
      */
-    public function getCharacterRelations(): array
+    public function getCharacters(): array
     {
-        return $this->characterRelations;
+        return $this->characters;
     }
 }

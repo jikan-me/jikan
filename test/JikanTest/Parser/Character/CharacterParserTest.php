@@ -55,7 +55,7 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_name_in_kanji()
     {
-        self::assertEquals('モモンガ', $this->parser->getNameKanji());
+        self::assertNull($this->parser->getNameKanji());
     }
 
     /**
@@ -86,7 +86,7 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_member_favorites()
     {
-        self::assertEquals(3755, $this->parser->getMemberFavorites());
+        self::assertEquals(9245, $this->parser->getMemberFavorites());
     }
 
     /**
@@ -96,7 +96,7 @@ class CharacterParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/characters/3/288006.jpg',
+            'https://cdn.myanimelist.net/images/characters/3/288006.jpg',
             $this->parser->getImage()
         );
     }
@@ -108,7 +108,7 @@ class CharacterParserTest extends TestCase
     public function it_gets_the_animeography()
     {
         $animeography = $this->parser->getAnimeography();
-        self::assertCount(9, $animeography);
+        self::assertCount(11, $animeography);
         self::assertContainsOnly(\Jikan\Model\Character\Animeography::class, $animeography);
     }
 
@@ -130,7 +130,7 @@ class CharacterParserTest extends TestCase
     public function it_gets_the_voice_actors()
     {
         $voiceActors = $this->parser->getVoiceActors();
-        self::assertCount(4, $voiceActors);
+        self::assertCount(5, $voiceActors);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Character\VoiceActor::class, $voiceActors);
         self::assertContains('Hino, Satoshi', $voiceActors);
         self::assertContains('Mendiant, Charles', $voiceActors);

@@ -2,6 +2,9 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
+use Jikan\Model\Reviews\RecentReviews;
 use Jikan\Parser\Anime\EpisodesParser;
 
 /**
@@ -9,17 +12,18 @@ use Jikan\Parser\Anime\EpisodesParser;
  *
  * @package Jikan\Model
  */
-class Episodes
+class Episodes extends Results implements Pagination
 {
+
+    /**
+     * @var bool
+     */
+    private $hasNextPage = false;
+
     /**
      * @var int
      */
-    private $episodesLastPage = 1;
-
-    /**
-     * @var EpisodeListItem[]
-     */
-    private $episodes = [];
+    private $lastVisiblePage = 1;
 
     /**
      * @param EpisodesParser $parser
@@ -30,25 +34,42 @@ class Episodes
     public static function fromParser(EpisodesParser $parser): self
     {
         $instance = new self();
-        $instance->episodes = $parser->getEpisodes();
-        $instance->episodesLastPage = $parser->getEpisodesLastPage();
+        $instance->results = $parser->getEpisodes();
+        $instance->lastVisiblePage = $parser->getLastPage();
+        $instance->hasNextPage = $parser->getHasNextPage();
 
         return $instance;
     }
 
     /**
-     * @return EpisodeListItem[]
+     * @return static
      */
-    public function getEpisodes(): array
+    public static function mock() : self
     {
-        return $this->episodes;
+        return new self();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool
+    {
+        return $this->hasNextPage;
     }
 
     /**
      * @return int
      */
-    public function getEpisodesLastPage(): int
+    public function getLastVisiblePage(): int
     {
-        return $this->episodesLastPage;
+        return $this->lastVisiblePage;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 }

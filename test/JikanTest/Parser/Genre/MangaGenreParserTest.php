@@ -51,6 +51,6 @@ class MangaGenreParserTest extends TestCase
      */
     public function it_gets_the_count()
     {
-        self::assertEquals(6187, $this->parser->getCount());
+        self::assertEquals(7318, $this->parser->getCount());
     }
 }

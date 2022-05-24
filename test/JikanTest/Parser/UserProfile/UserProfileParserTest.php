@@ -46,7 +46,7 @@ class UserProfileParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/userimages/3600201.jpg',
+            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1610489400',
             $this->parser->getImageUrl()
         );
     }
@@ -93,7 +93,7 @@ class UserProfileParserTest extends TestCase
      */
     public function it_gets_the_location()
     {
-        self::assertEquals('101', $this->parser->getLocation());
+        self::assertEquals('The wired', $this->parser->getLocation());
     }
 
     /**
@@ -121,14 +121,24 @@ class UserProfileParserTest extends TestCase
     public function it_gets_the_favorites()
     {
         self::assertInstanceOf(\Jikan\Model\User\Favorites::class, $this->parser->getFavorites());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeMeta::class, $this->parser->getFavorites()->getAnime());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MangaMeta::class, $this->parser->getFavorites()->getManga());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteAnime::class, $this->parser->getFavorites()->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteManga::class, $this->parser->getFavorites()->getManga());
         self::assertContainsOnlyInstancesOf(
-            \Jikan\Model\Common\CharacterMeta::class,
+            \Jikan\Model\User\FavoriteCharacter::class,
             $this->parser->getFavorites()->getCharacters()
         );
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\PersonMeta::class, $this->parser->getFavorites()->getPeople());
 
+    }
+
+    /**
+     * @test
+     * @vcr ProfileParserTest.yaml
+     */
+    public function it_gets_last_updates(){
+        $updates = $this->parser->getUserLastUpdates();
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\LastAnimeUpdate::class, $updates->getAnime());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\LastMangaUpdate::class, $updates->getManga());
     }
 
     /**

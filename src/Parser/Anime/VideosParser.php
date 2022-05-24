@@ -36,7 +36,7 @@ class VideosParser implements ParserInterface
     public function getEpisodes(): array
     {
         $episodes = $this->crawler
-            ->filterXPath('//div[@class="js-video-list-content"]/div[contains(@class, "video-list-outer")]');
+            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[contains(@class, "video-block episode-video")]//*[contains(@class, "video-list-outer")]');
 
         if (!$episodes->count()) {
             return [];

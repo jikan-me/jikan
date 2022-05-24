@@ -37,6 +37,7 @@ class Constants
     public const TOP_OVA = 'ova';
     public const TOP_ONA = 'ona';
     public const TOP_SPECIAL = 'special';
+    public const TOP_ONA = 'ona';
 
     public const TOP_MANGA = 'manga';
     public const TOP_LIGHTNOVELS = 'lightnovels';
@@ -45,9 +46,24 @@ class Constants
     public const TOP_DOUJINSHI = 'doujin';
     public const TOP_MANHWA = 'manhwa';
     public const TOP_MANHUA = 'manhua';
+    public const TOP_LIGHTNOVELS = 'lightnovels';
 
     public const TOP_BY_POPULARITY = 'bypopularity';
     public const TOP_BY_FAVORITES = 'favorite';
+
+    public const TOP_REVIEW_ANIME = 'anime';
+    public const TOP_REVIEW_MANGA = 'manga';
+    public const TOP_REVIEW_BEST_VOTED = 'bestvoted';
+
+    // v3 status const // remove old ones
+    public const STATUS_ANIME_AIRING = 1;
+    public const STATUS_ANIME_FINISHED = 2;
+    public const STATUS_ANIME_NOT_YET_AIRED = 3;
+    public const STATUS_MANGA_PUBLISHING = 1;
+    public const STATUS_MANGA_FINISHED = 2;
+    public const STATUS_MANGA_NOT_YET_PUBLISHED = 3;
+    public const STATUS_MANGA_ON_HIATUS = 4;
+    public const STATUS_MANGA_DISCONTINUED = 5;
 
     public const TOP_REVIEW_ANIME = 'anime';
     public const TOP_REVIEW_MANGA = 'manga';

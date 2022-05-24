@@ -43,12 +43,12 @@ class AnimeReviewScores
     private $enjoyment;
 
     /**
-     * @param Parser\Anime\AnimeReviewScoresParser $parser
+     * @param Parser\Reviews\AnimeReviewScoresParser $parser
      *
      * @return AnimeReviewScores
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\Anime\AnimeReviewScoresParser $parser): AnimeReviewScores
+    public static function fromParser(Parser\Reviews\AnimeReviewScoresParser $parser): AnimeReviewScores
     {
         $instance = new self();
 

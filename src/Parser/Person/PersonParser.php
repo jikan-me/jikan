@@ -97,7 +97,7 @@ class PersonParser implements ParserInterface
         }
 
         return JString::cleanse(
-            str_replace($node->text(), '', $node->parents()->text())
+            str_replace($node->text(), '', $node->ancestors()->text())
         );
     }
 
@@ -117,7 +117,7 @@ class PersonParser implements ParserInterface
         // MAL screwed up the HTML here
         preg_match(
             '~Family name:(.*?)(Alternate names|Birthday|Website|Member Favorites|More)~',
-            $node->parents()->text(),
+            $node->ancestors()->text(),
             $matches
         );
 
@@ -149,7 +149,7 @@ class PersonParser implements ParserInterface
 
         $names = explode(
             ',',
-            str_replace($node->text(), '', $node->parents()->text())
+            str_replace($node->text(), '', $node->ancestors()->text())
         );
 
         foreach ($names as &$name) {
@@ -202,7 +202,7 @@ class PersonParser implements ParserInterface
 
         return Parser::parseDateMDYReadable(
             JString::cleanse(
-                str_replace($node->text(), '', $node->parents()->text())
+                str_replace($node->text(), '', $node->ancestors()->text())
             )
         );
     }
@@ -222,7 +222,7 @@ class PersonParser implements ParserInterface
         }
 
         return (int)JString::cleanse(
-            str_replace([$node->text(), ','], '', $node->parents()->text())
+            str_replace([$node->text(), ','], '', $node->ancestors()->text())
         );
     }
 
@@ -259,7 +259,7 @@ class PersonParser implements ParserInterface
     public function getPersonVoiceActingRoles(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, "js-table-people-anime")]/tr[contains(@class, "js-people-anime")]');
+            ->filterXPath('//table[contains(@class, "js-table-people-character")]/tr[contains(@class, "js-people-character")]');
 
         if (!$node->count()) {
             return [];
@@ -280,7 +280,7 @@ class PersonParser implements ParserInterface
     public function getPersonAnimeStaffPositions(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, \'js-table-people-staff\')]/tr');
+            ->filterXPath('//table[contains(@class, "js-table-people-staff")]/tr[contains(@class, "js-people-staff")]');
 
         if (!$node->count()) {
             return [];
@@ -301,12 +301,11 @@ class PersonParser implements ParserInterface
     public function getPersonPublishedManga(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, \'js-table-people-manga\')]/tr');
+            ->filterXPath('//table[contains(@class, "js-table-people-manga")]/tr[contains(@class, "js-people-manga")]');
 
         if (!$node->count()) {
             return [];
         }
-
 
         return $node->each(
             function (Crawler $c) {

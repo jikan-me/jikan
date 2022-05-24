@@ -40,4 +40,20 @@ class AnimeRecentlyUpdatedByUsersRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime/%d/jikan/stats?show=%d', $this->id, $this->page);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
 }

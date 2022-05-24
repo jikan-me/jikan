@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Common\CharacterMeta;
+use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser\Character\CharacterListItemParser;
 
 /**
@@ -12,24 +14,9 @@ use Jikan\Parser\Character\CharacterListItemParser;
 class CharacterListItem
 {
     /**
-     * @var int
+     * @var CharacterMeta
      */
-    public $malId;
-
-    /**
-     * @var string
-     */
-    public $url;
-
-    /**
-     * @var string
-     */
-    public $imageUrl;
-
-    /**
-     * @var string
-     */
-    public $name;
+    public $character;
 
     /**
      * @var string
@@ -52,45 +39,10 @@ class CharacterListItem
     {
         $instance = new self();
         $instance->voiceActors = $parser->getVoiceActors();
-        $instance->malId = $parser->getMalId();
-        $instance->url = $parser->getCharacterUrl();
-        $instance->name = $parser->getName();
+        $instance->character = $parser->getCharacterMeta();
         $instance->role = $parser->getRole();
-        $instance->imageUrl = $parser->getImage();
 
         return $instance;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     /**
@@ -102,11 +54,11 @@ class CharacterListItem
     }
 
     /**
-     * @return string
+     * @return CharacterMeta
      */
-    public function getImageUrl(): string
+    public function getCharacter(): CharacterMeta
     {
-        return $this->imageUrl;
+        return $this->character;
     }
 
     /**

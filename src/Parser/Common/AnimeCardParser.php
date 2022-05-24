@@ -65,7 +65,6 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAnimeUrl(): string
     {
-
         $node = $this->crawler->filterXPath('//div/div/h2/a');
 
         if ($node->count()) {
@@ -200,7 +199,6 @@ class AnimeCardParser implements ParserInterface
     {
         // this information is no longer available
         return null;
-
         $text = $this->crawler->filterXPath('//div[contains(@class, "info")]');
 
         if (!$text->count()) {
@@ -269,6 +267,7 @@ class AnimeCardParser implements ParserInterface
 
         if ($node->count()) {
             $count = JString::cleanse($node->text());
+
             return (int)str_replace([',', '.'], '', $count);
         }
     }
@@ -351,6 +350,7 @@ class AnimeCardParser implements ParserInterface
             $score = JString::cleanse($node->text());
             if ($score === 'N/A') return null;
         }
+
         return (float) $score;
     }
 
@@ -363,7 +363,6 @@ class AnimeCardParser implements ParserInterface
     {
         // this information is no longer available
         return [];
-
         // if anyone can fix this spaghetti code, most welcome
         $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
 
@@ -376,7 +375,7 @@ class AnimeCardParser implements ParserInterface
                 $node->nextAll()->filterXPath('//a')
                     ->each(function(Crawler $c) use(&$malUrl) {
                         $malUrl[] = $c->text();
-                });
+                    });
             }
         });
 
@@ -390,7 +389,6 @@ class AnimeCardParser implements ParserInterface
      */
     public function getThemes(): array
     {
-
         $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/div[contains(@class, "properties")]/div[3]/span');
 
         $malUrl = [];
@@ -462,6 +460,6 @@ class AnimeCardParser implements ParserInterface
      */
     public function isContinuing(): bool
     {
-        return strpos($this->crawler->parents()->text(), '(Continuing)') !== false;
+        return strpos($this->crawler->ancestors()->text(), '(Continuing)') !== false;
     }
 }

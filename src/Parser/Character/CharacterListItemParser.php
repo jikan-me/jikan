@@ -6,6 +6,7 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Character\CharacterListItem;
 use Jikan\Model\Character\VoiceActor;
+use Jikan\Model\Common\CharacterMeta;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -103,6 +104,19 @@ class CharacterListItemParser implements ParserInterface
             JString::cleanse(
                 $this->crawler->filterXPath('//td[2]/div[4]')->text()
             )
+        );
+    }
+
+    /**
+     * @return CharacterMeta
+     * @throws \InvalidArgumentException
+     */
+    public function getCharacterMeta(): CharacterMeta
+    {
+        return new CharacterMeta(
+            $this->getName(),
+            $this->getCharacterUrl(),
+            $this->getImage()
         );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Character;
 
+use Jikan\Model\Common\PersonMeta;
 use Jikan\Parser\Character\VoiceActorParser;
 
 /**
@@ -11,25 +12,11 @@ use Jikan\Parser\Character\VoiceActorParser;
  */
 class VoiceActor
 {
-    /**
-     * @var int
-     */
-    private $malId;
 
     /**
-     * @var string
+     * @var PersonMeta
      */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $imageUrl;
+    private $person;
 
     /**
      * @var string
@@ -46,54 +33,18 @@ class VoiceActor
     public static function fromParser(VoiceActorParser $parser): VoiceActor
     {
         $instance = new self();
-        $instance->malId = $parser->getMalId();
-        $instance->url = $parser->getUrl();
-        $instance->name = $parser->getName();
-        $instance->imageUrl = $parser->getImage();
+        $instance->person = $parser->getPersonMeta();
         $instance->language = $parser->getLanguage();
-        $instance->url = $parser->getUrl();
 
         return $instance;
     }
 
     /**
-     * @return string
+     * @return PersonMeta
      */
-    public function __toString()
+    public function getPerson(): PersonMeta
     {
-        return $this->getName();
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
+        return $this->person;
     }
 
     /**

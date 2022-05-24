@@ -30,7 +30,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_title(): void
     {
-        self::assertEquals('Manga \'Berserk\' Resumes Serialization', $this->parser->getTitle());
+        self::assertEquals('North American Anime & Manga Releases for July', $this->parser->getTitle());
     }
 
     /**
@@ -39,7 +39,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_url(): void
     {
-        self::assertEquals('https://myanimelist.net/news/53304997', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/news/60161703', $this->parser->getUrl());
     }
 
     /**
@@ -49,7 +49,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_image(): void
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/s/common/uploaded_files/1512787795-f1674d6456f90126448afb689c3224be.jpeg?s=66f1c0637fa3b5b7e90dc0f40f608738',
+            'https://cdn.myanimelist.net/s/common/uploaded_files/1594161493-e76e48dafd1b0f67ece6f1fa065db158.jpeg?s=e24b9ee8cfa8d123bf27fbbd9aef0d27',
             $this->parser->getImage()
         );
     }
@@ -60,7 +60,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_date(): void
     {
-        self::assertEquals('2017-12-08 18:53', $this->parser->getDate()->format('Y-m-d H:i'));
+        self::assertEquals('2020-07-07 15:39', $this->parser->getDate()->format('Y-m-d H:i'));
     }
 
     /**
@@ -69,7 +69,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_author(): void
     {
-        self::assertEquals('Vindstot', (string)$this->parser->getAuthor());
+        self::assertEquals('ImperfectBlue', (string)$this->parser->getAuthor());
     }
 
     /**
@@ -78,7 +78,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_discussion_link(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=1690998', $this->parser->getDiscussionLink());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=1850747', $this->parser->getDiscussionLink());
     }
 
     /**
@@ -88,7 +88,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_comments(): void
     {
         self::assertEquals(
-            31,
+            0,
             $this->parser->getComments()
         );
     }
@@ -99,8 +99,8 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_introduction(): void
     {
-        self::assertEquals(
-            'The 24th issue of this year\'s Young Animal magazine has announced on Friday that Kentarou Miura\'s adventure fantasy manga Berserk will resume its serializa...',
+        self::assert(
+            'Here are the North American anime & manga releases for July Week 1: July 7 - 13 Anime Releases Cop Craft Complete Collection Blu-ray Dumbbell Nan Kilo Moteru? (H...',
             $this->parser->getIntro()
         );
     }

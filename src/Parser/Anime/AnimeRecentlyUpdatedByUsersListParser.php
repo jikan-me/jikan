@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Model\Anime\AnimeRecentlyUpdatedByUser;
+use Jikan\Model\Common\UserMeta;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -148,5 +149,14 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
     public function getModel(): AnimeRecentlyUpdatedByUser
     {
         return AnimeRecentlyUpdatedByUser::fromParser($this);
+    }
+
+    public function getUserMeta() : UserMeta
+    {
+        return new UserMeta(
+            $this->getUsername(),
+            $this->getUrl(),
+            $this->getImageUrl()
+        );
     }
 }

@@ -41,7 +41,7 @@ class MangaStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Reading:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -69,7 +69,7 @@ class MangaStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Completed:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -87,7 +87,7 @@ class MangaStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'On-Hold:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -105,7 +105,7 @@ class MangaStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Dropped:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -123,7 +123,7 @@ class MangaStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Plan to Read:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -141,7 +141,7 @@ class MangaStatsParser implements ParserInterface
             return $this->sanitize(
                 $this->crawler
                     ->filterXPath('//div[@class="spaceit_pad"]/span[contains(text(), \'Total:\')]')
-                    ->parents()
+                    ->ancestors()
                     ->getNode(0)->textContent
             );
         } catch (\Exception $e) {
@@ -175,13 +175,13 @@ class MangaStatsParser implements ParserInterface
                 );
                 $percentage = (float) JString::cleanse($percentage);
 
-                $scores[$score] = MangaStatsScore::setProperties($votes, $percentage);
+                $scores[$score] = MangaStatsScore::setProperties($score, $votes, $percentage);
             }
         );
 
         for ($i=1; $i<=10; $i++) {
             if (!array_key_exists($i, $scores)) {
-                $scores[$i] = MangaStatsScore::setProperties(0, 0);
+                $scores[$i] = MangaStatsScore::setProperties(0, 0, 0);
             }
         }
 

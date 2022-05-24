@@ -82,7 +82,7 @@ class CharacterListItemParserTest extends TestCase
     {
         $voiceActors = $this->parser->getVoiceActors();
         self::assertContainsOnly(VoiceActor::class, $voiceActors);
-        self::assertCount(2, $voiceActors);
+        self::assertCount(0, $voiceActors);
         self::assertContains('Hara, Yumi', $voiceActors);
         self::assertEquals('Japanese', $voiceActors[0]->getLanguage());
         self::assertEquals('English', $voiceActors[1]->getLanguage());

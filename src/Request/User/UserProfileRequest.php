@@ -34,4 +34,12 @@ class UserProfileRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/profile/%s/', $this->username);
     }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
 }

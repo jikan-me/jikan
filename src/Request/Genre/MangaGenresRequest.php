@@ -12,14 +12,6 @@ use Jikan\Request\RequestInterface;
 class MangaGenresRequest implements RequestInterface
 {
     /**
-     * MangaGenreRequest constructor.
-
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * @return string
      */
     public function getPath(): string

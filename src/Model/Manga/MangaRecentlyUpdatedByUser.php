@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Manga;
 
+use Jikan\Model\Common\UserMeta;
 use Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersListParser;
 
 /**
@@ -12,19 +13,9 @@ use Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersListParser;
 class MangaRecentlyUpdatedByUser
 {
     /**
-     * @var string
+     * @var UserMeta
      */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $imageUrl;
+    private $user;
 
     /**
      * @var int|null
@@ -71,9 +62,7 @@ class MangaRecentlyUpdatedByUser
     {
         $instance = new self();
 
-        $instance->username = $parser->getUsername();
-        $instance->url = $parser->getUrl();
-        $instance->imageUrl = $parser->getImageUrl();
+        $instance->user = $parser->getUserMeta();
         $instance->score = $parser->getScore();
         $instance->status = $parser->getStatus();
         $instance->volumesRead = $parser->getVolumesRead();
@@ -86,27 +75,11 @@ class MangaRecentlyUpdatedByUser
     }
 
     /**
-     * @return string
+     * @return UserMeta
      */
-    public function getUsername(): string
+    public function getUser(): UserMeta
     {
-        return $this->username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
+        return $this->user;
     }
 
     /**

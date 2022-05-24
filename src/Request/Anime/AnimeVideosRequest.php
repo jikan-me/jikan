@@ -33,4 +33,12 @@ class AnimeVideosRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime/%d/_/video', $this->id);
     }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

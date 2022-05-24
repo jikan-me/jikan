@@ -34,6 +34,7 @@ class AnimeGenreList
      */
     public $demographics = [];
 
+
     /**
      * @param AnimeGenreListParser $parser
      *
@@ -51,14 +52,6 @@ class AnimeGenreList
         $instance->demographics = $parser->getDemographics();
 
         return $instance;
-    }
-
-    /**
-     * @return array|AnimeGenreListItem[]
-     */
-    public function getGenres()
-    {
-        return $this->genres;
     }
 
     /**
@@ -85,4 +78,11 @@ class AnimeGenreList
         return $this->demographics;
     }
 
+    /**
+     * @return array|AnimeGenreListItem[]
+     */
+    public function getGenres()
+    {
+        return $this->genres;
+    }
 }

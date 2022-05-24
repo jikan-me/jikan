@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Model\Anime\AnimeUserUpdates;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -10,7 +11,7 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser\Anime
  */
-class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
+class AnimeRecentlyUpdatedByUsersParser
 {
     /**
      * @var Crawler
@@ -31,7 +32,7 @@ class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
      * @return array
      * @throws \InvalidArgumentException
      */
-    public function getModel(): array
+    public function getResults(): array
     {
         try {
             return $this->crawler
@@ -45,5 +46,21 @@ class AnimeRecentlyUpdatedByUsersParser implements ParserInterface
         } catch (\Exception $e) {
             return [];
         }
+    }
+
+    // @todo anime user updates pagination
+    public function getHasNextPage() : bool
+    {
+        return false;
+    }
+
+    public function getLastPage() : int
+    {
+        return 1;
+    }
+
+    public function getModel(): AnimeUserUpdates
+    {
+        return AnimeUserUpdates::fromParser($this);
     }
 }

@@ -16,7 +16,7 @@ class JString
      */
     public static function cleanse(string $string): string
     {
-        // <br> to new line
+        // convert any html before hand to new line
         $string = str_replace(
             ["<br>", "<br />", "<br/>", "<br >"], "\\n", $string
         );
@@ -25,10 +25,19 @@ class JString
         $string = preg_replace('~[[:cntrl:]]~', "", $string);
 
         // strip any leftover tags
+//        $string = htmlspecialchars_decode(strip_tags($string));
         $string = strip_tags($string);
 
-        // trim
+        // trim Nbsp // causing serializer issues
+//        $string = self::UTF8NbspTrim($string);
+
+
+
+        // remove any newlines at the end
         $string = str_replace('\\n', "\n", $string);
+//        $string = preg_replace('~([\n]+)~', '', $string);
+
+        // trim
         $string = trim($string);
 
         return $string;
@@ -36,7 +45,6 @@ class JString
 
     /**
      * @param string $string
-     *
      * @return string
      */
     public static function UTF8NbspTrim(string $string): string

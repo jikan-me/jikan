@@ -51,4 +51,20 @@ class UserHistoryRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/history/%s/%s', $this->username, $this->type);
     }
+
+    /**
+     * @return string
+     */
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
 }

@@ -8,6 +8,7 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Common\LicensorMeta;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\StudioMeta;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 
 /**
  * Class AnimeListItem
@@ -37,9 +38,9 @@ class AnimeListItem
     private $url;
 
     /**
-     * @var string
+     * @var CommonImageResource
      */
-    private $imageUrl;
+    private $images;
 
     /**
      * @var string
@@ -180,13 +181,15 @@ class AnimeListItem
         $instance = new self();
 
         $instance->malId = $item->anime_id;
-        $instance->title = (string) $item->anime_title;
-        $instance->imageUrl = Parser::parseImageQuality($item->anime_image_path);
+        $instance->title = $item->anime_title;
+        $instance->images = CommonImageResource::factory(
+            Parser::parseImageQuality($item->anime_image_path)
+        );
         $instance->url = Constants::BASE_URL . $item->anime_url;
         $instance->videoUrl = Constants::BASE_URL . $item->video_url;
         $instance->watchingStatus = $item->status;
         $instance->score = $item->score;
-        $instance->tags = $item->tags === "" ? null : (string) $item->tags;
+        $instance->tags = empty($item->tags) ? null : $item->tags;
         $instance->isRewatching = (bool) $item->is_rewatching;
         $instance->watchedEpisodes = $item->num_watched_episodes;
         $instance->totalEpisodes = $item->anime_num_episodes;
@@ -254,11 +257,19 @@ class AnimeListItem
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isAddedToList(): bool
+    public function getMalId(): int
     {
-        return $this->addedToList;
+        return $this->malId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
     }
 
     /**
@@ -278,22 +289,6 @@ class AnimeListItem
     }
 
     /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
      * @return string
      */
     public function getVideoUrl(): string
@@ -310,11 +305,19 @@ class AnimeListItem
     }
 
     /**
-     * @return string
+     * @return CommonImageResource
      */
-    public function getImageUrl(): string
+    public function getImages(): CommonImageResource
     {
-        return $this->imageUrl;
+        return $this->images;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAddedToList(): bool
+    {
+        return $this->addedToList;
     }
 
     /**

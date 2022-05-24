@@ -28,7 +28,7 @@ class FriendParserTest extends TestCase
      */
     public function it_gets_the_name()
     {
-        self::assertEquals('Dinoe', $this->parser->getName());
+        self::assertEquals('HeavyGod', $this->parser->getName());
     }
 
     /**
@@ -37,7 +37,7 @@ class FriendParserTest extends TestCase
      */
     public function it_gets_the_url()
     {
-        self::assertEquals('https://myanimelist.net/profile/Dinoe', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/profile/HeavyGod', $this->parser->getUrl());
     }
 
     /**
@@ -47,7 +47,7 @@ class FriendParserTest extends TestCase
     public function it_gets_the_avatar()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/userimages/5082596.jpg',
+            'https://cdn.myanimelist.net/images/userimages/6574969.jpg?t=1610778600',
             $this->parser->getAvatar()
         );
     }
@@ -59,7 +59,7 @@ class FriendParserTest extends TestCase
     public function it_gets_friends_since()
     {
         self::assertEquals(
-            '2016-05-11 04:37',
+            '2018-01-16 07:34',
             $this->parser->getFriendsSince()->format('Y-m-d H:i')
         );
     }

@@ -47,7 +47,7 @@ class AnimeRecommendationParserTest extends TestCase
     public function it_gets_url(): void
     {
         self::assertEquals(
-            "https://myanimelist.net/anime/6702/Fairy_Tail",
+            "https://myanimelist.net/recommendations/anime/21-6702",
             $this->parser[0]->getUrl()
         );
     }
@@ -99,7 +99,7 @@ class AnimeRecommendationParserTest extends TestCase
     public function it_gets_recommendation_count(): void
     {
         self::assertEquals(
-            83,
+            116,
             $this->parser[0]->getRecommendationCount()
         );
     }

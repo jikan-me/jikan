@@ -2,7 +2,10 @@
 
 namespace Jikan\Model\Producer;
 
+use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Top\TopPeople;
 use Jikan\Parser\Producer\ProducerParser;
 
 /**
@@ -10,18 +13,33 @@ use Jikan\Parser\Producer\ProducerParser;
  *
  * @package Jikan\Model
  */
-class Producer
+class Producer extends Results implements Pagination
 {
 
     /**
-     * @var MalUrl
+     * @var int
      */
-    public $malUrl;
+    private $malId;
 
     /**
-     * @var array|ProducerAnime[]
+     * @var string
      */
-    public $anime = [];
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var bool
+     */
+    private $hasNextPage = false;
+
+    /**
+     * @var int
+     */
+    private $lastVisiblePage = 1;
 
     /**
      * @param ProducerParser $parser
@@ -33,25 +51,62 @@ class Producer
     public static function fromParser(ProducerParser $parser): self
     {
         $instance = new self();
-        $instance->malUrl = $parser->getUrl();
-        $instance->anime = $parser->getProducerAnime();
+
+        $instance->malId = $parser->getUrl()->getMalId();
+        $instance->url = $parser->getUrl()->getUrl();
+        $instance->name = $parser->getUrl()->getName();
+        $instance->results = $parser->getResults();
+        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->lastVisiblePage = $parser->getLastPage();
 
         return $instance;
     }
 
     /**
-     * @return MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
     }
 
     /**
-     * @return array|ProducerAnime[]
+     * @return string
      */
-    public function getAnime(): array
+    public function getUrl(): string
     {
-        return $this->anime;
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool
+    {
+        return $this->hasNextPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        return $this->lastVisiblePage;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 }

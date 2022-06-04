@@ -13,6 +13,10 @@ use Jikan\Parser\Magazine\MagazineParser;
  */
 class MagazineListItem
 {
+    /**
+     * @var int
+     */
+    private $malId;
 
     /**
      * @var string
@@ -39,11 +43,20 @@ class MagazineListItem
     public static function fromParser(MagazineListItemParser $parser): self
     {
         $instance = new self();
+        $instance->malId = $parser->getMalId();
         $instance->name = $parser->getName();
         $instance->url = $parser->getUrl();
         $instance->count = $parser->getCount();
 
         return $instance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
     }
 
     /**

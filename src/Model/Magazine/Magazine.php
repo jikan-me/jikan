@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Magazine;
 
+use Jikan\Model\Common\Collection\Pagination;
+use Jikan\Model\Common\Collection\Results;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Magazine\MagazineParser;
 
@@ -10,18 +12,33 @@ use Jikan\Parser\Magazine\MagazineParser;
  *
  * @package Jikan\Model
  */
-class Magazine
+class Magazine extends Results implements Pagination
 {
 
     /**
-     * @var \Jikan\Model\Common\MalUrl
+     * @var int
      */
-    public $malUrl;
+    private $malId;
 
     /**
-     * @var array|MagazineManga[]
+     * @var string
      */
-    public $manga = [];
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var bool
+     */
+    private $hasNextPage = false;
+
+    /**
+     * @var int
+     */
+    private $lastVisiblePage = 1;
 
     /**
      * @param MagazineParser $parser
@@ -33,25 +50,62 @@ class Magazine
     public static function fromParser(MagazineParser $parser): self
     {
         $instance = new self();
-        $instance->malUrl = $parser->getUrl();
-        $instance->manga = $parser->getMagazineManga();
+
+        $instance->malId = $parser->getUrl()->getMalId();
+        $instance->url = $parser->getUrl()->getUrl();
+        $instance->name = $parser->getUrl()->getName();
+        $instance->results = $parser->getResults();
+        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->lastVisiblePage = $parser->getLastPage();
 
         return $instance;
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl
+     * @return int
      */
-    public function getMalUrl(): MalUrl
+    public function getMalId(): int
     {
-        return $this->malUrl;
+        return $this->malId;
     }
 
     /**
-     * @return array|MagazineManga[]
+     * @return string
      */
-    public function getManga(): array
+    public function getUrl(): string
     {
-        return $this->manga;
+        return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasNextPage(): bool
+    {
+        return $this->hasNextPage;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        return $this->lastVisiblePage;
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 }

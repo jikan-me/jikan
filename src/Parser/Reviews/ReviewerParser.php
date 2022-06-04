@@ -7,7 +7,6 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Model\Reviews\Reviewer;
-use Jikan\Parser\Anime\AnimeReviewScoresParser;
 use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -56,6 +55,8 @@ class ReviewerParser implements ParserInterface
         if ($node->count()) {
             return $node->attr('href');
         }
+
+        return "";
     }
 
     /**

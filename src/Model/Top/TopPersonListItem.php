@@ -6,11 +6,11 @@ use Jikan\Model\Resource\PersonImageResource\PersonImageResource;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopPerson
+ * Class TopPersonListItem
  *
  * @package Jikan\Model
  */
-class TopPerson
+class TopPersonListItem
 {
     /**
      * @var int

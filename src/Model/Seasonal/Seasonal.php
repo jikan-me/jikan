@@ -67,5 +67,4 @@ class Seasonal
     {
         return $this->anime;
     }
-
 }

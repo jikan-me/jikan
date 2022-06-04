@@ -41,10 +41,5 @@ class CharactersParser
                     return CharacterListItem::fromParser(new CharacterListItemParser($crawler));
                 }
             );
-//            ->each(
-//                function (Crawler $crawler) {
-//                    return CharacterListItem::fromParser(new CharacterListItemParser($crawler));
-//                }
-//            );
     }
 }

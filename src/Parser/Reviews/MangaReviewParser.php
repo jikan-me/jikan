@@ -210,6 +210,8 @@ class MangaReviewParser implements ParserInterface
         if ($node->count()) {
             return Parser::parseImageQuality($node->attr('data-src'));
         }
+
+        return "";
     }
 
     /**

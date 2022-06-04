@@ -7,11 +7,11 @@ use Jikan\Model\Resource\CharacterImageResource\CharacterImageResource;
 use Jikan\Parser\Top\TopListItemParser;
 
 /**
- * Class TopCharacter
+ * Class TopCharacterListItem
  *
  * @package Jikan\Model
  */
-class TopCharacter
+class TopCharacterListItem
 {
     /**
      * @var int

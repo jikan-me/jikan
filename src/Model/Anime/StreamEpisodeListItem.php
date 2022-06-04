@@ -13,6 +13,11 @@ use Jikan\Parser\Anime\StreamEpisodeListItemParser;
 class StreamEpisodeListItem
 {
     /**
+     * @var int
+     */
+    public $malId;
+
+    /**
      * @var string
      */
     public $title;
@@ -41,12 +46,21 @@ class StreamEpisodeListItem
     public static function fromParser(StreamEpisodeListItemParser $parser): self
     {
         $instance = new self();
+        $instance->malId = $parser->getMalId();
         $instance->title = $parser->getTitle();
         $instance->episode = $parser->getEpisode();
         $instance->url = $parser->getUrl();
         $instance->images = WrapImageResource::factory($parser->getImageUrl());
 
         return $instance;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMalId(): int
+    {
+        return $this->malId;
     }
 
     /**

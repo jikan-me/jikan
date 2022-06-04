@@ -62,6 +62,8 @@ class RecentReviewsParser
                     if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Manga)') {
                         return RecentMangaReview::fromParser(new MangaReviewParser($crawler));
                     }
+
+                    return null;
                 }
             );
     }

@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\User;
 
-
 use Jikan\Model\Common\MangaMeta;
 
 class LastMangaUpdate

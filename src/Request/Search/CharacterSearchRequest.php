@@ -133,5 +133,4 @@ class CharacterSearchRequest implements RequestInterface
     {
         return $this->char;
     }
-
 }

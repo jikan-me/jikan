@@ -442,5 +442,4 @@ class AnimeSearchRequest implements RequestInterface
     {
         return $this->sort;
     }
-
 }

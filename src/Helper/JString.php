@@ -18,7 +18,9 @@ class JString
     {
         // convert any html before hand to new line
         $string = str_replace(
-            ["<br>", "<br />", "<br/>", "<br >"], "\\n", $string
+            ["<br>", "<br />", "<br/>", "<br >"],
+            "\\n",
+            $string
         );
 
         // remove control characters

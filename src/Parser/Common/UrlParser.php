@@ -33,7 +33,6 @@ class UrlParser
      */
     public function getModel(): Url
     {
-
         return new Url(
             $this->crawler->text(),
             $this->crawler->attr('href')

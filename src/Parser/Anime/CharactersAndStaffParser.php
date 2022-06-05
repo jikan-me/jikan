@@ -37,7 +37,6 @@ class CharactersAndStaffParser implements ParserInterface
      */
     public function getCharacters(): array
     {
-
         return $this->crawler
             ->filterXPath('//div[contains(@class, "anime-character-container")]/table')
             ->each(

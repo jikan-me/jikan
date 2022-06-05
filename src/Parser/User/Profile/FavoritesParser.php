@@ -71,7 +71,6 @@ class FavoritesParser
      */
     public function getManga(): array
     {
-
         return $this->crawler->filterXPath('//div[@id=\'manga_favorites\']/div[@class=\'fav-slide-outer\']/ul/li')
             ->each(
                 function (Crawler $crawler) {

@@ -181,12 +181,11 @@ class Parser
      */
     public static function parseDateTimePST(string $dateTime) : ?\DateTimeImmutable
     {
-        try{
+        try {
             $malTimeZone = new \DateTimeZone('America/Los_Angeles'); //
-            $parsedDateTime = new \DateTimeImmutable($dateTime,$malTimeZone);
+            $parsedDateTime = new \DateTimeImmutable($dateTime, $malTimeZone);
             return $parsedDateTime->setTimezone(new \DateTimeZone('UTC'));
-        }
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             return null;
         }
     }

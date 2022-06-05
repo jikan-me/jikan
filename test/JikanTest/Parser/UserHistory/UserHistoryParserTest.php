@@ -26,7 +26,6 @@ class HistoryParserTest extends TestCase
 
     /**
      * @test
-     * @vcr HistoryParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -36,7 +35,6 @@ class HistoryParserTest extends TestCase
 
     /**
      * @test
-     * @vcr HistoryParserTest.yaml
      */
     public function it_gets_the_increment()
     {
@@ -45,7 +43,6 @@ class HistoryParserTest extends TestCase
 
     /**
      * @test
-     * @vcr HistoryParserTest.yaml
      */
     public function it_gets_the_date()
     {

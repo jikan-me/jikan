@@ -25,7 +25,6 @@ class MagazineParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MagazineParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -35,7 +34,6 @@ class MagazineParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MagazineParserTest.yaml
      */
     public function it_gets_manga()
     {

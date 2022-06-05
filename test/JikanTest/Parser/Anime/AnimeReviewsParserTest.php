@@ -31,7 +31,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_reviews(): void
     {
@@ -45,7 +44,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_review_id(): void
     {
@@ -55,7 +53,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_review_url(): void
     {
@@ -65,7 +62,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_review_helpful_count(): void
     {
@@ -75,7 +71,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_review_date(): void
     {
@@ -85,7 +80,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_reviewer_username(): void
     {
@@ -98,7 +92,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_reviewer_image_url(): void
     {
@@ -111,7 +104,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_reviewer_url(): void
     {
@@ -124,7 +116,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_reviewer_episodes_seen(): void
     {
@@ -137,7 +128,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_reviewer_scores(): void
     {
@@ -152,7 +142,6 @@ class AnimeReviewsParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     * @vcr AnimeReviewsParserTest.yaml
      */
     public function it_gets_reviewer_review(): void
     {

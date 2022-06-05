@@ -24,7 +24,6 @@ class FriendParserTest extends TestCase
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -33,7 +32,6 @@ class FriendParserTest extends TestCase
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -42,7 +40,6 @@ class FriendParserTest extends TestCase
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_the_avatar()
     {
@@ -54,7 +51,6 @@ class FriendParserTest extends TestCase
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_friends_since()
     {
@@ -65,7 +61,6 @@ class FriendParserTest extends TestCase
     }
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_last_online()
     {

@@ -34,7 +34,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
@@ -45,7 +44,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -54,7 +52,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_score()
     {
@@ -63,7 +60,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_type()
     {
@@ -72,7 +68,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_volumes()
     {
@@ -84,7 +79,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_members()
     {
@@ -93,7 +87,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_start_date()
     {
@@ -102,7 +95,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_end_date()
     {
@@ -111,7 +103,6 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_image()
     {

@@ -37,7 +37,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_mal_id()
     {
@@ -47,7 +46,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_url()
     {
@@ -56,7 +54,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title()
     {
@@ -65,7 +62,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title_english()
     {
@@ -74,7 +70,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title_synonyms()
     {
@@ -83,7 +78,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title_japanese()
     {
@@ -92,7 +86,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_image_url()
     {
@@ -104,7 +97,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_synopsis()
     {
@@ -116,7 +108,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_type()
     {
@@ -128,7 +119,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_chapters()
     {
@@ -140,7 +130,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_volumes()
     {
@@ -152,7 +141,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_status()
     {
@@ -164,7 +152,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_publishing()
     {
@@ -176,7 +163,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_published()
     {
@@ -190,7 +176,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_authors()
     {
@@ -202,7 +187,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_serialization()
     {
@@ -214,7 +198,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_genre()
     {
@@ -231,7 +214,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_score()
     {
@@ -243,7 +225,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_scored_by()
     {
@@ -255,7 +236,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_rank()
     {
@@ -267,7 +247,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_popularity()
     {
@@ -279,7 +258,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_members()
     {
@@ -291,7 +269,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_favorites()
     {
@@ -303,7 +280,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_related()
     {
@@ -314,7 +290,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_background()
     {

@@ -25,7 +25,6 @@ class PersonSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonSearchTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -34,7 +33,6 @@ class PersonSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonSearchTest.yaml
      */
     public function it_gets_the_image_url()
     {
@@ -43,7 +41,6 @@ class PersonSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonSearchTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -52,7 +49,6 @@ class PersonSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonSearchTest.yaml
      */
     public function it_gets_the_alternative_names()
     {

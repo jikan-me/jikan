@@ -24,7 +24,6 @@ class CharactersParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaCharacterListParserTest.yaml
      */
     public function it_gets_the_manga_characters()
     {

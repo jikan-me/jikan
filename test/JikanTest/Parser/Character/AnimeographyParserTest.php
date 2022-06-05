@@ -24,7 +24,6 @@ class AnimeographyParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_anime_mal_id()
     {
@@ -33,7 +32,6 @@ class AnimeographyParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_anime_url()
     {
@@ -42,7 +40,6 @@ class AnimeographyParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_anime_name()
     {
@@ -51,7 +48,6 @@ class AnimeographyParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_anime_image()
     {
@@ -63,7 +59,6 @@ class AnimeographyParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_role()
     {

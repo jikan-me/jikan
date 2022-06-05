@@ -26,7 +26,6 @@ class CharacterSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -35,7 +34,6 @@ class CharacterSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchTest.yaml
      */
     public function it_gets_the_image_url()
     {
@@ -44,7 +42,6 @@ class CharacterSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -53,7 +50,6 @@ class CharacterSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchTest.yaml
      */
     public function it_gets_the_alternative_names()
     {
@@ -63,7 +59,6 @@ class CharacterSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchTest.yaml
      */
     public function it_gets_the_anime()
     {
@@ -74,7 +69,6 @@ class CharacterSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchTest.yaml
      */
     public function it_gets_the_manga()
     {

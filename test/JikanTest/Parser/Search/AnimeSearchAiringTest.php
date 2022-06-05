@@ -13,7 +13,6 @@ class AnimeSearchAiringTest extends TestCase
 {
     /**
      * @test
-     * @vcr AnimeSearchAiringTest.yaml
      */
     public function it_gets_airing_non_null()
     {
@@ -28,7 +27,6 @@ class AnimeSearchAiringTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchAiringTest.yaml
      */
     public function it_gets_airing_null()
     {

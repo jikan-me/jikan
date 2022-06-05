@@ -13,7 +13,6 @@ class AnimeSearchEpisodeTest extends TestCase
 {
     /**
      * @test
-     * @vcr AnimeSearchEpisodeTest.yaml
      */
     public function it_gets_one_episode_airing_false()
     {
@@ -26,7 +25,6 @@ class AnimeSearchEpisodeTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchEpisodeTest.yaml
      */
     public function it_gets_multiple_episodes_airing_true()
     {

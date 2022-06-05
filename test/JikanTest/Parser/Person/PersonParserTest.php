@@ -24,7 +24,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -33,7 +32,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_Person_url()
     {
@@ -42,7 +40,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -51,7 +48,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_given_name()
     {
@@ -60,7 +56,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_family_name()
     {
@@ -69,7 +64,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_about()
     {
@@ -79,7 +73,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_member_favorites()
     {
@@ -88,7 +81,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -100,7 +92,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_voice_acting_roles()
     {
@@ -111,7 +102,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_anime_staff_positions()
     {
@@ -122,7 +112,6 @@ class PersonParserTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_the_published_manga()
     {

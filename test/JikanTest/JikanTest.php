@@ -36,7 +36,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr JikanTest_it_gets_anime.yaml
      */
     public function it_gets_anime()
     {
@@ -46,7 +45,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr JikanTest_it_gets_manga.yaml
      */
     public function it_gets_manga()
     {
@@ -56,7 +54,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_characters()
     {
@@ -69,7 +66,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_person()
     {
@@ -82,7 +78,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_seasonal_anime()
     {
@@ -94,7 +89,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_user_profile()
     {
@@ -106,7 +100,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_schedule()
     {
@@ -116,7 +109,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_friends()
     {
@@ -142,7 +134,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr ProducerParserTest.yaml
      */
     public function it_gets_producer()
     {
@@ -152,7 +143,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersAndStaffParserTest.yaml
      */
     public function it_gets_characters_and_staff()
     {
@@ -167,7 +157,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeVideosParserTest.yaml
      */
     public function it_gets_anime_videos()
     {
@@ -180,7 +169,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimePicturesParserTest.yaml
      */
     public function it_gets_anime_pictures()
     {
@@ -190,7 +178,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaPicturesParserTest.yaml
      */
     public function it_gets_manga_pictures()
     {
@@ -200,7 +187,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonPicturesParserTest.yaml
      */
     public function it_gets_person_pictures()
     {
@@ -210,7 +196,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterPicturesParserTest.yaml
      */
     public function it_gets_character_pictures()
     {
@@ -220,7 +205,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaNewsParserTest.yaml
      */
     public function it_gets_manga_news()
     {
@@ -231,7 +215,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeNewsParserTest.yaml
      */
     public function it_gets_anime_news()
     {
@@ -242,7 +225,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchParserTest.yaml
      */
     public function it_gets_anime_search()
     {
@@ -254,7 +236,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchParserTest.yaml
      */
     public function it_gets_manga_search()
     {
@@ -266,7 +247,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchParserTest.yaml
      */
     public function it_gets_character_search()
     {
@@ -278,7 +258,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr PersonSearchParserTest.yaml
      */
     public function it_gets_person_search()
     {
@@ -290,7 +269,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaCharacterListParserTest.yaml
      */
     public function it_gets_manga_characters()
     {
@@ -301,7 +279,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_top_anime()
     {
@@ -314,7 +291,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_top_manga()
     {
@@ -327,7 +303,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_top_characters()
     {
@@ -340,7 +315,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_top_people()
     {
@@ -353,7 +327,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_anime_forum()
     {
@@ -366,7 +339,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaForumTopicParserTest.yaml
      */
     public function it_gets_manga_forum()
     {
@@ -379,7 +351,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr HistoryParserTest.yaml
      */
     public function it_gets_user_history()
     {
@@ -390,7 +361,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_anime_episodes()
     {
@@ -402,7 +372,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr UserAnimeListParserTest.yaml
      */
     public function it_gets_user_anime_list() // TODO: Add more test cases
     {

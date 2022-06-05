@@ -28,7 +28,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
@@ -39,7 +38,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -48,7 +46,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -60,7 +57,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_score()
     {
@@ -69,7 +65,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_type()
     {
@@ -78,7 +73,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_episodes()
     {
@@ -87,7 +81,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_members()
     {
@@ -96,7 +89,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_start_date()
     {
@@ -105,7 +97,6 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_end_date()
     {

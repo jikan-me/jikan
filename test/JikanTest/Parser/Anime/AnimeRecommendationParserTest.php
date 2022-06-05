@@ -22,7 +22,6 @@ class AnimeRecommendationParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Common\Recommendations
-     * @vcr AnimeRecommendationParserTest.yaml
      */
     public function it_get_recommendations_count(): void
     {
@@ -32,7 +31,6 @@ class AnimeRecommendationParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Common\Recommendations
-     * @vcr AnimeRecommendationParserTest.yaml
      */
     public function it_gets_mal_id(): void
     {
@@ -42,7 +40,6 @@ class AnimeRecommendationParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Common\Recommendations
-     * @vcr AnimeRecommendationParserTest.yaml
      */
     public function it_gets_url(): void
     {
@@ -55,7 +52,6 @@ class AnimeRecommendationParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Common\Recommendations
-     * @vcr AnimeRecommendationParserTest.yaml
      */
     public function it_gets_image_url(): void
     {
@@ -68,7 +64,6 @@ class AnimeRecommendationParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Common\Recommendations
-     * @vcr AnimeRecommendationParserTest.yaml
      */
     public function it_gets_recommendation_url(): void
     {
@@ -81,7 +76,6 @@ class AnimeRecommendationParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Common\Recommendations
-     * @vcr AnimeRecommendationParserTest.yaml
      */
     public function it_gets_title(): void
     {
@@ -94,7 +88,6 @@ class AnimeRecommendationParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Common\Recommendations
-     * @vcr AnimeRecommendationParserTest.yaml
      */
     public function it_gets_recommendation_count(): void
     {

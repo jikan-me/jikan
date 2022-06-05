@@ -23,7 +23,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_mal_id(): void
     {
@@ -36,7 +35,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_url(): void
     {
@@ -49,7 +47,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_image_url(): void
     {
@@ -62,7 +59,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_title(): void
     {
@@ -75,7 +71,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_members_count(): void
     {
@@ -88,7 +83,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_pictures_count(): void
     {
@@ -101,7 +95,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_category(): void
     {
@@ -114,7 +107,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_created(): void
     {
@@ -127,7 +119,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_staff(): void
     {
@@ -140,7 +131,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_anime_relations(): void
     {
@@ -168,7 +158,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_manga_relations(): void
     {
@@ -196,7 +185,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_character_relations(): void
     {

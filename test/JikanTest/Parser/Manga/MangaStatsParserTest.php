@@ -26,7 +26,6 @@ class MangaStatsParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaStats.yaml
      */
     public function it_gets_numeric_statistics()
     {
@@ -40,7 +39,6 @@ class MangaStatsParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaStats.yaml
      */
     public function it_gets_score_attributes()
     {

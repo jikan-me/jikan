@@ -22,7 +22,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_recently_updated_by_users_count(): void
     {
@@ -32,7 +31,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_username(): void
     {
@@ -45,7 +43,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_url(): void
     {
@@ -58,7 +55,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_image_url(): void
     {
@@ -71,7 +67,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_score(): void
     {
@@ -84,7 +79,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_status(): void
     {
@@ -97,7 +91,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_episodes_seen(): void
     {
@@ -110,7 +103,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_episodes_total(): void
     {
@@ -123,7 +115,6 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     * @vcr AnimeRecentlyUpdatedByUsersParserTest.yaml
      */
     public function it_gets_date(): void
     {

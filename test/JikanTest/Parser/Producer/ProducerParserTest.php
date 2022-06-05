@@ -25,7 +25,6 @@ class ProducerParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProducerParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -35,7 +34,6 @@ class ProducerParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProducerParserTest.yaml
      */
     public function it_gets_anime()
     {

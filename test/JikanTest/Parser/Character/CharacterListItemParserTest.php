@@ -37,7 +37,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -46,7 +45,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -55,7 +53,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -64,7 +61,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -76,7 +72,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_voice_actors()
     {

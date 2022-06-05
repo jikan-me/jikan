@@ -24,7 +24,6 @@ class SeasonalParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_season()
     {
@@ -33,7 +32,6 @@ class SeasonalParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_anime()
     {

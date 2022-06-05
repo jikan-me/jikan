@@ -3,7 +3,6 @@
 namespace JikanTest\Parser\Club;
 
 use PHPUnit\Framework\TestCase;
-use VCR\VCR;
 
 class UserListParserTest extends TestCase
 {
@@ -23,7 +22,6 @@ class UserListParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\UserListParser
-     * @vcr ClubUserListParserTest.yaml
      */
     public function it_gets_users(): void
     {

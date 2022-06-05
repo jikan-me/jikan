@@ -29,7 +29,6 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
@@ -40,7 +39,6 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -52,7 +50,6 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -61,7 +58,6 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_character_kanji()
     {
@@ -70,7 +66,6 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_animeography()
     {
@@ -80,7 +75,6 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_mangaography()
     {
@@ -90,7 +84,6 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_favorites()
     {

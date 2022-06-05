@@ -26,7 +26,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_mondays()
     {
@@ -37,7 +36,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_tuesdays()
     {
@@ -48,7 +46,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_wednesdays()
     {
@@ -59,7 +56,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_thursdays()
     {
@@ -70,7 +66,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_fridays()
     {
@@ -81,7 +76,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_saturdays()
     {
@@ -92,7 +86,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_sundays()
     {
@@ -103,7 +96,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_all()
     {
@@ -114,7 +106,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_other()
     {
@@ -125,7 +116,6 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_unknown()
     {

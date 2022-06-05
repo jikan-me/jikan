@@ -27,7 +27,6 @@ class MangaGenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaGenreParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -37,7 +36,6 @@ class MangaGenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaGenreParserTest.yaml
      */
     public function it_gets_manga()
     {
@@ -47,7 +45,6 @@ class MangaGenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaGenreParserTest.yaml
      */
     public function it_gets_the_count()
     {

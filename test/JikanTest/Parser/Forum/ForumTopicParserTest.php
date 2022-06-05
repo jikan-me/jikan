@@ -27,7 +27,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_post_id(): void
     {
@@ -36,7 +35,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_post_url(): void
     {
@@ -45,7 +43,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_post_title(): void
     {
@@ -54,7 +51,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_post_date(): void
     {
@@ -63,7 +59,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_author_name(): void
     {
@@ -72,7 +67,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_author_url(): void
     {
@@ -81,7 +75,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_replies(): void
     {
@@ -90,7 +83,6 @@ class ForumTopicParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_the_last_post(): void
     {

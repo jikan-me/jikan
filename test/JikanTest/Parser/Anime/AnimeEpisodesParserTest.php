@@ -22,7 +22,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episodes_last_page(): void
     {
@@ -35,7 +34,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_id(): void
     {
@@ -48,7 +46,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_title(): void
     {
@@ -61,7 +58,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_title_japanese(): void
     {
@@ -74,7 +70,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_title_romanji(): void
     {
@@ -87,7 +82,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_aired(): void
     {
@@ -100,7 +94,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_filler(): void
     {
@@ -113,7 +106,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_recap(): void
     {
@@ -127,7 +119,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_video_url(): void
     {
@@ -140,7 +131,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_forum_url(): void
     {

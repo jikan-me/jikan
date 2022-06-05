@@ -34,7 +34,6 @@ class PicturesPageParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaPictures.yaml
      */
     public function it_gets_manga_pictures()
     {
@@ -51,7 +50,6 @@ class PicturesPageParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimePictures.yaml
      */
     public function it_gets_anime_pictures()
     {
@@ -68,7 +66,6 @@ class PicturesPageParserTest extends TestCase
 
     /**
      * @test
-     * @vcr Peopleictures.yaml
      */
     public function it_gets_person_pictures()
     {
@@ -85,7 +82,6 @@ class PicturesPageParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterPictures.yaml
      */
     public function it_gets_character_pictures()
     {

@@ -28,7 +28,6 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
@@ -39,7 +38,6 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -48,7 +46,6 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_favorites()
     {
@@ -57,7 +54,6 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -69,7 +65,6 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_kanji_name()
     {
@@ -81,7 +76,6 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_birthday()
     {

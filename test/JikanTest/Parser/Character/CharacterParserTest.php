@@ -24,7 +24,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -33,7 +32,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_character_url()
     {
@@ -42,7 +40,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -51,7 +48,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_name_in_kanji()
     {
@@ -60,7 +56,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_nicknames()
     {
@@ -72,7 +67,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_about()
     {
@@ -82,7 +76,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_member_favorites()
     {
@@ -91,7 +84,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -103,7 +95,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_animeography()
     {
@@ -114,7 +105,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_mangaography()
     {
@@ -125,7 +115,6 @@ class CharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_voice_actors()
     {

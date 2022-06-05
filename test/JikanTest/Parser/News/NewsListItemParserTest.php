@@ -26,7 +26,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_title(): void
     {
@@ -35,7 +34,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_url(): void
     {
@@ -44,7 +42,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_image(): void
     {
@@ -56,7 +53,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_date(): void
     {
@@ -65,7 +61,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_author(): void
     {
@@ -74,7 +69,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_discussion_link(): void
     {
@@ -83,7 +77,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_comments(): void
     {
@@ -95,7 +88,6 @@ class NewsListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr NewsParserTest.yaml
      */
     public function it_gets_the_introduction(): void
     {

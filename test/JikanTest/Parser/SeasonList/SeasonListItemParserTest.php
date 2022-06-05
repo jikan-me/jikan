@@ -23,7 +23,6 @@ class SeasonListItemParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\SeasonList\SeasonListItemParser::getYear
-     * @vcr SeasonList.yaml
      */
     public function it_gets_the_year(): void
     {
@@ -33,7 +32,6 @@ class SeasonListItemParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\SeasonList\SeasonListItemParser::getSeasons
-     * @vcr SeasonList.yaml
      */
     public function it_gets_the_seasons(): void
     {

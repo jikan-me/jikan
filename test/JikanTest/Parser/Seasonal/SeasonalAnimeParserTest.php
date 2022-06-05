@@ -50,7 +50,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_producer()
     {
@@ -71,7 +70,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_episodes()
     {
@@ -82,7 +80,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_source()
     {
@@ -93,7 +90,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_genres()
     {
@@ -106,7 +102,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_title()
     {
@@ -115,7 +110,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_description()
     {
@@ -124,7 +118,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_type()
     {
@@ -133,7 +126,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_air_dates()
     {
@@ -142,7 +134,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_air_members()
     {
@@ -151,7 +142,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_anime_id()
     {
@@ -160,7 +150,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_anime_url()
     {
@@ -172,7 +161,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_anime_image()
     {
@@ -184,7 +172,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_anime_score()
     {
@@ -197,7 +184,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_anime_licensor()
     {
@@ -206,7 +192,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_r18_rating()
     {
@@ -217,7 +202,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_kids_rating()
     {
@@ -228,7 +212,6 @@ class SeasonalAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_continuing()
     {

@@ -23,7 +23,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_username()
     {
@@ -32,7 +31,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -41,7 +39,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -53,7 +50,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_join_date()
     {
@@ -62,7 +58,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_last_online()
     {
@@ -71,7 +66,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_gender()
     {
@@ -80,7 +74,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_birthday()
     {
@@ -89,7 +82,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_location()
     {
@@ -98,7 +90,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_anime_stats()
     {
@@ -107,7 +98,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_manga_stats()
     {
@@ -116,7 +106,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_favorites()
     {
@@ -133,7 +122,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_last_updates(){
         $updates = $this->parser->getUserLastUpdates();
@@ -143,7 +131,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_about()
     {

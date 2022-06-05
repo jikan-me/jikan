@@ -25,7 +25,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_title()
     {
@@ -34,7 +33,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_image_url()
     {
@@ -43,7 +41,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_publishing()
     {
@@ -52,7 +49,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_synopsis()
     {
@@ -61,7 +57,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_type()
     {
@@ -70,7 +65,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_chapters()
     {
@@ -79,7 +73,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_volumes()
     {
@@ -88,7 +81,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_start_date()
     {
@@ -97,7 +89,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_end_date()
     {
@@ -106,7 +97,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_members()
     {
@@ -115,7 +105,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_score()
     {

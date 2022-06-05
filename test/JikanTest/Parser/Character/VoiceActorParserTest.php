@@ -24,7 +24,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -33,7 +32,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -42,7 +40,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_person()
     {
@@ -54,7 +51,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -66,7 +62,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_language()
     {

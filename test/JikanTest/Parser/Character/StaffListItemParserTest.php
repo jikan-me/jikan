@@ -28,7 +28,6 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -37,7 +36,6 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -46,7 +44,6 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -55,7 +52,6 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_image()
     {
@@ -67,7 +63,6 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_positions()
     {

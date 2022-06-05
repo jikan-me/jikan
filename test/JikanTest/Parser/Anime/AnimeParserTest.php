@@ -32,7 +32,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_mal_id(): void
     {
@@ -42,7 +41,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_url(): void
     {
@@ -51,7 +49,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_title(): void
     {
@@ -60,7 +57,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_title_english(): void
     {
@@ -69,7 +65,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_title_synonyms(): void
     {
@@ -78,7 +73,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_title_japanese(): void
     {
@@ -87,7 +81,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_image_url(): void
     {
@@ -99,7 +92,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_synopsis(): void
     {
@@ -111,7 +103,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_type(): void
     {
@@ -123,7 +114,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_episodes(): void
     {
@@ -135,7 +125,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_status(): void
     {
@@ -147,7 +136,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_aired_string(): void
     {
@@ -159,7 +147,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_aired(): void
     {
@@ -171,7 +158,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_premiered(): void
     {
@@ -180,7 +166,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_broadcast(): void
     {
@@ -189,7 +174,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_producer(): void
     {
@@ -203,7 +187,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_licensor(): void
     {
@@ -216,7 +199,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_studio(): void
     {
@@ -228,7 +210,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_source(): void
     {
@@ -237,7 +218,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_genre(): void
     {
@@ -255,7 +235,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_duration(): void
     {
@@ -267,7 +246,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_rating(): void
     {
@@ -279,7 +257,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_score(): void
     {
@@ -291,7 +268,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_scored_by(): void
     {
@@ -303,7 +279,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_rank(): void
     {
@@ -315,7 +290,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_popularity(): void
     {
@@ -327,7 +301,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_members(): void
     {
@@ -339,7 +312,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_favorites(): void
     {
@@ -351,7 +323,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_related(): void
     {
@@ -362,7 +333,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_background(): void
     {
@@ -371,7 +341,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_opening(): void
     {
@@ -383,7 +352,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_ending(): void
     {
@@ -395,7 +363,6 @@ class AnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_preview_video()
     {

@@ -28,7 +28,6 @@ class AnimeVideoParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeVideoParserTest.yaml
      */
     public function it_gets_promos()
     {
@@ -38,7 +37,6 @@ class AnimeVideoParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeVideoParserTest.yaml
      */
     public function it_gets_episodes()
     {

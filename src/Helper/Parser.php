@@ -52,6 +52,29 @@ class Parser
     }
 
     /**
+     * Extract club ID from MAL URl
+     *
+     * @param string $url
+     * @return int
+     */
+    public static function clubIdFromUrl(string $url) : int
+    {
+        return (int) preg_replace('~.*\.php\?cid=([\d]+)$~', '$1', $url);
+    }
+
+    /**
+     * Extract the last property id from a mal url (e.g episode ID)
+     *
+     * @param string $url
+     *
+     * @return int
+     */
+    public static function suffixIdFromUrl(string $url): int
+    {
+        return (int) preg_replace('#https://myanimelist.net/.*/(\d+)#', '$1', $url);
+    }
+
+    /**
      * @param string $date
      *
      * @return \DateTimeImmutable|null
@@ -192,7 +215,7 @@ class Parser
     public static function parseImageQuality(string $imageUrl) : string
     {
         // adding `v` prefix returns a very small thumbnail, as opposed to adding `l`
-        $imageUrl = str_replace(['v.jpg'], '.jpg', $imageUrl);
+        $imageUrl = str_replace(['v.jpg', 't.jpg', 'l.jpg'], '.jpg', $imageUrl);
         return preg_replace('~/r/\d+x\d+~', '', $imageUrl);
     }
 
@@ -207,6 +230,10 @@ class Parser
         return str_replace(['thumbs/', '_thumb'], '', $imageUrl);
     }
 
+    /**
+     * @param string $duration
+     * @return int|null
+     */
     public static function parseDurationToSeconds(string $duration): ?int
     {
         preg_match('~([0-9]{2}):([0-9]{2}):([0-9]{2})~', $duration, $match);

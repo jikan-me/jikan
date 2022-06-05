@@ -39,7 +39,6 @@ class TopListItemParser
     /**
      * @return \Jikan\Model\Common\MalUrl
      * @throws \InvalidArgumentException
-     * @throws ParserException
      */
     public function getMalUrl(): MalUrl
     {

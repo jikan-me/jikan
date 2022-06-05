@@ -2,12 +2,11 @@
 
 namespace Jikan\Parser\Reviews;
 
-use Jikan\Helper\JString;
+use Jikan\Exception\ParserException;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Model\Reviews\Reviewer;
-use Jikan\Parser\Anime\AnimeReviewScoresParser;
 use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -42,6 +41,7 @@ class ReviewerParser implements ParserInterface
     /**
      * @return string
      * @throws \InvalidArgumentException
+     * @throws \Jikan\Exception\ParserException
      */
     public function getUrl(): string
     {
@@ -56,6 +56,8 @@ class ReviewerParser implements ParserInterface
         if ($node->count()) {
             return $node->attr('href');
         }
+
+        throw new ParserException("Couldn't find any URL on review pages.");
     }
 
     /**

@@ -42,28 +42,32 @@ class RecentReviewsParser
     /**
      * @return array
      * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException|\Exception
      */
     public function getRecentReviews(): array
     {
-        return $this->crawler
-            ->filterXPath('//*[@id="content"]/div[@class="borderDark"]')
-            ->each(
-                function (Crawler $crawler) {
-                    // If requested by $type `Constants::TOP_REVIEWS_BEST_VOTED`; both types can be returned
-                    // So we check types here to allow the ability to parse and return both
+        return array_filter(
+            $this->crawler
+                ->filterXPath('//*[@id="content"]/div[@class="borderDark"]')
+                ->each(
+                    function (Crawler $crawler) {
+                        // If requested by $type `Constants::TOP_REVIEWS_BEST_VOTED`; both types can be returned
+                        // So we check types here to allow the ability to parse and return both
 
-                    // Anime Review
-                    if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Anime)') {
-                        return RecentAnimeReview::fromParser(new AnimeReviewParser($crawler));
-                    }
+                        // Anime Review
+                        if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Anime)') {
+                            return RecentAnimeReview::fromParser(new AnimeReviewParser($crawler));
+                        }
 
-                    // Manga Review
-                    if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Manga)') {
-                        return RecentMangaReview::fromParser(new MangaReviewParser($crawler));
+                        // Manga Review
+                        if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Manga)') {
+                            return RecentMangaReview::fromParser(new MangaReviewParser($crawler));
+                        }
+
+                        return null;
                     }
-                }
-            );
+                )
+        );
     }
 
     /**

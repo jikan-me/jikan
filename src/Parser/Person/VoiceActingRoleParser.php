@@ -48,7 +48,6 @@ class VoiceActingRoleParser implements ParserInterface
      */
     public function getRole(): ?string
     {
-
         $role = $this->crawler
             ->filterXPath('//td[3]/div[2]');
 

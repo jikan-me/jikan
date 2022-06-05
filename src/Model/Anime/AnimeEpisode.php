@@ -15,7 +15,7 @@ class AnimeEpisode
     /**
      * @var int
      */
-    private $episodeId;
+    private $malId;
 
     /**
      * @var string
@@ -72,7 +72,7 @@ class AnimeEpisode
     {
         $instance = new self();
 
-        $instance->episodeId = $parser->getEpisodeId();
+        $instance->malId = $parser->getEpisodeId();
         $instance->url = $parser->getEpisodeUrl();
         $instance->filler = $parser->getFiller();
         $instance->recap = $parser->getRecap();
@@ -93,9 +93,9 @@ class AnimeEpisode
     /**
      * @return int
      */
-    public function getEpisodeId(): int
+    public function getMalId(): int
     {
-        return $this->episodeId;
+        return $this->malId;
     }
 
     /**

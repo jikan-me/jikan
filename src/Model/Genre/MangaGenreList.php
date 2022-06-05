@@ -84,30 +84,4 @@ class MangaGenreList
     {
         return $this->genres;
     }
-
-    /**
-     * @return array|MangaGenreListItem[]
-     */
-    public function getExplicitGenres(): array
-    {
-        return $this->explicitGenres;
-    }
-
-    /**
-     * @return array|MangaGenreListItem[]
-     */
-    public function getThemes(): array
-    {
-        return $this->themes;
-    }
-
-    /**
-     * @return array|MangaGenreListItem[]
-     */
-    public function getDemographics(): array
-    {
-        return $this->demographics;
-    }
-
-
 }

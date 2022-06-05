@@ -9,7 +9,7 @@ use Jikan\Request\RequestInterface;
  *
  * @package Jikan\Request
  */
-class MagazinesRequest extends \Jikan\Request\Magazine\MagazineRequest implements RequestInterface
+class MagazinesRequest implements RequestInterface
 {
     /**
      * @return string

@@ -5,7 +5,6 @@ namespace Jikan\Parser\Reviews;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
-use Jikan\Model\Anime\AnimeReviewer;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Common\AnimeMeta;
 use Jikan\Model\Reviews\Reviewer;

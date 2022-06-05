@@ -46,7 +46,7 @@ class AnimeSearchListItemParser
      */
     public function getUrl(): string
     {
-        return $this->crawler->filterXPath('//td[2]/div/a')->attr('href');
+        return $this->crawler->filterXPath('//td[2]/a')->attr('href');
     }
 
     /**
@@ -55,7 +55,7 @@ class AnimeSearchListItemParser
      */
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//td[2]/div/a/strong')->text();
+        return $this->crawler->filterXPath('//td[2]/a/strong')->text();
     }
 
     /**

@@ -2,12 +2,11 @@
 
 namespace Jikan\Parser\Reviews;
 
+use Jikan\Exception\ParserException;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Common\AnimeMeta;
 use Jikan\Model\Common\MangaMeta;
 use Jikan\Model\Manga\MangaReview;
-use Jikan\Model\Manga\MangaReviewer;
 use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Model\Reviews\Reviewer;
 use Jikan\Parser\Manga\MangaReviewScoresParser;
@@ -22,9 +21,9 @@ use Symfony\Component\DomCrawler\Crawler;
 class MangaReviewParser implements ParserInterface
 {
     /**
-     * @var Crawler
+     * @var \Symfony\Component\DomCrawler\Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * MangaReviewParser constructor.
@@ -37,7 +36,7 @@ class MangaReviewParser implements ParserInterface
     }
 
     /**
-     * @return MangaReview
+     * @return \Jikan\Model\Manga\MangaReview
      * @throws \Exception
      * @throws \RuntimeException
      */
@@ -46,6 +45,9 @@ class MangaReviewParser implements ParserInterface
         return MangaReview::fromParser($this);
     }
 
+    /**
+     * @throws \Jikan\Exception\ParserException
+     */
     public function getManga() : MangaMeta
     {
         return new MangaMeta(
@@ -192,6 +194,7 @@ class MangaReviewParser implements ParserInterface
     /**
      * @return string
      * @throws \InvalidArgumentException
+     * @throws \Jikan\Exception\ParserException
      */
     public function getReviewedImageUrl(): string
     {
@@ -210,6 +213,8 @@ class MangaReviewParser implements ParserInterface
         if ($node->count()) {
             return Parser::parseImageQuality($node->attr('data-src'));
         }
+
+        throw new ParserException("Couldn't find the URL of reviewed image.");
     }
 
     /**

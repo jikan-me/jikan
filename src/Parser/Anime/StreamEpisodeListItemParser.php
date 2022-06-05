@@ -30,6 +30,20 @@ class StreamEpisodeListItemParser implements ParserInterface
     }
 
     /**
+     * @return int|null
+     */
+    public function getMalId() : ?int
+    {
+        preg_match('~([\d]+)$~', $this->getUrl(), $matches);
+
+        if (!empty($matches)) {
+            return $matches[1];
+        }
+
+        return null;
+    }
+
+    /**
      * @return StreamEpisodeListItem
      * @throws \InvalidArgumentException
      */

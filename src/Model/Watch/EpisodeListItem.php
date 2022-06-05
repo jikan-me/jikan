@@ -3,7 +3,7 @@
 namespace Jikan\Model\Watch;
 
 use Jikan\Model\Common\AnimeMeta;
-use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Parser\ParserInterface;
 use Jikan\Parser\Watch\EpisodeListItemParser;
 
 /**
@@ -35,7 +35,7 @@ class EpisodeListItem
      * @return EpisodeListItem
      * @throws \Exception
      */
-    public static function fromParser(EpisodeListItemParser $parser): EpisodeListItem
+    public static function fromParser(ParserInterface $parser): EpisodeListItem
     {
         $instance = new self();
         $instance->entry = $parser->getAnimeMeta();

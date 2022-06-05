@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Manga;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 class MangaRecentlyUpdatedByUsersParserTest extends TestCase
 {
@@ -13,8 +13,10 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Manga\MangaRecentlyUpdatedByUsersRequest(1);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = (new \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser($crawler))->getModel();
     }

@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Manga;
 use Jikan\Model\Manga\MangaReview;
 use Jikan\Parser\Manga\MangaReviewsParser;
 use Jikan\Request\Manga\MangaReviewsRequest;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 class MangaReviewsParserTest extends TestCase
 {
@@ -21,8 +21,10 @@ class MangaReviewsParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new MangaReviewsRequest(1);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = (new MangaReviewsParser($crawler))->getModel();
         $this->review = $this->parser[0];

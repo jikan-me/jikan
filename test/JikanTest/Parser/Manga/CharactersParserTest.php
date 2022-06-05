@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Manga;
 
 use Jikan\Parser\Manga\CharactersParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class CharactersParserTest
@@ -17,7 +17,9 @@ class CharactersParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/2/Berserk/characters');
         $this->parser = new CharactersParser($crawler);
     }

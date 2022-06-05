@@ -5,7 +5,7 @@ namespace JikanTest\Parser\SeasonList;
 use Goutte\Client;
 use Jikan\Model\SeasonList\SeasonListItem;
 use Jikan\Parser\SeasonList\SeasonListParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class SeasonListParserTest
@@ -19,8 +19,10 @@ class SeasonListParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\SeasonList\SeasonListRequest();
-        $client = new Client();
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new SeasonListParser($crawler);
     }

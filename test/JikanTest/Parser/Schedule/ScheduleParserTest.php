@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Person;
 use Goutte\Client;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class ScheduleParserTest
@@ -19,7 +19,9 @@ class ScheduleParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/season/schedule');
         $this->parser = new ScheduleParser($crawler);
     }

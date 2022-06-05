@@ -5,7 +5,7 @@
 namespace JikanTest\Parser\Anime;
 
 use Jikan\Model\Common\MalUrl;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class AnimeParserTest
@@ -24,8 +24,10 @@ class AnimeParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Anime\AnimeRequest(21);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime\AnimeParser($crawler);
     }

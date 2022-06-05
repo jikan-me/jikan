@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Search;
 
 use Jikan\Model\Common\MalUrl;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 use Jikan\MyAnimeList\MalClient;
 
 /**
@@ -17,7 +17,9 @@ class CharacterSearchTest extends TestCase
 
     public function setUp(): void
     {
-        $jikan = new MalClient();
+        parent::setUp();
+
+        $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getCharacterSearch(
             new \Jikan\Request\Search\CharacterSearchRequest('Fate')
         );

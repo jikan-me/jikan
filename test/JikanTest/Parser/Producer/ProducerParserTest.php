@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Person;
 
 use Goutte\Client;
 use Jikan\Parser\Producer\ProducerParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class ProducerParserTest
@@ -18,7 +18,9 @@ class ProducerParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/producer/1');
         $this->parser = new ProducerParser($crawler);
     }

@@ -2,6 +2,7 @@
 /.idea/
 /composer.lock
 /test.php
+/test/http.cache
 /jikan-fixtures
 /.php-cs-fixer.cache
 composer.phar

@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Pictures;
 use Goutte\Client;
 use Jikan\Model\Common\Picture;
 use Jikan\Parser\Common\PicturesPageParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class PicturesPageParserTest
@@ -37,7 +37,9 @@ class PicturesPageParserTest extends TestCase
      */
     public function it_gets_manga_pictures()
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/50145/jikan/pics');
         $this->mangaParser = new PicturesPageParser($crawler);
         $pictures = $this->mangaParser->getModel();
@@ -53,7 +55,9 @@ class PicturesPageParserTest extends TestCase
      */
     public function it_gets_anime_pictures()
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/22147/jikan/pics');
         $this->animeParser = new PicturesPageParser($crawler);
         $pictures = $this->animeParser->getModel();
@@ -69,7 +73,9 @@ class PicturesPageParserTest extends TestCase
      */
     public function it_gets_person_pictures()
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/people/11162/jikan/pictures');
         $this->personParser = new PicturesPageParser($crawler);
         $pictures = $this->personParser->getModel();
@@ -85,7 +91,9 @@ class PicturesPageParserTest extends TestCase
      */
     public function it_gets_character_pictures()
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/character/105591/jikan/pictures');
         $this->characterParser = new PicturesPageParser($crawler);
         $pictures = $this->characterParser->getModel();

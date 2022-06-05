@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Character;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class AnimeographyParserTest
@@ -16,7 +16,9 @@ class AnimeographyParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/character/116281');
         $crawler = $crawler->filterXPath('//div[contains(text(), \'Animeography\')]/../table/tr')->first();
         $this->parser = new \Jikan\Parser\Character\AnimeographyParser($crawler);

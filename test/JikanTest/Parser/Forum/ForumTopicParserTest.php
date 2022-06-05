@@ -6,7 +6,7 @@ namespace JikanTest\Parser\Anime;
 
 use Jikan\Model\Forum\ForumPost;
 use Jikan\Parser\Forum\ForumTopicParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class ForumTopicParserTest
@@ -20,7 +20,9 @@ class ForumTopicParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/21/_/forum');
         $this->parser = new ForumTopicParser($crawler->filterXPath('//tr[contains(@id, "topicRow")]')->eq(2));
     }

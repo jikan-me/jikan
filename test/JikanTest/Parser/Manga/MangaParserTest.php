@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Manga;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MangaParserTest
@@ -24,12 +24,14 @@ class MangaParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Manga\MangaRequest(11);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Manga\MangaParser($crawler);
 
-        $jikan = new MalClient;
+        $jikan = new MalClient($this->httpClient);
         $this->manga = $jikan->getManga(
             $request
         );

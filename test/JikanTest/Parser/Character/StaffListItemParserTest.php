@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Character;
 
 use Goutte\Client;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class StaffListItemParserTest
@@ -17,7 +17,9 @@ class StaffListItemParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/35073/_/characters');
 
         $this->parser = new \Jikan\Parser\Anime\StaffListItemParser(

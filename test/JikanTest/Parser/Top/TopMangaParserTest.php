@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Top;
 
 use Goutte\Client;
 use Jikan\Parser\Top\TopListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -24,7 +24,9 @@ class TopMangaParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $this->crawler = $crawler = $client->request('GET', 'https://myanimelist.net/topmanga.php');
 
         $this->parser = new TopListItemParser(

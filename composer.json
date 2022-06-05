@@ -19,7 +19,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Jikan\\": [
+            "JikanTest\\": [
                 "test/JikanTest"
             ]
         }

@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\User\Profile;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class ProfileParserTest
@@ -16,7 +16,9 @@ class UserProfileParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/sandshark');
         $this->parser = new \Jikan\Parser\User\Profile\UserProfileParser($crawler);
     }

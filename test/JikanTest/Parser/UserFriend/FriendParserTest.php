@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\User\Friends;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 class FriendParserTest extends TestCase
 {
@@ -13,7 +13,9 @@ class FriendParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/morshuwarrior/friends');
         $this->parser = new \Jikan\Parser\User\Friends\FriendParser(
             $crawler->filterXPath(

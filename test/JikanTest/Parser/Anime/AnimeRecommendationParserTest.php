@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Anime;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 class AnimeRecommendationParserTest extends TestCase
 {
@@ -13,8 +13,10 @@ class AnimeRecommendationParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Anime\AnimeRecommendationsRequest(21);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = (new \Jikan\Parser\Common\Recommendations($crawler))->getModel();
     }

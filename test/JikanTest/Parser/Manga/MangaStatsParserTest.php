@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Manga;
 
 use Jikan\Model\Manga\MangaStatsScore;
 use Jikan\Parser\Manga\MangaStatsParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MangaStatsParserTest
@@ -18,8 +18,10 @@ class MangaStatsParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Manga\MangaStatsRequest(99314);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->mangaStatsParser = new MangaStatsParser($crawler);
     }

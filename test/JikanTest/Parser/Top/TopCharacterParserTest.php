@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Top;
 use Goutte\Client;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class TopCharacterParserTest
@@ -19,7 +19,9 @@ class TopCharacterParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/character.php');
 
         $this->parser = new TopListItemParser(

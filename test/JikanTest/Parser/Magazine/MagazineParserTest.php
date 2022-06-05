@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Magazine;
 
 use Goutte\Client;
 use Jikan\Parser\Magazine\MagazineParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MagazineParserTest
@@ -18,7 +18,9 @@ class MagazineParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/magazine/1');
         $this->parser = new MagazineParser($crawler);
     }

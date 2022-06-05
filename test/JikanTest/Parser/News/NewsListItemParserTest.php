@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Anime;
 
 use Jikan\Parser\News\NewsListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class NewsListItemParserTest
@@ -17,7 +17,9 @@ class NewsListItemParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/2/Berserk/news');
         $this->parser = new NewsListItemParser(
             $crawler->filterXPath('//div[@class="js-scrollfix-bottom-rel"]/div[@class="clearfix"]')->first()

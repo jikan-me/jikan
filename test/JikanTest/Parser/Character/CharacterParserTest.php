@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Character;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class CharacterParserTest
@@ -16,8 +16,10 @@ class CharacterParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Character\CharacterRequest(116281);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Character\CharacterParser($crawler);
     }

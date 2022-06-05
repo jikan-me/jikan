@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Character;
 use Goutte\Client;
 use Jikan\Model\Character\VoiceActor;
 use Jikan\Parser\Character\CharacterListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -20,7 +20,9 @@ class CharacterListItemParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/35073/Overlord_II/characters');
 
         $this->parser = new CharacterListItemParser(

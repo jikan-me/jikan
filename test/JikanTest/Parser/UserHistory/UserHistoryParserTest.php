@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\User\History;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class HistoryParserTest
@@ -19,7 +19,9 @@ class HistoryParserTest extends TestCase
      */
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/history/nekomata1037/');
         $this->parser = (new \Jikan\Parser\User\History\HistoryParser($crawler))->getModel();
     }

@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 use Jikan\MyAnimeList\MalClient;
 
 /**
@@ -16,7 +16,9 @@ class MangaSearchTest extends TestCase
 
     public function setUp(): void
     {
-        $jikan = new MalClient;
+        parent::setUp();
+
+        $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getMangaSearch(
             new \Jikan\Request\Search\MangaSearchRequest('Fate')
         );

@@ -6,7 +6,7 @@ use Goutte\Client;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\MangaCard;
 use Jikan\Parser\Genre\MangaGenreParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MangaGenreParserTest
@@ -20,7 +20,9 @@ class MangaGenreParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/genre/1');
         $this->parser = new MangaGenreParser($crawler);
     }

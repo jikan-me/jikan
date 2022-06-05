@@ -17,7 +17,6 @@ use Jikan\Request\Anime\AnimeForumRequest;
 use Jikan\Request\Manga\MangaForumRequest;
 use Jikan\Request\Anime\AnimeNewsRequest;
 use Jikan\Request\Manga\MangaNewsRequest;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class JikanTest
@@ -31,7 +30,9 @@ class JikanTest extends TestCase
 
     public function setUp(): void
     {
-        $this->jikan = new MalClient();
+        parent::setUp();
+
+        $this->jikan = new MalClient($this->httpClient);
     }
 
     /**

@@ -3,6 +3,6 @@
 /composer.lock
 /test.php
 /jikan-fixtures
-/.php_cs.cache
+/.php-cs-fixer.cache
 composer.phar
 .phpunit.result.cache

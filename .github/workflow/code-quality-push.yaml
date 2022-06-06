@@ -18,6 +18,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.0'
-          tools: parallel-lint, phpunit
+          tools: parallel-lint, phpunit, php-cs-fixer
       - name: Run code quality checks
         run: ./.github/workflows/utilities/lint-push ${{ github.sha }}

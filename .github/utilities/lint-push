@@ -6,7 +6,7 @@ if (empty($argv[1])) {
     exit(1);
 }
 
-// Get a changelist of files from Git for this PR.
+// Get a changelist of files from Git for this push.
 $fileList = shell_exec('git show --name-only --pretty="" --diff-filter=ACMR ' . $argv[1]);
 $files = array_filter(explode("\n", $fileList));
 

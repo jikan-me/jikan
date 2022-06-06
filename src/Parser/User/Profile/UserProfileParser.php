@@ -110,7 +110,8 @@ class UserProfileParser
     {
         return Parser::parseDateTimePST(
             $this->crawler->filterXPath('//span[contains(text(), \'Last Online\')]/following-sibling::span')
-            ->text());
+            ->text()
+        );
     }
 
     /**

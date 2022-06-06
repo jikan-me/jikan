@@ -37,5 +37,4 @@ class DefaultPicture
     {
         return $this->imageUrl;
     }
-
 }

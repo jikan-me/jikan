@@ -641,7 +641,7 @@ class AnimeParser implements ParserInterface
         }
 
         return $links->nextAll()->filterXPath('//div[contains(@class, "pb16")]/a')
-            ->each(function(Crawler  $c) {
+            ->each(function (Crawler  $c) {
                 return (new UrlParser($c))->getModel();
             });
     }
@@ -697,7 +697,7 @@ class AnimeParser implements ParserInterface
     {
         $background = Parser::removeChildNodes($this->crawler->filterXPath('//p[@itemprop="description"]/..'));
 
-        $background->filter('p')->each(function(Crawler $c) {
+        $background->filter('p')->each(function (Crawler $c) {
             foreach ($c as $node) {
                 $node->parentNode->removeChild($node);
             }

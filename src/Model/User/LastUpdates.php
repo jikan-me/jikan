@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\User;
 
-
 use Jikan\Parser\User\Profile\LastUpdatesParser;
 
 class LastUpdates
@@ -40,5 +39,4 @@ class LastUpdates
     {
         return $this->manga;
     }
-
 }

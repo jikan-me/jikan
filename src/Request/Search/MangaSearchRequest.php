@@ -416,5 +416,4 @@ class MangaSearchRequest implements RequestInterface
     {
         return $this->sort;
     }
-
 }

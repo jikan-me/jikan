@@ -1216,7 +1216,7 @@ class MalClient
     public function getUserReviews(Request\User\UserReviewsRequest $request) : Model\User\Reviews\UserReviews
     {
         try {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (\Exception $e) {
             if ($e->getCode() === 404) {
                 return Model\User\Reviews\UserReviews::mock();

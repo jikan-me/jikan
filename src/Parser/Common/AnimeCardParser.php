@@ -90,12 +90,12 @@ class AnimeCardParser implements ParserInterface
 
         $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$malUrl) {
+        $node->each(function (Crawler $c) use (&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Studio") || str_contains($node->text(), "Studios")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$malUrl) {
+                    ->each(function (Crawler $c) use (&$malUrl) {
                         $malUrl[] = (new MalUrlParser($c))->getModel();
                     });
             }
@@ -341,14 +341,18 @@ class AnimeCardParser implements ParserInterface
         if ($node->count()) {
             $score = JString::cleanse($node->text());
 
-            if ($score === 'N/A') return null;
+            if ($score === 'N/A') {
+                return null;
+            }
         }
 
         // producers page
         $node = $this->crawler->filterXPath('//div[contains(@class, "widget")]/div[@class="stars"]');
         if ($node->count()) {
             $score = JString::cleanse($node->text());
-            if ($score === 'N/A') return null;
+            if ($score === 'N/A') {
+                return null;
+            }
         }
 
         return (float) $score;
@@ -368,12 +372,12 @@ class AnimeCardParser implements ParserInterface
 
         $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$malUrl) {
+        $node->each(function (Crawler $c) use (&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Licensor")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$malUrl) {
+                    ->each(function (Crawler $c) use (&$malUrl) {
                         $malUrl[] = $c->text();
                     });
             }
@@ -393,12 +397,12 @@ class AnimeCardParser implements ParserInterface
 
         $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$malUrl) {
+        $node->each(function (Crawler $c) use (&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Theme") || str_contains($node->text(), "Themes")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$malUrl) {
+                    ->each(function (Crawler $c) use (&$malUrl) {
                         $malUrl[] = (new MalUrlParser($c))->getModel();
                     });
             }
@@ -418,12 +422,12 @@ class AnimeCardParser implements ParserInterface
 
         $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$malUrl) {
+        $node->each(function (Crawler $c) use (&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Demographic") || str_contains($node->text(), "Demographics")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$malUrl) {
+                    ->each(function (Crawler $c) use (&$malUrl) {
                         $malUrl[] = (new MalUrlParser($c))->getModel();
                     });
             }

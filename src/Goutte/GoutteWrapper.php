@@ -33,8 +33,7 @@ class GoutteWrapper extends Client
         array $server = [],
         string $content = null,
         bool $changeHistory = true
-    ) : Crawler
-    {
+    ) : Crawler {
         $response = parent::request(
             $method,
             $uri,

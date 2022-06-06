@@ -1,8 +1,8 @@
 grumphp:
     process_timeout: 180
     tasks:
-        phpcsfixer2:
-            config: .php_cs.dist
+        phpcsfixer:
+            config: .php-cs-fixer.dist.php
         git_blacklist:
             keywords:
                 - 'var_dump'

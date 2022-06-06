@@ -546,7 +546,7 @@ class MangaParser implements ParserInterface
         }
 
         return $links->nextAll()->filterXPath('//div[contains(@class, "pb16")]/a')
-            ->each(function(Crawler  $c) {
+            ->each(function (Crawler  $c) {
                 return (new UrlParser($c))->getModel();
             });
     }

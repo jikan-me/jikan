@@ -275,12 +275,12 @@ class MangaCardParser implements ParserInterface
 
         $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$malUrl) {
+        $node->each(function (Crawler $c) use (&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Serialization")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$malUrl) {
+                    ->each(function (Crawler $c) use (&$malUrl) {
                         $malUrl[] = $c->text();
                     });
             }
@@ -300,12 +300,12 @@ class MangaCardParser implements ParserInterface
 
         $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$malUrl) {
+        $node->each(function (Crawler $c) use (&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Theme") || str_contains($node->text(), "Themes")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$malUrl) {
+                    ->each(function (Crawler $c) use (&$malUrl) {
                         $malUrl[] = (new MalUrlParser($c))->getModel();
                     });
             }
@@ -325,12 +325,12 @@ class MangaCardParser implements ParserInterface
 
         $malUrl = [];
 
-        $node->each(function(Crawler $c) use(&$malUrl) {
+        $node->each(function (Crawler $c) use (&$malUrl) {
             $node = $c->filterXPath('//span');
 
             if (str_contains($node->text(), "Demographic") || str_contains($node->text(), "Demographics")) {
                 $node->nextAll()->filterXPath('//a')
-                    ->each(function(Crawler $c) use(&$malUrl) {
+                    ->each(function (Crawler $c) use (&$malUrl) {
                         $malUrl[] = (new MalUrlParser($c))->getModel();
                     });
             }

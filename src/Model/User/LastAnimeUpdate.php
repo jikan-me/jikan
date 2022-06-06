@@ -2,7 +2,6 @@
 
 namespace Jikan\Model\User;
 
-
 use Jikan\Model\Common\AnimeMeta;
 
 class LastAnimeUpdate

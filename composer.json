@@ -32,7 +32,7 @@
     "require-dev": {
         "brianium/paratest": "^6.4.1",
         "doctrine/collections": "^1.5",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^3.8",
         "jakub-onderka/php-parallel-lint": "^1.0",
         "jikan-me/jikan-fixtures": "dev-master",
         "php-vcr/php-vcr": "^1.6",

@@ -38,7 +38,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://cdn.myanimelist.net/images/manga/3/196931.jpg?s=7da8d65371bc975c9ecda0d30a832984", $this->manga->getImages()->);
+        self::assertEquals("https://cdn.myanimelist.net/images/manga/3/196931.jpg?s=7da8d65371bc975c9ecda0d30a832984", $this->manga->getImages()->getJpg()->getImageUrl());
     }
 
     /**

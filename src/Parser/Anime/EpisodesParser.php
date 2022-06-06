@@ -71,7 +71,7 @@ class EpisodesParser implements ParserInterface
             return 1;
         }
 
-        preg_match('~\?offset=(\d+)$~', $pages->getUri(), $page);
+        preg_match('~\?offset=(\d+)$~', $pages->attr('href'), $page);
 
         return ((int) $page[1]/100) + 1;
     }

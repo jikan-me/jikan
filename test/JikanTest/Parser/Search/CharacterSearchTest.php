@@ -21,7 +21,7 @@ class CharacterSearchTest extends TestCase
 
         $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getCharacterSearch(
-            new \Jikan\Request\Search\CharacterSearchRequest('Fate')
+            new \Jikan\Request\Search\CharacterSearchRequest('Testarossa')
         );
         $this->anime = $this->search->getResults()[0];
     }
@@ -39,7 +39,10 @@ class CharacterSearchTest extends TestCase
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://myanimelist.cdn-dena.com/images/characters/4/226585.jpg?s=d234ff14c48241f52809684930d5a968", $this->anime->getImageUrl());
+        self::assertEquals(
+            "https://cdn.myanimelist.net/images/characters/4/226585.jpg?s=267b6d2c90c45a5bdbc191f50d431690",
+            $this->anime->getImages()->getJpg()->getImageUrl()
+        );
     }
 
     /**
@@ -65,8 +68,8 @@ class CharacterSearchTest extends TestCase
     public function it_gets_the_anime()
     {
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $this->anime->getAnime());
-        self::assertEquals("Mahou Shoujo Lyrical Nanoha ViVid", $this->anime->getAnime()[0]->getName());
-        self::assertEquals("https://myanimelist.net/anime/25939/Mahou_Shoujo_Lyrical_Nanoha_ViVid", $this->anime->getAnime()[0]->getUrl());
+        self::assertEquals("Mahou Shoujo Lyrical Nanoha: Reflection", $this->anime->getAnime()[0]->getName());
+        self::assertEquals("https://myanimelist.net/anime/17947/Mahou_Shoujo_Lyrical_Nanoha__Reflection", $this->anime->getAnime()[0]->getUrl());
     }
 
     /**

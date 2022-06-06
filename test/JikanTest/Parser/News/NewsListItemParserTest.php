@@ -22,7 +22,7 @@ class NewsListItemParserTest extends TestCase
         $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/2/Berserk/news');
         $this->parser = new NewsListItemParser(
-            $crawler->filterXPath('//div[@class="js-scrollfix-bottom-rel"]/div[@class="clearfix"]')->first()
+            $crawler->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')->first()
         );
     }
 
@@ -31,7 +31,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_title(): void
     {
-        self::assertEquals('North American Anime & Manga Releases for July', $this->parser->getTitle());
+        self::assertEquals("'Berserk' Creator Kentarou Miura Dies at 54", $this->parser->getTitle());
     }
 
     /**
@@ -39,7 +39,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_url(): void
     {
-        self::assertEquals('https://myanimelist.net/news/60161703', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/news/63203251', $this->parser->getUrl());
     }
 
     /**
@@ -48,7 +48,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_image(): void
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/s/common/uploaded_files/1594161493-e76e48dafd1b0f67ece6f1fa065db158.jpeg?s=e24b9ee8cfa8d123bf27fbbd9aef0d27',
+            'https://cdn.myanimelist.net/s/common/uploaded_files/1621492994-97c345f3d0912b89a1207f235274b1a4.jpeg?s=b42ac2bcc10470f9f29e6d4647f4c4fc',
             $this->parser->getImage()
         );
     }
@@ -58,7 +58,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_date(): void
     {
-        self::assertEquals('2020-07-07 15:39', $this->parser->getDate()->format('Y-m-d H:i'));
+        self::assertEquals('2021-05-19 21:39', $this->parser->getDate()->format('Y-m-d H:i'));
     }
 
     /**
@@ -66,7 +66,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_author(): void
     {
-        self::assertEquals('ImperfectBlue', (string)$this->parser->getAuthor());
+        self::assertEquals('Vindstot', (string)$this->parser->getAuthor());
     }
 
     /**
@@ -74,7 +74,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_discussion_link(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=1850747', $this->parser->getDiscussionLink());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=1924224', $this->parser->getDiscussionLink());
     }
 
     /**
@@ -83,7 +83,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_comments(): void
     {
         self::assertEquals(
-            0,
+            437,
             $this->parser->getComments()
         );
     }
@@ -93,8 +93,8 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_introduction(): void
     {
-        self::assert(
-            'Here are the North American anime & manga releases for July Week 1: July 7 - 13 Anime Releases Cop Craft Complete Collection Blu-ray Dumbbell Nan Kilo Moteru? (H...',
+        self::assertStringContainsString(
+            'Prolific manga author Kentarou Miura, best known for creating Berserk, died on May 6 at 2:48 p.m. due to an acute aortic dissection.',
             $this->parser->getIntro()
         );
     }

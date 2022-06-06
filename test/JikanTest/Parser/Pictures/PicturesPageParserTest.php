@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Pictures;
 
 use Goutte\Client;
 use Jikan\Model\Common\Picture;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Common\PicturesPageParser;
 use JikanTest\TestCase;
 
@@ -45,9 +46,15 @@ class PicturesPageParserTest extends TestCase
         $pictures = $this->mangaParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));
-        self::assertInstanceOf(Picture::class, $pictures[0]);
-        self::assertContains('https://myanimelist.cdn-dena.com/images/manga/', $pictures[0]->getSmall());
-        self::assertContains('https://myanimelist.cdn-dena.com/images/manga/', $pictures[0]->getLarge());
+        self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/manga/',
+            $pictures[0]->getJpg()->getSmallImageUrl()
+        );
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/manga/',
+            $pictures[0]->getJpg()->getLargeImageUrl()
+        );
     }
 
     /**
@@ -63,9 +70,15 @@ class PicturesPageParserTest extends TestCase
         $pictures = $this->animeParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));
-        self::assertInstanceOf(Picture::class, $pictures[0]);
-        self::assertContains('https://myanimelist.cdn-dena.com/images/anime/', $pictures[0]->getSmall());
-        self::assertContains('https://myanimelist.cdn-dena.com/images/anime/', $pictures[0]->getLarge());
+        self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/anime/',
+            $pictures[0]->getJpg()->getSmallImageUrl()
+        );
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/anime/',
+            $pictures[0]->getJpg()->getLargeImageUrl()
+        );
     }
 
     /**
@@ -76,14 +89,20 @@ class PicturesPageParserTest extends TestCase
         parent::setUp();
 
         $client = new Client($this->httpClient);
-        $crawler = $client->request('GET', 'https://myanimelist.net/people/11162/jikan/pictures');
+        $crawler = $client->request('GET', 'https://myanimelist.net/people/11162/jikan/pics');
         $this->personParser = new PicturesPageParser($crawler);
         $pictures = $this->personParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));
-        self::assertInstanceOf(Picture::class, $pictures[0]);
-        self::assertContains('https://myanimelist.cdn-dena.com/images/voiceactors/', $pictures[0]->getSmall());
-        self::assertContains('https://myanimelist.cdn-dena.com/images/voiceactors/', $pictures[0]->getLarge());
+        self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/voiceactors/',
+            $pictures[0]->getJpg()->getSmallImageUrl()
+        );
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/voiceactors/',
+            $pictures[0]->getJpg()->getLargeImageUrl()
+        );
     }
 
     /**
@@ -94,13 +113,19 @@ class PicturesPageParserTest extends TestCase
         parent::setUp();
 
         $client = new Client($this->httpClient);
-        $crawler = $client->request('GET', 'https://myanimelist.net/character/105591/jikan/pictures');
+        $crawler = $client->request('GET', 'https://myanimelist.net/character/105591/jikan/pics');
         $this->characterParser = new PicturesPageParser($crawler);
         $pictures = $this->characterParser->getModel();
 
         self::assertGreaterThan(0, count($pictures));
-        self::assertInstanceOf(Picture::class, $pictures[0]);
-        self::assertContains('https://myanimelist.cdn-dena.com/images/characters/', $pictures[0]->getSmall());
-        self::assertContains('https://myanimelist.cdn-dena.com/images/characters/', $pictures[0]->getLarge());
+        self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/characters/',
+            $pictures[0]->getJpg()->getSmallImageUrl()
+        );
+        self::assertStringContainsString(
+            'https://cdn.myanimelist.net/images/characters/',
+            $pictures[0]->getJpg()->getLargeImageUrl()
+        );
     }
 }

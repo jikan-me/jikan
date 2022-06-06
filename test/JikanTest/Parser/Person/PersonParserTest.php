@@ -69,8 +69,14 @@ class PersonParserTest extends TestCase
      */
     public function it_gets_the_about()
     {
-        self::assertContains('She began her voice-acting career in 1999 and has continued her work as a seiyuu for more than a decade.\n', $this->parser->getPersonAbout());
-        self::assertContains('Married on June 2, 2014, her 29th birthday.\n', $this->parser->getPersonAbout());
+        self::assertStringContainsString(
+            "She began her voice-acting career in 1999 and has continued her work as a seiyuu for more than a decade.\n",
+            $this->parser->getPersonAbout()
+        );
+        self::assertStringContainsString(
+            "Married on June 2, 2014, her 29th birthday.\n",
+            $this->parser->getPersonAbout()
+        );
     }
 
     /**
@@ -78,7 +84,7 @@ class PersonParserTest extends TestCase
      */
     public function it_gets_the_member_favorites()
     {
-        self::assertEquals(38369, $this->parser->getPersonFavorites());
+        self::assertEquals(38067, $this->parser->getPersonFavorites());
     }
 
     /**
@@ -87,7 +93,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/1/54600.jpg',
+            'https://cdn.myanimelist.net/images/voiceactors/2/65500.jpg',
             $this->parser->getPersonImageUrl()
         );
     }
@@ -98,7 +104,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_voice_acting_roles()
     {
         $voiceActingRoles = $this->parser->getPersonVoiceActingRoles();
-        self::assertCount(488, $voiceActingRoles);
+        self::assertCount(525, $voiceActingRoles);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\VoiceActingRole::class, $voiceActingRoles);
     }
 
@@ -108,7 +114,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_anime_staff_positions()
     {
         $animeStaffPositions = $this->parser->getPersonAnimeStaffPositions();
-        self::assertCount(43, $animeStaffPositions);
+        self::assertCount(41, $animeStaffPositions);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\AnimeStaffPosition::class, $animeStaffPositions);
     }
 

@@ -57,7 +57,7 @@ class VoiceActorParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/2/55555.jpg',
+            'https://cdn.myanimelist.net/images/voiceactors/3/65938.jpg',
             $this->parser->getImage()
         );
     }

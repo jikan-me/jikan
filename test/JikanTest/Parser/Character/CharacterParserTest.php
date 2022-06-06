@@ -53,7 +53,7 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_name_in_kanji()
     {
-        self::assertNull($this->parser->getNameKanji());
+        self::assertEquals('モモンガ', $this->parser->getNameKanji());
     }
 
     /**
@@ -72,8 +72,8 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_about()
     {
-        self::assertContains('He is the guild master of Ainz Ooal Gown and regarded', $this->parser->getAbout());
-        self::assertContains('(Source: Overlord Wikia)', $this->parser->getAbout());
+        self::assertStringContainsString('He is the guild master of Ainz Ooal Gown,', $this->parser->getAbout());
+        self::assertStringContainsString('(Source: Overlord Wikia)', $this->parser->getAbout());
     }
 
     /**
@@ -81,7 +81,7 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_member_favorites()
     {
-        self::assertEquals(9245, $this->parser->getMemberFavorites());
+        self::assertEquals(11523, $this->parser->getMemberFavorites());
     }
 
     /**
@@ -101,7 +101,7 @@ class CharacterParserTest extends TestCase
     public function it_gets_the_animeography()
     {
         $animeography = $this->parser->getAnimeography();
-        self::assertCount(11, $animeography);
+        self::assertCount(14, $animeography);
         self::assertContainsOnly(\Jikan\Model\Character\Animeography::class, $animeography);
     }
 
@@ -121,11 +121,11 @@ class CharacterParserTest extends TestCase
     public function it_gets_the_voice_actors()
     {
         $voiceActors = $this->parser->getVoiceActors();
-        self::assertCount(5, $voiceActors);
+        self::assertCount(7, $voiceActors);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Character\VoiceActor::class, $voiceActors);
-        self::assertContains('Hino, Satoshi', $voiceActors);
-        self::assertContains('Mendiant, Charles', $voiceActors);
-        self::assertContains('Kaminski, Stefan', $voiceActors);
-        self::assertContains('Guerrero, Chris', $voiceActors);
+        self::assertEquals('Hino, Satoshi', $voiceActors[0]->getPerson()->getName());
+        self::assertEquals('Guerrero, Chris', $voiceActors[1]->getPerson()->getName());
+        self::assertEquals('Mendiant, Charles', $voiceActors[3]->getPerson()->getName());
+        self::assertEquals('Kaminski, Stefan', $voiceActors[4]->getPerson()->getName());
     }
 }

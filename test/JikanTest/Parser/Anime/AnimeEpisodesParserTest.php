@@ -28,8 +28,8 @@ class AnimeEpisodesParserTest extends TestCase
     public function it_gets_episodes_last_page(): void
     {
         self::assertEquals(
-            9,
-            $this->parser->getEpisodesLastPage()
+            11,
+            $this->parser->getLastPage()
         );
     }
 
@@ -41,7 +41,7 @@ class AnimeEpisodesParserTest extends TestCase
     {
         self::assertEquals(
             1,
-            $this->parser->getEpisodes()[0]->getEpisodeId()
+            $this->parser->getEpisodes()[0]->getMalId()
         );
     }
 
@@ -75,7 +75,7 @@ class AnimeEpisodesParserTest extends TestCase
      */
     public function it_gets_episode_title_romanji(): void
     {
-        self::assertContains(
+        self::assertStringContainsString(
             "Ore wa Luffy! Kaizoku Ou ni Naru Otoko Da!",
             $this->parser->getEpisodes()[0]->getTitleRomanji()
         );
@@ -122,11 +122,11 @@ class AnimeEpisodesParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
      */
-    public function it_gets_episode_video_url(): void
+    public function it_gets_episode_url(): void
     {
         self::assertEquals(
             "https://myanimelist.net/anime/21/One_Piece/episode/1",
-            $this->parser->getEpisodes()[0]->getVideoUrl()
+            $this->parser->getEpisodes()[0]->getUrl()
         );
     }
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace JikanTest\Parser\User\History;
+namespace JikanTest\Parser\UserHistory;
 
 use JikanTest\TestCase;
 
 /**
  * Class HistoryParserTest
  */
-class HistoryParserTest extends TestCase
+class UserHistoryParserTest extends TestCase
 {
     /**
      * @var \Jikan\Model\User\History[]
@@ -22,7 +22,7 @@ class HistoryParserTest extends TestCase
         parent::setUp();
 
         $client = new \Goutte\Client($this->httpClient);
-        $crawler = $client->request('GET', 'https://myanimelist.net/history/nekomata1037/');
+        $crawler = $client->request('GET', 'https://myanimelist.net/history/morshuwarrior/');
         $this->parser = (new \Jikan\Parser\User\History\HistoryParser($crawler))->getModel();
     }
 
@@ -32,7 +32,7 @@ class HistoryParserTest extends TestCase
     public function it_gets_the_url()
     {
         self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->parser[0]->getMalUrl());
-        self::assertInternalType('string', $this->parser[0]->getMalUrl()->getTitle());
+        self::assertIsString($this->parser[0]->getMalUrl()->getTitle());
     }
 
     /**
@@ -40,7 +40,7 @@ class HistoryParserTest extends TestCase
      */
     public function it_gets_the_increment()
     {
-        self::assertInternalType('int', $this->parser[0]->getIncrement());
+        self::assertIsInt($this->parser[0]->getIncrement());
     }
 
     /**

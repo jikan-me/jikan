@@ -54,7 +54,10 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_synopsis()
     {
-        self::assertContains("War of the Holy Grail—Pursuing the power of the \"Holy Grail\" which grants a miracle, this is a contest in which seven magi summon seven Heroic Spirits to compete for it.", $this->manga->getSynopsis());
+        self::assertStringContainsString(
+            "War of the Holy Grail—Pursuing the power of the \"Holy Grail\" which grants a miracle, this is a contest in which seven magi summon seven Heroic Spirits to compete for it.",
+            $this->manga->getSynopsis()
+        );
     }
 
     /**
@@ -102,7 +105,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_members()
     {
-        self::assertEquals($this->manga->getMembers(), 3659);
+        self::assertEquals($this->manga->getMembers(), 6670);
     }
 
     /**
@@ -110,6 +113,6 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_score()
     {
-        self::assertEquals($this->manga->getScore(), 7.81);
+        self::assertEquals($this->manga->getScore(), 7.75);
     }
 }

@@ -41,7 +41,7 @@ class MangaGenreParserTest extends TestCase
      */
     public function it_gets_manga()
     {
-        $manga = $this->parser->getGenreManga();
+        $manga = $this->parser->getResults();
         self::assertContainsOnlyInstancesOf(MangaCard::class, $manga);
     }
 
@@ -50,6 +50,6 @@ class MangaGenreParserTest extends TestCase
      */
     public function it_gets_the_count()
     {
-        self::assertEquals(7318, $this->parser->getCount());
+        self::assertEquals(7973, $this->parser->getCount());
     }
 }

@@ -10,9 +10,9 @@ use JikanTest\TestCase;
 class MangaReviewsParserTest extends TestCase
 {
     /**
-     * @var MangaReview[]
+     * @var \Jikan\Model\Manga\MangaReviews
      */
-    private $parser;
+    private $model;
 
     /**
      * @var MangaReview
@@ -26,8 +26,8 @@ class MangaReviewsParserTest extends TestCase
         $request = new MangaReviewsRequest(1);
         $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
-        $this->parser = (new MangaReviewsParser($crawler))->getModel();
-        $this->review = $this->parser[0];
+        $this->model = (new MangaReviewsParser($crawler))->getModel();
+        $this->review = $this->model->getResults()[0];
     }
 
     /**
@@ -36,10 +36,10 @@ class MangaReviewsParserTest extends TestCase
      */
     public function it_gets_reviews(): void
     {
-        self::assertCount(20, $this->parser);
+        self::assertCount(20, $this->model->getResults());
         self::assertContainsOnlyInstancesOf(
             MangaReview::class,
-            $this->parser
+            $this->model->getResults()
         );
     }
 
@@ -65,9 +65,9 @@ class MangaReviewsParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Manga\MangaReviewsParser
      */
-    public function it_gets_review_helpful_count(): void
+    public function it_gets_review_votes_count(): void
     {
-        self::assertEquals(220, $this->review->getHelpfulCount());
+        self::assertEquals(411, $this->review->getVotes());
     }
 
     /**
@@ -87,7 +87,7 @@ class MangaReviewsParserTest extends TestCase
     {
         self::assertEquals(
             'BorisSoad',
-            $this->review->getReviewer()->getUsername()
+            $this->review->getUser()->getUsername()
         );
     }
 
@@ -98,8 +98,8 @@ class MangaReviewsParserTest extends TestCase
     public function it_gets_reviewer_image_url(): void
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/userimages/132886.jpg',
-            $this->review->getReviewer()->getImageUrl()
+            'https://cdn.myanimelist.net/images/userimages/132886.jpg?t=1368353400',
+            $this->review->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
 
@@ -111,7 +111,7 @@ class MangaReviewsParserTest extends TestCase
     {
         self::assertEquals(
             'https://myanimelist.net/profile/BorisSoad',
-            $this->review->getReviewer()->getUrl()
+            $this->review->getUser()->getUrl()
         );
     }
 
@@ -123,7 +123,7 @@ class MangaReviewsParserTest extends TestCase
     {
         self::assertEquals(
             162,
-            $this->review->getReviewer()->getChaptersRead()
+            $this->review->getChaptersRead()
         );
     }
 
@@ -133,11 +133,11 @@ class MangaReviewsParserTest extends TestCase
      */
     public function it_gets_reviewer_scores(): void
     {
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getOverall());
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getStory());
-        self::assertEquals(9, $this->review->getReviewer()->getScores()->getArt());
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getCharacter());
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getEnjoyment());
+        self::assertEquals(10, $this->review->getScores()->getOverall());
+        self::assertEquals(10, $this->review->getScores()->getStory());
+        self::assertEquals(9, $this->review->getScores()->getArt());
+        self::assertEquals(10, $this->review->getScores()->getCharacter());
+        self::assertEquals(10, $this->review->getScores()->getEnjoyment());
     }
 
     /**
@@ -146,13 +146,13 @@ class MangaReviewsParserTest extends TestCase
      */
     public function it_gets_reviewer_review(): void
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'Monster isn\'t a tradional manga. It isn\'t about fighting. I even dare to say it is a \'Love it or hate it\'-manga. If you are the type of Naruto and Bleach and looking for that kind of manga, this isn\'t the manga for you. If you are looking for an intense, well-written manga, I would recommend this certainly for you.',
-            $this->review->getContent()
+            $this->review->getReview()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'My conclusion: This manga is perfect for everyone who loves thrillers and tension! The 10 it has gotten from me, well, it just deserves it!',
-            $this->review->getContent()
+            $this->review->getReview()
         );
     }
 

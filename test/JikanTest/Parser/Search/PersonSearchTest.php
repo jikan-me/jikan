@@ -38,7 +38,10 @@ class PersonSearchTest extends TestCase
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://myanimelist.cdn-dena.com/images/voiceactors/2/42926.jpg?s=bf7e47ee3e4a1eb93e7ef86afed1c68b", $this->person->getImageUrl());
+        self::assertEquals(
+            "https://cdn.myanimelist.net/images/voiceactors/2/42926.jpg?s=bf7e47ee3e4a1eb93e7ef86afed1c68b",
+            $this->person->getImages()->getJpg()->getImageUrl()
+        );
     }
 
     /**

@@ -23,6 +23,9 @@ class JString
             $string
         );
 
+        // convert nbsp to space
+        $string = str_replace("\xc2\xa0", ' ', $string);
+
         // remove control characters
         $string = preg_replace('~[[:cntrl:]]~', "", $string);
 
@@ -32,8 +35,6 @@ class JString
 
         // trim Nbsp // causing serializer issues
 //        $string = self::UTF8NbspTrim($string);
-
-
 
         // remove any newlines at the end
         $string = str_replace('\\n', "\n", $string);

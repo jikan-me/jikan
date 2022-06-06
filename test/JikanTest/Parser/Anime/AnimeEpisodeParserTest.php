@@ -135,8 +135,8 @@ class AnimeEpisodeParserTest extends TestCase
      */
     public function it_gets_synopsis(): void
     {
-        self::assertContains(
-            'Countless souls have been lured along the Grand Line in pursuit of the legendary One Piece!',
+        self::assertStringContainsString(
+            'The series begins with an attack on a cruise ship at the hands of Alvida. Coby, a slave of Alvida, discovers a barrel.',
             $this->parser->getSynopsis()
         );
     }

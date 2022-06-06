@@ -40,7 +40,7 @@ class UserFriendsRequest implements RequestInterface
     {
         $query = '';
         if ($this->page) {
-            $query = '?'.http_build_query(['offset' => ($this->page - 1) * 100]);
+            $query = '?'.http_build_query(['p' => $this->page]);
         }
 
         return sprintf('https://myanimelist.net/profile/%s/friends%s', $this->username, $query);

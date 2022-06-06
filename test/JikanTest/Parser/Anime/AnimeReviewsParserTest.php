@@ -10,12 +10,12 @@ use JikanTest\TestCase;
 class AnimeReviewsParserTest extends TestCase
 {
     /**
-     * @var AnimeReview[]
+     * @var \Jikan\Model\Anime\AnimeReviews
      */
-    private $parser;
+    private $model;
 
     /**
-     * @var AnimeReview
+     * @var \Jikan\Model\Anime\AnimeReview
      */
     private $review;
 
@@ -26,8 +26,8 @@ class AnimeReviewsParserTest extends TestCase
         $request = new AnimeReviewsRequest(1);
         $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
-        $this->parser = (new AnimeReviewsParser($crawler))->getModel();
-        $this->review = $this->parser[0];
+        $this->model = (new AnimeReviewsParser($crawler))->getModel();
+        $this->review = $this->model->getResults()[0];
     }
 
     /**
@@ -36,10 +36,10 @@ class AnimeReviewsParserTest extends TestCase
      */
     public function it_gets_reviews(): void
     {
-        self::assertCount(20, $this->parser);
+        self::assertCount(20, $this->model->getResults());
         self::assertContainsOnlyInstancesOf(
             AnimeReview::class,
-            $this->parser
+            $this->model->getResults()
         );
     }
 
@@ -65,9 +65,9 @@ class AnimeReviewsParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
      */
-    public function it_gets_review_helpful_count(): void
+    public function it_gets_review_votes_count(): void
     {
-        self::assertEquals(1488, $this->review->getHelpfulCount());
+        self::assertEquals(2034, $this->review->getVotes());
     }
 
     /**
@@ -87,7 +87,7 @@ class AnimeReviewsParserTest extends TestCase
     {
         self::assertEquals(
             'TheLlama',
-            $this->review->getReviewer()->getUsername()
+            $this->review->getUser()->getUsername()
         );
     }
 
@@ -98,8 +98,8 @@ class AnimeReviewsParserTest extends TestCase
     public function it_gets_reviewer_image_url(): void
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/11081.jpg',
-            $this->review->getReviewer()->getImageUrl()
+            'https://cdn.myanimelist.net/images/userimages/11081.jpg?t=1654492800',
+            $this->review->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
 
@@ -111,7 +111,7 @@ class AnimeReviewsParserTest extends TestCase
     {
         self::assertEquals(
             'https://myanimelist.net/profile/TheLlama',
-            $this->review->getReviewer()->getUrl()
+            $this->review->getUser()->getUrl()
         );
     }
 
@@ -119,11 +119,11 @@ class AnimeReviewsParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
      */
-    public function it_gets_reviewer_episodes_seen(): void
+    public function it_gets_reviewer_episodes_watched(): void
     {
         self::assertEquals(
             26,
-            $this->review->getReviewer()->getEpisodesSeen()
+            $this->review->getEpisodesWatched()
         );
     }
 
@@ -133,12 +133,12 @@ class AnimeReviewsParserTest extends TestCase
      */
     public function it_gets_reviewer_scores(): void
     {
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getOverall());
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getStory());
-        self::assertEquals(9, $this->review->getReviewer()->getScores()->getAnimation());
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getSound());
-        self::assertEquals(10, $this->review->getReviewer()->getScores()->getCharacter());
-        self::assertEquals(9, $this->review->getReviewer()->getScores()->getEnjoyment());
+        self::assertEquals(10, $this->review->getScores()->getOverall());
+        self::assertEquals(10, $this->review->getScores()->getStory());
+        self::assertEquals(9, $this->review->getScores()->getAnimation());
+        self::assertEquals(10, $this->review->getScores()->getSound());
+        self::assertEquals(10, $this->review->getScores()->getCharacter());
+        self::assertEquals(9, $this->review->getScores()->getEnjoyment());
     }
 
     /**
@@ -147,13 +147,13 @@ class AnimeReviewsParserTest extends TestCase
      */
     public function it_gets_reviewer_review(): void
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'People who know me know that I\'m not a fan of episodic anime series unless they\'re either one season (12-14 episodes) long or a slice of life series',
-            $this->review->getContent()
+            $this->review->getReview()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'The characters are all really good and interesting fellows. Though they every now and then reminded me of characters from other shows, they preserved that originality which gave a feel that they were, if not completely, then at least a little bit more real than most characters out there.',
-            $this->review->getContent()
+            $this->review->getReview()
         );
     }
 

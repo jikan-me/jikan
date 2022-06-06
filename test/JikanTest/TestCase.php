@@ -16,7 +16,8 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     {
         parent::setUp();
 
-        $vcrPath = join(DIRECTORY_SEPARATOR, [__DIR__, '..', 'http.cache']);
-        $this->httpClient = new MockHttpClient(new HttpFilesystemCacheClientCallback($vcrPath));
+        $testClass = str_replace('\\', '_', get_class($this));
+        $cachePath = join(DIRECTORY_SEPARATOR, [__DIR__, '..', 'http.cache', $testClass]);
+        $this->httpClient = new MockHttpClient(new HttpFilesystemCacheClientCallback($cachePath));
     }
 }

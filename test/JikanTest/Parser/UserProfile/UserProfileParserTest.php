@@ -45,7 +45,7 @@ class UserProfileParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1610489400',
+            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1653853200',
             $this->parser->getImageUrl()
         );
     }
@@ -112,14 +112,22 @@ class UserProfileParserTest extends TestCase
     public function it_gets_the_favorites()
     {
         self::assertInstanceOf(\Jikan\Model\User\Favorites::class, $this->parser->getFavorites());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteAnime::class, $this->parser->getFavorites()->getAnime());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteManga::class, $this->parser->getFavorites()->getManga());
         self::assertContainsOnlyInstancesOf(
-            \Jikan\Model\User\FavoriteCharacter::class,
+            \Jikan\Model\User\FavoriteAnime::class,
+            $this->parser->getFavorites()->getAnime()
+        );
+        self::assertContainsOnlyInstancesOf(
+            \Jikan\Model\User\FavoriteManga::class,
+            $this->parser->getFavorites()->getManga()
+        );
+        self::assertContainsOnlyInstancesOf(
+            \Jikan\Model\Common\CharacterMeta::class,
             $this->parser->getFavorites()->getCharacters()
         );
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\PersonMeta::class, $this->parser->getFavorites()->getPeople());
-
+        self::assertContainsOnlyInstancesOf(
+            \Jikan\Model\Common\PersonMeta::class,
+            $this->parser->getFavorites()->getPeople()
+        );
     }
 
     /**

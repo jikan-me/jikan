@@ -40,7 +40,7 @@ class AnimeGenreParserTest extends TestCase
      */
     public function it_gets_anime()
     {
-        $anime = $this->parser->getGenreAnime();
+        $anime = $this->parser->getResults();
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $anime);
     }
 
@@ -49,6 +49,6 @@ class AnimeGenreParserTest extends TestCase
      */
     public function it_gets_the_count()
     {
-        self::assertEquals(3855, $this->parser->getCount());
+        self::assertEquals(4210, $this->parser->getCount());
     }
 }

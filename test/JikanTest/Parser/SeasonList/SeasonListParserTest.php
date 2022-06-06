@@ -35,7 +35,7 @@ class SeasonListParserTest extends TestCase
     {
         self::assertContainsOnlyInstancesOf(
             SeasonListItem::class,
-            $this->parser->getModel()
+            $this->parser->getModel()->getResults()
         );
     }
 }

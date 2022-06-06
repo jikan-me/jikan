@@ -35,8 +35,8 @@ class TopCharacterParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Levi', $url);
-        self::assertEquals('https://myanimelist.net/character/45627/Levi', $url->getUrl());
+        self::assertEquals('Lawliet, L', $url->getTitle());
+        self::assertEquals('https://myanimelist.net/character/71/L_Lawliet', $url->getUrl());
     }
 
     /**
@@ -45,7 +45,7 @@ class TopCharacterParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/characters/2/241413.jpg?s=be87b99243a15158d0c4234a2927742e',
+            'https://cdn.myanimelist.net/images/characters/10/249647.jpg?s=3a9db4dd560c26d3374eca98d66bcd9a',
             $this->parser->getImage()
         );
     }
@@ -63,7 +63,7 @@ class TopCharacterParserTest extends TestCase
      */
     public function it_gets_the_character_kanji()
     {
-        self::assertEquals('リヴァイ', $this->parser->getKanjiName());
+        self::assertEquals('エル ローライト', $this->parser->getKanjiName());
     }
 
     /**
@@ -71,7 +71,7 @@ class TopCharacterParserTest extends TestCase
      */
     public function it_gets_the_animeography()
     {
-        self::assertCount(3, $this->parser->getAnimeography());
+        self::assertCount(2, $this->parser->getAnimeography());
         self::assertContainsOnlyInstancesOf(MalUrl::class, $this->parser->getAnimeography());
     }
 
@@ -89,6 +89,6 @@ class TopCharacterParserTest extends TestCase
      */
     public function it_gets_the_favorites()
     {
-        self::assertEquals(115146, $this->parser->getFavorites());
+        self::assertEquals(118434, $this->parser->getFavorites());
     }
 }

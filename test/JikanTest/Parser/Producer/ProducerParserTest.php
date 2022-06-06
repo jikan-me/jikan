@@ -39,8 +39,8 @@ class ProducerParserTest extends TestCase
      */
     public function it_gets_anime()
     {
-        $anime = $this->parser->getProducerAnime();
-        self::assertCount(100, $anime);
+        $anime = $this->parser->getResults();
+        self::assertCount(278, $anime);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeCard::class, $anime);
     }
 }

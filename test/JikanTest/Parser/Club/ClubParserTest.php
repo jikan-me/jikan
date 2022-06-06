@@ -2,6 +2,7 @@
 namespace JikanTest\Parser\Club;
 
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\UserMetaBasic;
 use JikanTest\TestCase;
 use VCR\VCR;
 
@@ -77,7 +78,7 @@ class ClubParserTest extends TestCase
     public function it_gets_members_count(): void
     {
         self::assertEquals(
-            1347,
+            1378,
             $this->parser->getMembersCount()
         );
     }
@@ -101,7 +102,7 @@ class ClubParserTest extends TestCase
     public function it_gets_category(): void
     {
         self::assertEquals(
-            'Anime',
+            'anime',
             $this->parser->getCategory()
         );
     }
@@ -125,7 +126,7 @@ class ClubParserTest extends TestCase
     public function it_gets_staff(): void
     {
         self::assertContainsOnlyInstancesOf(
-            MalUrl::class,
+            UserMetaBasic::class,
             $this->parser->getStaff()
         );
     }

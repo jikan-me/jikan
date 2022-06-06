@@ -20,26 +20,6 @@ class SeasonalAnimeParserTest extends TestCase
      */
     private $parser;
 
-    /**
-     * @var AnimeCardParser
-     */
-    private $parser2;
-
-    /**
-     * @var AnimeCardParser
-     */
-    private $parserKids;
-
-    /**
-     * @var AnimeCardParser
-     */
-    private $parserR18;
-
-    /**
-     * @var AnimeCardParser
-     */
-    private $springParser;
-
     public function setUp(): void
     {
         parent::setUp();
@@ -55,19 +35,17 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_producer()
     {
-        $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         $producer = $this->parser->getProducer();
         self::assertCount(1, $producer);
         self::assertContainsOnly(\Jikan\Model\Common\MalUrl::class, $producer);
-        $producer = $producer[0];
-        self::assertEquals('Bones', $producer);
-        self::assertEquals('https://myanimelist.net/anime/producer/4/Bones', $producer->getUrl());
+        self::assertEquals('Bones', $producer[0]->getName());
+        self::assertEquals('https://myanimelist.net/anime/producer/4/Bones', $producer[0]->getUrl());
 
-        $producer = $this->parser2->getProducer();
+        $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
+        $producer = $parser2->getProducer();
         self::assertCount(1, $producer);
         self::assertContainsOnly(\Jikan\Model\Common\MalUrl::class, $producer);
-        self::assertContains('Pierrot Plus', $producer);
-        self::assertContains('Studio Pierrot', $producer);
+        self::assertEquals('A-1 Pictures', $producer[0]->getName());
     }
 
     /**
@@ -75,9 +53,9 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_episodes()
     {
-        $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
+        $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         self::assertEquals(25, $this->parser->getEpisodes());
-        self::assertEquals(23, $this->parser2->getEpisodes());
+        self::assertEquals(11, $parser2->getEpisodes());
     }
 
     /**
@@ -85,9 +63,9 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_source()
     {
-        $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
+        $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         self::assertEquals('Manga', $this->parser->getSource());
-        self::assertEquals('Visual novel', $this->parser2->getSource());
+        self::assertEquals('Web manga', $parser2->getSource());
     }
 
     /**
@@ -97,9 +75,7 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $genres = $this->parser->getGenres();
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $genres);
-        self::assertContains('Action', $genres[0]->getName());
-        self::assertContains('Comedy', $genres[1]->getName());
-        self::assertContains('Super Power', $genres[2]->getName());
+        self::assertEquals('Action', $genres[0]->getName());
     }
 
     /**
@@ -115,7 +91,10 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_description()
     {
-        self::assertContains('As summer arrives for the students at UA Academy, each of these superheroes', $this->parser->getDescription());
+        self::assertStringContainsString(
+            'As summer arrives for the students at UA Academy, each of these superheroes',
+            $this->parser->getDescription()
+        );
     }
 
     /**
@@ -123,7 +102,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_type()
     {
-        self::assertEquals('TV', $this->parser->getType());
+        self::assertNull($this->parser->getType());
     }
 
     /**
@@ -139,7 +118,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_air_members()
     {
-        self::assertEquals(1247636, $this->parser->getMembers());
+        self::assertEquals(19000000, $this->parser->getMembers());
     }
 
     /**
@@ -177,10 +156,10 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_score()
     {
-        $this->parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
+        $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         self::assertEquals(
-            8.52,
-            $this->parser2->getAnimeScore()
+            7.95,
+            $parser2->getAnimeScore()
         );
     }
 
@@ -189,7 +168,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_licensor()
     {
-        self::assertCount(1, $this->parser->getLicensors());
+        self::assertCount(0, $this->parser->getLicensors());
     }
 
     /**
@@ -198,8 +177,8 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_r18_rating()
     {
         self::assertFalse($this->parser->isR18());
-        $this->parserR18 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime.r18')->first());
-        self::assertTrue($this->parserR18->isR18());
+        $parserR18 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime.r18')->first());
+        self::assertTrue($parserR18->isR18());
     }
 
     /**
@@ -208,8 +187,8 @@ class SeasonalAnimeParserTest extends TestCase
     public function it_gets_the_kids_rating()
     {
         self::assertFalse($this->parser->isKids());
-        $this->parserKids = new AnimeCardParser($this->crawler->filter('div.seasonal-anime.kids')->first());
-        self::assertTrue($this->parserKids->isKids());
+        $parserKids = new AnimeCardParser($this->crawler->filter('div.seasonal-anime.kids')->first());
+        self::assertTrue($parserKids->isKids());
     }
 
     /**
@@ -217,13 +196,13 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_continuing()
     {
-        $this->springParser = new AnimeCardParser(
-            $this->crawler->filter(
-                '#content > div.js-categories-seasonal > div:nth-child(2) > div:nth-child(2)'
+        $springParser = new AnimeCardParser(
+            $this->crawler->filter('div.seasonal-anime-list')->eq(1)->filter(
+                'div.seasonal-anime.js-seasonal-anime'
             )->first()
         );
-        self::assertEquals('One Piece', $this->springParser->getTitle());
-        self::assertTrue($this->springParser->isContinuing());
+        self::assertEquals('One Piece', $springParser->getTitle());
+        self::assertTrue($springParser->isContinuing());
         self::assertEquals('Boku no Hero Academia 3rd Season', $this->parser->getTitle());
         self::assertFalse($this->parser->isContinuing());
     }

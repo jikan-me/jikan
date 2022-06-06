@@ -23,7 +23,7 @@ class ForumTopicParserTest extends TestCase
         parent::setUp();
 
         $client = new \Goutte\Client($this->httpClient);
-        $crawler = $client->request('GET', 'https://myanimelist.net/anime/21/_/forum');
+        $crawler = $client->request('GET', 'https://myanimelist.net/anime/1/_/forum');
         $this->parser = new ForumTopicParser($crawler->filterXPath('//tr[contains(@id, "topicRow")]')->eq(2));
     }
 
@@ -32,7 +32,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_id(): void
     {
-        self::assertEquals(1881620, $this->parser->getTopicId());
+        self::assertEquals(29264, $this->parser->getTopicId());
     }
 
     /**
@@ -40,7 +40,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_url(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=1881620', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=29264', $this->parser->getUrl());
     }
 
     /**
@@ -48,7 +48,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_title(): void
     {
-        self::assertEquals('One Piece Episode 954 Discussion', $this->parser->getTitle());
+        self::assertEquals('Cowboy Bebop Episode 1 Discussion', $this->parser->getTitle());
     }
 
     /**
@@ -56,7 +56,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_post_date(): void
     {
-        self::assertEquals('2020-12-12', $this->parser->getPostDate()->format('Y-m-d'));
+        self::assertEquals('2008-06-13', $this->parser->getPostDate()->format('Y-m-d'));
     }
 
     /**
@@ -64,7 +64,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_author_name(): void
     {
-        self::assertEquals('xeonite', $this->parser->getAuthorName());
+        self::assertEquals('ManU-Alchemist', $this->parser->getAuthorName());
     }
 
     /**
@@ -72,7 +72,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_author_url(): void
     {
-        self::assertEquals('https://myanimelist.net/profile/xeonite', $this->parser->getAuthorUrl());
+        self::assertEquals('https://myanimelist.net/profile/ManU-Alchemist', $this->parser->getAuthorUrl());
     }
 
     /**
@@ -80,7 +80,7 @@ class ForumTopicParserTest extends TestCase
      */
     public function it_gets_the_replies(): void
     {
-        self::assertEquals(39, $this->parser->getReplies());
+        self::assertEquals(171, $this->parser->getReplies());
     }
 
     /**
@@ -90,10 +90,10 @@ class ForumTopicParserTest extends TestCase
     {
         $lastPost = $this->parser->getLastPost();
         self::assertInstanceOf(ForumPost::class, $lastPost);
-        self::assertEquals('gfsdfgsdgsdfgs', $lastPost->getAuthorName());
-        self::assertEquals('https://myanimelist.net/profile/gfsdfgsdgsdfgs', $lastPost->getAuthorUrl());
-        self::assertEquals('https://myanimelist.net/forum/?topicid=57389&goto=lastpost', $lastPost->getUrl());
+        self::assertEquals('princedarkly77', $lastPost->getAuthorUsername());
+        self::assertEquals('https://myanimelist.net/profile/princedarkly77', $lastPost->getAuthorUrl());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=29264&goto=lastpost', $lastPost->getUrl());
         // Last post is 'by  Today, 6:29 AM, so just check hour, not day
-        self::assertEquals('06:29', $lastPost->getDatePosted()->format('H:i'));
+        self::assertEquals('03:41', $lastPost->getDate()->format('H:i'));
     }
 }

@@ -1,0 +1,66 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  phpUnitTests:
+    strategy:
+      max-parallel: 4
+      matrix:
+        operatingSystem: [ubuntu-20.04, windows-latest]
+        phpVersion: ['8.0', '8.1']
+      fail-fast: false
+    runs-on: ${{ matrix.operatingSystem }}
+    name: ${{ matrix.operatingSystem }} / PHP ${{ matrix.phpVersion }}
+    env:
+      extensions: curl, fileinfo, mongodb, gd, mbstring, openssl, pdo, pdo_sqlite, sqlite3, xml
+      key: jikan-cache-v1
+    steps:
+      - name: Checkout changes
+        uses: actions/checkout@v2
+
+      - name: Setup extension cache
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ matrix.phpVersion }}
+          extensions: ${{ env.extensions }}
+          key: ${{ env.key }}
+
+      - name: Cache extensions
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.phpVersion }}
+          tools: composer:v1
+          extensions: ${{ env.extensions }}
+
+      - name: Setup dependency cache
+        id: composercache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composercache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --no-suggest --no-scripts
+
+      - name: Run tests
+        env:
+          CI_ENV: true
+        run: ./vendor/bin/phpunit
+

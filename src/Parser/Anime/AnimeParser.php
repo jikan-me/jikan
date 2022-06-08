@@ -499,9 +499,15 @@ class AnimeParser implements ParserInterface
             return null;
         }
 
-        return JString::cleanse(
+        $rating = JString::cleanse(
             str_replace($rating->text(), '', $rating->ancestors()->text())
         );
+
+        if ($rating === 'None') {
+            return null;
+        }
+
+        return $rating;
     }
 
     /**

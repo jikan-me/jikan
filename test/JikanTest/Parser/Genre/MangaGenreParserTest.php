@@ -6,7 +6,7 @@ use Goutte\Client;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\MangaCard;
 use Jikan\Parser\Genre\MangaGenreParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MangaGenreParserTest
@@ -20,14 +20,15 @@ class MangaGenreParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/genre/1');
         $this->parser = new MangaGenreParser($crawler);
     }
 
     /**
      * @test
-     * @vcr MangaGenreParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -37,20 +38,18 @@ class MangaGenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaGenreParserTest.yaml
      */
     public function it_gets_manga()
     {
-        $manga = $this->parser->getGenreManga();
+        $manga = $this->parser->getResults();
         self::assertContainsOnlyInstancesOf(MangaCard::class, $manga);
     }
 
     /**
      * @test
-     * @vcr MangaGenreParserTest.yaml
      */
     public function it_gets_the_count()
     {
-        self::assertEquals(7318, $this->parser->getCount());
+        self::assertEquals(7973, $this->parser->getCount());
     }
 }

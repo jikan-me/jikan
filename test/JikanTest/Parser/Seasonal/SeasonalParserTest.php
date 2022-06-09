@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Seasonal;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class SeasonalParserTest
@@ -16,7 +16,9 @@ class SeasonalParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $request = new \Jikan\Request\Seasonal\SeasonalRequest(2018, 'spring');
         $crawler = $client->request('GET', $request->getPath());
         $this->springParser = new \Jikan\Parser\Seasonal\SeasonalParser($crawler);
@@ -24,7 +26,6 @@ class SeasonalParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_season()
     {
@@ -33,12 +34,11 @@ class SeasonalParserTest extends TestCase
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_the_anime()
     {
         $anime = $this->springParser->getSeasonalAnime();
-        self::assertCount(267, $anime);
+        self::assertCount(279, $anime);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Seasonal\SeasonalAnime::class, $anime);
     }
 }

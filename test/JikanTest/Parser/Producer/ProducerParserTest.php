@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Person;
 
 use Goutte\Client;
 use Jikan\Parser\Producer\ProducerParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class ProducerParserTest
@@ -18,14 +18,15 @@ class ProducerParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/producer/1');
         $this->parser = new ProducerParser($crawler);
     }
 
     /**
      * @test
-     * @vcr ProducerParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -35,12 +36,11 @@ class ProducerParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProducerParserTest.yaml
      */
     public function it_gets_anime()
     {
-        $anime = $this->parser->getProducerAnime();
-        self::assertCount(100, $anime);
+        $anime = $this->parser->getResults();
+        self::assertCount(278, $anime);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeCard::class, $anime);
     }
 }

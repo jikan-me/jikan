@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Manga;
 
 use Jikan\Model\Manga\MangaStatsScore;
 use Jikan\Parser\Manga\MangaStatsParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MangaStatsParserTest
@@ -18,15 +18,16 @@ class MangaStatsParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Manga\MangaStatsRequest(99314);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->mangaStatsParser = new MangaStatsParser($crawler);
     }
 
     /**
      * @test
-     * @vcr MangaStats.yaml
      */
     public function it_gets_numeric_statistics()
     {
@@ -40,12 +41,11 @@ class MangaStatsParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaStats.yaml
      */
     public function it_gets_score_attributes()
     {
         self::assertEquals(
-            4731, $this->mangaStatsParser->getScores()[10]->getVotes()
+            7938, $this->mangaStatsParser->getScores()[10]->getVotes()
         );
     }
 }

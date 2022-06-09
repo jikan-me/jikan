@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Top;
 
 use Goutte\Client;
 use Jikan\Parser\Top\TopListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class TopAnimeParserTest
@@ -18,7 +18,9 @@ class TopAnimeParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/topanime.php');
 
         $this->parser = new TopListItemParser(
@@ -28,18 +30,16 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Gintama: The Final', $url);
-        self::assertEquals('https://myanimelist.net/anime/39486/Gintama__The_Final', $url->getUrl());
+        self::assertEquals('Ginga Eiyuu Densetsu', $url->getTitle());
+        self::assertEquals('https://myanimelist.net/anime/820/Ginga_Eiyuu_Densetsu', $url->getUrl());
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -48,67 +48,60 @@ class TopAnimeParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/anime/1027/109706.jpg?s=29712c4254f5acc66580a2107fe6643d',
+            'https://cdn.myanimelist.net/images/anime/13/13225.jpg?s=385cedad342e284c5765833ab1cddc1c',
             $this->parser->getImage()
         );
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_score()
     {
-        self::assertEquals(9.0, $this->parser->getScore());
+        self::assertEquals(9.03, $this->parser->getScore());
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_type()
     {
-        self::assertEquals('Movie', $this->parser->getType());
+        self::assertEquals('OVA', $this->parser->getType());
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_episodes()
     {
-        self::assertEquals(1, $this->parser->getEpisodes());
+        self::assertEquals(110, $this->parser->getEpisodes());
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_members()
     {
-        self::assertEquals(22172, $this->parser->getMembers());
+        self::assertEquals(279994, $this->parser->getMembers());
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_start_date()
     {
-        self::assertEquals('Jan 2021', $this->parser->getStartDate());
+        self::assertEquals('Jan 1988', $this->parser->getStartDate());
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_the_anime_end_date()
     {
-        self::assertEquals('Jan 2021', $this->parser->getEndDate());
+        self::assertEquals('Mar 1997', $this->parser->getEndDate());
     }
 }

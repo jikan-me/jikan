@@ -3,7 +3,8 @@
 namespace JikanTest\Parser\Character;
 
 use Goutte\Client;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class StaffListItemParserTest
@@ -17,18 +18,27 @@ class StaffListItemParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/35073/_/characters');
 
         $this->parser = new \Jikan\Parser\Anime\StaffListItemParser(
-            $crawler->filterXPath('//h2/div/../following-sibling::table')
-                ->eq(4)
+            $crawler->filterXPath('//h2[text()="Staff"]')
+                ->ancestors()->nextAll()
+                ->reduce(
+                    function (Crawler $crawler) {
+                        return (bool)$crawler->filterXPath(
+                            '//a[contains(@href, "https://myanimelist.net/people")]'
+                        )->count();
+                    }
+                )
+                ->eq(9)
         );
     }
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -37,7 +47,6 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -46,7 +55,6 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -55,19 +63,17 @@ class StaffListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/voiceactors/3/33089.jpg?s=81a13198b1b0772a7565e8786b94cfe8',
+            'https://cdn.myanimelist.net/images/voiceactors/3/33089.jpg?s=50f22657ed0a169f99eb8d18342e5486',
             $this->parser->getImage()
         );
     }
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_positions()
     {

@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Anime;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 class AnimeEpisodesParserTest extends TestCase
 {
@@ -13,8 +13,10 @@ class AnimeEpisodesParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Anime\AnimeEpisodesRequest(21);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime\EpisodesParser($crawler);
     }
@@ -22,33 +24,30 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episodes_last_page(): void
     {
         self::assertEquals(
-            9,
-            $this->parser->getEpisodesLastPage()
+            11,
+            $this->parser->getLastPage()
         );
     }
 
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_id(): void
     {
         self::assertEquals(
             1,
-            $this->parser->getEpisodes()[0]->getEpisodeId()
+            $this->parser->getEpisodes()[0]->getMalId()
         );
     }
 
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_title(): void
     {
@@ -61,7 +60,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_title_japanese(): void
     {
@@ -74,11 +72,10 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_title_romanji(): void
     {
-        self::assertContains(
+        self::assertStringContainsString(
             "Ore wa Luffy! Kaizoku Ou ni Naru Otoko Da!",
             $this->parser->getEpisodes()[0]->getTitleRomanji()
         );
@@ -87,7 +84,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_aired(): void
     {
@@ -100,7 +96,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_filler(): void
     {
@@ -113,7 +108,6 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_recap(): void
     {
@@ -127,20 +121,18 @@ class AnimeEpisodesParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
-    public function it_gets_episode_video_url(): void
+    public function it_gets_episode_url(): void
     {
         self::assertEquals(
             "https://myanimelist.net/anime/21/One_Piece/episode/1",
-            $this->parser->getEpisodes()[0]->getVideoUrl()
+            $this->parser->getEpisodes()[0]->getUrl()
         );
     }
 
     /**
      * @test
      * @covers \Jikan\Parser\Anime\EpisodesParser
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_episode_forum_url(): void
     {

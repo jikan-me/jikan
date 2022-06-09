@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Character;
 use Goutte\Client;
 use Jikan\Model\Character\VoiceActor;
 use Jikan\Parser\Character\CharacterListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -20,11 +20,13 @@ class CharacterListItemParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/35073/Overlord_II/characters');
 
         $this->parser = new CharacterListItemParser(
-            $crawler->filterXPath('//h2[text()="Characters & Voice Actors"]/following-sibling::table')
+            $crawler->filterXPath('//div[contains(@class, "anime-character-container")]/table')
                 ->reduce(
                     function (Crawler $crawler) {
                         return (bool)$crawler->filterXPath(
@@ -37,7 +39,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -46,7 +47,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_name()
     {
@@ -55,7 +55,6 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -64,32 +63,30 @@ class CharacterListItemParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/images/characters/5/288167.jpg?s=4eb5561fa112e46f87456377a9a997ce',
+            'https://cdn.myanimelist.net/images/characters/14/292046.jpg?s=db3bc7bfe5c676d984e469f0537d08bb',
             $this->parser->getImage()
         );
     }
 
     /**
      * @test
-     * @vcr CharactersParserTest.yaml
      */
     public function it_gets_the_voice_actors()
     {
         $voiceActors = $this->parser->getVoiceActors();
         self::assertContainsOnly(VoiceActor::class, $voiceActors);
-        self::assertCount(0, $voiceActors);
-        self::assertContains('Hara, Yumi', $voiceActors);
+        self::assertCount(5, $voiceActors);
+        self::assertEquals('Hara, Yumi', $voiceActors[0]->getPerson()->getName());
         self::assertEquals('Japanese', $voiceActors[0]->getLanguage());
+        self::assertEquals('Maxwell, Elizabeth', $voiceActors[1]->getPerson()->getName());
         self::assertEquals('English', $voiceActors[1]->getLanguage());
         self::assertEquals(
-            'https://myanimelist.cdn-dena.com/r/23x32/images/voiceactors/3/49242.jpg?s=8fafa056dafe96209a6757ff802b7f8f',
-            $voiceActors[1]->getImageUrl()
+            'https://cdn.myanimelist.net/images/voiceactors/3/49242.jpg?s=7a7f209e6414f65664f03d8207372870',
+            $voiceActors[1]->getPerson()->getImages()->getJpg()->getImageUrl()
         );
-        self::assertContains('Maxwell, Elizabeth', $voiceActors);
     }
 }

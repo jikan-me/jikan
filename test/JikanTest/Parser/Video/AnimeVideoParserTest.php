@@ -6,7 +6,7 @@ use Goutte\Client;
 use Jikan\Model\Anime\PromoListItem;
 use Jikan\Model\Anime\StreamEpisodeListItem;
 use Jikan\Parser\Anime\VideosParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class AnimeVideoParserTest
@@ -20,7 +20,9 @@ class AnimeVideoParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/1/_/video');
         $this->parser = new VideosParser($crawler);
     }
@@ -28,7 +30,6 @@ class AnimeVideoParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeVideoParserTest.yaml
      */
     public function it_gets_promos()
     {
@@ -38,7 +39,6 @@ class AnimeVideoParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeVideoParserTest.yaml
      */
     public function it_gets_episodes()
     {

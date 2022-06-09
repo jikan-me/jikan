@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Person;
 use Goutte\Client;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class ScheduleParserTest
@@ -19,80 +19,75 @@ class ScheduleParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/season/schedule');
         $this->parser = new ScheduleParser($crawler);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_mondays()
     {
         $monday = $this->parser->getShedule('monday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $monday);
-        self::assertCount(12, $monday);
+        self::assertCount(6, $monday);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_tuesdays()
     {
         $tuesday = $this->parser->getShedule('tuesday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $tuesday);
-        self::assertCount(11, $tuesday);
+        self::assertCount(6, $tuesday);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_wednesdays()
     {
         $wednesday = $this->parser->getShedule('wednesday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $wednesday);
-        self::assertCount(13, $wednesday);
+        self::assertCount(9, $wednesday);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_thursdays()
     {
         $thursday = $this->parser->getShedule('thursday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $thursday);
-        self::assertCount(9, $thursday);
+        self::assertCount(6, $thursday);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_fridays()
     {
         $friday = $this->parser->getShedule('friday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $friday);
-        self::assertCount(15, $friday);
+        self::assertCount(12, $friday);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_saturdays()
     {
         $saturday = $this->parser->getShedule('saturday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $saturday);
-        self::assertCount(15, $saturday);
+        self::assertCount(20, $saturday);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_sundays()
     {
@@ -103,18 +98,16 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_all()
     {
         $all = $this->parser->getShedule('all');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $all);
-        self::assertCount(141, $all);
+        self::assertCount(120, $all);
     }
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_other()
     {
@@ -125,12 +118,11 @@ class ScheduleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_unknown()
     {
         $unknown = $this->parser->getShedule('unknown');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $unknown);
-        self::assertCount(20, $unknown);
+        self::assertCount(21, $unknown);
     }
 }

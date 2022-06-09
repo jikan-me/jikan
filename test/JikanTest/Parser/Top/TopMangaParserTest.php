@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Top;
 
 use Goutte\Client;
 use Jikan\Parser\Top\TopListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -24,7 +24,9 @@ class TopMangaParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $this->crawler = $crawler = $client->request('GET', 'https://myanimelist.net/topmanga.php');
 
         $this->parser = new TopListItemParser(
@@ -34,18 +36,16 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Vagabond', $url);
-        self::assertEquals('https://myanimelist.net/manga/656/Vagabond', $url->getUrl());
+        self::assertEquals('Fullmetal Alchemist', $url->getTitle());
+        self::assertEquals('https://myanimelist.net/manga/25/Fullmetal_Alchemist', $url->getUrl());
     }
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -54,16 +54,14 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_score()
     {
-        self::assertEquals(9.09, $this->parser->getScore());
+        self::assertEquals(9.06, $this->parser->getScore());
     }
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_type()
     {
@@ -72,51 +70,46 @@ class TopMangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_volumes()
     {
         $parser2 = new TopListItemParser(
             $this->crawler->filterXPath('//tr[@class="ranking-list"]')->eq(1)
         );
-        self::assertEquals(37, $this->parser->getVolumes());
+        self::assertEquals(27, $this->parser->getVolumes());
     }
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_members()
     {
-        self::assertEquals(160324, $this->parser->getMembers());
+        self::assertEquals(260591, $this->parser->getMembers());
     }
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_start_date()
     {
-        self::assertEquals('Sep 1998', $this->parser->getStartDate());
+        self::assertEquals('Jul 2001', $this->parser->getStartDate());
     }
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_end_date()
     {
-        self::assertEquals('May 2015', $this->parser->getEndDate());
+        self::assertEquals('Sep 2010', $this->parser->getEndDate());
     }
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_the_manga_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/manga/2/181787.jpg?s=bbd3ff81b5d8e50781531c60cd68773f',
+            'https://cdn.myanimelist.net/images/manga/3/243675.jpg?s=8cb0a643f8a7597514447f2dd0e4ffc2',
             $this->parser->getImage()
         );
     }

@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Top;
 
 use Goutte\Client;
 use Jikan\Parser\Top\TopListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class TopPeopleParserTest
@@ -18,7 +18,9 @@ class TopPeopleParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/people.php');
 
         $this->parser = new TopListItemParser(
@@ -28,18 +30,16 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Sugita, Tomokazu', $url);
-        self::assertEquals('https://myanimelist.net/people/2/Tomokazu_Sugita', $url->getUrl());
+        self::assertEquals('Oda, Eiichiro', $url);
+        self::assertEquals('https://myanimelist.net/people/1881/Eiichiro_Oda', $url->getUrl());
     }
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -48,45 +48,41 @@ class TopPeopleParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_favorites()
     {
-        self::assertEquals(39630, $this->parser->getPeopleFavorites());
+        self::assertEquals(46179, $this->parser->getPeopleFavorites());
     }
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/2/60638.jpg?s=5b39d822cfe1fe7c5dd164a0d4684a41',
+            'https://cdn.myanimelist.net/images/voiceactors/2/10593.jpg?s=6e83dfc242f5610e419eb59c24aebdc6',
             $this->parser->getImage()
         );
     }
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_kanji_name()
     {
         self::assertEquals(
-            '杉田 智和',
+            '尾田 栄一郎',
             $this->parser->getKanjiName()
         );
     }
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_the_birthday()
     {
         self::assertEquals(
-            '1980-10-11',
+            '1975-01-01',
             $this->parser->getBirthday()->format('Y-m-d')
         );
     }

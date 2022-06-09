@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Common;
 
 use Jikan\Parser\Common\MalUrlParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MalUrlParserTest

@@ -4,7 +4,7 @@ namespace JikanTest\Parser\Magazine;
 
 use Goutte\Client;
 use Jikan\Parser\Magazine\MagazineParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MagazineParserTest
@@ -18,14 +18,15 @@ class MagazineParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/magazine/1');
         $this->parser = new MagazineParser($crawler);
     }
 
     /**
      * @test
-     * @vcr MagazineParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -35,12 +36,11 @@ class MagazineParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MagazineParserTest.yaml
      */
     public function it_gets_manga()
     {
-        $manga = $this->parser->getMagazineManga();
-        self::assertCount(56, $manga);
+        $manga = $this->parser->getResults();
+        self::assertCount(67, $manga);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MangaCard::class, $manga);
     }
 }

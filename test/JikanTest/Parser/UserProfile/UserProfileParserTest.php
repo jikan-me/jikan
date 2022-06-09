@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\User\Profile;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class ProfileParserTest
@@ -16,14 +16,15 @@ class UserProfileParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/sandshark');
         $this->parser = new \Jikan\Parser\User\Profile\UserProfileParser($crawler);
     }
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_username()
     {
@@ -32,7 +33,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -41,19 +41,17 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1610489400',
+            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1653853200',
             $this->parser->getImageUrl()
         );
     }
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_join_date()
     {
@@ -62,7 +60,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_last_online()
     {
@@ -71,7 +68,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_gender()
     {
@@ -80,7 +76,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_birthday()
     {
@@ -89,7 +84,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_location()
     {
@@ -98,7 +92,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_anime_stats()
     {
@@ -107,7 +100,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_manga_stats()
     {
@@ -116,24 +108,30 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_the_favorites()
     {
         self::assertInstanceOf(\Jikan\Model\User\Favorites::class, $this->parser->getFavorites());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteAnime::class, $this->parser->getFavorites()->getAnime());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\User\FavoriteManga::class, $this->parser->getFavorites()->getManga());
         self::assertContainsOnlyInstancesOf(
-            \Jikan\Model\User\FavoriteCharacter::class,
+            \Jikan\Model\User\FavoriteAnime::class,
+            $this->parser->getFavorites()->getAnime()
+        );
+        self::assertContainsOnlyInstancesOf(
+            \Jikan\Model\User\FavoriteManga::class,
+            $this->parser->getFavorites()->getManga()
+        );
+        self::assertContainsOnlyInstancesOf(
+            \Jikan\Model\Common\CharacterMeta::class,
             $this->parser->getFavorites()->getCharacters()
         );
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\PersonMeta::class, $this->parser->getFavorites()->getPeople());
-
+        self::assertContainsOnlyInstancesOf(
+            \Jikan\Model\Common\PersonMeta::class,
+            $this->parser->getFavorites()->getPeople()
+        );
     }
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_last_updates(){
         $updates = $this->parser->getUserLastUpdates();
@@ -143,7 +141,6 @@ class UserProfileParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_about()
     {

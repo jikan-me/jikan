@@ -2,7 +2,8 @@
 namespace JikanTest\Parser\Club;
 
 use Jikan\Model\Common\MalUrl;
-use PHPUnit\Framework\TestCase;
+use Jikan\Model\Common\UserMetaBasic;
+use JikanTest\TestCase;
 use VCR\VCR;
 
 class ClubParserTest extends TestCase
@@ -14,8 +15,10 @@ class ClubParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Club\ClubRequest(1);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Club\ClubParser($crawler);
     }
@@ -23,7 +26,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_mal_id(): void
     {
@@ -36,7 +38,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_url(): void
     {
@@ -49,7 +50,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_image_url(): void
     {
@@ -62,7 +62,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_title(): void
     {
@@ -75,12 +74,11 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_members_count(): void
     {
         self::assertEquals(
-            1347,
+            1378,
             $this->parser->getMembersCount()
         );
     }
@@ -88,7 +86,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_pictures_count(): void
     {
@@ -101,12 +98,11 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_category(): void
     {
         self::assertEquals(
-            'Anime',
+            'anime',
             $this->parser->getCategory()
         );
     }
@@ -114,7 +110,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_created(): void
     {
@@ -127,12 +122,11 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_staff(): void
     {
         self::assertContainsOnlyInstancesOf(
-            MalUrl::class,
+            UserMetaBasic::class,
             $this->parser->getStaff()
         );
     }
@@ -140,7 +134,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_anime_relations(): void
     {
@@ -168,7 +161,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_manga_relations(): void
     {
@@ -196,7 +188,6 @@ class ClubParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\ClubParser
-     * @vcr ClubParserTest.yaml
      */
     public function it_gets_character_relations(): void
     {

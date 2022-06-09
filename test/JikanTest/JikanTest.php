@@ -17,7 +17,6 @@ use Jikan\Request\Anime\AnimeForumRequest;
 use Jikan\Request\Manga\MangaForumRequest;
 use Jikan\Request\Anime\AnimeNewsRequest;
 use Jikan\Request\Manga\MangaNewsRequest;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class JikanTest
@@ -31,12 +30,13 @@ class JikanTest extends TestCase
 
     public function setUp(): void
     {
-        $this->jikan = new MalClient();
+        parent::setUp();
+
+        $this->jikan = new MalClient($this->httpClient);
     }
 
     /**
      * @test
-     * @vcr JikanTest_it_gets_anime.yaml
      */
     public function it_gets_anime()
     {
@@ -46,7 +46,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr JikanTest_it_gets_manga.yaml
      */
     public function it_gets_manga()
     {
@@ -56,45 +55,41 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_characters()
     {
         $character = $this->jikan->getCharacter(new \Jikan\Request\Character\CharacterRequest(116281));
         self::assertInstanceOf(\Jikan\Model\Character\Character::class, $character);
-        self::assertCount(11, $character->getAnimeography());
+        self::assertCount(14, $character->getAnimeography());
         self::assertCount(2, $character->getMangaography());
-        self::assertCount(5, $character->getVoiceActors());
+        self::assertCount(7, $character->getVoiceActors());
     }
 
     /**
      * @test
-     * @vcr PersonParserTest.yaml
      */
     public function it_gets_person()
     {
         $person = $this->jikan->getPerson(new \Jikan\Request\Person\PersonRequest(1));
         self::assertInstanceOf(\Jikan\Model\Person\Person::class, $person);
-        self::assertCount(367, $person->getVoiceActingRoles());
+        self::assertCount(420, $person->getVoiceActingRoles());
         self::assertCount(15, $person->getAnimeStaffPositions());
         self::assertCount(0, $person->getPublishedManga());
     }
 
     /**
      * @test
-     * @vcr SeasonalParserTest.yaml
      */
     public function it_gets_seasonal_anime()
     {
         $seasonal = $this->jikan->getSeasonal(new \Jikan\Request\Seasonal\SeasonalRequest(2018, 'spring'));
         self::assertInstanceOf(\Jikan\Model\Seasonal\Seasonal::class, $seasonal);
-        self::assertCount(234, $seasonal->getAnime());
+        self::assertCount(279, $seasonal->getAnime());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Seasonal\SeasonalAnime::class, $seasonal->getAnime());
     }
 
     /**
      * @test
-     * @vcr ProfileParserTest.yaml
      */
     public function it_gets_user_profile()
     {
@@ -106,7 +101,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr ScheduleParserTest.yaml
      */
     public function it_gets_schedule()
     {
@@ -116,33 +110,39 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_friends()
     {
         $friends = $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior'));
-        self::assertContainsOnlyInstancesOf(Friend::class, $friends);
-        self::assertCount(100, $friends);
-        self::assertContains('sandshark', $friends);
-        self::assertContains('mangalicker94', $friends);
-        self::assertContains('Moune-Chan', $friends);
+        self::assertContainsOnlyInstancesOf(Friend::class, $friends->getResults());
+        self::assertCount(100, $friends->getResults());
+        $usernames = array_map(function ($item) {
+            return $item->getUser()->getUsername();
+        }, $friends->getResults());
+        self::assertContains('mutouyusei18', $usernames);
+        self::assertContains('king_t_challa', $usernames);
+        self::assertContains('johnyjohny', $usernames);
 
         // Second page
-        $friends = $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 1));
-        self::assertContainsOnlyInstancesOf(Friend::class, $friends);
-        self::assertCount(100, $friends);
-        self::assertContains('Benku', $friends);
-        self::assertContains('Seiya', $friends);
+        $friends = $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 2));
+        self::assertContainsOnlyInstancesOf(Friend::class, $friends->getResults());
+        self::assertCount(100, $friends->getResults());
+        $usernames = array_map(function ($item) {
+            return $item->getUser()->getUsername();
+        }, $friends->getResults());
+        self::assertNotContains('mutouyusei18', $usernames);
+        self::assertNotContains('king_t_challa', $usernames);
+        self::assertNotContains('johnyjohny', $usernames);
+        self::assertContains('localmoonman', $usernames);
+        self::assertContains('MizzyMizuki', $usernames);
 
         // Empty page
-        // Second
-        self::expectException(BadResponseException::class);
-        $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 100));
+        $friends = $this->jikan->getUserFriends(new \Jikan\Request\User\UserFriendsRequest('morshuwarrior', 100));
+        self::assertCount(0, $friends->getResults());
     }
 
     /**
      * @test
-     * @vcr ProducerParserTest.yaml
      */
     public function it_gets_producer()
     {
@@ -152,7 +152,6 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharactersAndStaffParserTest.yaml
      */
     public function it_gets_characters_and_staff()
     {
@@ -161,13 +160,12 @@ class JikanTest extends TestCase
         );
         $staff = $charactersAndStaff->getStaff();
         $characters = $charactersAndStaff->getCharacters();
-        self::assertCount(53, $characters);
-        self::assertCount(13, $staff);
+        self::assertCount(56, $characters);
+        self::assertCount(26, $staff);
     }
 
     /**
      * @test
-     * @vcr AnimeVideosParserTest.yaml
      */
     public function it_gets_anime_videos()
     {
@@ -180,37 +178,33 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimePicturesParserTest.yaml
      */
     public function it_gets_anime_pictures()
     {
         $pictures = $this->jikan->getAnimePictures(new \Jikan\Request\Anime\AnimePicturesRequest(1));
-        self::assertCount(10, $pictures);
+        self::assertCount(13, $pictures);
     }
 
     /**
      * @test
-     * @vcr MangaPicturesParserTest.yaml
      */
     public function it_gets_manga_pictures()
     {
         $pictures = $this->jikan->getMangaPictures(new \Jikan\Request\Manga\MangaPicturesRequest(1));
-        self::assertCount(8, $pictures);
+        self::assertCount(7, $pictures);
     }
 
     /**
      * @test
-     * @vcr PersonPicturesParserTest.yaml
      */
     public function it_gets_person_pictures()
     {
         $pictures = $this->jikan->getPersonPictures(new \Jikan\Request\Person\PersonPicturesRequest(1));
-        self::assertCount(4, $pictures);
+        self::assertCount(7, $pictures);
     }
 
     /**
      * @test
-     * @vcr CharacterPicturesParserTest.yaml
      */
     public function it_gets_character_pictures()
     {
@@ -220,18 +214,16 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaNewsParserTest.yaml
      */
     public function it_gets_manga_news()
     {
         $items = $this->jikan->getNewsList(new MangaNewsRequest(2))->getResults();
-        self::assertCount(14, $items);
+        self::assertCount(24, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
 
     /**
      * @test
-     * @vcr AnimeNewsParserTest.yaml
      */
     public function it_gets_anime_news()
     {
@@ -242,19 +234,17 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchParserTest.yaml
      */
     public function it_gets_anime_search()
     {
         $search = $this->jikan->getAnimeSearch(new \Jikan\Request\Search\AnimeSearchRequest('Fate'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\AnimeSearchListItem::class, $search->getResults());
-        self::assertEquals(17, $search->getLastVisiblePage());
+        self::assertEquals(20, $search->getLastVisiblePage());
     }
 
     /**
      * @test
-     * @vcr MangaSearchParserTest.yaml
      */
     public function it_gets_manga_search()
     {
@@ -266,19 +256,17 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterSearchParserTest.yaml
      */
     public function it_gets_character_search()
     {
         $search = $this->jikan->getCharacterSearch(new \Jikan\Request\Search\CharacterSearchRequest('Fate'));
         self::assertCount(50, $search->getResults());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Search\CharacterSearchListItem::class, $search->getResults());
-        self::assertEquals(11, $search->getLastVisiblePage());
+        self::assertEquals(14, $search->getLastVisiblePage());
     }
 
     /**
      * @test
-     * @vcr PersonSearchParserTest.yaml
      */
     public function it_gets_person_search()
     {
@@ -290,119 +278,127 @@ class JikanTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaCharacterListParserTest.yaml
      */
     public function it_gets_manga_characters()
     {
         $characters = $this->jikan->getMangaCharacters(new \Jikan\Request\Manga\MangaCharactersRequest(2));
-        self::assertCount(70, $characters);
+        self::assertCount(74, $characters);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Manga\CharacterListItem::class, $characters);
     }
 
     /**
      * @test
-     * @vcr TopAnimeParserTest.yaml
      */
     public function it_gets_top_anime()
     {
         $anime = $this->jikan->getTopAnime(new \Jikan\Request\Top\TopAnimeRequest());
-        self::assertCount(50, $anime);
-        self::assertContainsOnlyInstancesOf(TopAnimeListItem::class, $anime);
-        self::assertContains('Fullmetal Alchemist: Brotherhood', $anime);
-        self::assertContains('Mushishi Zoku Shou: Suzu no Shizuku', $anime);
+        self::assertCount(50, $anime->getResults());
+        self::assertContainsOnlyInstancesOf(TopAnimeListItem::class, $anime->getResults());
+        $titles = array_map(function ($item) {
+            return $item->getTitle();
+        }, $anime->getResults());
+        self::assertContains('Fullmetal Alchemist: Brotherhood', $titles);
+        self::assertContains('Steins;Gate', $titles);
     }
 
     /**
      * @test
-     * @vcr TopMangaParserTest.yaml
      */
     public function it_gets_top_manga()
     {
         $manga = $this->jikan->getTopManga(new \Jikan\Request\Top\TopMangaRequest());
-        self::assertCount(50, $manga);
-        self::assertContainsOnlyInstancesOf(TopMangaListItem::class, $manga);
-        self::assertContains('Berserk', $manga);
-        self::assertContains('Shigatsu wa Kimi no Uso', $manga);
+        self::assertCount(50, $manga->getResults());
+        self::assertContainsOnlyInstancesOf(TopMangaListItem::class, $manga->getResults());
+        $titles = array_map(function ($item) {
+            return $item->getTitle();
+        }, $manga->getResults());
+        self::assertContains('Berserk', $titles);
+        self::assertContains('One Piece', $titles);
     }
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_top_characters()
     {
         $characters = $this->jikan->getTopCharacters(new \Jikan\Request\Top\TopCharactersRequest());
-        self::assertCount(50, $characters);
-        self::assertContainsOnlyInstancesOf(TopCharacterListItem::class, $characters);
-        self::assertContains('Lamperouge, Lelouch', $characters);
-        self::assertContains('Usui, Takumi', $characters);
+        self::assertCount(50, $characters->getResults());
+        self::assertContainsOnlyInstancesOf(TopCharacterListItem::class, $characters->getResults());
+        $titles = array_map(function ($item) {
+            return $item->getTitle();
+        }, $characters->getResults());
+        self::assertContains('Lamperouge, Lelouch', $titles);
+        self::assertContains('Monkey D., Luffy', $titles);
     }
 
     /**
      * @test
-     * @vcr TopPeopleParserTest.yaml
      */
     public function it_gets_top_people()
     {
         $people = $this->jikan->getTopPeople(new \Jikan\Request\Top\TopPeopleRequest());
-        self::assertCount(50, $people);
-        self::assertContainsOnlyInstancesOf(TopPersonListItem::class, $people);
-        self::assertContains('Hanazawa, Kana', $people);
-        self::assertContains('Asano, Inio', $people);
+        self::assertCount(50, $people->getResults());
+        self::assertContainsOnlyInstancesOf(TopPersonListItem::class, $people->getResults());
+        $titles = array_map(function ($item) {
+            return $item->getTitle();
+        }, $people->getResults());
+        self::assertContains('Hanazawa, Kana', $titles);
+        self::assertContains('Asano, Inio', $titles);
     }
 
     /**
      * @test
-     * @vcr ForumTopicParserTest.yaml
      */
     public function it_gets_anime_forum()
     {
         $topics = $this->jikan->getAnimeForum(new AnimeForumRequest(21));
         self::assertCount(15, $topics);
         self::assertContainsOnlyInstancesOf(ForumTopic::class, $topics);
-        self::assertContains('One Piece Episode 381 Discussion', $topics);
-        self::assertContains('One Piece Episode 380 Discussion', $topics);
+        $titles = array_map(function ($item) {
+            return $item->getTitle();
+        }, $topics);
+        self::assertContains('One Piece Episode 1020 Discussion', $titles);
+        self::assertContains('One Piece Episode 1019 Discussion', $titles);
     }
 
     /**
      * @test
-     * @vcr MangaForumTopicParserTest.yaml
      */
     public function it_gets_manga_forum()
     {
         $topics = $this->jikan->getMangaForum(new MangaForumRequest(21));
         self::assertCount(15, $topics);
         self::assertContainsOnlyInstancesOf(ForumTopic::class, $topics);
-        self::assertContains('Death Note Chapter 60 Discussion', $topics);
-        self::assertContains('Death Note Chapter 21 Discussion', $topics);
+        $titles = array_map(function ($item) {
+            return $item->getTitle();
+        }, $topics);
+        self::assertContains('Death Note Chapter 54 Discussion', $titles);
+        self::assertContains('Death Note Chapter 91 Discussion', $titles);
     }
 
     /**
      * @test
-     * @vcr HistoryParserTest.yaml
      */
     public function it_gets_user_history()
     {
-        $history = $this->jikan->getUserHistory(new \Jikan\Request\User\UserHistoryRequest('nekomata1037'));
-        self::assertCount(17, $history);
+        $history = $this->jikan->getUserHistory(new \Jikan\Request\User\UserHistoryRequest('morshuwarrior'));
+        self::assertCount(23, $history);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\User\History::class, $history);
     }
 
     /**
      * @test
-     * @vcr AnimeEpisodesParserTest.yaml
      */
     public function it_gets_anime_episodes()
     {
         $episodes = $this->jikan->getAnimeEpisodes(new \Jikan\Request\Anime\AnimeEpisodesRequest(21));
-        self::assertCount(100, $episodes->getEpisodes());
-        self::assertEquals(9, $episodes->getEpisodesLastPage());
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Anime\EpisodeListItem::class, $episodes->getEpisodes());
+        self::assertCount(100, $episodes->getResults());
+        self::assertEquals(11, $episodes->getLastVisiblePage());
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Anime\EpisodeListItem::class, $episodes->getResults());
     }
 
     /**
      * @test
-     * @vcr UserAnimeListParserTest.yaml
      */
     public function it_gets_user_anime_list() // TODO: Add more test cases
     {

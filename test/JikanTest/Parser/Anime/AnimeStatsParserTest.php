@@ -2,9 +2,8 @@
 
 namespace JikanTest\Parser\Anime;
 
-use Jikan\Model\Anime\AnimeStatsScore;
 use Jikan\Parser\Anime\AnimeStatsParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class AnimeStatsParserTest
@@ -18,15 +17,16 @@ class AnimeStatsParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Anime\AnimeStatsRequest(37405);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->animeStatsParser = new \Jikan\Parser\Anime\AnimeStatsParser($crawler);
     }
 
     /**
      * @test
-     * @vcr AnimeStats.yaml
      */
     public function it_gets_numeric_statistics()
     {
@@ -40,12 +40,12 @@ class AnimeStatsParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeStats.yaml
      */
     public function it_gets_score_attributes()
     {
         self::assertEquals(
-            677, $this->animeStatsParser->getScores()[10]->getVotes()
+            1013,
+            $this->animeStatsParser->getScores()[10]->getVotes()
         );
     }
 }

@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Top;
 use Goutte\Client;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class TopCharacterParserTest
@@ -19,7 +19,9 @@ class TopCharacterParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/character.php');
 
         $this->parser = new TopListItemParser(
@@ -29,30 +31,27 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Levi', $url);
-        self::assertEquals('https://myanimelist.net/character/45627/Levi', $url->getUrl());
+        self::assertEquals('Lawliet, L', $url->getTitle());
+        self::assertEquals('https://myanimelist.net/character/71/L_Lawliet', $url->getUrl());
     }
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/characters/2/241413.jpg?s=be87b99243a15158d0c4234a2927742e',
+            'https://cdn.myanimelist.net/images/characters/10/249647.jpg?s=3a9db4dd560c26d3374eca98d66bcd9a',
             $this->parser->getImage()
         );
     }
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_rank()
     {
@@ -61,26 +60,23 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_character_kanji()
     {
-        self::assertEquals('リヴァイ', $this->parser->getKanjiName());
+        self::assertEquals('エル ローライト', $this->parser->getKanjiName());
     }
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_animeography()
     {
-        self::assertCount(3, $this->parser->getAnimeography());
+        self::assertCount(2, $this->parser->getAnimeography());
         self::assertContainsOnlyInstancesOf(MalUrl::class, $this->parser->getAnimeography());
     }
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_mangaography()
     {
@@ -90,10 +86,9 @@ class TopCharacterParserTest extends TestCase
 
     /**
      * @test
-     * @vcr TopCharacterParserTest.yaml
      */
     public function it_gets_the_favorites()
     {
-        self::assertEquals(115146, $this->parser->getFavorites());
+        self::assertEquals(118434, $this->parser->getFavorites());
     }
 }

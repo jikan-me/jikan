@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 use Jikan\MyAnimeList\MalClient;
 
 /**
@@ -16,7 +16,9 @@ class MangaSearchTest extends TestCase
 
     public function setUp(): void
     {
-        $jikan = new MalClient;
+        parent::setUp();
+
+        $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getMangaSearch(
             new \Jikan\Request\Search\MangaSearchRequest('Fate')
         );
@@ -25,7 +27,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_title()
     {
@@ -34,7 +35,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_image_url()
     {
@@ -43,7 +43,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_publishing()
     {
@@ -52,16 +51,17 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_synopsis()
     {
-        self::assertContains("War of the Holy Grail—Pursuing the power of the \"Holy Grail\" which grants a miracle, this is a contest in which seven magi summon seven Heroic Spirits to compete for it.", $this->manga->getSynopsis());
+        self::assertStringContainsString(
+            "War of the Holy Grail—Pursuing the power of the \"Holy Grail\" which grants a miracle, this is a contest in which seven magi summon seven Heroic Spirits to compete for it.",
+            $this->manga->getSynopsis()
+        );
     }
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_type()
     {
@@ -70,7 +70,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_chapters()
     {
@@ -79,7 +78,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_volumes()
     {
@@ -88,7 +86,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_start_date()
     {
@@ -97,7 +94,6 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_end_date()
     {
@@ -106,19 +102,17 @@ class MangaSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_members()
     {
-        self::assertEquals($this->manga->getMembers(), 3659);
+        self::assertEquals($this->manga->getMembers(), 6670);
     }
 
     /**
      * @test
-     * @vcr MangaSearchTest.yaml
      */
     public function it_gets_the_score()
     {
-        self::assertEquals($this->manga->getScore(), 7.81);
+        self::assertEquals($this->manga->getScore(), 7.75);
     }
 }

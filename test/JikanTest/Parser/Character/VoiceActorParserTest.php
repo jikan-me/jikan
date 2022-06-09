@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Character;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class VoiceActorParserTest
@@ -16,7 +16,9 @@ class VoiceActorParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/character/116281');
         $crawler = $crawler->filterXPath('//div[contains(text(), \'Voice Actors\')]/../table/tr')->first();
         $this->parser = new \Jikan\Parser\Character\VoiceActorParser($crawler);
@@ -24,7 +26,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_mal_id()
     {
@@ -33,7 +34,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_url()
     {
@@ -42,7 +42,6 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_person()
     {
@@ -54,19 +53,17 @@ class VoiceActorParserTest extends TestCase
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/2/55555.jpg',
+            'https://cdn.myanimelist.net/images/voiceactors/3/65938.jpg',
             $this->parser->getImage()
         );
     }
 
     /**
      * @test
-     * @vcr CharacterParserTest.yaml
      */
     public function it_gets_the_language()
     {

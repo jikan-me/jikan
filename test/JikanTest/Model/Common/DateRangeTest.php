@@ -42,12 +42,12 @@ class DateRangeTest extends TestCase
         self::assertEquals(15, $date->getFromProp()->getDay());
         self::assertEquals(9, $date->getFromProp()->getMonth());
         self::assertEquals(2018, $date->getFromProp()->getYear());
-        self::assertEquals(null, $date->getUntilProp()->getDay());
+        self::assertEquals(1, $date->getUntilProp()->getDay());
         self::assertEquals(10, $date->getUntilProp()->getMonth());
         self::assertEquals(2019, $date->getUntilProp()->getYear());
 
         $date = new DateRange('Jan, 2018 to ?');
-        self::assertEquals(null, $date->getFromProp()->getDay());
+        self::assertEquals(1, $date->getFromProp()->getDay());
         self::assertEquals(1, $date->getFromProp()->getMonth());
         self::assertEquals(2018, $date->getFromProp()->getYear());
         self::assertEquals(null, $date->getUntilProp()->getDay());
@@ -63,8 +63,8 @@ class DateRangeTest extends TestCase
         self::assertEquals(null, $date->getUntilProp()->getYear());
 
         $date = new DateRange('Jan 3, 2015 to 2016');
-        self::assertEquals(null, $date->getUntilProp()->getDay());
-        self::assertEquals(null, $date->getUntilProp()->getMonth());
+        self::assertEquals(1, $date->getUntilProp()->getDay());
+        self::assertEquals(1, $date->getUntilProp()->getMonth());
         self::assertEquals(2016, $date->getUntilProp()->getYear());
 
 

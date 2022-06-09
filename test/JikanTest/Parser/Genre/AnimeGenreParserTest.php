@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Genre;
 use Goutte\Client;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Genre\AnimeGenreParser;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class AnimeGenreParserTest
@@ -19,14 +19,15 @@ class AnimeGenreParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new Client();
+        parent::setUp();
+
+        $client = new Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/genre/1');
         $this->parser = new AnimeGenreParser($crawler);
     }
 
     /**
      * @test
-     * @vcr AnimeGenreParserTest.yaml
      */
     public function it_gets_url()
     {
@@ -36,20 +37,18 @@ class AnimeGenreParserTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeGenreParserTest.yaml
      */
     public function it_gets_anime()
     {
-        $anime = $this->parser->getGenreAnime();
+        $anime = $this->parser->getResults();
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $anime);
     }
 
     /**
      * @test
-     * @vcr AnimeGenreParserTest.yaml
      */
     public function it_gets_the_count()
     {
-        self::assertEquals(3855, $this->parser->getCount());
+        self::assertEquals(4210, $this->parser->getCount());
     }
 }

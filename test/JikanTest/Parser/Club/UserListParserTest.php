@@ -2,8 +2,7 @@
 
 namespace JikanTest\Parser\Club;
 
-use PHPUnit\Framework\TestCase;
-use VCR\VCR;
+use JikanTest\TestCase;
 
 class UserListParserTest extends TestCase
 {
@@ -14,8 +13,10 @@ class UserListParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Club\UserListRequest(21349);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Club\UserListParser($crawler);
     }
@@ -23,7 +24,6 @@ class UserListParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Club\UserListParser
-     * @vcr ClubUserListParserTest.yaml
      */
     public function it_gets_users(): void
     {

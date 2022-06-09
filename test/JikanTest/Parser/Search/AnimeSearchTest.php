@@ -3,7 +3,7 @@
 namespace JikanTest\Parser\Search;
 
 use Jikan\MyAnimeList\MalClient;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class AnimeSearchTest
@@ -16,7 +16,9 @@ class AnimeSearchTest extends TestCase
 
     public function setUp(): void
     {
-        $jikan = new MalClient;
+        parent::setUp();
+
+        $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getAnimeSearch(
             new \Jikan\Request\Search\AnimeSearchRequest('Fate')
         );
@@ -25,25 +27,25 @@ class AnimeSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_title()
     {
-        self::assertEquals("Fate/Zero", $this->anime->getTitle());
+        self::assertEquals("Fate/Zero 2nd Season", $this->anime->getTitle());
     }
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_image_url()
     {
-        self::assertEquals("https://myanimelist.cdn-dena.com/images/anime/2/73249.jpg?s=0ddd3d84549e11eda144df33626f97ae", $this->anime->getImageUrl());
+        self::assertEquals(
+            "https://cdn.myanimelist.net/images/anime/1522/117645.jpg?s=e54dcf99dc0874bc5b228ebe8496c857",
+            $this->anime->getImages()->getJpg()->getImageUrl()
+        );
     }
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_airing()
     {
@@ -52,16 +54,17 @@ class AnimeSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_synopsis()
     {
-        self::assertContains("With the promise of granting any wish, the omnipotent Holy Grail triggered three wars in the past, each too cruel and fierce to leave a victor.", $this->anime->getSynopsis());
+        self::assertStringContainsString(
+            "As the Fourth Holy Grail War rages on with no clear victor in sight,",
+            $this->anime->getSynopsis()
+        );
     }
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_type()
     {
@@ -70,16 +73,14 @@ class AnimeSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_episodes()
     {
-        self::assertEquals($this->anime->getEpisodes(), 13);
+        self::assertEquals(12, $this->anime->getEpisodes());
     }
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_start_date()
     {
@@ -88,7 +89,6 @@ class AnimeSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_end_date()
     {
@@ -97,16 +97,14 @@ class AnimeSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_members()
     {
-        self::assertEquals($this->anime->getMembers(), 677392);
+        self::assertEquals(1003331, $this->anime->getMembers());
     }
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_rated()
     {
@@ -115,10 +113,9 @@ class AnimeSearchTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeSearchTest.yaml
      */
     public function it_gets_the_score()
     {
-        self::assertEquals($this->anime->getScore(), 8.44);
+        self::assertEquals(8.57, $this->anime->getScore());
     }
 }

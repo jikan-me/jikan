@@ -5,7 +5,7 @@ namespace JikanTest\Parser\Manga;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 /**
  * Class MangaParserTest
@@ -24,12 +24,14 @@ class MangaParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Manga\MangaRequest(11);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Manga\MangaParser($crawler);
 
-        $jikan = new MalClient;
+        $jikan = new MalClient($this->httpClient);
         $this->manga = $jikan->getManga(
             $request
         );
@@ -37,7 +39,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_mal_id()
     {
@@ -47,7 +48,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_url()
     {
@@ -56,7 +56,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title()
     {
@@ -65,7 +64,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title_english()
     {
@@ -74,7 +72,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title_synonyms()
     {
@@ -83,7 +80,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_title_japanese()
     {
@@ -92,19 +88,17 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_image_url()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/manga/3/117681.jpg',
+            'https://cdn.myanimelist.net/images/manga/3/249658.jpg',
             $this->parser->getMangaImageURL()
         );
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_synopsis()
     {
@@ -116,7 +110,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_type()
     {
@@ -128,7 +121,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_chapters()
     {
@@ -140,7 +132,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_volumes()
     {
@@ -152,7 +143,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_status()
     {
@@ -164,7 +154,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_publishing()
     {
@@ -176,7 +165,6 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_published()
     {
@@ -190,48 +178,51 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_authors()
     {
         $authors = $this->manga->getAuthors();
         self::assertCount(1, $authors);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $authors);
-        self::assertContains('Kishimoto, Masashi', $authors);
+        $names = array_map(function ($item) {
+            return $item->getName();
+        }, $authors);
+        self::assertContains('Kishimoto, Masashi', $names);
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_serialization()
     {
         $serializations = $this->manga->getSerializations();
         self::assertCount(1, $serializations);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $serializations);
-        self::assertContains('Shounen Jump (Weekly)', $serializations);
+        $names = array_map(function ($item) {
+            return $item->getName();
+        }, $serializations);
+        self::assertContains('Shounen Jump (Weekly)', $names);
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_genre()
     {
         $genres = $this->manga->getGenres();
-        self::assertCount(5, $genres);
+        self::assertCount(3, $genres);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $genres);
-        self::assertContains('Action', $genres);
-        self::assertContains('Adventure', $genres);
-        self::assertContains('Martial Arts', $genres);
-        self::assertContains('Shounen', $genres);
-        self::assertContains('Super Power', $genres);
+        $names = array_map(function ($item) {
+            return $item->getName();
+        }, $genres);
+        self::assertContains('Action', $names);
+        self::assertContains('Adventure', $names);
+        self::assertContains('Fantasy', $names);
     }
 
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_score()
     {
@@ -243,67 +234,61 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_scored_by()
     {
         self::assertEquals(
-            217694,
+            250288,
             $this->manga->getScoredBy()
         );
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_rank()
     {
         self::assertEquals(
-            572,
+            594,
             $this->manga->getRank()
         );
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_popularity()
     {
         self::assertEquals(
-            4,
+            8,
             $this->manga->getPopularity()
         );
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_members()
     {
         self::assertEquals(
-            323346,
+            377720,
             $this->manga->getMembers()
         );
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_favorites()
     {
         self::assertEquals(
-            47385,
+            41940,
             $this->manga->getFavorites()
         );
     }
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_related()
     {
@@ -314,16 +299,15 @@ class MangaParserTest extends TestCase
 
     /**
      * @test
-     * @vcr MangaParserTest.yaml
      */
     public function it_gets_the_manga_background()
     {
         $background = $this->manga->getBackground();
-        self::assertContains(
+        self::assertStringContainsString(
             'Naruto has sold over 220 million copies worldwide as of 2015, making it the 4th highest grossing',
             $background
         );
-        self::assertContains(
+        self::assertStringContainsString(
             ' Comics/Planet Manga from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.',
             $background
         );

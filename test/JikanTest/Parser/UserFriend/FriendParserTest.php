@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\User\Friends;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 class FriendParserTest extends TestCase
 {
@@ -13,59 +13,56 @@ class FriendParserTest extends TestCase
 
     public function setUp(): void
     {
-        $client = new \Goutte\Client();
+        parent::setUp();
+
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/morshuwarrior/friends');
         $this->parser = new \Jikan\Parser\User\Friends\FriendParser(
             $crawler->filterXPath(
-                '//div[contains(@class, "friendBlock")][3]'
+                '//div[contains(@class, "boxlist-container")]/div[contains(@class, "boxlist")][3]'
             )
         );
     }
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_the_name()
     {
-        self::assertEquals('HeavyGod', $this->parser->getName());
+        self::assertEquals('batsling1234', $this->parser->getName());
     }
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_the_url()
     {
-        self::assertEquals('https://myanimelist.net/profile/HeavyGod', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/profile/batsling1234', $this->parser->getUrl());
     }
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_the_avatar()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/6574969.jpg?t=1610778600',
+            'https://cdn.myanimelist.net/images/userimages/4723677.jpg?t=1654526400',
             $this->parser->getAvatar()
         );
     }
 
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_friends_since()
     {
         self::assertEquals(
-            '2018-01-16 07:34',
+            '2019-08-03 18:25',
             $this->parser->getFriendsSince()->format('Y-m-d H:i')
         );
     }
     /**
      * @test
-     * @vcr FriendsParserTest.yaml
      */
     public function it_gets_last_online()
     {

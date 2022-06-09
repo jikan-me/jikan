@@ -27,7 +27,6 @@ class AnimeTest extends TestCase
 
     /**
      * @test
-     * @vcr AnimeParserTest.yaml
      */
     public function it_gets_the_anime_airing(): void
     {

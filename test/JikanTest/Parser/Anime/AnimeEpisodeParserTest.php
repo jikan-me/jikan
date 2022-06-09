@@ -2,7 +2,7 @@
 
 namespace JikanTest\Parser\Anime;
 
-use PHPUnit\Framework\TestCase;
+use JikanTest\TestCase;
 
 class AnimeEpisodeParserTest extends TestCase
 {
@@ -13,8 +13,10 @@ class AnimeEpisodeParserTest extends TestCase
 
     public function setUp(): void
     {
+        parent::setUp();
+
         $request = new \Jikan\Request\Anime\AnimeEpisodeRequest(21, 1);
-        $client = new \Goutte\Client();
+        $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime\AnimeEpisodeParser($crawler);
     }
@@ -22,7 +24,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_episode_id(): void
     {
@@ -35,7 +36,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_url(): void
     {
@@ -48,7 +48,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_title(): void
     {
@@ -61,7 +60,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_title_japanese(): void
     {
@@ -74,7 +72,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_title_romaji(): void
     {
@@ -87,7 +84,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_duration(): void
     {
@@ -100,7 +96,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_aired_date(): void
     {
@@ -113,7 +108,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_filler(): void
     {
@@ -126,7 +120,6 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_recap(): void
     {
@@ -139,12 +132,11 @@ class AnimeEpisodeParserTest extends TestCase
     /**
      * @test
      * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     * @vcr AnimeEpisodeParserTest.yaml
      */
     public function it_gets_synopsis(): void
     {
-        self::assertContains(
-            'Countless souls have been lured along the Grand Line in pursuit of the legendary One Piece!',
+        self::assertStringContainsString(
+            'The series begins with an attack on a cruise ship at the hands of Alvida. Coby, a slave of Alvida, discovers a barrel.',
             $this->parser->getSynopsis()
         );
     }

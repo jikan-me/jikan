@@ -58,7 +58,6 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: composer install --no-interaction --no-progress --no-suggest --no-scripts
 
       - name: Run tests

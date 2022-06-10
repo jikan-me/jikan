@@ -7,6 +7,7 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Anime\Anime;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Parser\Common\AlternativeTitleParser;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\Common\UrlParser;
 use Jikan\Parser\ParserInterface;
@@ -147,6 +148,31 @@ class AnimeParser implements ParserInterface
 
         return JString::cleanse(
             str_replace($title->text(), '', $title->ancestors()->text())
+        );
+    }
+
+    /**
+     * @return \Jikan\Model\Common\AlternativeTitle[]
+     * @throws \Exception
+     */
+    public function getAlternativeTitles(): array
+    {
+        $crawler = $this->crawler
+            ->filterXPath(
+                '//h2[text()="Alternative Titles"]/following-sibling::div[following::h2[text()="Information"]]'
+            );
+
+        if ($crawler->count() === 0) {
+            return [];
+        }
+
+        return array_filter(
+            $crawler->filterXPath('//div[contains(@class, "spaceit_pad")]')->each(function ($item) {
+                return (new AlternativeTitleParser($item))->getModel();
+            }),
+            function ($item) {
+                return $item->getLanguage() !== 'synonyms';
+            }
         );
     }
 

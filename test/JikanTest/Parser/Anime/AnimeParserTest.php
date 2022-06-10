@@ -5,6 +5,7 @@
 namespace JikanTest\Parser\Anime;
 
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Title;
 use JikanTest\TestCase;
 
 /**
@@ -79,6 +80,18 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_title_japanese(): void
     {
         self::assertEquals('トライガン', $this->parser->getTitleJapanese());
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_the_anime_titles(): void
+    {
+        $titles = $this->parser->getTitles();
+        self::assertCount(3, $titles);
+        self::assertEquals(new Title('Default', 'Trigun'), $titles[0]);
+        self::assertEquals(new Title('Japanese', 'トライガン'), $titles[1]);
+        self::assertEquals(new Title('English', 'Trigun'), $titles[2]);
     }
 
     /**

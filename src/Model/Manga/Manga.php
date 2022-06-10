@@ -10,6 +10,7 @@ namespace Jikan\Model\Manga;
 
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Title;
 use Jikan\Model\Common\Url;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Manga\MangaParser;
@@ -56,6 +57,11 @@ class Manga
      * @var string|null
      */
     private $titleJapanese;
+
+    /**
+     * @var \Jikan\Model\Common\Title[]
+     */
+    private $titles;
 
     /**
      * @var string
@@ -195,6 +201,7 @@ class Manga
         $instance->titleEnglish = $parser->getMangaTitleEnglish();
         $instance->titleSynonyms = $parser->getMangaTitleSynonyms();
         $instance->titleJapanese = $parser->getMangaTitleJapanese();
+        $instance->titles = $parser->getTitles();
         $instance->type = $parser->getMangaType();
         $instance->chapters = $parser->getMangaChapters();
         $instance->volumes = $parser->getMangaVolumes();
@@ -278,6 +285,7 @@ class Manga
 
     /**
      * @return string
+     * @deprecated Use {@link Manga::getTitles()} instead.
      */
     public function getTitle(): string
     {
@@ -286,6 +294,7 @@ class Manga
 
     /**
      * @return string|null
+     * @deprecated Use {@link Manga::getTitles()} instead.
      */
     public function getTitleEnglish(): ?string
     {
@@ -294,6 +303,7 @@ class Manga
 
     /**
      * @return string[]
+     * @deprecated Use {@link Manga::getTitles()} instead.
      */
     public function getTitleSynonyms(): array
     {
@@ -302,10 +312,19 @@ class Manga
 
     /**
      * @return string|null
+     * @deprecated Use {@link Manga::getTitles()} instead.
      */
     public function getTitleJapanese(): ?string
     {
         return $this->titleJapanese;
+    }
+
+    /**
+     * @return \Jikan\Model\Common\Title[]
+     */
+    public function getTitles(): array
+    {
+        return $this->titles;
     }
 
     /**

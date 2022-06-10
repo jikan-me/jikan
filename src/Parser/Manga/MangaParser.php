@@ -6,7 +6,9 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Title;
 use Jikan\Model\Manga\Manga;
+use Jikan\Parser\Common\AlternativeTitleParser;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\Common\UrlParser;
 use Jikan\Parser\ParserInterface;
@@ -167,6 +169,35 @@ class MangaParser implements ParserInterface
 
         return JString::cleanse(
             str_replace($title->text(), '', $title->ancestors()->text())
+        );
+    }
+
+    /**
+     * @return \Jikan\Model\Common\Title[]
+     * @throws \Exception
+     */
+    public function getTitles(): array
+    {
+        $crawler = $this->crawler
+            ->filterXPath(
+                '//h2[text()="Alternative Titles"]/following-sibling::div[following::h2[text()="Information"]]'
+            );
+
+        $titles = [new Title(Title::TYPE_DEFAULT, $this->getMangaTitle())];
+
+        foreach ($this->getMangaTitleSynonyms() as $synonym) {
+            $titles[] = new Title(Title::TYPE_SYNONYM, $synonym);
+        }
+
+        if ($crawler->count() === 0) {
+            return $titles;
+        }
+
+        return array_merge(
+            $titles,
+            ...$crawler->filterXPath('//div[contains(@class, "spaceit_pad")]')->each(function ($item) {
+                return (new AlternativeTitleParser($item))->getModel();
+            })
         );
     }
 

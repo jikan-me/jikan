@@ -169,9 +169,8 @@ class MangaParser implements ParserInterface
             return null;
         }
 
-        return JString::cleanse(
-            str_replace($type->text(), '', $type->ancestors()->text())
-        );
+        $type = JString::cleanse(str_replace($type->text(), '', $type->ancestors()->text()));
+        return $type === 'Unknown' ? null : $type;
     }
 
     /**

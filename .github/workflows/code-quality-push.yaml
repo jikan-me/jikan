@@ -20,4 +20,4 @@ jobs:
           php-version: '8.0'
           tools: parallel-lint, phpunit, php-cs-fixer
       - name: Run code quality checks
-        run: ./.github/workflows/utilities/lint-push ${{ github.sha }}
+        run: ./.github/workflows/utilities/lint-push

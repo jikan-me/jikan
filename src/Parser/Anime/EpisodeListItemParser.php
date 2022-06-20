@@ -54,7 +54,7 @@ class EpisodeListItemParser implements ParserInterface
      */
     public function getEpisodeUrl(): string
     {
-        return $this->crawler->filterXPath('//td[@class="episode-title"]/a')->attr('href');
+        return $this->crawler->filterXPath('//td[contains(@class,"episode-title")]/a')->attr('href');
     }
 
     /**
@@ -63,7 +63,7 @@ class EpisodeListItemParser implements ParserInterface
      */
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//td[@class="episode-title"]/a')->text();
+        return $this->crawler->filterXPath('//td[contains(@class, "episode-title")]/a')->text();
     }
 
     /**
@@ -72,7 +72,7 @@ class EpisodeListItemParser implements ParserInterface
      */
     public function getTitleJapanese(): ?string
     {
-        $title = $this->crawler->filterXPath('//td[@class="episode-title"]/span[@class=\'di-ib\']')->text();
+        $title = $this->crawler->filterXPath('//td[contains(@class, "episode-title")]/span[@class=\'di-ib\']')->text();
 
         if (empty($title)) {
             return null;
@@ -89,7 +89,7 @@ class EpisodeListItemParser implements ParserInterface
      */
     public function getTitleRomanji(): ?string
     {
-        $title = $this->crawler->filterXPath('//td[@class="episode-title"]/span[@class=\'di-ib\']')->text();
+        $title = $this->crawler->filterXPath('//td[contains(@class, "episode-title")]/span[@class=\'di-ib\']')->text();
 
         if (empty($title)) {
             return null;
@@ -122,11 +122,8 @@ class EpisodeListItemParser implements ParserInterface
     public function getFiller(): bool
     {
         $filler = $this->crawler->filterXPath(
-            '//td
-            [
-                @class="episode-title"]
-                /span[contains(@class, \'icon-episode-type-bg\') and contains(text(), \'Filler\')
-            ]'
+            '//td[contains(@class,"episode-title")]
+                /span[contains(@class, \'icon-episode-type-bg\') and contains(text(), \'Filler\')]'
         );
 
         if (!$filler->count()) {
@@ -142,9 +139,7 @@ class EpisodeListItemParser implements ParserInterface
     public function getRecap(): bool
     {
         $recap = $this->crawler->filterXPath(
-            '//td
-            [
-                @class="episode-title"]
+            '//td[contains(@class,"episode-title")]
                 /span[contains(@class, \'icon-episode-type-bg\') and contains(text(), \'Recap\')
             ]'
         );

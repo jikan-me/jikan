@@ -1,0 +1,25 @@
+name: Archive
+
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/stale@v1.1.0
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        days-before-stale: 60
+        days-before-close: 18
+        stale-issue-message: >
+          This issue will be closed and archived in 18 days, as there has been no activity in the last 60 days.
+          If this issue is still relevant or you would like to see it actioned, please respond and we will re-open this issue.
+        stale-pr-message: >
+          This pull request will be closed and archived in 18 days, as there has been no activity in the last 60 days.
+          If this is still being worked on, please respond and we will re-open this pull request.
+        stale-issue-label: 'archived'
+        stale-pr-label: 'archived'
+        exempt-issue-label: 'in progress'
+        exempt-pr-label: 'in progress'

@@ -60,7 +60,7 @@ class Anime
     /**
      * @var \Jikan\Model\Common\AlternativeTitle[]
      */
-    private $alternativeTitles;
+    private $titleAlternatives;
 
     /**
      * @var string|null
@@ -228,7 +228,7 @@ class Anime
         $instance->titleEnglish = $parser->getTitleEnglish();
         $instance->titleSynonyms = $parser->getTitleSynonyms();
         $instance->titleJapanese = $parser->getTitleJapanese();
-        $instance->alternativeTitles = $parser->getAlternativeTitles();
+        $instance->titleAlternatives = $parser->getTitleAlternatives();
         $instance->type = $parser->getType();
         $instance->episodes = $parser->getEpisodes();
         $instance->status = $parser->getStatus();
@@ -344,9 +344,9 @@ class Anime
     /**
      * @return \Jikan\Model\Common\AlternativeTitle[]
      */
-    public function getAlternativeTitles(): array
+    public function getTitleAlternatives(): array
     {
-        return $this->alternativeTitles;
+        return $this->titleAlternatives;
     }
 
     /**

@@ -55,7 +55,7 @@ class Manga
     /**
      * @var \Jikan\Model\Common\AlternativeTitle[]
      */
-    private $alternativeTitles;
+    private $titleAlternatives;
 
     /**
      * @var string
@@ -194,7 +194,7 @@ class Manga
         $instance->titleEnglish = $parser->getMangaTitleEnglish();
         $instance->titleSynonyms = $parser->getMangaTitleSynonyms();
         $instance->titleJapanese = $parser->getMangaTitleJapanese();
-        $instance->alternativeTitles = $parser->getAlternativeTitles();
+        $instance->titleAlternatives = $parser->getTitleAlternatives();
         $instance->type = $parser->getMangaType();
         $instance->chapters = $parser->getMangaChapters();
         $instance->volumes = $parser->getMangaVolumes();
@@ -303,9 +303,9 @@ class Manga
     /**
      * @return \Jikan\Model\Common\AlternativeTitle[]
      */
-    public function getAlternativeTitles(): array
+    public function getTitleAlternatives(): array
     {
-        return $this->alternativeTitles;
+        return $this->titleAlternatives;
     }
 
     /**

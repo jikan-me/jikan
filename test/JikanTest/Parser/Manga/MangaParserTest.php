@@ -89,9 +89,9 @@ class MangaParserTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_the_manga_alternative_titles()
+    public function it_gets_the_manga_title_alternatives()
     {
-        $titles = $this->parser->getAlternativeTitles();
+        $titles = $this->parser->getTitleAlternatives();
         self::assertCount(2, $titles);
         self::assertEquals('NARUTO―ナルト―', $titles[0]->getTitle());
         self::assertEquals('Japanese', $titles[0]->getLanguage());

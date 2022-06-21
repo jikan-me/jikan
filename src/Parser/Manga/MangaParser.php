@@ -161,7 +161,7 @@ class MangaParser implements ParserInterface
      * @return \Jikan\Model\Common\AlternativeTitle[]
      * @throws \Exception
      */
-    public function getAlternativeTitles(): array
+    public function getTitleAlternatives(): array
     {
         $crawler = $this->crawler
             ->filterXPath(

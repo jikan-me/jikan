@@ -12,12 +12,12 @@ class Url
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * Genre constructor.

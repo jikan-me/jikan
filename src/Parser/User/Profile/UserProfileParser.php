@@ -4,8 +4,10 @@ namespace Jikan\Parser\User\Profile;
 
 use Jikan\Helper\Parser;
 use Jikan\Model;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Model\User\AnimeStats;
 use Jikan\Model\User\MangaStats;
+use Jikan\Parser\Common\UrlParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -223,5 +225,23 @@ class UserProfileParser
     public function getUserLastUpdates(): Model\User\LastUpdates
     {
         return (new LastUpdatesParser($this->crawler))->getModel();
+    }
+
+    /**
+     * @return array|MalUrl[]
+     * @throws \InvalidArgumentException
+     */
+    public function getUserExternalLinks(): array
+    {
+        $links = $this->crawler
+            ->filterXPath('//*[@id="content"]/div/div[1]/div/div[contains(@class, "user-profile-sns")][1]/a');
+
+        if (!$links->count()) {
+            return [];
+        }
+
+        return $links->each(function (Crawler  $c) {
+                return (new UrlParser($c))->getModel();
+            });
     }
 }

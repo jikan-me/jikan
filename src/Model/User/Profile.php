@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\User;
 
+use Jikan\Model\Common\Url;
 use Jikan\Model\Resource\UserImageResource\UserImageResource;
 use Jikan\Parser\User\Profile\UserProfileParser;
 
@@ -16,72 +17,77 @@ class Profile
     /**
      * @var int|null
      */
-    private $malId;
+    private ?int $malId;
 
     /**
      * @var string
      */
-    private $username;
+    private string $username;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var UserImageResource
      */
-    private $images;
+    private UserImageResource $images;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    private $lastOnline;
+    private ?\DateTimeImmutable $lastOnline;
 
     /**
      * @var string|null
      */
-    private $gender;
+    private ?string $gender;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    private $birthday;
+    private ?\DateTimeImmutable $birthday;
 
     /**
      * @var string|null
      */
-    private $location;
+    private ?string $location;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    private $joined;
+    private ?\DateTimeImmutable $joined;
 
     /**
      * @var AnimeStats
      */
-    private $animeStats;
+    private AnimeStats $animeStats;
 
     /**
      * @var MangaStats
      */
-    private $mangaStats;
+    private MangaStats $mangaStats;
 
     /**
      * @var Favorites
      */
-    private $favorites;
+    private Favorites $favorites;
 
     /**
      * @var LastUpdates
      */
-    private $lastUpdates;
+    private LastUpdates $lastUpdates;
+
+    /**
+     * @var Url[]
+     */
+    private array $externalLinks = [];
 
     /**
      * @var string|null
      */
-    private $about;
+    private ?string $about;
 
     /**
      * @param UserProfileParser $parser
@@ -107,6 +113,7 @@ class Profile
         $instance->about = $parser->getAbout();
         $instance->favorites = $parser->getFavorites();
         $instance->lastUpdates = $parser->getUserLastUpdates();
+        $instance->externalLinks = $parser->getUserExternalLinks();
 
         return $instance;
     }
@@ -222,4 +229,13 @@ class Profile
     {
         return $this->lastUpdates;
     }
+
+    /**
+     * @return Url[]
+     */
+    public function getExternalLinks(): array
+    {
+        return $this->externalLinks;
+    }
+
 }

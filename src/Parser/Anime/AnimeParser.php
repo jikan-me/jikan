@@ -633,8 +633,7 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return array|MalUrl[]
-     * @throws \InvalidArgumentException
+     * @return array
      */
     public function getExternalLinks(): array
     {

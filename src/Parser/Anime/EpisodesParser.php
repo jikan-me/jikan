@@ -57,14 +57,13 @@ class EpisodesParser implements ParserInterface
     public function getLastPage(): int
     {
         $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div/a[contains(@class, "link")]');
+            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "link")]');
 
         if (!$pages->count()) {
             return 1;
         }
 
         $pages = $pages
-            ->nextAll()
             ->last();
 
         if (!$pages->count()) {

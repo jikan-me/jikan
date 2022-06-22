@@ -21,5 +21,5 @@ jobs:
           If this is still being worked on, please respond and we will re-open this pull request.
         stale-issue-label: 'archived'
         stale-pr-label: 'archived'
-        exempt-issue-label: 'in progress'
+        exempt-issue-label: 'in progress','feature request','bug'
         exempt-pr-label: 'in progress'

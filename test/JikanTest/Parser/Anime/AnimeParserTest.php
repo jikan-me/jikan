@@ -84,19 +84,6 @@ class AnimeParserTest extends TestCase
     /**
      * @test
      */
-    public function it_gets_the_anime_title_alternatives(): void
-    {
-        $titles = $this->parser->getTitleAlternatives();
-        self::assertCount(2, $titles);
-        self::assertEquals('トライガン', $titles[0]->getTitle());
-        self::assertEquals('Japanese', $titles[0]->getLanguage());
-        self::assertEquals('Trigun', $titles[1]->getTitle());
-        self::assertEquals('English', $titles[1]->getLanguage());
-    }
-
-    /**
-     * @test
-     */
     public function it_gets_the_anime_image_url(): void
     {
         self::assertEquals(

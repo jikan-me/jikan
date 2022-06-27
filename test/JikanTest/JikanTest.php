@@ -47,10 +47,28 @@ class JikanTest extends TestCase
     /**
      * @test
      */
+    public function it_gets_unapproved_anime()
+    {
+        $anime = $this->jikan->getAnime(new \Jikan\Request\Anime\AnimeRequest(48104));
+        self::assertEquals(false, $anime->isApproved());
+    }
+
+    /**
+     * @test
+     */
     public function it_gets_manga()
     {
         $manga = $this->jikan->getManga(new \Jikan\Request\Manga\MangaRequest(11));
         self::assertInstanceOf(\Jikan\Model\Manga\Manga::class, $manga);
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_unapproved_manga()
+    {
+        $manga = $this->jikan->getManga(new \Jikan\Request\Manga\MangaRequest(145036));
+        self::assertEquals(false, $manga->isApproved());
     }
 
     /**

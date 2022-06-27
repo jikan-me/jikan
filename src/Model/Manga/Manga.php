@@ -48,6 +48,11 @@ class Manga
     private $titleSynonyms;
 
     /**
+     * @var bool
+     */
+    private $approved;
+
+    /**
      * @var string|null
      */
     private $titleJapanese;
@@ -184,6 +189,7 @@ class Manga
         $instance->title = $parser->getMangaTitle();
         $instance->url = $parser->getMangaURL();
         $instance->malId = $parser->getMangaId();
+        $instance->approved = $parser->getApproved();
         $instance->images = CommonImageResource::factory($parser->getMangaImageURL());
         $instance->synopsis = $parser->getMangaSynopsis();
         $instance->titleEnglish = $parser->getMangaTitleEnglish();
@@ -212,6 +218,14 @@ class Manga
         $instance->serializations = $parser->getMangaSerialization();
 
         return $instance;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isApproved(): bool
+    {
+        return $this->approved;
     }
 
     /**

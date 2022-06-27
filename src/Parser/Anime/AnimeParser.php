@@ -95,6 +95,20 @@ class AnimeParser implements ParserInterface
     }
 
     /**
+     * @return bool
+     */
+    public function getApproved(): bool
+    {
+        $node = $this->crawler->filterXPath('//*[@id="addtolist"]/span[contains(text(), "pending approval")]');
+
+        if ($node->count()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * @return string|null
      * @throws \InvalidArgumentException
      */

@@ -58,6 +58,11 @@ class Anime
     private $titleSynonyms;
 
     /**
+     * @var bool
+     */
+    private $approved;
+
+    /**
      * @var string|null
      */
     private $type;
@@ -218,6 +223,7 @@ class Anime
         $instance->title = $parser->getTitle();
         $instance->url = $parser->getURL();
         $instance->malId = $parser->getId();
+        $instance->approved = $parser->getApproved();
         $instance->images = CommonImageResource::factory($parser->getImageURL());
         $instance->synopsis = $parser->getSynopsis();
         $instance->titleEnglish = $parser->getTitleEnglish();
@@ -253,6 +259,14 @@ class Anime
         $instance->background = $parser->getBackground();
 
         return $instance;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isApproved(): bool
+    {
+        return $this->approved;
     }
 
     /**

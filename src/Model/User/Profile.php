@@ -237,5 +237,4 @@ class Profile
     {
         return $this->externalLinks;
     }
-
 }

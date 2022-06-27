@@ -241,7 +241,7 @@ class UserProfileParser
         }
 
         return $links->each(function (Crawler  $c) {
-                return (new UrlParser($c))->getModel();
-            });
+            return (new UrlParser($c))->getModel();
+        });
     }
 }

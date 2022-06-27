@@ -208,6 +208,11 @@ class Anime
     private $externalLinks = [];
 
     /**
+     * @var Url[]
+     */
+    private $streamingLinks = [];
+
+    /**
      * Create an instance from an AnimeParser parser
      *
      * @param AnimeParser $parser
@@ -253,6 +258,7 @@ class Anime
         $instance->members = $parser->getMembers();
         $instance->favorites = $parser->getFavorites();
         $instance->externalLinks = $parser->getExternalLinks();
+        $instance->streamingLinks = $parser->getStreamingLinks();
         $instance->related = $parser->getRelated();
         $instance->openingThemes = $parser->getOpeningThemes();
         $instance->endingThemes = $parser->getEndingThemes();
@@ -299,6 +305,14 @@ class Anime
     public function getExternalLinks(): array
     {
         return $this->externalLinks;
+    }
+
+    /**
+     * @return Url[]
+     */
+    public function getStreamingLinks(): array
+    {
+        return $this->streamingLinks;
     }
 
     /**

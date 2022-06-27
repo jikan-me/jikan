@@ -666,6 +666,24 @@ class AnimeParser implements ParserInterface
 
     /**
      * @return array
+     */
+    public function getStreamingLinks(): array
+    {
+        $links = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[1]/div/div[contains(@class, "broadcast")]//div[contains(@class, "broadcast")]');
+
+        if (!$links->count()) {
+            return [];
+        }
+
+        return $links->filterXPath('//a')
+            ->each(function (Crawler  $c) {
+                return (new UrlParser($c))->getModel();
+            });
+    }
+
+    /**
+     * @return array
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */

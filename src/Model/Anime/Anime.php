@@ -20,197 +20,197 @@ class Anime
     /**
      * @var int
      */
-    private $malId;
+    private int $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var CommonImageResource
      */
-    private $images;
+    private CommonImageResource $images;
 
     /**
      * @var YoutubeMeta
      */
-    private $trailer;
+    private YoutubeMeta $trailer;
 
     /**
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @var string|null
      */
-    private $titleEnglish;
+    private ?string $titleEnglish;
 
     /**
      * @var string|null
      */
-    private $titleJapanese;
+    private ?string $titleJapanese;
 
     /**
      * @var string[]
      */
-    private $titleSynonyms;
+    private array $titleSynonyms;
 
     /**
      * @var bool
      */
-    private $approved;
+    private bool $approved;
 
     /**
      * @var string|null
      */
-    private $type;
+    private ?string $type;
 
     /**
      * @var string|null
      */
-    private $source;
+    private ?string $source;
 
     /**
      * @var int|null
      */
-    private $episodes;
+    private ?int $episodes;
 
     /**
      * @var string|null
      */
-    private $status;
+    private ?string $status;
 
     /**
      * @var bool
      */
-    private $airing = false;
+    private bool $airing = false;
 
     /**
      * @var DateRange
      */
-    private $aired;
+    private DateRange $aired;
 
     /**
      * @var string|null
      */
-    private $duration;
+    private ?string $duration;
 
     /**
      * @var string|null
      */
-    private $rating;
+    private ?string $rating;
 
     /**
      * @var float|null
      */
-    private $score;
+    private ?float $score;
 
     /**
      * @var int|null
      */
-    private $scoredBy;
+    private ?int $scoredBy;
 
     /**
      * @var int|null
      */
-    private $rank;
+    private ?int $rank;
 
     /**
      * @var int|null
      */
-    private $popularity;
+    private ?int $popularity;
 
     /**
      * @var int|null
      */
-    private $members;
+    private ?int $members;
 
     /**
      * @var int|null
      */
-    private $favorites;
+    private ?int $favorites;
 
     /**
      * @var string|null
      */
-    private $synopsis;
+    private ?string $synopsis;
 
     /**
      * @var string|null
      */
-    private $background;
+    private ?string $background;
 
     /**
      * @var string|null
      */
-    private $premiered;
+    private ?string $premiered;
 
     /**
      * @var string|null
      */
-    private $broadcast;
+    private ?string $broadcast;
 
     /**
      * @var MalUrl[]
      */
-    private $related = [];
-
-    /**
-     * @var \Jikan\Model\Common\MalUrl[]
-     */
-    private $producers = [];
+    private array $related = [];
 
     /**
      * @var MalUrl[]
      */
-    private $licensors = [];
+    private array $producers = [];
 
     /**
      * @var MalUrl[]
      */
-    private $studios = [];
+    private array $licensors = [];
 
     /**
      * @var MalUrl[]
      */
-    private $genres = [];
+    private array $studios = [];
 
     /**
      * @var MalUrl[]
      */
-    private $explicitGenres = [];
+    private array $genres = [];
 
     /**
      * @var MalUrl[]
      */
-    private $demographics = [];
+    private array $explicitGenres = [];
 
     /**
      * @var MalUrl[]
      */
-    private $themes = [];
+    private array $demographics = [];
+
+    /**
+     * @var MalUrl[]
+     */
+    private array $themes = [];
 
     /**
      * @var string[]
      */
-    private $openingThemes = [];
+    private array $openingThemes = [];
 
     /**
      * @var string[]
      */
-    private $endingThemes = [];
+    private array $endingThemes = [];
 
     /**
      * @var Url[]
      */
-    private $externalLinks = [];
+    private array $externalLinks = [];
 
     /**
      * @var Url[]
      */
-    private $streamingLinks = [];
+    private array $streamingLinks = [];
 
     /**
      * Create an instance from an AnimeParser parser

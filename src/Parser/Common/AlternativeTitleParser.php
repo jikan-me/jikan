@@ -7,6 +7,11 @@ use Jikan\Model\Common\Title;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
+/**
+ * Class AlternativeTitleParser parses an alternative of an anime/manga.
+ *
+ * @package Jikan\Parser\Common
+ */
 class AlternativeTitleParser implements ParserInterface
 {
     /**

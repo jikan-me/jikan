@@ -61,7 +61,7 @@ class Manga
     /**
      * @var \Jikan\Model\Common\Title[]
      */
-    private $titles;
+    private array $titles;
 
     /**
      * @var string

@@ -141,4 +141,16 @@ class AnimeEpisodesParserTest extends TestCase
             $this->parser->getEpisodes()[0]->getForumUrl()
         );
     }
+
+    /**
+     * @test
+     * @covers \Jikan\Parser\Anime\EpisodesParser
+     */
+    public function it_gets_episodes_score(): void
+    {
+        self::assertEquals(
+            4.4,
+            $this->parser->getEpisodes()[0]->getScore()
+        );
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Manga;
 
+use Jikan\Model\Common\Title;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
@@ -84,6 +85,18 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_title_japanese()
     {
         self::assertEquals('NARUTO―ナルト―', $this->parser->getMangaTitleJapanese());
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_the_manga_titles()
+    {
+        $titles = $this->parser->getTitles();
+        self::assertCount(3, $titles);
+        self::assertEquals(new Title('Default', 'Naruto'), $titles[0]);
+        self::assertEquals(new Title('Japanese', 'NARUTO―ナルト―'), $titles[1]);
+        self::assertEquals(new Title('English', 'Naruto'), $titles[2]);
     }
 
     /**

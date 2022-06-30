@@ -15,47 +15,52 @@ class EpisodeListItem
     /**
      * @var int
      */
-    public $malId;
+    public int $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var string
      */
-    public $title;
+    public string $title;
 
     /**
      * @var string|null
      */
-    public $titleJapanese;
+    public ?string $titleJapanese;
 
     /**
      * @var string|null
      */
-    public $titleRomanji;
+    public ?string $titleRomanji;
 
     /**
      * @var \DateTimeImmutable|null
      */
-    public $aired;
+    public ?\DateTimeImmutable $aired;
+
+    /**
+     * @var float
+     */
+    public float $score;
 
     /**
      * @var bool
      */
-    public $filler;
+    public bool $filler;
 
     /**
      * @var bool
      */
-    public $recap;
+    public bool $recap;
 
     /**
      * @var string
      */
-    public $forumUrl;
+    public string $forumUrl;
 
 
     /**
@@ -71,6 +76,7 @@ class EpisodeListItem
         $instance->titleJapanese = $parser->getTitleJapanese();
         $instance->titleRomanji = $parser->getTitleRomanji();
         $instance->aired = $parser->getAired();
+        $instance->score = $parser->getScore();
         $instance->filler = $parser->getFiller();
         $instance->recap = $parser->getRecap();
         $instance->url = $parser->getVideoUrl();
@@ -117,6 +123,14 @@ class EpisodeListItem
     public function getAired()
     {
         return $this->aired;
+    }
+
+    /**
+     * @return float
+     */
+    public function getScore(): float
+    {
+        return $this->score;
     }
 
     /**

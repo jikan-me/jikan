@@ -116,6 +116,17 @@ class EpisodeListItemParser implements ParserInterface
         return Parser::parseDateMDYReadable($aired);
     }
 
+
+    /**
+     * @return float
+     */
+    public function getScore(): float
+    {
+        return (float) $this->crawler
+            ->filterXPath('//td[contains(@class, \'episode-poll\')]/div[contains(@class, "average")]/span')
+            ->text();
+    }
+
     /**
      * @return bool
      */

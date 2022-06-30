@@ -393,4 +393,13 @@ class AnimeParserTest extends TestCase
         $preview = $this->parser->getPreview();
         self::assertEquals('https://www.youtube.com/embed/bJVyIXeUznY?enablejsapi=1&wmode=opaque&autoplay=1', $preview);
     }
+
+    /**
+     * @test
+     */
+    public function it_gets_the_streaming_links()
+    {
+        $streamingLinks = $this->parser->getStreamingLinks();
+        self::assertEquals('https://www.funimation.com/shows/trigun', $streamingLinks[0]->getUrl());
+    }
 }

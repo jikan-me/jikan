@@ -36,14 +36,13 @@ class EpisodesParser implements ParserInterface
     public function getEpisodes(): array
     {
         $episodes = $this->crawler
-            ->filterXPath('//table[contains(@class, \'js-watch-episode-list ascend\')]/tr[1]');
+            ->filterXPath('//table[contains(@class, \'js-watch-episode-list\')]/tbody//tr');
 
         if (!$episodes->count()) {
             return [];
         }
 
-        return $episodes->nextAll()
-            ->each(
+        return $episodes->each(
                 function (Crawler $crawler) {
                     return (new EpisodeListItemParser($crawler))->getModel();
                 }

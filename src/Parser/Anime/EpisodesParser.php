@@ -43,10 +43,10 @@ class EpisodesParser implements ParserInterface
         }
 
         return $episodes->each(
-                function (Crawler $crawler) {
+            function (Crawler $crawler) {
                     return (new EpisodeListItemParser($crawler))->getModel();
                 }
-            );
+        );
     }
 
     /**

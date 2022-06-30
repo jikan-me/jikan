@@ -151,7 +151,6 @@ class JikanTest extends TestCase
         self::assertNotContains('mutouyusei18', $usernames);
         self::assertNotContains('king_t_challa', $usernames);
         self::assertNotContains('johnyjohny', $usernames);
-        self::assertContains('localmoonman', $usernames);
         self::assertContains('MizzyMizuki', $usernames);
 
         // Empty page
@@ -236,7 +235,7 @@ class JikanTest extends TestCase
     public function it_gets_manga_news()
     {
         $items = $this->jikan->getNewsList(new MangaNewsRequest(2))->getResults();
-        self::assertCount(24, $items);
+        self::assertCount(25, $items);
         self::assertContainsOnlyInstancesOf(NewsListItem::class, $items);
     }
 
@@ -375,8 +374,8 @@ class JikanTest extends TestCase
         $titles = array_map(function ($item) {
             return $item->getTitle();
         }, $topics);
-        self::assertContains('One Piece Episode 1020 Discussion', $titles);
-        self::assertContains('One Piece Episode 1019 Discussion', $titles);
+        self::assertContains('My Top 5 Arcs, What Are Yours?', $titles);
+        self::assertContains('One Piece Episode 28 Discussion', $titles);
     }
 
     /**
@@ -400,7 +399,7 @@ class JikanTest extends TestCase
     public function it_gets_user_history()
     {
         $history = $this->jikan->getUserHistory(new \Jikan\Request\User\UserHistoryRequest('morshuwarrior'));
-        self::assertCount(23, $history);
+        self::assertCount(82, $history);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\User\History::class, $history);
     }
 

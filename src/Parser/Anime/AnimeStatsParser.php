@@ -158,7 +158,7 @@ class AnimeStatsParser implements ParserInterface
         $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::text()');
 
         if ($table->count()
-            && $table->text() === 'No scores have been recorded for this anime.') {
+            && str_contains($table->text(), 'No scores have been recorded for this')) {
             return [];
         }
 

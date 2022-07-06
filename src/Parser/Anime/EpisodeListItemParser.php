@@ -118,12 +118,18 @@ class EpisodeListItemParser implements ParserInterface
 
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getScore(): float
+    public function getScore(): ?float
     {
-        return (float) $this->crawler
-            ->filterXPath('//td[contains(@class, \'episode-poll\')]/div[contains(@class, "average")]/span')
+        $node = $this->crawler
+            ->filterXPath('//td[contains(@class, \'episode-poll\')]/div[contains(@class, "average")]/span');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return (float) $node
             ->text();
     }
 

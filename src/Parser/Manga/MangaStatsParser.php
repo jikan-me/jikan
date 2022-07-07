@@ -155,9 +155,16 @@ class MangaStatsParser implements ParserInterface
      */
     public function getScores(): array
     {
-        $scores = [];
+        $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::text()');
+
+        if ($table->count()
+            && str_contains($table->text(), 'No scores have been recorded for this')) {
+            return [];
+        }
+
         $table = $this->crawler->filterXPath('//h2[text()="Score Stats"]/following-sibling::table[1]/tr');
 
+        $scores = [];
         $table->each(
             function (Crawler $crawler) use (&$scores) {
                 $score = (int) $crawler->filterXPath('//td[1]')->text();

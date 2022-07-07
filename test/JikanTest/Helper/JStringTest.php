@@ -14,6 +14,32 @@ class JStringTest extends TestCase
     /**
      * @test
      */
+    public function it_checks_for_string_float()
+    {
+        self::assertEquals(
+            true,
+            JString::isStringFloat('3.123')
+        );
+
+        self::assertEquals(
+            true,
+            JString::isStringFloat(' 3.123')
+        );
+
+        self::assertEquals(
+            false,
+            JString::isStringFloat(' abc 3.123')
+        );
+
+        self::assertEquals(
+            false,
+            JString::isStringFloat('3..123')
+        );
+    }
+
+    /**
+     * @test
+     */
     public function it_converts_string_to_canonical_format()
     {
         self::assertEquals(

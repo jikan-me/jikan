@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Model\Anime\AnimeVideos;
+use Jikan\Model\Anime\MusicVideoListItem;
 use Jikan\Model\Anime\PromoListItem;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -68,6 +69,27 @@ class VideosParser implements ParserInterface
             ->each(
                 function (Crawler $crawler) {
                     return (new PromoListItemParser($crawler))->getModel();
+                }
+            );
+    }
+
+
+    /**
+     * @return MusicVideoListItem[]
+     */
+    public function getMusic(): array
+    {
+        $node = $this->crawler
+            ->filterXPath('//div[contains(@class, "video-block music-video")]/section/div');
+
+        if (!$node->count()) {
+            return [];
+        }
+
+        return $node
+            ->each(
+                function (Crawler $crawler) {
+                    return (new MusicVideoListItemParser($crawler))->getModel();
                 }
             );
     }

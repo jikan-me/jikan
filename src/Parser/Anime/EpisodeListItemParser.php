@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\EpisodeListItem;
 use Jikan\Model\Common\DateRange;
@@ -129,8 +130,13 @@ class EpisodeListItemParser implements ParserInterface
             return null;
         }
 
-        return (float) $node
-            ->text();
+        $score = $node->text();
+
+        if (!JString::isStringFloat($score)) {
+            return null;
+        }
+
+        return (float) $score;
     }
 
     /**

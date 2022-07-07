@@ -67,4 +67,16 @@ class JString
             preg_replace("/[^[:alnum:][:space:]\-\/]/u", '', $string)
         );
     }
+
+    /**
+     * @param string $string
+     * @return bool
+     *
+     * @see https://stackoverflow.com/a/56851835
+     */
+    public static function isStringFloat(string $string): bool
+    {
+        return is_numeric($string) && str_contains($string, '.');
+    }
+
 }

@@ -78,5 +78,4 @@ class JString
     {
         return is_numeric($string) && str_contains($string, '.');
     }
-
 }

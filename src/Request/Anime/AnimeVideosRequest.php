@@ -5,7 +5,7 @@ namespace Jikan\Request\Anime;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class AnimeVideos
+ * Class AnimeVideosRequest
  *
  * @package Jikan\Request
  */
@@ -14,7 +14,7 @@ class AnimeVideosRequest implements RequestInterface
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * AnimeVideosRequest constructor.

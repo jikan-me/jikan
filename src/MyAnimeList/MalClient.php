@@ -114,6 +114,24 @@ class MalClient
     }
 
     /**
+     * @param Request\Anime\AnimeVideosEpisodesRequest $request
+     * @return Model\Anime\AnimeVideosEpisodes
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getAnimeVideosEpisodes(Request\Anime\AnimeVideosEpisodesRequest $request): Model\Anime\AnimeVideosEpisodes
+    {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Anime\VideosParser($crawler);
+
+            return $parser->getResultsModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
      * @param  Request\Manga\MangaRequest $request
      * @return Model\Manga\Manga
      * @throws BadResponseException

@@ -14,12 +14,17 @@ class AnimeVideos
     /**
      * @var PromoListItem[]
      */
-    private $promo;
+    private array $promo;
 
     /**
      * @var StreamEpisodeListItem[]
      */
-    private $episodes;
+    private array $episodes;
+
+    /**
+     * @var MusicVideoListItem[]
+     */
+    private array $musicVideos;
 
     /**
      * @param VideosParser $parser
@@ -32,6 +37,7 @@ class AnimeVideos
         $instance = new self();
         $instance->episodes = $parser->getEpisodes();
         $instance->promo = $parser->getPromos();
+        $instance->musicVideos = $parser->getMusic();
 
         return $instance;
     }
@@ -50,5 +56,13 @@ class AnimeVideos
     public function getEpisodes(): array
     {
         return $this->episodes;
+    }
+
+    /**
+     * @return MusicVideoListItem[]
+     */
+    public function getMusicVideos()
+    {
+        return $this->musicVideos;
     }
 }

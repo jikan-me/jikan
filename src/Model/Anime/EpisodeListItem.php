@@ -18,9 +18,9 @@ class EpisodeListItem
     public int $malId;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $url;
+    private ?string $url;
 
     /**
      * @var string
@@ -43,9 +43,9 @@ class EpisodeListItem
     public ?\DateTimeImmutable $aired;
 
     /**
-     * @var float
+     * @var float|null
      */
-    public float $score;
+    public ?float $score;
 
     /**
      * @var bool
@@ -58,9 +58,9 @@ class EpisodeListItem
     public bool $recap;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public string $forumUrl;
+    public ?string $forumUrl;
 
 
     /**

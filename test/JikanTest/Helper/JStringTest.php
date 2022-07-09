@@ -13,6 +13,25 @@ class JStringTest extends TestCase
 {
     /**
      * @test
+     * @dataProvider  stringFloatProvider
+     */
+    public function it_checks_for_string_float(bool $given, bool $expected): void
+    {
+        self::assertSame($expected, $given);
+    }
+
+    public function stringFloatProvider(): array
+    {
+        return [
+            [JString::isStringFloat('3.123'), true],
+            [JString::isStringFloat(' 3.123'), true],
+            [JString::isStringFloat(' abc 3.123'), false],
+            [JString::isStringFloat('3..123'), false],
+        ];
+    }
+
+    /**
+     * @test
      */
     public function it_converts_string_to_canonical_format()
     {

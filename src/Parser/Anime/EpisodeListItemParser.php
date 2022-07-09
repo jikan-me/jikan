@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\EpisodeListItem;
 use Jikan\Model\Common\DateRange;
@@ -118,13 +119,24 @@ class EpisodeListItemParser implements ParserInterface
 
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getScore(): float
+    public function getScore(): ?float
     {
-        return (float) $this->crawler
-            ->filterXPath('//td[contains(@class, \'episode-poll\')]/div[contains(@class, "average")]/span')
-            ->text();
+        $node = $this->crawler
+            ->filterXPath('//td[contains(@class, \'episode-poll\')]/div[contains(@class, "average")]/span');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        $score = $node->text();
+
+        if (!JString::isStringFloat($score)) {
+            return null;
+        }
+
+        return (float) $score;
     }
 
     /**

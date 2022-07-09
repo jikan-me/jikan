@@ -15,12 +15,12 @@ class PromoListItem
     /**
      * @var string
      */
-    public string $title;
+    private string $title;
 
     /**
      * @var YoutubeMeta
      */
-    public YoutubeMeta $trailer;
+    private YoutubeMeta $trailer;
 
     /**
      * @param PromoListItemParser $parser

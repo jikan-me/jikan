@@ -16,17 +16,17 @@ class MusicVideoListItem
     /**
      * @var string
      */
-    public string $title;
+    private string $title;
 
     /**
      * @var YoutubeMeta
      */
-    public YoutubeMeta $video;
+    private YoutubeMeta $video;
 
     /**
      * @var MusicMeta
      */
-    public MusicMeta $meta;
+    private MusicMeta $meta;
 
 
     /**

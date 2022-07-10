@@ -5,6 +5,7 @@ namespace Jikan\Model\Producer;
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Url;
 use Jikan\Model\Top\TopPeople;
 use Jikan\Parser\Producer\ProducerParser;
 
@@ -19,27 +20,58 @@ class Producer extends Results implements Pagination
     /**
      * @var int
      */
-    private $malId;
+    private int $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
+
+    /**
+     * @var string
+     * @deprecated @see titles
+     */
+    private string $name;
+
+    /**
+     * @var array
+     */
+    private array $titles;
+
+    /**
+     * @var \DateTimeImmutable
+     */
+    private \DateTimeImmutable $established;
+
+    /**
+     * @var int|null
+     */
+    private ?int $favorites;
 
     /**
      * @var string
      */
-    private $name;
+    private string $about;
 
     /**
-     * @var bool
+     * @var Url[]
      */
-    private $hasNextPage = false;
+    private array $externalLinks;
 
     /**
      * @var int
      */
-    private $lastVisiblePage = 1;
+    private int $count;
+
+    /**
+     * @var bool
+     */
+    private bool $hasNextPage = false;
+
+    /**
+     * @var int
+     */
+    private int $lastVisiblePage = 1;
 
     /**
      * @param ProducerParser $parser
@@ -55,6 +87,12 @@ class Producer extends Results implements Pagination
         $instance->malId = $parser->getUrl()->getMalId();
         $instance->url = $parser->getUrl()->getUrl();
         $instance->name = $parser->getUrl()->getName();
+        $instance->titles = $parser->getTitles();
+        $instance->favorites = $parser->getFavorites();
+        $instance->established = $parser->getEstablished();
+        $instance->about = $parser->getAbout();
+        $instance->externalLinks = $parser->getExternalLinks();
+        $instance->count = $parser->getAnimeCount();
         $instance->results = $parser->getResults();
         $instance->hasNextPage = $parser->getHasNextPage();
         $instance->lastVisiblePage = $parser->getLastPage();
@@ -87,6 +125,54 @@ class Producer extends Results implements Pagination
     }
 
     /**
+     * @return array
+     */
+    public function getTitles(): array
+    {
+        return $this->titles;
+    }
+
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getEstablished(): \DateTimeImmutable
+    {
+        return $this->established;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFavorites(): ?int
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbout(): string
+    {
+        return $this->about;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExternalLinks(): array
+    {
+        return $this->externalLinks;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
+    }
+
+    /**
      * @return bool
      */
     public function hasNextPage(): bool
@@ -102,11 +188,4 @@ class Producer extends Results implements Pagination
         return $this->lastVisiblePage;
     }
 
-    /**
-     * @return array
-     */
-    public function getResults(): array
-    {
-        return $this->results;
-    }
 }

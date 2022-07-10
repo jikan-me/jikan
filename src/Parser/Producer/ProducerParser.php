@@ -6,6 +6,7 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Parser\Common\AnimeCardParser;
+use Jikan\Parser\Common\UrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -19,7 +20,7 @@ class ProducerParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * ProducerParser constructor.
@@ -49,7 +50,7 @@ class ProducerParser implements ParserInterface
     public function getResults(): array
     {
         return $this->crawler
-            ->filter('div.seasonal-anime')
+            ->filterXPath('//*[@id="content"]/div[2]/div[contains(@class, "js-categories-seasonal")]')
             ->each(
                 function (Crawler $animeCrawler) {
                     return (new AnimeCardParser($animeCrawler))->getModel();
@@ -120,5 +121,95 @@ class ProducerParser implements ParserInterface
         }
 
         return true;
+    }
+
+    public function getTitles(): array
+    {
+        $titles = [];
+        $titleEnglish = $this->crawler->filterXPath('//*[@id="contentWrapper"]/div[1]/h1');
+
+        if ($titleEnglish->count()) {
+            $titles[] = new Model\Common\Title(Model\Common\Title::TYPE_DEFAULT, $titleEnglish->text());
+        }
+
+        $titleJapanese = $this->crawler->filterXPath('//span[text()="Japanese:"]');
+
+        if ($titleJapanese->count()) {
+            $titles[] = new Model\Common\Title(
+                'Japanese',
+                JString::cleanse(
+                    str_replace($titleJapanese->text(), '', $titleJapanese->ancestors()->text())
+                )
+            );
+        }
+
+        return $titles;
+    }
+
+    public function getEstablished(): ?\DateTimeImmutable
+    {
+        $node = $this->crawler
+            ->filterXPath('//span[text()="Established:"]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return Parser::parseDateMDYReadable(
+            JString::cleanse(
+                str_replace($node->text(), '', $node->ancestors()->text())
+            )
+        );
+    }
+
+    public function getAbout(): string
+    {
+        // it will be the node without <span class="dark_text">
+        $node = $this->crawler
+            ->filterXPath('//*[@id="content"]/div[1]//div[contains(@class, "spaceit_pad")]/span[not(contains(@class, "dark_text"))]');
+
+        return JString::cleanse(
+            $node->text()
+        );
+    }
+
+    public function getFavorites(): ?int
+    {
+        $favorite = $this->crawler
+            ->filterXPath('//span[text()="Member Favorites:"]');
+
+        if (!$favorite->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            str_replace([$favorite->text(), ','], '', $favorite->ancestors()->text())
+        );
+    }
+
+    public function getAnimeCount(): int
+    {
+        $node = $this->crawler->filterXPath('//*[@id="content"]/div[2]/div[6]/div/ul/li[1]');
+
+        preg_match('~\((.*)\)~', $node->text(), $matches);
+
+        return JString::cleanse(
+            str_replace(',', '', $matches[1])
+        );
+    }
+
+
+    public function getExternalLinks(): array
+    {
+        $links = $this->crawler
+            ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "user-profile-sns")]/span//a');
+
+        if (!$links->count()) {
+            return [];
+        }
+
+        return $links->each(function (Crawler  $c) {
+            return (new UrlParser($c))->getModel();
+        });
     }
 }

@@ -52,4 +52,15 @@ class MangaGenreParserTest extends TestCase
     {
         self::assertEquals(7973, $this->parser->getCount());
     }
+
+    /**
+     * @test
+     */
+    public function it_gets_description()
+    {
+        self::assertStringContainsString(
+            ' individual characters and the effort they put into their personal battles',
+            $this->parser->getDescription()
+        );
+    }
 }

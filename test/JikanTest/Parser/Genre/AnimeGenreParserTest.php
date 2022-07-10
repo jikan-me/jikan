@@ -51,4 +51,15 @@ class AnimeGenreParserTest extends TestCase
     {
         self::assertEquals(4210, $this->parser->getCount());
     }
+
+    /**
+     * @test
+     */
+    public function it_gets_description()
+    {
+        self::assertStringContainsString(
+            'Exciting action sequences take priority and significant conflicts between characters',
+            $this->parser->getDescription()
+        );
+    }
 }

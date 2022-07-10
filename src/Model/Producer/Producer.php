@@ -46,9 +46,9 @@ class Producer extends Results implements Pagination
     private array $titles;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      */
-    private \DateTimeImmutable $established;
+    private ?\DateTimeImmutable $established;
 
     /**
      * @var int|null
@@ -56,9 +56,9 @@ class Producer extends Results implements Pagination
     private ?int $favorites;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $about;
+    private ?string $about;
 
     /**
      * @var Url[]
@@ -149,9 +149,9 @@ class Producer extends Results implements Pagination
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
-    public function getEstablished(): \DateTimeImmutable
+    public function getEstablished(): ?\DateTimeImmutable
     {
         return $this->established;
     }
@@ -165,15 +165,15 @@ class Producer extends Results implements Pagination
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAbout(): string
+    public function getAbout(): ?string
     {
         return $this->about;
     }
 
     /**
-     * @return array
+     * @return Url[]
      */
     public function getExternalLinks(): array
     {

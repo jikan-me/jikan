@@ -170,13 +170,17 @@ class ProducerParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAbout(): string
+    public function getAbout(): ?string
     {
         // it will be the node without <span class="dark_text">
         $node = $this->crawler
             ->filterXPath('//*[@id="content"]/div[1]//div[contains(@class, "spaceit_pad")]/span[not(contains(@class, "dark_text"))]');
+
+        if (!$node->count()) {
+            return null;
+        }
 
         return JString::cleanse(
             $node->text()

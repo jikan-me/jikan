@@ -90,6 +90,16 @@ class MangaGenreParser implements ParserInterface
     }
 
     /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return JString::cleanse(
+            Parser::removeChildNodes($this->crawler->filterXPath('//*[@id="content"]/div[4]/p'))->html()
+        );
+    }
+
+    /**
      * @return int
      * @throws \RuntimeException
      * @throws \InvalidArgumentException

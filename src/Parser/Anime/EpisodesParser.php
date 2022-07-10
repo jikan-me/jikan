@@ -79,19 +79,20 @@ class EpisodesParser implements ParserInterface
      */
     public function getHasNextPage(): bool
     {
-        $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div/a[contains(@class, "link")]');
+        $isBeyondLastPage = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div/div[2]/table/tbody/tr/td/div[2]');
 
-        if (!$pages->count()) {
+        if (
+            $isBeyondLastPage->count()
+            && str_contains($isBeyondLastPage->text(), "No episode information has been added to this title")
+        ) {
             return false;
         }
 
-        $pages = $pages
-            ->nextAll()
-            ->last()
-            ->filterXPath('//a[not(contains(@class, "current"))]');
+        $isLastPage = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "current") and position() = last()]');
 
-        if (!$pages->count()) {
+        if ($isLastPage->count()) {
             return false;
         }
 

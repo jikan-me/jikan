@@ -187,5 +187,4 @@ class Producer extends Results implements Pagination
     {
         return $this->lastVisiblePage;
     }
-
 }

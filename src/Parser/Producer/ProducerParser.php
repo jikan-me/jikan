@@ -50,7 +50,7 @@ class ProducerParser implements ParserInterface
     public function getResults(): array
     {
         return $this->crawler
-            ->filterXPath('//*[@id="content"]/div[2]/div[contains(@class, "js-categories-seasonal")]')
+            ->filterXPath('//*[@id="content"]/div[2]/div[contains(@class, "js-categories-seasonal")]/div[contains(@class, "seasonal-anime")]')
             ->each(
                 function (Crawler $animeCrawler) {
                     return (new AnimeCardParser($animeCrawler))->getModel();

@@ -183,7 +183,7 @@ class ProducerParser implements ParserInterface
         }
 
         return JString::cleanse(
-            $node->text()
+            $node->html()
         );
     }
 

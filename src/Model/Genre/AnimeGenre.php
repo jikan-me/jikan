@@ -136,5 +136,4 @@ class AnimeGenre extends Results implements Pagination
     {
         return $this->description;
     }
-
 }

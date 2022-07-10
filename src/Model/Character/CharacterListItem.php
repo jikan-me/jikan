@@ -16,17 +16,22 @@ class CharacterListItem
     /**
      * @var CharacterMeta
      */
-    public $character;
+    private CharacterMeta $character;
 
     /**
      * @var string
      */
-    public $role;
+    private string $role;
+
+    /**
+     * @var int
+     */
+    private int $favorites;
 
     /**
      * @var VoiceActor[]
      */
-    public $voiceActors = [];
+    private array $voiceActors = [];
 
     /**
      * @param CharacterListItemParser $parser
@@ -41,6 +46,7 @@ class CharacterListItem
         $instance->voiceActors = $parser->getVoiceActors();
         $instance->character = $parser->getCharacterMeta();
         $instance->role = $parser->getRole();
+        $instance->favorites = $parser->getFavorites();
 
         return $instance;
     }
@@ -67,5 +73,13 @@ class CharacterListItem
     public function getVoiceActors(): array
     {
         return $this->voiceActors;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFavorites(): int
+    {
+        return $this->favorites;
     }
 }

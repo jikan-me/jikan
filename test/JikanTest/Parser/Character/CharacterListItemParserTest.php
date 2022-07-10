@@ -89,4 +89,15 @@ class CharacterListItemParserTest extends TestCase
             $voiceActors[1]->getPerson()->getImages()->getJpg()->getImageUrl()
         );
     }
+
+    /**
+     * @test
+     */
+    public function it_gets_the_favorites_count()
+    {
+        self::assertEquals(
+            6724,
+            $this->parser->getFavorites()
+        );
+    }
 }

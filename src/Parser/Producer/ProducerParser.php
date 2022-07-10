@@ -123,6 +123,9 @@ class ProducerParser implements ParserInterface
         return true;
     }
 
+    /**
+     * @return array
+     */
     public function getTitles(): array
     {
         $titles = [];
@@ -146,6 +149,10 @@ class ProducerParser implements ParserInterface
         return $titles;
     }
 
+    /**
+     * @return \DateTimeImmutable|null
+     * @throws \Exception
+     */
     public function getEstablished(): ?\DateTimeImmutable
     {
         $node = $this->crawler
@@ -162,6 +169,9 @@ class ProducerParser implements ParserInterface
         );
     }
 
+    /**
+     * @return string
+     */
     public function getAbout(): string
     {
         // it will be the node without <span class="dark_text">
@@ -173,6 +183,9 @@ class ProducerParser implements ParserInterface
         );
     }
 
+    /**
+     * @return int|null
+     */
     public function getFavorites(): ?int
     {
         $favorite = $this->crawler
@@ -187,6 +200,9 @@ class ProducerParser implements ParserInterface
         );
     }
 
+    /**
+     * @return int
+     */
     public function getAnimeCount(): int
     {
         $node = $this->crawler->filterXPath('//*[@id="content"]/div[2]/div[6]/div/ul/li[1]');
@@ -199,6 +215,9 @@ class ProducerParser implements ParserInterface
     }
 
 
+    /**
+     * @return array
+     */
     public function getExternalLinks(): array
     {
         $links = $this->crawler
@@ -211,5 +230,17 @@ class ProducerParser implements ParserInterface
         return $links->each(function (Crawler  $c) {
             return (new UrlParser($c))->getModel();
         });
+    }
+
+    /**
+     * @return Model\Resource\WrapImageResource\WrapImageResource
+     */
+    public function getImages(): Model\Resource\WrapImageResource\WrapImageResource
+    {
+        return Model\Resource\WrapImageResource\WrapImageResource::factory(
+            $this->crawler
+                ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "logo")]/img')
+                ->attr('data-src')
+        );
     }
 }

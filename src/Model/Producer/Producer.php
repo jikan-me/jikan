@@ -6,6 +6,8 @@ use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Url;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
 use Jikan\Model\Top\TopPeople;
 use Jikan\Parser\Producer\ProducerParser;
 
@@ -26,6 +28,11 @@ class Producer extends Results implements Pagination
      * @var string
      */
     private string $url;
+
+    /**
+     * @var WrapImageResource
+     */
+    private WrapImageResource $images;
 
     /**
      * @var string
@@ -86,8 +93,9 @@ class Producer extends Results implements Pagination
 
         $instance->malId = $parser->getUrl()->getMalId();
         $instance->url = $parser->getUrl()->getUrl();
-        $instance->name = $parser->getUrl()->getName();
         $instance->titles = $parser->getTitles();
+        $instance->name = (string) $instance->titles[0]->getTitle();
+        $instance->images = $parser->getImages();
         $instance->favorites = $parser->getFavorites();
         $instance->established = $parser->getEstablished();
         $instance->about = $parser->getAbout();
@@ -114,6 +122,14 @@ class Producer extends Results implements Pagination
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    /**
+     * @return WrapImageResource
+     */
+    public function getImages(): WrapImageResource
+    {
+        return $this->images;
     }
 
     /**

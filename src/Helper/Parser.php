@@ -172,6 +172,12 @@ class Parser
             return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
         }
 
+        // Parses invalid dates without days, e.g: May, 1979
+        // Converts it to May 01, 1979 otherwise DateTimeImmutable will use today's day
+        if (preg_match('~^([a-zA-z]+), (\d{4})$~', $date, $matches)) {
+            return new \DateTimeImmutable("$matches[1] 01, $matches[2]", new \DateTimeZone('UTC'));
+        }
+
         return null;
     }
 

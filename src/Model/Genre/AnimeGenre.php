@@ -19,32 +19,37 @@ class AnimeGenre extends Results implements Pagination
     /**
      * @var int
      */
-    private $malId;
+    private int $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var string
      */
-    private $name;
+    private string $name;
+
+    /**
+     * @var string
+     */
+    private string $description;
 
     /**
      * @var int
      */
-    public $count;
+    public int $count;
 
     /**
      * @var bool
      */
-    private $hasNextPage = false;
+    private bool $hasNextPage = false;
 
     /**
      * @var int
      */
-    private $lastVisiblePage = 1;
+    private int $lastVisiblePage = 1;
 
     /**
      * @param AnimeGenreParser $parser
@@ -61,6 +66,7 @@ class AnimeGenre extends Results implements Pagination
         $instance->name = $parser->getName();
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
+        $instance->description = $parser->getDescription();
         $instance->hasNextPage = $parser->getHasNextPage();
         $instance->lastVisiblePage = $parser->getLastPage();
 
@@ -121,5 +127,13 @@ class AnimeGenre extends Results implements Pagination
     public function getResults(): array
     {
         return $this->results;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
     }
 }

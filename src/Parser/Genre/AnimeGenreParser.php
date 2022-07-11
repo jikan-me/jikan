@@ -19,7 +19,7 @@ class AnimeGenreParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * GenreParser constructor.
@@ -64,7 +64,7 @@ class AnimeGenreParser implements ParserInterface
      */
     public function getMalId(): int
     {
-        return (int)preg_replace('#https://myanimelist.net(/\w+/\w+/)(\d+).*#', '$2', $this->getUrl());
+        return (int) preg_replace('#https://myanimelist.net(/\w+/\w+/)(\d+).*#', '$2', $this->getUrl());
     }
 
     /**
@@ -89,6 +89,16 @@ class AnimeGenreParser implements ParserInterface
         );
 
         return preg_replace('~(.*?)\sAnime~', '$1', $name);
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return JString::cleanse(
+            Parser::removeChildNodes($this->crawler->filterXPath('//*[@id="content"]/div[4]/p'))->html()
+        );
     }
 
     /**

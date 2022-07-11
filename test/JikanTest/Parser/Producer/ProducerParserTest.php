@@ -3,6 +3,7 @@
 namespace JikanTest\Parser\Person;
 
 use Goutte\Client;
+use Jikan\Model\Common\Url;
 use Jikan\Parser\Producer\ProducerParser;
 use JikanTest\TestCase;
 
@@ -42,5 +43,83 @@ class ProducerParserTest extends TestCase
         $anime = $this->parser->getResults();
         self::assertCount(278, $anime);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeCard::class, $anime);
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_image()
+    {
+        self::assertEquals(
+            'https://cdn.myanimelist.net/img/common/companies/1.png',
+            $this->parser->getImages()->getJpg()->getImageUrl()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_established()
+    {
+        self::assertEquals(
+            294364800,
+            $this->parser->getEstablished()->getTimestamp()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_favorites()
+    {
+        self::assertEquals(
+            1485,
+            $this->parser->getFavorites()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_about()
+    {
+        self::assertEquals(
+            null,
+            $this->parser->getAbout()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_count()
+    {
+        self::assertEquals(
+            278,
+            $this->parser->getAnimeCount()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_gets_external_links()
+    {
+        $externalLinks = $this->parser->getExternalLinks();
+
+        self::assertCount(
+            4,
+            $externalLinks
+        );
+
+        self::assertContainsOnlyInstancesOf(
+            Url::class,
+            $externalLinks
+        );
+
+        self::assertEquals(
+            'http://pierrot.jp/',
+            $externalLinks[0]->getUrl()
+        );
     }
 }

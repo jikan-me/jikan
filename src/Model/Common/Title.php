@@ -16,12 +16,12 @@ class Title
     /**
      * @var string
      */
-    private $type;
+    private string $type;
 
     /**
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @param string $title

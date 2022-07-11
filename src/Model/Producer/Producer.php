@@ -5,6 +5,9 @@ namespace Jikan\Model\Producer;
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Url;
+use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
+use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
 use Jikan\Model\Top\TopPeople;
 use Jikan\Parser\Producer\ProducerParser;
 
@@ -19,27 +22,63 @@ class Producer extends Results implements Pagination
     /**
      * @var int
      */
-    private $malId;
+    private int $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
+
+    /**
+     * @var WrapImageResource
+     */
+    private WrapImageResource $images;
 
     /**
      * @var string
+     * @deprecated @see titles
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var bool
+     * @var array
      */
-    private $hasNextPage = false;
+    private array $titles;
+
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    private ?\DateTimeImmutable $established;
+
+    /**
+     * @var int|null
+     */
+    private ?int $favorites;
+
+    /**
+     * @var string|null
+     */
+    private ?string $about;
+
+    /**
+     * @var Url[]
+     */
+    private array $externalLinks;
 
     /**
      * @var int
      */
-    private $lastVisiblePage = 1;
+    private int $count;
+
+    /**
+     * @var bool
+     */
+    private bool $hasNextPage = false;
+
+    /**
+     * @var int
+     */
+    private int $lastVisiblePage = 1;
 
     /**
      * @param ProducerParser $parser
@@ -54,7 +93,14 @@ class Producer extends Results implements Pagination
 
         $instance->malId = $parser->getUrl()->getMalId();
         $instance->url = $parser->getUrl()->getUrl();
-        $instance->name = $parser->getUrl()->getName();
+        $instance->titles = $parser->getTitles();
+        $instance->name = (string) $instance->titles[0]->getTitle();
+        $instance->images = $parser->getImages();
+        $instance->favorites = $parser->getFavorites();
+        $instance->established = $parser->getEstablished();
+        $instance->about = $parser->getAbout();
+        $instance->externalLinks = $parser->getExternalLinks();
+        $instance->count = $parser->getAnimeCount();
         $instance->results = $parser->getResults();
         $instance->hasNextPage = $parser->getHasNextPage();
         $instance->lastVisiblePage = $parser->getLastPage();
@@ -79,11 +125,67 @@ class Producer extends Results implements Pagination
     }
 
     /**
+     * @return WrapImageResource
+     */
+    public function getImages(): WrapImageResource
+    {
+        return $this->images;
+    }
+
+    /**
      * @return string
      */
     public function getName(): string
     {
         return $this->name;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTitles(): array
+    {
+        return $this->titles;
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getEstablished(): ?\DateTimeImmutable
+    {
+        return $this->established;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFavorites(): ?int
+    {
+        return $this->favorites;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAbout(): ?string
+    {
+        return $this->about;
+    }
+
+    /**
+     * @return Url[]
+     */
+    public function getExternalLinks(): array
+    {
+        return $this->externalLinks;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->count;
     }
 
     /**
@@ -100,13 +202,5 @@ class Producer extends Results implements Pagination
     public function getLastVisiblePage(): int
     {
         return $this->lastVisiblePage;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults(): array
-    {
-        return $this->results;
     }
 }

@@ -62,8 +62,8 @@ class MusicVideoListItem
     /**
      * @return MusicMeta
      */
-    public function getMusic(): MusicMeta
+    public function getMeta(): MusicMeta
     {
-        return $this->music;
+        return $this->meta;
     }
 }

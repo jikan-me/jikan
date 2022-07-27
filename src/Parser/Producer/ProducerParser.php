@@ -65,10 +65,9 @@ class ProducerParser implements ParserInterface
      */
     public function getUrl(): Model\Common\MalUrl
     {
+        $title = $this->crawler->filterXPath('//*[@id="contentWrapper"]/div[1]/h1');
         return new Model\Common\MalUrl(
-            JString::cleanse(
-                Parser::removeChildNodes($this->crawler->filterXPath('//span[@class=\'di-ib mt4\']'))->text()
-            ),
+            $title->text(),
             $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content')
         );
     }
@@ -209,7 +208,7 @@ class ProducerParser implements ParserInterface
      */
     public function getAnimeCount(): int
     {
-        $node = $this->crawler->filterXPath('//*[@id="content"]/div[2]/div[6]/div/ul/li[1]');
+        $node = $this->crawler->filterXPath('//*[@id="content"]/div[2]/div[contains(@class, "navi-seasonal")]/div/ul/li[1]');
 
         preg_match('~\((.*)\)~', $node->text(), $matches);
 

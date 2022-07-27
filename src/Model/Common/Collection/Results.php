@@ -12,7 +12,7 @@ abstract class Results
     /**
      * @var array
      */
-    protected $results = [];
+    protected array $results = [];
 
     /**
      * @return array

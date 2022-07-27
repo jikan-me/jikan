@@ -20,7 +20,7 @@ class CharacterListItemParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * CharacterListItemParser constructor.
@@ -105,6 +105,17 @@ class CharacterListItemParser implements ParserInterface
                 $this->crawler->filterXPath('//td[2]/div[4]')->text()
             )
         );
+    }
+
+    /**
+     * @return int
+     */
+    public function getFavorites(): int
+    {
+        $node = $this->crawler
+            ->filterXPath('//td[2]/div[5]');
+
+        return (int) str_replace(',', '', $node->text());
     }
 
     /**

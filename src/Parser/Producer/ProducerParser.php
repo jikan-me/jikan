@@ -6,6 +6,7 @@ use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Parser\Common\AnimeCardParser;
+use Jikan\Parser\Common\UrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -19,7 +20,7 @@ class ProducerParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * ProducerParser constructor.
@@ -49,7 +50,7 @@ class ProducerParser implements ParserInterface
     public function getResults(): array
     {
         return $this->crawler
-            ->filter('div.seasonal-anime')
+            ->filterXPath('//*[@id="content"]/div[2]/div[contains(@class, "js-categories-seasonal")]/div[contains(@class, "seasonal-anime")]')
             ->each(
                 function (Crawler $animeCrawler) {
                     return (new AnimeCardParser($animeCrawler))->getModel();
@@ -120,5 +121,130 @@ class ProducerParser implements ParserInterface
         }
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTitles(): array
+    {
+        $titles = [];
+        $titleEnglish = $this->crawler->filterXPath('//*[@id="contentWrapper"]/div[1]/h1');
+
+        if ($titleEnglish->count()) {
+            $titles[] = new Model\Common\Title(Model\Common\Title::TYPE_DEFAULT, $titleEnglish->text());
+        }
+
+        $titleJapanese = $this->crawler->filterXPath('//span[text()="Japanese:"]');
+
+        if ($titleJapanese->count()) {
+            $titles[] = new Model\Common\Title(
+                'Japanese',
+                JString::cleanse(
+                    str_replace($titleJapanese->text(), '', $titleJapanese->ancestors()->text())
+                )
+            );
+        }
+
+        return $titles;
+    }
+
+    /**
+     * @return \DateTimeImmutable|null
+     * @throws \Exception
+     */
+    public function getEstablished(): ?\DateTimeImmutable
+    {
+        $node = $this->crawler
+            ->filterXPath('//span[text()="Established:"]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return Parser::parseDateMDYReadable(
+            JString::cleanse(
+                str_replace($node->text(), '', $node->ancestors()->text())
+            )
+        );
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAbout(): ?string
+    {
+        // it will be the node without <span class="dark_text">
+        $node = $this->crawler
+            ->filterXPath('//*[@id="content"]/div[1]//div[contains(@class, "spaceit_pad")]/span[not(contains(@class, "dark_text"))]');
+
+        if (!$node->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            $node->html()
+        );
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFavorites(): ?int
+    {
+        $favorite = $this->crawler
+            ->filterXPath('//span[text()="Member Favorites:"]');
+
+        if (!$favorite->count()) {
+            return null;
+        }
+
+        return JString::cleanse(
+            str_replace([$favorite->text(), ','], '', $favorite->ancestors()->text())
+        );
+    }
+
+    /**
+     * @return int
+     */
+    public function getAnimeCount(): int
+    {
+        $node = $this->crawler->filterXPath('//*[@id="content"]/div[2]/div[6]/div/ul/li[1]');
+
+        preg_match('~\((.*)\)~', $node->text(), $matches);
+
+        return JString::cleanse(
+            str_replace(',', '', $matches[1])
+        );
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getExternalLinks(): array
+    {
+        $links = $this->crawler
+            ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "user-profile-sns")]/span//a');
+
+        if (!$links->count()) {
+            return [];
+        }
+
+        return $links->each(function (Crawler  $c) {
+            return (new UrlParser($c))->getModel();
+        });
+    }
+
+    /**
+     * @return Model\Resource\WrapImageResource\WrapImageResource
+     */
+    public function getImages(): Model\Resource\WrapImageResource\WrapImageResource
+    {
+        return Model\Resource\WrapImageResource\WrapImageResource::factory(
+            $this->crawler
+                ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "logo")]/img')
+                ->attr('data-src')
+        );
     }
 }

@@ -69,6 +69,6 @@ class MusicVideoListItemParser implements ParserInterface
 
         preg_match('~(.*) by (.*)~', $node->text(), $matches);
 
-        return new MusicMeta($matches[1], $matches[2]);
+        return new MusicMeta($matches[1] ?? null, $matches[2] ?? null);
     }
 }

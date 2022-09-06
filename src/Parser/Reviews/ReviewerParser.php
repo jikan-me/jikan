@@ -46,7 +46,7 @@ class ReviewerParser implements ParserInterface
     public function getUrl(): string
     {
         // works on Anime/Manga Review pages
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/a');
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "username")]/a');
         if ($node->count()) {
             return $node->attr('href');
         }
@@ -67,7 +67,7 @@ class ReviewerParser implements ParserInterface
     public function getUsername(): string
     {
         // works on Anime/Manga Review pages
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[2]/a');
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "username")]/a');
         if ($node->count()) {
             return $node->text();
         }
@@ -85,7 +85,7 @@ class ReviewerParser implements ParserInterface
     public function getImageUrl(): string
     {
         // works on Anime/Manga Review pages
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tr/td[1]/div/a/img');
+        $node = $this->crawler->filterXPath('//div/div/a/img');
         if ($node->count()) {
             return Parser::parseImageThumbToHQ(
                 $node->attr('data-src')

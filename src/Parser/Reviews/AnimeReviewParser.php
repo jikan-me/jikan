@@ -71,7 +71,8 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        $node = $this->crawler->filterXPath('//div[1]/div[3]/div/div/a');
+        $node = $this->crawler
+            ->filterXPath('//div/div[2]/div[contains(@class, "bottom-navi")]/div[@class="open"]/a');
         return $node->attr('href');
     }
 
@@ -134,6 +135,8 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getHelpfulCount(): int
     {
+        return 0; //@todo replace with reactions array
+
         // works on Profile pages
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[1]/div/strong/span');
         if ($node->count()) {
@@ -158,8 +161,9 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getDate(): \DateTimeImmutable
     {
-        $date = $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[1]')->text();
-        $time = $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[1]')->attr('title');
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "update_at")]');
+        $date = $node->text();
+        $time = $node->attr('title');
         return new \DateTimeImmutable("{$date} {$time}", new \DateTimeZone('UTC'));
     }
 
@@ -179,8 +183,10 @@ class AnimeReviewParser implements ParserInterface
         //        return $this->crawler
         //            ->filterXPath('//div[2]')
         //            ->text();
-        $node = $this->crawler->filterXPath('//div[1]/div[2]');
-        $nodeExpanded = $node->filterXPath('//span');
+        $node = $this->crawler->filterXPath('//div[1]/div[2]/div[contains(@class, "text")]');
+        $nodeExpanded = $this
+            ->crawler
+            ->filterXPath('//div[1]/div[2]/div[contains(@class, "text")]/span[contains(@class, "js-hidden")]');
 
         $node = Parser::removeChildNodes($node);
 

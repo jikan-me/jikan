@@ -7,6 +7,7 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Common\AnimeMeta;
+use Jikan\Model\Reviews\Reactions;
 use Jikan\Model\Reviews\Reviewer;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -21,7 +22,7 @@ class AnimeReviewParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * AnimeReviewParser constructor.
@@ -173,20 +174,10 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getContent(): string
     {
-        //        echo htmlentities(
-        //            $this->crawler
-        //                ->filterXPath('//div[contains(@class, "textReadability")]')
-        //                ->html()
-        //        );
-        //        echo "<br><br>";
-        //
-        //        return $this->crawler
-        //            ->filterXPath('//div[2]')
-        //            ->text();
-        $node = $this->crawler->filterXPath('//div[1]/div[2]/div[contains(@class, "text")]');
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "text")]');
         $nodeExpanded = $this
             ->crawler
-            ->filterXPath('//div[1]/div[2]/div[contains(@class, "text")]/span[contains(@class, "js-hidden")]');
+            ->filterXPath('//div/div[2]/div[contains(@class, "text")]/span[contains(@class, "js-hidden")]');
 
         $node = Parser::removeChildNodes($node);
 
@@ -199,7 +190,6 @@ class AnimeReviewParser implements ParserInterface
 
         return $content;
     }
-
 
     /**
      * @return Reviewer
@@ -239,21 +229,64 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getEpisodesWatched(): int
+    public function getEpisodesWatched(): ?int
     {
-        $nodeText = JString::cleanse(
-            $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
-        );
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "preliminary")]/span');
 
-        preg_match('~(\d+) of (.*) episodes seen~', $nodeText, $episodesSeen);
+        if (!$node->count()) {
+            return null;
+        }
+
+        preg_match('~\((\d+)/(.*)\)~', JString::cleanse($node->text()), $episodesSeen);
 
         if (empty($episodesSeen)) {
             return 0;
         }
 
         return (int) $episodesSeen[1];
+    }
+
+    public function getReactions(): Reactions
+    {
+        return (new ReactionsParser($this->crawler))->getModel();
+    }
+
+    public function getReviewerScore(): int
+    {
+        return (int) $this->crawler
+            ->filterXPath('//div/div[2]/div[contains(@class, "rating")]/span')
+            ->text();
+    }
+
+    public function getReviewTag(): string
+    {
+        return $this->crawler
+            ->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[1]')
+            ->text();
+    }
+
+    public function isPreliminary(): bool
+    {
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "preliminary")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isSpoiler(): bool
+    {
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "spoiler")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
     }
 }

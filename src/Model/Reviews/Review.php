@@ -16,32 +16,52 @@ abstract class Review
     /**
      * @var int
      */
-    protected $malId;
+    protected int $malId;
 
     /**
      * @var string
      */
-    protected $url;
+    protected string $url;
 
     /**
      * @var string
      */
-    protected $type;
+    protected string $type;
 
     /**
-     * @var int
+     * @var Reactions
      */
-    protected $votes;
+    protected Reactions $reactions;
 
     /**
      * @var \DateTimeImmutable
      */
-    protected $date;
+    protected \DateTimeImmutable $date;
 
     /**
      * @var string
      */
-    protected $review;
+    protected string $review;
+
+    /**
+     * @var int
+     */
+    protected int $score;
+
+    /**
+     * @var string
+     */
+    protected string $tag;
+
+    /**
+     * @var bool
+     */
+    protected bool $isSpoiler;
+
+    /**
+     * @var bool
+     */
+    protected bool $isPreliminary;
 
     /**
      * @return int
@@ -68,11 +88,11 @@ abstract class Review
     }
 
     /**
-     * @return int
+     * @return Reactions
      */
-    public function getVotes(): int
+    public function getReactions(): Reactions
     {
-        return $this->votes;
+        return $this->reactions;
     }
 
     /**
@@ -90,4 +110,37 @@ abstract class Review
     {
         return $this->review;
     }
+
+    /**
+     * @return int
+     */
+    public function getScore(): int
+    {
+        return $this->score;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTag(): string
+    {
+        return $this->tag;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSpoiler(): bool
+    {
+        return $this->isSpoiler;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPreliminary(): bool
+    {
+        return $this->isPreliminary;
+    }
+
 }

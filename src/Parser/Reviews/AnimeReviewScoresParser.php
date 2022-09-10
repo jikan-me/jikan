@@ -1,4 +1,8 @@
 <?php
+/**
+ * Removed as of MAL's re-haul of the review system
+ * Read more: https://myanimelist.net/forum/?topicid=2034720&show=0
+ */
 
 namespace Jikan\Parser\Reviews;
 

@@ -14,12 +14,12 @@ class AnimeReviewsRequest implements RequestInterface
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @var int
      */
-    private $page;
+    private int $page;
 
     /**
      * AnimeReviewsRequest constructor.

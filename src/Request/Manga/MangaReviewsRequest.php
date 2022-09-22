@@ -2,6 +2,7 @@
 
 namespace Jikan\Request\Manga;
 
+use Jikan\Helper\Constants;
 use Jikan\Request\RequestInterface;
 
 /**
@@ -14,12 +15,27 @@ class MangaReviewsRequest implements RequestInterface
     /**
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @var int
      */
-    private $page;
+    private int $page;
+
+    /**
+     * @var string
+     */
+    private string $sort;
+
+    /**
+     * @var bool
+     */
+    private bool $spoilers;
+
+    /**
+     * @var bool
+     */
+    private bool $preliminary;
 
     /**
      * MangaReviewsRequest constructor.
@@ -27,10 +43,13 @@ class MangaReviewsRequest implements RequestInterface
      * @param int $id
      * @param int $page
      */
-    public function __construct(int $id, int $page = 1)
+    public function __construct(int $id, int $page = 1, string $sort = Constants::REVIEWS_SORT_MOST_VOTED, bool $spoilers = true, bool $preliminary = true)
     {
         $this->id = $id;
         $this->page = $page;
+        $this->sort = $sort;
+        $this->spoilers = $spoilers;
+        $this->preliminary = $preliminary;
     }
 
     /**
@@ -38,7 +57,16 @@ class MangaReviewsRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return sprintf('https://myanimelist.net/manga/%d/jikan/reviews?p=%d', $this->id, $this->page);
+        $query = '?'.http_build_query(
+                [
+                    'spoiler' => $this->spoilers ? 'on' : 'off',
+                    'preliminary' => $this->preliminary ? 'on' : 'off',
+                    'sort' => $this->sort,
+                    'p' => $this->page
+                ]
+            );
+
+        return sprintf('https://myanimelist.net/manga/%d/jikan/reviews%s', $this->id, $query);
     }
 
     /**
@@ -55,5 +83,29 @@ class MangaReviewsRequest implements RequestInterface
     public function getPage(): int
     {
         return $this->page;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSort(): string
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSpoilers(): bool
+    {
+        return $this->spoilers;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPreliminary(): bool
+    {
+        return $this->preliminary;
     }
 }

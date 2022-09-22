@@ -249,11 +249,17 @@ class AnimeReviewParser implements ParserInterface
         return (int) $episodesSeen[1];
     }
 
+    /**
+     * @return Reactions
+     */
     public function getReactions(): Reactions
     {
         return (new ReactionsParser($this->crawler))->getModel();
     }
 
+    /**
+     * @return int
+     */
     public function getReviewerScore(): int
     {
         return (int) $this->crawler
@@ -261,6 +267,9 @@ class AnimeReviewParser implements ParserInterface
             ->text();
     }
 
+    /**
+     * @return string
+     */
     public function getReviewTag(): string
     {
         return $this->crawler
@@ -268,6 +277,9 @@ class AnimeReviewParser implements ParserInterface
             ->text();
     }
 
+    /**
+     * @return bool
+     */
     public function isPreliminary(): bool
     {
         $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "preliminary")]');
@@ -279,6 +291,9 @@ class AnimeReviewParser implements ParserInterface
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function isSpoiler(): bool
     {
         $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "spoiler")]');

@@ -306,4 +306,9 @@ class Constants
 
     public const USER_LIST_SORT_DESCENDING = 1;
     public const USER_LIST_SORT_ASCENDING = -1;
+
+    public const REVIEWS_SORT_MOST_VOTED = 'mostvoted';
+    public const REVIEWS_SORT_OLDEST = 'oldest';
+    public const REVIEWS_SORT_NEWEST = 'newest';
+
 }

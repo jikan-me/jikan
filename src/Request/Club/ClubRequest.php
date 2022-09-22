@@ -47,4 +47,12 @@ class ClubRequest implements RequestInterface
     {
         return $this->clubId;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

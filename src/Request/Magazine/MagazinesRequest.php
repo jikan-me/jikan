@@ -18,4 +18,12 @@ class MagazinesRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/manga/magazine');
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

@@ -19,4 +19,12 @@ class PopularEpisodesRequest implements RequestInterface
     {
         return 'https://myanimelist.net/watch/episode/popular';
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

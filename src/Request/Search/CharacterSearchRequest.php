@@ -133,4 +133,12 @@ class CharacterSearchRequest implements RequestInterface
     {
         return $this->char;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

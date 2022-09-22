@@ -18,4 +18,12 @@ class MangaGenresRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/manga.php');
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

@@ -55,4 +55,12 @@ class MangaNewsRequest implements RequestInterface
     {
         return $this->page;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

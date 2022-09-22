@@ -22,15 +22,21 @@ class AnimeReviewsRequest implements RequestInterface
     private $page;
 
     /**
+     * @var bool
+     */
+    private bool $showSpoilers;
+
+    /**
      * AnimeReviewsRequest constructor.
      *
      * @param int $id
      * @param int $page
      */
-    public function __construct(int $id, int $page = 1)
+    public function __construct(int $id, int $page = 1, bool $showSpoilers = true)
     {
         $this->id = $id;
         $this->page = $page;
+        $this->showSpoilers = $showSpoilers;
     }
 
     /**
@@ -39,6 +45,16 @@ class AnimeReviewsRequest implements RequestInterface
     public function getPath(): string
     {
         return sprintf('https://myanimelist.net/anime/%d/jikan/reviews?p=%d', $this->id, $this->page);
+    }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [
+            'reviews_inc_spoiler' => (int) $this->showSpoilers
+        ];
     }
 
     /**
@@ -56,4 +72,13 @@ class AnimeReviewsRequest implements RequestInterface
     {
         return $this->page;
     }
+
+    /**
+     * @return bool
+     */
+    public function isShowSpoilers(): bool
+    {
+        return $this->showSpoilers;
+    }
+
 }

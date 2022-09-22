@@ -18,4 +18,12 @@ class SeasonListRequest implements RequestInterface
     {
         return 'https://myanimelist.net/anime/season/archive';
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

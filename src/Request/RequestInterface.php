@@ -15,4 +15,5 @@ interface RequestInterface
      * @return string
      */
     public function getPath(): string;
+    public function getCookies(): array;
 }

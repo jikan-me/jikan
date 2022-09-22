@@ -194,4 +194,12 @@ class UserSearchRequest implements RequestInterface
     {
         return $this->gender;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

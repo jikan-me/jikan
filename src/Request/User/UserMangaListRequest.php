@@ -287,4 +287,12 @@ class UserMangaListRequest implements RequestInterface
     {
         return $this->magazine;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

@@ -338,4 +338,12 @@ class UserAnimeListRequest implements RequestInterface
     {
         return $this->producer;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

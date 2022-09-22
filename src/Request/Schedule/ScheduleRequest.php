@@ -18,4 +18,12 @@ class ScheduleRequest implements RequestInterface
     {
         return 'https://myanimelist.net/anime/season/schedule';
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

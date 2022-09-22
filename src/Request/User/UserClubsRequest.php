@@ -41,4 +41,12 @@ class UserClubsRequest implements RequestInterface
     {
         return $this->username;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

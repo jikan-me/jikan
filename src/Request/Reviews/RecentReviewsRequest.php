@@ -91,4 +91,12 @@ class RecentReviewsRequest implements RequestInterface
     {
         return $this->type;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

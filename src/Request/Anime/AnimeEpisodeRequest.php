@@ -56,4 +56,12 @@ class AnimeEpisodeRequest implements RequestInterface
     {
         return $this->episodeId;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

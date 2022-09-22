@@ -19,4 +19,12 @@ class RecentlyOnlineUsersRequest implements RequestInterface
     {
         return 'https://myanimelist.net/users.php';
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

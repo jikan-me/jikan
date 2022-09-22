@@ -83,4 +83,12 @@ class SeasonalRequest implements RequestInterface
     {
         return $this->later;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

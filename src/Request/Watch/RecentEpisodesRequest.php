@@ -19,4 +19,12 @@ class RecentEpisodesRequest implements RequestInterface
     {
         return 'https://myanimelist.net/watch/episode';
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

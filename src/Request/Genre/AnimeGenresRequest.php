@@ -18,4 +18,12 @@ class AnimeGenresRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime.php');
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

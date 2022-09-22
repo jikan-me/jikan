@@ -17,6 +17,8 @@ use Jikan\Goutte\GoutteWrapper;
 use Jikan\Model;
 use Jikan\Parser;
 use Jikan\Request;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\BrowserKit\CookieJar;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -28,12 +30,12 @@ class MalClient
     /**
      * @var GoutteWrapper
      */
-    protected $ghoutte;
+    protected GoutteWrapper $ghoutte;
 
     /**
-     * @var HttpClientInterface|HttpClientInterface
+     * @var HttpClientInterface
      */
-    protected $httpClient;
+    protected HttpClientInterface $httpClient;
 
     /**
      * MalClient constructor.
@@ -980,7 +982,8 @@ class MalClient
      */
     public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): Model\Anime\AnimeReviews
     {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
+        $crawler = Request\JikanRequest::create($request);
+
         try {
             $parser = new Parser\Anime\AnimeReviewsParser($crawler);
 

@@ -56,4 +56,12 @@ class ProducerRequest implements RequestInterface
     {
         return $this->page;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

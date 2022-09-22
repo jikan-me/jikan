@@ -133,4 +133,12 @@ class PersonSearchRequest implements RequestInterface
     {
         return $this->char;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

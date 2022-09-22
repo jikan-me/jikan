@@ -442,4 +442,12 @@ class AnimeSearchRequest implements RequestInterface
     {
         return $this->sort;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

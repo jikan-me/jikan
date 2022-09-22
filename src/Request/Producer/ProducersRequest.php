@@ -18,4 +18,12 @@ class ProducersRequest implements RequestInterface
     {
         return sprintf('https://myanimelist.net/anime/producer');
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

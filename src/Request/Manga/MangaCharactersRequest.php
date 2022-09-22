@@ -41,4 +41,12 @@ class MangaCharactersRequest implements RequestInterface
     {
         return $this->id;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

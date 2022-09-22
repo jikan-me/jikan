@@ -19,4 +19,12 @@ class PopularPromotionalVideosRequest implements RequestInterface
     {
         return 'https://myanimelist.net/watch/promotion/popular';
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

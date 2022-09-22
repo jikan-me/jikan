@@ -74,4 +74,12 @@ class MangaForumRequest implements RequestInterface
     {
         return $this->topic;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

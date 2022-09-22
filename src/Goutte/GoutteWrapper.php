@@ -4,6 +4,7 @@ namespace Jikan\Goutte;
 
 use Goutte\Client;
 use Jikan\Exception\BadResponseException;
+use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -34,6 +35,7 @@ class GoutteWrapper extends Client
         string $content = null,
         bool $changeHistory = true
     ) : Crawler {
+
         $response = parent::request(
             $method,
             $uri,

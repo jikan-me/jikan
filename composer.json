@@ -27,7 +27,8 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "fabpot/goutte": "^4.0"
+        "fabpot/goutte": "^4.0",
+        "symfony/browser-kit": "^6.1"
     },
     "require-dev": {
         "brianium/paratest": "^6.4.1",

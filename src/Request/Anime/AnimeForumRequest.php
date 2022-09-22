@@ -74,4 +74,12 @@ class AnimeForumRequest implements RequestInterface
     {
         return $this->topic;
     }
+
+    /**
+     * @return array
+     */
+    public function getCookies(): array
+    {
+        return [];
+    }
 }

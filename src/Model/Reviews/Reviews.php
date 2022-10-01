@@ -8,11 +8,11 @@ use Jikan\Model\Recommendations\UserRecommendations;
 use Jikan\Parser;
 
 /**
- * Class RecentReviews
+ * Class Reviews
  *
- * @package Jikan\Model\UserReviewsParser\RecentReviews
+ * @package Jikan\Model\UserReviewsParser\Reviews
  */
-class RecentReviews extends Results implements Pagination
+class Reviews extends Results implements Pagination
 {
 
     /**
@@ -26,18 +26,18 @@ class RecentReviews extends Results implements Pagination
     private $lastVisiblePage = 1;
 
     /**
-     * @param Parser\Reviews\RecentReviewsParser $parser
+     * @param Parser\Reviews\ReviewsParser $parser
      *
-     * @return RecentReviews
+     * @return Reviews
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\Reviews\RecentReviewsParser $parser): self
+    public static function fromParser(Parser\Reviews\ReviewsParser $parser): self
     {
         $instance = new self();
 
-        $instance->results = $parser->getRecentReviews();
+        $instance->results = $parser->getReviews();
         $instance->hasNextPage = $parser->hasNextPage();
 
         return $instance;

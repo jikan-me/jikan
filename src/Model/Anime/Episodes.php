@@ -4,7 +4,7 @@ namespace Jikan\Model\Anime;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
-use Jikan\Model\Reviews\RecentReviews;
+use Jikan\Model\Reviews\Reviews;
 use Jikan\Parser\Anime\EpisodesParser;
 
 /**

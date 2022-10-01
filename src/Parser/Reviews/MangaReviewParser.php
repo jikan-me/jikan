@@ -160,11 +160,21 @@ class MangaReviewParser implements ParserInterface
      */
     public function getType(): ?string
     {
+        // Anime/Manga and User Reviews page
         $node = $this->crawler->filterXPath('//div/div/div[2]/div[2]/small');
 
-        if (!$node->count()) {
-            return null;
+        if ($node->count()) {
+            return strtolower(
+                str_replace(
+                    ['(', ')'],
+                    '',
+                    $node->text()
+                )
+            );
         }
+
+        // All Reviews Page
+        $node = $this->crawler->filterXPath('//div/small');
 
         return strtolower(
             str_replace(

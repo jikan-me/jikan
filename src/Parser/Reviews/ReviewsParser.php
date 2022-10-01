@@ -2,9 +2,9 @@
 
 namespace Jikan\Parser\Reviews;
 
-use Jikan\Model\Reviews\Recent\RecentAnimeReview;
-use Jikan\Model\Reviews\Recent\RecentMangaReview;
-use Jikan\Model\Reviews\RecentReviews;
+use Jikan\Model\Reviews\FullAnimeReview;
+use Jikan\Model\Reviews\FullMangaReview;
+use Jikan\Model\Reviews\Reviews;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -12,13 +12,12 @@ use Symfony\Component\DomCrawler\Crawler;
  *
  * @package Jikan\Parser\Top
  */
-class RecentReviewsParser
+class ReviewsParser
 {
     /**
      * @var Crawler
      */
-    private $crawler;
-
+    private Crawler $crawler;
 
     /**
      * CharacterListItemParser constructor.
@@ -31,12 +30,12 @@ class RecentReviewsParser
     }
 
     /**
-     * @return RecentReviews
+     * @return Reviews
      * @throws \Exception
      */
-    public function getModel(): RecentReviews
+    public function getModel(): Reviews
     {
-        return RecentReviews::fromParser($this);
+        return Reviews::fromParser($this);
     }
 
     /**
@@ -44,24 +43,22 @@ class RecentReviewsParser
      * @throws \RuntimeException
      * @throws \InvalidArgumentException|\Exception
      */
-    public function getRecentReviews(): array
+    public function getReviews(): array
     {
         return array_filter(
             $this->crawler
-                ->filterXPath('//*[@id="content"]/div[@class="borderDark"]')
+                ->filterXPath('//*[@id="content"]//div[contains(@class, "review-element")]')
                 ->each(
                     function (Crawler $crawler) {
-                        // If requested by $type `Constants::TOP_REVIEWS_BEST_VOTED`; both types can be returned
-                        // So we check types here to allow the ability to parse and return both
 
                         // Anime Review
-                        if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Anime)') {
-                            return RecentAnimeReview::fromParser(new AnimeReviewParser($crawler));
+                        if ($crawler->filterXPath('//div/small')->text() === '(Anime)') {
+                            return FullAnimeReview::fromParser(new AnimeReviewParser($crawler));
                         }
 
                         // Manga Review
-                        if ($crawler->filterXPath('//div[1]/div[1]/div[2]/small')->text() === '(Manga)') {
-                            return RecentMangaReview::fromParser(new MangaReviewParser($crawler));
+                        if ($crawler->filterXPath('//div/small')->text() === '(Manga)') {
+                            return FullMangaReview::fromParser(new MangaReviewParser($crawler));
                         }
 
                         return null;

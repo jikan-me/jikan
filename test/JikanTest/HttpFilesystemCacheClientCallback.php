@@ -7,12 +7,26 @@ use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
+/**
+ *
+ */
 class HttpFilesystemCacheClientCallback
 {
-    private $cachePath;
-    private $httpClient;
+    /**
+     * @var string
+     */
+    private string $cachePath;
 
-    public function __construct($cachePath, HttpClientInterface $httpClient = null)
+    /**
+     * @var HttpClientInterface
+     */
+    private HttpClientInterface $httpClient;
+
+    /**
+     * @param string $cachePath
+     * @param HttpClientInterface|null $httpClient
+     */
+    public function __construct(string $cachePath, HttpClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?? HttpClient::create();
         if (!is_dir($cachePath)) {
@@ -23,6 +37,16 @@ class HttpFilesystemCacheClientCallback
         $this->cachePath = $cachePath;
     }
 
+    /**
+     * @param string $method
+     * @param string $url
+     * @param array $options
+     * @return ResponseInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+     */
     public function __invoke(string $method, string $url, array $options = []): ResponseInterface
     {
         $hash = sha1(json_encode(compact('method', 'url', 'options')));

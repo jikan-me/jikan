@@ -9,8 +9,5 @@
     <testsuite name="Unit">
       <directory>./test/JikanTest</directory>
     </testsuite>
-    <testsuite name="Fast">
-      <directory>./test/JikanTest/JikanTest.php</directory>
-    </testsuite>
   </testsuites>
 </phpunit>

@@ -18,8 +18,8 @@ class UserMangaReview extends MangaReview
     /**
      * @var MangaMeta
      */
-    private $entry;
-
+    private MangaMeta $entry;
+    
     /**
      * @param MangaReviewParser $parser
      * @return UserAnimeReview
@@ -33,77 +33,16 @@ class UserMangaReview extends MangaReview
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();
-        $instance->votes = $parser->getHelpfulCount();
+        $instance->reactions = $parser->getReactions();
         $instance->date = $parser->getDate();
-        $instance->scores = $parser->getMangaScores();
+        $instance->score = $parser->getReviewerScore();
         $instance->review = $parser->getContent();
+        $instance->tags = $parser->getReviewTag();
+        $instance->isPreliminary = $parser->isPreliminary();
         $instance->chaptersRead = $parser->getChaptersRead();
+        $instance->isSpoiler = $parser->isSpoiler();
 
         return $instance;
-    }
-
-    /**
-     * @return string
-     */
-    public function getChaptersRead(): string
-    {
-        return $this->chaptersRead;
-    }
-
-    /**
-     * @return MangaReviewScores
-     */
-    public function getScores(): MangaReviewScores
-    {
-        return $this->scores;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return $this->malId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVotes(): int
-    {
-        return $this->votes;
-    }
-
-    /**
-     * @return \DateTimeImmutable
-     */
-    public function getDate(): \DateTimeImmutable
-    {
-        return $this->date;
-    }
-
-    /**
-     * @return string
-     */
-    public function getReview(): string
-    {
-        return $this->review;
     }
 
     /**

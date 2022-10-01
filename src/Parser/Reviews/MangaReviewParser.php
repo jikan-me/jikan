@@ -52,9 +52,9 @@ class MangaReviewParser implements ParserInterface
     public function getManga() : MangaMeta
     {
         return new MangaMeta(
-            $this->getReviewedTitle(),
-            $this->getReviewedUrl(),
-            $this->getReviewedImageUrl()
+            $this->getMangaTitle(),
+            $this->getMangaUrl(),
+            $this->getMangaImageUrl()
         );
     }
 
@@ -160,7 +160,7 @@ class MangaReviewParser implements ParserInterface
      */
     public function getType(): ?string
     {
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/small');
+        $node = $this->crawler->filterXPath('//div/div/div[2]/div[2]/small');
 
         if (!$node->count()) {
             return null;
@@ -179,10 +179,10 @@ class MangaReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedTitle(): string
+    public function getMangaTitle(): string
     {
         return $this->crawler
-            ->filterXPath('//div[1]/div[1]/div[2]/strong/a')
+            ->filterXPath('//div[1]/div/div[2]/div/a')
             ->text();
     }
 
@@ -191,11 +191,11 @@ class MangaReviewParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \Jikan\Exception\ParserException
      */
-    public function getReviewedImageUrl(): string
+    public function getMangaImageUrl(): string
     {
         // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[12]/div[1]/div[1]/a/img');
+            ->filterXPath('//div[1]/div/div[1]/a/img');
 
         if ($node->count()) {
             return Parser::parseImageQuality($node->attr('data-src'));
@@ -216,11 +216,11 @@ class MangaReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedUrl(): string
+    public function getMangaUrl(): string
     {
         // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[12]/div[1]/div[1]/a');
+            ->filterXPath('//div[1]/div/div[2]/div/a');
 
         if ($node->count()) {
             return $node->attr('href');
@@ -273,13 +273,17 @@ class MangaReviewParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getReviewTag(): string
+    public function getReviewTag(): array
     {
         return $this->crawler
-            ->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[1]')
-            ->text();
+            ->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div')
+            ->each(function (Crawler $crawler) {
+                return JString::cleanse(
+                    Parser::removeChildNodes($crawler)->text()
+                );
+            });
     }
 
     /**

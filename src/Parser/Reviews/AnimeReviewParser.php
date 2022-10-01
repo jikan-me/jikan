@@ -50,9 +50,9 @@ class AnimeReviewParser implements ParserInterface
     public function getAnime() : AnimeMeta
     {
         return new AnimeMeta(
-            $this->getReviewedTitle(),
-            $this->getReviewedUrl(),
-            $this->getReviewedImageUrl()
+            $this->getAnimeTitle(),
+            $this->getAnimeURL(),
+            $this->getAnimeImageUrl()
         );
     }
 
@@ -81,10 +81,10 @@ class AnimeReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedTitle(): string
+    public function getAnimeTitle(): string
     {
         return $this->crawler
-            ->filterXPath('//div[1]/div[1]/div[2]/strong/a')
+            ->filterXPath('//div[1]/div/div[2]/div/a')
             ->text();
     }
 
@@ -92,11 +92,11 @@ class AnimeReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedUrl(): string
+    public function getAnimeUrl(): string
     {
         // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[12]/div[1]/div[1]/a');
+            ->filterXPath('//div[1]/div/div[2]/div/a');
 
         if ($node->count()) {
             return $node->attr('href');
@@ -113,11 +113,11 @@ class AnimeReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedImageUrl(): string
+    public function getAnimeImageUrl(): string
     {
         // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[12]/div[1]/div[1]/a/img');
+            ->filterXPath('//div[1]/div/div[1]/a/img');
 
         if ($node->count()) {
             return Parser::parseImageQuality($node->attr('data-src'));
@@ -213,7 +213,7 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getType(): ?string
     {
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/small');
+        $node = $this->crawler->filterXPath('//div/div/div[2]/div[2]/small');
 
         if (!$node->count()) {
             return null;
@@ -268,13 +268,17 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getReviewTag(): string
+    public function getReviewTag(): array
     {
         return $this->crawler
-            ->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[1]')
-            ->text();
+            ->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div')
+            ->each(function (Crawler $crawler) {
+                return JString::cleanse(
+                    Parser::removeChildNodes($crawler)->text()
+                );
+            });
     }
 
     /**

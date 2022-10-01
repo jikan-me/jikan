@@ -15,22 +15,22 @@ class AnimeMeta
     /**
      * @var int
      */
-    private $malId;
+    private int $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var CommonImageResource
      */
-    private $images;
+    private CommonImageResource $images;
 
     /**
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * Genre constructor.

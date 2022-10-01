@@ -24,9 +24,9 @@ abstract class Review
     protected string $url;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected string $type;
+    protected ?string $type;
 
     /**
      * @var Reactions
@@ -49,9 +49,9 @@ abstract class Review
     protected int $score;
 
     /**
-     * @var string
+     * @var array
      */
-    protected string $tag;
+    protected array $tags;
 
     /**
      * @var bool
@@ -120,11 +120,11 @@ abstract class Review
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getTag(): string
+    public function getTags(): array
     {
-        return $this->tag;
+        return $this->tags;
     }
 
     /**

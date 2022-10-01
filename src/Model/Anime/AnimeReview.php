@@ -35,7 +35,7 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
         $instance->user = $parser->getReviewer();
         $instance->score = $parser->getReviewerScore();
         $instance->review = $parser->getContent();
-        $instance->tag = $parser->getReviewTag();
+        $instance->tags = $parser->getReviewTag();
         $instance->isPreliminary = $parser->isPreliminary();
         $instance->episodesWatched = $parser->getEpisodesWatched();
         $instance->isSpoiler = $parser->isSpoiler();

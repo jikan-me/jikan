@@ -37,7 +37,7 @@ class MangaReview extends \Jikan\Model\Reviews\MangaReview
         $instance->user = $parser->getReviewer();
         $instance->score = $parser->getReviewerScore();
         $instance->review = $parser->getContent();
-        $instance->tag = $parser->getReviewTag();
+        $instance->tags = $parser->getReviewTag();
         $instance->isPreliminary = $parser->isPreliminary();
         $instance->chaptersRead = $parser->getChaptersRead();
         $instance->isSpoiler = $parser->isSpoiler();

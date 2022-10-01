@@ -24,5 +24,4 @@ abstract class AnimeReview extends Review
     {
         return $this->episodesWatched;
     }
-
 }

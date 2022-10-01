@@ -142,5 +142,4 @@ abstract class Review
     {
         return $this->isPreliminary;
     }
-
 }

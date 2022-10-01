@@ -79,5 +79,4 @@ class ReviewsRequest implements RequestInterface
             ]
         );
     }
-
 }

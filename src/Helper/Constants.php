@@ -306,5 +306,4 @@ class Constants
     public const REVIEWS_SORT_MOST_VOTED = 'mostvoted';
     public const REVIEWS_SORT_OLDEST = 'oldest';
     public const REVIEWS_SORT_NEWEST = 'newest';
-
 }

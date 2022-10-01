@@ -73,5 +73,4 @@ class Reactions
 
         return $instance;
     }
-
 }

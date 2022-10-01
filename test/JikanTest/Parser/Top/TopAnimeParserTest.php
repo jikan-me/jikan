@@ -34,8 +34,8 @@ class TopAnimeParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Ginga Eiyuu Densetsu', $url->getTitle());
-        self::assertEquals('https://myanimelist.net/anime/820/Ginga_Eiyuu_Densetsu', $url->getUrl());
+        self::assertEquals('Fruits Basket: The Final', $url->getTitle());
+        self::assertEquals('https://myanimelist.net/anime/42938/Fruits_Basket__The_Final', $url->getUrl());
     }
 
     /**
@@ -52,7 +52,7 @@ class TopAnimeParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/anime/13/13225.jpg?s=385cedad342e284c5765833ab1cddc1c',
+            'https://cdn.myanimelist.net/images/anime/1085/114792.jpg?s=bb4303c0804c9d5ca9fcb30b8f8e6783',
             $this->parser->getImage()
         );
     }
@@ -62,7 +62,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_score()
     {
-        self::assertEquals(9.03, $this->parser->getScore());
+        self::assertEquals(9.02, $this->parser->getScore());
     }
 
     /**
@@ -70,7 +70,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_type()
     {
-        self::assertEquals('OVA', $this->parser->getType());
+        self::assertEquals('TV', $this->parser->getType());
     }
 
     /**
@@ -78,7 +78,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_episodes()
     {
-        self::assertEquals(110, $this->parser->getEpisodes());
+        self::assertEquals(13, $this->parser->getEpisodes());
     }
 
     /**
@@ -86,7 +86,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_members()
     {
-        self::assertEquals(279994, $this->parser->getMembers());
+        self::assertEquals(376544, $this->parser->getMembers());
     }
 
     /**
@@ -94,7 +94,7 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_start_date()
     {
-        self::assertEquals('Jan 1988', $this->parser->getStartDate());
+        self::assertEquals('Apr 2021', $this->parser->getStartDate());
     }
 
     /**
@@ -102,6 +102,6 @@ class TopAnimeParserTest extends TestCase
      */
     public function it_gets_the_anime_end_date()
     {
-        self::assertEquals('Mar 1997', $this->parser->getEndDate());
+        self::assertEquals('Jun 2021', $this->parser->getEndDate());
     }
 }

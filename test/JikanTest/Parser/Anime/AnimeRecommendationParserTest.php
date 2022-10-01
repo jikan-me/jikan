@@ -27,7 +27,7 @@ class AnimeRecommendationParserTest extends TestCase
      */
     public function it_get_recommendations_count(): void
     {
-        self::assertCount(132, $this->model);
+        self::assertCount(131, $this->model);
     }
 
     /**
@@ -94,7 +94,7 @@ class AnimeRecommendationParserTest extends TestCase
     public function it_gets_recommendation_count(): void
     {
         self::assertCount(
-            132,
+            131,
             $this->model
         );
     }

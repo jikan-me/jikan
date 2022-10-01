@@ -81,7 +81,7 @@ class CharacterParserTest extends TestCase
      */
     public function it_gets_the_member_favorites()
     {
-        self::assertEquals(11523, $this->parser->getMemberFavorites());
+        self::assertEquals(12474, $this->parser->getMemberFavorites());
     }
 
     /**

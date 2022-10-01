@@ -118,7 +118,7 @@ class SeasonalAnimeParserTest extends TestCase
      */
     public function it_gets_the_air_members()
     {
-        self::assertEquals(19000000, $this->parser->getMembers());
+        self::assertEquals(20000000, $this->parser->getMembers());
     }
 
     /**

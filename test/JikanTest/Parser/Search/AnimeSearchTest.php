@@ -100,7 +100,7 @@ class AnimeSearchTest extends TestCase
      */
     public function it_gets_the_members()
     {
-        self::assertEquals(1003331, $this->anime->getMembers());
+        self::assertEquals(1029210, $this->anime->getMembers());
     }
 
     /**
@@ -116,6 +116,6 @@ class AnimeSearchTest extends TestCase
      */
     public function it_gets_the_score()
     {
-        self::assertEquals(8.57, $this->anime->getScore());
+        self::assertEquals(8.56, $this->anime->getScore());
     }
 }

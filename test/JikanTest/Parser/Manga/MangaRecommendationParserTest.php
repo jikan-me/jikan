@@ -27,7 +27,7 @@ class MangaRecommendationParserTest extends TestCase
      */
     public function it_get_recommendations_count(): void
     {
-        self::assertCount(44, $this->model);
+        self::assertCount(46, $this->model);
     }
 
     /**

@@ -40,8 +40,8 @@ class TopMangaParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Fullmetal Alchemist', $url->getTitle());
-        self::assertEquals('https://myanimelist.net/manga/25/Fullmetal_Alchemist', $url->getUrl());
+        self::assertEquals('Slam Dunk', $url->getTitle());
+        self::assertEquals('https://myanimelist.net/manga/51/Slam_Dunk', $url->getUrl());
     }
 
     /**
@@ -76,7 +76,7 @@ class TopMangaParserTest extends TestCase
         $parser2 = new TopListItemParser(
             $this->crawler->filterXPath('//tr[@class="ranking-list"]')->eq(1)
         );
-        self::assertEquals(27, $this->parser->getVolumes());
+        self::assertEquals(31, $this->parser->getVolumes());
     }
 
     /**
@@ -84,7 +84,7 @@ class TopMangaParserTest extends TestCase
      */
     public function it_gets_the_manga_members()
     {
-        self::assertEquals(260591, $this->parser->getMembers());
+        self::assertEquals(138611, $this->parser->getMembers());
     }
 
     /**
@@ -92,7 +92,7 @@ class TopMangaParserTest extends TestCase
      */
     public function it_gets_the_manga_start_date()
     {
-        self::assertEquals('Jul 2001', $this->parser->getStartDate());
+        self::assertEquals('Sep 1990', $this->parser->getStartDate());
     }
 
     /**
@@ -100,7 +100,7 @@ class TopMangaParserTest extends TestCase
      */
     public function it_gets_the_manga_end_date()
     {
-        self::assertEquals('Sep 2010', $this->parser->getEndDate());
+        self::assertEquals('Jun 1996', $this->parser->getEndDate());
     }
 
     /**
@@ -109,7 +109,7 @@ class TopMangaParserTest extends TestCase
     public function it_gets_the_manga_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/manga/3/243675.jpg?s=8cb0a643f8a7597514447f2dd0e4ffc2',
+            'https://cdn.myanimelist.net/images/manga/2/258749.jpg?s=fad0d2cae56806beefaca50b445fa0dd',
             $this->parser->getImage()
         );
     }

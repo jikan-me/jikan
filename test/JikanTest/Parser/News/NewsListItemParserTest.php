@@ -1,6 +1,6 @@
 <?php
 
-namespace JikanTest\Parser\Anime;
+namespace JikanTest\Parser\News;
 
 use Jikan\Parser\News\NewsListItemParser;
 use JikanTest\TestCase;
@@ -31,7 +31,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_title(): void
     {
-        self::assertEquals("'Berserk' Creator Kentarou Miura Dies at 54", $this->parser->getTitle());
+        self::assertEquals("Kentarou Miura's Assistants Resume 'Berserk' Serialization, 'Holyland' Creator Kouji Mori to Supervise", $this->parser->getTitle());
     }
 
     /**
@@ -39,7 +39,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_url(): void
     {
-        self::assertEquals('https://myanimelist.net/news/63203251', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/news/66547854', $this->parser->getUrl());
     }
 
     /**
@@ -48,7 +48,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_image(): void
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/s/common/uploaded_files/1621492994-97c345f3d0912b89a1207f235274b1a4.jpeg?s=b42ac2bcc10470f9f29e6d4647f4c4fc',
+            'https://cdn.myanimelist.net/s/common/uploaded_files/1654587114-bf53f8de5beebd981afec1932486e604.jpeg?s=14bd951b901aa46034b344818e7cbd31',
             $this->parser->getImage()
         );
     }
@@ -58,7 +58,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_date(): void
     {
-        self::assertEquals('2021-05-19 21:39', $this->parser->getDate()->format('Y-m-d H:i'));
+        self::assertEquals('2022-06-07 00:33', $this->parser->getDate()->format('Y-m-d H:i'));
     }
 
     /**
@@ -74,7 +74,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_discussion_link(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=1924224', $this->parser->getDiscussionLink());
+        self::assertEquals('https://myanimelist.net/forum/?topicid=2021160', $this->parser->getDiscussionLink());
     }
 
     /**
@@ -83,7 +83,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_comments(): void
     {
         self::assertEquals(
-            437,
+            70,
             $this->parser->getComments()
         );
     }
@@ -94,7 +94,7 @@ class NewsListItemParserTest extends TestCase
     public function it_gets_the_introduction(): void
     {
         self::assertStringContainsString(
-            'Prolific manga author Kentarou Miura, best known for creating Berserk, died on May 6 at 2:48 p.m. due to an acute aortic dissection.',
+            "The editorial department of Young Animal announced on Tuesday that the late Kentarou Miura's Berserk manga will resume serialization",
             $this->parser->getIntro()
         );
     }

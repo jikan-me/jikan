@@ -41,7 +41,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_anime()
     {
         $anime = $this->parser->getResults();
-        self::assertCount(278, $anime);
+        self::assertCount(287, $anime);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeCard::class, $anime);
     }
 
@@ -51,7 +51,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/img/common/companies/1.png',
+            'https://cdn.myanimelist.net/images/company/1.png',
             $this->parser->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -73,7 +73,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_favorites()
     {
         self::assertEquals(
-            1485,
+            2251,
             $this->parser->getFavorites()
         );
     }
@@ -95,7 +95,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_count()
     {
         self::assertEquals(
-            278,
+            287,
             $this->parser->getAnimeCount()
         );
     }

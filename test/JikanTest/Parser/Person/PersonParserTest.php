@@ -70,11 +70,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_about()
     {
         self::assertStringContainsString(
-            "She began her voice-acting career in 1999 and has continued her work as a seiyuu for more than a decade.\n",
-            $this->parser->getPersonAbout()
-        );
-        self::assertStringContainsString(
-            "Married on June 2, 2014, her 29th birthday.\n",
+            "Hobbies: piano",
             $this->parser->getPersonAbout()
         );
     }
@@ -84,7 +80,7 @@ class PersonParserTest extends TestCase
      */
     public function it_gets_the_member_favorites()
     {
-        self::assertEquals(38067, $this->parser->getPersonFavorites());
+        self::assertEquals(38896, $this->parser->getPersonFavorites());
     }
 
     /**
@@ -104,7 +100,7 @@ class PersonParserTest extends TestCase
     public function it_gets_the_voice_acting_roles()
     {
         $voiceActingRoles = $this->parser->getPersonVoiceActingRoles();
-        self::assertCount(525, $voiceActingRoles);
+        self::assertCount(537, $voiceActingRoles);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\VoiceActingRole::class, $voiceActingRoles);
     }
 

@@ -105,7 +105,7 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_members()
     {
-        self::assertEquals($this->manga->getMembers(), 6670);
+        self::assertEquals($this->manga->getMembers(), 6906);
     }
 
     /**
@@ -113,6 +113,6 @@ class MangaSearchTest extends TestCase
      */
     public function it_gets_the_score()
     {
-        self::assertEquals($this->manga->getScore(), 7.75);
+        self::assertEquals($this->manga->getScore(), 7.76);
     }
 }

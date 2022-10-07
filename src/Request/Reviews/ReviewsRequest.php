@@ -6,9 +6,9 @@ use Jikan\Helper\Constants;
 use Jikan\Request\RequestInterface;
 
 /**
- * Class TopReviewsRequest
+ * Class ReviewsRequest
  *
- * @package Jikan\Request\Top
+ * @package Jikan\Request\Reviews;
  */
 class ReviewsRequest implements RequestInterface
 {

@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\User\Profile;
 
+use Jikan\Parser\User\Profile\UserProfileParser;
 use JikanTest\TestCase;
 
 /**
@@ -10,9 +11,9 @@ use JikanTest\TestCase;
 class UserProfileParserTest extends TestCase
 {
     /**
-     * @var \Jikan\Parser\User\Profile\UserProfileParser
+     * @var UserProfileParser
      */
-    private $parser;
+    private UserProfileParser $parser;
 
     public function setUp(): void
     {
@@ -20,7 +21,7 @@ class UserProfileParserTest extends TestCase
 
         $client = new \Goutte\Client($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/sandshark');
-        $this->parser = new \Jikan\Parser\User\Profile\UserProfileParser($crawler);
+        $this->parser = new UserProfileParser($crawler);
     }
 
     /**
@@ -45,7 +46,7 @@ class UserProfileParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1653853200',
+            'https://cdn.myanimelist.net/images/userimages/3600201.jpg?t=1664231400',
             $this->parser->getImageUrl()
         );
     }

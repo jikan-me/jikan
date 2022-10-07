@@ -40,7 +40,7 @@ class MagazineParserTest extends TestCase
     public function it_gets_manga()
     {
         $manga = $this->parser->getResults();
-        self::assertCount(67, $manga);
+        self::assertCount(68, $manga);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MangaCard::class, $manga);
     }
 }

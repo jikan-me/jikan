@@ -1,7 +1,4 @@
-<?php /** @noinspection ALL */
-
-/** @noinspection PhpCSValidationInspection */
-
+<?php
 namespace JikanTest\Parser\Anime;
 
 use Jikan\Model\Common\MalUrl;
@@ -295,7 +292,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_scored_by(): void
     {
         self::assertEquals(
-            327963,
+            336220,
             $this->parser->getScoredBy()
         );
     }
@@ -306,7 +303,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_rank(): void
     {
         self::assertEquals(
-            311,
+            308,
             $this->parser->getRank()
         );
     }
@@ -317,7 +314,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_popularity(): void
     {
         self::assertEquals(
-            242,
+            243,
             $this->parser->getPopularity()
         );
     }
@@ -328,7 +325,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_members(): void
     {
         self::assertEquals(
-            658778,
+            678927,
             $this->parser->getMembers()
         );
     }
@@ -339,7 +336,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_favorites(): void
     {
         self::assertEquals(
-            13235,
+            13750,
             $this->parser->getFavorites()
         );
     }
@@ -350,7 +347,7 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_related(): void
     {
         $related = $this->parser->getRelated();
-        self::assertCount(2, $related);
+        self::assertCount(3, $related);
         self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Adaptation']);
     }
 
@@ -400,6 +397,6 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_streaming_links()
     {
         $streamingLinks = $this->parser->getStreamingLinks();
-        self::assertEquals('https://www.funimation.com/shows/trigun', $streamingLinks[0]->getUrl());
+        self::assertEquals('http://www.crunchyroll.com/series-275669', $streamingLinks[0]->getUrl());
     }
 }

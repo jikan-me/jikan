@@ -37,7 +37,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_username(): void
     {
         self::assertEquals(
-            "gl4ss",
+            "Dylanzio",
             $this->parser->getResults()[6]->getUser()->getUsername()
         );
     }
@@ -49,7 +49,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_url(): void
     {
         self::assertEquals(
-            "https://myanimelist.net/profile/gl4ss",
+            "https://myanimelist.net/profile/Dylanzio",
             $this->parser->getResults()[6]->getUser()->getUrl()
         );
     }
@@ -61,7 +61,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_image_url(): void
     {
         self::assertEquals(
-            "https://cdn.myanimelist.net/images/userimages/11142052.jpg?t=1654525200",
+            "https://cdn.myanimelist.net/images/userimages/12682629.jpg?t=1664638800",
             $this->parser->getResults()[6]->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -94,7 +94,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_chapters_read(): void
     {
         self::assertEquals(
-            23,
+            133,
             $this->parser->getResults()[6]->getChaptersRead()
         );
     }

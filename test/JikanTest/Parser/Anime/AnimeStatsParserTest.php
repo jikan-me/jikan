@@ -44,7 +44,7 @@ class AnimeStatsParserTest extends TestCase
     public function it_gets_score_attributes()
     {
         self::assertEquals(
-            1013,
+            1062,
             $this->animeStatsParser->getScores()[10]->getVotes()
         );
     }

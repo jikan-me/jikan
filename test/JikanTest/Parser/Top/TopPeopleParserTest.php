@@ -34,8 +34,8 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
-        self::assertEquals('Oda, Eiichiro', $url);
-        self::assertEquals('https://myanimelist.net/people/1881/Eiichiro_Oda', $url->getUrl());
+        self::assertEquals('Ono, Daisuke', $url->getName());
+        self::assertEquals('https://myanimelist.net/people/212/Daisuke_Ono', $url->getUrl());
     }
 
     /**
@@ -51,7 +51,7 @@ class TopPeopleParserTest extends TestCase
      */
     public function it_gets_the_favorites()
     {
-        self::assertEquals(46179, $this->parser->getPeopleFavorites());
+        self::assertEquals(47386, $this->parser->getPeopleFavorites());
     }
 
     /**
@@ -60,7 +60,7 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/voiceactors/2/10593.jpg?s=6e83dfc242f5610e419eb59c24aebdc6',
+            'https://cdn.myanimelist.net/images/voiceactors/1/54593.jpg?s=3c92b9a278bb1fb08cf7f0f3f2ec7bee',
             $this->parser->getImage()
         );
     }
@@ -71,7 +71,7 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_kanji_name()
     {
         self::assertEquals(
-            '尾田 栄一郎',
+            '小野 大輔',
             $this->parser->getKanjiName()
         );
     }
@@ -82,7 +82,7 @@ class TopPeopleParserTest extends TestCase
     public function it_gets_the_birthday()
     {
         self::assertEquals(
-            '1975-01-01',
+            '1978-05-04',
             $this->parser->getBirthday()->format('Y-m-d')
         );
     }

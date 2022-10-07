@@ -33,7 +33,7 @@ class ScheduleParserTest extends TestCase
     {
         $monday = $this->parser->getShedule('monday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $monday);
-        self::assertCount(6, $monday);
+        self::assertCount(9, $monday);
     }
 
     /**
@@ -43,7 +43,7 @@ class ScheduleParserTest extends TestCase
     {
         $tuesday = $this->parser->getShedule('tuesday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $tuesday);
-        self::assertCount(6, $tuesday);
+        self::assertCount(5, $tuesday);
     }
 
     /**
@@ -53,7 +53,7 @@ class ScheduleParserTest extends TestCase
     {
         $wednesday = $this->parser->getShedule('wednesday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $wednesday);
-        self::assertCount(9, $wednesday);
+        self::assertCount(11, $wednesday);
     }
 
     /**
@@ -73,7 +73,7 @@ class ScheduleParserTest extends TestCase
     {
         $friday = $this->parser->getShedule('friday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $friday);
-        self::assertCount(12, $friday);
+        self::assertCount(9, $friday);
     }
 
     /**
@@ -83,7 +83,7 @@ class ScheduleParserTest extends TestCase
     {
         $saturday = $this->parser->getShedule('saturday');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $saturday);
-        self::assertCount(20, $saturday);
+        self::assertCount(14, $saturday);
     }
 
     /**
@@ -103,7 +103,7 @@ class ScheduleParserTest extends TestCase
     {
         $all = $this->parser->getShedule('all');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $all);
-        self::assertCount(120, $all);
+        self::assertCount(115, $all);
     }
 
     /**

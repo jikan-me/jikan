@@ -29,7 +29,7 @@ class FriendParserTest extends TestCase
      */
     public function it_gets_the_name()
     {
-        self::assertEquals('batsling1234', $this->parser->getName());
+        self::assertEquals('EmperorKaido', $this->parser->getName());
     }
 
     /**
@@ -37,7 +37,7 @@ class FriendParserTest extends TestCase
      */
     public function it_gets_the_url()
     {
-        self::assertEquals('https://myanimelist.net/profile/batsling1234', $this->parser->getUrl());
+        self::assertEquals('https://myanimelist.net/profile/EmperorKaido', $this->parser->getUrl());
     }
 
     /**
@@ -46,7 +46,7 @@ class FriendParserTest extends TestCase
     public function it_gets_the_avatar()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/4723677.jpg?t=1654526400',
+            'https://cdn.myanimelist.net/images/userimages/5229794.jpg?t=1664642400',
             $this->parser->getAvatar()
         );
     }
@@ -57,7 +57,7 @@ class FriendParserTest extends TestCase
     public function it_gets_friends_since()
     {
         self::assertEquals(
-            '2019-08-03 18:25',
+            '2019-11-14 12:08',
             $this->parser->getFriendsSince()->format('Y-m-d H:i')
         );
     }

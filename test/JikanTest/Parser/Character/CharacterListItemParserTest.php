@@ -79,7 +79,7 @@ class CharacterListItemParserTest extends TestCase
     {
         $voiceActors = $this->parser->getVoiceActors();
         self::assertContainsOnly(VoiceActor::class, $voiceActors);
-        self::assertCount(5, $voiceActors);
+        self::assertCount(6, $voiceActors);
         self::assertEquals('Hara, Yumi', $voiceActors[0]->getPerson()->getName());
         self::assertEquals('Japanese', $voiceActors[0]->getLanguage());
         self::assertEquals('Maxwell, Elizabeth', $voiceActors[1]->getPerson()->getName());
@@ -96,7 +96,7 @@ class CharacterListItemParserTest extends TestCase
     public function it_gets_the_favorites_count()
     {
         self::assertEquals(
-            6724,
+            7606,
             $this->parser->getFavorites()
         );
     }

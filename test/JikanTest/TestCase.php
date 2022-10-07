@@ -4,13 +4,14 @@ namespace JikanTest;
 
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var \Symfony\Contracts\HttpClient\HttpClientInterface
+     * @var HttpClientInterface
      */
-    protected $httpClient;
+    protected HttpClientInterface|MockHttpClient $httpClient;
 
     protected function setUp(): void
     {

@@ -30,7 +30,7 @@ class CharactersParserTest extends TestCase
     public function it_gets_the_manga_characters()
     {
         $characters = $this->parser->getCharacters();
-        self::assertCount(74, $characters);
+        self::assertCount(75, $characters);
         $names = array_map(function ($item) {
             return $item->getCharacter()->getName();
         }, $characters);

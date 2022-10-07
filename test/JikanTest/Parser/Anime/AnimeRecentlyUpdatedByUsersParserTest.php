@@ -37,7 +37,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_username(): void
     {
         self::assertEquals(
-            "Docorum",
+            "KyouTorii",
             $this->model->getResults()[0]->getUser()->getUsername()
         );
     }
@@ -49,7 +49,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_url(): void
     {
         self::assertEquals(
-            "https://myanimelist.net/profile/Docorum",
+            "https://myanimelist.net/profile/KyouTorii",
             $this->model->getResults()[0]->getUser()->getUrl()
         );
     }
@@ -61,7 +61,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_image_url(): void
     {
         self::assertEquals(
-            "https://cdn.myanimelist.net/images/questionmark_50.gif",
+            "https://cdn.myanimelist.net/images/userimages/15361140.jpg?t=1664641200",
             $this->model->getResults()[0]->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -82,7 +82,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_status(): void
     {
         self::assertEquals(
-            "Watching",
+            "Plan to Watch",
             $this->model->getResults()[0]->getStatus()
         );
     }

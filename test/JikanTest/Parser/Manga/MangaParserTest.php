@@ -115,8 +115,8 @@ class MangaParserTest extends TestCase
      */
     public function it_gets_the_manga_synopsis()
     {
-        self::assertEquals(
-            "Whenever Naruto Uzumaki proclaims that he will someday become the Hokage—a title bestowed upon the best ninja in the Village Hidden in the Leaves—no one takes him seriously. Since birth, Naruto has been shunned and ridiculed by his fellow villagers. But their contempt isn't because Naruto is loud-mouthed, mischievous, or because of his ineptitude in the ninja arts, but because there is a demon inside him. Prior to Naruto's birth, the powerful and deadly Nine-Tailed Fox attacked the village. In order to stop the rampage, the Fourth Hokage sacrificed his life to seal the demon inside the body of the newborn Naruto. And so when he is assigned to Team 7—along with his new teammates Sasuke Uchiha and Sakura Haruno, under the mentorship of veteran ninja Kakashi Hatake—Naruto is forced to work together with other people for the first time in his life. Through undergoing vigorous training and taking on challenging missions, Naruto must learn what it means to work in a team and carve his own route toward becoming a full-fledged ninja recognized by his village. [Written by MAL Rewrite]",
+        self::assertStringContainsString(
+            "Whenever Naruto Uzumaki proclaims that he will someday become the Hokage—a title bestowed upon the best ninja in the Village Hidden",
             $this->parser->getMangaSynopsis()
         );
     }
@@ -240,7 +240,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_score()
     {
         self::assertEquals(
-            8.06,
+            8.07,
             $this->manga->getScore()
         );
     }
@@ -251,7 +251,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_scored_by()
     {
         self::assertEquals(
-            250288,
+            254718,
             $this->manga->getScoredBy()
         );
     }
@@ -262,7 +262,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_rank()
     {
         self::assertEquals(
-            594,
+            577,
             $this->manga->getRank()
         );
     }
@@ -284,7 +284,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_members()
     {
         self::assertEquals(
-            377720,
+            385378,
             $this->manga->getMembers()
         );
     }
@@ -295,7 +295,7 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_favorites()
     {
         self::assertEquals(
-            41940,
+            42312,
             $this->manga->getFavorites()
         );
     }
@@ -317,11 +317,11 @@ class MangaParserTest extends TestCase
     {
         $background = $this->manga->getBackground();
         self::assertStringContainsString(
-            'Naruto has sold over 220 million copies worldwide as of 2015, making it the 4th highest grossing',
+            'Naruto has sold over 250 million copies worldwide as of 2020, making it the 4th highest grossing manga series of all time.',
             $background
         );
         self::assertStringContainsString(
-            ' Comics/Planet Manga from May 2007 to June 2015, and again as Naruto Gold edition since July 2015.',
+            'The series was published in English by VIZ Media under the Shonen Jump',
             $background
         );
     }

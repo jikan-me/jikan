@@ -1,9 +1,9 @@
 <?php
 
-namespace Jikan\Model\Anime;
+namespace Jikan\Model\Reviews;
 
-use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
-use Jikan\Model\Reviews\Reviewer;
+use Jikan\Model\Anime\AnimeReviewScores;
+use Jikan\Model\Common\AnimeMeta;
 use Jikan\Parser\Reviews\AnimeReviewParser;
 
 /**
@@ -11,8 +11,13 @@ use Jikan\Parser\Reviews\AnimeReviewParser;
  *
  * @package Jikan\Model
  */
-class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
+class FullAnimeReview extends AnimeReview
 {
+    /**
+     * @var AnimeMeta
+     */
+    private AnimeMeta $entry;
+
     /**
      * @var Reviewer
      */
@@ -20,16 +25,17 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
 
     /**
      * @param AnimeReviewParser $parser
-     * @return AnimeReview
+     * @return FullAnimeReview
      * @throws \Exception
      */
-    public static function fromParser(AnimeReviewParser $parser): AnimeReview
+    public static function fromParser(AnimeReviewParser $parser): FullAnimeReview
     {
         $instance = new self();
 
+        $instance->entry = $parser->getAnime();
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
-        $instance->type = $parser->getType() ?? 'anime';
+        $instance->type = $parser->getType();
         $instance->reactions = $parser->getReactions();
         $instance->date = $parser->getDate();
         $instance->user = $parser->getReviewer();
@@ -41,6 +47,14 @@ class AnimeReview extends \Jikan\Model\Reviews\AnimeReview
         $instance->isSpoiler = $parser->isSpoiler();
 
         return $instance;
+    }
+
+    /**
+     * @return AnimeMeta
+     */
+    public function getEntry(): AnimeMeta
+    {
+        return $this->entry;
     }
 
     /**

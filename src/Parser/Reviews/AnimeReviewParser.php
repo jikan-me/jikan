@@ -7,6 +7,7 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Common\AnimeMeta;
+use Jikan\Model\Reviews\Reactions;
 use Jikan\Model\Reviews\Reviewer;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -21,7 +22,7 @@ class AnimeReviewParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * AnimeReviewParser constructor.
@@ -49,9 +50,9 @@ class AnimeReviewParser implements ParserInterface
     public function getAnime() : AnimeMeta
     {
         return new AnimeMeta(
-            $this->getReviewedTitle(),
-            $this->getReviewedUrl(),
-            $this->getReviewedImageUrl()
+            $this->getAnimeTitle(),
+            $this->getAnimeURL(),
+            $this->getAnimeImageUrl()
         );
     }
 
@@ -71,7 +72,8 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        $node = $this->crawler->filterXPath('//div[1]/div[3]/div/div/a');
+        $node = $this->crawler
+            ->filterXPath('//div/div[2]/div[contains(@class, "bottom-navi")]/div[@class="open"]/a');
         return $node->attr('href');
     }
 
@@ -79,10 +81,10 @@ class AnimeReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedTitle(): string
+    public function getAnimeTitle(): string
     {
         return $this->crawler
-            ->filterXPath('//div[1]/div[1]/div[2]/strong/a')
+            ->filterXPath('//div[1]/div/div[2]/div/a')
             ->text();
     }
 
@@ -90,11 +92,11 @@ class AnimeReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedUrl(): string
+    public function getAnimeUrl(): string
     {
         // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[12]/div[1]/div[1]/a');
+            ->filterXPath('//div[1]/div/div[2]/div/a');
 
         if ($node->count()) {
             return $node->attr('href');
@@ -111,11 +113,11 @@ class AnimeReviewParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getReviewedImageUrl(): string
+    public function getAnimeImageUrl(): string
     {
         // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[12]/div[1]/div[1]/a/img');
+            ->filterXPath('//div[1]/div/div[1]/a/img');
 
         if ($node->count()) {
             return Parser::parseImageQuality($node->attr('data-src'));
@@ -134,6 +136,8 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getHelpfulCount(): int
     {
+        return 0; //@todo replace with reactions array
+
         // works on Profile pages
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tr/td[1]/div/strong/span');
         if ($node->count()) {
@@ -158,8 +162,9 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getDate(): \DateTimeImmutable
     {
-        $date = $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[1]')->text();
-        $time = $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[1]')->attr('title');
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "update_at")]');
+        $date = $node->text();
+        $time = $node->attr('title');
         return new \DateTimeImmutable("{$date} {$time}", new \DateTimeZone('UTC'));
     }
 
@@ -169,18 +174,10 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getContent(): string
     {
-        //        echo htmlentities(
-        //            $this->crawler
-        //                ->filterXPath('//div[contains(@class, "textReadability")]')
-        //                ->html()
-        //        );
-        //        echo "<br><br>";
-        //
-        //        return $this->crawler
-        //            ->filterXPath('//div[2]')
-        //            ->text();
-        $node = $this->crawler->filterXPath('//div[1]/div[2]');
-        $nodeExpanded = $node->filterXPath('//span');
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "text")]');
+        $nodeExpanded = $this
+            ->crawler
+            ->filterXPath('//div/div[2]/div[contains(@class, "text")]/span[contains(@class, "js-hidden")]');
 
         $node = Parser::removeChildNodes($node);
 
@@ -193,7 +190,6 @@ class AnimeReviewParser implements ParserInterface
 
         return $content;
     }
-
 
     /**
      * @return Reviewer
@@ -217,11 +213,21 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getType(): ?string
     {
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/small');
+        // Anime/Manga and User Reviews page
+        $node = $this->crawler->filterXPath('//div/div/div[2]/div[2]/small');
 
-        if (!$node->count()) {
-            return null;
+        if ($node->count()) {
+            return strtolower(
+                str_replace(
+                    ['(', ')'],
+                    '',
+                    $node->text()
+                )
+            );
         }
+
+        // All Reviews Page
+        $node = $this->crawler->filterXPath('//div/small');
 
         return strtolower(
             str_replace(
@@ -233,21 +239,83 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getEpisodesWatched(): int
+    public function getEpisodesWatched(): ?int
     {
-        $nodeText = JString::cleanse(
-            $this->crawler->filterXPath('//div[1]/div[1]/div[1]/div[2]')->text()
-        );
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "preliminary")]/span');
 
-        preg_match('~(\d+) of (.*) episodes seen~', $nodeText, $episodesSeen);
+        if (!$node->count()) {
+            return null;
+        }
+
+        preg_match('~\((\d+)/(.*)\)~', JString::cleanse($node->text()), $episodesSeen);
 
         if (empty($episodesSeen)) {
             return 0;
         }
 
         return (int) $episodesSeen[1];
+    }
+
+    /**
+     * @return Reactions
+     */
+    public function getReactions(): Reactions
+    {
+        return (new ReactionsParser($this->crawler))->getModel();
+    }
+
+    /**
+     * @return int
+     */
+    public function getReviewerScore(): int
+    {
+        return (int) $this->crawler
+            ->filterXPath('//div/div[2]/div[contains(@class, "rating")]/span')
+            ->text();
+    }
+
+    /**
+     * @return array
+     */
+    public function getReviewTag(): array
+    {
+        return $this->crawler
+            ->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div')
+            ->each(function (Crawler $crawler) {
+                return JString::cleanse(
+                    Parser::removeChildNodes($crawler)->text()
+                );
+            });
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPreliminary(): bool
+    {
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "preliminary")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSpoiler(): bool
+    {
+        $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "tags")]/div[contains(@class, "spoiler")]');
+
+        if ($node->count()) {
+            return true;
+        }
+
+        return false;
     }
 }

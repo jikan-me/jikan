@@ -17,7 +17,7 @@ class UserReviewsParser
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * UsernameByIdParser constructor.
@@ -36,7 +36,7 @@ class UserReviewsParser
 
     public function getReviews() : array
     {
-        $node = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]/div[@class="borderDark"]');
+        $node = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]//div[contains(@class, "review-element")]');
 
         if (!$node->count()) {
             return [];
@@ -45,17 +45,16 @@ class UserReviewsParser
         return $node->each(function (Crawler $crawler) {
 
             // Anime Review
-            if ($crawler->filterXPath('//div[2]/div[2]/small[1]')->text() === '(Anime)') {
+            if ($crawler->filterXPath('//div/div/div[2]/div[2]/small')->text() === '(Anime)') {
                 return Model\User\Reviews\UserAnimeReview::fromParser(new AnimeReviewParser($crawler));
             }
 
             // Manga Review
-            if ($crawler->filterXPath('//div[2]/div[2]/small[1]')->text() === '(Manga)') {
+            if ($crawler->filterXPath('//div/div/div[2]/div[2]/small')->text() === '(Manga)') {
                 return Model\User\Reviews\UserMangaReview::fromParser(new MangaReviewParser($crawler));
             }
         });
     }
-
     public function hasNextPage() : bool
     {
         // TODO: Add implementation

@@ -1,40 +1,49 @@
 <?php
 
-namespace Jikan\Model\User\Reviews;
+namespace Jikan\Model\Reviews;
 
 use Jikan\Model\Common\MangaMeta;
 use Jikan\Model\Manga\MangaReviewScores;
-use Jikan\Model\Reviews\MangaReview;
 use Jikan\Parser\Reviews\MangaReviewParser;
 
 /**
- * Class UserAnimeReview
+ * Class UserMangaReview
  *
  * @package Jikan\Model
  */
-class UserMangaReview extends MangaReview
+class FullMangaReview extends MangaReview
 {
-
     /**
      * @var MangaMeta
      */
     private MangaMeta $entry;
-    
+
     /**
-     * @param MangaReviewParser $parser
-     * @return UserAnimeReview
-     * @throws \Exception
+     * @var Reviewer
      */
-    public static function fromParser(MangaReviewParser $parser): UserMangaReview
+    private Reviewer $user;
+
+    /**
+     * Create an instance from an MangaReviewParser parser
+     *
+     * @param MangaReviewParser $parser
+     *
+     * @return FullMangaReview
+     * @throws \Exception
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public static function fromParser(MangaReviewParser $parser): FullMangaReview
     {
         $instance = new self();
 
         $instance->entry = $parser->getManga();
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
-        $instance->type = $parser->getType();
+        $instance->type = $parser->getType() ?? 'manga';
         $instance->reactions = $parser->getReactions();
         $instance->date = $parser->getDate();
+        $instance->user = $parser->getReviewer();
         $instance->score = $parser->getReviewerScore();
         $instance->review = $parser->getContent();
         $instance->tags = $parser->getReviewTag();
@@ -51,5 +60,13 @@ class UserMangaReview extends MangaReview
     public function getEntry(): MangaMeta
     {
         return $this->entry;
+    }
+
+    /**
+     * @return Reviewer
+     */
+    public function getUser(): Reviewer
+    {
+        return $this->user;
     }
 }

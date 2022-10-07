@@ -17,7 +17,7 @@ class Reviewer extends User
     /**
      * @var UserImageResource
      */
-    protected $images;
+    protected UserImageResource $images;
 
 
     public static function fromParser(ReviewerParser $parser): self

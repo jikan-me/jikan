@@ -1125,17 +1125,17 @@ class MalClient
     }
 
     /**
-     * @param Request\Reviews\RecentReviewsRequest $request
+     * @param Request\Reviews\ReviewsRequest $request
      *
      * @return
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getRecentReviews(Request\Reviews\RecentReviewsRequest $request): Model\Reviews\RecentReviews
+    public function getReviews(Request\Reviews\ReviewsRequest $request): Model\Reviews\Reviews
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Reviews\RecentReviewsParser($crawler);
+            $parser = new Parser\Reviews\ReviewsParser($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {

@@ -6,7 +6,7 @@ use Jikan\Model\Anime\AnimeReview;
 use Jikan\Model\Manga\MangaReview;
 use Jikan\Model\Recommendations\RecentRecommendations;
 use Jikan\Model\Recommendations\RecommendationListItem;
-use Jikan\Model\Reviews\RecentReviews;
+use Jikan\Model\Reviews\Reviews;
 use Jikan\Parser\Anime\AnimeReviewParser;
 use Jikan\Parser\Manga\MangaReviewParser;
 use Symfony\Component\DomCrawler\Crawler;
@@ -34,7 +34,7 @@ class RecentRecommendationsParser
     }
 
     /**
-     * @return RecentReviews
+     * @return Reviews
      * @throws \Exception
      */
     public function getModel(): RecentRecommendations

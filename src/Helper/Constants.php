@@ -49,10 +49,6 @@ class Constants
     public const TOP_BY_POPULARITY = 'bypopularity';
     public const TOP_BY_FAVORITES = 'favorite';
 
-    public const RECENT_REVIEW_ANIME = 'anime';
-    public const RECENT_REVIEW_MANGA = 'manga';
-    public const RECENT_REVIEW_BEST_VOTED = 'bestvoted';
-
     public const RECENT_RECOMMENDATION_ANIME = 'anime';
     public const RECENT_RECOMMENDATION_MANGA = 'manga';
 
@@ -306,4 +302,8 @@ class Constants
 
     public const USER_LIST_SORT_DESCENDING = 1;
     public const USER_LIST_SORT_ASCENDING = -1;
+
+    public const REVIEWS_SORT_MOST_VOTED = 'mostvoted';
+    public const REVIEWS_SORT_OLDEST = 'oldest';
+    public const REVIEWS_SORT_NEWEST = 'newest';
 }

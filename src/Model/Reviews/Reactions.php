@@ -72,4 +72,68 @@ class Reactions
 
         return $instance;
     }
+
+    /**
+     * @return int
+     */
+    public function getOverall(): int
+    {
+        return $this->overall;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNice(): int
+    {
+        return $this->nice;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLoveIt(): int
+    {
+        return $this->loveIt;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFunny(): int
+    {
+        return $this->funny;
+    }
+
+    /**
+     * @return int
+     */
+    public function getConfusing(): int
+    {
+        return $this->confusing;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInformative(): int
+    {
+        return $this->informative;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWellWritten(): int
+    {
+        return $this->wellWritten;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCreative(): int
+    {
+        return $this->creative;
+    }
 }

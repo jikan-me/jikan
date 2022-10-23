@@ -2,8 +2,6 @@
 
 namespace Jikan\Model\Reviews;
 
-use Jikan\Model\Manga\MangaReviewScores;
-
 /**
  * Class UserAnimeReview
  *
@@ -20,7 +18,7 @@ abstract class MangaReview extends Review
     /**
      * @return string
      */
-    public function getChaptersRead(): string
+    public function getChaptersRead(): ?string
     {
         return $this->chaptersRead;
     }

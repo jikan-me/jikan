@@ -18,7 +18,6 @@ use Jikan\Parser\Producer\ProducerParser;
  */
 class Producer extends Results implements Pagination
 {
-
     /**
      * @var int
      */

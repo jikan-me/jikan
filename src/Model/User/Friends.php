@@ -13,7 +13,6 @@ use Jikan\Parser;
  */
 class Friends extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

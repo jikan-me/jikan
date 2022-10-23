@@ -12,7 +12,6 @@ use Jikan\Parser\User\History\HistoryItemParser;
  */
 class History
 {
-
     /**
      * @var MalUrl
      */

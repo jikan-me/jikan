@@ -13,7 +13,6 @@ use Jikan\Model\Common\MalUrl;
  */
 class FavoriteCharacter extends CharacterMeta
 {
-
     /**
      * @var FavoriteCharacterRelatedEntry
      */

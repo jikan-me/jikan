@@ -12,7 +12,6 @@ use Jikan\Parser;
  */
 class PersonSearchListItem
 {
-
     /**
      * @var int
      */

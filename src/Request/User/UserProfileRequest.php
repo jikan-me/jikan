@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserProfileRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

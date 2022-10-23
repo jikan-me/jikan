@@ -14,7 +14,6 @@ use Jikan\Parser\Common\MalUrlParser;
  */
 class Recommendation
 {
-
     /**
      * @var CommonMeta
      */

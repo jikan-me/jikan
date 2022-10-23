@@ -18,7 +18,6 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class ClubParser implements ParserInterface
 {
-
     /**
      * @var Crawler
      */

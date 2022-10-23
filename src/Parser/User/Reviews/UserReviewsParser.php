@@ -43,7 +43,6 @@ class UserReviewsParser
         }
 
         return $node->each(function (Crawler $crawler) {
-
             // Anime Review
             if ($crawler->filterXPath('//div/div/div[2]/div[2]/small')->text() === '(Anime)') {
                 return Model\User\Reviews\UserAnimeReview::fromParser(new AnimeReviewParser($crawler));

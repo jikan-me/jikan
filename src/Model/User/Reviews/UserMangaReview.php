@@ -14,7 +14,6 @@ use Jikan\Parser\Reviews\MangaReviewParser;
  */
 class UserMangaReview extends MangaReview
 {
-
     /**
      * @var MangaMeta
      */

@@ -12,7 +12,6 @@ use Jikan\Request\RequestInterface;
  */
 class PersonSearchRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

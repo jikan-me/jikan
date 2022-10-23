@@ -12,7 +12,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserMangaListRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

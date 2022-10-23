@@ -13,7 +13,6 @@ use Jikan\Parser\Reviews\MangaReviewParser;
  */
 class MangaReview extends \Jikan\Model\Reviews\MangaReview
 {
-
     /**
      * @var Reviewer
      */

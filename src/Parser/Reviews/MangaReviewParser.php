@@ -176,13 +176,17 @@ class MangaReviewParser implements ParserInterface
         // All Reviews Page
         $node = $this->crawler->filterXPath('//div/small');
 
-        return strtolower(
-            str_replace(
-                ['(', ')'],
-                '',
-                $node->text()
-            )
-        );
+        if ($node->count()) {
+            return strtolower(
+                str_replace(
+                    ['(', ')'],
+                    '',
+                    $node->text()
+                )
+            );
+        }
+
+        return null;
     }
 
     /**

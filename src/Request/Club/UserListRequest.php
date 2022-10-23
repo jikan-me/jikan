@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserListRequest implements RequestInterface
 {
-
     /**
      * @var int
      */

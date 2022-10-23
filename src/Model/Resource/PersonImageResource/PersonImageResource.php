@@ -8,7 +8,6 @@ namespace Jikan\Model\Resource\PersonImageResource;
  */
 class PersonImageResource
 {
-
     /**
      * @var Jpg
      */

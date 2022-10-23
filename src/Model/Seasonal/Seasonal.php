@@ -11,7 +11,6 @@ use Jikan\Parser\Seasonal\SeasonalParser;
  */
 class Seasonal
 {
-
     /**
      * @var string|null
      */

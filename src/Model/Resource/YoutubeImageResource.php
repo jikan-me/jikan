@@ -8,7 +8,6 @@ namespace Jikan\Model\Resource;
  */
 class YoutubeImageResource
 {
-
     /**
      * @var string|null
      */

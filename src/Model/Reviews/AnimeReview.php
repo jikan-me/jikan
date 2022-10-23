@@ -11,7 +11,6 @@ use Jikan\Model\Anime\AnimeReviewScores;
  */
 abstract class AnimeReview extends Review
 {
-
     /**
      * @var int|null
      */

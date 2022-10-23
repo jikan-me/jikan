@@ -50,7 +50,6 @@ class ReviewsParser
                 ->filterXPath('//*[@id="content"]//div[contains(@class, "review-element")]')
                 ->each(
                     function (Crawler $crawler) {
-
                         // Anime Review
                         if ($crawler->filterXPath('//div/small')->text() === '(Anime)') {
                             return FullAnimeReview::fromParser(new AnimeReviewParser($crawler));

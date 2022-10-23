@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserHistoryRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

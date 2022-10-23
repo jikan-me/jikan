@@ -9,7 +9,6 @@ namespace Jikan\Model\Common;
  */
 abstract class User
 {
-
     /**
      * @var string
      */

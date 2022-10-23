@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UsernameByIdRequest implements RequestInterface
 {
-
     /**
      * @var int
      */

@@ -9,7 +9,6 @@ namespace Jikan\Model\Watch;
  */
 class RecentEpisodeListItem
 {
-
     /**
      * @var int
      */

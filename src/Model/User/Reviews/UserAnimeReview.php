@@ -15,7 +15,6 @@ use Jikan\Parser\Reviews\AnimeReviewParser;
  */
 class UserAnimeReview extends AnimeReview
 {
-
     /**
      * @var AnimeMeta
      */

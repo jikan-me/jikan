@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserReviewsRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

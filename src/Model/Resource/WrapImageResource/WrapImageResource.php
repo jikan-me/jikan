@@ -8,7 +8,6 @@ namespace Jikan\Model\Resource\WrapImageResource;
  */
 class WrapImageResource
 {
-
     /**
      * @var Jpg
      */

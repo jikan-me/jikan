@@ -8,7 +8,6 @@ namespace Jikan\Model\Resource\CommonImageResource;
  */
 class CommonImageResource
 {
-
     /**
      * @var Jpg
      */

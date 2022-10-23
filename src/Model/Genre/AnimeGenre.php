@@ -15,7 +15,6 @@ use Jikan\Parser\Genre\AnimeGenreParser;
  */
 class AnimeGenre extends Results implements Pagination
 {
-
     /**
      * @var int
      */

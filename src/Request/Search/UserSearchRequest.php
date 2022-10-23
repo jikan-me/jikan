@@ -13,7 +13,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserSearchRequest implements RequestInterface
 {
-
     /**
      * @var string|null
      */

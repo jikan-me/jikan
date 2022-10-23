@@ -22,7 +22,6 @@ use Jikan\Parser\Manga\MangaParser;
  */
 class Manga
 {
-
     /**
      * @var int
      */

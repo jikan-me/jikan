@@ -14,7 +14,6 @@ use Jikan\Parser\Magazine\MagazineParser;
  */
 class Magazine extends Results implements Pagination
 {
-
     /**
      * @var int
      */

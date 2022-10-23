@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class RecentlyOnlineUsersRequest implements RequestInterface
 {
-
     /**
      * @return string
      */

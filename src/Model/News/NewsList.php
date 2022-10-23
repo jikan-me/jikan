@@ -13,7 +13,6 @@ use Jikan\Parser;
  */
 class NewsList extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

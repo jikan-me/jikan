@@ -13,7 +13,6 @@ use Jikan\Parser;
  */
 class UserRecommendations extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

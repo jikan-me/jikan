@@ -13,7 +13,6 @@ use Jikan\Parser\Manga\MangaReviewerParser;
  */
 class MangaReviewer extends Reviewer
 {
-
     /**
      * @var int
      */

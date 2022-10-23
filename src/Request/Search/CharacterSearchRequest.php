@@ -12,7 +12,6 @@ use Jikan\Request\RequestInterface;
  */
 class CharacterSearchRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

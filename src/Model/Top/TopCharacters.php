@@ -13,7 +13,6 @@ use Jikan\Parser;
  */
 class TopCharacters extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

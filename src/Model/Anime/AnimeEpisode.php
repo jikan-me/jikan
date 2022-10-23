@@ -11,7 +11,6 @@ use Jikan\Parser\Anime\AnimeEpisodeParser;
  */
 class AnimeEpisode
 {
-
     /**
      * @var int
      */

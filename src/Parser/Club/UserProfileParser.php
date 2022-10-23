@@ -15,7 +15,6 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class UserProfileParser implements ParserInterface
 {
-
     /**
      * @var Crawler
      */

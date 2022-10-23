@@ -8,7 +8,6 @@ use Jikan\Parser;
 
 class MangaReviews extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

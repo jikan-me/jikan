@@ -12,7 +12,6 @@ use Jikan\Request\RequestInterface;
  */
 class AnimeSearchRequest implements RequestInterface
 {
-
     /**
      * @var string|null
      */

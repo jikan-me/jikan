@@ -13,7 +13,6 @@ use Jikan\Parser;
  */
 class UserSearch extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

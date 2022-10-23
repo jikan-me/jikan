@@ -12,7 +12,6 @@ use Jikan\Model\Manga\MangaReviewScores;
  */
 abstract class Review
 {
-
     /**
      * @var int
      */

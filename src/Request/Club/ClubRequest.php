@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class ClubRequest implements RequestInterface
 {
-
     /**
      * @var int
      */

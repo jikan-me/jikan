@@ -13,7 +13,6 @@ use Jikan\Parser;
  */
 class AnimeVideosEpisodes extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

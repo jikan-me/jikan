@@ -8,7 +8,6 @@ namespace Jikan\Model\Resource\CharacterImageResource;
  */
 class Webp
 {
-
     /**
      * @var string|null
      */

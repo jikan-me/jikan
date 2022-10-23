@@ -14,7 +14,6 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class UserListParser implements ParserInterface
 {
-
     /**
      * @var Crawler
      */

@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserFriendsRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

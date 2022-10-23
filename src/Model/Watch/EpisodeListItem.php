@@ -13,7 +13,6 @@ use Jikan\Parser\Watch\EpisodeListItemParser;
  */
 class EpisodeListItem
 {
-
     /**
      * @var AnimeMeta
      */

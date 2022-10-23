@@ -12,7 +12,6 @@ use Jikan\Parser\Genre\MangaGenreListParser;
  */
 class MangaGenreListItem
 {
-
     /**
      * @var int
      */

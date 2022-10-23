@@ -13,7 +13,6 @@ use Jikan\Parser\Genre\AnimeGenreParser;
  */
 class AnimeGenreList
 {
-
     /**
      * @var array|AnimeGenreListItem[]
      */

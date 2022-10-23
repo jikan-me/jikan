@@ -13,7 +13,6 @@ use Jikan\Parser\User\Profile\UserProfileParser;
  */
 class Profile
 {
-
     /**
      * @var int|null
      */

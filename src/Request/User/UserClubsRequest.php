@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserClubsRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

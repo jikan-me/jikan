@@ -9,7 +9,6 @@ namespace Jikan\Model\Common;
  */
 class MusicMeta
 {
-
     /**
      * @var string|null
      */

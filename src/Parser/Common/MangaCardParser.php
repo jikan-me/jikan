@@ -163,7 +163,7 @@ class MangaCardParser implements ParserInterface
         $node = $this->crawler->filterXPath('//div/div[2]/div/span[contains(@class, "item")][1]');
 
         if (
-        !preg_match('~(.*), ([0-9]{1,})~', $node->text(), $matches)
+            !preg_match('~(.*), ([0-9]{1,})~', $node->text(), $matches)
         ) {
             return null;
         }

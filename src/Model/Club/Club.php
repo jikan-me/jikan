@@ -13,7 +13,6 @@ use Jikan\Parser\Club\ClubParser;
  */
 class Club
 {
-
     /**
      * @var int
      */

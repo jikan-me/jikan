@@ -11,7 +11,6 @@ use Jikan\Parser;
  */
 class MangaReviewScores
 {
-
     /**
      * @var int
      */

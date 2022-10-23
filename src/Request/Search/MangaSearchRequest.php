@@ -12,7 +12,6 @@ use Jikan\Request\RequestInterface;
  */
 class MangaSearchRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

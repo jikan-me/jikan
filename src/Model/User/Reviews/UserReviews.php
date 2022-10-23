@@ -13,7 +13,6 @@ use Jikan\Parser\User\Reviews\UserReviewsParser;
  */
 class UserReviews extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

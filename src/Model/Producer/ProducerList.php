@@ -12,7 +12,6 @@ use Jikan\Parser\Producer\ProducerParser;
  */
 class ProducerList
 {
-
     /**
      * @var array|ProducerListItem[]
      */

@@ -11,7 +11,6 @@ use Jikan\Parser;
  */
 class Reactions
 {
-
     /**
      * @var int
      */

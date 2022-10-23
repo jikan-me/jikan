@@ -13,7 +13,6 @@ use Jikan\Parser;
  */
 class MangaUserUpdates extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

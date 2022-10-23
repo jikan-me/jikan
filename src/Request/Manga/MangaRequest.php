@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class MangaRequest implements RequestInterface
 {
-
     /**
      * @var int
      */

@@ -14,7 +14,6 @@ use Jikan\Parser;
  */
 class RecentRecommendations extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

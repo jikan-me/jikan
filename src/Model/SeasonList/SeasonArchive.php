@@ -11,7 +11,6 @@ use Jikan\Parser\SeasonList\SeasonListParser;
  */
 class SeasonArchive extends Results
 {
-
     /**
      * @param SeasonListParser $parser
      * @return static

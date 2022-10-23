@@ -8,7 +8,6 @@ namespace Jikan\Model\Resource\ClubImageResource;
  */
 class ClubImageResource
 {
-
     /**
      * @var Jpg
      */

@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class PopularPromotionalVideosRequest implements RequestInterface
 {
-
     /**
      * @return string
      */

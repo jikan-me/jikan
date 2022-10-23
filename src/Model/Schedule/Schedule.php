@@ -12,7 +12,6 @@ use Jikan\Parser\Schedule\ScheduleParser;
  */
 class Schedule
 {
-
     /**
      * @var AnimeCard[]
      */

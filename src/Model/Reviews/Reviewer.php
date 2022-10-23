@@ -13,7 +13,6 @@ use Jikan\Parser\Reviews\ReviewerParser;
  */
 class Reviewer extends User
 {
-
     /**
      * @var UserImageResource
      */

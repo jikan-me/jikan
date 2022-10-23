@@ -12,7 +12,6 @@ use Jikan\Parser\Character\VoiceActorParser;
  */
 class VoiceActor
 {
-
     /**
      * @var PersonMeta
      */

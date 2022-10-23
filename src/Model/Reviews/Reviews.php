@@ -14,7 +14,6 @@ use Jikan\Parser;
  */
 class Reviews extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

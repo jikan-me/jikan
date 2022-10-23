@@ -14,7 +14,6 @@ use Jikan\Parser\Anime\EpisodesParser;
  */
 class Episodes extends Results implements Pagination
 {
-
     /**
      * @var bool
      */

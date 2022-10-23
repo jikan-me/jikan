@@ -8,7 +8,6 @@ namespace Jikan\Model\Resource\AnimeImageResource;
  */
 class Jpg
 {
-
     /**
      * @var string|null
      */

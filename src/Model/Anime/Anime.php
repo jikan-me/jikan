@@ -16,7 +16,6 @@ use Jikan\Parser\Anime\AnimeParser;
  */
 class Anime
 {
-
     /**
      * @var int
      */

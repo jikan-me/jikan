@@ -13,7 +13,6 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class AnimeographyParser extends OgraphyParser implements ParserInterface
 {
-
     /**
      * @var Crawler
      */

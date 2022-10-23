@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class UserRecommendationsRequest implements RequestInterface
 {
-
     /**
      * @var string
      */

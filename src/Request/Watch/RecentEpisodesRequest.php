@@ -11,7 +11,6 @@ use Jikan\Request\RequestInterface;
  */
 class RecentEpisodesRequest implements RequestInterface
 {
-
     /**
      * @return string
      */

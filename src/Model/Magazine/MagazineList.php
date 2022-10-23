@@ -13,7 +13,6 @@ use Jikan\Parser\Magazine\MagazineParser;
  */
 class MagazineList
 {
-
     /**
      * @var array|MagazineListItem[]
      */

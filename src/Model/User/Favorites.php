@@ -11,7 +11,6 @@ use Jikan\Parser\User\Profile\FavoritesParser;
  */
 class Favorites
 {
-
     /**
      * @var array
      */

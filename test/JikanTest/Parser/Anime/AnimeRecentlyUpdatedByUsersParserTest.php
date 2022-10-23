@@ -94,7 +94,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_episodes_seen(): void
     {
         self::assertEquals(
-            5,
+            null,
             $this->model->getResults()[0]->getEpisodesSeen()
         );
     }
@@ -106,7 +106,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
     public function it_gets_episodes_total(): void
     {
         self::assertEquals(
-            26,
+            null,
             $this->model->getResults()[0]->getEpisodesTotal()
         );
     }

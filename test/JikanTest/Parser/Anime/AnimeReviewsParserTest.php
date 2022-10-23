@@ -6,6 +6,7 @@ use Jikan\Model\Anime\AnimeReview;
 use Jikan\Parser\Anime\AnimeReviewsParser;
 use Jikan\Request\Anime\AnimeReviewsRequest;
 use JikanTest\TestCase;
+use Symfony\Component\HttpClient\HttpClient;
 
 class AnimeReviewsParserTest extends TestCase
 {
@@ -65,15 +66,6 @@ class AnimeReviewsParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
      */
-    public function it_gets_review_votes_count(): void
-    {
-        self::assertEquals(2034, $this->review->getVotes());
-    }
-
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
     public function it_gets_review_date(): void
     {
         self::assertEquals(1219556760, $this->review->getDate()->getTimestamp());
@@ -98,7 +90,7 @@ class AnimeReviewsParserTest extends TestCase
     public function it_gets_reviewer_image_url(): void
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/userimages/11081.jpg?t=1654492800',
+            'https://cdn.myanimelist.net/images/userimages/11081.jpg?t=1666216200',
             $this->review->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -122,7 +114,7 @@ class AnimeReviewsParserTest extends TestCase
     public function it_gets_reviewer_episodes_watched(): void
     {
         self::assertEquals(
-            26,
+            null,
             $this->review->getEpisodesWatched()
         );
     }
@@ -131,14 +123,16 @@ class AnimeReviewsParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Anime\AnimeReviewsParser
      */
-    public function it_gets_reviewer_scores(): void
+    public function it_gets_reviewer_reactions(): void
     {
-        self::assertEquals(10, $this->review->getScores()->getOverall());
-        self::assertEquals(10, $this->review->getScores()->getStory());
-        self::assertEquals(9, $this->review->getScores()->getAnimation());
-        self::assertEquals(10, $this->review->getScores()->getSound());
-        self::assertEquals(10, $this->review->getScores()->getCharacter());
-        self::assertEquals(9, $this->review->getScores()->getEnjoyment());
+        self::assertEquals(2, $this->review->getReactions()->getLoveIt());
+        self::assertEquals(0, $this->review->getReactions()->getCreative());
+        self::assertEquals(0, $this->review->getReactions()->getWellWritten());
+        self::assertEquals(0, $this->review->getReactions()->getInformative());
+        self::assertEquals(0, $this->review->getReactions()->getConfusing());
+        self::assertEquals(1, $this->review->getReactions()->getFunny());
+        self::assertEquals(2087, $this->review->getReactions()->getNice());
+        self::assertEquals(2090, $this->review->getReactions()->getOverall());
     }
 
     /**

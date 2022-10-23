@@ -65,15 +65,6 @@ class MangaReviewsParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Manga\MangaReviewsParser
      */
-    public function it_gets_review_votes_count(): void
-    {
-        self::assertEquals(411, $this->review->getVotes());
-    }
-
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaReviewsParser
-     */
     public function it_gets_review_date(): void
     {
         self::assertEquals(1232768580, $this->review->getDate()->getTimestamp());
@@ -122,7 +113,7 @@ class MangaReviewsParserTest extends TestCase
     public function it_gets_reviewer_chapters_read(): void
     {
         self::assertEquals(
-            162,
+            null,
             $this->review->getChaptersRead()
         );
     }
@@ -131,13 +122,16 @@ class MangaReviewsParserTest extends TestCase
      * @test
      * @covers \Jikan\Parser\Manga\MangaReviewsParser
      */
-    public function it_gets_reviewer_scores(): void
+    public function it_gets_reviewer_reactions(): void
     {
-        self::assertEquals(10, $this->review->getScores()->getOverall());
-        self::assertEquals(10, $this->review->getScores()->getStory());
-        self::assertEquals(9, $this->review->getScores()->getArt());
-        self::assertEquals(10, $this->review->getScores()->getCharacter());
-        self::assertEquals(10, $this->review->getScores()->getEnjoyment());
+        self::assertEquals(0, $this->review->getReactions()->getLoveIt());
+        self::assertEquals(0, $this->review->getReactions()->getCreative());
+        self::assertEquals(0, $this->review->getReactions()->getWellWritten());
+        self::assertEquals(0, $this->review->getReactions()->getInformative());
+        self::assertEquals(0, $this->review->getReactions()->getConfusing());
+        self::assertEquals(0, $this->review->getReactions()->getFunny());
+        self::assertEquals(422, $this->review->getReactions()->getNice());
+        self::assertEquals(422, $this->review->getReactions()->getOverall());
     }
 
     /**

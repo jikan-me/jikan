@@ -99,6 +99,11 @@ class Anime
     /**
      * @var string|null
      */
+    private ?string $animeAiredString;
+
+    /**
+     * @var string|null
+     */
     private ?string $duration;
 
     /**
@@ -244,6 +249,7 @@ class Anime
         $instance->status = $parser->getStatus();
         $instance->airing = $instance->status === 'Currently Airing';
         $instance->aired = $parser->getAired();
+        $instance->animeAiredString = $parser->getAnimeAiredString();
         $instance->premiered = $parser->getPremiered();
         $instance->broadcast = $parser->getBroadcast();
         $instance->producers = $parser->getProducers();
@@ -442,6 +448,14 @@ class Anime
     public function getAired(): DateRange
     {
         return $this->aired;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAnimeAiredString(): ?string
+    {
+        return $this->animeAiredString;
     }
 
     /**

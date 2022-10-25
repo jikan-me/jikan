@@ -49,13 +49,20 @@ class MangaReviewParser implements ParserInterface
     /**
      * @throws \Jikan\Exception\ParserException
      */
-    public function getManga() : MangaMeta
+    public function getManga(string $page = null) : MangaMeta
     {
-        return new MangaMeta(
-            $this->getMangaTitle(),
-            $this->getMangaUrl(),
-            $this->getMangaImageUrl()
-        );
+        return match ($page) {
+            'user' => new MangaMeta(
+                $this->getMangaTitle(),
+                $this->getMangaUrl(),
+                $this->getMangaImageUrlFromUserPage()
+            ),
+            default => new MangaMeta(
+                $this->getMangaTitle(),
+                $this->getMangaUrl(),
+                $this->getMangaImageUrl()
+            ),
+        };
     }
 
     /**
@@ -196,34 +203,30 @@ class MangaReviewParser implements ParserInterface
     public function getMangaTitle(): string
     {
         return $this->crawler
-            ->filterXPath('//div[1]/div/div[2]/div/a')
+            ->filterXPath('//div[contains(@class, "titleblock")]/a')
             ->text();
     }
 
     /**
      * @return string
-     * @throws \InvalidArgumentException
-     * @throws \Jikan\Exception\ParserException
      */
     public function getMangaImageUrl(): string
     {
-        // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[1]/div/div[1]/a/img');
+            ->filterXPath('//div[contains(@class, "thumbbody")]/div[contains(@class, "body")]/div[contains(@class, "text")]/div[contains(@class, "thumb-right")]/a/img');
 
-        if ($node->count()) {
-            return Parser::parseImageQuality($node->attr('data-src'));
-        }
+        return Parser::parseImageQuality($node->attr('data-src'));
+    }
 
-        // Recent UserReviews Anime page
+    /**
+     * @return string
+     */
+    public function getMangaImageUrlFromUserPage(): string
+    {
         $node = $this->crawler
-            ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a/img');
+            ->filterXPath('//div[contains(@class, "thumbbody")]/div[contains(@class, "thumb")]/a/img');
 
-        if ($node->count()) {
-            return Parser::parseImageQuality($node->attr('data-src'));
-        }
-
-        throw new ParserException("Couldn't find the URL of reviewed image.");
+        return Parser::parseImageQuality($node->attr('data-src'));
     }
 
     /**
@@ -233,16 +236,16 @@ class MangaReviewParser implements ParserInterface
     public function getMangaUrl(): string
     {
         // User UserReviews page
-        $node = $this->crawler
-            ->filterXPath('//div[1]/div/div[2]/div/a');
-
-        if ($node->count()) {
-            return $node->attr('href');
-        }
+//        $node = $this->crawler
+//            ->filterXPath('//div[1]/div/div[2]/div/a');
+//
+//        if ($node->count()) {
+//            return $node->attr('href');
+//        }
 
         // Recent UserReviews Anime page
         $node = $this->crawler
-            ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a');
+            ->filterXPath('//div[contains(@class, "titleblock")]/a');
 
         return $node->attr('href');
     }

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Reviews;
 
+use Jikan\Exception\ParserException;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
@@ -47,13 +48,20 @@ class AnimeReviewParser implements ParserInterface
     /**
      * @return AnimeMeta
      */
-    public function getAnime() : AnimeMeta
+    public function getAnime(string $page = null) : AnimeMeta
     {
-        return new AnimeMeta(
-            $this->getAnimeTitle(),
-            $this->getAnimeURL(),
-            $this->getAnimeImageUrl()
-        );
+        return match ($page) {
+            'user' => new AnimeMeta(
+                $this->getAnimeTitle(),
+                $this->getAnimeURL(),
+                $this->getAnimeImageUrlFromUserPage()
+            ),
+            default => new AnimeMeta(
+                $this->getAnimeTitle(),
+                $this->getAnimeURL(),
+                $this->getAnimeImageUrl()
+            ),
+        };
     }
 
     /**
@@ -84,7 +92,7 @@ class AnimeReviewParser implements ParserInterface
     public function getAnimeTitle(): string
     {
         return $this->crawler
-            ->filterXPath('//div[1]/div/div[2]/div/a')
+            ->filterXPath('//div[contains(@class, "titleblock")]/a')
             ->text();
     }
 
@@ -95,16 +103,16 @@ class AnimeReviewParser implements ParserInterface
     public function getAnimeUrl(): string
     {
         // User UserReviews page
-        $node = $this->crawler
-            ->filterXPath('//div[1]/div/div[2]/div/a');
-
-        if ($node->count()) {
-            return $node->attr('href');
-        }
+//        $node = $this->crawler
+//            ->filterXPath('//div[1]/div/div[2]/div/a');
+//
+//        if ($node->count()) {
+//            return $node->attr('href');
+//        }
 
         // Recent UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a');
+            ->filterXPath('//div[contains(@class, "titleblock")]/a');
 
         return $node->attr('href');
     }
@@ -115,17 +123,19 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getAnimeImageUrl(): string
     {
-        // User UserReviews page
         $node = $this->crawler
-            ->filterXPath('//div[1]/div/div[1]/a/img');
+            ->filterXPath('//div[contains(@class, "thumbbody")]/div[contains(@class, "body")]/div[contains(@class, "text")]/div[contains(@class, "thumb-right")]/a/img');
 
-        if ($node->count()) {
-            return Parser::parseImageQuality($node->attr('data-src'));
-        }
+        return Parser::parseImageQuality($node->attr('data-src'));
+    }
 
-        // Recent UserReviews page
+    /**
+     * @return string
+     */
+    public function getAnimeImageUrlFromUserPage(): string
+    {
         $node = $this->crawler
-            ->filterXPath('//div[1]/div[2]/div[1]/div[1]/a/img');
+            ->filterXPath('//div[contains(@class, "thumbbody")]/div[contains(@class, "thumb")]/a/img');
 
         return Parser::parseImageQuality($node->attr('data-src'));
     }

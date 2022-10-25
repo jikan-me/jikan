@@ -29,7 +29,7 @@ class UserAnimeReview extends AnimeReview
     {
         $instance = new self();
 
-        $instance->entry = $parser->getAnime();
+        $instance->entry = $parser->getAnime('user');
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();

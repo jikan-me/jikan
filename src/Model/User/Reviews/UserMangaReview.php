@@ -18,7 +18,7 @@ class UserMangaReview extends MangaReview
      * @var MangaMeta
      */
     private MangaMeta $entry;
-    
+
     /**
      * @param MangaReviewParser $parser
      * @return UserAnimeReview
@@ -28,7 +28,7 @@ class UserMangaReview extends MangaReview
     {
         $instance = new self();
 
-        $instance->entry = $parser->getManga();
+        $instance->entry = $parser->getManga('user');
         $instance->malId = $parser->getId();
         $instance->url = $parser->getUrl();
         $instance->type = $parser->getType();

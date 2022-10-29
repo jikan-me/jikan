@@ -85,7 +85,6 @@ class MalClient
             throw $e;
         }
 
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\EpisodesParser($crawler);
 

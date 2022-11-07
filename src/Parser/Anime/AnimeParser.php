@@ -90,10 +90,10 @@ class AnimeParser implements ParserInterface
     public function getSynopsis(): ?string
     {
         $synopsis = JString::cleanse(
-            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
+            $this->crawler->filterXPath('//p[@itemprop=\'description\']')->html()
         );
 
-        return preg_match('~^Looking for information on the anime~', $synopsis) ? null : $synopsis;
+        return str_starts_with($synopsis, 'No synopsis information has been added to this title.') ? null : $synopsis;
     }
 
     /**

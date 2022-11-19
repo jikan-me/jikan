@@ -125,14 +125,14 @@ class AnimeReviewsParserTest extends TestCase
      */
     public function it_gets_reviewer_reactions(): void
     {
-        self::assertEquals(2, $this->review->getReactions()->getLoveIt());
-        self::assertEquals(0, $this->review->getReactions()->getCreative());
-        self::assertEquals(0, $this->review->getReactions()->getWellWritten());
-        self::assertEquals(0, $this->review->getReactions()->getInformative());
+        self::assertGreaterThanOrEqual(2, $this->review->getReactions()->getLoveIt());
+        self::assertGreaterThanOrEqual(0, $this->review->getReactions()->getCreative());
+        self::assertGreaterThanOrEqual(0, $this->review->getReactions()->getWellWritten());
+        self::assertGreaterThanOrEqual(1, $this->review->getReactions()->getInformative());
         self::assertEquals(0, $this->review->getReactions()->getConfusing());
         self::assertEquals(1, $this->review->getReactions()->getFunny());
-        self::assertEquals(2087, $this->review->getReactions()->getNice());
-        self::assertEquals(2090, $this->review->getReactions()->getOverall());
+        self::assertGreaterThanOrEqual(2087, $this->review->getReactions()->getNice());
+        self::assertGreaterThanOrEqual(2090, $this->review->getReactions()->getOverall());
     }
 
     /**

@@ -74,16 +74,19 @@ A huge thank you to all our Patrons! 🙏 This project wouldn't be running witho
 
 We have a free [REST API service](https://jikan.moe), if you wish to support us you can [become a Patron!](https://patreon.com/jikan)
 
-## Sugoi (すごい) Patrons
+### Sugoi (すごい) Patrons
 
 - [Jared Allard (jaredallard)](https://github.com/jaredallard)
 - [hugonun (hug_onun)](https://twitter.com/hug_onun)
 
-## Patrons
+### Patrons
 
 - Aaron Treinish
+- Abdelhafid Achtaou
 - Aika Fujiwara
+- Bobby Williams
 - Cesar Irad Mendoza
+- CrafterSama
 - Fro116
 - Jason Weatherly
 - Jesse

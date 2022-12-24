@@ -89,6 +89,13 @@ class EpisodesParser implements ParserInterface
             return false;
         }
 
+        $pageLinks = $this->crawler
+            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "link")]');
+
+        if (!$pageLinks->count()) {
+            return false;
+        }
+
         $isLastPage = $this->crawler
             ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[2]/div[2]/div//a[contains(@class, "current") and position() = last()]');
 

@@ -185,10 +185,6 @@ class MangaParser implements ParserInterface
 
         $titles = [new Title(Title::TYPE_DEFAULT, $this->getMangaTitle())];
 
-        foreach ($this->getMangaTitleSynonyms() as $synonym) {
-            $titles[] = new Title(Title::TYPE_SYNONYM, $synonym);
-        }
-
         if ($crawler->count() === 0) {
             return $titles;
         }

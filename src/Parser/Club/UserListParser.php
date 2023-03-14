@@ -83,6 +83,7 @@ class UserListParser implements ParserInterface
             ->filterXPath('//*[@id="content"]/div');
 
         preg_match('~Pages \((.*)\)~', $node->text(), $pages);
-        return (int) $pages[1];
+
+        return isset($pages[1]) ? (int) $pages[1] : 1;
     }
 }

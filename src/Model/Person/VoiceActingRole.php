@@ -58,7 +58,7 @@ class VoiceActingRole
      */
     public function getAnimeMeta(): AnimeMeta
     {
-        return $this->animeMeta;
+        return $this->anime;
     }
 
     /**
@@ -66,6 +66,6 @@ class VoiceActingRole
      */
     public function getCharacterMeta(): CharacterMeta
     {
-        return $this->characterMeta;
+        return $this->character;
     }
 }

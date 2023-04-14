@@ -83,17 +83,9 @@ class FriendsParser implements ParserInterface
     public function getHasNextPage(): bool
     {
         $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[2]/div[contains(@class, "mt12 mb12")]/div[contains(@class, "pagination")]');
+            ->filterXPath('//*[@id="content"]/div/div[2]/div/div[2]//a[text()="Next"]');
 
         if (!$pages->count()) {
-            return false;
-        }
-
-        $pages = $pages
-            ->filterXPath('//a[contains(@class, "link")]')
-            ->last();
-
-        if (strpos($pages->attr('class'), 'current')) {
             return false;
         }
 

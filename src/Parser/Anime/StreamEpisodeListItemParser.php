@@ -67,7 +67,7 @@ class StreamEpisodeListItemParser implements ParserInterface
      */
     public function getEpisode(): string
     {
-        return Parser::removeChildNodes($this->crawler->filterXPath('//a/div/span[@class="title"]'))->text();
+        return Parser::removeChildNodes($this->crawler->filterXPath('//a/div/span[contains(@class,"title")]'))->text();
     }
 
     /**

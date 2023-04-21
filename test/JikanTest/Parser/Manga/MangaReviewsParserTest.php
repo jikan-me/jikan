@@ -124,14 +124,14 @@ class MangaReviewsParserTest extends TestCase
      */
     public function it_gets_reviewer_reactions(): void
     {
-        self::assertGreaterThanOrEqual(0, $this->review->getReactions()->getLoveIt());
+        self::assertEquals(1, $this->review->getReactions()->getLoveIt());
         self::assertEquals(0, $this->review->getReactions()->getCreative());
-        self::assertEquals(0, $this->review->getReactions()->getWellWritten());
+        self::assertEquals(5, $this->review->getReactions()->getWellWritten());
         self::assertEquals(0, $this->review->getReactions()->getInformative());
-        self::assertEquals(0, $this->review->getReactions()->getConfusing());
-        self::assertEquals(0, $this->review->getReactions()->getFunny());
-        self::assertEquals(425, $this->review->getReactions()->getNice());
-        self::assertGreaterThanOrEqual(422, $this->review->getReactions()->getOverall());
+        self::assertEquals(4, $this->review->getReactions()->getConfusing());
+        self::assertEquals(3, $this->review->getReactions()->getFunny());
+        self::assertEquals(448, $this->review->getReactions()->getNice());
+        self::assertEquals(461, $this->review->getReactions()->getOverall());
     }
 
     /**

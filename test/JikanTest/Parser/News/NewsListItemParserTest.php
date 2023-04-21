@@ -58,7 +58,7 @@ class NewsListItemParserTest extends TestCase
      */
     public function it_gets_the_date(): void
     {
-        self::assertEquals('2022-06-07 00:33', $this->parser->getDate()->format('Y-m-d H:i'));
+        self::assertEquals('2023-06-07 00:33', $this->parser->getDate()->format('Y-m-d H:i'));
     }
 
     /**

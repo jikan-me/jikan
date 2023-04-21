@@ -130,7 +130,7 @@ class MangaReviewsParserTest extends TestCase
         self::assertEquals(0, $this->review->getReactions()->getInformative());
         self::assertEquals(0, $this->review->getReactions()->getConfusing());
         self::assertEquals(0, $this->review->getReactions()->getFunny());
-        self::assertEquals(422, $this->review->getReactions()->getNice());
+        self::assertEquals(425, $this->review->getReactions()->getNice());
         self::assertGreaterThanOrEqual(422, $this->review->getReactions()->getOverall());
     }
 

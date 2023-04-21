@@ -679,7 +679,7 @@ class AnimeParser implements ParserInterface
     public function getExternalLinks(): array
     {
         $links = $this->crawler
-            ->filterXPath('//*[@id="content"]/table//div[contains(@class, "external_links")]//a[contains(@class, "link") and not(contains(@data-rel, "resource"))]');
+            ->filterXPath('//*[@id="content"]/table//div[contains(@class, "external_links")]//a[contains(@class, "link") and not(contains(@class, "js-more-links"))]');
 
         if (!$links->count()) {
             return [];

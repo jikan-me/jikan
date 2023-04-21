@@ -51,6 +51,6 @@ class AnimeStaffPosition
      */
     public function getAnimeMeta(): AnimeMeta
     {
-        return $this->animeMeta;
+        return $this->anime;
     }
 }

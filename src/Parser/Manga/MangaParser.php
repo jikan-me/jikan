@@ -185,10 +185,6 @@ class MangaParser implements ParserInterface
 
         $titles = [new Title(Title::TYPE_DEFAULT, $this->getMangaTitle())];
 
-        foreach ($this->getMangaTitleSynonyms() as $synonym) {
-            $titles[] = new Title(Title::TYPE_SYNONYM, $synonym);
-        }
-
         if ($crawler->count() === 0) {
             return $titles;
         }
@@ -583,14 +579,14 @@ class MangaParser implements ParserInterface
     public function getExternalLinks(): array
     {
         $links = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[1]/div/h2[contains(text(), "External Links")]');
+            ->filterXPath('//*[@id="content"]/table//div[contains(@class, "external_links")]//a[contains(@class, "link") and not(contains(@data-rel, "resource"))]');
 
         if (!$links->count()) {
             return [];
         }
 
-        return $links->nextAll()->filterXPath('//div[contains(@class, "pb16")]/a')
-            ->each(function (Crawler  $c) {
+        return $links
+            ->each(function (Crawler $c){
                 return (new UrlParser($c))->getModel();
             });
     }

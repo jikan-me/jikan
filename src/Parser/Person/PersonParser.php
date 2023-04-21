@@ -96,9 +96,15 @@ class PersonParser implements ParserInterface
             return null;
         }
 
-        return JString::cleanse(
+        $givenName = JString::cleanse(
             str_replace($node->text(), '', $node->ancestors()->text())
         );
+
+        if (empty($givenName)) {
+            return null;
+        }
+
+        return $givenName;
     }
 
     /**

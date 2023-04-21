@@ -686,7 +686,7 @@ class AnimeParser implements ParserInterface
         }
 
         return $links
-            ->each(function (Crawler $c){
+            ->each(function (Crawler $c) {
                 return (new UrlParser($c))->getModel();
             });
     }

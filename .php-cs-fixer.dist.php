@@ -10,5 +10,4 @@ return (new PhpCsFixer\Config())
         'array_syntax' => ['syntax' => 'short'],
     ])
     ->setFinder($finder)
-    ->setLineEnding('\n')
 ;

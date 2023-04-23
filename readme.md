@@ -16,12 +16,13 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 | Version   | Support | PHP | Lumen/Laravel |
 |------------|----------|----------|----------| 
-| [`^3` (master)]([https://github.com/jikan-me/jikan/tree/3.0.0](https://github.com/jikan-me/jikan)) | ✅ New features | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]() | `^8`, `^9` |
+| [`^4` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | ✅ New features | [![8.1](https://img.shields.io/badge/PHP-^%208.1-blue.svg?style=flat)]() | `^9`,`^10` |
+| [`^3`](https://github.com/jikan-me/jikan/releases/tag/v3.3.2) | ❌ No longer maintained or supported | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]() | `^8`, `^9` |
 | [`^2`](https://github.com/jikan-me/jikan/tree/2.19.4)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`
 | [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*` |
 
 
-1. `composer require jikan-me/jikan ^3`
+1. `composer require jikan-me/jikan ^4`
 2. [Documentation](http://docs.jikan.moe)
 
 # Jikan REST API

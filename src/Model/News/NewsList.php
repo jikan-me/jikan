@@ -1,15 +1,15 @@
 <?php
 
-namespace Jikan\Model\Recommendations;
+namespace Jikan\Model\News;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
 /**
- * Class RecentNews
+ * Class NewsList
  */
-class RecentNews extends Results implements Pagination
+class NewsList extends Results implements Pagination
 {
     /**
      * @var bool
@@ -23,16 +23,16 @@ class RecentNews extends Results implements Pagination
 
 
     /**
-     * @param Parser\News\RecentNewsParser $parser
+     * @param Parser\News\NewsListParser $parser
      * @return static
      */
-    public static function fromParser(Parser\News\RecentNewsParser $parser): self
+    public static function fromParser(Parser\News\NewsListParser $parser): self
     {
         $instance = new self();
 
-        $instance->results = $parser->getRecentNews();
-        $instance->lastVisiblePage = $parser->getLastPage();
-        $instance->hasNextPage = $parser->hasNextPage();
+        $instance->results = $parser->getResults();
+        $instance->lastVisiblePage = $parser->getLastVisiblePage();
+        $instance->hasNextPage = $parser->getHasNextPage();
 
         return $instance;
     }

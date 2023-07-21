@@ -2,71 +2,94 @@
 
 namespace Jikan\Model\News;
 
-use Jikan\Model\Common\Collection\Pagination;
-use Jikan\Model\Common\Collection\Results;
-use Jikan\Parser;
+use Jikan\Model\Resource\NewsImageResource\NewsImageResource;
+use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
+use Jikan\Parser\News\NewsListItemParser;
+use Jikan\Parser\News\ResourceNewsListItemParser;
 
 /**
- * Class ResourceNewsList
+ * Class AnimeParser
  *
- * @package Jikan\Model\News\ResourceNewsList
+ * @package Jikan\Model
  */
-class ResourceNewsList extends Results implements Pagination
+class NewsListItem
 {
     /**
-     * @var bool
+     * @var int|null
      */
-    private $hasNextPage = false;
+    private int|null $malId;
+
+    /**
+     * @var string
+     */
+    private string $url;
+
+    /**
+     * @var string
+     */
+    private string $title;
+
+    /**
+     * @var \DateTimeImmutable
+     */
+    private \DateTimeImmutable $date;
+
+    /**
+     * @var string
+     */
+    private string $authorUsername;
+
+    /**
+     * @var string
+     */
+    private string $authorUrl;
+
+    /**
+     * @var string
+     */
+    private string $forumUrl;
+
+    /**
+     * @var NewsImageResource
+     */
+    private NewsImageResource $images;
 
     /**
      * @var int
      */
-    private $lastVisiblePage = 1;
+    private int $comments;
 
     /**
-     * @param Parser\News\ResourceNewsListParser $parser
+     * @var string
+     */
+    private string $excerpt;
+
+    /**
+     * @var array
+     */
+    private array $tags;
+
+    /**
+     * @param NewsListItemParser $parser
      *
-     * @return ResourceNewsList
-     * @throws \Exception
-     * @throws \RuntimeException
+     * @return NewsListItem
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\News\ResourceNewsListParser $parser): self
+    public static function fromParser(NewsListItemParser $parser): NewsListItem
     {
         $instance = new self();
-
-        $instance->results = $parser->getResults();
-        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->malId = $parser->getMalId();
+        $instance->url = $parser->getUrl();
+        $instance->title = $parser->getTitle();
+        $instance->date = $parser->getDate();
+        $instance->authorUsername = $parser->getAuthor()->getName();
+        $instance->authorUrl = $parser->getAuthor()->getUrl();
+        $instance->forumUrl = $parser->getDiscussionLink();
+        $instance->images = NewsImageResource::factory($parser->getImageUrl());
+        $instance->comments = $parser->getComments();
+        $instance->excerpt = $parser->getExcerpt();
 
         return $instance;
     }
 
-    public static function mock() : self
-    {
-        return new self();
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasNextPage(): bool
-    {
-        return $this->hasNextPage;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLastVisiblePage(): int
-    {
-        return $this->lastVisiblePage;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults(): array
-    {
-        return $this->results;
-    }
 }

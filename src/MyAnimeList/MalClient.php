@@ -1369,11 +1369,17 @@ class MalClient
     }
 
 
-    public function getRecentNews(Request\News\RecentNewsRequest $request): Model\News\RecentNews
+    /**
+     * @param Request\News\RecentNewsRequest $request
+     * @return Model\News\NewsList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getRecentNews(Request\News\RecentNewsRequest $request): Model\News\NewsList
     {
         $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\News\RecentNewsParser($crawler);
+            $parser = new Parser\News\NewsListParser($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {

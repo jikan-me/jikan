@@ -2,18 +2,18 @@
 
 namespace Jikan\Parser\News;
 
-use Jikan\Model\News\NewsList;
-use Jikan\Model\News\NewsListItem;
+use Jikan\Model\News\ResourceNewsList;
+use Jikan\Model\News\ResourceNewsListItem;
 use Jikan\Model\Search\AnimeSearch;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class NewsListParser
+ * Class ResourceNewsListParser
  *
  * @package Jikan\Parser
  */
-class NewsListParser implements ParserInterface
+class ResourceNewsListParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -31,18 +31,18 @@ class NewsListParser implements ParserInterface
     }
 
     /**
-     * @return NewsList
+     * @return ResourceNewsList
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): NewsList
+    public function getModel(): ResourceNewsList
     {
-        return NewsList::fromParser($this);
+        return ResourceNewsList::fromParser($this);
     }
 
     /**
-     * @return NewsListItem[]
+     * @return ResourceNewsListItem[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -52,7 +52,7 @@ class NewsListParser implements ParserInterface
             ->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')
             ->each(
                 function (Crawler $crawler) {
-                    return (new NewsListItemParser($crawler))->getModel();
+                    return (new ResourceNewsListItemParser($crawler))->getModel();
                 }
             );
     }

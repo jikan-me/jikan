@@ -7,11 +7,11 @@ use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
 /**
- * Class NewsList
+ * Class ResourceNewsList
  *
- * @package Jikan\Model\News\NewsList
+ * @package Jikan\Model\News\ResourceNewsList
  */
-class NewsList extends Results implements Pagination
+class ResourceNewsList extends Results implements Pagination
 {
     /**
      * @var bool
@@ -24,14 +24,14 @@ class NewsList extends Results implements Pagination
     private $lastVisiblePage = 1;
 
     /**
-     * @param Parser\News\NewsListParser $parser
+     * @param Parser\News\ResourceNewsListParser $parser
      *
-     * @return NewsList
+     * @return ResourceNewsList
      * @throws \Exception
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(Parser\News\NewsListParser $parser): self
+    public static function fromParser(Parser\News\ResourceNewsListParser $parser): self
     {
         $instance = new self();
 

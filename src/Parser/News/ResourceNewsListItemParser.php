@@ -6,17 +6,17 @@ use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
-use Jikan\Model\News\NewsListItem;
+use Jikan\Model\News\ResourceNewsListItem;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class NewsListParser
+ * Class ResourceNewsListParser
  *
  * @package Jikan\Parser
  */
-class NewsListItemParser implements ParserInterface
+class ResourceNewsListItemParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -34,13 +34,13 @@ class NewsListItemParser implements ParserInterface
     }
 
     /**
-     * @return NewsListItem
+     * @return ResourceNewsListItem
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getModel(): NewsListItem
+    public function getModel(): ResourceNewsListItem
     {
-        return NewsListItem::fromParser($this);
+        return ResourceNewsListItem::fromParser($this);
     }
 
     /**

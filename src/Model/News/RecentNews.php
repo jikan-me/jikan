@@ -1,17 +1,15 @@
 <?php
 
-namespace Jikan\Model\News;
+namespace Jikan\Model\Recommendations;
 
 use Jikan\Model\Common\Collection\Pagination;
 use Jikan\Model\Common\Collection\Results;
 use Jikan\Parser;
 
 /**
- * Class ResourceNewsList
- *
- * @package Jikan\Model\News\ResourceNewsList
+ * Class RecentNews
  */
-class ResourceNewsList extends Results implements Pagination
+class RecentNews extends Results implements Pagination
 {
     /**
      * @var bool
@@ -23,27 +21,36 @@ class ResourceNewsList extends Results implements Pagination
      */
     private $lastVisiblePage = 1;
 
+
     /**
-     * @param Parser\News\ResourceNewsListParser $parser
-     *
-     * @return ResourceNewsList
-     * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @param Parser\News\RecentNewsParser $parser
+     * @return static
      */
-    public static function fromParser(Parser\News\ResourceNewsListParser $parser): self
+    public static function fromParser(Parser\News\RecentNewsParser $parser): self
     {
         $instance = new self();
 
-        $instance->results = $parser->getResults();
-        $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->results = $parser->getRecentNews();
+        $instance->lastVisiblePage = $parser->getLastPage();
+        $instance->hasNextPage = $parser->hasNextPage();
 
         return $instance;
     }
 
+    /**
+     * @return static
+     */
     public static function mock() : self
     {
         return new self();
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 
     /**
@@ -60,13 +67,5 @@ class ResourceNewsList extends Results implements Pagination
     public function getLastVisiblePage(): int
     {
         return $this->lastVisiblePage;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults(): array
-    {
-        return $this->results;
     }
 }

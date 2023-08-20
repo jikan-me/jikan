@@ -65,9 +65,9 @@ class ProducerParser implements ParserInterface
      */
     public function getUrl(): Model\Common\MalUrl
     {
-        $title = $this->crawler->filterXPath('//*[@id="contentWrapper"]/div[1]/h1');
+        $title = $this->crawler->filterXPath('//*[@class="title-name"]');
         return new Model\Common\MalUrl(
-            $title->text(),
+            JString::cleanse($title->text()),
             $this->crawler->filterXPath('//meta[@property="og:url"]')->attr('content')
         );
     }

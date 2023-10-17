@@ -134,18 +134,24 @@ class Constants
     public const SEARCH_USER_GENDER_FEMALE = 2;
     public const SEARCH_USER_GENDER_NONBINARY = 3;
 
+    /**
+     * Anime Genres
+     */
     public const GENRE_ANIME_ACTION = 1;
     public const GENRE_ANIME_ADVENTURE = 2;
-    public const GENRE_ANIME_CARS = 3;
+    public const GENRE_ANIME_RACING = 3;
+    public const GENRE_ANIME_CARS = 3; // Renamed to the above by MAL
     public const GENRE_ANIME_COMEDY = 4;
     public const GENRE_ANIME_AVANT_GARDE = 5;
     public const GENRE_ANIME_DEMENTIA = 5; // Renamed to the above by MAL
-    public const GENRE_ANIME_DEMONS = 6;
+    public const GENRE_ANIME_MYTHOLOGY = 6;
+    public const GENRE_ANIME_DEMONS = 6; // Renamed to the above by MAL
     public const GENRE_ANIME_MYSTERY = 7;
     public const GENRE_ANIME_DRAMA = 8;
     public const GENRE_ANIME_ECCHI = 9;
     public const GENRE_ANIME_FANTASY = 10;
-    public const GENRE_ANIME_GAME = 11;
+    public const GENRE_ANIME_STRATEGY_GAME = 11;
+    public const GENRE_ANIME_GAME = 11; // Renamed to the above by MAL
     public const GENRE_ANIME_HENTAI = 12;
     public const GENRE_ANIME_HISTORICAL = 13;
     public const GENRE_ANIME_HORROR = 14;
@@ -175,7 +181,8 @@ class Constants
     public const GENRE_ANIME_SLICE_OF_LIFE = 36;
     public const GENRE_ANIME_SUPERNATURAL = 37;
     public const GENRE_ANIME_MILITARY = 38;
-    public const GENRE_ANIME_POLICE = 39;
+    public const GENRE_ANIME_DETECTIVE = 39;
+    public const GENRE_ANIME_POLICE = 39; // Renamed to the above by MAL
     public const GENRE_ANIME_PSYCHOLOGICAL = 40;
     public const GENRE_ANIME_SUSPENSE = 41;
     public const GENRE_ANIME_THRILLER = 41; // Renamed to the above by MAL
@@ -183,21 +190,62 @@ class Constants
     public const GENRE_ANIME_JOSEI = 43;
     public const GENRE_ANIME_AWARD_WINNING = 46;
     public const GENRE_ANIME_GOURMET = 47;
-    public const GENRE_ANIME_WORK_LIFE = 48;
+    public const GENRE_ANIME_WORKPLACE = 48;
+    public const GENRE_ANIME_WORK_LIFE = 48; // Renamed to the above by MAL
     public const GENRE_ANIME_EROTICA = 49;
+    public const GENRE_ANIME_ADULT_CAST = 50;
+    public const GENRE_ANIME_ANTHROPOMORPHIC = 51;
+    public const GENRE_ANIME_CGDCT = 52;
+    public const GENRE_ANIME_CHILDCARE = 53;
+    public const GENRE_ANIME_COMBAT_SPORTS = 54;
+    public const GENRE_ANIME_DELINQUENTS = 55;
+    public const GENRE_ANIME_EDUCATIONAL = 56;
+    public const GENRE_ANIME_GAG_HUMOR = 57;
+    public const GENRE_ANIME_GORE = 58;
+    public const GENRE_ANIME_HIGH_STAKES_GAME = 59;
+    public const GENRE_ANIME_IDOLS_FEMALE = 60;
+    public const GENRE_ANIME_IDOLS_MALE = 61;
+    public const GENRE_ANIME_ISEKAI = 62;
+    public const GENRE_ANIME_IYASHIKEI = 63;
+    public const GENRE_ANIME_LOVE_POLYGON = 64;
+    public const GENRE_ANIME_MAGICAL_SEX_SHIFT = 65;
+    public const GENRE_ANIME_MAHOU_SHOUJO = 66;
+    public const GENRE_ANIME_MEDICAL = 67;
+    public const GENRE_ANIME_ORGANIZED_CRIME = 68;
+    public const GENRE_ANIME_OTAKU_CULTURE = 69;
+    public const GENRE_ANIME_PERFORMING_ARTS = 70;
+    public const GENRE_ANIME_PETS = 71;
+    public const GENRE_ANIME_REINCARNATION = 72;
+    public const GENRE_ANIME_REVERSE_HAREM = 73;
+    public const GENRE_ANIME_ROMANTIC_SUBTEXT = 74;
+    public const GENRE_ANIME_SHOWBIZ = 75;
+    public const GENRE_ANIME_SURVIVAL = 76;
+    public const GENRE_ANIME_TEAM_SPORTS = 77;
+    public const GENRE_ANIME_TIME_TRAVEL = 78;
+    public const GENRE_ANIME_VIDEO_GAME = 79;
+    public const GENRE_ANIME_VISUAL_ARTS = 80;
+    public const GENRE_ANIME_CROSSDRESSING = 81;
 
+
+
+    /**
+     * Manga Genres
+     */
     public const GENRE_MANGA_ACTION = 1;
     public const GENRE_MANGA_ADVENTURE = 2;
-    public const GENRE_MANGA_CARS = 3;
+    public const GENRE_MANGA_RACING = 3;
+    public const GENRE_MANGA_CARS = 3; // Renamed to the above by MAL
     public const GENRE_MANGA_COMEDY = 4;
-    public const GENRE_MANGA_DEMENTIA = 5; // Renamed to the above by MAL
     public const GENRE_MANGA_AVANT_GARDE = 5;
-    public const GENRE_MANGA_DEMONS = 6;
+    public const GENRE_MANGA_DEMENTIA = 5; // Renamed to the above by MAL
+    public const GENRE_MANGA_MYTHOLOGY = 6;
+    public const GENRE_MANGA_DEMONS = 6; // Renamed to the above by MAL
     public const GENRE_MANGA_MYSTERY = 7;
     public const GENRE_MANGA_DRAMA = 8;
     public const GENRE_MANGA_ECCHI = 9;
     public const GENRE_MANGA_FANTASY = 10;
-    public const GENRE_MANGA_GAME = 11;
+    public const GENRE_MANGA_STRATEGY_GAME = 11;
+    public const GENRE_MANGA_GAME = 11; // Renamed to the above by MAL
     public const GENRE_MANGA_HENTAI = 12;
     public const GENRE_MANGA_HISTORICAL = 13;
     public const GENRE_MANGA_HORROR = 14;
@@ -227,18 +275,54 @@ class Constants
     public const GENRE_MANGA_SLICE_OF_LIFE = 36;
     public const GENRE_MANGA_SUPERNATURAL = 37;
     public const GENRE_MANGA_MILITARY = 38;
-    public const GENRE_MANGA_POLICE = 39;
+    public const GENRE_MANGA_DETECTIVE = 39;
+    public const GENRE_MANGA_POLICE = 39; // Renamed to the above by MAL
     public const GENRE_MANGA_PSYCHOLOGICAL = 40;
     public const GENRE_MANGA_SEINEN = 41;
     public const GENRE_MANGA_JOSEI = 42;
-    public const GENRE_MANGA_DOUJINSHI = 43;
-    public const GENRE_MANGA_GENDER_BENDER = 44;
+    public const GENRE_MANGA_DOUJINSHI = 43; // Removed by MAL - will throw BadResponseException (404)
+    public const GENRE_MANGA_CROSSDRESSING = 44;
+    public const GENRE_MANGA_GENDER_BENDER = 44; // Renamed to the above by MAL
     public const GENRE_MANGA_SUSPENSE = 45;
     public const GENRE_MANGA_THRILLER = 45; // Renamed to the above by MAL
     public const GENRE_MANGA_AWARD_WINNING = 46;
     public const GENRE_MANGA_GOURMET = 47;
-    public const GENRE_MANGA_WORK_LIFE = 48;
+    public const GENRE_MANGA_WORKPLACE = 48;
+    public const GENRE_MANGA_WORK_LIFE = 48; // Renamed to the above by MAL
     public const GENRE_MANGA_EROTICA = 49;
+    public const GENRE_MANGA_ADULT_CAST = 50;
+    public const GENRE_MANGA_ANTHROPOMORPHIC = 51;
+    public const GENRE_MANGA_CGDCT = 52;
+    public const GENRE_MANGA_CHILDCARE = 53;
+    public const GENRE_MANGA_COMBAT_SPORTS = 54;
+    public const GENRE_MANGA_DELINQUENTS = 55;
+    public const GENRE_MANGA_EDUCATIONAL = 56;
+    public const GENRE_MANGA_GAG_HUMOR = 57;
+    public const GENRE_MANGA_GORE = 58;
+    public const GENRE_MANGA_HIGH_STAKES_GAME = 59;
+    public const GENRE_MANGA_IDOLS_FEMALE = 60;
+    public const GENRE_MANGA_IDOLS_MALE = 61;
+    public const GENRE_MANGA_ISEKAI = 62;
+    public const GENRE_MANGA_IYASHIKEI = 63;
+    public const GENRE_MANGA_LOVE_POLYGON = 64;
+    public const GENRE_MANGA_MAGICAL_SEX_SHIFT = 65;
+    public const GENRE_MANGA_MAHOU_SHOUJO = 66;
+    public const GENRE_MANGA_MEDICAL = 67;
+    public const GENRE_MANGA_MEMOIR = 68;
+    public const GENRE_MANGA_ORGANIZED_CRIME = 69;
+    public const GENRE_MANGA_OTAKU_CULTURE = 70;
+    public const GENRE_MANGA_PERFORMING_ARTS = 71;
+    public const GENRE_MANGA_PETS = 72;
+    public const GENRE_MANGA_REINCARNATION = 73;
+    public const GENRE_MANGA_REVERSE_HAREM = 74;
+    public const GENRE_MANGA_ROMANTIC_SUBTEXT = 75;
+    public const GENRE_MANGA_SHOWBIZ = 76;
+    public const GENRE_MANGA_SURVIVAL = 77;
+    public const GENRE_MANGA_TEAM_SPORTS = 78;
+    public const GENRE_MANGA_TIME_TRAVEL = 79;
+    public const GENRE_MANGA_VIDEO_GAME = 80;
+    public const GENRE_MANGA_VILLAINESS = 81;
+    public const GENRE_MANGA_VISUAL_ARTS = 82;
 
     /*
      * User List Ordering Explained

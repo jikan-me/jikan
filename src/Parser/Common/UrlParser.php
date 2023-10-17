@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\JString;
 use Jikan\Model\Common\Url;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -15,7 +16,7 @@ class UrlParser
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * MalUrlParser constructor.
@@ -34,8 +35,8 @@ class UrlParser
     public function getModel(): Url
     {
         return new Url(
-            $this->crawler->text(),
-            $this->crawler->attr('href')
+            JString::cleanse($this->crawler->text()),
+            JString::cleanse($this->crawler->attr('href'))
         );
     }
 }

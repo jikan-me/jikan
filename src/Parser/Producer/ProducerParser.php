@@ -241,16 +241,34 @@ class ProducerParser implements ParserInterface
      */
     public function getExternalLinks(): array
     {
-        $links = $this->crawler
+        $links = [];
+
+        $availableAtLinks = $this->crawler
             ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "user-profile-sns")]/span//a');
 
-        if (!$links->count()) {
+        if (!$availableAtLinks->count()) {
             return [];
         }
 
-        return $links->each(function (Crawler  $c) {
-            return (new UrlParser($c))->getModel();
-        });
+        $links = array_merge($links, $availableAtLinks
+            ->each(function (Crawler $c) {
+                return (new UrlParser($c))->getModel();
+            }));
+
+
+        $resourcesLinks = $this->crawler
+            ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "pb16")]/span//a');
+
+        if (!$resourcesLinks->count()) {
+            return [];
+        }
+
+        $links = array_merge($links, $resourcesLinks
+            ->each(function (Crawler $c) {
+                return (new UrlParser($c))->getModel();
+            }));
+
+        return $links;
     }
 
     /**

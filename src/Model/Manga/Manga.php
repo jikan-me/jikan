@@ -25,37 +25,37 @@ class Manga
     /**
      * @var int
      */
-    private $malId;
+    private int $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @var string|null
      */
-    private $titleEnglish;
+    private ?string $titleEnglish;
 
     /**
      * @var string[]
      */
-    private $titleSynonyms;
+    private array $titleSynonyms;
 
     /**
      * @var bool
      */
-    private $approved;
+    private bool $approved;
 
     /**
      * @var string|null
      */
-    private $titleJapanese;
+    private ?string $titleJapanese;
 
     /**
      * @var \Jikan\Model\Common\Title[]
@@ -65,117 +65,117 @@ class Manga
     /**
      * @var string
      */
-    private $status;
+    private string $status;
 
     /**
      * @var CommonImageResource
      */
-    private $images;
+    private CommonImageResource $images;
 
     /**
      * @var string|null
      */
-    private $type;
+    private ?string $type;
 
     /**
      * @var int|null
      */
-    private $volumes;
+    private ?int $volumes;
 
     /**
      * @var int|null
      */
-    private $chapters;
+    private ?int $chapters;
 
     /**
      * @var bool
      */
-    private $publishing = false;
+    private bool $publishing = false;
 
     /**
      * @var DateRange
      */
-    private $published;
+    private DateRange $published;
 
     /**
      * @var int|null
      */
-    private $rank;
+    private ?int $rank;
 
     /**
      * @var float|null
      */
-    private $score;
+    private ?float $score;
 
     /**
      * @var int|null
      */
-    private $scoredBy;
+    private ?int $scoredBy;
 
     /**
      * @var int|null
      */
-    private $popularity;
+    private ?int $popularity;
 
     /**
      * @var int|null
      */
-    private $members;
+    private ?int $members;
 
     /**
      * @var int|null
      */
-    private $favorites;
+    private ?int $favorites;
 
     /**
      * @var string|null
      */
-    private $synopsis;
+    private ?string $synopsis;
 
     /**
      * @var string|null
      */
-    private $background;
+    private ?string $background;
 
     /**
      * @var MalUrl[]
      */
-    private $related = [];
+    private array $related = [];
 
     /**
      * @var MalUrl[]
      */
-    private $genres = [];
+    private array $genres = [];
 
     /**
      * @var MalUrl[]
      */
-    private $explicitGenres = [];
+    private array $explicitGenres = [];
 
     /**
      * @var MalUrl[]
      */
-    private $demographics = [];
+    private array $demographics = [];
 
     /**
      * @var MalUrl[]
      */
-    private $themes = [];
+    private array $themes = [];
 
     /**
      * @var MalUrl[]
      */
-    private $authors = [];
+    private array $authors = [];
 
     /**
      * @var MalUrl[]
      */
-    private $serializations = [];
+    private array $serializations = [];
 
     /**
      * @var Url[]
      */
-    private $externalLinks = [];
+    private array $externalLinks = [];
 
 
     /**

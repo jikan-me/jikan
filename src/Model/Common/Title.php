@@ -19,15 +19,15 @@ class Title
     private string $type;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $title;
+    private ?string $title;
 
     /**
-     * @param string $title
+     * @param string|null $title
      * @param string $type
      */
-    public function __construct(string $type, string $title)
+    public function __construct(string $type, ?string $title)
     {
         $this->type = $type;
         $this->title = $title;
@@ -42,9 +42,9 @@ class Title
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }

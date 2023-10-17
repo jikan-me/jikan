@@ -17,7 +17,7 @@ class AlternativeTitleParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * EpisodeListItemParser constructor.
@@ -35,9 +35,10 @@ class AlternativeTitleParser implements ParserInterface
      */
     public function getModel(): array
     {
-        [$type, $title] = explode(': ', $this->crawler->text(), 2);
+        [$type, $title] = explode(':', $this->crawler->text(), 2);
+
         if ($type !== 'Synonyms') {
-            return [new Title($type, $title)];
+            return [new Title($type, JString::cleanse($title))];
         }
 
         $titles = explode(', ', $title);

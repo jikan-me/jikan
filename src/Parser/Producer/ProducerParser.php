@@ -128,7 +128,7 @@ class ProducerParser implements ParserInterface
     public function getTitles(): array
     {
         $titles = [];
-        $titleEnglish = $this->crawler->filterXPath('//*[@id="contentWrapper"]/div[1]/h1');
+        $titleEnglish = $this->crawler->filterXPath('//*[@id="contentWrapper"]//h1[contains(@class, "title-name")]');
 
         if ($titleEnglish->count()) {
             $titles[] = new Model\Common\Title(Model\Common\Title::TYPE_DEFAULT, $titleEnglish->text());
@@ -143,6 +143,24 @@ class ProducerParser implements ParserInterface
                     str_replace($titleJapanese->text(), '', $titleJapanese->ancestors()->text())
                 )
             );
+        }
+
+        $titleSynonyms = $this->crawler
+            ->filterXPath('//span[text()="Synonyms:"]');
+
+        if ($titleSynonyms->count()) {
+            $titleSynonyms = str_replace($titleSynonyms->text(), '', $titleSynonyms->ancestors()->text());
+            $titleSynonyms = explode(', ', $titleSynonyms);
+
+            foreach ($titleSynonyms as $titleSynonym) {
+                $titleSynonym = JString::cleanse($titleSynonym);
+
+                if (empty($titleSynonym) || is_null($titleSynonym)) {
+                    continue;
+                }
+
+                $titles[] = new Model\Common\Title('Synonym', $titleSynonym);
+            }
         }
 
         return $titles;

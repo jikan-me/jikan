@@ -78,7 +78,7 @@ class ClubParserTest extends TestCase
     public function it_gets_members_count(): void
     {
         self::assertEquals(
-            1381,
+            1398,
             $this->parser->getMembersCount()
         );
     }

@@ -41,7 +41,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_anime()
     {
         $anime = $this->parser->getResults();
-        self::assertCount(287, $anime);
+        self::assertCount(306, $anime);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeCard::class, $anime);
     }
 
@@ -51,7 +51,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_image()
     {
         self::assertEquals(
-            'https://cdn.myanimelist.net/images/company/1.png',
+            'https://cdn.myanimelist.net/s/common/company_logos/b03509d0-0a9f-4f7e-a75f-6ad2649f4cdc_600x600_i?s=668dd24cfe04283101aba66102a2c2c5',
             $this->parser->getImages()->getJpg()->getImageUrl()
         );
     }
@@ -73,7 +73,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_favorites()
     {
         self::assertEquals(
-            2251,
+            4476,
             $this->parser->getFavorites()
         );
     }
@@ -83,8 +83,8 @@ class ProducerParserTest extends TestCase
      */
     public function it_gets_about()
     {
-        self::assertEquals(
-            null,
+        self::assertStringContainsString(
+            "Pierrot ぴえろ (Pierrot Co., Ltd.) is a Japanese animation studio established in May 1979 by former employees of both Tatsunoko Production and Mushi Production.",
             $this->parser->getAbout()
         );
     }
@@ -95,7 +95,7 @@ class ProducerParserTest extends TestCase
     public function it_gets_count()
     {
         self::assertEquals(
-            287,
+            306,
             $this->parser->getAnimeCount()
         );
     }
@@ -108,7 +108,7 @@ class ProducerParserTest extends TestCase
         $externalLinks = $this->parser->getExternalLinks();
 
         self::assertCount(
-            4,
+            11,
             $externalLinks
         );
 

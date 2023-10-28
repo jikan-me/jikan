@@ -12,6 +12,7 @@ namespace Jikan\Helper;
 class Constants
 {
     public const BASE_URL = 'https://myanimelist.net';
+    public const CDN_URL = 'https://cdn.myanimelist.net';
 
     public const SEASONS = [
         'Winter',

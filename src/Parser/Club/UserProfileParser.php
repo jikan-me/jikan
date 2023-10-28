@@ -63,7 +63,11 @@ class UserProfileParser implements ParserInterface
             $this->crawler->filterXPath('//img[1]')->attr('data-src')
         );
 
-        if (!preg_match("~^".Constants::BASE_URL."~", $imageUrl)) {
+        if (str_contains($imageUrl, Constants::CDN_URL)) {
+            return $imageUrl;
+        }
+
+        if (!str_contains($imageUrl, Constants::BASE_URL)) {
             $imageUrl = Constants::BASE_URL.$imageUrl;
         }
 

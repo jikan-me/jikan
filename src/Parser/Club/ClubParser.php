@@ -262,7 +262,7 @@ class ClubParser implements ParserInterface
     public function getStaff(): array
     {
         $staffNode = $this->crawler
-            ->filterXPath('//div[contains(text(), "Club Admins and Officers") and @class="normal_header"]')
+            ->filterXPath('//div[contains(text(), "Club Staff") and @class="normal_header"]')
             ->nextAll()
             ->filterXPath('//a');
 

@@ -45,6 +45,10 @@
             "composer config repositories.fixtures path ../jikan-fixtures",
             "composer update jikan-me/jikan-fixtures",
             "composer config repositories.fixtures --unset"
+        ],
+        "generate-docs": [
+            "git clone https://github.com/jikan-me/jikan-docs.git ../jikan-docs || git -C ../jikan-docs reset --hard origin/master",
+            "phpDocumentor run -d src -t ../jikan-docs/docs"
         ]
     },
     "config": {

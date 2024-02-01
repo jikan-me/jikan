@@ -28,9 +28,9 @@ class Jpg
      * @param string|null $imageUrl
      * @return self
      */
-    public static function factory(?string $imageUrl) : self
+    public static function factory(?string $imageUrl): self
     {
-        $instance = new self;
+        $instance = new self();
 
         $instance->imageUrl = $imageUrl;
 

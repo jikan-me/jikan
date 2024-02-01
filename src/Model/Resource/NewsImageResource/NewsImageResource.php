@@ -20,9 +20,9 @@ class NewsImageResource
      * @param string|null $imageUrl
      * @return NewsImageResource
      */
-    public static function factory(?string $imageUrl) : NewsImageResource
+    public static function factory(?string $imageUrl): NewsImageResource
     {
-        $instance = new self;
+        $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
 
@@ -32,7 +32,7 @@ class NewsImageResource
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getJpg()->getImageUrl();
     }

@@ -48,7 +48,7 @@ class NewsListItemParser implements ParserInterface
     /**
      * @return int|null
      */
-    public function getMalId() : ?int
+    public function getMalId(): ?int
     {
         preg_match('~([\d]+)$~', $this->getUrl(), $matches);
 
@@ -65,7 +65,7 @@ class NewsListItemParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return Constants::BASE_URL.$this->crawler
+        return Constants::BASE_URL . $this->crawler
                 ->filterXPath('//div[contains(@class,"news-unit-right")]/p/a')
                 ->attr('href');
     }
@@ -94,7 +94,8 @@ class NewsListItemParser implements ParserInterface
     public function getDate(): ?\DateTimeImmutable
     {
         return Parser::parseDate(
-            explode(' by',
+            explode(
+                ' by',
                 Parser::removeChildNodes(
                     $this->crawler
                         ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p')
@@ -121,7 +122,7 @@ class NewsListItemParser implements ParserInterface
      */
     public function getDiscussionLink(): string
     {
-        return Constants::BASE_URL.$this->crawler
+        return Constants::BASE_URL . $this->crawler
                 ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[last()]')
                 ->attr('href');
     }
@@ -130,7 +131,7 @@ class NewsListItemParser implements ParserInterface
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getComments() : int
+    public function getComments(): int
     {
         $comments = $this->crawler
             ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[last()]')

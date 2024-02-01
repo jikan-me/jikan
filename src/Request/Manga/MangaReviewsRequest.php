@@ -62,7 +62,7 @@ class MangaReviewsRequest implements RequestInterface
                     'spoiler' => $this->spoilers ? 'on' : 'off',
                     'preliminary' => $this->preliminary ? 'on' : 'off',
                     'sort' => $this->sort,
-                    'p' => $this->page
+                    'p' => $this->page,
                 ]
         );
 

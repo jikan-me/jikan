@@ -39,7 +39,7 @@ class RecentRecommendationsRequest implements RequestInterface
                 $type,
                 [
                     Constants::RECENT_RECOMMENDATION_ANIME,
-                    Constants::RECENT_RECOMMENDATION_MANGA
+                    Constants::RECENT_RECOMMENDATION_MANGA,
                 ],
                 true
             )
@@ -62,7 +62,7 @@ class RecentRecommendationsRequest implements RequestInterface
             [
                     's' => 'recentrecs',
                     't'  => $this->type,
-                    'show' => ($this->page !== 1) ? 100 * ($this->page - 1) : null
+                    'show' => ($this->page !== 1) ? 100 * ($this->page - 1) : null,
                 ]
         );
     }

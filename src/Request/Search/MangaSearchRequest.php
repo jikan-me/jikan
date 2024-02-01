@@ -92,7 +92,7 @@ class MangaSearchRequest implements RequestInterface
         $this->query = $query;
         $this->page = $page;
 
-        $this->query = $this->query ?? '';
+        $this->query ??= '';
 
         $querySize = strlen($this->query);
 
@@ -125,7 +125,7 @@ class MangaSearchRequest implements RequestInterface
                 'ey'     => $this->endDate[2],
                 'gx'     => (int)$this->genreExclude,
                 'o'      => $this->orderBy,
-                'w'      => $this->sort
+                'w'      => $this->sort,
             ]
         );
 
@@ -150,7 +150,7 @@ class MangaSearchRequest implements RequestInterface
     public function setQuery(?string $query = null): self
     {
         $this->query = $query;
-        $this->query = $this->query ?? '';
+        $this->query ??= '';
 
         return $this;
     }

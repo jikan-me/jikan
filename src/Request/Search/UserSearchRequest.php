@@ -53,7 +53,7 @@ class UserSearchRequest implements RequestInterface
         $this->query = $query;
         $this->page = $page;
 
-        $this->query = $this->query ?? '';
+        $this->query ??= '';
 
         $querySize = strlen($this->query);
 

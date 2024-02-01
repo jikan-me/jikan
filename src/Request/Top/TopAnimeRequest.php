@@ -46,7 +46,7 @@ class TopAnimeRequest implements RequestInterface
                     Constants::TOP_SPECIAL,
                     Constants::TOP_BY_POPULARITY,
                     Constants::TOP_BY_FAVORITES,
-                    Constants::TOP_ONA
+                    Constants::TOP_ONA,
                 ],
                 true
             )

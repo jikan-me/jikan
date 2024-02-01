@@ -95,7 +95,7 @@ class UserMangaListRequest implements RequestInterface
             'published_to_month' => $this->publishedTo[1],
             'published_to_day' => $this->publishedTo[2],
             'magazine' => $this->magazine,
-            'publishing_status' => $this->publishingStatus
+            'publishing_status' => $this->publishingStatus,
             ]
         );
         return sprintf('https://myanimelist.net/mangalist/%s/load.json%s', $this->username, $query);

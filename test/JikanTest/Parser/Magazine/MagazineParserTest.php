@@ -1,10 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\Magazine;
+namespace Parser\Magazine;
 
-use Goutte\Client;
 use Jikan\Parser\Magazine\MagazineParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Magazine\Client;
+use TestCase;
 
 /**
  * Class MagazineParserTest

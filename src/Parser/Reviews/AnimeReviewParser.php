@@ -103,12 +103,12 @@ class AnimeReviewParser implements ParserInterface
     public function getAnimeUrl(): string
     {
         // User UserReviews page
-//        $node = $this->crawler
-//            ->filterXPath('//div[1]/div/div[2]/div/a');
-//
-//        if ($node->count()) {
-//            return $node->attr('href');
-//        }
+        //        $node = $this->crawler
+        //            ->filterXPath('//div[1]/div/div[2]/div/a');
+        //
+        //        if ($node->count()) {
+        //            return $node->attr('href');
+        //        }
 
         // Recent UserReviews page
         $node = $this->crawler

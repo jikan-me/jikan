@@ -1,9 +1,9 @@
 <?php
 
-namespace JikanTest\Parser\Common;
+namespace Parser\Common;
 
 use Jikan\Parser\Common\MalUrlParser;
-use JikanTest\TestCase;
+use TestCase;
 
 /**
  * Class MalUrlParserTest

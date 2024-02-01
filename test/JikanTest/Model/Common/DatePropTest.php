@@ -1,6 +1,6 @@
 <?php
 
-namespace JikanTest\Model\Common;
+namespace Model\Common;
 
 use Jikan\Model\Common\DateProp;
 use PHPUnit\Framework\TestCase;

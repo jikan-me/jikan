@@ -1,12 +1,12 @@
 <?php
 
-namespace JikanTest\Parser\Character;
+namespace Parser\Character;
 
-use Goutte\Client;
 use Jikan\Model\Character\VoiceActor;
 use Jikan\Parser\Character\CharacterListItemParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Character\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use TestCase;
 
 /**
  * Class CharacterListItemParserTest

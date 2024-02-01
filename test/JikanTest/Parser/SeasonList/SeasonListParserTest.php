@@ -1,11 +1,11 @@
 <?php
 
-namespace JikanTest\Parser\SeasonList;
+namespace Parser\SeasonList;
 
-use Goutte\Client;
 use Jikan\Model\SeasonList\SeasonListItem;
 use Jikan\Parser\SeasonList\SeasonListParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\SeasonList\Client;
+use TestCase;
 
 /**
  * Class SeasonListParserTest

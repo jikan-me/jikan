@@ -1,10 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\Search;
+namespace Parser\Search;
 
 use Jikan\Model\Common\MalUrl;
-use JikanTest\TestCase;
 use Jikan\MyAnimeList\MalClient;
+use TestCase;
 
 /**
  * Class CharacterSearchTest

@@ -1,9 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\User\Profile;
+namespace Parser\UserProfile;
 
 use Jikan\Parser\User\Profile\UserProfileParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\User\Profile\HttpClientWrapper;
+use TestCase;
 
 /**
  * Class ProfileParserTest
@@ -19,7 +20,7 @@ class UserProfileParserTest extends TestCase
     {
         parent::setUp();
 
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/profile/sandshark');
         $this->parser = new UserProfileParser($crawler);
     }

@@ -1,8 +1,9 @@
 <?php
 
-namespace JikanTest\Parser\Anime;
+namespace Parser\Anime;
 
-use JikanTest\TestCase;
+use JikanTest\Parser\Anime\HttpClientWrapper;
+use TestCase;
 
 class AnimeEpisodesParserTest extends TestCase
 {
@@ -16,7 +17,7 @@ class AnimeEpisodesParserTest extends TestCase
         parent::setUp();
 
         $request = new \Jikan\Request\Anime\AnimeEpisodesRequest(21);
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Anime\EpisodesParser($crawler);
     }

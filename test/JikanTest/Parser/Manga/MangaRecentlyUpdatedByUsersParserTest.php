@@ -1,8 +1,9 @@
 <?php
 
-namespace JikanTest\Parser\Manga;
+namespace Parser\Manga;
 
-use JikanTest\TestCase;
+use JikanTest\Parser\Manga\HttpClientWrapper;
+use TestCase;
 
 class MangaRecentlyUpdatedByUsersParserTest extends TestCase
 {
@@ -16,7 +17,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         parent::setUp();
 
         $request = new \Jikan\Request\Manga\MangaRecentlyUpdatedByUsersRequest(1);
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = (new \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser($crawler))->getModel();
     }

@@ -1,11 +1,11 @@
 <?php
 
-namespace JikanTest\Parser\Person;
+namespace Parser\Producer;
 
-use Goutte\Client;
 use Jikan\Model\Common\Url;
 use Jikan\Parser\Producer\ProducerParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Person\Client;
+use TestCase;
 
 /**
  * Class ProducerParserTest

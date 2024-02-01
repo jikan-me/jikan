@@ -1,10 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\Manga;
+namespace Parser\Manga;
 
-use Jikan\Model\Manga\MangaStatsScore;
 use Jikan\Parser\Manga\MangaStatsParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Manga\HttpClientWrapper;
+use TestCase;
 
 /**
  * Class MangaStatsParserTest
@@ -21,7 +21,7 @@ class MangaStatsParserTest extends TestCase
         parent::setUp();
 
         $request = new \Jikan\Request\Manga\MangaStatsRequest(99314);
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->mangaStatsParser = new MangaStatsParser($crawler);
     }

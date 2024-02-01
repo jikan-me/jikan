@@ -467,9 +467,9 @@ class MalClient
     {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
 
-//        if ($this->httpClientWrapper->getInternalResponse()->getStatusCode()) {
-//            return Model\Search\AnimeSearch::mock();
-//        }
+        //        if ($this->httpClientWrapper->getInternalResponse()->getStatusCode()) {
+        //            return Model\Search\AnimeSearch::mock();
+        //        }
 
         try {
             $parser = new Parser\Search\AnimeSearchParser($crawler);

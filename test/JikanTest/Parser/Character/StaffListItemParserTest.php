@@ -1,10 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\Character;
+namespace Parser\Character;
 
-use Goutte\Client;
-use JikanTest\TestCase;
+use JikanTest\Parser\Character\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use TestCase;
 
 /**
  * Class StaffListItemParserTest

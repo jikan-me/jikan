@@ -1,5 +1,4 @@
 <?php
-
 namespace JikanTest;
 
 use Symfony\Component\HttpClient\HttpClient;

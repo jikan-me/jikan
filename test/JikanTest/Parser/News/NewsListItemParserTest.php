@@ -1,9 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\News;
+namespace Parser\News;
 
 use Jikan\Parser\News\NewsListItemParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\News\HttpClientWrapper;
+use TestCase;
 
 /**
  * Class NewsListItemParserTest
@@ -19,7 +20,7 @@ class NewsListItemParserTest extends TestCase
     {
         parent::setUp();
 
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/2/Berserk/news');
         $this->parser = new NewsListItemParser(
             $crawler->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')->first()

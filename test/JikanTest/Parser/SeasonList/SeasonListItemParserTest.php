@@ -1,8 +1,10 @@
 <?php
 
-namespace Jikan\Parser\SeasonList;
+namespace Parser\SeasonList;
 
-use JikanTest\TestCase;
+use Jikan\Parser\SeasonList\HttpClientWrapper;
+use Jikan\Parser\SeasonList\SeasonListItemParser;
+use TestCase;
 
 class SeasonListItemParserTest extends TestCase
 {
@@ -15,7 +17,7 @@ class SeasonListItemParserTest extends TestCase
     {
         parent::setUp();
 
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/season/archive');
         $this->parser = new SeasonListItemParser(
             $crawler->filterXPath('//table[contains(@class, "anime-seasonal-byseason")]/tr')->first()

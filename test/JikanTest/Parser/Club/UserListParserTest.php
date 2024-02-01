@@ -1,8 +1,9 @@
 <?php
 
-namespace JikanTest\Parser\Club;
+namespace Parser\Club;
 
-use JikanTest\TestCase;
+use JikanTest\Parser\Club\HttpClientWrapper;
+use TestCase;
 
 class UserListParserTest extends TestCase
 {
@@ -16,7 +17,7 @@ class UserListParserTest extends TestCase
         parent::setUp();
 
         $request = new \Jikan\Request\Club\UserListRequest(21349);
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Club\UserListParser($crawler);
     }

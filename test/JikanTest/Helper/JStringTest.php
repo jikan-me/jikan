@@ -1,9 +1,8 @@
 <?php
 
-namespace JikanTest\Helper;
+namespace Helper;
 
 use Jikan\Helper\JString;
-use Jikan\Helper\Parser;
 use PHPUnit\Framework\TestCase;
 
 /**

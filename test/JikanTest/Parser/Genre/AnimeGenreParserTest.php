@@ -1,11 +1,11 @@
 <?php
 
-namespace JikanTest\Parser\Genre;
+namespace Parser\Genre;
 
-use Goutte\Client;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Genre\AnimeGenreParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Genre\Client;
+use TestCase;
 
 /**
  * Class AnimeGenreParserTest

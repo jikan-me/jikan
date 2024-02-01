@@ -1,8 +1,9 @@
 <?php
 
-namespace JikanTest\Parser\Person;
+namespace Parser\Person;
 
-use JikanTest\TestCase;
+use JikanTest\Parser\Person\HttpClientWrapper;
+use TestCase;
 
 /**
  * Class PersonParserTest
@@ -19,7 +20,7 @@ class PersonParserTest extends TestCase
         parent::setUp();
 
         $request = new \Jikan\Request\Person\PersonRequest(99);
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->parser = new \Jikan\Parser\Person\PersonParser($crawler);
     }

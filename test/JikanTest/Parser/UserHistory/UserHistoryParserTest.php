@@ -1,8 +1,9 @@
 <?php
 
-namespace JikanTest\Parser\UserHistory;
+namespace Parser\UserHistory;
 
-use JikanTest\TestCase;
+use JikanTest\Parser\UserHistory\HttpClientWrapper;
+use TestCase;
 
 /**
  * Class HistoryParserTest
@@ -21,7 +22,7 @@ class UserHistoryParserTest extends TestCase
     {
         parent::setUp();
 
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/history/morshuwarrior/');
         $this->parser = (new \Jikan\Parser\User\History\HistoryParser($crawler))->getModel();
     }

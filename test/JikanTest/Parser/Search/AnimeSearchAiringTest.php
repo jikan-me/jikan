@@ -1,10 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\Search;
+namespace Parser\Search;
 
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Search\AnimeSearchRequest;
-use JikanTest\TestCase;
+use TestCase;
 
 /**
  * Class AnimeSearchAiringTest

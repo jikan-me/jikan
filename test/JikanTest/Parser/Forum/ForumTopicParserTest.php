@@ -2,11 +2,12 @@
 
 /** @noinspection PhpCSValidationInspection */
 
-namespace JikanTest\Parser\Forum;
+namespace Parser\Forum;
 
 use Jikan\Model\Forum\ForumPost;
 use Jikan\Parser\Forum\ForumTopicParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Forum\HttpClientWrapper;
+use TestCase;
 
 /**
  * Class ForumTopicParserTest
@@ -22,7 +23,7 @@ class ForumTopicParserTest extends TestCase
     {
         parent::setUp();
 
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/1/_/forum');
         $this->parser = new ForumTopicParser($crawler->filterXPath('//tr[contains(@id, "topicRow")]')->eq(2));
     }

@@ -1,9 +1,9 @@
 <?php
 
-namespace JikanTest\Parser\Search;
+namespace Parser\Search;
 
-use JikanTest\TestCase;
 use Jikan\MyAnimeList\MalClient;
+use TestCase;
 
 /**
  * Class MangaSearchTest

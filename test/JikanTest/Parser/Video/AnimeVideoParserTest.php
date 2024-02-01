@@ -1,12 +1,13 @@
 <?php
 
-namespace JikanTest\Parser\Video;
+namespace Parser\Video;
 
-use Goutte\Client;
 use Jikan\Model\Anime\PromoListItem;
 use Jikan\Model\Anime\StreamEpisodeListItem;
 use Jikan\Parser\Anime\VideosParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Video\AnimeVideoParser;
+use JikanTest\Parser\Video\Client;
+use TestCase;
 
 /**
  * Class AnimeVideoParserTest

@@ -1,11 +1,11 @@
 <?php
 
-namespace JikanTest\Parser\Person;
+namespace Parser\Schedule;
 
-use Goutte\Client;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Person\Client;
+use TestCase;
 
 /**
  * Class ScheduleParserTest

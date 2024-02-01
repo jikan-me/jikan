@@ -1,9 +1,10 @@
 <?php
 
-namespace JikanTest\Parser\Anime;
+namespace Parser\Anime;
 
 use Jikan\Parser\Anime\AnimeStatsParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Anime\HttpClientWrapper;
+use TestCase;
 
 /**
  * Class AnimeStatsParserTest
@@ -20,7 +21,7 @@ class AnimeStatsParserTest extends TestCase
         parent::setUp();
 
         $request = new \Jikan\Request\Anime\AnimeStatsRequest(37405);
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->animeStatsParser = new \Jikan\Parser\Anime\AnimeStatsParser($crawler);
     }

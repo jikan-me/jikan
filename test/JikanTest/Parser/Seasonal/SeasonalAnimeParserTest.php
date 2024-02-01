@@ -1,10 +1,11 @@
 <?php
 
-namespace JikanTest\Parser\Seasonal;
+namespace Parser\Seasonal;
 
 use Jikan\Parser\Common\AnimeCardParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Seasonal\HttpClientWrapper;
 use Symfony\Component\DomCrawler\Crawler;
+use TestCase;
 
 /**
  * Class SeasonalParserTest
@@ -24,7 +25,7 @@ class SeasonalAnimeParserTest extends TestCase
     {
         parent::setUp();
 
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $request = new \Jikan\Request\Seasonal\SeasonalRequest(2018, 'spring');
         $this->crawler = $crawler = $client->request('GET', $request->getPath());
         $this->parser = new AnimeCardParser($crawler->filter('div.seasonal-anime')->first());

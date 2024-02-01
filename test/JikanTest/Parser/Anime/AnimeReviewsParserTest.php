@@ -1,12 +1,12 @@
 <?php
 
-namespace JikanTest\Parser\Anime;
+namespace Parser\Anime;
 
 use Jikan\Model\Anime\AnimeReview;
 use Jikan\Parser\Anime\AnimeReviewsParser;
 use Jikan\Request\Anime\AnimeReviewsRequest;
-use JikanTest\TestCase;
-use Symfony\Component\HttpClient\HttpClient;
+use JikanTest\Parser\Anime\HttpClientWrapper;
+use TestCase;
 
 class AnimeReviewsParserTest extends TestCase
 {
@@ -25,7 +25,7 @@ class AnimeReviewsParserTest extends TestCase
         parent::setUp();
 
         $request = new AnimeReviewsRequest(1);
-        $client = new \Goutte\Client($this->httpClient);
+        $client = new HttpClientWrapper($this->httpClient);
         $crawler = $client->request('GET', $request->getPath());
         $this->model = (new AnimeReviewsParser($crawler))->getModel();
         $this->review = $this->model->getResults()[0];

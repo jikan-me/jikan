@@ -1,11 +1,11 @@
 <?php
 
-namespace JikanTest\Parser\Top;
+namespace Parser\Top;
 
-use Goutte\Client;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
-use JikanTest\TestCase;
+use JikanTest\Parser\Top\Client;
+use TestCase;
 
 /**
  * Class TopCharacterParserTest

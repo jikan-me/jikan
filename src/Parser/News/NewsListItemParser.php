@@ -44,7 +44,9 @@ class NewsListItemParser implements ParserInterface
 
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class,"news-unit-right")]/p/a')->text();
+        return $this->crawler
+            ->filterXPath('//p[contains(@class,"title")]/a')
+            ->text();
     }
 
     /**
@@ -67,8 +69,8 @@ class NewsListItemParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return Constants::BASE_URL . $this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/p/a')
+        return $this->crawler
+                ->filterXPath('//p[contains(@class,"title")]/a')
                 ->attr('href');
     }
 
@@ -100,7 +102,7 @@ class NewsListItemParser implements ParserInterface
                 ' by',
                 Parser::removeChildNodes(
                     $this->crawler
-                        ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p')
+                        ->filterXPath('//div[contains(@class, "information")]/p')
                 )->text()
             )[0]
         );
@@ -114,7 +116,7 @@ class NewsListItemParser implements ParserInterface
     {
         return (new MalUrlParser(
             $this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[1]')
+                ->filterXPath('//div[contains(@class, "information")]/p/a[1]')
         ))->getModel();
     }
 
@@ -125,7 +127,7 @@ class NewsListItemParser implements ParserInterface
     public function getDiscussionLink(): string
     {
         return $this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[last()]')
+                ->filterXPath('//div[contains(@class, "information")]/p/a[last()]')
                 ->attr('href');
     }
 
@@ -137,8 +139,7 @@ class NewsListItemParser implements ParserInterface
     {
         $comments = $this->crawler
             ->filterXPath('
-                //div[contains(@class,"news-unit-right")]
-                /div[contains(@class, "information")]
+                //div[contains(@class, "information")]
                 //a[contains(@class, "comment")]
             ')
             ->text();
@@ -155,7 +156,7 @@ class NewsListItemParser implements ParserInterface
     {
         return JString::cleanse(
             $this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "text")]')
+                ->filterXPath('//div[contains(@class, "text")]')
                 ->text()
         );
     }
@@ -164,8 +165,7 @@ class NewsListItemParser implements ParserInterface
     {
         $node = $this->crawler
             ->filterXPath('
-                //div[contains(@class,"news-unit-right")]
-                /div[contains(@class, "information")]
+                //div[contains(@class, "information")]
                 /p[contains(@class, "tags")]
                 /a
             ');

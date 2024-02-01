@@ -6,17 +6,17 @@ use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
-use Jikan\Model\News\NewsListItem;
+use Jikan\Model\News\ResourceNewsListItem;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class NewsListItemParser
+ * Class ResourceNewsListParser
  *
  * @package Jikan\Parser
  */
-class NewsListItemParser implements ParserInterface
+class ResourceNewsListItemParser implements ParserInterface
 {
     /**
      * @var Crawler
@@ -24,7 +24,7 @@ class NewsListItemParser implements ParserInterface
     private Crawler $crawler;
 
     /**
-     * NewsListItemParser constructor.
+     * MangaParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -33,16 +33,23 @@ class NewsListItemParser implements ParserInterface
         $this->crawler = $crawler;
     }
 
-
-    public function getModel(): NewsListItem
+    /**
+     * @return ResourceNewsListItem
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getModel(): ResourceNewsListItem
     {
-        return NewsListItem::fromParser($this);
+        return ResourceNewsListItem::fromParser($this);
     }
 
-
+    /**
+     * @return string
+     * @throws \InvalidArgumentException
+     */
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//div[contains(@class,"news-unit-right")]/p/a')->text();
+        return $this->crawler->filterXPath('//p/a/strong')->text();
     }
 
     /**
@@ -65,25 +72,23 @@ class NewsListItemParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return Constants::BASE_URL.$this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/p/a')
-                ->attr('href');
+        return Constants::BASE_URL.$this->crawler->filterXPath('//p/a/strong/..')->attr('href');
     }
 
     /**
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): ?string
+    public function getImage(): ?string
     {
-        $image = $this->crawler->filterXPath('//*[contains(@class, "image-link")]/img');
+        $image = $this->crawler->filterXPath('//img[1]');
 
         if (!$image->count()) {
             return null;
         }
 
         return Parser::parseImageQuality(
-            $image->attr('src')
+            $image->attr('data-src')
         );
     }
 
@@ -93,14 +98,7 @@ class NewsListItemParser implements ParserInterface
      */
     public function getDate(): ?\DateTimeImmutable
     {
-        return Parser::parseDate(
-            explode(' by',
-                Parser::removeChildNodes(
-                    $this->crawler
-                        ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p')
-                )->text()
-            )[0]
-        );
+        return Parser::parseDate(explode(' by', $this->crawler->filterXPath('//p[last()]')->text())[0]);
     }
 
     /**
@@ -109,10 +107,7 @@ class NewsListItemParser implements ParserInterface
      */
     public function getAuthor(): MalUrl
     {
-        return (new MalUrlParser(
-            $this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[1]')
-        ))->getModel();
+        return (new MalUrlParser($this->crawler->filterXPath('//a[contains(@href, "profile")][1]')))->getModel();
     }
 
     /**
@@ -121,9 +116,7 @@ class NewsListItemParser implements ParserInterface
      */
     public function getDiscussionLink(): string
     {
-        return Constants::BASE_URL.$this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[last()]')
-                ->attr('href');
+        return Constants::BASE_URL.$this->crawler->filterXPath('//a[last()]')->attr('href');
     }
 
     /**
@@ -132,11 +125,8 @@ class NewsListItemParser implements ParserInterface
      */
     public function getComments() : int
     {
-        $comments = $this->crawler
-            ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[last()]')
-            ->text();
-
-        preg_match('~\((\d+) comments\)~', $comments, $comments);
+        $comments = $this->crawler->filterXPath('//a[last()]')->text();
+        preg_match('~Discuss \((\d+) comments\)~', $comments, $comments);
         return !empty($comments) ? $comments[1] : 0;
     }
 
@@ -144,12 +134,10 @@ class NewsListItemParser implements ParserInterface
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function getExcerpt(): string
+    public function getIntro(): string
     {
         return JString::cleanse(
-            $this->crawler
-                ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "text")]')
-                ->text()
+            Parser::removeChildNodes($this->crawler->filterXPath('//p[2]'))->text()
         );
     }
 }

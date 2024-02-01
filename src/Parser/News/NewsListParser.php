@@ -3,8 +3,6 @@
 namespace Jikan\Parser\News;
 
 use Jikan\Model\News\NewsList;
-use Jikan\Model\News\NewsListItem;
-use Jikan\Model\Search\AnimeSearch;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -18,10 +16,10 @@ class NewsListParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
-     * MangaParser constructor.
+     * NewsListParser constructor.
      *
      * @param Crawler $crawler
      */
@@ -30,26 +28,17 @@ class NewsListParser implements ParserInterface
         $this->crawler = $crawler;
     }
 
-    /**
-     * @return NewsList
-     * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
+
     public function getModel(): NewsList
     {
         return NewsList::fromParser($this);
     }
 
-    /**
-     * @return NewsListItem[]
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
-     */
+
     public function getResults(): array
     {
         return $this->crawler
-            ->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')
+            ->filterXPath('//*[@id="content"]/div[1]/div/div[contains(@class, "news-list")]/div[contains(@class, "news-unit") and contains(@class, "rect")]')
             ->each(
                 function (Crawler $crawler) {
                     return (new NewsListItemParser($crawler))->getModel();
@@ -62,13 +51,14 @@ class NewsListParser implements ParserInterface
      */
     public function getHasNextPage(): bool
     {
-        $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tr/td[2]/div[1]/a[contains(text(), "More News")]');
-
-        if ($pages->count()) {
-            return true;
-        }
-
         return false;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        return 1;
     }
 }

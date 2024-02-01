@@ -50,7 +50,7 @@ class NewsListItemParserTest extends TestCase
     {
         self::assertEquals(
             'https://cdn.myanimelist.net/s/common/uploaded_files/1654587114-bf53f8de5beebd981afec1932486e604.jpeg?s=14bd951b901aa46034b344818e7cbd31',
-            $this->parser->getImage()
+            $this->parser->getImageUrl()
         );
     }
 
@@ -96,7 +96,7 @@ class NewsListItemParserTest extends TestCase
     {
         self::assertStringContainsString(
             "The editorial department of Young Animal announced on Tuesday that the late Kentarou Miura's Berserk manga will resume serialization",
-            $this->parser->getIntro()
+            $this->parser->getExcerpt()
         );
     }
 }

@@ -6,7 +6,7 @@
     "minimum-stability": "stable",
     "authors": [
         {
-            "name": "Irfan",
+            "name": "Nekomata",
             "email": "neko@jikan.moe"
         }
     ],
@@ -20,14 +20,16 @@
     "autoload-dev": {
         "psr-4": {
             "JikanTest\\": [
-                "test/JikanTest"
+                "test"
             ]
         }
     },
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "fabpot/goutte": "^4.0"
+        "symfony/browser-kit": "^6.4",
+        "symfony/css-selector": "^6.4",
+        "symfony/http-client": "^6.4"
     },
     "require-dev": {
         "brianium/paratest": "^6.4.1",

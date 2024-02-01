@@ -1,17 +1,17 @@
 <?php
 
-namespace Jikan\Goutte;
+namespace Jikan\Http;
 
-use Goutte\Client;
 use Jikan\Exception\BadResponseException;
+use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
- * Class GoutteWrapper
+ * Class HttpClientWrapper
  *
- * @package Jikan\Goutte
+ * @package Jikan\Http
  */
-class GoutteWrapper extends Client
+class HttpClientWrapper extends HttpBrowser
 {
     /**
      * @inheritdoc

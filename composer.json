@@ -19,7 +19,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "JikanTest\\": "test/JikanTest/"
+          "JikanTest\\": [
+              "test/unit"
+          ]
         }
     },
     "require": {

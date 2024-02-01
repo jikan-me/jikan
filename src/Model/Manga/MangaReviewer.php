@@ -33,7 +33,7 @@ class MangaReviewer extends Reviewer
     {
         $instance = new self();
 
-        $instance->url= $parser->getUrl();
+        $instance->url = $parser->getUrl();
         $instance->images = UserImageResource::factory($parser->getImageUrl());
         $instance->username = $parser->getUsername();
         $instance->chaptersRead = $parser->getChaptersRead();

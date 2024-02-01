@@ -195,7 +195,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
         return MangaRecentlyUpdatedByUser::fromParser($this);
     }
 
-    public function getUserMeta() : UserMeta
+    public function getUserMeta(): UserMeta
     {
         return new UserMeta(
             $this->getUsername(),

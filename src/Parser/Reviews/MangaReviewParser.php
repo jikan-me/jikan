@@ -49,7 +49,7 @@ class MangaReviewParser implements ParserInterface
     /**
      * @throws \Jikan\Exception\ParserException
      */
-    public function getManga(string $page = null) : MangaMeta
+    public function getManga(string $page = null): MangaMeta
     {
         return match ($page) {
             'user' => new MangaMeta(

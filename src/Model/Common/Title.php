@@ -10,8 +10,8 @@ namespace Jikan\Model\Common;
  */
 class Title
 {
-    const TYPE_DEFAULT = 'Default';
-    const TYPE_SYNONYM = 'Synonym';
+    public const TYPE_DEFAULT = 'Default';
+    public const TYPE_SYNONYM = 'Synonym';
 
     /**
      * @var string

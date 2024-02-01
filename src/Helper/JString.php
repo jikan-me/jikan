@@ -59,7 +59,7 @@ class JString
      * @param  string $string
      * @return string
      */
-    public static function strToCanonical(string $string) : string
+    public static function strToCanonical(string $string): string
     {
         return str_replace(
             [' ', '/'],

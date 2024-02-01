@@ -29,9 +29,9 @@ class ClubMeta
      * @param string $url
      * @return ClubMeta
      */
-    public static function factory(int  $malId, string $name, string $url) : self
+    public static function factory(int  $malId, string $name, string $url): self
     {
-        $instance = new self;
+        $instance = new self();
 
         $instance->malId = $malId;
         $instance->name = $name;

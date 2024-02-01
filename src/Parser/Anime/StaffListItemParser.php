@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\Parser;

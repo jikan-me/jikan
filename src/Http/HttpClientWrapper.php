@@ -33,7 +33,7 @@ class HttpClientWrapper extends HttpBrowser
         array $server = [],
         string $content = null,
         bool $changeHistory = true
-    ) : Crawler {
+    ): Crawler {
         $response = parent::request(
             $method,
             $uri,

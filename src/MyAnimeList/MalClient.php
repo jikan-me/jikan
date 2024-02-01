@@ -1212,7 +1212,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUsernameById(Request\User\UsernameByIdRequest $request) : Model\Common\UserMetaBasic
+    public function getUsernameById(Request\User\UsernameByIdRequest $request): Model\Common\UserMetaBasic
     {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {
@@ -1230,7 +1230,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUserReviews(Request\User\UserReviewsRequest $request) : Model\User\Reviews\UserReviews
+    public function getUserReviews(Request\User\UserReviewsRequest $request): Model\User\Reviews\UserReviews
     {
         try {
             $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
@@ -1254,7 +1254,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getRecentEpisodes(Request\Watch\RecentEpisodesRequest $request) : Model\Watch\Episodes
+    public function getRecentEpisodes(Request\Watch\RecentEpisodesRequest $request): Model\Watch\Episodes
     {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {
@@ -1272,7 +1272,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getPopularEpisodes(Request\Watch\PopularEpisodesRequest $request) : Model\Watch\Episodes
+    public function getPopularEpisodes(Request\Watch\PopularEpisodesRequest $request): Model\Watch\Episodes
     {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {
@@ -1292,7 +1292,7 @@ class MalClient
      */
     public function getRecentPromotionalVideos(
         Request\Watch\RecentPromotionalVideosRequest $request
-    ) : Model\Watch\PromotionalVideos {
+    ): Model\Watch\PromotionalVideos {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
@@ -1311,7 +1311,7 @@ class MalClient
      */
     public function getPopularPromotionalVideos(
         Request\Watch\PopularPromotionalVideosRequest $request
-    ) : Model\Watch\PromotionalVideos {
+    ): Model\Watch\PromotionalVideos {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
@@ -1347,7 +1347,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUserClubs(Request\User\UserClubsRequest $request) : array
+    public function getUserClubs(Request\User\UserClubsRequest $request): array
     {
         // user clubs page returns 404 when there are none added
         try {

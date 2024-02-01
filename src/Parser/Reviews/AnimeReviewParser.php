@@ -48,7 +48,7 @@ class AnimeReviewParser implements ParserInterface
     /**
      * @return AnimeMeta
      */
-    public function getAnime(string $page = null) : AnimeMeta
+    public function getAnime(string $page = null): AnimeMeta
     {
         return match ($page) {
             'user' => new AnimeMeta(

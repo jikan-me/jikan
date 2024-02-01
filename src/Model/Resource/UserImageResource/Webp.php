@@ -17,9 +17,9 @@ class Webp
      * @param string $imageUrl
      * @return \Jikan\Model\Resource\AnimeImageResource\Webp
      */
-    public static function factory(?string $imageUrl) : self
+    public static function factory(?string $imageUrl): self
     {
-        $instance = new self;
+        $instance = new self();
 
         $instance->imageUrl = str_replace('.jpg', '.webp', $imageUrl);
 

@@ -57,7 +57,7 @@ class Parser
      * @param string $url
      * @return int
      */
-    public static function clubIdFromUrl(string $url) : int
+    public static function clubIdFromUrl(string $url): int
     {
         return (int) preg_replace('~.*\.php\?cid=([\d]+)$~', '$1', $url);
     }
@@ -185,7 +185,7 @@ class Parser
      * @param string $dateTime
      * @return \DateTimeImmutable|null
      */
-    public static function parseDateTimePST(string $dateTime) : ?\DateTimeImmutable
+    public static function parseDateTimePST(string $dateTime): ?\DateTimeImmutable
     {
         try {
             $malTimeZone = new \DateTimeZone('America/Los_Angeles'); //
@@ -217,7 +217,7 @@ class Parser
      * @return string
      * @throws \InvalidArgumentException
      */
-    public static function parseImageQuality(string $imageUrl) : string
+    public static function parseImageQuality(string $imageUrl): string
     {
         // adding `v` prefix returns a very small thumbnail, as opposed to adding `l`
         $imageUrl = str_replace(['v.jpg', 't.jpg', 'l.jpg'], '.jpg', $imageUrl);
@@ -230,7 +230,7 @@ class Parser
      * @return string
      * @throws \InvalidArgumentException
      */
-    public static function parseImageThumbToHQ(string $imageUrl) : string
+    public static function parseImageThumbToHQ(string $imageUrl): string
     {
         return str_replace(['thumbs/', '_thumb'], '', $imageUrl);
     }
@@ -250,6 +250,6 @@ class Parser
         $minutes = $match[2] ?? 0;
         $seconds = $match[3] ?? 0;
 
-        return ($hours*60*60) + ($minutes*60) + $seconds;
+        return ($hours * 60 * 60) + ($minutes * 60) + $seconds;
     }
 }

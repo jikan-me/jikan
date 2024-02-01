@@ -187,7 +187,7 @@ class AnimeStatsParser implements ParserInterface
                 }
             );
 
-        for ($i=1; $i<=10; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
             if (!array_key_exists($i, $scores)) {
                 $scores[$i] = AnimeStatsScore::setProperties($i, 0, 0);
             }

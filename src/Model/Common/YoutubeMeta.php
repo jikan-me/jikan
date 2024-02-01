@@ -36,9 +36,9 @@ class YoutubeMeta
      * @param string $embedUrl
      * @return YoutubeMeta
      */
-    public static function factory(?string $embedUrl) : self
+    public static function factory(?string $embedUrl): self
     {
-        $instance = new self;
+        $instance = new self();
 
         $instance->embedUrl = $embedUrl;
         $instance->youtubeId = Media::youtubeIdFromUrl($embedUrl);

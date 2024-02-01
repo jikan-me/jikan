@@ -42,7 +42,7 @@ class AnimeSearch extends Results implements Pagination
         return $instance;
     }
 
-    public static function mock() : self
+    public static function mock(): self
     {
         return new self();
     }

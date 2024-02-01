@@ -95,6 +95,6 @@ class UserRecommendationsParser
 
         $recommendationsCount = (int) str_replace(',', '', $pages[1]);
 
-        return ceil($recommendationsCount/30);
+        return ceil($recommendationsCount / 30);
     }
 }

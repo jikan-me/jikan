@@ -96,7 +96,7 @@ class FavoritesParser
                 function (Crawler $crawler) {
                     return new CharacterMeta(
                         $crawler->filterXPath('//a/span[contains(@class, \'title\')]')->text(),
-                        Constants::BASE_URL.$crawler->filterXPath('//a')->attr('href'),
+                        Constants::BASE_URL . $crawler->filterXPath('//a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//a/img')
                             ->attr('data-src')),
                     );
@@ -115,7 +115,7 @@ class FavoritesParser
                 function (Crawler $crawler) {
                     return new PersonMeta(
                         $crawler->filterXPath('//a/span[contains(@class, \'title\')]')->text(),
-                        Constants::BASE_URL.$crawler->filterXPath('//a')->attr('href'),
+                        Constants::BASE_URL . $crawler->filterXPath('//a')->attr('href'),
                         Parser::parseImageQuality($crawler->filterXPath('//a/img')
                             ->attr('data-src')),
                     );

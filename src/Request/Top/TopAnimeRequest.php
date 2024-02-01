@@ -65,7 +65,7 @@ class TopAnimeRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return 'https://myanimelist.net/topanime.php?'.http_build_query(
+        return 'https://myanimelist.net/topanime.php?' . http_build_query(
             [
                     'limit' => 50 * ($this->page - 1),
                     'type'  => $this->type,

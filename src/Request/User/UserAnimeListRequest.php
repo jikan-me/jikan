@@ -91,7 +91,7 @@ class UserAnimeListRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        $query = '?'.http_build_query(
+        $query = '?' . http_build_query(
             [
             'offset' => $this->page,
             'status' => $this->status,

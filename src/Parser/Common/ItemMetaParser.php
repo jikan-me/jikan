@@ -33,7 +33,7 @@ abstract class ItemMetaParser
      */
     public function getMalId(): ?int
     {
-        return (int)preg_replace('#https://myanimelist.net/\w+/(\d+).*#', '$1', $this->getUrl());
+        return (int) preg_replace('#https://myanimelist.net/\w+/(\d+).*#', '$1', $this->getUrl());
     }
 
     /**

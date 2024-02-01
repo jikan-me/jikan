@@ -33,7 +33,7 @@ class TopCharactersRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return 'https://myanimelist.net/character.php?'.http_build_query(['limit' => 50 * ($this->page - 1)]);
+        return 'https://myanimelist.net/character.php?' . http_build_query(['limit' => 50 * ($this->page - 1)]);
     }
 
     /**

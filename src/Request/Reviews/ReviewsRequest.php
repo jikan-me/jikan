@@ -69,7 +69,7 @@ class ReviewsRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return 'https://myanimelist.net/reviews.php?'.http_build_query(
+        return 'https://myanimelist.net/reviews.php?' . http_build_query(
             [
                 'p' => $this->page,
                 't'  => $this->type,

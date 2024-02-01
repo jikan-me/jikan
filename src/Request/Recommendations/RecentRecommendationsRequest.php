@@ -58,7 +58,7 @@ class RecentRecommendationsRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return 'https://myanimelist.net/recommendations.php?'.http_build_query(
+        return 'https://myanimelist.net/recommendations.php?' . http_build_query(
             [
                     's' => 'recentrecs',
                     't'  => $this->type,

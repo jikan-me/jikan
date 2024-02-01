@@ -138,7 +138,7 @@ class CharacterParser implements ParserInterface
         $crawler = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[1]');
         $crawler = Parser::removeChildNodes($crawler);
 
-        return (int)preg_replace('/\D/', '', $crawler->text());
+        return (int) preg_replace('/\D/', '', $crawler->text());
     }
 
     /**

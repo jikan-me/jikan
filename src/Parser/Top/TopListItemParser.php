@@ -83,7 +83,7 @@ class TopListItemParser
      */
     public function getRank(): int
     {
-        return (int)$this->crawler->filterXPath('//td[1]/span')->text();
+        return (int) $this->crawler->filterXPath('//td[1]/span')->text();
     }
 
     /**
@@ -153,7 +153,7 @@ class TopListItemParser
         $count = 0;
         $vols = preg_replace('/.*\((\d+) vols\).*/', '$1', $this->getTextArray()[0], -1, $count);
 
-        return $count ? (int)$vols : null;
+        return $count ? (int) $vols : null;
     }
 
     /**
@@ -162,7 +162,7 @@ class TopListItemParser
      */
     public function getMembers(): int
     {
-        return (int)preg_replace('/\D/', '', $this->getTextArray()[2]);
+        return (int) preg_replace('/\D/', '', $this->getTextArray()[2]);
     }
 
     /**
@@ -234,7 +234,7 @@ class TopListItemParser
      */
     public function getFavorites(): int
     {
-        return (int)preg_replace('/\D/', '', $this->crawler->filterXPath('//td[5]')->text());
+        return (int) preg_replace('/\D/', '', $this->crawler->filterXPath('//td[5]')->text());
     }
 
 
@@ -244,7 +244,7 @@ class TopListItemParser
      */
     public function getPeopleFavorites(): int
     {
-        return (int)preg_replace('/\D/', '', $this->crawler->filterXPath('//td[4]')->text());
+        return (int) preg_replace('/\D/', '', $this->crawler->filterXPath('//td[4]')->text());
     }
 
     /**

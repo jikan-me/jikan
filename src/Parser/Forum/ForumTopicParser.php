@@ -38,7 +38,7 @@ class ForumTopicParser
     {
         parse_str(explode('?', $this->getUrl())[1], $query);
 
-        return (int)$query['topicid'];
+        return (int) $query['topicid'];
     }
 
     /**
@@ -47,7 +47,7 @@ class ForumTopicParser
      */
     public function getUrl(): string
     {
-        return Constants::BASE_URL.$this->crawler->filterXPath('//a[2]')->attr('href');
+        return Constants::BASE_URL . $this->crawler->filterXPath('//a[2]')->attr('href');
     }
 
     /**
@@ -83,7 +83,7 @@ class ForumTopicParser
      */
     public function getAuthorUrl(): string
     {
-        return Constants::BASE_URL.$this->crawler->filterXPath('//span[@class="forum_postusername"]/a')->attr('href');
+        return Constants::BASE_URL . $this->crawler->filterXPath('//span[@class="forum_postusername"]/a')->attr('href');
     }
 
     /**
@@ -92,7 +92,7 @@ class ForumTopicParser
      */
     public function getReplies(): int
     {
-        return (int)$this->crawler->filterXPath('//td[3]')->text();
+        return (int) $this->crawler->filterXPath('//td[3]')->text();
     }
 
     /**
@@ -102,8 +102,8 @@ class ForumTopicParser
     public function getLastPost(): ForumPost
     {
         $authorName = $this->crawler->filterXPath('//td[4]/a[1]')->text();
-        $authorUrl = Constants::BASE_URL.$this->crawler->filterXPath('//td[4]/a[1]')->attr('href');
-        $url = Constants::BASE_URL.$this->crawler->filterXPath('//td[4]/a[2]')->attr('href');
+        $authorUrl = Constants::BASE_URL . $this->crawler->filterXPath('//td[4]/a[1]')->attr('href');
+        $url = Constants::BASE_URL . $this->crawler->filterXPath('//td[4]/a[2]')->attr('href');
         $date = Parser::removeChildNodes($this->crawler->filterXPath('//td[4]'))->text();
         $date = JString::cleanse($date);
         $date = str_replace('by ', '', $date);

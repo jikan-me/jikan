@@ -193,7 +193,7 @@ class MangaCardParser implements ParserInterface
         $count = str_replace('M', '000000', $count);
 
 
-        return (int)str_replace([',', '.'], '', $count);
+        return (int) str_replace([',', '.'], '', $count);
     }
 
     /**
@@ -260,7 +260,7 @@ class MangaCardParser implements ParserInterface
             return null;
         }
 
-        return (float)$score;
+        return (float) $score;
     }
 
     /**

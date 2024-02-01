@@ -52,7 +52,7 @@ class JString
      */
     public static function UTF8NbspTrim(string $string): string
     {
-        return trim($string, \chr(0xC2).\chr(0xA0));
+        return trim($string, \chr(0xC2) . \chr(0xA0));
     }
 
     /**

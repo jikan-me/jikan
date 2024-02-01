@@ -822,7 +822,7 @@ class MalClient
 
             if ($response->getStatusCode() >= 400) {
                 throw new BadResponseException(
-                    $response->getStatusCode().' on '.$response->getInfo('url'),
+                    $response->getStatusCode() . ' on ' . $response->getInfo('url'),
                     $response->getStatusCode()
                 );
             }
@@ -836,7 +836,7 @@ class MalClient
             return $model;
         } catch (\Exception $e) {
             throw new BadResponseException(
-                $e->getCode().' on '.$request->getPath(),
+                $e->getCode() . ' on ' . $request->getPath(),
                 $e->getCode()
             );
         }
@@ -856,7 +856,7 @@ class MalClient
 
             if ($response->getStatusCode() >= 400) {
                 throw new BadResponseException(
-                    $response->getStatusCode().' on '.$response->getInfo('url'),
+                    $response->getStatusCode() . ' on ' . $response->getInfo('url'),
                     $response->getStatusCode()
                 );
             }
@@ -870,7 +870,7 @@ class MalClient
             return $model;
         } catch (\Exception $e) {
             throw new BadResponseException(
-                $e->getCode().' on '.$request->getPath(),
+                $e->getCode() . ' on ' . $request->getPath(),
                 $e->getCode()
             );
         }

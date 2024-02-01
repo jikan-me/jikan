@@ -48,7 +48,7 @@ class Parser
      */
     public static function idFromUrl(string $url): int
     {
-        return (int)preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
+        return (int) preg_replace('#https://myanimelist.net(/\w+/)(\d+).*#', '$2', $url);
     }
 
     /**
@@ -82,7 +82,7 @@ class Parser
     public static function parseForumDate(string $date): ?\DateTimeImmutable
     {
         if (!preg_match('/\d{4}/', $date)) {
-            $date .= ', '.date('Y');
+            $date .= ', ' . date('Y');
         }
 
         return self::parseDate($date);
@@ -96,7 +96,7 @@ class Parser
     public static function parseDate(string $date): ?\DateTimeImmutable
     {
         if (preg_match('/^\d{4}$/', $date)) {
-            return \DateTimeImmutable::createFromFormat('!Y-m-d', $date.'-01-01', new \DateTimeZone('UTC'));
+            return \DateTimeImmutable::createFromFormat('!Y-m-d', $date . '-01-01', new \DateTimeZone('UTC'));
         }
 
         if (preg_match('/(\w{3}), (\d{4})/', $date, $matches)) {

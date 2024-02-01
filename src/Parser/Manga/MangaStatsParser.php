@@ -56,7 +56,7 @@ class MangaStatsParser implements ParserInterface
      */
     private function sanitize($input): int
     {
-        return (int)preg_replace('/\D/', '', $input);
+        return (int) preg_replace('/\D/', '', $input);
     }
 
     /**

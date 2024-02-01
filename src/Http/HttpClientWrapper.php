@@ -47,7 +47,7 @@ class HttpClientWrapper extends HttpBrowser
         $internalResponse = $this->getInternalResponse();
         if ($internalResponse->getStatusCode() >= 400) {
             throw new BadResponseException(
-                $internalResponse->getStatusCode().' on '.$response->getUri(),
+                $internalResponse->getStatusCode() . ' on ' . $response->getUri(),
                 $internalResponse->getStatusCode()
             );
         }

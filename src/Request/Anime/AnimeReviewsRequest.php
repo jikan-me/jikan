@@ -57,7 +57,7 @@ class AnimeReviewsRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        $query = '?'.http_build_query(
+        $query = '?' . http_build_query(
             [
                     'spoiler' => $this->spoilers ? 'on' : 'off',
                     'preliminary' => $this->preliminary ? 'on' : 'off',

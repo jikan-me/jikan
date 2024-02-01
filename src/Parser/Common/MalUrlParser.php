@@ -54,7 +54,7 @@ class MalUrlParser
 
         return new MalUrl(
             JString::cleanse($this->crawler->text()),
-            'https://myanimelist.net'.$href
+            'https://myanimelist.net' . $href
         );
     }
 }

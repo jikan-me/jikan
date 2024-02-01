@@ -37,8 +37,17 @@ class NewsListParser implements ParserInterface
 
     public function getResults(): array
     {
-        return $this->crawler
-            ->filterXPath('//*[@id="content"]/div[1]/div/div[contains(@class, "news-list")]/div[contains(@class, "news-unit") and contains(@class, "rect")]')
+        $node = $this->crawler
+            ->filterXPath('
+            //*[contains(@class, "news-list")]
+            /div[contains(@class, "news-unit") and contains(@class, "rect")]
+        ');
+
+        if (!$node->count()) {
+            return [];
+        }
+
+        return $node
             ->each(
                 function (Crawler $crawler) {
                     return (new NewsListItemParser($crawler))->getModel();

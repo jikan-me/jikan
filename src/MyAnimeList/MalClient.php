@@ -1385,4 +1385,22 @@ class MalClient
             throw ParserException::fromRequest($request, $e);
         }
     }
+
+    /**
+     * @param Request\News\NewsByTagRequest $request
+     * @return Model\News\NewsList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getNewsByTag(Request\News\NewsByTagRequest $request): Model\News\NewsList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\News\NewsListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
 }

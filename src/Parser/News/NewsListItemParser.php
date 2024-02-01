@@ -2,12 +2,14 @@
 
 namespace Jikan\Parser\News;
 
+use Amp\Parallel\Context\ThreadContext;
 use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\News\NewsListItem;
 use Jikan\Parser\Common\MalUrlParser;
+use Jikan\Parser\Common\TagUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -122,7 +124,7 @@ class NewsListItemParser implements ParserInterface
      */
     public function getDiscussionLink(): string
     {
-        return Constants::BASE_URL . $this->crawler
+        return $this->crawler
                 ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[last()]')
                 ->attr('href');
     }
@@ -134,10 +136,14 @@ class NewsListItemParser implements ParserInterface
     public function getComments(): int
     {
         $comments = $this->crawler
-            ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "information")]/p/a[last()]')
+            ->filterXPath('
+                //div[contains(@class,"news-unit-right")]
+                /div[contains(@class, "information")]
+                //a[contains(@class, "comment")]
+            ')
             ->text();
 
-        preg_match('~\((\d+) comments\)~', $comments, $comments);
+        preg_match('~(\d+) Comments~', $comments, $comments);
         return !empty($comments) ? $comments[1] : 0;
     }
 
@@ -152,5 +158,24 @@ class NewsListItemParser implements ParserInterface
                 ->filterXPath('//div[contains(@class,"news-unit-right")]/div[contains(@class, "text")]')
                 ->text()
         );
+    }
+
+    public function getTags(): array
+    {
+        $node = $this->crawler
+            ->filterXPath('
+                //div[contains(@class,"news-unit-right")]
+                /div[contains(@class, "information")]
+                /p[contains(@class, "tags")]
+                /a
+            ');
+
+        if (!$node->count()) {
+            return [];
+        }
+
+        return $node->each(function (Crawler $crawler) {
+            return (new TagUrlParser($crawler))->getModel();
+        });
     }
 }

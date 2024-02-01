@@ -81,13 +81,14 @@ class NewsListItem
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
-        $instance->date = $parser->getDate();
+        $instance->comments = $parser->getComments();
+        $instance->tags = $parser->getTags();
         $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
         $instance->images = NewsImageResource::factory($parser->getImageUrl());
-        $instance->comments = $parser->getComments();
         $instance->excerpt = $parser->getExcerpt();
+        $instance->date = $parser->getDate();
 
         return $instance;
     }

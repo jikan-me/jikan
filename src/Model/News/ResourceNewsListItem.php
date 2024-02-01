@@ -74,13 +74,13 @@ class ResourceNewsListItem
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
-        $instance->date = $parser->getDate();
         $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
         $instance->images = WrapImageResource::factory($parser->getImage());
         $instance->comments = $parser->getComments();
         $instance->excerpt = $parser->getIntro();
+        $instance->date = $parser->getDate();
 
         return $instance;
     }

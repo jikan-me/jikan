@@ -72,7 +72,7 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return Constants::BASE_URL . $this->crawler->filterXPath('//p/a/strong/..')->attr('href');
+        return $this->crawler->filterXPath('//p/a/strong/..')->attr('href');
     }
 
     /**
@@ -116,7 +116,7 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getDiscussionLink(): string
     {
-        return Constants::BASE_URL . $this->crawler->filterXPath('//a[last()]')->attr('href');
+        return $this->crawler->filterXPath('//a[last()]')->attr('href');
     }
 
     /**

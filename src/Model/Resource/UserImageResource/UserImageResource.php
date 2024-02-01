@@ -22,9 +22,9 @@ class UserImageResource
      * @param string $imageUrl
      * @return UserImageResource
      */
-    public static function factory(?string $imageUrl) : self
+    public static function factory(?string $imageUrl): self
     {
-        $instance = new self;
+        $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
         $instance->webp = Webp::factory($imageUrl);

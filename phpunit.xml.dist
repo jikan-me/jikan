@@ -1,7 +1,7 @@
 <phpunit colors="true">
     <testsuites>
         <testsuite name="Unit">
-            <directory>./test/JikanTest</directory>
+            <directory>./test/unit</directory>
         </testsuite>
     </testsuites>
     <filter>

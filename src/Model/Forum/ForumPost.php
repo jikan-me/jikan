@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jikan\Model\Forum;
 
 /**

@@ -1,13 +1,22 @@
-<?xml version="1.0"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-  <coverage processUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">src</directory>
-    </include>
-  </coverage>
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         cacheDirectory=".phpunit.cache"
+         beStrictAboutOutputDuringTests="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         colors="true"
+         failOnEmptyTestSuite="true"
+>
   <testsuites>
-    <testsuite name="Unit">
-      <directory>./test/JikanTest</directory>
+    <testsuite name="unit">
+      <directory phpVersion="8.2" phpVersionOperator=">=">test/unit</directory>
     </testsuite>
   </testsuites>
+
+  <php>
+    <ini name="precision" value="14"/>
+    <ini name="serialize_precision" value="14"/>
+
+    <const name="PHPUNIT_TESTSUITE" value="true"/>
+  </php>
 </phpunit>

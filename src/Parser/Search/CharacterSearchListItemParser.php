@@ -111,7 +111,7 @@ class CharacterSearchListItemParser
             function (Crawler $c) {
                 return new MalUrl(
                     $c->text(),
-                    Constants::BASE_URL.$c->attr('href')
+                    Constants::BASE_URL . $c->attr('href')
                 );
             }
         );
@@ -134,7 +134,7 @@ class CharacterSearchListItemParser
             function (Crawler $c) {
                 return new MalUrl(
                     $c->text(),
-                    Constants::BASE_URL.$c->attr('href')
+                    Constants::BASE_URL . $c->attr('href')
                 );
             }
         );

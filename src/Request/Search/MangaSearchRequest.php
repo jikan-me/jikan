@@ -92,7 +92,7 @@ class MangaSearchRequest implements RequestInterface
         $this->query = $query;
         $this->page = $page;
 
-        $this->query = $this->query ?? '';
+        $this->query ??= '';
 
         $querySize = strlen($this->query);
 
@@ -123,16 +123,16 @@ class MangaSearchRequest implements RequestInterface
                 'ed'     => $this->endDate[0],
                 'em'     => $this->endDate[1],
                 'ey'     => $this->endDate[2],
-                'gx'     => (int)$this->genreExclude,
+                'gx'     => (int) $this->genreExclude,
                 'o'      => $this->orderBy,
-                'w'      => $this->sort
+                'w'      => $this->sort,
             ]
         );
 
         // Add genre[]=
         if (!empty($this->genre)) {
             foreach ($this->genre as $genre) {
-                $query .= '&genre[]='.$genre;
+                $query .= '&genre[]=' . $genre;
             }
         }
 
@@ -150,7 +150,7 @@ class MangaSearchRequest implements RequestInterface
     public function setQuery(?string $query = null): self
     {
         $this->query = $query;
-        $this->query = $this->query ?? '';
+        $this->query ??= '';
 
         return $this;
     }

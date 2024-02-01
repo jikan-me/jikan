@@ -61,7 +61,7 @@ class DateProp
     /**
      * @param string $date
      */
-    private function parse(string $date) : void
+    private function parse(string $date): void
     {
         if (preg_match('/^\d{4}$/', $date)) {
             $this->set(null, null, (int) $date);
@@ -97,7 +97,7 @@ class DateProp
      * @param int|null $month
      * @param int|null $year
      */
-    private function set(?int $day, ?int $month, ?int $year) : void
+    private function set(?int $day, ?int $month, ?int $year): void
     {
         $this->day = $day;
         $this->month = $month;
@@ -107,7 +107,7 @@ class DateProp
     /**
      * @return int|null
      */
-    public function getDay() : ?int
+    public function getDay(): ?int
     {
         return $this->day;
     }
@@ -115,7 +115,7 @@ class DateProp
     /**
      * @return int|null
      */
-    public function getMonth() : ?int
+    public function getMonth(): ?int
     {
         return $this->month;
     }
@@ -123,7 +123,7 @@ class DateProp
     /**
      * @return int|null
      */
-    public function getYear() : ?int
+    public function getYear(): ?int
     {
         return $this->year;
     }

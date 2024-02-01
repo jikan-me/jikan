@@ -15,10 +15,10 @@ interface Pagination
     /**
      * @return bool
      */
-    public function hasNextPage() : bool;
+    public function hasNextPage(): bool;
 
     /**
      * @return int|null
      */
-    public function getLastVisiblePage() : ?int;
+    public function getLastVisiblePage(): ?int;
 }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Jikan\Model\User;
 
 use Jikan\Model\Common\CharacterMeta;

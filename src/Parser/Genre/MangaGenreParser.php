@@ -64,7 +64,7 @@ class MangaGenreParser implements ParserInterface
      */
     public function getMalId(): int
     {
-        return (int)preg_replace('#https://myanimelist.net(/\w+/\w+/)(\d+).*#', '$2', $this->getUrl());
+        return (int) preg_replace('#https://myanimelist.net(/\w+/\w+/)(\d+).*#', '$2', $this->getUrl());
     }
 
     /**
@@ -112,7 +112,7 @@ class MangaGenreParser implements ParserInterface
             return 0;
         }
 
-        return (int)preg_replace(
+        return (int) preg_replace(
             '/\D/',
             '',
             $count->text()

@@ -45,7 +45,7 @@ class ProducerListItemParser implements ParserInterface
     /**
      * @return int|null
      */
-    public function getMalId() : ?int
+    public function getMalId(): ?int
     {
         preg_match('~(\d+)/.*$~', $this->getUrl(), $matches);
 

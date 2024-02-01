@@ -15,7 +15,7 @@ class Media
      * @param string|null $url
      * @return string
      */
-    public static function youtubeIdFromUrl(?string $url) : ?string
+    public static function youtubeIdFromUrl(?string $url): ?string
     {
         /**
          *  https://stackoverflow.com/a/17030234
@@ -38,7 +38,7 @@ class Media
      * @param string $id
      * @return string
      */
-    public static function generateYoutubeUrlFromId(?string $id) : ?string
+    public static function generateYoutubeUrlFromId(?string $id): ?string
     {
         if ($id === null) {
             return null;
@@ -51,7 +51,7 @@ class Media
      * @param string $id
      * @return YoutubeImageResource
      */
-    public static function generateYoutubeImageResource(?string $id) : YoutubeImageResource
+    public static function generateYoutubeImageResource(?string $id): YoutubeImageResource
     {
         return YoutubeImageResource::factory($id);
     }

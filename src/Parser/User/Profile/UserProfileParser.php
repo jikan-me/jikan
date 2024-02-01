@@ -54,7 +54,7 @@ class UserProfileParser
         preg_match('#id=(.*)#', $node->attr('href'), $id);
 
         if (!empty($id)) {
-            return (int)$id[1];
+            return (int) $id[1];
         }
 
         return null;

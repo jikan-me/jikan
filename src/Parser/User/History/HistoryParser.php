@@ -40,7 +40,7 @@ class HistoryParser implements ParserInterface
         return $node
             ->reduce(
                 function (Crawler $c) {
-                    return (bool)$c->filterXPath('//td[contains(@class, "borderClass")]')->count();
+                    return (bool) $c->filterXPath('//td[contains(@class, "borderClass")]')->count();
                 }
             )
             ->each(

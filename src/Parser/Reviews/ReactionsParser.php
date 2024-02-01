@@ -1,4 +1,5 @@
 <?php
+
 namespace Jikan\Parser\Reviews;
 
 use Jikan\Helper\JString;

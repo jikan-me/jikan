@@ -39,7 +39,7 @@ class RecentRecommendationsRequest implements RequestInterface
                 $type,
                 [
                     Constants::RECENT_RECOMMENDATION_ANIME,
-                    Constants::RECENT_RECOMMENDATION_MANGA
+                    Constants::RECENT_RECOMMENDATION_MANGA,
                 ],
                 true
             )
@@ -58,11 +58,11 @@ class RecentRecommendationsRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return 'https://myanimelist.net/recommendations.php?'.http_build_query(
+        return 'https://myanimelist.net/recommendations.php?' . http_build_query(
             [
                     's' => 'recentrecs',
                     't'  => $this->type,
-                    'show' => ($this->page !== 1) ? 100 * ($this->page - 1) : null
+                    'show' => ($this->page !== 1) ? 100 * ($this->page - 1) : null,
                 ]
         );
     }

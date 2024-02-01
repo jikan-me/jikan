@@ -33,7 +33,7 @@ class SeasonListParser
     /**
      * @return SeasonArchive
      */
-    public function getModel() : SeasonArchive
+    public function getModel(): SeasonArchive
     {
         return SeasonArchive::fromParser($this);
     }

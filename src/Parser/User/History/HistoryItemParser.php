@@ -61,7 +61,7 @@ class HistoryItemParser implements ParserInterface
             throw new ParserException('Could not parse MalUrl');
         }
 
-        $url = Constants::BASE_URL.'/'.$matches[1].'/'.$matches[2];
+        $url = Constants::BASE_URL . '/' . $matches[1] . '/' . $matches[2];
 
         return new MalUrl($name, $url);
     }
@@ -72,7 +72,7 @@ class HistoryItemParser implements ParserInterface
      */
     public function getIncrement(): int
     {
-        return (int)$this->crawler->filterXPath('//td[1]/strong')->text();
+        return (int) $this->crawler->filterXPath('//td[1]/strong')->text();
     }
 
     /**

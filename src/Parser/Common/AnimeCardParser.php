@@ -124,7 +124,7 @@ class AnimeCardParser implements ParserInterface
         $eps = JString::cleanse($eps->text());
         $eps = str_replace(' eps', '', $eps);
 
-        return $eps === '?' ? null : (int)$eps;
+        return $eps === '?' ? null : (int) $eps;
     }
 
     /**
@@ -259,7 +259,7 @@ class AnimeCardParser implements ParserInterface
             $count = str_replace('K', '000', $count);
             $count = str_replace('M', '000000', $count);
 
-            return (int)str_replace([',', '.'], '', $count);
+            return (int) str_replace([',', '.'], '', $count);
         }
 
         // producers page
@@ -268,7 +268,7 @@ class AnimeCardParser implements ParserInterface
         if ($node->count()) {
             $count = JString::cleanse($node->text());
 
-            return (int)str_replace([',', '.'], '', $count);
+            return (int) str_replace([',', '.'], '', $count);
         }
     }
 

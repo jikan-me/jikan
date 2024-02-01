@@ -53,7 +53,7 @@ class PersonParser implements ParserInterface
     {
         preg_match('#https?://myanimelist.net/people/(\d+)#', $this->getPersonURL(), $matches);
 
-        return (int)$matches[1];
+        return (int) $matches[1];
     }
 
     /**
@@ -227,7 +227,7 @@ class PersonParser implements ParserInterface
             return null;
         }
 
-        return (int)JString::cleanse(
+        return (int) JString::cleanse(
             str_replace([$node->text(), ','], '', $node->ancestors()->text())
         );
     }

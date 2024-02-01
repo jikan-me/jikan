@@ -29,7 +29,7 @@ class MangaReviewsParser implements ParserInterface
         $this->crawler = $crawler;
     }
 
-    public function getModel() : MangaReviews
+    public function getModel(): MangaReviews
     {
         return MangaReviews::fromParser($this);
     }

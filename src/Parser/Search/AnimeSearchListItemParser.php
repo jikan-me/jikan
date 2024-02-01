@@ -99,7 +99,7 @@ class AnimeSearchListItemParser
      */
     public function getEpisodes(): int
     {
-        return (int)$this->crawler->filterXPath('//td[4]')->text();
+        return (int) $this->crawler->filterXPath('//td[4]')->text();
     }
 
     /**
@@ -108,7 +108,7 @@ class AnimeSearchListItemParser
      */
     public function getScore(): float
     {
-        return (float)$this->crawler->filterXPath('//td[5]')->text();
+        return (float) $this->crawler->filterXPath('//td[5]')->text();
     }
 
     /**
@@ -117,7 +117,7 @@ class AnimeSearchListItemParser
      */
     public function getMembers(): int
     {
-        return (int)str_replace(
+        return (int) str_replace(
             ',',
             '',
             $this->crawler->filterXPath('//td[8]')->text()

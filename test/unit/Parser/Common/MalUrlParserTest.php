@@ -33,7 +33,7 @@ class MalUrlParserTest extends TestCase
     /**
      * @return array
      */
-    public function urlProvider(): array
+    public static function urlProvider(): array
     {
         return [
             ['https://myanimelist.net/anime/12345'],

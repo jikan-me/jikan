@@ -19,7 +19,7 @@ class JStringTest extends TestCase
         self::assertSame($expected, $given);
     }
 
-    public function stringFloatProvider(): array
+    public static function stringFloatProvider(): array
     {
         return [
             [JString::isStringFloat('3.123'), true],

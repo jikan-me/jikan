@@ -36,12 +36,18 @@ class NewsListItemParser implements ParserInterface
     }
 
 
+    /**
+     * @return NewsListItem
+     */
     public function getModel(): NewsListItem
     {
         return NewsListItem::fromParser($this);
     }
 
 
+    /**
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->crawler
@@ -161,6 +167,9 @@ class NewsListItemParser implements ParserInterface
         );
     }
 
+    /**
+     * @return array
+     */
     public function getTags(): array
     {
         $node = $this->crawler

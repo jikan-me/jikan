@@ -78,4 +78,13 @@ class JString
     {
         return is_numeric($string) && str_contains($string, '.');
     }
+
+    public static function ifEmptyStringReturnNull(string $string): ?string
+    {
+        if (empty($string)) {
+            return null;
+        }
+
+        return $string;
+    }
 }

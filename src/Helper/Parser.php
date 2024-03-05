@@ -52,6 +52,19 @@ class Parser
     }
 
     /**
+     * Extract a string id from a mal url
+     *
+     * @param string $url
+     *
+     * @return string
+     */
+    public static function stringIdFromUrl(string $url): string
+    {
+        $urlParts = explode("/", parse_url($url)['path']);
+        return $urlParts[array_key_last($urlParts)];
+    }
+
+    /**
      * Extract club ID from MAL URl
      *
      * @param string $url

@@ -2,22 +2,21 @@
 
 namespace Jikan\Model\News;
 
-use Jikan\Model\Resource\NewsImageResource\NewsImageResource;
+use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
-use Jikan\Parser\News\NewsListItemParser;
-use Jikan\Parser\News\ResourceNewsListItemParser;
+use Jikan\Parser\News\NewsParser;
 
 /**
  * Class AnimeParser
  *
  * @package Jikan\Model
  */
-class NewsListItem
+class ResourceNews
 {
     /**
      * @var int|null
      */
-    private int|null $malId;
+    private ?int $malId;
 
     /**
      * @var string
@@ -50,9 +49,9 @@ class NewsListItem
     private string $forumUrl;
 
     /**
-     * @var NewsImageResource
+     * @var WrapImageResource
      */
-    private NewsImageResource $images;
+    private WrapImageResource $images;
 
     /**
      * @var int
@@ -60,37 +59,39 @@ class NewsListItem
     private int $comments;
 
     /**
-     * @var string
-     */
-    private string $excerpt;
-
-    /**
      * @var array
      */
     private array $tags;
 
     /**
-     * @param NewsListItemParser $parser
-     *
-     * @return NewsListItem
-     * @throws \InvalidArgumentException
+     * @var string
      */
-    public static function fromParser(NewsListItemParser $parser): NewsListItem
+    private string $content;
+
+    /**
+     * @var MalUrl[]
+     */
+    private array $related = [];
+
+
+    /**
+     * @param NewsParser $parser
+     * @return self
+     */
+    public static function fromParser(NewsParser $parser): self
     {
         $instance = new self();
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
-        $instance->comments = $parser->getComments();
-        $instance->tags = $parser->getTags();
         $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
-        $instance->images = NewsImageResource::factory($parser->getImageUrl());
-        $instance->excerpt = $parser->getExcerpt();
+        $instance->images = WrapImageResource::factory($parser->getImage());
+        $instance->comments = $parser->getComments();
+        $instance->content = $parser->getContent();
         $instance->date = $parser->getDate();
 
         return $instance;
     }
-
 }

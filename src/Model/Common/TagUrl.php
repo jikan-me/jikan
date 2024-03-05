@@ -2,15 +2,19 @@
 
 namespace Jikan\Model\Common;
 
-use Jikan\Parser\Common\MalUrlParser;
-
 /**
- * Class MalUrl
+ * Class Url
  *
  * @package Jikan\Model
  */
-class MalUrl
+class TagUrl
 {
+
+    /**
+     * @var string
+     */
+    private string $malId;
+
     /**
      * @var string
      */
@@ -27,8 +31,9 @@ class MalUrl
      * @param string $name
      * @param string $url
      */
-    public function __construct(string $name, string $url)
+    public function __construct(string $malId, string $name, string $url)
     {
+        $this->malId = $malId;
         $this->name = $name;
         $this->url = $url;
     }
@@ -36,39 +41,15 @@ class MalUrl
     /**
      * @return string
      */
-    public function __toString()
+    public function getMalId(): string
     {
-        return $this->name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getMalId(): int
-    {
-        return MalUrlParser::parseId($this->url);
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return preg_replace('#https://myanimelist.net/(\w+)/.*#', '$1', $this->url);
+        return $this->malId;
     }
 
     /**
      * @return string
      */
     public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle(): string
     {
         return $this->name;
     }

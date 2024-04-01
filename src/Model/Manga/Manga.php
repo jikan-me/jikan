@@ -211,8 +211,8 @@ class Manga
         $instance->explicitGenres = $parser->getExplicitGenres();
         $instance->demographics = $parser->getDemographics();
         $instance->themes = $parser->getThemes();
-        $instance->score = $parser->getMangaScore();
-        $instance->scoredBy = $parser->getMangaScoredBy();
+        $instance->score = $parser->getScore();
+        $instance->scoredBy = $parser->getScoredBy();
         $instance->rank = $parser->getMangaRank();
         $instance->popularity = $parser->getMangaPopularity();
         $instance->members = $parser->getMangaMembers();

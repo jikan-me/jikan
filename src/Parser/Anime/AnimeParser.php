@@ -556,18 +556,19 @@ class AnimeParser implements ParserInterface
      */
     public function getScore(): ?float
     {
-        $score = trim(
-            $this->crawler->filterXPath('//div[@class="fl-l score"]')->text()
-        );
+        $score = $this->crawler->filterXPath('//span[@itemprop="ratingValue"]');
+
+        if (!$score->count()) {
+            return null;
+        }
+
+        $score = JString::cleanse($score->text());
 
         if ($score === 'N/A') {
             return null;
         }
 
         return (float) $score;
-
-        // doesn't work for some IDs like `29711`
-        //return Parser::textOrNull($this->crawler->filterXPath('//span[@itemprop="ratingValue"]'));
     }
 
     /**
@@ -576,7 +577,13 @@ class AnimeParser implements ParserInterface
      */
     public function getScoredBy(): ?int
     {
-        $scoredBy = $this->crawler->filterXPath('//div[@class="fl-l score"]')->attr('data-user');
+        $scoredBy = $this->crawler->filterXPath('//span[@itemprop="ratingCount"]');
+
+        if (!$scoredBy->count()) {
+            return null;
+        }
+
+        $scoredBy = JString::cleanse($scoredBy->text());
 
         $scoredByNum = str_replace(
             [',', ' users', ' user'],

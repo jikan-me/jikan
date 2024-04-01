@@ -456,20 +456,21 @@ class MangaParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getMangaScore(): ?float
+    public function getScore(): ?float
     {
-        $score = $this->crawler
-            ->filter('span[itemprop="ratingValue"]');
+        $score = $this->crawler->filterXPath('//span[@itemprop="ratingValue"]');
 
         if (!$score->count()) {
             return null;
         }
 
-        if (strpos($score->text(), 'N/A')) {
+        $score = JString::cleanse($score->text());
+
+        if ($score === 'N/A') {
             return null;
         }
 
-        return (float)$score->text();
+        return (float) $score;
     }
 
     /**
@@ -477,16 +478,27 @@ class MangaParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getMangaScoredBy(): ?int
+    public function getScoredBy(): ?int
     {
-        $scoredBy = $this->crawler
-            ->filter('span[itemprop="ratingCount"]');
+        $scoredBy = $this->crawler->filterXPath('//span[@itemprop="ratingCount"]');
 
         if (!$scoredBy->count()) {
             return null;
         }
 
-        return (int)$scoredBy->text();
+        $scoredBy = JString::cleanse($scoredBy->text());
+
+        $scoredByNum = str_replace(
+            [',', ' users', ' user'],
+            '',
+            $scoredBy
+        );
+
+        if (!is_numeric($scoredByNum)) {
+            return null;
+        }
+
+        return (int) $scoredByNum;
     }
 
     /**

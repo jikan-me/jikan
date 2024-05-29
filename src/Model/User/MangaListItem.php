@@ -170,7 +170,7 @@ class MangaListItem
         $instance->readStartDate = Parser::parseDateMDY($item->start_date_string);
         $instance->readEndDate = Parser::parseDateMDY($item->finish_date_string);
         $instance->days = $item->days_string;
-        $instance->retail= empty($item->retail_string) ? null : $item->retail_string;
+        $instance->retail = empty($item->retail_string) ? null : $item->retail_string;
         $instance->priority = $item->priority_string;
         $instance->addedToList = $item->is_added_to_list;
 

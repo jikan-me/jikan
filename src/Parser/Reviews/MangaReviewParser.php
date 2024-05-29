@@ -49,7 +49,7 @@ class MangaReviewParser implements ParserInterface
     /**
      * @throws \Jikan\Exception\ParserException
      */
-    public function getManga(string $page = null) : MangaMeta
+    public function getManga(string $page = null): MangaMeta
     {
         return match ($page) {
             'user' => new MangaMeta(
@@ -236,12 +236,12 @@ class MangaReviewParser implements ParserInterface
     public function getMangaUrl(): string
     {
         // User UserReviews page
-//        $node = $this->crawler
-//            ->filterXPath('//div[1]/div/div[2]/div/a');
-//
-//        if ($node->count()) {
-//            return $node->attr('href');
-//        }
+        //        $node = $this->crawler
+        //            ->filterXPath('//div[1]/div/div[2]/div/a');
+        //
+        //        if ($node->count()) {
+        //            return $node->attr('href');
+        //        }
 
         // Recent UserReviews Anime page
         $node = $this->crawler

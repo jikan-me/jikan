@@ -42,7 +42,7 @@ class CharacterSearchRequest implements RequestInterface
         $this->query = $query;
         $this->page = $page;
 
-        $this->query = $this->query ?? '';
+        $this->query ??= '';
 
         $querySize = strlen($this->query);
 
@@ -80,7 +80,7 @@ class CharacterSearchRequest implements RequestInterface
     public function setQuery(?string $query = null): self
     {
         $this->query = $query;
-        $this->query = $this->query ?? '';
+        $this->query ??= '';
 
         return $this;
     }

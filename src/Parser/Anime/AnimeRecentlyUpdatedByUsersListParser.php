@@ -151,7 +151,7 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
         return AnimeRecentlyUpdatedByUser::fromParser($this);
     }
 
-    public function getUserMeta() : UserMeta
+    public function getUserMeta(): UserMeta
     {
         return new UserMeta(
             $this->getUsername(),

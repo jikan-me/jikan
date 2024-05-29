@@ -22,9 +22,9 @@ class AnimeImageResource
      * @param string $imageUrl
      * @return AnimeImageResource
      */
-    public static function factory(?string $imageUrl) : self
+    public static function factory(?string $imageUrl): self
     {
-        $instance = new self;
+        $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
         $instance->webp = Webp::factory($imageUrl);
@@ -35,7 +35,7 @@ class AnimeImageResource
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->getJpg()->getImageUrl();
     }

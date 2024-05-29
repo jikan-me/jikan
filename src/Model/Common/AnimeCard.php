@@ -181,7 +181,7 @@ class AnimeCard
      */
     public function __toString()
     {
-        return (string)$this->url;
+        return (string) $this->url;
     }
 
     /**

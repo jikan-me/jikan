@@ -38,9 +38,9 @@ class YoutubeImageResource
      * @param string $id
      * @return YoutubeImageResource
      */
-    public static function factory(?string $id) : self
+    public static function factory(?string $id): self
     {
-        $instance = new self;
+        $instance = new self();
 
         if ($id !== null) {
             $instance->imageUrl = sprintf('https://img.youtube.com/vi/%s/default.jpg', $id);

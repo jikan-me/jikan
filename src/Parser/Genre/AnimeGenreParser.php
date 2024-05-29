@@ -114,7 +114,7 @@ class AnimeGenreParser implements ParserInterface
             return 0;
         }
 
-        return (int)preg_replace(
+        return (int) preg_replace(
             '/\D/',
             '',
             $count->text()

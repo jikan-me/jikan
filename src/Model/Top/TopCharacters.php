@@ -42,7 +42,7 @@ class TopCharacters extends Results implements Pagination
     /**
      * @return TopCharacters
      */
-    public static function mock() : self
+    public static function mock(): self
     {
         return new self();
     }

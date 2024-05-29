@@ -230,7 +230,7 @@ class AnimeParser implements ParserInterface
                 ?
                 null
                 :
-                (int)str_replace(
+                (int) str_replace(
                     $episodes->text(),
                     '',
                     $episodes->ancestors()->text()

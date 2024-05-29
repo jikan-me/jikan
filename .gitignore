@@ -6,4 +6,5 @@
 /.php-cs-fixer.cache
 composer.phar
 .phpunit.result.cache
-/.phpdoc
+.phpdoc
+.phive

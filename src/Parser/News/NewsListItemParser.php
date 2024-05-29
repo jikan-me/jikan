@@ -55,7 +55,7 @@ class NewsListItemParser implements ParserInterface
     /**
      * @return int|null
      */
-    public function getMalId() : ?int
+    public function getMalId(): ?int
     {
         preg_match('~([\d]+)$~', $this->getUrl(), $matches);
 
@@ -72,7 +72,7 @@ class NewsListItemParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return Constants::BASE_URL.$this->crawler->filterXPath('//p/a/strong/..')->attr('href');
+        return Constants::BASE_URL . $this->crawler->filterXPath('//p/a/strong/..')->attr('href');
     }
 
     /**
@@ -116,14 +116,14 @@ class NewsListItemParser implements ParserInterface
      */
     public function getDiscussionLink(): string
     {
-        return Constants::BASE_URL.$this->crawler->filterXPath('//a[last()]')->attr('href');
+        return Constants::BASE_URL . $this->crawler->filterXPath('//a[last()]')->attr('href');
     }
 
     /**
      * @return int
      * @throws \InvalidArgumentException
      */
-    public function getComments() : int
+    public function getComments(): int
     {
         $comments = $this->crawler->filterXPath('//a[last()]')->text();
         preg_match('~Discuss \((\d+) comments\)~', $comments, $comments);

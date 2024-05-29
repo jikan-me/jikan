@@ -32,7 +32,7 @@ class AnimeReviewsParser implements ParserInterface
     /**
      * @return AnimeReviews
      */
-    public function getModel() : AnimeReviews
+    public function getModel(): AnimeReviews
     {
         return AnimeReviews::fromParser($this);
     }

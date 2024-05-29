@@ -55,7 +55,7 @@ class MangaParser implements ParserInterface
     {
         preg_match('#https?://myanimelist.net/manga/(\d+)#', $this->getMangaURL(), $matches);
 
-        return (int)$matches[1];
+        return (int) $matches[1];
     }
 
     /**
@@ -237,7 +237,7 @@ class MangaParser implements ParserInterface
                 ?
                 null
                 :
-                (int)str_replace(
+                (int) str_replace(
                     $chapters->text(),
                     '',
                     $chapters->ancestors()->text()
@@ -267,7 +267,7 @@ class MangaParser implements ParserInterface
                 ?
                 null
                 :
-                (int)str_replace(
+                (int) str_replace(
                     $volumes->text(),
                     '',
                     $volumes->ancestors()->text()
@@ -470,7 +470,7 @@ class MangaParser implements ParserInterface
             return null;
         }
 
-        return (float) $score;
+        return (float) $score->text();
     }
 
     /**
@@ -486,19 +486,7 @@ class MangaParser implements ParserInterface
             return null;
         }
 
-        $scoredBy = JString::cleanse($scoredBy->text());
-
-        $scoredByNum = str_replace(
-            [',', ' users', ' user'],
-            '',
-            $scoredBy
-        );
-
-        if (!is_numeric($scoredByNum)) {
-            return null;
-        }
-
-        return (int) $scoredByNum;
+        return (int) $scoredBy->text();
     }
 
     /**
@@ -524,7 +512,7 @@ class MangaParser implements ParserInterface
             )
         );
 
-        return $ranked !== 'N/A' ? (int)$ranked : null;
+        return $ranked !== 'N/A' ? (int) $ranked : null;
     }
 
     /**

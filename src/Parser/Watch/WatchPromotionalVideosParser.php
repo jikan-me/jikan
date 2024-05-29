@@ -32,7 +32,7 @@ class WatchPromotionalVideosParser
         return Model\Watch\PromotionalVideos::fromParser($this);
     }
 
-    public function getResults(): array
+    public function getResults() : array
     {
         $node = $this->crawler->filterXPath(
             '//*[@id="content"]/div[3]/div/div[contains(@class, "video-list-outer-vertical")]'
@@ -47,7 +47,7 @@ class WatchPromotionalVideosParser
         });
     }
 
-    public function getHasNextPage(): bool
+    public function getHasNextPage() : bool
     {
         $node = $this->crawler->filterXPath(
             '//*[@id="content"]/div[contains(@class, "pagination")]/a[contains(text(), "More")]'
@@ -60,7 +60,7 @@ class WatchPromotionalVideosParser
         return false;
     }
 
-    public function getLastVisiblePage(): int
+    public function getLastVisiblePage() : int
     {
         $node = $this->crawler->filterXPath(
             '//*[@id="content"]/div[contains(@class, "pagination")]/span[@class="link-blue-box"]'

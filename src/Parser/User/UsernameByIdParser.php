@@ -31,7 +31,7 @@ class UsernameByIdParser
         $this->crawler = $crawler;
     }
 
-    public function getUser(): Model\Common\UserMetaBasic
+    public function getUser() : Model\Common\UserMetaBasic
     {
         $node = $this->crawler->filterXPath("//*[@id=\"content\"]/div[1]/div[1]/a");
 

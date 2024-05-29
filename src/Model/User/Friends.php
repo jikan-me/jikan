@@ -42,7 +42,7 @@ class Friends extends Results implements Pagination
     /**
      * @return static
      */
-    public static function mock(): self
+    public static function mock() : self
     {
         return new self();
     }

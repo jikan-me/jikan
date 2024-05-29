@@ -51,12 +51,12 @@ class MangaRecentlyUpdatedByUsersParser
 
 
     // @todo anime user updates pagination
-    public function getHasNextPage(): bool
+    public function getHasNextPage() : bool
     {
         return false;
     }
 
-    public function getLastPage(): int
+    public function getLastPage() : int
     {
         return 1;
     }

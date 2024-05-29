@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Jikan\Model\User;
 
 /**
@@ -7,4 +8,6 @@ namespace Jikan\Model\User;
  *
  * @package Jikan\Model\User
  */
-class FavoriteManga extends FavoriteListEntry {}
+class FavoriteManga extends FavoriteListEntry
+{
+}

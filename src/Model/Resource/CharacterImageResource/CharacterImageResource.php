@@ -23,9 +23,9 @@ class CharacterImageResource
      * @param string $imageUrl
      * @return CharacterImageResource
      */
-    public static function factory(?string $imageUrl): self
+    public static function factory(?string $imageUrl) : self
     {
-        $instance = new self();
+        $instance = new self;
 
         $instance->jpg = Jpg::factory($imageUrl);
         $instance->webp = Webp::factory($imageUrl);
@@ -36,7 +36,7 @@ class CharacterImageResource
     /**
      * @return string
      */
-    public function __toString(): string
+    public function __toString() : string
     {
         return $this->getJpg()->getImageUrl();
     }

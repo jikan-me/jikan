@@ -68,7 +68,7 @@ class CharactersAndStaffParser implements ParserInterface
             ->ancestors()->nextAll()
             ->reduce(
                 function (Crawler $crawler) {
-                    return (bool) $crawler->filterXPath(
+                    return (bool)$crawler->filterXPath(
                         '//a[contains(@href, "https://myanimelist.net/people")]'
                     )->count();
                 }

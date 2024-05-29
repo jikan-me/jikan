@@ -81,7 +81,7 @@ class ClubParser implements ParserInterface
     /**
      * @return int
      */
-    public function getMembersCount(): int
+    public function getMembersCount() : int
     {
         return (int) Parser::removeChildNodes(
             $this->crawler

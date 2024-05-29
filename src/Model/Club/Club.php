@@ -87,7 +87,7 @@ class Club
         $instance->name = $parser->getTitle();
         $instance->images = ClubImageResource::factory($parser->getImageUrl());
         $instance->members = $parser->getMembersCount();
-        //        $instance->picturesCount = $parser->getPicturesCount();
+//        $instance->picturesCount = $parser->getPicturesCount();
         $instance->category = $parser->getCategory();
         $instance->created = $parser->getCreated();
         $instance->anime = $parser->getAnimeRelations();

@@ -68,7 +68,7 @@ class UserProfileParser implements ParserInterface
         }
 
         if (!str_contains($imageUrl, Constants::BASE_URL)) {
-            $imageUrl = Constants::BASE_URL . $imageUrl;
+            $imageUrl = Constants::BASE_URL.$imageUrl;
         }
 
         return $imageUrl;

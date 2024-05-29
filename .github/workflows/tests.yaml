@@ -11,8 +11,8 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        operatingSystem: [ubuntu-22.04, windows-latest]
-        phpVersion: ['8.2']
+        operatingSystem: [ubuntu-20.04, windows-latest]
+        phpVersion: ['8.0', '8.1']
       fail-fast: false
     runs-on: ${{ matrix.operatingSystem }}
     name: ${{ matrix.operatingSystem }} / PHP ${{ matrix.phpVersion }}

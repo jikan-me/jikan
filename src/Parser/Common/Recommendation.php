@@ -98,7 +98,7 @@ class Recommendation implements ParserInterface
         return \Jikan\Model\Common\Recommendation::fromParser($this);
     }
 
-    public function getEntryMeta(): CommonMeta
+    public function getEntryMeta() : CommonMeta
     {
         return new CommonMeta(
             $this->getTitle(),

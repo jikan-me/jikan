@@ -56,7 +56,7 @@ class MangaStatsParser implements ParserInterface
      */
     private function sanitize($input): int
     {
-        return (int) preg_replace('/\D/', '', $input);
+        return (int)preg_replace('/\D/', '', $input);
     }
 
     /**
@@ -186,7 +186,7 @@ class MangaStatsParser implements ParserInterface
             }
         );
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i=1; $i<=10; $i++) {
             if (!array_key_exists($i, $scores)) {
                 $scores[$i] = MangaStatsScore::setProperties(0, 0, 0);
             }

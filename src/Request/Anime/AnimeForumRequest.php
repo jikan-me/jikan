@@ -45,7 +45,7 @@ class AnimeForumRequest implements RequestInterface
     {
         $query = '';
         if ($this->topic !== null && \in_array($this->topic, self::$validTypes, true)) {
-            $query = '?' . http_build_query(['topic' => $this->topic]);
+            $query = '?'.http_build_query(['topic' => $this->topic]);
         }
 
         return sprintf('https://myanimelist.net/anime/%s/_/forum%s', $this->id, $query);

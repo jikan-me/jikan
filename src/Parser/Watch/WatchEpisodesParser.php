@@ -32,7 +32,7 @@ class WatchEpisodesParser
         return Model\Watch\Episodes::fromParser($this);
     }
 
-    public function getResults(): array
+    public function getResults() : array
     {
         $node = $this->crawler->filterXPath(
             '//*[@id="content"]/div[3]/div/div[contains(@class, "video-list-outer-vertical")]

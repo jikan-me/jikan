@@ -1,9 +1,9 @@
 <?php
 /**
- *    Jikan - MyAnimeList.net Unofficial API
+ *    Jikan - MyAnimeList.net Unofficial API v3
  *
- *    Jikan is an unofficial MAL API which scrapes data requested from MAL.
- *    No authentication is needed for utilizing this library and neither are any authentication based features supported.
+ *    This is an unofficial MAL API that stands in for the lackluster features of the official API.
+ *    Jikan scrapes and parses the data you request from MAL. No authentication is needed for utilizing this library.
  *
  *    Jikan is NOT affiliated with MyAnimeList.net
  *    This library does not perform any rate limitations or caching, so use it responsibly.
@@ -13,7 +13,7 @@ namespace Jikan\MyAnimeList;
 
 use Jikan\Exception\BadResponseException;
 use Jikan\Exception\ParserException;
-use Jikan\Http\HttpClientWrapper;
+use Jikan\Goutte\GoutteWrapper;
 use Jikan\Model;
 use Jikan\Parser;
 use Jikan\Request;
@@ -26,14 +26,14 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class MalClient
 {
     /**
-     * @var HttpClientWrapper
+     * @var GoutteWrapper
      */
-    protected HttpClientWrapper $httpClientWrapper;
+    protected $ghoutte;
 
     /**
-     * @var HttpClientInterface
+     * @var HttpClientInterface|HttpClientInterface
      */
-    protected HttpClientInterface $httpClient;
+    protected $httpClient;
 
     /**
      * MalClient constructor.
@@ -45,7 +45,7 @@ class MalClient
     public function __construct(HttpClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?? HttpClient::create();
-        $this->httpClientWrapper = new HttpClientWrapper($this->httpClient);
+        $this->ghoutte = new GoutteWrapper($this->httpClient);
     }
 
     /**
@@ -56,7 +56,7 @@ class MalClient
      */
     public function getAnime(Request\Anime\AnimeRequest $request): Model\Anime\Anime
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\AnimeParser($crawler);
 
@@ -76,7 +76,7 @@ class MalClient
     {
         // Episode page returns 404 when there are no results
         try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (\Exception $e) {
             if ($e->getCode() === 404) {
                 return new Model\Anime\Episodes();
@@ -102,7 +102,7 @@ class MalClient
      */
     public function getAnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\Anime\AnimeVideos
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\VideosParser($crawler);
 
@@ -120,7 +120,7 @@ class MalClient
      */
     public function getAnimeVideosEpisodes(Request\Anime\AnimeVideosEpisodesRequest $request): Model\Anime\AnimeVideosEpisodes
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\VideosParser($crawler);
 
@@ -138,7 +138,7 @@ class MalClient
      */
     public function getManga(Request\Manga\MangaRequest $request): Model\Manga\Manga
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Manga\MangaParser($crawler);
 
@@ -161,7 +161,7 @@ class MalClient
             throw new BadResponseException(sprintf('404 on %s', $request->getPath()), 404);
         }
 
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         // MAL returns `Invalid ID provided.` instead of 404 on invalid characters
         $badResult = $crawler->filterXPath('//*[@id="content"]/div[@class="badresult"]');
@@ -191,7 +191,7 @@ class MalClient
             throw new BadResponseException(sprintf('404 on %s', $request->getPath()), 404);
         }
 
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Person\PersonParser($crawler);
 
@@ -209,7 +209,7 @@ class MalClient
      */
     public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\Profile
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\User\Profile\UserProfileParser($crawler);
 
@@ -227,7 +227,7 @@ class MalClient
      */
     public function getUserFriends(Request\User\UserFriendsRequest $request): Model\User\Friends
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\User\Friends\FriendsParser($crawler);
 
@@ -245,7 +245,7 @@ class MalClient
      */
     public function getSeasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal\Seasonal
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Seasonal\SeasonalParser($crawler);
 
@@ -263,7 +263,7 @@ class MalClient
      */
     public function getProducer(Request\Producer\ProducerRequest $request): Model\Producer\Producer
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Producer\ProducerParser($crawler);
 
@@ -281,7 +281,7 @@ class MalClient
      */
     public function getMagazine(Request\Magazine\MagazineRequest $request): Model\Magazine\Magazine
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Magazine\MagazineParser($crawler);
 
@@ -299,7 +299,7 @@ class MalClient
      */
     public function getAnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Genre\AnimeGenre
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Genre\AnimeGenreParser($crawler);
 
@@ -317,7 +317,7 @@ class MalClient
      */
     public function getMangaGenre(Request\Genre\MangaGenreRequest $request): Model\Genre\MangaGenre
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Genre\MangaGenreParser($crawler);
 
@@ -335,7 +335,7 @@ class MalClient
      */
     public function getSchedule(Request\Schedule\ScheduleRequest $request): Model\Schedule\Schedule
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Schedule\ScheduleParser($crawler);
 
@@ -354,7 +354,7 @@ class MalClient
     public function getAnimeCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
     ): Model\Anime\AnimeCharactersAndStaff {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\CharactersAndStaffParser($crawler);
 
@@ -372,7 +372,7 @@ class MalClient
      */
     public function getAnimePictures(Request\Anime\AnimePicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Common\PicturesPageParser($crawler);
 
@@ -390,7 +390,7 @@ class MalClient
      */
     public function getMangaPictures(Request\Manga\MangaPicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Common\PicturesPageParser($crawler);
 
@@ -408,7 +408,7 @@ class MalClient
      */
     public function getCharacterPictures(Request\Character\CharacterPicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Common\DefaultPicturesPageParser($crawler);
 
@@ -427,7 +427,7 @@ class MalClient
      */
     public function getPersonPictures(Request\Person\PersonPicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Common\DefaultPicturesPageParser($crawler);
 
@@ -446,7 +446,7 @@ class MalClient
      */
     public function getNewsList(Request\RequestInterface $request): Model\News\NewsList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\News\NewsListParser($crawler);
 
@@ -465,11 +465,11 @@ class MalClient
      */
     public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
-        //        if ($this->httpClientWrapper->getInternalResponse()->getStatusCode()) {
-        //            return Model\Search\AnimeSearch::mock();
-        //        }
+//        if ($this->ghoutte->getInternalResponse()->getStatusCode()) {
+//            return Model\Search\AnimeSearch::mock();
+//        }
 
         try {
             $parser = new Parser\Search\AnimeSearchParser($crawler);
@@ -489,7 +489,7 @@ class MalClient
      */
     public function getAnimeSearchAlt(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearchAlt
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Search\AnimeSearchParser($crawler);
 
@@ -508,7 +508,7 @@ class MalClient
      */
     public function getMangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Search\MangaSearchParser($crawler);
 
@@ -528,7 +528,7 @@ class MalClient
     public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
         try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (BadResponseException $e) {
             if ($e->getCode() === 404) {
                 return Model\Search\CharacterSearch::mock();
@@ -553,7 +553,7 @@ class MalClient
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
         try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (BadResponseException $e) {
             if ($e->getCode() === 404) {
                 return Model\Search\PersonSearch::mock();
@@ -578,7 +578,7 @@ class MalClient
      */
     public function getMangaCharacters(Request\Manga\MangaCharactersRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Manga\CharactersParser($crawler);
 
@@ -597,7 +597,7 @@ class MalClient
      */
     public function getTopAnime(Request\Top\TopAnimeRequest $request): Model\Top\TopAnime
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopAnimeParser($crawler);
 
@@ -616,7 +616,7 @@ class MalClient
      */
     public function getTopManga(Request\Top\TopMangaRequest $request): Model\Top\TopManga
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopMangaParser($crawler);
 
@@ -635,7 +635,7 @@ class MalClient
      */
     public function getTopCharacters(Request\Top\TopCharactersRequest $request): Model\Top\TopCharacters
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopCharactersParser($crawler);
 
@@ -654,7 +654,7 @@ class MalClient
      */
     public function getTopPeople(Request\Top\TopPeopleRequest $request): Model\Top\TopPeople
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Top\TopPeopleParser($crawler);
 
@@ -673,7 +673,7 @@ class MalClient
      */
     public function getAnimeStats(Request\Anime\AnimeStatsRequest $request): Model\Anime\AnimeStats
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\AnimeStatsParser($crawler);
 
@@ -691,7 +691,7 @@ class MalClient
      */
     public function getMangaStats(Request\Manga\MangaStatsRequest $request): Model\Manga\MangaStats
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Manga\MangaStatsParser($crawler);
 
@@ -709,7 +709,7 @@ class MalClient
      */
     public function getAnimeForum(Request\Anime\AnimeForumRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Forum\ForumPageParser($crawler);
 
@@ -727,7 +727,7 @@ class MalClient
      */
     public function getMangaForum(Request\Manga\MangaForumRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Forum\ForumPageParser($crawler);
 
@@ -745,7 +745,7 @@ class MalClient
      */
     public function getAnimeMoreInfo(Request\Anime\AnimeMoreInfoRequest $request): ?string
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\MoreInfoParser($crawler);
 
@@ -763,7 +763,7 @@ class MalClient
      */
     public function getMangaMoreInfo(Request\Manga\MangaMoreInfoRequest $request): ?string
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Manga\MoreInfoParser($crawler);
 
@@ -781,7 +781,7 @@ class MalClient
      */
     public function getSeasonList(Request\SeasonList\SeasonListRequest $request): Model\SeasonList\SeasonArchive
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\SeasonList\SeasonListParser($crawler);
 
@@ -799,7 +799,7 @@ class MalClient
      */
     public function getUserHistory(Request\User\UserHistoryRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\User\History\HistoryParser($crawler);
 
@@ -822,7 +822,7 @@ class MalClient
 
             if ($response->getStatusCode() >= 400) {
                 throw new BadResponseException(
-                    $response->getStatusCode() . ' on ' . $response->getInfo('url'),
+                    $response->getStatusCode().' on '.$response->getInfo('url'),
                     $response->getStatusCode()
                 );
             }
@@ -836,7 +836,7 @@ class MalClient
             return $model;
         } catch (\Exception $e) {
             throw new BadResponseException(
-                $e->getCode() . ' on ' . $request->getPath(),
+                $e->getCode().' on '.$request->getPath(),
                 $e->getCode()
             );
         }
@@ -856,7 +856,7 @@ class MalClient
 
             if ($response->getStatusCode() >= 400) {
                 throw new BadResponseException(
-                    $response->getStatusCode() . ' on ' . $response->getInfo('url'),
+                    $response->getStatusCode().' on '.$response->getInfo('url'),
                     $response->getStatusCode()
                 );
             }
@@ -870,7 +870,7 @@ class MalClient
             return $model;
         } catch (\Exception $e) {
             throw new BadResponseException(
-                $e->getCode() . ' on ' . $request->getPath(),
+                $e->getCode().' on '.$request->getPath(),
                 $e->getCode()
             );
         }
@@ -885,7 +885,7 @@ class MalClient
      */
     public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request): Model\Anime\AnimeUserUpdates
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\AnimeRecentlyUpdatedByUsersParser($crawler);
 
@@ -903,7 +903,7 @@ class MalClient
      */
     public function getMangaRecentlyUpdatedByUsers(Request\Manga\MangaRecentlyUpdatedByUsersRequest $request): Model\Manga\MangaUserUpdates
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Manga\MangaRecentlyUpdatedByUsersParser($crawler);
 
@@ -921,7 +921,7 @@ class MalClient
      */
     public function getAnimeRecommendations(Request\Anime\AnimeRecommendationsRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Common\Recommendations($crawler);
 
@@ -939,7 +939,7 @@ class MalClient
      */
     public function getMangaRecommendations(Request\Manga\MangaRecommendationsRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Common\Recommendations($crawler);
@@ -959,7 +959,7 @@ class MalClient
      */
     public function getClubUsers(Request\Club\UserListRequest $request): Model\Club\UserList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Club\UserListParser($crawler);
@@ -979,7 +979,7 @@ class MalClient
      */
     public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): Model\Anime\AnimeReviews
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Anime\AnimeReviewsParser($crawler);
 
@@ -998,7 +998,7 @@ class MalClient
      */
     public function getMangaReviews(Request\Manga\MangaReviewsRequest $request): Model\Manga\MangaReviews
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Manga\MangaReviewsParser($crawler);
@@ -1017,7 +1017,7 @@ class MalClient
      */
     public function getClub(Request\Club\ClubRequest $request): Model\Club\Club
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Club\ClubParser($crawler);
@@ -1036,7 +1036,7 @@ class MalClient
      */
     public function getAnimeEpisode(Request\Anime\AnimeEpisodeRequest $request): Model\Anime\AnimeEpisode
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Anime\AnimeEpisodeParser($crawler);
@@ -1055,7 +1055,7 @@ class MalClient
      */
     public function getProducers(Request\Producer\ProducersRequest $request): Model\Producer\ProducerList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Producer\ProducerListParser($crawler);
@@ -1074,7 +1074,7 @@ class MalClient
      */
     public function getMagazines(Request\Magazine\MagazinesRequest $request): Model\Magazine\MagazineList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Magazine\MagazineListParser($crawler);
@@ -1093,7 +1093,7 @@ class MalClient
      */
     public function getAnimeGenres(Request\Genre\AnimeGenresRequest $request): Model\Genre\AnimeGenreList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Genre\AnimeGenreListParser($crawler);
@@ -1112,7 +1112,7 @@ class MalClient
      */
     public function getMangaGenres(Request\Genre\MangaGenresRequest $request): Model\Genre\MangaGenreList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
 
         try {
             $parser = new Parser\Genre\MangaGenreListParser($crawler);
@@ -1132,7 +1132,7 @@ class MalClient
      */
     public function getReviews(Request\Reviews\ReviewsRequest $request): Model\Reviews\Reviews
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Reviews\ReviewsParser($crawler);
 
@@ -1150,7 +1150,7 @@ class MalClient
      */
     public function getRecentRecommendations(Request\Recommendations\RecentRecommendationsRequest $request): Model\Recommendations\RecentRecommendations
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Recommendations\RecentRecommendationsParser($crawler);
 
@@ -1171,7 +1171,7 @@ class MalClient
     {
         // Returns 404 when there are no results
         try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (\Exception $e) {
             if ($e->getCode() === 404) {
                 return new Model\Search\UserSearch();
@@ -1196,7 +1196,7 @@ class MalClient
      */
     public function getRecentOnlineUsers(Request\User\RecentlyOnlineUsersRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Search\UserSearchParser($crawler);
 
@@ -1212,9 +1212,9 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUsernameById(Request\User\UsernameByIdRequest $request): Model\Common\UserMetaBasic
+    public function getUsernameById(Request\User\UsernameByIdRequest $request) : Model\Common\UserMetaBasic
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\User\UsernameByIdParser($crawler);
 
@@ -1230,10 +1230,10 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUserReviews(Request\User\UserReviewsRequest $request): Model\User\Reviews\UserReviews
+    public function getUserReviews(Request\User\UserReviewsRequest $request) : Model\User\Reviews\UserReviews
     {
         try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (\Exception $e) {
             if ($e->getCode() === 404) {
                 return Model\User\Reviews\UserReviews::mock();
@@ -1254,9 +1254,9 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getRecentEpisodes(Request\Watch\RecentEpisodesRequest $request): Model\Watch\Episodes
+    public function getRecentEpisodes(Request\Watch\RecentEpisodesRequest $request) : Model\Watch\Episodes
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchEpisodesParser($crawler);
 
@@ -1272,9 +1272,9 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getPopularEpisodes(Request\Watch\PopularEpisodesRequest $request): Model\Watch\Episodes
+    public function getPopularEpisodes(Request\Watch\PopularEpisodesRequest $request) : Model\Watch\Episodes
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchEpisodesParser($crawler);
 
@@ -1292,8 +1292,8 @@ class MalClient
      */
     public function getRecentPromotionalVideos(
         Request\Watch\RecentPromotionalVideosRequest $request
-    ): Model\Watch\PromotionalVideos {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+    ) : Model\Watch\PromotionalVideos {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
 
@@ -1311,8 +1311,8 @@ class MalClient
      */
     public function getPopularPromotionalVideos(
         Request\Watch\PopularPromotionalVideosRequest $request
-    ): Model\Watch\PromotionalVideos {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+    ) : Model\Watch\PromotionalVideos {
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
 
@@ -1331,7 +1331,7 @@ class MalClient
      */
     public function getUserRecommendations(Request\User\UserRecommendationsRequest $request): Model\Recommendations\UserRecommendations
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
             $parser = new Parser\Recommendations\UserRecommendationsParser($crawler);
 
@@ -1347,11 +1347,11 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getUserClubs(Request\User\UserClubsRequest $request): array
+    public function getUserClubs(Request\User\UserClubsRequest $request) : array
     {
         // user clubs page returns 404 when there are none added
         try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+            $crawler = $this->ghoutte->request('GET', $request->getPath());
         } catch (\Exception $e) {
             if ($e->getCode() === 404) {
                 return [];

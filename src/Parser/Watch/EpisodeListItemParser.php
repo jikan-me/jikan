@@ -120,14 +120,14 @@ class EpisodeListItemParser implements ParserInterface
         return $episodes;
     }
 
-    public function getRegionLocked(): bool
+    public function getRegionLocked() : bool
     {
         $node = $this->crawler->filterXPath('//div[contains(@class, "is_blocked")]');
 
         return $node->count();
     }
 
-    public function getAnimeMeta(): AnimeMeta
+    public function getAnimeMeta() : AnimeMeta
     {
         return new AnimeMeta(
             $this->getTitle(),

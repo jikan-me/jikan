@@ -7,4 +7,6 @@ namespace Jikan\Exception;
  *
  * @package Jikan\Exception
  */
-class BadResponseException extends \Exception {}
+class BadResponseException extends \Exception
+{
+}

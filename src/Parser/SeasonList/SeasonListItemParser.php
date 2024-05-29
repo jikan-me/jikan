@@ -44,7 +44,7 @@ class SeasonListItemParser implements ParserInterface
      */
     public function getYear(): int
     {
-        return (int) preg_replace(
+        return (int)preg_replace(
             '/\D/',
             '',
             $this->crawler

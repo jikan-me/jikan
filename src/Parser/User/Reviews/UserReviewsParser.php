@@ -34,7 +34,7 @@ class UserReviewsParser
         return Model\User\Reviews\UserReviews::fromParser($this);
     }
 
-    public function getReviews(): array
+    public function getReviews() : array
     {
         $node = $this->crawler->filterXPath('//*[@id="content"]/table/tr/td[2]//div[contains(@class, "review-element")]');
 
@@ -54,13 +54,13 @@ class UserReviewsParser
             }
         });
     }
-    public function hasNextPage(): bool
+    public function hasNextPage() : bool
     {
         // TODO: Add implementation
         return true;
     }
 
-    public function getLastVisiblePage(): ?int
+    public function getLastVisiblePage() : ?int
     {
         // TODO: Add implementation
         return 1;

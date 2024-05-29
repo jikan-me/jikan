@@ -7,4 +7,6 @@ namespace Jikan\Model\Common;
  *
  * @package Jikan\Model\Common
  */
-class MagazineMeta extends ItemBasicMeta {}
+class MagazineMeta extends ItemBasicMeta
+{
+}

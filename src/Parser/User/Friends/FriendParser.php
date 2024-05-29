@@ -108,7 +108,7 @@ class FriendParser implements ParserInterface
         );
     }
 
-    public function getUserMeta(): UserMeta
+    public function getUserMeta() : UserMeta
     {
         return new UserMeta(
             $this->getName(),

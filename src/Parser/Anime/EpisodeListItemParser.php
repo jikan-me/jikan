@@ -46,7 +46,7 @@ class EpisodeListItemParser implements ParserInterface
      */
     public function getEpisodeId(): int
     {
-        return (int) $this->crawler->filterXPath('//td[contains(@class, \'episode-number\')]')->text();
+        return (int)$this->crawler->filterXPath('//td[contains(@class, \'episode-number\')]')->text();
     }
 
     /**

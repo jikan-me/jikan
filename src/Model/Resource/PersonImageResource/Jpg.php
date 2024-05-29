@@ -17,9 +17,9 @@ class Jpg
      * @param string $imageUrl
      * @return Jpg
      */
-    public static function factory(?string $imageUrl): self
+    public static function factory(?string $imageUrl) : self
     {
-        $instance = new self();
+        $instance = new self;
 
         $instance->imageUrl = $imageUrl;
 
@@ -33,7 +33,7 @@ class Jpg
     /**
      * @return string
      */
-    public function __toString(): string
+    public function __toString() : string
     {
         return $this->getJpg()->getImageUrl();
     }

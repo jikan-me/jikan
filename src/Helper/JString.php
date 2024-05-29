@@ -30,15 +30,15 @@ class JString
         $string = preg_replace('~[[:cntrl:]]~', "", $string);
 
         // strip any leftover tags
-        //        $string = htmlspecialchars_decode(strip_tags($string));
+//        $string = htmlspecialchars_decode(strip_tags($string));
         $string = strip_tags($string);
 
         // trim Nbsp // causing serializer issues
-        //        $string = self::UTF8NbspTrim($string);
+//        $string = self::UTF8NbspTrim($string);
 
         // remove any newlines at the end
         $string = str_replace('\\n', "\n", $string);
-        //        $string = preg_replace('~([\n]+)~', '', $string);
+//        $string = preg_replace('~([\n]+)~', '', $string);
 
         // trim
         $string = trim($string);
@@ -52,14 +52,14 @@ class JString
      */
     public static function UTF8NbspTrim(string $string): string
     {
-        return trim($string, \chr(0xC2) . \chr(0xA0));
+        return trim($string, \chr(0xC2).\chr(0xA0));
     }
 
     /**
      * @param  string $string
      * @return string
      */
-    public static function strToCanonical(string $string): string
+    public static function strToCanonical(string $string) : string
     {
         return str_replace(
             [' ', '/'],

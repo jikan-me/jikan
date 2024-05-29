@@ -46,7 +46,7 @@ class TopAnimeRequest implements RequestInterface
                     Constants::TOP_SPECIAL,
                     Constants::TOP_BY_POPULARITY,
                     Constants::TOP_BY_FAVORITES,
-                    Constants::TOP_ONA,
+                    Constants::TOP_ONA
                 ],
                 true
             )
@@ -65,7 +65,7 @@ class TopAnimeRequest implements RequestInterface
      */
     public function getPath(): string
     {
-        return 'https://myanimelist.net/topanime.php?' . http_build_query(
+        return 'https://myanimelist.net/topanime.php?'.http_build_query(
             [
                     'limit' => 50 * ($this->page - 1),
                     'type'  => $this->type,

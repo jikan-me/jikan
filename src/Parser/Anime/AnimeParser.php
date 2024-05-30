@@ -731,7 +731,14 @@ class AnimeParser implements ParserInterface
             ->filterXPath('//div[contains(@class, "related-entries")]/div[contains(@class, "entries-tile")]/div[contains(@class, "entry")]')
             ->each(
                 function (Crawler $c) use (&$related) {
-                    $relation = $c->filterXPath('//div[@class="content"]/div[@class="relation"]')->text();
+                    $relation = $c->filterXPath('//div[@class="content"]/div[@class="relation"]');
+
+                    // skips empty entry boxes
+                    if (!$relation->count()) {
+                        return;
+                    }
+
+                    $relation = $relation->text();
 
                     // strip entry type (if any)
                     $relation = JString::cleanse(

@@ -46,7 +46,7 @@ class RecentNewsParserTest extends TestCase
         self::assertEquals("DatRandomDude", $entry->getAuthorUsername());
         self::assertEquals("https://myanimelist.net/profile/DatRandomDude", $entry->getAuthorUrl());
         self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1717110506-c2df0122ab28537fbc74e36192e28523.jpeg?s=ba0c8cc3f258481898c12d5e7230fe30", $entry->getImages()->getJpg()->getImageUrl());
-        self::assertEquals(5, $entry->getComments());
+        self::assertEquals(7, $entry->getComments());
         self::assertStringContainsString("The official website for the Boku no Hero Academia", $entry->getExcerpt());
         self::assertCount(1, $entry->getTags());
         self::assertEquals("More Info", (string) $entry->getTags()[0]);

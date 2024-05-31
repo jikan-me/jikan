@@ -8,3 +8,4 @@ composer.phar
 .phpunit.result.cache
 .phpdoc
 .phive
+/.phpunit.cache

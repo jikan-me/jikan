@@ -12,14 +12,14 @@ use Jikan\Request\RequestInterface;
 class NewsRequest implements RequestInterface
 {
     /**
-     * @var string
+     * @var int
      */
     private string $malId;
 
     /**
-     * @param string $malId
+     * @param int $malId
      */
-    public function __construct(string $malId)
+    public function __construct(int $malId)
     {
         $this->malId = $malId;
     }
@@ -33,7 +33,7 @@ class NewsRequest implements RequestInterface
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getMalId(): string
     {

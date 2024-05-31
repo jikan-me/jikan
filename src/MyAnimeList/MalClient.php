@@ -1447,7 +1447,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getNews(Request\News\NewsRequest $request): array
+    public function getNews(Request\News\NewsRequest $request): Model\News\ResourceNews
     {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {

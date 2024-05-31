@@ -71,7 +71,9 @@ class ResourceNews
     /**
      * @var MalUrl[]
      */
-    private array $related = [];
+    private array $relatedEntries = [];
+
+    private array $relatedNews = [];
 
 
     /**
@@ -87,10 +89,13 @@ class ResourceNews
         $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
-        $instance->images = WrapImageResource::factory($parser->getImage());
+        $instance->images = WrapImageResource::factory($parser->getImageUrl());
         $instance->comments = $parser->getComments();
         $instance->content = $parser->getContent();
         $instance->date = $parser->getDate();
+        $instance->tags = $parser->getTags();
+        $instance->relatedEntries = $parser->getRelatedEntries();
+        $instance->relatedNews = $parser->getRelatedNews();
 
         return $instance;
     }

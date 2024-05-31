@@ -7,6 +7,7 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\News\ResourceNews;
 use Jikan\Parser\Common\MalUrlParser;
+use Jikan\Parser\Common\NewsMetaParser;
 use Jikan\Parser\Common\TagUrlParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -75,10 +76,16 @@ class NewsParser implements ParserInterface
      */
     public function getDate(): ?\DateTimeImmutable
     {
-        return Parser::parseDate(
-            $this->crawler
-                ->filterXPath('//div[contains(@class, "news-container")]//a[contains(@class, "comment")]')
-                ->text()
+        $date = $this->crawler
+            ->filterXPath('//div[contains(@class, "news-container")]/div[contains(@class, "news-info-block")]/div[2]');
+
+        $date = Parser::removeChildNodes($date)->text();
+        $date = str_replace(['by ', ' |'], '', $date);
+
+
+        return new \DateTimeImmutable(
+            $date,
+            new \DateTimeZone('UTC')
         );
     }
 
@@ -97,7 +104,9 @@ class NewsParser implements ParserInterface
      */
     public function getDiscussionLink(): string
     {
-        return $this->crawler->filterXPath('//a[last()]')->attr('href');
+        return $this->crawler
+            ->filterXPath('//div[contains(@class, "news-container")]/div[contains(@class, "news-info-block")]/div[2]/a[2]')
+            ->attr('href');
     }
 
 
@@ -119,8 +128,11 @@ class NewsParser implements ParserInterface
      */
     public function getComments(): int
     {
-        $comments = $this->crawler->filterXPath('//a[last()]')->text();
-        preg_match('~Discuss \((\d+) comments\)~', $comments, $comments);
+        $comments = $this->crawler
+            ->filterXPath('//div[contains(@class, "news-container")]/div[contains(@class, "news-info-block")]/div[2]/a[2]')
+            ->text();
+
+        preg_match('~(\d+) Comments~', $comments, $comments);
         return !empty($comments) ? $comments[1] : 0;
     }
 
@@ -130,13 +142,13 @@ class NewsParser implements ParserInterface
     public function getTags(): array
     {
         $node = $this->crawler
-            ->filterXPath('//div[contains(@class, "tags")]');
+            ->filterXPath('//div[contains(@class, "tags")]/a');
 
         if (!$node->count()) {
             return [];
         }
 
-        return $node->each(function (Crawler $crawler) {
+        return $node->each(function (Crawler $crawler) use ($node) {
             return (new TagUrlParser($crawler))->getModel();
         });
     }
@@ -146,9 +158,11 @@ class NewsParser implements ParserInterface
      */
     public function getContent(): string
     {
-        return $this->crawler
-            ->filterXPath('//div[contains(@class, "content")]')
-            ->html();
+        return trim(
+            $this->crawler
+            ->filterXPath('//div[contains(@class, "news-container")]//div[contains(@class, "content")]')
+            ->html()
+        );
     }
 
     /**
@@ -156,7 +170,7 @@ class NewsParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getRelated(): array
+    public function getRelatedEntries(): array
     {
         $related = [];
         $this->crawler
@@ -191,5 +205,24 @@ class NewsParser implements ParserInterface
             );
 
         return $related;
+    }
+
+    /**
+     * @return array
+     * @throws \InvalidArgumentException
+     * @throws \RuntimeException
+     */
+    public function getRelatedNews(): array
+    {
+        $relatedNews = $this->crawler
+            ->filterXPath('//*[contains(text(), "Related News")]/following-sibling::ul/li');
+
+        if (!$relatedNews->count()) {
+            return [];
+        }
+
+        return $relatedNews->each(function (Crawler $crawler) use ($relatedNews) {
+            return (new NewsMetaParser($crawler))->getModel();
+        });
     }
 }

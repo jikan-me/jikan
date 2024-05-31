@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Anime;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AnimeMoreInfoParserTest extends TestCase
 {
@@ -22,10 +23,7 @@ class AnimeMoreInfoParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Anime\MoreInfoParser($crawler);
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\MoreInfoParser
-     */
+    #[Test]
     public function it_gets_more_info(): void
     {
         self::assertStringContainsString(

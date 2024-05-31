@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Parser\Top\TopListItemParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class TopCharacterParserTest
@@ -29,9 +30,7 @@ class TopCharacterParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
@@ -39,9 +38,7 @@ class TopCharacterParserTest extends TestCase
         self::assertEquals('https://myanimelist.net/character/40/Luffy_Monkey_D', $url->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -50,43 +47,33 @@ class TopCharacterParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_rank()
     {
         self::assertEquals(3, $this->parser->getRank());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_character_kanji()
     {
         self::assertEquals('モンキー・D・ルフィ', $this->parser->getKanjiName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_animeography()
     {
         self::assertCount(3, $this->parser->getAnimeography());
         self::assertContainsOnlyInstancesOf(MalUrl::class, $this->parser->getAnimeography());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mangaography()
     {
         self::assertCount(3, $this->parser->getMangaography());
         self::assertContainsOnlyInstancesOf(MalUrl::class, $this->parser->getMangaography());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_favorites()
     {
         self::assertEquals(121629, $this->parser->getFavorites());

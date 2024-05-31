@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Anime;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AnimeEpisodesParserTest extends TestCase
 {
@@ -23,10 +24,7 @@ class AnimeEpisodesParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Anime\EpisodesParser($crawler);
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episodes_last_page(): void
     {
         self::assertEquals(
@@ -35,10 +33,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_id(): void
     {
         self::assertEquals(
@@ -47,10 +42,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_title(): void
     {
         self::assertEquals(
@@ -59,10 +51,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_title_japanese(): void
     {
         self::assertEquals(
@@ -71,10 +60,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_title_romanji(): void
     {
         self::assertStringContainsString(
@@ -83,10 +69,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_aired(): void
     {
         self::assertInstanceOf(
@@ -95,10 +78,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_filler(): void
     {
         self::assertEquals(
@@ -107,10 +87,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_recap(): void
     {
         self::assertEquals(
@@ -120,10 +97,7 @@ class AnimeEpisodesParserTest extends TestCase
     }
 
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_url(): void
     {
         self::assertEquals(
@@ -132,10 +106,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episode_forum_url(): void
     {
         self::assertEquals(
@@ -144,10 +115,7 @@ class AnimeEpisodesParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\EpisodesParser
-     */
+    #[Test]
     public function it_gets_episodes_score(): void
     {
         self::assertEquals(

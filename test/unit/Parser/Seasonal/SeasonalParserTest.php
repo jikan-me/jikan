@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Seasonal;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class SeasonalParserTest
@@ -25,17 +26,13 @@ class SeasonalParserTest extends TestCase
         $this->springParser = new \Jikan\Parser\Seasonal\SeasonalParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_season()
     {
         self::assertEquals('Spring 2018', $this->springParser->getSeasonName() . " " . $this->springParser->getSeasonYear());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime()
     {
         $anime = $this->springParser->getSeasonalAnime();

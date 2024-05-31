@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Search;
 use Jikan\Model\Common\MalUrl;
 use Jikan\MyAnimeList\MalClient;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class CharacterSearchTest
@@ -26,17 +27,13 @@ class CharacterSearchTest extends TestCase
         $this->anime = $this->search->getResults()[0];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name()
     {
         self::assertEquals("Testarossa, Fate", $this->anime->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image_url()
     {
         self::assertEquals(
@@ -45,26 +42,20 @@ class CharacterSearchTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertEquals("https://myanimelist.net/character/1896/Fate_Testarossa", $this->anime->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_alternative_names()
     {
         self::assertContains('Fate T. Harlaown', $this->anime->getAlternativeNames());
         self::assertContains('Har', $this->anime->getAlternativeNames());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime()
     {
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $this->anime->getAnime());
@@ -72,9 +63,7 @@ class CharacterSearchTest extends TestCase
         self::assertEquals("https://myanimelist.net/anime/17947/Mahou_Shoujo_Lyrical_Nanoha__Reflection", $this->anime->getAnime()[0]->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga()
     {
         self::assertContainsOnlyInstancesOf(MalUrl::class, $this->anime->getManga());

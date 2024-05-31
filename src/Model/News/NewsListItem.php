@@ -2,8 +2,10 @@
 
 namespace Jikan\Model\News;
 
+use Jikan\Model\Resource\NewsImageResource\NewsImageResource;
 use Jikan\Model\Resource\WrapImageResource\WrapImageResource;
 use Jikan\Parser\News\NewsListItemParser;
+use Jikan\Parser\News\ResourceNewsListItemParser;
 
 /**
  * Class AnimeParser
@@ -15,52 +17,57 @@ class NewsListItem
     /**
      * @var int|null
      */
-    private $malId;
+    private int|null $malId;
 
     /**
      * @var string
      */
-    private $url;
+    private string $url;
 
     /**
      * @var string
      */
-    private $title;
+    private string $title;
 
     /**
      * @var \DateTimeImmutable
      */
-    private $date;
+    private \DateTimeImmutable $date;
 
     /**
      * @var string
      */
-    private $authorUsername;
+    private string $authorUsername;
 
     /**
      * @var string
      */
-    private $authorUrl;
+    private string $authorUrl;
 
     /**
      * @var string
      */
-    private $forumUrl;
+    private string $forumUrl;
 
     /**
-     * @var WrapImageResource
+     * @var NewsImageResource
      */
-    private $images;
+    private NewsImageResource $images;
 
     /**
      * @var int
      */
-    private $comments;
+    private int $comments;
 
     /**
      * @var string
      */
-    private $excerpt;
+    private string $excerpt;
+
+    /**
+     * @var array
+     */
+    private array $tags;
 
     /**
      * @param NewsListItemParser $parser
@@ -68,19 +75,20 @@ class NewsListItem
      * @return NewsListItem
      * @throws \InvalidArgumentException
      */
-    public static function fromParser(NewsListItemParser $parser): self
+    public static function fromParser(NewsListItemParser $parser): NewsListItem
     {
         $instance = new self();
         $instance->malId = $parser->getMalId();
         $instance->url = $parser->getUrl();
         $instance->title = $parser->getTitle();
-        $instance->date = $parser->getDate();
+        $instance->comments = $parser->getComments();
+        $instance->tags = $parser->getTags();
         $instance->authorUsername = $parser->getAuthor()->getName();
         $instance->authorUrl = $parser->getAuthor()->getUrl();
         $instance->forumUrl = $parser->getDiscussionLink();
-        $instance->images = WrapImageResource::factory($parser->getImage());
-        $instance->comments = $parser->getComments();
-        $instance->excerpt = $parser->getIntro();
+        $instance->images = NewsImageResource::factory($parser->getImageUrl());
+        $instance->excerpt = $parser->getExcerpt();
+        $instance->date = $parser->getDate();
 
         return $instance;
     }
@@ -142,9 +150,9 @@ class NewsListItem
     }
 
     /**
-     * @return WrapImageResource
+     * @return NewsImageResource
      */
-    public function getImages(): WrapImageResource
+    public function getImages(): NewsImageResource
     {
         return $this->images;
     }
@@ -163,5 +171,13 @@ class NewsListItem
     public function getExcerpt(): string
     {
         return $this->excerpt;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
     }
 }

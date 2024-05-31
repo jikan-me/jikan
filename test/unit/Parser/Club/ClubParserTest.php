@@ -5,6 +5,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\UserMetaBasic;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ClubParserTest extends TestCase
 {
@@ -23,10 +24,7 @@ class ClubParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Club\ClubParser($crawler);
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_mal_id(): void
     {
         self::assertEquals(
@@ -35,10 +33,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_url(): void
     {
         self::assertEquals(
@@ -47,10 +42,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_image_url(): void
     {
         self::assertEquals(
@@ -59,10 +51,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_title(): void
     {
         self::assertEquals(
@@ -71,10 +60,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_members_count(): void
     {
         self::assertEquals(
@@ -83,10 +69,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_pictures_count(): void
     {
         self::assertEquals(
@@ -95,10 +78,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_category(): void
     {
         self::assertEquals(
@@ -107,10 +87,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_created(): void
     {
         self::assertEquals(
@@ -119,10 +96,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_staff(): void
     {
         self::assertContainsOnlyInstancesOf(
@@ -131,10 +105,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_anime_relations(): void
     {
         self::assertContainsOnlyInstancesOf(
@@ -158,10 +129,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_manga_relations(): void
     {
         self::assertContainsOnlyInstancesOf(
@@ -185,10 +153,7 @@ class ClubParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\ClubParser
-     */
+    #[Test]
     public function it_gets_character_relations(): void
     {
         self::assertContainsOnlyInstancesOf(

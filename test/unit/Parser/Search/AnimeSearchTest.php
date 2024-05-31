@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Search;
 
 use Jikan\MyAnimeList\MalClient;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeSearchTest
@@ -25,17 +26,13 @@ class AnimeSearchTest extends TestCase
         $this->anime = $this->search->getResults()[0];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_title()
     {
         self::assertEquals("Fate/Zero 2nd Season", $this->anime->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image_url()
     {
         self::assertEquals(
@@ -44,17 +41,13 @@ class AnimeSearchTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_airing()
     {
         self::assertEquals($this->anime->isAiring(), false);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_synopsis()
     {
         self::assertStringContainsString(
@@ -63,57 +56,43 @@ class AnimeSearchTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_type()
     {
         self::assertEquals($this->anime->getType(), "TV");
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_episodes()
     {
         self::assertEquals(12, $this->anime->getEpisodes());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_start_date()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->anime->getStartDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_end_date()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->anime->getEndDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_members()
     {
         self::assertEquals(1106026, $this->anime->getMembers());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_rated()
     {
         self::assertEquals($this->anime->getRated(), 'R');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_score()
     {
         self::assertEquals(8.55, $this->anime->getScore());

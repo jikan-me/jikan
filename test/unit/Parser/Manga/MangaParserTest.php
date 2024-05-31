@@ -8,6 +8,7 @@ use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Title;
 use Jikan\MyAnimeList\MalClient;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MangaParserTest
@@ -39,58 +40,44 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_mal_id()
     {
         self::assertEquals(11, $this->parser->getMangaID());
     }
 
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_url()
     {
         self::assertEquals('https://myanimelist.net/manga/11/Naruto', $this->parser->getMangaURL());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_title()
     {
         self::assertEquals('Naruto', $this->parser->getMangaTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_title_english()
     {
         self::assertEquals('Naruto', $this->parser->getMangaTitleEnglish());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_title_synonyms()
     {
         self::assertEquals([], $this->parser->getMangaTitleSynonyms());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_title_japanese()
     {
         self::assertEquals('NARUTO―ナルト―', $this->parser->getMangaTitleJapanese());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_titles()
     {
         $titles = $this->parser->getTitles();
@@ -100,9 +87,7 @@ class MangaParserTest extends TestCase
         self::assertEquals(new Title('English', 'Naruto'), $titles[2]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_image_url()
     {
         self::assertEquals(
@@ -111,9 +96,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_synopsis()
     {
         self::assertStringContainsString(
@@ -122,9 +105,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_type()
     {
         self::assertEquals(
@@ -133,9 +114,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_chapters()
     {
         self::assertEquals(
@@ -144,9 +123,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_volumes()
     {
         self::assertEquals(
@@ -155,9 +132,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_status()
     {
         self::assertEquals(
@@ -166,9 +141,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_publishing()
     {
         self::assertEquals(
@@ -177,9 +150,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_published()
     {
         $range = $this->manga->getPublished();
@@ -190,9 +161,7 @@ class MangaParserTest extends TestCase
         self::assertEquals('2014-11-10', $range->getUntil()->format('Y-m-d'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_authors()
     {
         $authors = $this->manga->getAuthors();
@@ -204,9 +173,7 @@ class MangaParserTest extends TestCase
         self::assertContains('Kishimoto, Masashi', $names);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_serialization()
     {
         $serializations = $this->manga->getSerializations();
@@ -218,9 +185,7 @@ class MangaParserTest extends TestCase
         self::assertContains('Shounen Jump (Weekly)', $names);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_genre()
     {
         $genres = $this->manga->getGenres();
@@ -235,9 +200,7 @@ class MangaParserTest extends TestCase
     }
 
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_score()
     {
         self::assertEquals(
@@ -246,9 +209,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_scored_by()
     {
         self::assertEquals(
@@ -257,9 +218,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_rank()
     {
         self::assertEquals(
@@ -268,9 +227,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_popularity()
     {
         self::assertEquals(
@@ -279,9 +236,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_members()
     {
         self::assertEquals(
@@ -290,9 +245,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_favorites()
     {
         self::assertEquals(
@@ -301,9 +254,7 @@ class MangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_related()
     {
         $related = $this->parser->getMangaRelated();
@@ -311,9 +262,7 @@ class MangaParserTest extends TestCase
         self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Alternative version']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_background()
     {
         $background = $this->manga->getBackground();

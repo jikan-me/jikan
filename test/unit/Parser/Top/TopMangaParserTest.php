@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Top\TopListItemParser;
 use Symfony\Component\DomCrawler\Crawler;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class TopMangaParserTest
@@ -34,9 +35,7 @@ class TopMangaParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
@@ -44,33 +43,25 @@ class TopMangaParserTest extends TestCase
         self::assertEquals('https://myanimelist.net/manga/51/Slam_Dunk', $url->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_rank()
     {
         self::assertEquals(6, $this->parser->getRank());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_score()
     {
         self::assertEquals(9.06, $this->parser->getScore());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_type()
     {
         self::assertEquals('Manga', $this->parser->getType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_volumes()
     {
         $parser2 = new TopListItemParser(
@@ -79,33 +70,25 @@ class TopMangaParserTest extends TestCase
         self::assertEquals(31, $this->parser->getVolumes());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_members()
     {
         self::assertEquals(138611, $this->parser->getMembers());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_start_date()
     {
         self::assertEquals('Sep 1990', $this->parser->getStartDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_end_date()
     {
         self::assertEquals('Jun 1996', $this->parser->getEndDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_image()
     {
         self::assertEquals(

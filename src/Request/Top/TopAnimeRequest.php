@@ -67,9 +67,9 @@ class TopAnimeRequest implements RequestInterface
     {
         return 'https://myanimelist.net/topanime.php?' . http_build_query(
             [
-                    'limit' => 50 * ($this->page - 1),
-                    'type'  => $this->type,
-                ]
+                'limit' => 50 * ($this->page - 1),
+                'type'  => $this->type,
+            ]
         );
     }
 

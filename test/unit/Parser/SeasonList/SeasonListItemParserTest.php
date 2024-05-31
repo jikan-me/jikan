@@ -5,6 +5,7 @@ namespace JikanTest\Parser\SeasonList;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\SeasonList\SeasonListItemParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class SeasonListItemParserTest extends TestCase
 {
@@ -24,19 +25,13 @@ class SeasonListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\SeasonList\SeasonListItemParser::getYear
-     */
+    #[Test]
     public function it_gets_the_year(): void
     {
         self::assertEquals(2024, $this->parser->getYear());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\SeasonList\SeasonListItemParser::getSeasons
-     */
+    #[Test]
     public function it_gets_the_seasons(): void
     {
         self::assertContains('winter', $this->parser->getSeasons());

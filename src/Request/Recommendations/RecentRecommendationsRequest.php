@@ -60,10 +60,10 @@ class RecentRecommendationsRequest implements RequestInterface
     {
         return 'https://myanimelist.net/recommendations.php?' . http_build_query(
             [
-                    's' => 'recentrecs',
-                    't'  => $this->type,
-                    'show' => ($this->page !== 1) ? 100 * ($this->page - 1) : null,
-                ]
+                's' => 'recentrecs',
+                't'  => $this->type,
+                'show' => ($this->page !== 1) ? 100 * ($this->page - 1) : null,
+            ]
         );
     }
 

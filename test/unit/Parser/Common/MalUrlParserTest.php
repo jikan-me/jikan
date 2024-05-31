@@ -4,6 +4,8 @@ namespace JikanTest\Parser\Common;
 
 use Jikan\Parser\Common\MalUrlParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MalUrlParserTest
@@ -12,11 +14,8 @@ use JikanTest\TestCase;
  */
 class MalUrlParserTest extends TestCase
 {
-    /**
-     * @dataProvider urlProvider
-     *
-     * @param string $url
-     */
+    #[Test]
+    #[DataProvider('urlProvider')]
     public function testMalIdParser(string $url)
     {
         $this->assertEquals(12345, MalUrlParser::parseId($url));

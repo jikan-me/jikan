@@ -8,6 +8,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Forum\ForumPost;
 use Jikan\Parser\Forum\ForumTopicParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class ForumTopicParserTest
@@ -28,65 +29,49 @@ class ForumTopicParserTest extends TestCase
         $this->parser = new ForumTopicParser($crawler->filterXPath('//tr[contains(@id, "topicRow")]')->eq(2));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_post_id(): void
     {
         self::assertEquals(24885, $this->parser->getTopicId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_post_url(): void
     {
         self::assertEquals('https://myanimelist.net/forum/?topicid=24885', $this->parser->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_post_title(): void
     {
         self::assertEquals('Cowboy Bebop Episode 18 Discussion', $this->parser->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_post_date(): void
     {
         self::assertEquals('2008-05-14', $this->parser->getPostDate()->format('Y-m-d'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_author_name(): void
     {
         self::assertEquals('FighterZ', $this->parser->getAuthorName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_author_url(): void
     {
         self::assertEquals('https://myanimelist.net/profile/FighterZ', $this->parser->getAuthorUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_replies(): void
     {
         self::assertEquals(160, $this->parser->getReplies());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_last_post(): void
     {
         $lastPost = $this->parser->getLastPost();

@@ -4,15 +4,11 @@ namespace JikanTest\Helper;
 
 use Jikan\Helper\Media;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
-/**
- * Class MediaTest
- */
 class MediaTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_dates()
     {
         self::assertEquals(

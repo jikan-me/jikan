@@ -12,7 +12,6 @@ use Jikan\Parser\Common\NewsMetaParser;
  */
 class NewsMeta
 {
-
     /**
      * @var int
      */

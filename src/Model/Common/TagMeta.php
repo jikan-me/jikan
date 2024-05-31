@@ -12,7 +12,6 @@ use Jikan\Parser\Common\TagUrlParser;
  */
 class TagMeta
 {
-
     /**
      * @var string
      */

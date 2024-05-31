@@ -83,19 +83,19 @@ class UserMangaListRequest implements RequestInterface
     {
         $query = '?' . http_build_query(
             [
-            'offset' => $this->page,
-            'status' => $this->status,
-            'order' => $this->orderBy,
-            'order2' => $this->orderBy2,
-            's' => $this->title,
-            'published_from_year' => $this->publishedFrom[0],
-            'published_from_month' => $this->publishedFrom[1],
-            'published_from_day' => $this->publishedFrom[2],
-            'published_to_year' => $this->publishedTo[0],
-            'published_to_month' => $this->publishedTo[1],
-            'published_to_day' => $this->publishedTo[2],
-            'magazine' => $this->magazine,
-            'publishing_status' => $this->publishingStatus,
+                'offset' => $this->page,
+                'status' => $this->status,
+                'order' => $this->orderBy,
+                'order2' => $this->orderBy2,
+                's' => $this->title,
+                'published_from_year' => $this->publishedFrom[0],
+                'published_from_month' => $this->publishedFrom[1],
+                'published_from_day' => $this->publishedFrom[2],
+                'published_to_year' => $this->publishedTo[0],
+                'published_to_month' => $this->publishedTo[1],
+                'published_to_day' => $this->publishedTo[2],
+                'magazine' => $this->magazine,
+                'publishing_status' => $this->publishingStatus,
             ]
         );
         return sprintf('https://myanimelist.net/mangalist/%s/load.json%s', $this->username, $query);

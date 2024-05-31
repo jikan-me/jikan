@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Character;
 use Jikan\Http\HttpClientWrapper;
 use Symfony\Component\DomCrawler\Crawler;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class StaffListItemParserTest
@@ -37,33 +38,25 @@ class StaffListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_id()
     {
         self::assertEquals(12596, $this->parser->getMalId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name()
     {
         self::assertEquals('Tom-H@ck', $this->parser->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertEquals('https://myanimelist.net/people/12596/Tom-Hck', $this->parser->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -72,9 +65,7 @@ class StaffListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_positions()
     {
         $positions = $this->parser->getPositions();

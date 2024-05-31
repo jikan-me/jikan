@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Anime;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Anime\AnimeStatsParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeStatsParserTest
@@ -26,9 +27,7 @@ class AnimeStatsParserTest extends TestCase
         $this->animeStatsParser = new \Jikan\Parser\Anime\AnimeStatsParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_numeric_statistics()
     {
         self::assertGreaterThan(0, $this->animeStatsParser->getWatching());
@@ -39,9 +38,7 @@ class AnimeStatsParserTest extends TestCase
         self::assertGreaterThan(0, $this->animeStatsParser->getPlanToWatch());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_score_attributes()
     {
         self::assertEquals(

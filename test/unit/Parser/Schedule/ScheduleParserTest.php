@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class ScheduleParserTest
@@ -26,9 +27,7 @@ class ScheduleParserTest extends TestCase
         $this->parser = new ScheduleParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_mondays()
     {
         $monday = $this->parser->getShedule('monday');
@@ -36,9 +35,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(11, $monday);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_tuesdays()
     {
         $tuesday = $this->parser->getShedule('tuesday');
@@ -46,9 +43,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(7, $tuesday);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_wednesdays()
     {
         $wednesday = $this->parser->getShedule('wednesday');
@@ -56,9 +51,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(9, $wednesday);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_thursdays()
     {
         $thursday = $this->parser->getShedule('thursday');
@@ -66,9 +59,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(9, $thursday);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_fridays()
     {
         $friday = $this->parser->getShedule('friday');
@@ -76,9 +67,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(14, $friday);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_saturdays()
     {
         $saturday = $this->parser->getShedule('saturday');
@@ -86,9 +75,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(17, $saturday);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_sundays()
     {
         $sunday = $this->parser->getShedule('sunday');
@@ -96,9 +83,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(27, $sunday);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_all()
     {
         $all = $this->parser->getShedule('all');
@@ -106,9 +91,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(144, $all);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_other()
     {
         $other = $this->parser->getShedule('other');
@@ -116,9 +99,7 @@ class ScheduleParserTest extends TestCase
         self::assertCount(12, $other);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_unknown()
     {
         $unknown = $this->parser->getShedule('unknown');

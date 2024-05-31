@@ -5,15 +5,14 @@ namespace JikanTest\Model\Common;
 use Jikan\Model\Common\DateProp;
 use Jikan\Model\Common\DateRange;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class DateRangeTest
  */
 class DateRangeTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_date()
     {
         $date = new DateRange('Sep 15, 2018 to Sep, 2019');
@@ -29,9 +28,7 @@ class DateRangeTest extends TestCase
         self::assertEquals(null, $date->getUntil());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_date_props()
     {
         $date = new DateRange('Sep 15, 2018 to Oct, 2019');

@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Common\PicturesPageParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class PicturesPageParserTest
@@ -32,9 +33,7 @@ class PicturesPageParserTest extends TestCase
      */
     private PicturesPageParser $characterParser;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_manga_pictures()
     {
         parent::setUp();
@@ -56,9 +55,7 @@ class PicturesPageParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_anime_pictures()
     {
         parent::setUp();
@@ -80,9 +77,7 @@ class PicturesPageParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_person_pictures()
     {
         parent::setUp();
@@ -104,9 +99,7 @@ class PicturesPageParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_character_pictures()
     {
         parent::setUp();

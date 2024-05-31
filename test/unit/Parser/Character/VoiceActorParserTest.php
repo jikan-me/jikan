@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Character;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class VoiceActorParserTest
@@ -25,25 +26,19 @@ class VoiceActorParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Character\VoiceActorParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_id()
     {
         self::assertEquals(245, $this->parser->getMalId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertEquals('https://myanimelist.net/people/245/Satoshi_Hino', $this->parser->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_person()
     {
         $person = $this->parser->getPerson();
@@ -52,9 +47,7 @@ class VoiceActorParserTest extends TestCase
         self::assertEquals('https://myanimelist.net/people/245/Satoshi_Hino', $person->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -63,9 +56,7 @@ class VoiceActorParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_language()
     {
         self::assertEquals('Japanese', $this->parser->getLanguage());

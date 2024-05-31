@@ -8,6 +8,7 @@ use Jikan\Model\Anime\StreamEpisodeListItem;
 use Jikan\Parser\Anime\VideosParser;
 use JikanTest\Parser\Video\AnimeVideoParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeVideoParserTest
@@ -29,18 +30,14 @@ class AnimeVideoParserTest extends TestCase
     }
 
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_promos()
     {
         $videos = $this->parser->getPromos();
         self::assertContainsOnlyInstancesOf(PromoListItem::class, $videos);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_episodes()
     {
         $videos = $this->parser->getEpisodes();

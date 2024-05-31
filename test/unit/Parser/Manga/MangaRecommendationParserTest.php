@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Manga;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class MangaRecommendationParserTest extends TestCase
 {
@@ -22,28 +23,19 @@ class MangaRecommendationParserTest extends TestCase
         $this->model = (new \Jikan\Parser\Common\Recommendations($crawler))->getModel();
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Common\Recommendations
-     */
+    #[Test]
     public function it_get_recommendations_count(): void
     {
         self::assertCount(46, $this->model);
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Common\Recommendations
-     */
+    #[Test]
     public function it_gets_mal_id(): void
     {
         self::assertEquals(21, $this->model[0]->getEntry()->getMalId());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Common\Recommendations
-     */
+    #[Test]
     public function it_gets_url(): void
     {
         self::assertEquals(
@@ -52,10 +44,7 @@ class MangaRecommendationParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Common\Recommendations
-     */
+    #[Test]
     public function it_gets_image_url(): void
     {
         self::assertEquals(
@@ -64,10 +53,7 @@ class MangaRecommendationParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Common\Recommendations
-     */
+    #[Test]
     public function it_gets_recommendation_url(): void
     {
         self::assertEquals(
@@ -76,10 +62,7 @@ class MangaRecommendationParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Common\Recommendations
-     */
+    #[Test]
     public function it_gets_title(): void
     {
         self::assertEquals(
@@ -88,10 +71,7 @@ class MangaRecommendationParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Common\Recommendations
-     */
+    #[Test]
     public function it_gets_votes_count(): void
     {
         self::assertEquals(

@@ -40,6 +40,14 @@ class TagUrl
     /**
      * @return string
      */
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
     public function getMalId(): string
     {
         return $this->malId;

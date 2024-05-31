@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Manga;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Manga\MangaStatsParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MangaStatsParserTest
@@ -26,9 +27,7 @@ class MangaStatsParserTest extends TestCase
         $this->mangaStatsParser = new MangaStatsParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_numeric_statistics()
     {
         self::assertGreaterThan(0, $this->mangaStatsParser->getReading());
@@ -39,9 +38,7 @@ class MangaStatsParserTest extends TestCase
         self::assertGreaterThan(0, $this->mangaStatsParser->getPlanToRead());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_score_attributes()
     {
         self::assertEquals(

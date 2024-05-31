@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Search;
 
 use Jikan\MyAnimeList\MalClient;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class PersonSearchTest
@@ -25,17 +26,13 @@ class PersonSearchTest extends TestCase
         $this->person = $this->search->getResults()[0];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name()
     {
         self::assertEquals("Araizumi, Rui", $this->person->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image_url()
     {
         self::assertEquals(
@@ -44,17 +41,13 @@ class PersonSearchTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertEquals("https://myanimelist.net/people/5159/Rui_Araizumi", $this->person->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_alternative_names()
     {
         self::assertContains('あらいず☆みるい', $this->person->getAlternativeNames());

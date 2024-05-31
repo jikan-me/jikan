@@ -26,7 +26,7 @@ class NewsSearchRequest implements RequestInterface
      *
      * @param int $page
      */
-    public function __construct(string $query, int $page)
+    public function __construct(string $query, int $page = 1)
     {
         $this->query = $query;
         $this->page = $page;

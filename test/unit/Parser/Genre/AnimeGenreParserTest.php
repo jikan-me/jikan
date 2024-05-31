@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Genre\AnimeGenreParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeGenreParserTest
@@ -26,35 +27,27 @@ class AnimeGenreParserTest extends TestCase
         $this->parser = new AnimeGenreParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_url()
     {
         $url = $this->parser->getUrl();
         self::assertEquals("https://myanimelist.net/anime/genre/1/Action", $url);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_anime()
     {
         $anime = $this->parser->getResults();
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $anime);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_count()
     {
         self::assertEquals(4369, $this->parser->getCount());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_description()
     {
         self::assertStringContainsString(

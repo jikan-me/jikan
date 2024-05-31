@@ -26,7 +26,7 @@ class NewsByTagRequest implements RequestInterface
      *
      * @param int $page
      */
-    public function __construct(string $malId, int $page)
+    public function __construct(string $malId, int $page = 1)
     {
         $this->malId = $malId;
         $this->page = $page;

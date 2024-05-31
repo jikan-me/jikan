@@ -5,6 +5,7 @@ namespace JikanTest\Parser\UserProfile;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\User\Profile\UserProfileParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class ProfileParserTest
@@ -25,25 +26,19 @@ class UserProfileParserTest extends TestCase
         $this->parser = new UserProfileParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_username()
     {
         self::assertEquals('sandshark', $this->parser->getUsername());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertEquals('https://myanimelist.net/profile/sandshark', $this->parser->getProfileUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -52,65 +47,49 @@ class UserProfileParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_join_date()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getJoinDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_last_online()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getLastOnline());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_gender()
     {
         self::assertEquals('Male', $this->parser->getGender());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_birthday()
     {
         self::assertEquals(null, $this->parser->getBirthday());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_location()
     {
         self::assertEquals('The wired', $this->parser->getLocation());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_stats()
     {
         self::assertInstanceOf(\Jikan\Model\User\AnimeStats::class, $this->parser->getAnimeStats());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_stats()
     {
         self::assertInstanceOf(\Jikan\Model\User\MangaStats::class, $this->parser->getMangaStats());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_favorites()
     {
         self::assertInstanceOf(\Jikan\Model\User\Favorites::class, $this->parser->getFavorites());
@@ -132,18 +111,14 @@ class UserProfileParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_last_updates(){
         $updates = $this->parser->getUserLastUpdates();
         self::assertContainsOnlyInstancesOf(\Jikan\Model\User\LastAnimeUpdate::class, $updates->getAnime());
         self::assertContainsOnlyInstancesOf(\Jikan\Model\User\LastMangaUpdate::class, $updates->getManga());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_about()
     {
         self::assertEquals(null, $this->parser->getAbout());

@@ -2,18 +2,20 @@
 
 namespace JikanTest\Parser\Search;
 
+use Jikan\Model\Search\AnimeSearch;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Search\AnimeSearchRequest;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeSearchAiringTest
  */
 class AnimeSearchAiringTest extends TestCase
 {
-    /**
-     * @test
-     */
+    private AnimeSearch $search;
+
+    #[Test]
     public function it_gets_airing_non_null()
     {
         $jikan = new MalClient($this->httpClient);
@@ -25,9 +27,7 @@ class AnimeSearchAiringTest extends TestCase
         //self::assertTrue($anime->isAiring());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_airing_null()
     {
         $jikan = new MalClient($this->httpClient);

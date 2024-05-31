@@ -5,6 +5,7 @@ namespace JikanTest\Parser\News;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\News\NewsListItemParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class NewsListItemParserTest
@@ -31,25 +32,19 @@ class NewsListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_title(): void
     {
         self::assertEquals("Kentarou Miura's Assistants Resume 'Berserk' Serialization, 'Holyland' Creator Kouji Mori to Supervise", $this->parser->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url(): void
     {
         self::assertEquals('https://myanimelist.net/news/66547854', $this->parser->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image(): void
     {
         self::assertEquals(
@@ -58,33 +53,25 @@ class NewsListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_date(): void
     {
         self::assertEquals('2024-06-07 00:33', $this->parser->getDate()->format('Y-m-d H:i'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_author(): void
     {
         self::assertEquals('Vindstot', (string)$this->parser->getAuthor());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_discussion_link(): void
     {
         self::assertEquals('https://myanimelist.net/forum/?topicid=2021160', $this->parser->getDiscussionLink());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_comments(): void
     {
         self::assertEquals(
@@ -93,9 +80,7 @@ class NewsListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_introduction(): void
     {
         self::assertStringContainsString(

@@ -29,7 +29,6 @@ class NewsMetaParser implements ParserInterface
     public function __construct(Crawler $crawler)
     {
         $this->crawler = $crawler;
-        var_dump($this->crawler->html());
     }
 
 

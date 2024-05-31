@@ -2,18 +2,19 @@
 
 namespace JikanTest\Parser\Search;
 
+use Jikan\Model\Search\AnimeSearch;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Search\AnimeSearchRequest;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeSearchEpisodeTest
  */
 class AnimeSearchEpisodeTest extends TestCase
 {
-    /**
-     * @test
-     */
+    private AnimeSearch $search;
+    #[Test]
     public function it_gets_one_episode_airing_false()
     {
         $jikan = new MalClient($this->httpClient);
@@ -23,9 +24,7 @@ class AnimeSearchEpisodeTest extends TestCase
         self::assertFalse($anime->isAiring());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_multiple_episodes_airing_true()
     {
         $jikan = new MalClient($this->httpClient);

@@ -4,22 +4,22 @@ namespace JikanTest\Helper;
 
 use Jikan\Helper\JString;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
-/**
- * Class JStringTest
- */
 class JStringTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider  stringFloatProvider
-     */
+    #[Test]
+    #[DataProvider('stringFloatProvider')]
     public function it_checks_for_string_float(bool $given, bool $expected): void
     {
         self::assertSame($expected, $given);
     }
 
-    public function stringFloatProvider(): array
+    /**
+     * @return array[]
+     */
+    public static function stringFloatProvider(): array
     {
         return [
             [JString::isStringFloat('3.123'), true],
@@ -29,9 +29,7 @@ class JStringTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_converts_string_to_canonical_format()
     {
         self::assertEquals(

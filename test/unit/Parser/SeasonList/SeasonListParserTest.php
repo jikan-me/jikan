@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\SeasonList\SeasonListItem;
 use Jikan\Parser\SeasonList\SeasonListParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class SeasonListParserTest
@@ -27,10 +28,7 @@ class SeasonListParserTest extends TestCase
         $this->parser = new SeasonListParser($crawler);
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\SeasonList\SeasonListParser::getModel
-     */
+    #[Test]
     public function it_contains_season_items(): void
     {
         self::assertContainsOnlyInstancesOf(

@@ -4,15 +4,14 @@ namespace JikanTest\Helper;
 
 use Jikan\Helper\Parser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class ParserTest
  */
 class ParserTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_dates()
     {
         $date = Parser::parseDate(2011);

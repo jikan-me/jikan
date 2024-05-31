@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Character;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeographyParserTest
@@ -25,33 +26,25 @@ class AnimeographyParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Character\AnimeographyParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_mal_id()
     {
         self::assertEquals(29803, $this->parser->getMalId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_url()
     {
         self::assertEquals('https://myanimelist.net/anime/29803/Overlord', $this->parser->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_name()
     {
         self::assertEquals('Overlord', $this->parser->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_image()
     {
         self::assertEquals(
@@ -60,9 +53,7 @@ class AnimeographyParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_role()
     {
         self::assertEquals('Main',$this->parser->getRole());

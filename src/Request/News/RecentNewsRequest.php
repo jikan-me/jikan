@@ -21,7 +21,7 @@ class RecentNewsRequest implements RequestInterface
      *
      * @param int $page
      */
-    public function __construct(int $page)
+    public function __construct(int $page = 1)
     {
         $this->page = $page;
     }

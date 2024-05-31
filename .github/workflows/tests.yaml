@@ -45,12 +45,12 @@ jobs:
           tools: composer:v2
           extensions: ${{ env.extensions }}
 
-      - name: Setup dependency cache
+      - name: Setup dependency cache (Linux)
         if: matrix.operatingSystem == 'ubuntu-22.04'
         id: composercache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       
-      - name: Setup dependency cache
+      - name: Setup dependency cache (Windows)
         if: matrix.operatingSystem == 'windows-latest'
         id: composercachewin
         run: echo "dir=$(composer config cache-files-dir)" | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append

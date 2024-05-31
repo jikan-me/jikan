@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Magazine;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Magazine\MagazineParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class MagazineParserTest
@@ -25,18 +26,14 @@ class MagazineParserTest extends TestCase
         $this->parser = new MagazineParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_url()
     {
         $url = $this->parser->getUrl();
         self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $url);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_manga()
     {
         $manga = $this->parser->getResults();

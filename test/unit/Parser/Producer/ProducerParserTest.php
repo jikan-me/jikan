@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\Url;
 use Jikan\Parser\Producer\ProducerParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class ProducerParserTest
@@ -26,18 +27,14 @@ class ProducerParserTest extends TestCase
         $this->parser = new ProducerParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_url()
     {
         $url = $this->parser->getUrl();
         self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $url);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_anime()
     {
         $anime = $this->parser->getResults();
@@ -45,9 +42,7 @@ class ProducerParserTest extends TestCase
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\AnimeCard::class, $anime);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_image()
     {
         self::assertEquals(
@@ -56,9 +51,7 @@ class ProducerParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_established()
     {
         self::assertEquals(
@@ -67,9 +60,7 @@ class ProducerParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_favorites()
     {
         self::assertEquals(
@@ -78,9 +69,7 @@ class ProducerParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_about()
     {
         self::assertStringContainsString(
@@ -89,9 +78,7 @@ class ProducerParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_count()
     {
         self::assertEquals(
@@ -100,9 +87,7 @@ class ProducerParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_external_links()
     {
         $externalLinks = $this->parser->getExternalLinks();

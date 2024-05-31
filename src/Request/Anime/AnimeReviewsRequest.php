@@ -59,11 +59,11 @@ class AnimeReviewsRequest implements RequestInterface
     {
         $query = '?' . http_build_query(
             [
-                    'spoiler' => $this->spoilers ? 'on' : 'off',
-                    'preliminary' => $this->preliminary ? 'on' : 'off',
-                    'sort' => $this->sort,
-                    'p' => $this->page,
-                ]
+                'spoiler' => $this->spoilers ? 'on' : 'off',
+                'preliminary' => $this->preliminary ? 'on' : 'off',
+                'sort' => $this->sort,
+                'p' => $this->page,
+            ]
         );
 
         return sprintf('https://myanimelist.net/anime/%d/jikan/reviews%s', $this->id, $query);

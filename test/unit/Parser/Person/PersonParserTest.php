@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Person;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class PersonParserTest
@@ -25,49 +26,37 @@ class PersonParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Person\PersonParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_id()
     {
         self::assertEquals(99, $this->parser->getPersonId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_Person_url()
     {
         self::assertEquals('https://myanimelist.net/people/99/Miyuki_Sawashiro', $this->parser->getPersonUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name()
     {
         self::assertEquals('Miyuki Sawashiro', $this->parser->getPersonName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_given_name()
     {
         self::assertEquals('みゆき', $this->parser->getPersonGivenName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_family_name()
     {
         self::assertEquals('沢城', $this->parser->getPersonFamilyName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_about()
     {
         self::assertStringContainsString(
@@ -76,17 +65,13 @@ class PersonParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_member_favorites()
     {
         self::assertEquals(38896, $this->parser->getPersonFavorites());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -95,9 +80,7 @@ class PersonParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_voice_acting_roles()
     {
         $voiceActingRoles = $this->parser->getPersonVoiceActingRoles();
@@ -105,9 +88,7 @@ class PersonParserTest extends TestCase
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\VoiceActingRole::class, $voiceActingRoles);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_staff_positions()
     {
         $animeStaffPositions = $this->parser->getPersonAnimeStaffPositions();
@@ -115,9 +96,7 @@ class PersonParserTest extends TestCase
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\AnimeStaffPosition::class, $animeStaffPositions);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_published_manga()
     {
         $publishedManga = $this->parser->getPersonPublishedManga();

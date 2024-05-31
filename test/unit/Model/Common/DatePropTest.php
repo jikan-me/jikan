@@ -4,15 +4,14 @@ namespace JikanTest\Model\Common;
 
 use Jikan\Model\Common\DateProp;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class DatePropTest
  */
 class DatePropTest extends TestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_date_props()
     {
         $date = DateProp::fromFactory(null, null, null);

@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Club;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class UserListParserTest extends TestCase
 {
@@ -22,10 +23,7 @@ class UserListParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Club\UserListParser($crawler);
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Club\UserListParser
-     */
+    #[Test]
     public function it_gets_users(): void
     {
         $results = $this->parser->getResults();

@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Common\AnimeCardParser;
 use Symfony\Component\DomCrawler\Crawler;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class SeasonalParserTest
@@ -31,9 +32,7 @@ class SeasonalAnimeParserTest extends TestCase
         $this->parser = new AnimeCardParser($crawler->filter('div.seasonal-anime')->first());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_producer()
     {
         $producer = $this->parser->getProducer();
@@ -49,9 +48,7 @@ class SeasonalAnimeParserTest extends TestCase
         self::assertEquals('A-1 Pictures', $producer[0]->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_episodes()
     {
         $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
@@ -59,9 +56,7 @@ class SeasonalAnimeParserTest extends TestCase
         self::assertEquals(11, $parser2->getEpisodes());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_source()
     {
         $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
@@ -69,9 +64,7 @@ class SeasonalAnimeParserTest extends TestCase
         self::assertEquals('Web manga', $parser2->getSource());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_genres()
     {
         $genres = $this->parser->getGenres();
@@ -79,17 +72,13 @@ class SeasonalAnimeParserTest extends TestCase
         self::assertEquals('Action', $genres[0]->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_title()
     {
         self::assertEquals('Boku no Hero Academia 3rd Season', $this->parser->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_description()
     {
         self::assertStringContainsString(
@@ -98,41 +87,31 @@ class SeasonalAnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_type()
     {
         self::assertNull($this->parser->getType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_air_dates()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getAirDates());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_air_members()
     {
         self::assertEquals(20000000, $this->parser->getMembers());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_id()
     {
         self::assertEquals(36456, $this->parser->getMalId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_url()
     {
         self::assertEquals(
@@ -141,9 +120,7 @@ class SeasonalAnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_image()
     {
         self::assertEquals(
@@ -152,9 +129,7 @@ class SeasonalAnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_score()
     {
         $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
@@ -164,17 +139,13 @@ class SeasonalAnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_licensor()
     {
         self::assertCount(0, $this->parser->getLicensors());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_r18_rating()
     {
         self::assertFalse($this->parser->isR18());
@@ -182,9 +153,7 @@ class SeasonalAnimeParserTest extends TestCase
         self::assertTrue($parserR18->isR18());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_kids_rating()
     {
         self::assertFalse($this->parser->isKids());
@@ -192,9 +161,7 @@ class SeasonalAnimeParserTest extends TestCase
         self::assertTrue($parserKids->isKids());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_continuing()
     {
         $springParser = new AnimeCardParser(

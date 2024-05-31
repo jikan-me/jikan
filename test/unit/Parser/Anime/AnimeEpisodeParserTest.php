@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Anime;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AnimeEpisodeParserTest extends TestCase
 {
@@ -22,10 +23,7 @@ class AnimeEpisodeParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Anime\AnimeEpisodeParser($crawler);
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_episode_id(): void
     {
         self::assertEquals(
@@ -34,10 +32,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_url(): void
     {
         self::assertEquals(
@@ -46,10 +41,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_title(): void
     {
         self::assertEquals(
@@ -58,10 +50,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_title_japanese(): void
     {
         self::assertEquals(
@@ -70,10 +59,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_title_romaji(): void
     {
         self::assertEquals(
@@ -82,10 +68,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_duration(): void
     {
         self::assertEquals(
@@ -94,10 +77,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_aired_date(): void
     {
         self::assertEquals(
@@ -106,10 +86,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_filler(): void
     {
         self::assertEquals(
@@ -118,10 +95,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_recap(): void
     {
         self::assertEquals(
@@ -130,10 +104,7 @@ class AnimeEpisodeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeEpisodeParser
-     */
+    #[Test]
     public function it_gets_synopsis(): void
     {
         self::assertStringContainsString(

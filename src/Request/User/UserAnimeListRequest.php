@@ -93,21 +93,21 @@ class UserAnimeListRequest implements RequestInterface
     {
         $query = '?' . http_build_query(
             [
-            'offset' => $this->page,
-            'status' => $this->status,
-            'order' => $this->orderBy,
-            'order2' => $this->orderBy2,
-            's' => $this->title,
-            'season' => $this->season,
-            'season_year' => $this->seasonYear,
-            'aired_from_year' => $this->airedFrom[0],
-            'aired_from_month' => $this->airedFrom[1],
-            'aired_from_day' => $this->airedFrom[2],
-            'aired_to_year' => $this->airedTo[0],
-            'aired_to_month' => $this->airedTo[1],
-            'aired_to_day' => $this->airedTo[2],
-            'producer' => $this->producer,
-            'airing_status' => $this->airingStatus,
+                'offset' => $this->page,
+                'status' => $this->status,
+                'order' => $this->orderBy,
+                'order2' => $this->orderBy2,
+                's' => $this->title,
+                'season' => $this->season,
+                'season_year' => $this->seasonYear,
+                'aired_from_year' => $this->airedFrom[0],
+                'aired_from_month' => $this->airedFrom[1],
+                'aired_from_day' => $this->airedFrom[2],
+                'aired_to_year' => $this->airedTo[0],
+                'aired_to_month' => $this->airedTo[1],
+                'aired_to_day' => $this->airedTo[2],
+                'producer' => $this->producer,
+                'airing_status' => $this->airingStatus,
             ]
         );
 

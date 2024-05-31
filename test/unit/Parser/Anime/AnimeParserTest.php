@@ -5,6 +5,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Title;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class AnimeParserTest
@@ -31,58 +32,44 @@ class AnimeParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Anime\AnimeParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_mal_id(): void
     {
         self::assertEquals(6, $this->parser->getId());
     }
 
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_url(): void
     {
         self::assertEquals('https://myanimelist.net/anime/6/Trigun', $this->parser->getURL());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_title(): void
     {
         self::assertEquals('Trigun', $this->parser->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_title_english(): void
     {
         self::assertEquals('Trigun', $this->parser->getTitleEnglish());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_title_synonyms(): void
     {
         self::assertEmpty($this->parser->getTitleSynonyms());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_title_japanese(): void
     {
         self::assertEquals('トライガン', $this->parser->getTitleJapanese());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_titles(): void
     {
         $titles = $this->parser->getTitles();
@@ -92,9 +79,7 @@ class AnimeParserTest extends TestCase
         self::assertEquals(new Title('English', 'Trigun'), $titles[2]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_image_url(): void
     {
         self::assertEquals(
@@ -103,9 +88,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_synopsis(): void
     {
         self::assertStringContainsString(
@@ -116,9 +99,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_type(): void
     {
         self::assertEquals(
@@ -127,9 +108,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_episodes(): void
     {
         self::assertEquals(
@@ -138,9 +117,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_status(): void
     {
         self::assertEquals(
@@ -149,9 +126,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_aired_string(): void
     {
         self::assertEquals(
@@ -160,9 +135,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_aired(): void
     {
         $aired = $this->parser->getAired();
@@ -171,25 +144,19 @@ class AnimeParserTest extends TestCase
         self::assertEquals('1998-09-30', $aired->getUntil()->format('Y-m-d'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_premiered(): void
     {
         self::assertEquals('Spring 1998', $this->parser->getPremiered());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_broadcast(): void
     {
         self::assertEquals('Thursdays at 01:15 (JST)', $this->parser->getBroadcast());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_producer(): void
     {
         $producers = $this->parser->getProducers();
@@ -201,9 +168,7 @@ class AnimeParserTest extends TestCase
         self::assertContains('Victor Entertainment', $names);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_licensor(): void
     {
         $licensors = $this->parser->getLicensors();
@@ -216,9 +181,7 @@ class AnimeParserTest extends TestCase
         self::assertContains('Geneon Entertainment USA', $names);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_studio(): void
     {
         $studios = $this->parser->getStudios();
@@ -230,17 +193,13 @@ class AnimeParserTest extends TestCase
         self::assertContains('Madhouse', $names);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_source(): void
     {
         self::assertEquals('Manga', $this->parser->getSource());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_genre(): void
     {
         $genres = $this->parser->getGenres();
@@ -256,9 +215,7 @@ class AnimeParserTest extends TestCase
         self::assertContains('Sci-Fi', $names);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_duration(): void
     {
         self::assertEquals(
@@ -267,9 +224,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_rating(): void
     {
         self::assertEquals(
@@ -278,9 +233,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_score(): void
     {
         self::assertEquals(
@@ -289,9 +242,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_scored_by(): void
     {
         self::assertEquals(
@@ -300,9 +251,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_rank(): void
     {
         self::assertEquals(
@@ -311,9 +260,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_popularity(): void
     {
         self::assertEquals(
@@ -322,9 +269,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_members(): void
     {
         self::assertEquals(
@@ -333,9 +278,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_favorites(): void
     {
         self::assertEquals(
@@ -344,9 +287,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_related(): void
     {
         $related = $this->parser->getRelated();
@@ -354,9 +295,7 @@ class AnimeParserTest extends TestCase
         self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Adaptation']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_background(): void
     {
         self::assertStringContainsString(
@@ -365,9 +304,7 @@ class AnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_opening(): void
     {
         $ops = $this->parser->getOpeningThemes();
@@ -375,9 +312,7 @@ class AnimeParserTest extends TestCase
         self::assertContains('"H.T." by Tsuneo Imahori', $ops);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_ending(): void
     {
         $eds = $this->parser->getEndingThemes();
@@ -385,18 +320,14 @@ class AnimeParserTest extends TestCase
         self::assertContains('"Kaze wa Mirai ni Fuku (The Wind Blows to the Future)" by AKIMA & NEOS', $eds);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_preview_video()
     {
         $preview = $this->parser->getPreview();
         self::assertEquals('https://www.youtube.com/embed/bJVyIXeUznY?enablejsapi=1&wmode=opaque&autoplay=1', $preview);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_streaming_links()
     {
         $streamingLinks = $this->parser->getStreamingLinks();

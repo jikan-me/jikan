@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Anime;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
 {
@@ -22,19 +23,13 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         $this->model = (new \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser($crawler))->getModel();
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_recently_updated_by_users_count(): void
     {
         self::assertCount(75, $this->model->getResults());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_username(): void
     {
         self::assertEquals(
@@ -43,10 +38,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_url(): void
     {
         self::assertEquals(
@@ -55,10 +47,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_image_url(): void
     {
         self::assertEquals(
@@ -67,19 +56,13 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_score(): void
     {
         self::assertNull($this->model->getResults()[0]->getScore());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_status(): void
     {
         self::assertEquals(
@@ -88,10 +71,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_episodes_seen(): void
     {
         self::assertEquals(
@@ -100,10 +80,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_episodes_total(): void
     {
         self::assertEquals(
@@ -112,10 +89,7 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_date(): void
     {
         self::assertInstanceOf(

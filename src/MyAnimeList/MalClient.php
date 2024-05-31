@@ -440,15 +440,15 @@ class MalClient
     /**
      * @param Request\RequestInterface $request
      *
-     * @return Model\News\NewsList
+     * @return Model\News\ResourceNewsList
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getNewsList(Request\RequestInterface $request): Model\News\NewsList
+    public function getNewsList(Request\RequestInterface $request): Model\News\ResourceNewsList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        $crawler = $this->ghoutte->request('GET', $request->getPath());
         try {
-            $parser = new Parser\News\NewsListParser($crawler);
+            $parser = new Parser\News\ResourceNewsListParser($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {
@@ -1363,6 +1363,97 @@ class MalClient
             $parser = new Parser\User\ClubParser($crawler);
 
             return $parser->getClubs();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\News\RecentNewsRequest $request
+     * @return Model\News\NewsList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getRecentNews(Request\News\RecentNewsRequest $request): Model\News\NewsList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\News\NewsListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\News\NewsByTagRequest $request
+     * @return Model\News\NewsList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getNewsByTag(Request\News\NewsByTagRequest $request): Model\News\NewsList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\News\NewsListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\Search\NewsByTagRequest $request
+     * @return Model\News\NewsList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getNewsSearch(Request\Search\NewsSearchRequest $request): Model\News\NewsList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\News\NewsListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\News\NewsTagsRequest $request
+     * @return array
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getNewsTags(Request\News\NewsTagsRequest $request): array
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\News\NewsTagsParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+
+    /**
+     * @param Request\News\NewsRequest $request
+     * @return array
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getNews(Request\News\NewsRequest $request): Model\News\ResourceNews
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\News\NewsParser($crawler);
+
+            return $parser->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

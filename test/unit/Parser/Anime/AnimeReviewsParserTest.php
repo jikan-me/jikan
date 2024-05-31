@@ -7,6 +7,7 @@ use Jikan\Model\Anime\AnimeReview;
 use Jikan\Parser\Anime\AnimeReviewsParser;
 use Jikan\Request\Anime\AnimeReviewsRequest;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AnimeReviewsParserTest extends TestCase
 {
@@ -31,10 +32,7 @@ class AnimeReviewsParserTest extends TestCase
         $this->review = $this->model->getResults()[0];
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_reviews(): void
     {
         self::assertCount(20, $this->model->getResults());
@@ -44,37 +42,25 @@ class AnimeReviewsParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_review_id(): void
     {
         self::assertEquals(7406, $this->review->getMalId());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_review_url(): void
     {
         self::assertEquals('https://myanimelist.net/reviews.php?id=7406', $this->review->getUrl());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_review_date(): void
     {
         self::assertEquals(1219556760, $this->review->getDate()->getTimestamp());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_reviewer_username(): void
     {
         self::assertEquals(
@@ -83,10 +69,7 @@ class AnimeReviewsParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_reviewer_image_url(): void
     {
         self::assertEquals(
@@ -95,10 +78,7 @@ class AnimeReviewsParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_reviewer_url(): void
     {
         self::assertEquals(
@@ -107,10 +87,7 @@ class AnimeReviewsParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_reviewer_episodes_watched(): void
     {
         self::assertEquals(
@@ -119,10 +96,7 @@ class AnimeReviewsParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_reviewer_reactions(): void
     {
         self::assertEquals(8, $this->review->getReactions()->getLoveIt());
@@ -135,10 +109,7 @@ class AnimeReviewsParserTest extends TestCase
         self::assertEquals(2137, $this->review->getReactions()->getOverall());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Anime\AnimeReviewsParser
-     */
+    #[Test]
     public function it_gets_reviewer_review(): void
     {
         self::assertStringContainsString(

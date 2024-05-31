@@ -4,6 +4,7 @@ namespace JikanTest\Parser\UserHistory;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class HistoryParserTest
@@ -27,26 +28,20 @@ class UserHistoryParserTest extends TestCase
         $this->parser = (new \Jikan\Parser\User\History\HistoryParser($crawler))->getModel();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertInstanceOf(\Jikan\Model\Common\MalUrl::class, $this->parser[0]->getMalUrl());
         self::assertIsString($this->parser[0]->getMalUrl()->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_increment()
     {
         self::assertIsInt($this->parser[0]->getIncrement());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_date()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->parser[0]->getDate());

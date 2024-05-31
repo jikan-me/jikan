@@ -4,6 +4,7 @@ namespace JikanTest\Parser\UserFriend;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class FriendParserTest extends TestCase
 {
@@ -25,25 +26,19 @@ class FriendParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name()
     {
         self::assertEquals('sandshark', $this->parser->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertEquals('https://myanimelist.net/profile/sandshark', $this->parser->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_avatar()
     {
         self::assertEquals(
@@ -52,9 +47,7 @@ class FriendParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_friends_since()
     {
         self::assertEquals(
@@ -62,9 +55,7 @@ class FriendParserTest extends TestCase
             $this->parser->getFriendsSince()->format('Y-m-d H:i')
         );
     }
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_last_online()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getLastOnline());

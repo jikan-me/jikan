@@ -8,8 +8,6 @@ use Jikan\Parser;
 
 /**
  * Class NewsList
- *
- * @package Jikan\Model\News\NewsList
  */
 class NewsList extends Results implements Pagination
 {
@@ -23,27 +21,36 @@ class NewsList extends Results implements Pagination
      */
     private $lastVisiblePage = 1;
 
+
     /**
      * @param Parser\News\NewsListParser $parser
-     *
-     * @return NewsList
-     * @throws \Exception
-     * @throws \RuntimeException
-     * @throws \InvalidArgumentException
+     * @return static
      */
     public static function fromParser(Parser\News\NewsListParser $parser): self
     {
         $instance = new self();
 
         $instance->results = $parser->getResults();
+        $instance->lastVisiblePage = $parser->getLastVisiblePage();
         $instance->hasNextPage = $parser->getHasNextPage();
 
         return $instance;
     }
 
+    /**
+     * @return static
+     */
     public static function mock(): self
     {
         return new self();
+    }
+
+    /**
+     * @return array
+     */
+    public function getResults(): array
+    {
+        return $this->results;
     }
 
     /**
@@ -60,13 +67,5 @@ class NewsList extends Results implements Pagination
     public function getLastVisiblePage(): int
     {
         return $this->lastVisiblePage;
-    }
-
-    /**
-     * @return array
-     */
-    public function getResults(): array
-    {
-        return $this->results;
     }
 }

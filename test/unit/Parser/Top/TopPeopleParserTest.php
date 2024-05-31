@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Top;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Top\TopListItemParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class TopPeopleParserTest
@@ -28,9 +29,7 @@ class TopPeopleParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
@@ -38,25 +37,19 @@ class TopPeopleParserTest extends TestCase
         self::assertEquals('https://myanimelist.net/people/212/Daisuke_Ono', $url->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_rank()
     {
         self::assertEquals(8, $this->parser->getRank());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_favorites()
     {
         self::assertEquals(47386, $this->parser->getPeopleFavorites());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -65,9 +58,7 @@ class TopPeopleParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_kanji_name()
     {
         self::assertEquals(
@@ -76,9 +67,7 @@ class TopPeopleParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_birthday()
     {
         self::assertEquals(

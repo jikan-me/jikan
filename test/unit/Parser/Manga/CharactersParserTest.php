@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Manga;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Manga\CharactersParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class CharactersParserTest
@@ -25,9 +26,7 @@ class CharactersParserTest extends TestCase
         $this->parser = new CharactersParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_manga_characters()
     {
         $characters = $this->parser->getCharacters();

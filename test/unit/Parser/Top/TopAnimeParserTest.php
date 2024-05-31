@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Top;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Top\TopListItemParser;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class TopAnimeParserTest
@@ -28,9 +29,7 @@ class TopAnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_url()
     {
         $url = $this->parser->getMalUrl();
@@ -38,17 +37,13 @@ class TopAnimeParserTest extends TestCase
         self::assertEquals('https://myanimelist.net/anime/42938/Fruits_Basket__The_Final', $url->getUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_rank()
     {
         self::assertEquals(11, $this->parser->getRank());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -57,49 +52,37 @@ class TopAnimeParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_score()
     {
         self::assertEquals(9.02, $this->parser->getScore());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_type()
     {
         self::assertEquals('TV', $this->parser->getType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_episodes()
     {
         self::assertEquals(13, $this->parser->getEpisodes());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_members()
     {
         self::assertEquals(376544, $this->parser->getMembers());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_start_date()
     {
         self::assertEquals('Apr 2021', $this->parser->getStartDate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_anime_end_date()
     {
         self::assertEquals('Jun 2021', $this->parser->getEndDate());

@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Character;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class CharacterParserTest
@@ -25,41 +26,31 @@ class CharacterParserTest extends TestCase
         $this->parser = new \Jikan\Parser\Character\CharacterParser($crawler);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_id()
     {
         self::assertEquals(116281, $this->parser->getMalId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_character_url()
     {
         self::assertEquals('https://myanimelist.net/character/116281/Momonga', $this->parser->getCharacterUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name()
     {
         self::assertEquals('Momonga', $this->parser->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name_in_kanji()
     {
         self::assertEquals('モモンガ', $this->parser->getNameKanji());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_nicknames()
     {
         $aliases = $this->parser->getNameNicknames();
@@ -68,26 +59,20 @@ class CharacterParserTest extends TestCase
         self::assertContains('Ainz Ooal Gown', $aliases);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_about()
     {
         self::assertStringContainsString('He is the guild master of Ainz Ooal Gown,', $this->parser->getAbout());
         self::assertStringContainsString('(Source: Overlord Wikia)', $this->parser->getAbout());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_member_favorites()
     {
         self::assertEquals(12474, $this->parser->getMemberFavorites());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -96,9 +81,7 @@ class CharacterParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_animeography()
     {
         $animeography = $this->parser->getAnimeography();
@@ -106,9 +89,7 @@ class CharacterParserTest extends TestCase
         self::assertContainsOnly(\Jikan\Model\Character\Animeography::class, $animeography);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mangaography()
     {
         $manaography = $this->parser->getMangaography();
@@ -116,9 +97,7 @@ class CharacterParserTest extends TestCase
         self::assertContainsOnly(\Jikan\Model\Character\Mangaography::class, $manaography);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_voice_actors()
     {
         $voiceActors = $this->parser->getVoiceActors();

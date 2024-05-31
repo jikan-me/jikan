@@ -7,6 +7,7 @@ use Jikan\Model\Character\VoiceActor;
 use Jikan\Parser\Character\CharacterListItemParser;
 use Symfony\Component\DomCrawler\Crawler;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 /**
  * Class CharacterListItemParserTest
@@ -37,33 +38,25 @@ class CharacterListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_mal_id()
     {
         self::assertEquals(116275, $this->parser->getMalId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_name()
     {
         self::assertEquals('Albedo', $this->parser->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_url()
     {
         self::assertEquals('https://myanimelist.net/character/116275/Albedo', $this->parser->getCharacterUrl());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_image()
     {
         self::assertEquals(
@@ -72,9 +65,7 @@ class CharacterListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_voice_actors()
     {
         $voiceActors = $this->parser->getVoiceActors();
@@ -90,9 +81,7 @@ class CharacterListItemParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_gets_the_favorites_count()
     {
         self::assertEquals(

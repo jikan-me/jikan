@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Manga;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class MangaRecentlyUpdatedByUsersParserTest extends TestCase
 {
@@ -22,19 +23,13 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         $this->parser = (new \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser($crawler))->getModel();
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_recently_updated_by_users_count(): void
     {
         self::assertCount(75, $this->parser->getResults());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_username(): void
     {
         self::assertEquals(
@@ -43,10 +38,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_url(): void
     {
         self::assertEquals(
@@ -55,10 +47,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_image_url(): void
     {
         self::assertEquals(
@@ -67,19 +56,13 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_score(): void
     {
         self::assertNull($this->parser->getResults()[6]->getScore());
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_status(): void
     {
         self::assertEquals(
@@ -88,10 +71,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_chapters_read(): void
     {
         self::assertEquals(
@@ -100,10 +80,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_chapters_total(): void
     {
         self::assertEquals(
@@ -112,20 +89,14 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_volumes_read(): void
     {
         self::assertNull($this->parser->getResults()[6]->getVolumesRead());
     }
 
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_volumes_total(): void
     {
         self::assertEquals(
@@ -134,10 +105,7 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @covers \Jikan\Parser\Manga\MangaRecentlyUpdatedByUsersParser
-     */
+    #[Test]
     public function it_gets_date(): void
     {
         self::assertInstanceOf(

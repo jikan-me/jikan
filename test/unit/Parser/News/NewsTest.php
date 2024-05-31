@@ -60,8 +60,8 @@ class NewsTest extends TestCase
     public function it_gets_related_entries()
     {
         self::assertCount(1, $this->data->getRelatedEntries());
-        self::assertEquals("Re:Zero kara Hajimeru Isekai Seikatsu 3rd Season", $this->data->getRelatedEntries()[0]->getTitle());
-        self::assertEquals("Anime", $this->data->getRelatedEntries()[0]->getType());
+        self::assertEquals("Re:Zero kara Hajimeru Isekai Seikatsu 3rd Season", $this->data->getRelatedEntries()["Anime"][0]->getTitle());
+        self::assertEquals("anime", $this->data->getRelatedEntries()["Anime"][0]->getType());
     }
 
     #[Test]
@@ -74,6 +74,6 @@ class NewsTest extends TestCase
     public function it_gets_tags()
     {
         self::assertCount(4, $this->data->getTags());
-        self::assertEquals("Preview", $this->data->getTags()[2]->getName());
+        self::assertEquals("More Info", $this->data->getTags()[2]->getName());
     }
 }

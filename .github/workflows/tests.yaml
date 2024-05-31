@@ -46,14 +46,20 @@ jobs:
           extensions: ${{ env.extensions }}
 
       - name: Setup dependency cache
+        if: matrix.operatingSystem == 'ubuntu-22.04'
         id: composercache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      
+      - name: Setup dependency cache
+        if: matrix.operatingSystem == 'windows-latest'
+        id: composercachewin
+        run: echo "dir=$(composer config cache-files-dir)" | Out-File -FilePath $Env:GITHUB_OUTPUT -Encoding utf8 -Append
 
       - name: Cache dependencies
         uses: actions/cache@v2
         id: cache
         with:
-          path: ${{ steps.composercache.outputs.dir }}
+          path: ${{ steps.composercache.outputs.dir }}${{ steps.composercachewin.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
 

@@ -16,9 +16,6 @@ class JStringTest extends TestCase
         self::assertSame($expected, $given);
     }
 
-    /**
-     * @return array[]
-     */
     public static function stringFloatProvider(): array
     {
         return [

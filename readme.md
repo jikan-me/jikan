@@ -2,7 +2,7 @@
 
 # Jikan - Unofficial MyAnimeList.net PHP API
 
-[![build](https://github.com/jikan-me/jikan/actions/workflows/tests.yaml/badge.svg?branch=master)](https://github.com/jikan-me/jikan/actions/workflows/tests.yaml) [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]() [![Discord Server](https://img.shields.io/discord/460491088004907029.svg?style=flat&logo=discord)](http://discord.jikan.moe)
+[![build](https://github.com/jikan-me/jikan/actions/workflows/tests.yaml/badge.svg?branch=master)](https://github.com/jikan-me/jikan/actions/workflows/tests.yaml) [![stable](https://img.shields.io/packagist/v/jikan-me/jikan.svg?style=flat)](https://packagist.org/packages/jikan-me/jikan) [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Average time to resolve an issue") [![Percentage of issues still open](http://isitmaintained.com/badge/open/jikan-me/jikan.svg)](http://isitmaintained.com/project/jikan-me/jikan "Percentage of issues still open") [![stable](https://img.shields.io/badge/PHP-^%208.3-blue.svg?style=flat)]() [![Discord Server](https://img.shields.io/discord/460491088004907029.svg?style=flat&logo=discord)](http://discord.jikan.moe)
 
 Jikan is a PHP API for [MyAnimeList.net](https://myanimelist.net). It scrapes the website to satisfy the need for API functionality that MyAnimeList.net lacks.
 
@@ -14,15 +14,16 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 ## Getting Started
 
-| Version   | Support | PHP | Lumen/Laravel |
-|------------|----------|----------|----------| 
-| [`^4` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | ✅ New features | [![8.1](https://img.shields.io/badge/PHP-^%208.1-blue.svg?style=flat)]() | `^9`,`^10` |
-| [`^3`](https://github.com/jikan-me/jikan/releases/tag/v3.3.2) | ❌ No longer maintained or supported | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]() | `^8`, `^9` |
-| [`^2`](https://github.com/jikan-me/jikan/tree/2.19.4)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`
-| [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)      | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*` |
+| Version                                                                                 | Support                             | PHP                                                                         | Lumen/Laravel |
+|-----------------------------------------------------------------------------------------|-------------------------------------|-----------------------------------------------------------------------------|---------------| 
+| [`^5` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | 🚧 New features - WIP               | [![8.3](https://img.shields.io/badge/PHP-^%208.3-blue.svg?style=flat)]()    | `^11`         |
+| [`^4` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | ✅ Maintenance only                  | [![8.1](https://img.shields.io/badge/PHP-^%208.1-blue.svg?style=flat)]()    | `^9`,`^10`    |
+| [`^3`](https://github.com/jikan-me/jikan/releases/tag/v3.3.2)                           | ❌ No longer maintained or supported | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]()    | `^8`, `^9`    |
+| [`^2`](https://github.com/jikan-me/jikan/tree/2.19.4)                                   | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`          
+| [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)                                   | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*`       |
 
 
-1. `composer require jikan-me/jikan ^4`
+1. `composer require jikan-me/jikan ^5`
 2. [Documentation](http://docs.jikan.moe)
 
 # Jikan REST API

@@ -456,20 +456,21 @@ class MangaParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getMangaScore(): ?float
+    public function getScore(): ?float
     {
-        $score = $this->crawler
-            ->filter('span[itemprop="ratingValue"]');
+        $score = $this->crawler->filterXPath('//span[@itemprop="ratingValue"]');
 
         if (!$score->count()) {
             return null;
         }
 
-        if (strpos($score->text(), 'N/A')) {
+        $score = JString::cleanse($score->text());
+
+        if ($score === 'N/A') {
             return null;
         }
 
-        return (float) $score->text();
+        return (float) $score;
     }
 
     /**
@@ -477,16 +478,27 @@ class MangaParser implements ParserInterface
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
-    public function getMangaScoredBy(): ?int
+    public function getScoredBy(): ?int
     {
-        $scoredBy = $this->crawler
-            ->filter('span[itemprop="ratingCount"]');
+        $scoredBy = $this->crawler->filterXPath('//span[@itemprop="ratingCount"]');
 
         if (!$scoredBy->count()) {
             return null;
         }
 
-        return (int) $scoredBy->text();
+        $scoredBy = JString::cleanse($scoredBy->text());
+
+        $scoredByNum = str_replace(
+            [',', ' users', ' user'],
+            '',
+            $scoredBy
+        );
+
+        if (!is_numeric($scoredByNum)) {
+            return null;
+        }
+
+        return (int) $scoredByNum;
     }
 
     /**
@@ -599,11 +611,47 @@ class MangaParser implements ParserInterface
     public function getMangaRelated(): array
     {
         $related = [];
+
+        // MAL has divided relations up into tiles and table format
+        // We first parse whatever there's in the tiles
         $this->crawler
-            ->filterXPath('//table[contains(@class, "anime_detail_related_anime")]/tr')
+            ->filterXPath('//div[contains(@class, "related-entries")]/div[contains(@class, "entries-tile")]/div[contains(@class, "entry")]')
             ->each(
                 function (Crawler $c) use (&$related) {
-                    $links = $c->filterXPath('//td[2]/a');
+                    $relation = $c->filterXPath('//div[@class="content"]/div[@class="relation"]')->text();
+
+                    // strip entry type (if any)
+                    $relation = JString::cleanse(
+                        preg_replace("~\s\(.*\)~", '', $relation)
+                    );
+
+                    $links = $c->filterXPath('//div[@class="content"]/div[@class="title"]/a');
+
+                    // Check for empty links #justMALThings
+                    if ($links->count() === 1 // if it's the only link MAL has listed
+                        && empty($links->first()->text()) // and if its a bugged/empty link
+                    ) {
+                        $related[$relation] = [];
+                        return;
+                    }
+
+                    // Remove empty/bugged links #justMALThings
+                    foreach ($links as $node) {
+                        if (empty($node->textContent)) {
+                            $node->parentNode->removeChild($node);
+                        }
+                    }
+
+                    $related[$relation][] = (new MalUrlParser($links))->getModel();
+                }
+            );
+
+        // Then we'll parse the table
+        $this->crawler
+            ->filterXPath('//table[contains(@class, "entries-table")]/tr')
+            ->each(
+                function (Crawler $c) use (&$related) {
+                    $links = $c->filterXPath('//td[2]//a');
                     $relation = JString::cleanse(
                         str_replace(':', '', $c->filterXPath('//td[1]')->text())
                     );

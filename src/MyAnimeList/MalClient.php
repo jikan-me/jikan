@@ -1048,7 +1048,7 @@ class MalClient
             // so we check for a forced 404 exception thrown by the parser
             // in order to throw a proper 404 exception
             if ($e->getCode() === 404) {
-                throw new BadResponseException('404 on '.$request->getPath(), 404);
+                throw new BadResponseException('404 on ' . $request->getPath(), 404);
             }
 
             throw ParserException::fromRequest($request, $e);

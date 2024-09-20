@@ -91,11 +91,17 @@ class MangaParser implements ParserInterface
      */
     public function getMangaSynopsis(): ?string
     {
-        $synopsis = JString::cleanse(
-            $this->crawler->filterXPath('//meta[@property=\'og:description\']')->attr('content')
-        );
+        // #justMALThings: anime synopsis is wrapped in <p> whereas it's <span> for manga
+        $node = $this->crawler->filterXPath('//span[@itemprop=\'description\']');
 
-        return preg_match('~^Looking for information on the manga~', $synopsis) ? null : $synopsis;
+        if (!$node->count()) {
+            return null;
+        }
+
+        $synopsis = JString::cleanse($node->html());
+
+        //                                just in case
+        return str_starts_with($synopsis, 'No synopsis information has been added to this title.') ? null : $synopsis;
     }
 
     /**

@@ -1043,6 +1043,14 @@ class MalClient
 
             return $parser->getModel();
         } catch (\Exception $e) {
+
+            // MAL returns HTTP 200 for a page that doesn't exist,
+            // so we check for a forced 404 exception thrown by the parser
+            // in order to throw a proper 404 exception
+            if ($e->getCode() === 404) {
+                throw new BadResponseException('404 on '.$request->getPath(), 404);
+            }
+
             throw ParserException::fromRequest($request, $e);
         }
     }

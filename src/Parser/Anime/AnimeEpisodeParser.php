@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Exception\BadResponseException;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeEpisode;
@@ -42,14 +43,23 @@ class AnimeEpisodeParser implements ParserInterface
     /**
      * @return int
      * @throws \InvalidArgumentException
+     * @throws BadResponseException
      */
     public function getEpisodeId(): int
     {
+        $node = $this->crawler->filterXPath('//h2[contains(@class, \'fs18\')]/span');
+
+        // MAL returns HTTP 200 for a page that doesn't exist, so we fail the parsing here
+        // in order to send a mock 404 for the request handler to capture
+        if (!$node->count()) {
+            throw new BadResponseException(404, 404);
+        }
+
         return (int) trim(
             str_replace(
                 ['-', '#'],
                 '',
-                $this->crawler->filterXPath('//h2[contains(@class, \'fs18\')]/span')->text()
+                $node->text()
             )
         );
     }

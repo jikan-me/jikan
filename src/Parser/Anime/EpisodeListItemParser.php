@@ -124,7 +124,7 @@ class EpisodeListItemParser implements ParserInterface
     public function getScore(): ?float
     {
         $node = $this->crawler
-            ->filterXPath('//td[contains(@class, \'episode-poll\')]/div[contains(@class, "average")]/span');
+            ->filterXPath('//td[contains(@class, \'episode-poll\')]/@data-raw');
 
         if (!$node->count()) {
             return null;

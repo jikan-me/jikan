@@ -17,7 +17,7 @@ class MangaReviewsParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private $crawler;
+    private Crawler $crawler;
 
     /**
      * MangaReviewsParser constructor.
@@ -53,10 +53,10 @@ class MangaReviewsParser implements ParserInterface
     /**
      * @return bool
      */
-    public function hasNextPage(): bool // @TODO WIP
+    public function hasNextPage(): bool
     {
         $node = $this->crawler
-            ->filterXPath('//*[@id="horiznav_nav"]/div/a[contains(text(), "Next")]');
+            ->filterXPath('//*[@id="content"]/table//a[contains(text(), "More Reviews")]');
 
         if ($node->count()) {
             return true;

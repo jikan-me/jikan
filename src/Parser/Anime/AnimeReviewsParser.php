@@ -67,7 +67,7 @@ class AnimeReviewsParser implements ParserInterface
     public function hasNextPage(): bool // @TODO WIP
     {
         $node = $this->crawler
-            ->filterXPath('//*[@id="horiznav_nav"]/div/a[contains(text(), "Next")]');
+            ->filterXPath('//*[@id="content"]/table//a[contains(text(), "More Reviews")]');
 
         if ($node->count()) {
             return true;

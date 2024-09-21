@@ -17,17 +17,17 @@ class MalUrl
     private string $name;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $url;
+    private ?string $url;
 
     /**
      * Genre constructor.
      *
      * @param string $name
-     * @param string $url
+     * @param string|null $url
      */
-    public function __construct(string $name, string $url)
+    public function __construct(string $name, ?string $url)
     {
         $this->name = $name;
         $this->url = $url;
@@ -74,9 +74,9 @@ class MalUrl
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }

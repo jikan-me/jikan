@@ -10,7 +10,6 @@ use Jikan\Parser;
  */
 class PinnedArticleList extends Results
 {
-
     /**
      * @param Parser\Article\PinnedArticleListParser $parser
      * @return self

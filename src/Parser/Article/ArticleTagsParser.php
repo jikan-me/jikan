@@ -48,8 +48,8 @@ class ArticleTagsParser implements ParserInterface
                         ->filterXPath('//div[contains(@class, "tag-list")]')
                         ->each(function (Crawler $crawler) {
                             return (new MalUrlParser(
-                                    $crawler->filterXPath('//a')
-                                ))
+                                $crawler->filterXPath('//a')
+                            ))
                                 ->getModel();
                         });
                 }

@@ -1467,6 +1467,12 @@ class MalClient
         }
     }
 
+    /**
+     * @param Request\Article\PinnedArticlesRequest $request
+     * @return Model\Article\PinnedArticleList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
     public function getPinnedArticles(Request\Article\PinnedArticlesRequest $request): Model\Article\PinnedArticleList
     {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());

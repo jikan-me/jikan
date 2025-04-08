@@ -121,9 +121,9 @@ class ArticleListItem
     }
 
     /**
-     * @return NewsImageResource
+     * @return WrapImageResource
      */
-    public function getImages(): NewsImageResource
+    public function getImages(): WrapImageResource
     {
         return $this->images;
     }

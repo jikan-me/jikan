@@ -36,8 +36,8 @@
         "doctrine/collections": "^1.5",
         "friendsofphp/php-cs-fixer": "^3.8",
         "jikan-me/jikan-fixtures": "dev-master",
-        "php-parallel-lint/php-parallel-lint": "^1.3",
-        "phpro/grumphp": "^2.4",
+        "php-parallel-lint/php-parallel-lint": "^1.4",
+        "phpro/grumphp": "^1",
         "squizlabs/php_codesniffer": "^3.3"
     },
     "scripts": {

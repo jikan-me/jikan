@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\News;
 
+use Jikan\Http\HttpClientWrapper;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\News\NewsByTagRequest;
 use JikanTest\TestCase;
@@ -15,38 +16,38 @@ class NewsByTagTest extends TestCase
     /**
      * @var RecentNewsParserTest
      */
-    private $data;
+    private $parser;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->data = (new MalClient())
-            ->getNewsByTag(
-                new NewsByTagRequest("fall_2024")
-            );
+        $request = new \Jikan\Request\News\NewsByTagRequest('fall_2024');
+        $client = new HttpClientWrapper($this->httpClient);
+        $crawler = $client->request('GET', $request->getPath());
+        $this->parser = new \Jikan\Parser\News\NewsListParser($crawler);
     }
 
     #[Test]
     public function it_gets_results()
     {
-        self::assertEquals(20, count($this->data->getResults()));
+        self::assertEquals(20, count($this->parser->getResults()));
     }
 
     #[Test]
     public function it_gets_result_item()
     {
-        $entry = $this->data->getResults()[0];
+        $entry = $this->parser->getResults()[0];
 
-        self::assertEquals(71145912, $entry->getMalId());
-        self::assertEquals("https://myanimelist.net/news/71145912", $entry->getUrl());
+        self::assertEquals(72151278, $entry->getMalId());
+        self::assertEquals("https://myanimelist.net/news/72151278", $entry->getUrl());
         self::assertInstanceOf(\DateTimeImmutable::class, $entry->getDate());
-        self::assertEquals("Hyperion_PS", $entry->getAuthorUsername());
-        self::assertEquals("https://myanimelist.net/profile/Hyperion_PS", $entry->getAuthorUrl());
-        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1717090995-216f46f6c0b7786ff6c6485c56d4e9a8.jpeg?s=2304e0a33535edcd50422b4a3aae06b8", $entry->getImages()->getJpg()->getImageUrl());
-        self::assertEquals(2, $entry->getComments());
-        self::assertStringContainsString("Blue Lock 2nd Season television anime unveiled", $entry->getExcerpt());
-        self::assertCount(2, $entry->getTags());
-        self::assertEquals("Fall 2024", (string) $entry->getTags()[1]);
+        self::assertEquals("Vindstot", $entry->getAuthorUsername());
+        self::assertEquals("https://myanimelist.net/profile/Vindstot", $entry->getAuthorUrl());
+        self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1734755485-2e3720eda48f241b354707a867bcb0bd.jpeg?s=338a34101aaab494b01e445a779068d4", $entry->getImages()->getJpg()->getImageUrl());
+        self::assertEquals(0, $entry->getComments());
+        self::assertStringContainsString("The Rurouni Kenshin: Meiji Kenkaku Romantan - Kyoto Douran", $entry->getExcerpt());
+        self::assertCount(5, $entry->getTags());
+        self::assertEquals("OP ED", (string) $entry->getTags()[1]);
     }
 }

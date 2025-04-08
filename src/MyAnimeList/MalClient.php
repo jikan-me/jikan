@@ -1,4 +1,5 @@
 <?php
+
 /**
  *    Jikan - MyAnimeList.net Unofficial API
  *

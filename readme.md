@@ -16,7 +16,7 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 | Version                                                                                 | Support                             | PHP                                                                         | Lumen/Laravel |
 |-----------------------------------------------------------------------------------------|-------------------------------------|-----------------------------------------------------------------------------|---------------| 
-| [`^5` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | 🚧 New features - WIP               | [![8.3](https://img.shields.io/badge/PHP-^%208.3-blue.svg?style=flat)]()    | `^11`         |
+| [`^5` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | 🚧 New features - WIP               | [![8.3](https://img.shields.io/badge/PHP-^%208.3-blue.svg?style=flat)]()    | `^11`,`^12`   |
 | [`^4` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | ✅ Maintenance only                  | [![8.1](https://img.shields.io/badge/PHP-^%208.1-blue.svg?style=flat)]()    | `^9`,`^10`    |
 | [`^3`](https://github.com/jikan-me/jikan/releases/tag/v3.3.2)                           | ❌ No longer maintained or supported | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]()    | `^8`, `^9`    |
 | [`^2`](https://github.com/jikan-me/jikan/tree/2.19.4)                                   | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`          
@@ -41,11 +41,11 @@ A REST API service is available as well
 | JavaScript | [JikanJS](https://github.com/zuritor/jikanjs) by Zuritor |
 | Java       | [Jikan4java](https://github.com/Doomsdayrs/Jikan4java) by Doomsdayrs<br>[reactive-jikan](https://github.com/SandroHc/reactive-jikan) by Sandro Marques<br>[Jaikan](https://github.com/ShindouMihou/Jaikan) by ShindouMihou |
 | Python     | [JikanPy](https://github.com/abhinavk99/jikanpy) by Abhinav Kasamsetty |
+| Deno       | [Jikan.js](https://github.com/RPDJF/Jikan.js) by RPDJF |
 | Node.js    | [jikan-node](https://github.com/xy137/jikan-node) by xy137<br>[jikan-nodejs](https://github.com/ribeirogab/jikan-nodejs) by ribeirogab |
 | TypeScript | [jikants](https://github.com/Julien-Broyard/jikants) by Julien Broyard<br>[jikan-client](https://github.com/javi11/jikan-client) by Javier Blanco |
 | PHP        | [jikan-php](https://github.com/janvernieuwe/jikan-jikanPHP) by Jan Vernieuwe |
 | .NET       | [Jikan.net](https://github.com/Ervie/jikan.net) by Ervie |
-| Elixir     | [JikanEx](https://github.com/seanbreckenridge/jikan_ex) by Sean Breckenridge |
 | Go         | [jikan-go](https://github.com/darenliang/jikan-go) by Daren Liang<br>[jikan2go](https://github.com/nokusukun/jikan2go) by nokusukun |
 | Ruby       | [Jikan.rb](https://github.com/Zerocchi/jikan.rb) by Zerocchi |
 | Dart       | [jikan-dart](https://github.com/charafau/jikan-dart) by Rafal Wachol |

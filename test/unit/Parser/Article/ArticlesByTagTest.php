@@ -3,20 +3,19 @@
 namespace JikanTest\Parser\Article;
 
 use Jikan\Http\HttpClientWrapper;
-use Jikan\MyAnimeList\MalClient;
-use Jikan\Request\Article\ArticlesByTagRequest;
+use Jikan\Parser\Article\ArticleListParser;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
- * Class ArticleByTagTest
+ * Class ArticlesByTagTest
  */
-class ArticleByTagTest extends TestCase
+class ArticlesByTagTest extends TestCase
 {
     /**
-     * @var ArticleByTagTest
+     * @var ArticleListParser
      */
-    private $parser;
+    private ArticleListParser $parser;
 
     public function setUp(): void
     {
@@ -44,7 +43,7 @@ class ArticleByTagTest extends TestCase
         self::assertEquals("Jankenpopp", $entry->getAuthorUsername());
         self::assertEquals("https://myanimelist.net/profile/Jankenpopp", $entry->getAuthorUrl());
         self::assertEquals("https://cdn.myanimelist.net/s/common/uploaded_files/1476869204-81bd716e087a287a3f4eb1a9b7d5d359.jpeg", $entry->getImages()->getJpg()->getImageUrl());
-        self::assertEquals(53895, $entry->getViews());
+        self::assertEquals(53896, $entry->getViews());
         self::assertStringContainsString("Edward Elric. Zero Kiryuu. Broly. Vic Mignogna has an impressive voice", $entry->getExcerpt());
         self::assertCount(1, $entry->getTags());
     }

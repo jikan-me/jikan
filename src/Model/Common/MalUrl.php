@@ -42,9 +42,9 @@ class MalUrl
     }
 
     /**
-     * @return int
+     * @return int|string
      */
-    public function getMalId(): int
+    public function getMalId(): int|string
     {
         return MalUrlParser::parseId($this->url);
     }

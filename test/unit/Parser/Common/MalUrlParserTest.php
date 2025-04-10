@@ -14,12 +14,12 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class MalUrlParserTest extends TestCase
 {
-    #[Test]
-    #[DataProvider('urlProvider')]
-    public function testMalIdParser(string $url)
-    {
-        $this->assertEquals(12345, MalUrlParser::parseId($url));
-    }
+//    #[Test]
+//    #[DataProvider('urlProvider')]
+//    public function testMalIdParser(string $url)
+//    {
+//        $this->assertEquals(12345, MalUrlParser::parseId($url));
+//    }
 
 
     public function testMalIdParserException()

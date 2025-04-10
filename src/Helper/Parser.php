@@ -21,15 +21,15 @@ class Parser
      * @return Crawler
      * @throws \InvalidArgumentException
      */
-    public static function removeChildNodes(Crawler $crawler): Crawler
+    public static function removeChildNodes(Crawler $crawler, bool $removeAllNodes = false): Crawler
     {
         if (!$crawler->count()) {
             return $crawler;
         }
         $crawler->children()->each(
-            function (Crawler $crawler) {
+            function (Crawler $crawler) use ($removeAllNodes) {
                 $node = $crawler->getNode(0);
-                if ($node === null || $node->nodeType === 3 || \in_array($node->nodeName, self::ALLOWED_NODES, true)) {
+                if ($node === null || $node->nodeType === 3 || \in_array($node->nodeName, $removeAllNodes ? [] : self::ALLOWED_NODES, true)) {
                     return;
                 }
                 $node->parentNode->removeChild($node);

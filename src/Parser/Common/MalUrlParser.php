@@ -31,16 +31,20 @@ class MalUrlParser
     /**
      * @param string $url
      *
-     * @return int
+     * @return int|string
      */
-    public static function parseId(string $url): int
+    public static function parseId(string $url): int|string
     {
-        if (!preg_match_all('#/(\d+)#', $url, $matches)) {
-            return 0;
-            //            throw new \RuntimeException(sprintf('Unable to parse id from mal url: %s', $url ?? 'null'));
+        if (preg_match_all('#/(\d+)#', $url, $matches)) {
+            return (int) $matches[1][0];
         }
 
-        return (int) $matches[1][0];
+        if (preg_match_all('#featured/tag/(\w+)#', $url, $matches)) {
+            return (string) $matches[1][0];
+        }
+
+        return 0;
+        //  throw new \RuntimeException(sprintf('Unable to parse id from mal url: %s', $url ?? 'null'));
     }
 
     /**

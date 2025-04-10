@@ -1,4 +1,5 @@
 <?php
+
 /**
  *    Jikan - MyAnimeList.net Unofficial API
  *
@@ -1460,6 +1461,116 @@ class MalClient
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {
             $parser = new Parser\News\NewsParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\Article\PinnedArticlesRequest $request
+     * @return Model\Article\PinnedArticleList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getPinnedArticles(Request\Article\PinnedArticlesRequest $request): Model\Article\PinnedArticleList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Article\PinnedArticleListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\Article\RecentArticleRequest $request
+     * @return Model\Article\ArticleList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getRecentArticles(Request\Article\RecentArticleRequest $request): Model\Article\ArticleList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Article\ArticleListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+
+    /**
+     * @param Request\Article\ArticlesByTagRequest $request
+     * @return Model\Article\ArticleList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getArticlesByTag(Request\Article\ArticlesByTagRequest $request): Model\Article\ArticleList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Article\ArticleListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\Search\ArticleSearchRequest $request
+     * @return Model\Article\ArticleList
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getArticleSearch(Request\Search\ArticleSearchRequest $request): Model\Article\ArticleList
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Article\ArticleListParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+
+    /**
+     * @param Request\Article\ArticleTagsRequest $request
+     * @return array
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getArticleTags(Request\Article\ArticleTagsRequest $request): array
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Article\ArticleTagsParser($crawler);
+
+            return $parser->getModel();
+        } catch (\Exception $e) {
+            throw ParserException::fromRequest($request, $e);
+        }
+    }
+
+    /**
+     * @param Request\Article\ArticleRequest $request
+     * @return Model\Article\ResourceArticle
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    public function getArticle(Request\Article\ArticleRequest $request): Model\Article\ResourceArticle
+    {
+        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $parser = new Parser\Article\ArticleParser($crawler);
 
             return $parser->getModel();
         } catch (\Exception $e) {

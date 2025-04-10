@@ -13,7 +13,7 @@
 >
   <testsuites>
     <testsuite name="unit">
-      <directory phpVersion="8.2" phpVersionOperator=">=">test/unit</directory>
+      <directory phpVersion="8.3" phpVersionOperator=">=">test/unit</directory>
     </testsuite>
   </testsuites>
 

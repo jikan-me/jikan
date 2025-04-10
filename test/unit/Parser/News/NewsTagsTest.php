@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\News;
 
+use Jikan\Http\HttpClientWrapper;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\News\NewsByTagRequest;
 use Jikan\Request\News\NewsTagsRequest;
@@ -14,28 +15,28 @@ use PHPUnit\Framework\Attributes\Test;
  */
 class NewsTagsTest extends TestCase
 {
-    private $data;
+    private $parser;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->data = (new MalClient())
-            ->getNewsTags(
-                new NewsTagsRequest()
-            );
+        $request = new \Jikan\Request\News\NewsTagsRequest();
+        $client = new HttpClientWrapper($this->httpClient);
+        $crawler = $client->request('GET', $request->getPath());
+        $this->parser = new \Jikan\Parser\News\NewsTagsParser($crawler);
     }
 
     #[Test]
     public function it_gets_results()
     {
-        self::assertEquals(131, count($this->data));
+        self::assertEquals(135, count($this->parser->getModel()));
     }
 
     #[Test]
     public function it_gets_result_item()
     {
-        $entry = $this->data[0];
+        $entry = $this->parser->getModel()[0];
 
         self::assertEquals("New Anime", $entry->getName());
         self::assertEquals("new_anime", $entry->getMalId());

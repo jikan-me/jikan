@@ -9,3 +9,4 @@ composer.phar
 .phpdoc
 .phive
 /.phpunit.cache
+*.Identifier

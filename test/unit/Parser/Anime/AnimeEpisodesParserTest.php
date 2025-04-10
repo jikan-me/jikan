@@ -119,7 +119,7 @@ class AnimeEpisodesParserTest extends TestCase
     public function it_gets_episodes_score(): void
     {
         self::assertEquals(
-            4.3,
+            4.26,
             $this->parser->getEpisodes()[0]->getScore()
         );
     }

@@ -91,7 +91,6 @@ We have a free [REST API service](https://jikan.moe), if you wish to support us 
 - Fro116
 - Jason Weatherly
 - Jesse
-- Kundan Chintamaneni
 - Kururin
 - Purplepinapples
 - Ryo Ando

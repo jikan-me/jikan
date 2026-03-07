@@ -163,7 +163,7 @@ class Manga
     private array $themes = [];
 
     /**
-     * @var MalUrl[]
+     * @var Author[]
      */
     private array $authors = [];
 
@@ -464,7 +464,7 @@ class Manga
     }
 
     /**
-     * @return MalUrl[]
+     * @return Author[]
      */
     public function getAuthors(): array
     {
@@ -477,5 +477,32 @@ class Manga
     public function getSerializations(): array
     {
         return $this->serializations;
+    }
+}
+
+class Author extends MalUrl
+{
+    /**
+     * @var string
+     */
+    private string $role;
+
+    /**
+     * @param string $name
+     * @param string $url
+     * @param string $role
+     */
+    public function __construct(string $name, string $url, string $role)
+    {
+        parent::__construct($name, $url);
+        $this->role = $role;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRole(): string
+    {
+        return $this->role;
     }
 }

@@ -299,7 +299,7 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return \Jikan\Model\Common\MalUrl[]
+     * @return \Jikan\Model\Manga\Author[]
      * @throws \RuntimeException
      * @throws \InvalidArgumentException
      */
@@ -308,8 +308,28 @@ class MangaParser implements ParserInterface
         return $this->crawler
             ->filterXPath('//span[text()="Authors:"]/following-sibling::a')
             ->each(
-                function (Crawler $crawler) {
-                    return (new MalUrlParser($crawler))->getModel();
+                function (Crawler $c) {
+                    $node = $c->getNode(0);
+                    $name = $node->textContent;
+                    $url = $node->getAttribute('href');
+
+                    $role = '';
+
+                    $nextSibling = $node->nextSibling;
+
+                    if ($nextSibling) {
+                        $text = $nextSibling->textContent;
+
+                        if (trim($text) === '' && $nextSibling->nextSibling) {
+                            $text = $nextSibling->nextSibling->textContent;
+                        }
+
+                        if (preg_match('/\((.*?)\)/', $text, $matches)) {
+                            $role = trim($matches[1]);
+                        }
+                    }
+
+                    return new \Jikan\Model\Manga\Author($name, $url, $role);
                 }
             );
     }

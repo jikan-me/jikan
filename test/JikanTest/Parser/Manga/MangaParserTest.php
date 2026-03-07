@@ -195,12 +195,15 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_authors()
     {
         $authors = $this->manga->getAuthors();
+
         self::assertCount(1, $authors);
-        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $authors);
-        $names = array_map(function ($item) {
-            return $item->getName();
-        }, $authors);
-        self::assertContains('Kishimoto, Masashi', $names);
+
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Manga\Author::class, $authors);
+
+        $author = $authors[0];
+
+        self::assertEquals('Kishimoto, Masashi', $author->getName());
+        self::assertEquals('Story & Art', $author->getRole());
     }
 
     /**

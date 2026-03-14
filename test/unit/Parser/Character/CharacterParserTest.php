@@ -86,7 +86,7 @@ class CharacterParserTest extends TestCase
     {
         $animeography = $this->parser->getAnimeography();
         self::assertNotEmpty($animeography);
-        self::assertContainsOnly(\Jikan\Model\Character\Animeography::class, $animeography);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Character\Animeography::class, $animeography);
     }
 
     #[Test]
@@ -94,7 +94,7 @@ class CharacterParserTest extends TestCase
     {
         $manaography = $this->parser->getMangaography();
         self::assertCount(6, $manaography);
-        self::assertContainsOnly(\Jikan\Model\Character\Mangaography::class, $manaography);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Character\Mangaography::class, $manaography);
     }
 
     #[Test]

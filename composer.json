@@ -27,7 +27,6 @@
     "require": {
         "php": "^8.4",
         "ext-json": "*",
-        "phpro/grumphp": "^2",
         "symfony/browser-kit": "^8.0",
         "symfony/css-selector": "^8.0",
         "symfony/http-client": "^8.0"
@@ -38,6 +37,7 @@
         "friendsofphp/php-cs-fixer": "^3.8",
         "jikan-me/jikan-fixtures": "dev-master",
         "php-parallel-lint/php-parallel-lint": "^1.4",
+        "phpro/grumphp": "^2",
         "squizlabs/php_codesniffer": "^3.3"
     },
     "scripts": {

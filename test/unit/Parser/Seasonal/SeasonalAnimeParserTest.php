@@ -37,14 +37,14 @@ class SeasonalAnimeParserTest extends TestCase
     {
         $producer = $this->parser->getProducer();
         self::assertCount(1, $producer);
-        self::assertContainsOnly(\Jikan\Model\Common\MalUrl::class, $producer);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $producer);
         self::assertEquals('Bones', $producer[0]->getName());
         self::assertEquals('https://myanimelist.net/anime/producer/4/Bones', $producer[0]->getUrl());
 
         $parser2 = new AnimeCardParser($this->crawler->filter('div.seasonal-anime')->eq(2));
         $producer = $parser2->getProducer();
         self::assertCount(1, $producer);
-        self::assertContainsOnly(\Jikan\Model\Common\MalUrl::class, $producer);
+        self::assertContainsOnlyInstancesOf(\Jikan\Model\Common\MalUrl::class, $producer);
         self::assertEquals('A-1 Pictures', $producer[0]->getName());
     }
 

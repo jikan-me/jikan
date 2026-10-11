@@ -82,7 +82,7 @@ class EpisodeListItemParser implements ParserInterface
 
         preg_match('~(.*)\((.*)\)~', $title, $matches);
 
-        return (!empty($matches[2]) ? $matches[2] : null);
+        return (!empty($matches[2]) ? JString::cleanse($matches[2]) : null);
     }
 
     /**
@@ -99,7 +99,7 @@ class EpisodeListItemParser implements ParserInterface
 
         preg_match('~(.*)\((.*)\)~', $title, $matches);
 
-        return (!empty($matches[1]) ? $matches[1] : null);
+        return (!empty($matches[1]) ? JString::cleanse($matches[1]) : null);
     }
 
 

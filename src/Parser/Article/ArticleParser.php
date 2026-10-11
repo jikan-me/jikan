@@ -84,17 +84,30 @@ class ArticleParser implements ParserInterface
      */
     public function getDate(): ?\DateTimeImmutable
     {
-        $date = $this->crawler
-            ->filterXPath('//div[contains(@class, "information")]');
+        // The article's own info block is the first .information on the page.
+        // Build the date text WITHOUT removing child nodes from the live DOM
+        // (the old removeChildNodes call mutated the crawler, breaking any
+        // later getter on the same parser instance).
+        $info = $this->crawler->filterXPath('//div[contains(@class, "information")][1]');
 
-        $date = Parser::removeChildNodes($date, true)->text();
+        if (!$info->count()) {
+            return null;
+        }
 
-        $date = trim(str_replace(['by ', 'removed_user', ' |', 'views'], '', $date));
+        $html = preg_replace('~<a\b[^>]*>.*?</a>~is', '', $info->html());
+        $html = preg_replace('~<b>.*?</b>~is', '', $html);
+        $text = trim(preg_replace('~\s+~', ' ', strip_tags(str_replace('<br>', ' ', $html))));
+        $text = trim(str_replace(['by ', 'removed_user', ' |', 'views'], '', $text));
 
-        return new \DateTimeImmutable(
-            $date,
-            new \DateTimeZone('UTC')
-        );
+        if ($text === '') {
+            return null;
+        }
+
+        try {
+            return new \DateTimeImmutable($text, new \DateTimeZone('UTC'));
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     /**
@@ -128,20 +141,22 @@ class ArticleParser implements ParserInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getViews(): int
+    public function getViews(): ?int
     {
+        // Featured pages show the view count in the article's own info block;
+        // pages without a count (or without info) resolve to null instead of
+        // throwing or aggregating sibling blocks' counts.
         $views = $this->crawler
-            ->filterXPath('
-                //div[contains(@class, "information")]
-                //b
-            ')
-            ->text();
+            ->filterXPath('//div[contains(@class, "information")][1]//b');
 
+        if (!$views->count()) {
+            return null;
+        }
 
-        return (int) str_replace(',', '', $views);
+        return (int) str_replace(',', '', $views->text());
     }
 
     /**

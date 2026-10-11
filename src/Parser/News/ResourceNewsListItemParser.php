@@ -49,7 +49,7 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getTitle(): string
     {
-        return $this->crawler->filterXPath('//p/a/strong')->text();
+        return $this->crawler->filterXPath('//p[contains(@class, "title")]/a')->text();
     }
 
     /**
@@ -72,7 +72,7 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getUrl(): string
     {
-        return $this->crawler->filterXPath('//p/a/strong/..')->attr('href');
+        return $this->crawler->filterXPath('//p[contains(@class, "title")]/a')->attr('href');
     }
 
     /**
@@ -81,14 +81,14 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getImage(): ?string
     {
-        $image = $this->crawler->filterXPath('//img[1]');
+        $image = $this->crawler->filterXPath('//*[contains(@class, "image-link")]/img');
 
         if (!$image->count()) {
             return null;
         }
 
         return Parser::parseImageQuality(
-            $image->attr('data-src')
+            $image->attr('src')
         );
     }
 
@@ -98,7 +98,9 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getDate(): ?\DateTimeImmutable
     {
-        return Parser::parseDate(explode(' by', $this->crawler->filterXPath('//p[last()]')->text())[0]);
+        return Parser::parseDate(
+            explode(' by', $this->crawler->filterXPath('//div[contains(@class, "information")]/p')->text())[0]
+        );
     }
 
     /**
@@ -116,7 +118,9 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getDiscussionLink(): string
     {
-        return $this->crawler->filterXPath('//a[last()]')->attr('href');
+        return $this->crawler
+            ->filterXPath('//div[contains(@class, "information")]/p/a[last()]')
+            ->attr('href');
     }
 
     /**
@@ -125,8 +129,10 @@ class ResourceNewsListItemParser implements ParserInterface
      */
     public function getComments(): int
     {
-        $comments = $this->crawler->filterXPath('//a[last()]')->text();
-        preg_match('~Discuss \((\d+) comments\)~', $comments, $comments);
+        $comments = $this->crawler
+            ->filterXPath('//div[contains(@class, "information")]//a[contains(@class, "comment")]')
+            ->text();
+        preg_match('~(\d+) Comments~', $comments, $comments);
         return !empty($comments) ? $comments[1] : 0;
     }
 
@@ -137,7 +143,7 @@ class ResourceNewsListItemParser implements ParserInterface
     public function getIntro(): string
     {
         return JString::cleanse(
-            Parser::removeChildNodes($this->crawler->filterXPath('//p[2]'))->text()
+            $this->crawler->filterXPath('//div[contains(@class, "text")]')->text()
         );
     }
 }

@@ -29,7 +29,7 @@ value objects (a `getPath()` per request) → `Jikan\Parser\*` (Symfony `DomCraw
 | getAnimeStats | https://myanimelist.net/anime/{id}/jikan/stats | Jikan\Request\Anime\AnimeStatsRequest | Jikan\Parser\Anime\AnimeStatsParser | Jikan\Model\Anime\AnimeStats | JikanTest\Parser\Anime\AnimeStatsParserTest | no |
 | getAnimeVideos | https://myanimelist.net/anime/{id}/_/video | Jikan\Request\Anime\AnimeVideosRequest | Jikan\Parser\Anime\VideosParser | Jikan\Model\Anime\AnimeVideos | JikanTest\Parser\Video\AnimeVideoParserTest | no |
 | getAnimeVideosEpisodes | https://myanimelist.net/anime/{id}/_/video?p={page} | Jikan\Request\Anime\AnimeVideosEpisodesRequest | Jikan\Parser\Anime\VideosParser | Jikan\Model\Anime\AnimeVideosEpisodes | JikanTest\Parser\Video\AnimeVideoParserTest | no |
-| getArticle | https://myanimelist.net/featured/{malId} | Jikan\Request\Article\ArticleRequest | Jikan\Parser\Article\ArticleParser | Jikan\Model\Article\ResourceArticle | — | no |
+| getArticle | https://myanimelist.net/featured/{malId} | Jikan\Request\Article\ArticleRequest | Jikan\Parser\Article\ArticleParser | Jikan\Model\Article\ResourceArticle | JikanTest\Parser\Article\ArticleParserTest | no |
 | getArticleSearch | https://myanimelist.net/featured/search?q={query}&p={page} | Jikan\Request\Search\ArticleSearchRequest | Jikan\Parser\Article\ArticleListParser | Jikan\Model\Article\ArticleList | JikanTest\Parser\Article\ArticlesByTagTest | no |
 | getArticleTags | https://myanimelist.net/featured/tag | Jikan\Request\Article\ArticleTagsRequest | Jikan\Parser\Article\ArticleTagsParser | — | JikanTest\Parser\Article\ArticleTagsTest | no |
 | getArticlesByTag | https://myanimelist.net/featured/tag/{malId}?p={page} | Jikan\Request\Article\ArticlesByTagRequest | Jikan\Parser\Article\ArticleListParser | Jikan\Model\Article\ArticleList | JikanTest\Parser\Article\ArticlesByTagTest | no |
@@ -54,7 +54,7 @@ value objects (a `getPath()` per request) → `Jikan\Parser\*` (Symfony `DomCraw
 | getMangaStats | https://myanimelist.net/manga/{id}/jikan/stats | Jikan\Request\Manga\MangaStatsRequest | Jikan\Parser\Manga\MangaStatsParser | Jikan\Model\Manga\MangaStats | JikanTest\Parser\Manga\MangaStatsParserTest | no |
 | getNews | https://myanimelist.net/news/{malId} | Jikan\Request\News\NewsRequest | Jikan\Parser\News\NewsParser | Jikan\Model\News\ResourceNews | JikanTest\Parser\News\NewsTest | no |
 | getNewsByTag | https://myanimelist.net/news/tag/{malId}?p={page} | Jikan\Request\News\NewsByTagRequest | Jikan\Parser\News\NewsListParser | Jikan\Model\News\NewsList | JikanTest\Parser\News\NewsSearchTest | no |
-| getNewsList | — | Jikan\Request\RequestInterface | Jikan\Parser\News\ResourceNewsListParser | Jikan\Model\News\ResourceNewsList | — | no |
+| getNewsList | — | Jikan\Request\RequestInterface | Jikan\Parser\News\ResourceNewsListParser | Jikan\Model\News\ResourceNewsList | JikanTest\Parser\News\ResourceNewsListParserTest | no |
 | getNewsSearch | https://myanimelist.net/news/search?q={query}&p={page} | Jikan\Request\Search\NewsSearchRequest | Jikan\Parser\News\NewsListParser | Jikan\Model\News\NewsList | JikanTest\Parser\News\NewsSearchTest | no |
 | getNewsTags | https://myanimelist.net/news/tag | Jikan\Request\News\NewsTagsRequest | Jikan\Parser\News\NewsTagsParser | — | JikanTest\Parser\News\NewsTagsTest | no |
 | getPerson | https://myanimelist.net/people/{id} | Jikan\Request\Person\PersonRequest | Jikan\Parser\Person\PersonParser | Jikan\Model\Person\Person | JikanTest\Parser\Person\PersonParserTest | no |

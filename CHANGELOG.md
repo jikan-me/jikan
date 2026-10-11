@@ -98,6 +98,9 @@ which changes a consumer can see.
 - Anime/manga detail pages with no cover no longer surface the MAL site icon (`og:image` → `/img/sp/icon/apple-touch-icon-256.png`) as the entity's image — it is now treated as a placeholder and resolved to `null` (jikan#488).
 - `Jikan\Model\Watch\EpisodeListItem::getEpisodes()` returns the aired episode links as an array — every call previously threw a `TypeError` because the declared return type was `RecentEpisodeListItem`.
 - `getAnimeGenres()`/`getMangaGenres()` no longer read the wrong page section when MAL prepends extra `genre-link` blocks before the genre lists (e.g. the "adapted from" block on `manga.php`) — the four sections are now anchored by content, not position.
+- `getNewsList()` now parses the current MAL news index (`div.news-unit` items, ad placements filtered out) — the previous `js-scrollfix-bottom-rel` layout selector matched nothing on today's markup and returned an empty list (jikan#629).
+- `ResourceArticle::getViews()` returns `null` instead of throwing when an article page has no view count — its type is now `?int` (jikan#629).
+- News-item and article `getDate()` no longer mutate the shared DOM, so reading other info getters (author, views, comments) after the date on the same parser instance no longer fails (jikan#629).
 
 ---
 

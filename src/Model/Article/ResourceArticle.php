@@ -57,7 +57,7 @@ class ResourceArticle
     /**
      * @var int
      */
-    private int $views;
+    private ?int $views;
 
     /**
      * @var array
@@ -139,9 +139,9 @@ class ResourceArticle
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getViews(): int
+    public function getViews(): ?int
     {
         return $this->views;
     }

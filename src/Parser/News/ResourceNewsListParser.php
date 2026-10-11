@@ -47,8 +47,16 @@ class ResourceNewsListParser implements ParserInterface
      */
     public function getResults(): array
     {
+        // The news index currently renders items as div.news-unit (an
+        // exact-class match: news-unit-right does not contain "news-unit" as a
+        // token). The old js-scrollfix-bottom-rel/.clearfix layout is gone.
+        // MAL also injects ad placements inside div.news-unit, so keep only the
+        // units that actually carry an article title link.
         return $this->crawler
-            ->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')
+            ->filterXPath('//div[contains(concat(" ", normalize-space(@class), " "), " news-unit ")]')
+            ->reduce(
+                static fn(Crawler $unit): bool => $unit->filterXPath('.//p[contains(@class, "title")]/a')->count() > 0
+            )
             ->each(
                 function (Crawler $crawler) {
                     return new ResourceNewsListItemParser($crawler)->getModel();
@@ -61,11 +69,15 @@ class ResourceNewsListParser implements ParserInterface
      */
     public function getHasNextPage(): bool
     {
-        $pages = $this->crawler
-            ->filterXPath('//*[@id="content"]/table/tbody/tr/td[2]/div[1]/a[contains(text(), "More News")]');
+        // The news index paginates with `?p=N` range links (e.g. "21 - 40");
+        // a link to a page beyond 1 means a next page exists.
+        $pageLinks = $this->crawler
+            ->filterXPath('//*[@id="content"]//a[contains(@href, "?p=")]');
 
-        if ($pages->count()) {
-            return true;
+        foreach ($pageLinks as $node) {
+            if (preg_match('~[?&]p=(\d+)~', $node->getAttribute('href'), $m) && (int) $m[1] > 1) {
+                return true;
+            }
         }
 
         return false;

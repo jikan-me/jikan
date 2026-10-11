@@ -95,6 +95,9 @@ which changes a consumer can see.
 
 ### Fixed
 - Reading `getSmallImageUrl()`/`getLargeImageUrl()`/WebP image URLs on an entity whose image is a MyAnimeList placeholder (normalized to `null`) no longer throws "typed property must not be accessed before initialization" — those getters now return `null`, matching the `?string` image contract (jikan#488).
+- Anime/manga detail pages with no cover no longer surface the MAL site icon (`og:image` → `/img/sp/icon/apple-touch-icon-256.png`) as the entity's image — it is now treated as a placeholder and resolved to `null` (jikan#488).
+- `Jikan\Model\Watch\EpisodeListItem::getEpisodes()` returns the aired episode links as an array — every call previously threw a `TypeError` because the declared return type was `RecentEpisodeListItem`.
+- `getAnimeGenres()`/`getMangaGenres()` no longer read the wrong page section when MAL prepends extra `genre-link` blocks before the genre lists (e.g. the "adapted from" block on `manga.php`) — the four sections are now anchored by content, not position.
 
 ---
 

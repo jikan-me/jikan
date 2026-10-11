@@ -39,14 +39,33 @@ class MangaGenreListParser implements ParserInterface
     }
 
     /**
+     * The four genre sections (Genres / Explicit Genres / Themes / Demographics)
+     * are the `genre-link` blocks whose links are genre URLs. MAL prepends
+     * page-specific `genre-link` blocks before them (e.g. the "adapted from"
+     * source filter on manga.php), so the sections are anchored by content, not
+     * by block position.
+     *
+     * @return Crawler the four section blocks, in Genres…Demographics order
+     */
+    private function genreLinkSections(): Crawler
+    {
+        return $this->crawler
+            ->filterXPath('//*[@class="genre-link"]')
+            ->reduce(static function (Crawler $block): bool {
+                return $block->filterXPath('.//a[contains(@href, "/genre/")]')->count() > 0;
+            });
+    }
+
+    /**
      * @return array|\Jikan\Model\Genre\MangaGenreListItem[]
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
     public function getGenres(): array
     {
-        return $this->crawler
-            ->filterXPath('//*[@class="genre-link"][1]/div/div/a[@class="genre-name-link"]')
+        return $this->genreLinkSections()
+            ->eq(0)
+            ->filterXPath('.//a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
                 return new MangaGenreListItemParser($crawler)->getModel();
             });
@@ -59,8 +78,9 @@ class MangaGenreListParser implements ParserInterface
      */
     public function getExplicitGenres(): array
     {
-        return $this->crawler
-            ->filterXPath('//*[@class="genre-link"][2]/div/div/a[@class="genre-name-link"]')
+        return $this->genreLinkSections()
+            ->eq(1)
+            ->filterXPath('.//a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
                 return new MangaGenreListItemParser($crawler)->getModel();
             });
@@ -73,8 +93,9 @@ class MangaGenreListParser implements ParserInterface
      */
     public function getThemes(): array
     {
-        return $this->crawler
-            ->filterXPath('//*[@class="genre-link"][3]/div/div/a[@class="genre-name-link"]')
+        return $this->genreLinkSections()
+            ->eq(2)
+            ->filterXPath('.//a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
                 return new MangaGenreListItemParser($crawler)->getModel();
             });
@@ -87,8 +108,9 @@ class MangaGenreListParser implements ParserInterface
      */
     public function getDemographics(): array
     {
-        return $this->crawler
-            ->filterXPath('//*[@class="genre-link"][4]/div/div/a[@class="genre-name-link"]')
+        return $this->genreLinkSections()
+            ->eq(3)
+            ->filterXPath('.//a[@class="genre-name-link"]')
             ->each(function (Crawler $crawler) {
                 return new MangaGenreListItemParser($crawler)->getModel();
             });

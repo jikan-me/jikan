@@ -38,6 +38,8 @@ class ImagePlaceholderTest extends TestCase
             // anime / manga missing art (png + json variants)
             'https://cdn.myanimelist.net/images/na_series_12345.png',
             'https://cdn.myanimelist.net/images/na_series_12345.json',
+            // artless anime / manga detail page og:image fallback (site icon)
+            'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png',
         ];
 
         foreach ($placeholders as $url) {
@@ -61,6 +63,9 @@ class ImagePlaceholderTest extends TestCase
             // similar-looking but real paths must not false-positive
             'https://example.com/gallery/questionmark_logo.png',
             'https://cdn.myanimelist.net/images/questionmark_24.gif',
+            // other apple-touch-icon sizes (favicons) are not the og:image fallback
+            'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-57.png',
+            'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-180.png',
         ];
 
         foreach ($real as $url) {

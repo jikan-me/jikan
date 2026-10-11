@@ -24,8 +24,8 @@ value objects (a `getPath()` per request) → `Jikan\Parser\*` (Symfony `DomCraw
 | getAnimeRecentlyUpdatedByUsers | https://myanimelist.net/anime/{id}/jikan/stats?show={page} | Jikan\Request\Anime\AnimeRecentlyUpdatedByUsersRequest | Jikan\Parser\Anime\AnimeRecentlyUpdatedByUsersParser | Jikan\Model\Anime\AnimeUserUpdates | JikanTest\Parser\Anime\AnimeRecentlyUpdatedByUsersParserTest | no |
 | getAnimeRecommendations | https://myanimelist.net/anime/{id}/jikan/userrecs | Jikan\Request\Anime\AnimeRecommendationsRequest | Jikan\Parser\Common\Recommendations | — | JikanTest\Parser\Manga\MangaRecommendationParserTest | no |
 | getAnimeReviews | https://myanimelist.net/anime/{id}/jikan/reviews{query} | Jikan\Request\Anime\AnimeReviewsRequest | Jikan\Parser\Anime\AnimeReviewsParser | Jikan\Model\Anime\AnimeReviews | JikanTest\Parser\Anime\AnimeReviewsParserTest | no |
-| getAnimeSearch | https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g | Jikan\Request\Search\AnimeSearchRequest | Jikan\Parser\Search\AnimeSearchParser | Jikan\Model\Search\AnimeSearch | — | no |
-| getAnimeSearchAlt | https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g | Jikan\Request\Search\AnimeSearchRequest | Jikan\Parser\Search\AnimeSearchParser | Jikan\Model\Search\AnimeSearch | — | no |
+| getAnimeSearch | https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g | Jikan\Request\Search\AnimeSearchRequest | Jikan\Parser\Search\AnimeSearchParser | Jikan\Model\Search\AnimeSearch | JikanTest\Parser\Search\AnimeSearchParserTest | no |
+| getAnimeSearchAlt | https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g | Jikan\Request\Search\AnimeSearchRequest | Jikan\Parser\Search\AnimeSearchParser | Jikan\Model\Search\AnimeSearch | JikanTest\Parser\Search\AnimeSearchParserTest | no |
 | getAnimeStats | https://myanimelist.net/anime/{id}/jikan/stats | Jikan\Request\Anime\AnimeStatsRequest | Jikan\Parser\Anime\AnimeStatsParser | Jikan\Model\Anime\AnimeStats | JikanTest\Parser\Anime\AnimeStatsParserTest | no |
 | getAnimeVideos | https://myanimelist.net/anime/{id}/_/video | Jikan\Request\Anime\AnimeVideosRequest | Jikan\Parser\Anime\VideosParser | Jikan\Model\Anime\AnimeVideos | JikanTest\Parser\Video\AnimeVideoParserTest | no |
 | getAnimeVideosEpisodes | https://myanimelist.net/anime/{id}/_/video?p={page} | Jikan\Request\Anime\AnimeVideosEpisodesRequest | Jikan\Parser\Anime\VideosParser | Jikan\Model\Anime\AnimeVideosEpisodes | JikanTest\Parser\Video\AnimeVideoParserTest | no |
@@ -75,10 +75,10 @@ value objects (a `getPath()` per request) → `Jikan\Parser\*` (Symfony `DomCraw
 | getSchedule | https://myanimelist.net/anime/season/schedule | Jikan\Request\Schedule\ScheduleRequest | Jikan\Parser\Schedule\ScheduleParser | Jikan\Model\Schedule\Schedule | JikanTest\Parser\Schedule\ScheduleParserTest | no |
 | getSeasonList | https://myanimelist.net/anime/season/archive | Jikan\Request\SeasonList\SeasonListRequest | Jikan\Parser\SeasonList\SeasonListParser | Jikan\Model\SeasonList\SeasonArchive | JikanTest\Parser\SeasonList\SeasonListParserTest | no |
 | getSeasonal | https://myanimelist.net/anime/season/later | Jikan\Request\Seasonal\SeasonalRequest | Jikan\Parser\Seasonal\SeasonalParser | Jikan\Model\Seasonal\Seasonal | JikanTest\Parser\Seasonal\SeasonalParserTest | no |
-| getTopAnime | — | Jikan\Request\Top\TopAnimeRequest | Jikan\Parser\Top\TopAnimeParser | Jikan\Model\Top\TopAnime | — | no |
-| getTopCharacters | — | Jikan\Request\Top\TopCharactersRequest | Jikan\Parser\Top\TopCharactersParser | Jikan\Model\Top\TopCharacters | — | no |
-| getTopManga | — | Jikan\Request\Top\TopMangaRequest | Jikan\Parser\Top\TopMangaParser | Jikan\Model\Top\TopManga | — | no |
-| getTopPeople | — | Jikan\Request\Top\TopPeopleRequest | Jikan\Parser\Top\TopPeopleParser | Jikan\Model\Top\TopPeople | — | no |
+| getTopAnime | — | Jikan\Request\Top\TopAnimeRequest | Jikan\Parser\Top\TopAnimeParser | Jikan\Model\Top\TopAnime | JikanTest\Parser\Top\TopAnimeParserPageTest | no |
+| getTopCharacters | — | Jikan\Request\Top\TopCharactersRequest | Jikan\Parser\Top\TopCharactersParser | Jikan\Model\Top\TopCharacters | JikanTest\Parser\Top\TopCharactersParserPageTest | no |
+| getTopManga | — | Jikan\Request\Top\TopMangaRequest | Jikan\Parser\Top\TopMangaParser | Jikan\Model\Top\TopManga | JikanTest\Parser\Top\TopMangaParserPageTest | no |
+| getTopPeople | — | Jikan\Request\Top\TopPeopleRequest | Jikan\Parser\Top\TopPeopleParser | Jikan\Model\Top\TopPeople | JikanTest\Parser\Top\TopPeopleParserPageTest | no |
 | getUserAnimeList | https://myanimelist.net/animelist/{username}/load.json{query} | Jikan\Request\User\UserAnimeListRequest | — | — | — | no |
 | getUserClubs | https://myanimelist.net/profile/{username}/clubs | Jikan\Request\User\UserClubsRequest | Jikan\Parser\User\ClubParser | — | — | no |
 | getUserFriends | https://myanimelist.net/profile/{username}/friends{query} | Jikan\Request\User\UserFriendsRequest | Jikan\Parser\User\Friends\FriendsParser | Jikan\Model\User\Friends | — | no |

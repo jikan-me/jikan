@@ -1,0 +1,2397 @@
+{
+    "_source": {
+        "generatedBy": "scripts/generate_endpoints.php",
+        "generate": "php scripts/generate_endpoints.php --write",
+        "check": "php scripts/generate_endpoints.php --check",
+        "_note": "DERIVED COLLATERAL \u2014 regenerable, source-stamped; never hand-edit. Contact: MalClient + Request/Parser/Model files + test tree."
+    },
+    "schemaVersion": 1,
+    "generatedAt": "2026-10-11T19:11:17Z",
+    "verification": {
+        "commit": "1e351e0",
+        "methodsSeen": 77,
+        "domainsSeen": 20
+    },
+    "client": {
+        "class": "Jikan\\MyAnimeList\\MalClient",
+        "file": "src/MyAnimeList/MalClient.php"
+    },
+    "endpoints": [
+        {
+            "method": "getAnime",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeRequest",
+                "file": "src/Request/Anime/AnimeRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\AnimeParser",
+                "file": "src/Parser/Anime/AnimeParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\Anime",
+                "file": "src/Model/Anime/Anime.php"
+            },
+            "returnType": "Model\\Anime\\Anime",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\AnimeParserTest",
+                "file": "test/unit/Parser/Anime/AnimeParserTest.php"
+            },
+            "notes": "getAnime"
+        },
+        {
+            "method": "getAnimeCharactersAndStaff",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeCharactersAndStaffRequest",
+                "file": "src/Request/Anime/AnimeCharactersAndStaffRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\CharactersAndStaffParser",
+                "file": "src/Parser/Anime/CharactersAndStaffParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\AnimeCharactersAndStaff",
+                "file": "src/Model/Anime/AnimeCharactersAndStaff.php"
+            },
+            "returnType": "Model\\Anime\\AnimeCharactersAndStaff",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/_/characters",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getAnimeCharactersAndStaff"
+        },
+        {
+            "method": "getAnimeEpisode",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeEpisodeRequest",
+                "file": "src/Request/Anime/AnimeEpisodeRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\AnimeEpisodeParser",
+                "file": "src/Parser/Anime/AnimeEpisodeParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\AnimeEpisode",
+                "file": "src/Model/Anime/AnimeEpisode.php"
+            },
+            "returnType": "Model\\Anime\\AnimeEpisode",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/_/episode/{episodeId}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\AnimeEpisodeParserTest",
+                "file": "test/unit/Parser/Anime/AnimeEpisodeParserTest.php"
+            },
+            "notes": "getAnimeEpisode"
+        },
+        {
+            "method": "getAnimeEpisodes",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeEpisodesRequest",
+                "file": "src/Request/Anime/AnimeEpisodesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\EpisodesParser",
+                "file": "src/Parser/Anime/EpisodesParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\Episodes",
+                "file": "src/Model/Anime/Episodes.php"
+            },
+            "returnType": "Model\\Anime\\Episodes",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/_/episode?offset={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\AnimeEpisodesParserTest",
+                "file": "test/unit/Parser/Anime/AnimeEpisodesParserTest.php"
+            },
+            "notes": "getAnimeEpisodes"
+        },
+        {
+            "method": "getAnimeForum",
+            "kind": "array",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeForumRequest",
+                "file": "src/Request/Anime/AnimeForumRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Forum\\ForumPageParser",
+                "file": "src/Parser/Forum/ForumPageParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/_/forum{query}",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getAnimeForum"
+        },
+        {
+            "method": "getAnimeGenre",
+            "kind": "model",
+            "domain": "genre",
+            "request": {
+                "class": "Jikan\\Request\\Genre\\AnimeGenreRequest",
+                "file": "src/Request/Genre/AnimeGenreRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Genre\\AnimeGenreParser",
+                "file": "src/Parser/Genre/AnimeGenreParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Genre\\AnimeGenre",
+                "file": "src/Model/Genre/AnimeGenre.php"
+            },
+            "returnType": "Model\\Genre\\AnimeGenre",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/genre/{id}?page={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Genre\\AnimeGenreParserTest",
+                "file": "test/unit/Parser/Genre/AnimeGenreParserTest.php"
+            },
+            "notes": "getAnimeGenre"
+        },
+        {
+            "method": "getAnimeGenres",
+            "kind": "model",
+            "domain": "genre",
+            "request": {
+                "class": "Jikan\\Request\\Genre\\AnimeGenresRequest",
+                "file": "src/Request/Genre/AnimeGenresRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Genre\\AnimeGenreListParser",
+                "file": "src/Parser/Genre/AnimeGenreListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Genre\\AnimeGenreList",
+                "file": "src/Model/Genre/AnimeGenreList.php"
+            },
+            "returnType": "Model\\Genre\\AnimeGenreList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime.php",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getAnimeGenres"
+        },
+        {
+            "method": "getAnimeMoreInfo",
+            "kind": "scalar",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeMoreInfoRequest",
+                "file": "src/Request/Anime/AnimeMoreInfoRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\MoreInfoParser",
+                "file": "src/Parser/Anime/MoreInfoParser.php"
+            },
+            "model": null,
+            "returnType": "?string",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/_/moreinfo",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\AnimeMoreInfoParserTest",
+                "file": "test/unit/Parser/Anime/AnimeMoreInfoParserTest.php"
+            },
+            "notes": "getAnimeMoreInfo"
+        },
+        {
+            "method": "getAnimePictures",
+            "kind": "array",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimePicturesRequest",
+                "file": "src/Request/Anime/AnimePicturesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Common\\PicturesPageParser",
+                "file": "src/Parser/Common/PicturesPageParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/jikan/pics",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Pictures\\PicturesPageParserTest",
+                "file": "test/unit/Parser/Pictures/PicturesPageParserTest.php"
+            },
+            "notes": "getAnimePictures"
+        },
+        {
+            "method": "getAnimeRecentlyUpdatedByUsers",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeRecentlyUpdatedByUsersRequest",
+                "file": "src/Request/Anime/AnimeRecentlyUpdatedByUsersRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\AnimeRecentlyUpdatedByUsersParser",
+                "file": "src/Parser/Anime/AnimeRecentlyUpdatedByUsersParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\AnimeUserUpdates",
+                "file": "src/Model/Anime/AnimeUserUpdates.php"
+            },
+            "returnType": "Model\\Anime\\AnimeUserUpdates",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/jikan/stats?show={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\AnimeRecentlyUpdatedByUsersParserTest",
+                "file": "test/unit/Parser/Anime/AnimeRecentlyUpdatedByUsersParserTest.php"
+            },
+            "notes": "getAnimeRecentlyUpdatedByUsers"
+        },
+        {
+            "method": "getAnimeRecommendations",
+            "kind": "array",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeRecommendationsRequest",
+                "file": "src/Request/Anime/AnimeRecommendationsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Common\\Recommendations",
+                "file": "src/Parser/Common/Recommendations.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/jikan/userrecs",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\MangaRecommendationParserTest",
+                "file": "test/unit/Parser/Manga/MangaRecommendationParserTest.php"
+            },
+            "notes": "getAnimeRecommendations"
+        },
+        {
+            "method": "getAnimeReviews",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeReviewsRequest",
+                "file": "src/Request/Anime/AnimeReviewsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\AnimeReviewsParser",
+                "file": "src/Parser/Anime/AnimeReviewsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\AnimeReviews",
+                "file": "src/Model/Anime/AnimeReviews.php"
+            },
+            "returnType": "Model\\Anime\\AnimeReviews",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/jikan/reviews{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\AnimeReviewsParserTest",
+                "file": "test/unit/Parser/Anime/AnimeReviewsParserTest.php"
+            },
+            "notes": "getAnimeReviews"
+        },
+        {
+            "method": "getAnimeSearch",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\AnimeSearchRequest",
+                "file": "src/Request/Search/AnimeSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Search\\AnimeSearchParser",
+                "file": "src/Parser/Search/AnimeSearchParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Search\\AnimeSearch",
+                "file": "src/Model/Search/AnimeSearch.php"
+            },
+            "returnType": "Model\\Search\\AnimeSearch",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getAnimeSearch"
+        },
+        {
+            "method": "getAnimeSearchAlt",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\AnimeSearchRequest",
+                "file": "src/Request/Search/AnimeSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Search\\AnimeSearchParser",
+                "file": "src/Parser/Search/AnimeSearchParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Search\\AnimeSearch",
+                "file": "src/Model/Search/AnimeSearch.php"
+            },
+            "returnType": "Model\\Search\\AnimeSearch",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getAnimeSearchAlt"
+        },
+        {
+            "method": "getAnimeStats",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeStatsRequest",
+                "file": "src/Request/Anime/AnimeStatsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\AnimeStatsParser",
+                "file": "src/Parser/Anime/AnimeStatsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\AnimeStats",
+                "file": "src/Model/Anime/AnimeStats.php"
+            },
+            "returnType": "Model\\Anime\\AnimeStats",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/jikan/stats",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\AnimeStatsParserTest",
+                "file": "test/unit/Parser/Anime/AnimeStatsParserTest.php"
+            },
+            "notes": "getAnimeStats"
+        },
+        {
+            "method": "getAnimeVideos",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeVideosRequest",
+                "file": "src/Request/Anime/AnimeVideosRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\VideosParser",
+                "file": "src/Parser/Anime/VideosParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\AnimeVideos",
+                "file": "src/Model/Anime/AnimeVideos.php"
+            },
+            "returnType": "Model\\Anime\\AnimeVideos",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/_/video",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Video\\AnimeVideoParserTest",
+                "file": "test/unit/Parser/Video/AnimeVideoParserTest.php"
+            },
+            "notes": "getAnimeVideos"
+        },
+        {
+            "method": "getAnimeVideosEpisodes",
+            "kind": "model",
+            "domain": "anime",
+            "request": {
+                "class": "Jikan\\Request\\Anime\\AnimeVideosEpisodesRequest",
+                "file": "src/Request/Anime/AnimeVideosEpisodesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Anime\\VideosParser",
+                "file": "src/Parser/Anime/VideosParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Anime\\AnimeVideosEpisodes",
+                "file": "src/Model/Anime/AnimeVideosEpisodes.php"
+            },
+            "returnType": "Model\\Anime\\AnimeVideosEpisodes",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/{id}/_/video?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Video\\AnimeVideoParserTest",
+                "file": "test/unit/Parser/Video/AnimeVideoParserTest.php"
+            },
+            "notes": "getAnimeVideosEpisodes"
+        },
+        {
+            "method": "getArticle",
+            "kind": "model",
+            "domain": "article",
+            "request": {
+                "class": "Jikan\\Request\\Article\\ArticleRequest",
+                "file": "src/Request/Article/ArticleRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Article\\ArticleParser",
+                "file": "src/Parser/Article/ArticleParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Article\\ResourceArticle",
+                "file": "src/Model/Article/ResourceArticle.php"
+            },
+            "returnType": "Model\\Article\\ResourceArticle",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/featured/{malId}",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getArticle"
+        },
+        {
+            "method": "getArticleSearch",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\ArticleSearchRequest",
+                "file": "src/Request/Search/ArticleSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Article\\ArticleListParser",
+                "file": "src/Parser/Article/ArticleListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Article\\ArticleList",
+                "file": "src/Model/Article/ArticleList.php"
+            },
+            "returnType": "Model\\Article\\ArticleList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/featured/search?q={query}&p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Article\\ArticlesByTagTest",
+                "file": "test/unit/Parser/Article/ArticlesByTagTest.php"
+            },
+            "notes": "getArticleSearch"
+        },
+        {
+            "method": "getArticleTags",
+            "kind": "array",
+            "domain": "article",
+            "request": {
+                "class": "Jikan\\Request\\Article\\ArticleTagsRequest",
+                "file": "src/Request/Article/ArticleTagsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Article\\ArticleTagsParser",
+                "file": "src/Parser/Article/ArticleTagsParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/featured/tag",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Article\\ArticleTagsTest",
+                "file": "test/unit/Parser/Article/ArticleTagsTest.php"
+            },
+            "notes": "getArticleTags"
+        },
+        {
+            "method": "getArticlesByTag",
+            "kind": "model",
+            "domain": "article",
+            "request": {
+                "class": "Jikan\\Request\\Article\\ArticlesByTagRequest",
+                "file": "src/Request/Article/ArticlesByTagRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Article\\ArticleListParser",
+                "file": "src/Parser/Article/ArticleListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Article\\ArticleList",
+                "file": "src/Model/Article/ArticleList.php"
+            },
+            "returnType": "Model\\Article\\ArticleList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/featured/tag/{malId}?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Article\\ArticlesByTagTest",
+                "file": "test/unit/Parser/Article/ArticlesByTagTest.php"
+            },
+            "notes": "getArticlesByTag"
+        },
+        {
+            "method": "getCharacter",
+            "kind": "model",
+            "domain": "character",
+            "request": {
+                "class": "Jikan\\Request\\Character\\CharacterRequest",
+                "file": "src/Request/Character/CharacterRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Character\\CharacterParser",
+                "file": "src/Parser/Character/CharacterParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Character\\Character",
+                "file": "src/Model/Character/Character.php"
+            },
+            "returnType": "Model\\Character\\Character",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/character/{id}",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Character\\CharacterParserTest",
+                "file": "test/unit/Parser/Character/CharacterParserTest.php"
+            },
+            "notes": "getCharacter"
+        },
+        {
+            "method": "getCharacterPictures",
+            "kind": "array",
+            "domain": "character",
+            "request": {
+                "class": "Jikan\\Request\\Character\\CharacterPicturesRequest",
+                "file": "src/Request/Character/CharacterPicturesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Common\\DefaultPicturesPageParser",
+                "file": "src/Parser/Common/DefaultPicturesPageParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/character/{id}/jikan/pics",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getCharacterPictures"
+        },
+        {
+            "method": "getCharacterSearch",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\CharacterSearchRequest",
+                "file": "src/Request/Search/CharacterSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Search\\CharacterSearchParser",
+                "file": "src/Parser/Search/CharacterSearchParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Search\\CharacterSearch",
+                "file": "src/Model/Search/CharacterSearch.php"
+            },
+            "returnType": "Model\\Search\\CharacterSearch",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/character.php?{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getCharacterSearch"
+        },
+        {
+            "method": "getClub",
+            "kind": "model",
+            "domain": "club",
+            "request": {
+                "class": "Jikan\\Request\\Club\\ClubRequest",
+                "file": "src/Request/Club/ClubRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Club\\ClubParser",
+                "file": "src/Parser/Club/ClubParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Club\\Club",
+                "file": "src/Model/Club/Club.php"
+            },
+            "returnType": "Model\\Club\\Club",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/clubs.php?cid={clubId}",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Club\\ClubParserTest",
+                "file": "test/unit/Parser/Club/ClubParserTest.php"
+            },
+            "notes": "getClub"
+        },
+        {
+            "method": "getClubUsers",
+            "kind": "model",
+            "domain": "club",
+            "request": {
+                "class": "Jikan\\Request\\Club\\UserListRequest",
+                "file": "src/Request/Club/UserListRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Club\\UserListParser",
+                "file": "src/Parser/Club/UserListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Club\\UserList",
+                "file": "src/Model/Club/UserList.php"
+            },
+            "returnType": "Model\\Club\\UserList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/clubs.php?action=view&t=members&id={clubId}&show={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Club\\UserListParserTest",
+                "file": "test/unit/Parser/Club/UserListParserTest.php"
+            },
+            "notes": "getClubUsers"
+        },
+        {
+            "method": "getMagazine",
+            "kind": "model",
+            "domain": "magazine",
+            "request": {
+                "class": "Jikan\\Request\\Magazine\\MagazineRequest",
+                "file": "src/Request/Magazine/MagazineRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Magazine\\MagazineParser",
+                "file": "src/Parser/Magazine/MagazineParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Magazine\\Magazine",
+                "file": "src/Model/Magazine/Magazine.php"
+            },
+            "returnType": "Model\\Magazine\\Magazine",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/magazine/{id}?page={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Magazine\\MagazineParserTest",
+                "file": "test/unit/Parser/Magazine/MagazineParserTest.php"
+            },
+            "notes": "getMagazine"
+        },
+        {
+            "method": "getMagazines",
+            "kind": "model",
+            "domain": "magazine",
+            "request": {
+                "class": "Jikan\\Request\\Magazine\\MagazinesRequest",
+                "file": "src/Request/Magazine/MagazinesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Magazine\\MagazineListParser",
+                "file": "src/Parser/Magazine/MagazineListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Magazine\\MagazineList",
+                "file": "src/Model/Magazine/MagazineList.php"
+            },
+            "returnType": "Model\\Magazine\\MagazineList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/magazine",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getMagazines"
+        },
+        {
+            "method": "getManga",
+            "kind": "model",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaRequest",
+                "file": "src/Request/Manga/MangaRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Manga\\MangaParser",
+                "file": "src/Parser/Manga/MangaParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Manga\\Manga",
+                "file": "src/Model/Manga/Manga.php"
+            },
+            "returnType": "Model\\Manga\\Manga",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\MangaParserTest",
+                "file": "test/unit/Parser/Manga/MangaParserTest.php"
+            },
+            "notes": "getManga"
+        },
+        {
+            "method": "getMangaCharacters",
+            "kind": "array",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaCharactersRequest",
+                "file": "src/Request/Manga/MangaCharactersRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Manga\\CharactersParser",
+                "file": "src/Parser/Manga/CharactersParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/_/characters",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\CharactersParserTest",
+                "file": "test/unit/Parser/Manga/CharactersParserTest.php"
+            },
+            "notes": "getMangaCharacters"
+        },
+        {
+            "method": "getMangaForum",
+            "kind": "array",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaForumRequest",
+                "file": "src/Request/Manga/MangaForumRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Forum\\ForumPageParser",
+                "file": "src/Parser/Forum/ForumPageParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/_/forum{query}",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getMangaForum"
+        },
+        {
+            "method": "getMangaGenre",
+            "kind": "model",
+            "domain": "genre",
+            "request": {
+                "class": "Jikan\\Request\\Genre\\MangaGenreRequest",
+                "file": "src/Request/Genre/MangaGenreRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Genre\\MangaGenreParser",
+                "file": "src/Parser/Genre/MangaGenreParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Genre\\MangaGenre",
+                "file": "src/Model/Genre/MangaGenre.php"
+            },
+            "returnType": "Model\\Genre\\MangaGenre",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/genre/{id}?page={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Genre\\MangaGenreParserTest",
+                "file": "test/unit/Parser/Genre/MangaGenreParserTest.php"
+            },
+            "notes": "getMangaGenre"
+        },
+        {
+            "method": "getMangaGenres",
+            "kind": "model",
+            "domain": "genre",
+            "request": {
+                "class": "Jikan\\Request\\Genre\\MangaGenresRequest",
+                "file": "src/Request/Genre/MangaGenresRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Genre\\MangaGenreListParser",
+                "file": "src/Parser/Genre/MangaGenreListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Genre\\MangaGenreList",
+                "file": "src/Model/Genre/MangaGenreList.php"
+            },
+            "returnType": "Model\\Genre\\MangaGenreList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga.php",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getMangaGenres"
+        },
+        {
+            "method": "getMangaMoreInfo",
+            "kind": "scalar",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaMoreInfoRequest",
+                "file": "src/Request/Manga/MangaMoreInfoRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Manga\\MoreInfoParser",
+                "file": "src/Parser/Manga/MoreInfoParser.php"
+            },
+            "model": null,
+            "returnType": "?string",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/_/moreinfo",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getMangaMoreInfo"
+        },
+        {
+            "method": "getMangaPictures",
+            "kind": "array",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaPicturesRequest",
+                "file": "src/Request/Manga/MangaPicturesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Common\\PicturesPageParser",
+                "file": "src/Parser/Common/PicturesPageParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/jikan/pics",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Pictures\\PicturesPageParserTest",
+                "file": "test/unit/Parser/Pictures/PicturesPageParserTest.php"
+            },
+            "notes": "getMangaPictures"
+        },
+        {
+            "method": "getMangaRecentlyUpdatedByUsers",
+            "kind": "model",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaRecentlyUpdatedByUsersRequest",
+                "file": "src/Request/Manga/MangaRecentlyUpdatedByUsersRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Manga\\MangaRecentlyUpdatedByUsersParser",
+                "file": "src/Parser/Manga/MangaRecentlyUpdatedByUsersParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Manga\\MangaUserUpdates",
+                "file": "src/Model/Manga/MangaUserUpdates.php"
+            },
+            "returnType": "Model\\Manga\\MangaUserUpdates",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/jikan/stats?show={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\MangaRecentlyUpdatedByUsersParserTest",
+                "file": "test/unit/Parser/Manga/MangaRecentlyUpdatedByUsersParserTest.php"
+            },
+            "notes": "getMangaRecentlyUpdatedByUsers"
+        },
+        {
+            "method": "getMangaRecommendations",
+            "kind": "array",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaRecommendationsRequest",
+                "file": "src/Request/Manga/MangaRecommendationsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Common\\Recommendations",
+                "file": "src/Parser/Common/Recommendations.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/jikan/userrecs",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\MangaRecommendationParserTest",
+                "file": "test/unit/Parser/Manga/MangaRecommendationParserTest.php"
+            },
+            "notes": "getMangaRecommendations"
+        },
+        {
+            "method": "getMangaReviews",
+            "kind": "model",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaReviewsRequest",
+                "file": "src/Request/Manga/MangaReviewsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Manga\\MangaReviewsParser",
+                "file": "src/Parser/Manga/MangaReviewsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Manga\\MangaReviews",
+                "file": "src/Model/Manga/MangaReviews.php"
+            },
+            "returnType": "Model\\Manga\\MangaReviews",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/jikan/reviews{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\MangaReviewsParserTest",
+                "file": "test/unit/Parser/Manga/MangaReviewsParserTest.php"
+            },
+            "notes": "getMangaReviews"
+        },
+        {
+            "method": "getMangaSearch",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\MangaSearchRequest",
+                "file": "src/Request/Search/MangaSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Search\\MangaSearchParser",
+                "file": "src/Parser/Search/MangaSearchParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Search\\MangaSearch",
+                "file": "src/Model/Search/MangaSearch.php"
+            },
+            "returnType": "Model\\Search\\MangaSearch",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getMangaSearch"
+        },
+        {
+            "method": "getMangaStats",
+            "kind": "model",
+            "domain": "manga",
+            "request": {
+                "class": "Jikan\\Request\\Manga\\MangaStatsRequest",
+                "file": "src/Request/Manga/MangaStatsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Manga\\MangaStatsParser",
+                "file": "src/Parser/Manga/MangaStatsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Manga\\MangaStats",
+                "file": "src/Model/Manga/MangaStats.php"
+            },
+            "returnType": "Model\\Manga\\MangaStats",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/manga/{id}/jikan/stats",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\MangaStatsParserTest",
+                "file": "test/unit/Parser/Manga/MangaStatsParserTest.php"
+            },
+            "notes": "getMangaStats"
+        },
+        {
+            "method": "getNews",
+            "kind": "model",
+            "domain": "news",
+            "request": {
+                "class": "Jikan\\Request\\News\\NewsRequest",
+                "file": "src/Request/News/NewsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\News\\NewsParser",
+                "file": "src/Parser/News/NewsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\News\\ResourceNews",
+                "file": "src/Model/News/ResourceNews.php"
+            },
+            "returnType": "Model\\News\\ResourceNews",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/news/{malId}",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\News\\NewsTest",
+                "file": "test/unit/Parser/News/NewsTest.php"
+            },
+            "notes": "getNews"
+        },
+        {
+            "method": "getNewsByTag",
+            "kind": "model",
+            "domain": "news",
+            "request": {
+                "class": "Jikan\\Request\\News\\NewsByTagRequest",
+                "file": "src/Request/News/NewsByTagRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\News\\NewsListParser",
+                "file": "src/Parser/News/NewsListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\News\\NewsList",
+                "file": "src/Model/News/NewsList.php"
+            },
+            "returnType": "Model\\News\\NewsList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/news/tag/{malId}?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\News\\NewsSearchTest",
+                "file": "test/unit/Parser/News/NewsSearchTest.php"
+            },
+            "notes": "getNewsByTag"
+        },
+        {
+            "method": "getNewsList",
+            "kind": "model",
+            "domain": "requestinterface",
+            "request": {
+                "class": "Jikan\\Request\\RequestInterface",
+                "file": "src/Request/RequestInterface.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\News\\ResourceNewsListParser",
+                "file": "src/Parser/News/ResourceNewsListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\News\\ResourceNewsList",
+                "file": "src/Model/News/ResourceNewsList.php"
+            },
+            "returnType": "Model\\News\\ResourceNewsList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": null,
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getNewsList"
+        },
+        {
+            "method": "getNewsSearch",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\NewsSearchRequest",
+                "file": "src/Request/Search/NewsSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\News\\NewsListParser",
+                "file": "src/Parser/News/NewsListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\News\\NewsList",
+                "file": "src/Model/News/NewsList.php"
+            },
+            "returnType": "Model\\News\\NewsList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/news/search?q={query}&p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\News\\NewsSearchTest",
+                "file": "test/unit/Parser/News/NewsSearchTest.php"
+            },
+            "notes": "getNewsSearch"
+        },
+        {
+            "method": "getNewsTags",
+            "kind": "array",
+            "domain": "news",
+            "request": {
+                "class": "Jikan\\Request\\News\\NewsTagsRequest",
+                "file": "src/Request/News/NewsTagsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\News\\NewsTagsParser",
+                "file": "src/Parser/News/NewsTagsParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/news/tag",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\News\\NewsTagsTest",
+                "file": "test/unit/Parser/News/NewsTagsTest.php"
+            },
+            "notes": "getNewsTags"
+        },
+        {
+            "method": "getPerson",
+            "kind": "model",
+            "domain": "person",
+            "request": {
+                "class": "Jikan\\Request\\Person\\PersonRequest",
+                "file": "src/Request/Person/PersonRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Person\\PersonParser",
+                "file": "src/Parser/Person/PersonParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Person\\Person",
+                "file": "src/Model/Person/Person.php"
+            },
+            "returnType": "Model\\Person\\Person",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/people/{id}",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Person\\PersonParserTest",
+                "file": "test/unit/Parser/Person/PersonParserTest.php"
+            },
+            "notes": "getPerson"
+        },
+        {
+            "method": "getPersonPictures",
+            "kind": "array",
+            "domain": "person",
+            "request": {
+                "class": "Jikan\\Request\\Person\\PersonPicturesRequest",
+                "file": "src/Request/Person/PersonPicturesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Common\\DefaultPicturesPageParser",
+                "file": "src/Parser/Common/DefaultPicturesPageParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/people/{id}/jikan/pics",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getPersonPictures"
+        },
+        {
+            "method": "getPersonSearch",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\PersonSearchRequest",
+                "file": "src/Request/Search/PersonSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Search\\PersonSearchParser",
+                "file": "src/Parser/Search/PersonSearchParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Search\\PersonSearch",
+                "file": "src/Model/Search/PersonSearch.php"
+            },
+            "returnType": "Model\\Search\\PersonSearch",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/people.php?{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getPersonSearch"
+        },
+        {
+            "method": "getPinnedArticles",
+            "kind": "model",
+            "domain": "article",
+            "request": {
+                "class": "Jikan\\Request\\Article\\PinnedArticlesRequest",
+                "file": "src/Request/Article/PinnedArticlesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Article\\PinnedArticleListParser",
+                "file": "src/Parser/Article/PinnedArticleListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Article\\PinnedArticleList",
+                "file": "src/Model/Article/PinnedArticleList.php"
+            },
+            "returnType": "Model\\Article\\PinnedArticleList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/featured",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Article\\ArticlesPinnedTest",
+                "file": "test/unit/Parser/Article/ArticlesPinnedTest.php"
+            },
+            "notes": "getPinnedArticles"
+        },
+        {
+            "method": "getPopularEpisodes",
+            "kind": "model",
+            "domain": "watch",
+            "request": {
+                "class": "Jikan\\Request\\Watch\\PopularEpisodesRequest",
+                "file": "src/Request/Watch/PopularEpisodesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Watch\\WatchEpisodesParser",
+                "file": "src/Parser/Watch/WatchEpisodesParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Watch\\Episodes",
+                "file": "src/Model/Watch/Episodes.php"
+            },
+            "returnType": "Model\\Watch\\Episodes",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/watch/episode/popular",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getPopularEpisodes"
+        },
+        {
+            "method": "getPopularPromotionalVideos",
+            "kind": "model",
+            "domain": "watch",
+            "request": {
+                "class": "Jikan\\Request\\Watch\\PopularPromotionalVideosRequest",
+                "file": "src/Request/Watch/PopularPromotionalVideosRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Watch\\WatchPromotionalVideosParser",
+                "file": "src/Parser/Watch/WatchPromotionalVideosParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Watch\\PromotionalVideos",
+                "file": "src/Model/Watch/PromotionalVideos.php"
+            },
+            "returnType": "Model\\Watch\\PromotionalVideos",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/watch/promotion/popular",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getPopularPromotionalVideos"
+        },
+        {
+            "method": "getProducer",
+            "kind": "model",
+            "domain": "producer",
+            "request": {
+                "class": "Jikan\\Request\\Producer\\ProducerRequest",
+                "file": "src/Request/Producer/ProducerRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Producer\\ProducerParser",
+                "file": "src/Parser/Producer/ProducerParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Producer\\Producer",
+                "file": "src/Model/Producer/Producer.php"
+            },
+            "returnType": "Model\\Producer\\Producer",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/producer/{id}?page={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Producer\\ProducerParserTest",
+                "file": "test/unit/Parser/Producer/ProducerParserTest.php"
+            },
+            "notes": "getProducer"
+        },
+        {
+            "method": "getProducers",
+            "kind": "model",
+            "domain": "producer",
+            "request": {
+                "class": "Jikan\\Request\\Producer\\ProducersRequest",
+                "file": "src/Request/Producer/ProducersRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Producer\\ProducerListParser",
+                "file": "src/Parser/Producer/ProducerListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Producer\\ProducerList",
+                "file": "src/Model/Producer/ProducerList.php"
+            },
+            "returnType": "Model\\Producer\\ProducerList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/producer",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getProducers"
+        },
+        {
+            "method": "getRecentArticles",
+            "kind": "model",
+            "domain": "article",
+            "request": {
+                "class": "Jikan\\Request\\Article\\RecentArticleRequest",
+                "file": "src/Request/Article/RecentArticleRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Article\\ArticleListParser",
+                "file": "src/Parser/Article/ArticleListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Article\\ArticleList",
+                "file": "src/Model/Article/ArticleList.php"
+            },
+            "returnType": "Model\\Article\\ArticleList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/featured?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Article\\ArticlesByTagTest",
+                "file": "test/unit/Parser/Article/ArticlesByTagTest.php"
+            },
+            "notes": "getRecentArticles"
+        },
+        {
+            "method": "getRecentEpisodes",
+            "kind": "model",
+            "domain": "watch",
+            "request": {
+                "class": "Jikan\\Request\\Watch\\RecentEpisodesRequest",
+                "file": "src/Request/Watch/RecentEpisodesRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Watch\\WatchEpisodesParser",
+                "file": "src/Parser/Watch/WatchEpisodesParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Watch\\Episodes",
+                "file": "src/Model/Watch/Episodes.php"
+            },
+            "returnType": "Model\\Watch\\Episodes",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/watch/episode",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getRecentEpisodes"
+        },
+        {
+            "method": "getRecentNews",
+            "kind": "model",
+            "domain": "news",
+            "request": {
+                "class": "Jikan\\Request\\News\\RecentNewsRequest",
+                "file": "src/Request/News/RecentNewsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\News\\NewsListParser",
+                "file": "src/Parser/News/NewsListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\News\\NewsList",
+                "file": "src/Model/News/NewsList.php"
+            },
+            "returnType": "Model\\News\\NewsList",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/news?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\News\\NewsSearchTest",
+                "file": "test/unit/Parser/News/NewsSearchTest.php"
+            },
+            "notes": "getRecentNews"
+        },
+        {
+            "method": "getRecentOnlineUsers",
+            "kind": "array",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\RecentlyOnlineUsersRequest",
+                "file": "src/Request/User/RecentlyOnlineUsersRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Search\\UserSearchParser",
+                "file": "src/Parser/Search/UserSearchParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Search\\UserSearch",
+                "file": "src/Model/Search/UserSearch.php"
+            },
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/users.php",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getRecentOnlineUsers"
+        },
+        {
+            "method": "getRecentPromotionalVideos",
+            "kind": "model",
+            "domain": "watch",
+            "request": {
+                "class": "Jikan\\Request\\Watch\\RecentPromotionalVideosRequest",
+                "file": "src/Request/Watch/RecentPromotionalVideosRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Watch\\WatchPromotionalVideosParser",
+                "file": "src/Parser/Watch/WatchPromotionalVideosParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Watch\\PromotionalVideos",
+                "file": "src/Model/Watch/PromotionalVideos.php"
+            },
+            "returnType": "Model\\Watch\\PromotionalVideos",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/watch/promotion?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getRecentPromotionalVideos"
+        },
+        {
+            "method": "getRecentRecommendations",
+            "kind": "model",
+            "domain": "recommendations",
+            "request": {
+                "class": "Jikan\\Request\\Recommendations\\RecentRecommendationsRequest",
+                "file": "src/Request/Recommendations/RecentRecommendationsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Recommendations\\RecentRecommendationsParser",
+                "file": "src/Parser/Recommendations/RecentRecommendationsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Recommendations\\RecentRecommendations",
+                "file": "src/Model/Recommendations/RecentRecommendations.php"
+            },
+            "returnType": "Model\\Recommendations\\RecentRecommendations",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": null,
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getRecentRecommendations"
+        },
+        {
+            "method": "getReviews",
+            "kind": "model",
+            "domain": "reviews",
+            "request": {
+                "class": "Jikan\\Request\\Reviews\\ReviewsRequest",
+                "file": "src/Request/Reviews/ReviewsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Reviews\\ReviewsParser",
+                "file": "src/Parser/Reviews/ReviewsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Reviews\\Reviews",
+                "file": "src/Model/Reviews/Reviews.php"
+            },
+            "returnType": "Model\\Reviews\\Reviews",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": null,
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getReviews"
+        },
+        {
+            "method": "getSchedule",
+            "kind": "model",
+            "domain": "schedule",
+            "request": {
+                "class": "Jikan\\Request\\Schedule\\ScheduleRequest",
+                "file": "src/Request/Schedule/ScheduleRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Schedule\\ScheduleParser",
+                "file": "src/Parser/Schedule/ScheduleParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Schedule\\Schedule",
+                "file": "src/Model/Schedule/Schedule.php"
+            },
+            "returnType": "Model\\Schedule\\Schedule",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/season/schedule",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Schedule\\ScheduleParserTest",
+                "file": "test/unit/Parser/Schedule/ScheduleParserTest.php"
+            },
+            "notes": "getSchedule"
+        },
+        {
+            "method": "getSeasonList",
+            "kind": "model",
+            "domain": "seasonlist",
+            "request": {
+                "class": "Jikan\\Request\\SeasonList\\SeasonListRequest",
+                "file": "src/Request/SeasonList/SeasonListRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\SeasonList\\SeasonListParser",
+                "file": "src/Parser/SeasonList/SeasonListParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\SeasonList\\SeasonArchive",
+                "file": "src/Model/SeasonList/SeasonArchive.php"
+            },
+            "returnType": "Model\\SeasonList\\SeasonArchive",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/season/archive",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\SeasonList\\SeasonListParserTest",
+                "file": "test/unit/Parser/SeasonList/SeasonListParserTest.php"
+            },
+            "notes": "getSeasonList"
+        },
+        {
+            "method": "getSeasonal",
+            "kind": "model",
+            "domain": "seasonal",
+            "request": {
+                "class": "Jikan\\Request\\Seasonal\\SeasonalRequest",
+                "file": "src/Request/Seasonal/SeasonalRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Seasonal\\SeasonalParser",
+                "file": "src/Parser/Seasonal/SeasonalParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Seasonal\\Seasonal",
+                "file": "src/Model/Seasonal/Seasonal.php"
+            },
+            "returnType": "Model\\Seasonal\\Seasonal",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/anime/season/later",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\Seasonal\\SeasonalParserTest",
+                "file": "test/unit/Parser/Seasonal/SeasonalParserTest.php"
+            },
+            "notes": "getSeasonal"
+        },
+        {
+            "method": "getTopAnime",
+            "kind": "model",
+            "domain": "top",
+            "request": {
+                "class": "Jikan\\Request\\Top\\TopAnimeRequest",
+                "file": "src/Request/Top/TopAnimeRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Top\\TopAnimeParser",
+                "file": "src/Parser/Top/TopAnimeParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Top\\TopAnime",
+                "file": "src/Model/Top/TopAnime.php"
+            },
+            "returnType": "Model\\Top\\TopAnime",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": null,
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getTopAnime"
+        },
+        {
+            "method": "getTopCharacters",
+            "kind": "model",
+            "domain": "top",
+            "request": {
+                "class": "Jikan\\Request\\Top\\TopCharactersRequest",
+                "file": "src/Request/Top/TopCharactersRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Top\\TopCharactersParser",
+                "file": "src/Parser/Top/TopCharactersParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Top\\TopCharacters",
+                "file": "src/Model/Top/TopCharacters.php"
+            },
+            "returnType": "Model\\Top\\TopCharacters",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": null,
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getTopCharacters"
+        },
+        {
+            "method": "getTopManga",
+            "kind": "model",
+            "domain": "top",
+            "request": {
+                "class": "Jikan\\Request\\Top\\TopMangaRequest",
+                "file": "src/Request/Top/TopMangaRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Top\\TopMangaParser",
+                "file": "src/Parser/Top/TopMangaParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Top\\TopManga",
+                "file": "src/Model/Top/TopManga.php"
+            },
+            "returnType": "Model\\Top\\TopManga",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": null,
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getTopManga"
+        },
+        {
+            "method": "getTopPeople",
+            "kind": "model",
+            "domain": "top",
+            "request": {
+                "class": "Jikan\\Request\\Top\\TopPeopleRequest",
+                "file": "src/Request/Top/TopPeopleRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Top\\TopPeopleParser",
+                "file": "src/Parser/Top/TopPeopleParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Top\\TopPeople",
+                "file": "src/Model/Top/TopPeople.php"
+            },
+            "returnType": "Model\\Top\\TopPeople",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": null,
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getTopPeople"
+        },
+        {
+            "method": "getUserAnimeList",
+            "kind": "raw",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserAnimeListRequest",
+                "file": "src/Request/User/UserAnimeListRequest.php"
+            },
+            "parser": null,
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/animelist/{username}/load.json{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "raw JSON client call \u2014 bypasses the parser layer"
+        },
+        {
+            "method": "getUserClubs",
+            "kind": "array",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserClubsRequest",
+                "file": "src/Request/User/UserClubsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\User\\ClubParser",
+                "file": "src/Parser/User/ClubParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/profile/{username}/clubs",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getUserClubs"
+        },
+        {
+            "method": "getUserFriends",
+            "kind": "model",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserFriendsRequest",
+                "file": "src/Request/User/UserFriendsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\User\\Friends\\FriendsParser",
+                "file": "src/Parser/User/Friends/FriendsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\User\\Friends",
+                "file": "src/Model/User/Friends.php"
+            },
+            "returnType": "Model\\User\\Friends",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/profile/{username}/friends{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getUserFriends"
+        },
+        {
+            "method": "getUserHistory",
+            "kind": "array",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserHistoryRequest",
+                "file": "src/Request/User/UserHistoryRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\User\\History\\HistoryParser",
+                "file": "src/Parser/User/History/HistoryParser.php"
+            },
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/history/{username}/{type}",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\UserHistory\\UserHistoryParserTest",
+                "file": "test/unit/Parser/UserHistory/UserHistoryParserTest.php"
+            },
+            "notes": "getUserHistory"
+        },
+        {
+            "method": "getUserMangaList",
+            "kind": "raw",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserMangaListRequest",
+                "file": "src/Request/User/UserMangaListRequest.php"
+            },
+            "parser": null,
+            "model": null,
+            "returnType": "array",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/mangalist/{username}/load.json{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "raw JSON client call \u2014 bypasses the parser layer"
+        },
+        {
+            "method": "getUserProfile",
+            "kind": "model",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserProfileRequest",
+                "file": "src/Request/User/UserProfileRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\User\\Profile\\UserProfileParser",
+                "file": "src/Parser/User/Profile/UserProfileParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\User\\Profile",
+                "file": "src/Model/User/Profile.php"
+            },
+            "returnType": "Model\\User\\Profile",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/profile/{username}/",
+            "paged": false,
+            "deprecated": false,
+            "test": {
+                "class": "JikanTest\\Parser\\UserProfile\\UserProfileParserTest",
+                "file": "test/unit/Parser/UserProfile/UserProfileParserTest.php"
+            },
+            "notes": "getUserProfile"
+        },
+        {
+            "method": "getUserRecommendations",
+            "kind": "model",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserRecommendationsRequest",
+                "file": "src/Request/User/UserRecommendationsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Recommendations\\UserRecommendationsParser",
+                "file": "src/Parser/Recommendations/UserRecommendationsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Recommendations\\UserRecommendations",
+                "file": "src/Model/Recommendations/UserRecommendations.php"
+            },
+            "returnType": "Model\\Recommendations\\UserRecommendations",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/profile/{username}/recommendations?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getUserRecommendations"
+        },
+        {
+            "method": "getUserReviews",
+            "kind": "model",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UserReviewsRequest",
+                "file": "src/Request/User/UserReviewsRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\User\\Reviews\\UserReviewsParser",
+                "file": "src/Parser/User/Reviews/UserReviewsParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\User\\Reviews\\UserReviews",
+                "file": "src/Model/User/Reviews/UserReviews.php"
+            },
+            "returnType": "Model\\User\\Reviews\\UserReviews",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/profile/{username}/reviews?p={page}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getUserReviews"
+        },
+        {
+            "method": "getUserSearch",
+            "kind": "model",
+            "domain": "search",
+            "request": {
+                "class": "Jikan\\Request\\Search\\UserSearchRequest",
+                "file": "src/Request/Search/UserSearchRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\Search\\UserSearchParser",
+                "file": "src/Parser/Search/UserSearchParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Search\\UserSearch",
+                "file": "src/Model/Search/UserSearch.php"
+            },
+            "returnType": "Model\\Search\\UserSearch",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/users.php?{query}",
+            "paged": true,
+            "deprecated": false,
+            "test": null,
+            "notes": "getUserSearch"
+        },
+        {
+            "method": "getUsernameById",
+            "kind": "model",
+            "domain": "user",
+            "request": {
+                "class": "Jikan\\Request\\User\\UsernameByIdRequest",
+                "file": "src/Request/User/UsernameByIdRequest.php"
+            },
+            "parser": {
+                "class": "Jikan\\Parser\\User\\UsernameByIdParser",
+                "file": "src/Parser/User/UsernameByIdParser.php"
+            },
+            "model": {
+                "class": "Jikan\\Model\\Common\\UserMetaBasic",
+                "file": "src/Model/Common/UserMetaBasic.php"
+            },
+            "returnType": "Model\\Common\\UserMetaBasic",
+            "parameters": [
+                {
+                    "name": "request",
+                    "type": "",
+                    "required": true
+                }
+            ],
+            "pathPattern": "https://myanimelist.net/comments.php?id={id}",
+            "paged": false,
+            "deprecated": false,
+            "test": null,
+            "notes": "getUsernameById"
+        }
+    ]
+}

@@ -488,7 +488,7 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    public function getAnimeSearchAlt(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearchAlt
+    public function getAnimeSearchAlt(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {

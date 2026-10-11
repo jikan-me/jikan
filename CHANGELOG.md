@@ -134,6 +134,10 @@ the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing 
 - **Date ranges preserve precision** — a year-only or month-only date (`1989`, `May, 1979`) no
   longer surfaces as `January 1 of the year`; `from_prop`/`to_prop` `month`/`day` are `null` when
   the source date omitted them (jikan#486).
+- **`getAnimeSearchAlt()` no longer references a non-existent model class** — its declared return
+  type pointed at `Model\Search\AnimeSearchAlt`, which did not exist, so calling it would fatal;
+  it now declares what the shared parser actually returns (`Model\Search\AnimeSearch`). Found by the
+  new endpoint-manifest gate.
 - **Placeholder images are no longer parsed (jikan#488)** — MyAnimeList's "no image" placeholder
   assets (`questionmark_23.gif`, `questionmark_50.gif`, `qm_50.gif`,
   `company/placeholder.png`, `na.gif`, `na_series_*.png|json`) are now surfaced as `null` instead

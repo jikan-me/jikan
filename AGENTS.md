@@ -38,16 +38,18 @@ arch-rules, doc manifest) matter when your task touches the public surface or th
 | Where does X live | `CONTRIBUTING.md` §4 | Location table |
 | Is X deprecated / why | `DEPRECATIONS.md` + the `@deprecated` tag | Rationale in `DECISIONS.md` ("not scheduled" policy) |
 | Does this conform | `API-STANDARD.md` + `.backend-suite/arch-rules.json` | Review rejects drift |
-| What is the whole public surface | `readme.md` (authored) | A machine-readable endpoint catalog is planned — not built yet |
+| What is the whole public surface | `llm.txt` (generated catalog) + `readme.md` (authored) | `llm.txt` is derived — regenerate via `scripts/generate_endpoints.php`, never hand-edit |
 | Change consumer-visible behaviour | `CHANGELOG.md` §1–2 | An entry is required, or the change does not belong |
 | Run the gates | `CONTRIBUTING.md` §5–6 | `composer test`, php-cs-fixer, the backend-suite audits, per-install harness wiring |
 
 ## 4. Derived collateral — regenerate, never hand-edit
 
 Files produced by running something, never written by hand, and safe to delete and regenerate:
+`.backend-suite/endpoints.json` (the endpoint catalog), `llm.txt` (its human/agent-readable digest),
 `.backend-suite/survey.json` and the recorded fixtures
-(`vendor/jikan-me/jikan-fixtures/fixtures/`). If you need to change what they say, change the code
-or docs that produce them — not the file.
+(`vendor/jikan-me/jikan-fixtures/fixtures/`). Regenerate with `composer endpoints:write` /
+`scripts/generate_endpoints.php --write`; keep it honest with `composer endpoints:check`. If you need
+to change what they say, change the code or docs that produce them — not the file.
 
 ## 5. Rules that live only here
 

@@ -50,7 +50,9 @@ $results = $client->getAnimeSearch(new AnimeSearchRequest())->getResults();
 Every public endpoint is one `MalClient` method taking one `Jikan\Request\*` value object; the
 method list, the class-per-endpoint surface, and the conventions each must follow are documented in
 `readme` (conceptually), `API-STANDARD.md` (requirements) and `CONTRIBUTING.md` §3 (how to add one).
-A machine-readable endpoint catalog is planned but not yet built.
+The full machine-readable catalog lives in `llm.txt` (and `.backend-suite/endpoints.json`) — derived,
+regenerated with `composer endpoints:write`. On every change that touches the surface, run
+`composer endpoints:write` and `composer endpoints:check`.
 
 # Jikan REST API
 

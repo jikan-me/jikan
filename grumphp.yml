@@ -5,12 +5,20 @@ grumphp:
             config: .php-cs-fixer.dist.php
         git_blacklist:
             keywords:
-                - 'var_dump'
-                - 'exit'
+                # Debug helpers and process termination, scoped to their actual
+                # call forms. git grep matches these as POSIX basic regexes, so
+                # a bare '(' is a literal paren: 'var_dump(' catches the call,
+                # not prose that merely mentions the word — a PHP docblock that
+                # says "exits with exit code N" no longer blocks the commit.
+                # 'else' is kept deliberately: jikan is an early-return
+                # codebase (zero 'else' in src/) and the gate enforces that style.
+                - 'var_dump('
+                - 'die('
+                - 'ini_set('
+                - 'error_reporting('
+                - 'exit('
+                - 'exit;'
                 - 'else'
-                - 'ini_set'
-                - 'error_reporting'
-                - 'die'
         paratest:
             always_execute: true
         phplint: ~

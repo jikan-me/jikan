@@ -82,13 +82,14 @@ per kind in `CHANGELOG.md` §3. Announcement order, in one flow (also see `DEPRE
   `test_network_coupling` gate rejects any `HttpClient::create()` fallback returning.
 - A public method with no fixture-backed test.
 
-## 7. Open decisions (maintainer sign-off)
+## 7. Decisions on this standard (resolved 2026-10-11)
 
-- Whether the deprecated title accessors (`Anime::getTitle*`, `Manga::getTitle*`,
-  `Producer::getName()`) receive a removal version, or stay "not scheduled" indefinitely
-  (recorded, not decided, in `DEPRECATIONS.md`).
-- This document becomes the review benchmark — anything a reviewer wants changed here is changed
-  in this document and the code together, deliberately.
+- **The deprecated title accessors stay "not scheduled" indefinitely.** No removal version
+  will be set for `Anime::getTitle*`, `Manga::getTitle*` or `Producer::getName()`; the public
+  surface stays a compatibility superset (see `DECISIONS.md`, "Deprecation and release policy").
+- **This standard is approved as written** and is the review benchmark: code that drifts from any
+  convention above is rejected in review, and changing a convention means changing this document
+  and the code together, deliberately.
 
 ---
 

@@ -12,7 +12,7 @@ codebase owners; must change whenever the toolchain or the checks change.
 
 ```bash
 # Get current
-git checkout 5.0.0 && git pull
+git checkout master && git pull
 
 # Install dependencies (PHP ^8.4)
 composer install
@@ -27,9 +27,9 @@ recordings and any test its requests are missing **fails with a hard error**
 (the cache is a pure reader; it never fetches live — see `.backend-suite`
 `audit_test_network_coupling`).
 
-**Never commit directly to `5.0.0`.** Cut a feature branch from it and land
-changes through a reviewed PR into `5.0.0`. (`5.0.0` is the canonical release branch; the local
-clone often carries it under the alias `v5` — use whichever spelling resolves for you.)
+**Never commit directly to `master`.** Cut a feature branch from it and land
+changes through a reviewed PR into `master`. The v5 line is tagged as it ships
+(`v5.0.0-beta`); `5.0.0` was the pre-master branch name for that line and is no longer used.
 
 Also read [`AGENTS.md`](AGENTS.md) before starting: it is the navigation map (what to read in what
 order, where things live, the task router) — `CLAUDE.md` is just an `@AGENTS.md` import.
@@ -54,7 +54,7 @@ The pre-commit hook also runs the backend-suite gates from `.backend-suite/hooks
 `.git/hooks/pre-commit` (suite gate first, then grumphp) — see §6 to wire it on a
 fresh checkout.
 
-- [ ] Branch is cut from current `5.0.0`
+- [ ] Branch is cut from current `master`
 - [ ] `composer test` passes (empty findings in `.backend-suite/scratch/`)
 - [ ] The documents affected by this change are updated **in the same PR** (`CHANGELOG.md`
       for consumer-visible changes, `DECISIONS.md` for decisions, the `readme.md` **Usage**

@@ -12,19 +12,23 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 **Notice**: Jikan does not support authenticated requests. You can not update your lists.
 
+**Status**: active development is on `master` — the v5 line, currently **5.0.0-beta**. The v4 line
+is **end of life** and no longer supported. Jikan is a PHP **library**, not a hosted service; a
+self-hosted REST API exists as a separate project.
+
 ## Getting Started
 
 | Version                                                                                 | Support                             | PHP                                                                         | Lumen/Laravel |
 |-----------------------------------------------------------------------------------------|-------------------------------------|-----------------------------------------------------------------------------|---------------| 
-| [`^5` (5.0.0-beta)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan))  | 🚧 New features - WIP · **beta (pre-release)** | [![8.4](https://img.shields.io/badge/PHP-^%208.4-blue.svg?style=flat)]()    | `^11`,`^12`   |
-| [`^4` (master)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan)) | ✅ Maintenance only                  | [![8.1](https://img.shields.io/badge/PHP-^%208.1-blue.svg?style=flat)]()    | `^9`,`^10`    |
+| [`^5` (master · 5.0.0-beta)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan))  | 🚧 New features - WIP · **beta (pre-release)** | [![8.4](https://img.shields.io/badge/PHP-^%208.4-blue.svg?style=flat)]()    | `^11`,`^12`   |
+| [`^4`](https://github.com/jikan-me/jikan/releases/tag/v4.0.13)                           | ❌ **End of life** — no longer supported | [![8.1](https://img.shields.io/badge/PHP-^%208.1-blue.svg?style=flat)]()    | `^9`,`^10`    |
 | [`^3`](https://github.com/jikan-me/jikan/releases/tag/v3.3.2)                           | ❌ No longer maintained or supported | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]()    | `^8`, `^9`    |
 | [`^2`](https://github.com/jikan-me/jikan/tree/2.19.4)                                   | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`          
 | [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)                                   | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*`       |
 
 
 1. `composer require jikan-me/jikan "^5.0@beta"`  <!-- the 5.0.0 line is pre-release; a plain `^5` has no stable tag to resolve to yet -->
-2. [Documentation](http://docs.jikan.moe)
+2. Read the [Repository docs](#repository-docs) below — this repo holds the canonical documentation.
 
 ### Repository docs
 
@@ -54,13 +58,12 @@ The full machine-readable catalog lives in `llm.txt` (and `.backend-suite/endpoi
 regenerated with `composer endpoints:write`. On every change that touches the surface, run
 `composer endpoints:write` and `composer endpoints:check`.
 
-# Jikan REST API
+# REST API (self-hosted)
 
-A REST API service is available as well
+The library powers a separate, **self-hostable** REST API project:
+[jikan-me/jikan-rest](https://github.com/jikan-me/jikan-rest).
 
-- **[REST API DOCUMENTATION](https://jikan.docs.apiary.io)**
-- **[Apps/Projects using the REST API](https://jikan.moe/showcase)**
-- **[Host the REST API yourself](https://github.com/jikan-me/jikan-rest)**
+No hosted/public instance of the REST API is provided.
 
 ## Wrappers
 
@@ -100,7 +103,7 @@ audits). Full workflow: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 A huge thank you to all our Patrons! 🙏 This project wouldn't be running without your support.
 
-We have a free [REST API service](https://jikan.moe), if you wish to support us you can [become a Patron!](https://patreon.com/jikan)
+If you'd like to support the project, you can [become a Patron!](https://patreon.com/jikan)
 
 ### Sugoi (すごい) Patrons
 

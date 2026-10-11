@@ -2,17 +2,12 @@
   "surveyVersion": 1,
   "sourceStamp": {
     "generatedBy": "backend-suite bin/survey.py v1",
-    "generatedAt": "2026-10-11T14:33:58Z",
+    "generatedAt": "2026-10-11T15:27:27Z",
     "projectRoot": "/Users/irfan/jikan",
-    "commit": "ea4fee0d724666d9719d6e5bfa1c11937f643192",
-    "branch": "feat/backend-suite-hardening",
+    "commit": "78d5179861d1a14477dca2e6c9dc399c6a8d9ea1",
+    "branch": "docs/remaining-context-stubs",
     "workingTreeDirty": true,
     "dirtyFiles": [
-      "API-STANDARD.md",
-      "CHANGELOG.md",
-      "CONTRIBUTING.md",
-      "DECISIONS.md",
-      "DEPRECATIONS.md",
       "backend-suite/docs.manifest.json"
     ],
     "regenerate": "python3 ${CLAUDE_PLUGIN_ROOT}/bin/survey.py",

@@ -1,5 +1,5 @@
 {
-  "_readme": "Maps doc ROLES (the vocabulary skills speak in) to the actual paths in THIS project. Full role vocabulary and the exit-code contract: plugins/backend-suite/docs/DOC-ROLES.md. readme.md is the entry point and the only fully-authored doc: a library's public API surface is documented there. The other five roles (api-standard, changelog, contributing, decisions, deprecations) map to stubs scaffolded 2026-10-11 — resolve exits 5 for them (registered, unwritten) until the DECIDE markers are answered. App/org-shaped roles (brief, backlog, builds, deployment, production-readiness) are declined with reasons; the rest are unmapped, which makes a skill stop and ask rather than guess.",
+  "_readme": "Maps doc ROLES (the vocabulary skills speak in) to the actual paths in THIS project. Full role vocabulary and the exit-code contract: plugins/backend-suite/docs/DOC-ROLES.md. All seven mapped roles are authored: readme.md plays entry-point and api (the library's public surface), and api-standard, changelog, contributing, decisions and deprecations are their own files. Five app/org-shaped roles (brief, backlog, builds, deployment, production-readiness) are declined with reasons. A role not listed here is unmapped, which makes a skill stop and ask rather than guess.",
   "roles": {
     "entry-point": "readme.md",
     "api": "readme.md",

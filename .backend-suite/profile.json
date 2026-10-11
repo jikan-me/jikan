@@ -15,6 +15,9 @@
     "otherSharedDirs": [],
     "testRoot": "test/unit"
   },
+  "pipelines": {
+    "scripts": "scripts"
+  },
   "audits": {
     "exceptionsFile": ".backend-suite/exceptions.json",
     "archRulesFile": ".backend-suite/arch-rules.json",
@@ -122,6 +125,13 @@
         "on": "2026-10-11",
         "value": [],
         "evidence": "no shared-component directories in a flat PSR-4 library"
+      },
+      "pipelines.scripts": {
+        "state": "declared",
+        "by": "irfan (beta preparation)",
+        "on": "2026-10-12",
+        "value": "scripts",
+        "evidence": "scripts/generate_endpoints.php lives there; declared so survey --check does not flag the directory as undeclared"
       }
     }
   }

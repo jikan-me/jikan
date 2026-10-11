@@ -1,9 +1,3 @@
----
-status: stub
-# Scaffolded from a template, not yet written. Delete this whole
-# frontmatter block once you have authored the document. Until then it
-# resolves with exit 5 and counts as design debt, never as coverage.
----
 # Jikan — Decision Log
 
 Every significant decision made **after** the initial specification — scope changes, design pivots,
@@ -62,15 +56,10 @@ reader otherwise assumes the decision propagated further than it did.
 
 ## Organisation
 
-<!-- DECIDE: group entries by topic, or list them chronologically?
-
-     Topical scales better for reading — someone asking "how does auth work" finds everything in one
-     place. Chronological scales better for auditing — "what changed in March" is trivial.
-
-     Topical is usually right, since this document is read to answer questions rather than to review
-     a period. But topical requires discipline: a new entry must go in the right section, and the
-     Date fields carry all the chronology. Pick one and say which here, because a document that is
-     half-topical and half-chronological is neither. -->
+Entries are grouped **topically**; the `Date` fields carry all the chronology. A new entry goes in
+the section it answers, creating a section only when none fits. This document exists to answer
+questions, not to review periods — that is the reason the template's usual default of "topical is
+usually right" applies here outright.
 
 Whichever you choose: **never reorder or reword existing entries** to fit. Append.
 
@@ -85,9 +74,10 @@ An entry that turns out to be wrong gets a correction, not an edit. Two acceptab
 Never delete the original claim. Someone acted on it, and a reader who remembers it needs to find
 out it changed — silently removing it makes the log untrustworthy for everything else it says.
 
-<!-- DECIDE: which of the two correction forms is standard here? Both work; using both
-     inconsistently means a reader cannot tell whether an uncorrected entry is still true or just
-     never revisited. -->
+**The standard here is the inline correction:** `**Correction (YYYY-MM-DD):**` appended to the
+original entry, stating what was wrong and what is true. Used consistently, so an entry with no
+correction paragraph reads as "still true as far as anyone knows". A superseding entry is reserved
+for the case where later work builds on the corrected decision rather than replacing it.
 
 ## Growth
 
@@ -101,8 +91,8 @@ If it becomes unwieldy:
 - **Never** prune old entries to save space. The old ones are the valuable ones; recent decisions are
   still in people's heads, and decade-old ones are the only record
 
-<!-- DECIDE: at what size does this get split, and along what lines? Answering now is easier than
-     answering at 3,000 lines under pressure. -->
+**Split trigger:** when any single topical section reaches 25 entries, that section moves to its own
+file with this document as the index and a pointer link where the section was.
 
 ## What belongs here, and what does not
 
@@ -114,9 +104,10 @@ decisions to *not* do something.
 already obvious from the code, and — importantly — plans. A plan is what you intend; a decision is
 what you settled. Plans belong in a working-notes directory where they can be superseded freely.
 
-<!-- DECIDE: what is the threshold for "significant"? Too low and this fills with noise nobody reads;
-     too high and the interesting decisions never get written down. A useful test: would someone
-     reading the code in a year assume this was a mistake? Then log it. -->
+**The significance threshold is the template's own test, kept:** *would someone reading the code a
+year from now assume this was a mistake?* If yes, it is logged. That test is why the constants
+decision and the exemptions decision above both appear — each is a deliberate choice that the code
+does not explain on its own.
 
 ---
 
@@ -140,4 +131,4 @@ what you settled. Plans belong in a working-notes directory where they can be su
 
 ---
 
-_Last updated: <!-- DERIVED: install date -->_
+_Last updated: 2026-10-11_

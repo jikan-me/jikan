@@ -1,0 +1,49 @@
+# .backend-suite/.gitignore — scaffolded by bin/init.py, safe to commit as-is.
+#
+# This directory holds two very different kinds of file, and they need opposite
+# treatment (see the suite's CONCEPTS.md, "Derived collaterals"):
+#
+#   AUTHORED — profile.json, docs.manifest.json, arch-rules.json,
+#   exceptions.json, hooks.map.json, known-traps.json, component-*.json,
+#   baselines/. Review these, argue about them, commit them. They are the
+#   project's own declared facts and its ratchet.
+#
+#   REGENERABLE — everything below. Produced by running an audit, never
+#   hand-written, and safe to delete at any time.
+#
+# Regenerable output is ignored for a reason beyond tidiness: audit findings
+# quote the source they found. An audit finding's snippet is a literal line of
+# this project's code, and the literals an audit greps for can be the same
+# shape a hardcoded credential has. Committing findings into a client
+# repository publishes code excerpts by default, which is not a decision a
+# scaffolder should make silently on a team's behalf.
+#
+# If your project needs a finding to be durable — a baseline, an accepted
+# exception — that belongs in an AUTHORED file above, deliberately, not in
+# regenerable output that happens to have been committed.
+
+findings/
+evidence/
+scratch/
+.golden_local_ab/
+
+# Local working state some audits write alongside their committed counterpart.
+*.local.json
+
+# Raw report /audit-layer-boundaries saves on every plain run (its --out
+# default). It used to land in a top-level scripts/ directory this file could
+# not reach. If an old copy is still tracked there, `git rm --cached` it.
+layer-boundaries-findings.json
+
+# Raw report engine/mockapi/audit_mock_api.py saves on every plain run (its
+# --out default). It used to be <pipelines.mockApi>/findings.json at the
+# project root, out of reach of this file. If an old copy is still tracked
+# there, `git rm --cached` it.
+mock-api-findings.json
+
+# Deliberately NOT ignored: survey.json. It is derived and regenerable, but the
+# test for ignoring something here is whether it quotes the project's source —
+# survey.json records paths, stack and candidate counts, never a matched line.
+# docs/CATALOG.md is the precedent: a derived file may be committed as long as
+# it carries a source stamp (survey.json has `sourceStamp`) so nobody mistakes
+# it for something hand-written and edits it.

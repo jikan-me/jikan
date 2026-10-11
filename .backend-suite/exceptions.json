@@ -1,0 +1,15 @@
+{
+  "_readme": "Accepted, deliberate exceptions to the audits — never a place to silence a finding you have not actually decided to accept. Two shipped audits consult this file: audit_error_handling.py reads errorHandling.intentionalDeadStates, and audit_api_consistency.py reads apiConsistency (hardBakedStrings, semanticsExempt); check the relevant script's docstring before adding a category it does not expect. Keep this file small: an exceptions list that grows without review is an audit that has quietly stopped auditing.",
+  "errorHandling": {
+    "_comment": "Consumed by bin/audit_error_handling.py. intentionalDeadStates maps a failure-state CLASS NAME this project has retired on purpose to the reason. The two entries below are NOT dead states - they are jikan's two live exception types, consumed by throwing and by a consumer's catch. They are exempted because the audit's dead-state check classifies a class as dead when nothing type-tests it with instanceof, and that consumption model is screen-shaped: it does not describe how a PHP library's exceptions are consumed (catch (\\Exception)). A library has no 'state classes' for this check to mean the same thing it means in a UI app.",
+    "intentionalDeadStates": {
+      "BadResponseException": "not a dead state: jikan's HTTP-error exception, thrown by HttpClientWrapper::request() on >= 400 responses and rethrown through MalClient. The audit's dead-state check only understands instanceof-consumption, which does not describe how a library exception is consumed (callers catch \\Exception). Check is screen-shaped; exemption is the N/A record.",
+      "ParserException": "not a dead state: jikan's parse-error exception, the shared failure type every MalClient method maps onto via ParserException::fromRequest(). Same screen-shaped dead-state check as BadResponseException; exemption is the N/A record."
+    }
+  },
+  "apiConsistency": {
+    "_comment": "Consumed by bin/audit_api_consistency.py. hardBakedStrings: hardcoded literal -> reason the audit must accept it. semanticsExempt: repo-relative path or file stem -> reason, for a file exempt from the semantics-provenance check. Every entry carries its reason; a bare name is not an exemption.",
+    "hardBakedStrings": {},
+    "semanticsExempt": {}
+  }
+}

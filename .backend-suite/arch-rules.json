@@ -1,0 +1,22 @@
+{
+  "_readme": "Facts about THIS project's architecture (banned imports, layer directions, error vocabulary) that the structural audits enforce. An absent section makes the matching audit refuse to run rather than pass vacuously. Only sections we genuinely intend to run on this library are configured. contractHeaders (no CONTRACT-banner convention in jikan), layerBoundaries (propose-config measured no clean layer direction: Model<->Parser import each other ~120 files both ways), apiConsistency (checks/scope are explicit human decisions) and the REST-app sections are deliberately absent so those audits refuse with exit 2 rather than report a confident zero.",
+  "errorHandling": {
+    "_comment": "Consumed by bin/audit_error_handling.py, scoped to jikan's own error machinery. exception_type is the shared exception every MalClient failure is mapped onto (ParserException::fromRequest). jikan has no per-call guard FUNCTION; its guard is the shared funnel class - every outbound request must go through HttpClientWrapper, so a 'bypass' is a call straight to the raw Symfony client injected in MalClient ($this->httpClient->request), and the audit's bypass check is pointed at exactly that shape. state_class_pattern/suffix scope check 3 to the two library exception classes, which are exempted in exceptions.json because a library surfaces failures by throwing and consumers consume them by catching - the audit's instanceof-consumption model is screen-shaped.",
+    "exception_type": "Jikan\\Exception\\ParserException",
+    "guard_call": "HttpClientWrapper",
+    "client_call_pattern": "\\$this->httpClient->request\\s*\\(",
+    "error_state_widget": "ParserException",
+    "error_message_field": "getMessage",
+    "state_class_pattern": "class\\s+(\\w+Exception)\\b",
+    "state_file_suffix": "Exception.php",
+    "pages_marker": "/Request/"
+  },
+  "testNetworkCoupling": {
+    "_comment": "Consumed by bin/audit_test_network_coupling.py. Measured on jikan 2026-10-11: 0/41 host-referencing test files construct a live client directly (all 39 extend JikanTest\\TestCase, which injects MockHttpClient over HttpFilesystemCacheClientCallback); the coupling is shape 2 - HttpFilesystemCacheClientCallback falls back to HttpClient::create() whenever a fixture file is missing, so a checkout that skipped `composer link-fixtures` runs the whole suite live while looking offline.",
+    "testsGlob": "test/**/*.php",
+    "liveHostPattern": "myanimelist\\.net",
+    "mockClientPattern": "(?:MockHttpClient|HttpFilesystemCacheClientCallback|extends\\s+TestCase)",
+    "fallbackPattern": "HttpClient::create\\(\\)",
+    "exempt": {}
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "_readme": "Maps doc ROLES (the vocabulary skills speak in) to the actual paths in THIS project. Full role vocabulary and the exit-code contract: plugins/backend-suite/docs/DOC-ROLES.md. Map only the roles you actually have. readme.md is the entry point and, for a library, the only authored record of the public API surface (getAnime/getManga/... usage). Jikan deliberately has no api-standard, decisions or backlog documents in this repo, so those roles are left unmapped (an unmapped role makes a skill stop and ask rather than guess).",
+  "roles": {
+    "entry-point": "readme.md",
+    "api": "readme.md"
+  }
+}

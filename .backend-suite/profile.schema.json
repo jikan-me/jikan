@@ -1,0 +1,510 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/irfan-dahir/ai-backend-suite/schemas/profile.schema.json",
+  "title": "Backend Quality Suite — project profile",
+  "description": "Schema for .backend-suite/profile.json. The suite's engines carry no project literals; everything project-specific is declared here. `backend-suite doctor` validates a profile against this schema and additionally checks that every declared path resolves.",
+  "type": "object",
+  "required": [
+    "profileVersion",
+    "project",
+    "adapters",
+    "source",
+    "docs"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "relativePath": {
+      "description": "A repo-relative path. Absolute paths, home-relative paths, Windows drive paths, and parent-escapes are all rejected: a committed absolute path is machine-specific and silently inert on every other checkout. This repo has a live instance of that bug in .claude/settings.json (four dead /Users/<name>/... entries), which is why the prohibition is in the schema rather than a convention.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!~)(?![A-Za-z]:)(?!\\.\\./).+$"
+    },
+    "provenanceEntry": {
+      "type": "object",
+      "description": "How one profile field got its value. RFC-0002 §3b: inference without provenance is indistinguishable from a fact, so a machine's guess must never be able to wear a human decision's clothes.",
+      "required": [
+        "state"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "inferred",
+            "declared",
+            "approved"
+          ],
+          "description": "'inferred' — a survey or a skill proposed it, and nothing downstream may treat it as authoritative. 'declared' — a human wrote it. 'approved' — a human reviewed an inferred value and ratified it. There is deliberately no fourth value here: 'contradicted' is COMPUTED by doctor.py when an approved or declared field stops matching the tree, and storing it would make a stale fact re-assertable by hand (RFC-0002 §3h)."
+        },
+        "by": {
+          "type": "string",
+          "description": "Who decided it. Required in spirit for 'declared'/'approved' — an unattributed ratification cannot be re-examined — but not schema-required, because refusing to record provenance at all is worse than recording it anonymously."
+        },
+        "on": {
+          "type": "string",
+          "description": "ISO date of the decision. Informational only: staleness is measured in diffs via verifiedAgainst.commit, never in days (RFC-0002 §3h rejects a calendar TTL on approvals outright)."
+        },
+        "value": {
+          "description": "The field's value as ratified. doctor.py compares it against the profile's live value: a difference means the value was edited after ratification and the ratification no longer covers it. Optional — omitting it only narrows what can be contradicted."
+        },
+        "evidence": {
+          "type": "string",
+          "description": "Why this state is justified — the survey signal, or the reasoning a skill argued from. Load-bearing for 'inferred', since ratifying a proposal means reviewing its argument."
+        },
+        "verifiedAgainst": {
+          "type": "object",
+          "description": "The tree this field was last confirmed against. RFC-0002 §3h's `verified_against`, spelled camelCase for consistency with the rest of this file. A timestamp makes staleness a calendar guess; a commit makes it a diff — 'verified against a tree 339 commits ago' is a fact, 'verified 24 days ago' is an eyebrow-raise.",
+          "additionalProperties": false,
+          "required": [
+            "commit"
+          ],
+          "properties": {
+            "commit": {
+              "type": "string",
+              "description": "Full or abbreviated git SHA of the tree the value was confirmed against."
+            },
+            "dirty": {
+              "type": "boolean",
+              "description": "True when the working tree differed from that commit at confirmation time. A confirmation against uncommitted work that reads as a confirmation of HEAD is a lie, so it is stamped rather than forbidden."
+            }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "_readme": {
+      "type": "string"
+    },
+    "profileVersion": {
+      "const": 1
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "framework"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "audience": {
+          "type": "string",
+          "description": "Who uses the product. Feeds copy and accessibility judgement."
+        },
+        "framework": {
+          "type": "string",
+          "description": "Free text, read by prompts. Include deliberate non-features (e.g. 'light-only') so audits do not report them as gaps."
+        },
+        "singleLocale": {
+          "type": "string",
+          "description": "Set when the project is deliberately single-locale, so no skill proposes i18n scaffolding."
+        },
+        "projectKind": {
+          "description": "Which archetype this repository is. Selects which doc roles are expected, which discovery runs, and which audits apply at all. The enum is closed on purpose: a value outside it is a refusal, never a fall-through to 'app' — assuming 'app' for a package is what makes a scaffolder emit an empty flows document and an audit report clean on documents it never looked for. Optional, so an existing profile keeps working; anything that needs the kind must then say it does not know rather than assume one. Vocabulary mirrored in templates/docs/roles.json, which also carries per-role applicability.",
+          "enum": [
+            "app",
+            "design-system",
+            "docs-site"
+          ]
+        },
+        "workspace": {
+          "type": "boolean",
+          "description": "True when this repository is a container of archetypes (a monorepo). Deliberately an orthogonal flag rather than a fourth projectKind: as a kind it would force a repo holding an app and a package to pick one and be wrong either way. Each role in roles.json declares whether it resolves once at workspace root or once per member."
+        }
+      }
+    },
+    "adapters": {
+      "type": "object",
+      "description": "Which implementation fills each stack seam. Unknown values fail fast rather than silently no-op.",
+      "required": [
+        "lang"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "lang": {
+          "type": "string",
+          "examples": [
+            "dart",
+            "tsx",
+            "swift"
+          ]
+        },
+        "assets": {
+          "type": "string",
+          "examples": [
+            "flutter_pubspec"
+          ]
+        },
+        "scaffold": {
+          "type": "string",
+          "examples": [
+            "flutter"
+          ]
+        },
+        "schema": {
+          "type": "string",
+          "examples": [
+            "dart_fromjson"
+          ]
+        },
+        "mock": {
+          "type": "string",
+          "examples": [
+            "postman"
+          ]
+        },
+        "doc": {
+          "type": "string",
+          "examples": [
+            "markdown_api"
+          ]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "fileGlob"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "root"
+          ]
+        },
+        {
+          "required": [
+            "roots"
+          ]
+        }
+      ],
+      "_rootsComment": "`root` was required outright until multi-root support landed (RFC-0002 §3g #3). It is now one of two accepted ways to say the same thing, so every existing profile — both live consumers declare only `root` — validates unchanged. What is NOT accepted is declaring neither: a profile with no source tree at all would make every source audit sweep nothing and report clean.",
+      "properties": {
+        "root": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "roots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Every source tree this project has, for a workspace whose top-level manifest is a stub and whose real sources live in its members. Optional and additive: when absent, `root` answers as it always did; when present, it wins and `root` is ignored. Sweeps union these roots; findings stay repo-relative, so the path itself names the root it came from and no second identifier can drift from it. Declaring neither key is a refusal, not a fallback to the repository root.",
+          "items": {
+            "$ref": "#/$defs/relativePath"
+          }
+        },
+        "fileGlob": {
+          "type": "string"
+        },
+        "screensGlob": {
+          "type": "string"
+        },
+        "featureWidgetsGlob": {
+          "type": "string"
+        },
+        "sharedComponentDir": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "otherSharedDirs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relativePath"
+          }
+        },
+        "testRoot": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "routesFile": {
+          "type": "string",
+          "description": "Project-relative path to the file that DECLARES route paths. Read by /review-docs check C. Not necessarily the file that builds the router.",
+          "not": {
+            "pattern": "^/"
+          }
+        },
+        "_routesComment": {
+          "type": "string"
+        }
+      }
+    },
+    "audits": {
+      "type": "object",
+      "properties": {
+        "exceptionsFile": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "archRulesFile": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "baselineDir": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "docs": {
+      "type": "object",
+      "required": [
+        "manifest"
+      ],
+      "properties": {
+        "manifest": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "debt": {
+      "type": "object",
+      "description": "Configuration for /quality-debt. `audits` is what makes a never-run audit visible: the dashboard reads .backend-suite/findings/, and an audit that has never run leaves no file there, so inferring the expected set from what exists on disk would render its absence invisible.",
+      "properties": {
+        "audits": {
+          "type": "array",
+          "description": "Audits this project expects to have collected findings for, named by the audit key that matches the envelope's `audit` field.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "thresholds": {
+          "type": "object",
+          "description": "Per-audit, per-category grade bands overriding the engine defaults. 144 findings in a 382-file tree and 144 in a 40-file one are not the same condition, and the engine cannot tell which it is looking at.",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "violationBands": {
+                  "type": "array",
+                  "description": "[[maxCount, grade], ...] ascending. First band whose count is not exceeded wins; past the last is F.",
+                  "items": {
+                    "type": "array"
+                  }
+                },
+                "passRateBands": {
+                  "type": "array",
+                  "description": "[[minRate, grade], ...] descending, for audits that report checks rather than violations.",
+                  "items": {
+                    "type": "array"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pipelines": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/relativePath"
+      },
+      "properties": {
+        "_comment": {
+          "type": "string"
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "description": "How this project renders and re-checks its golden corpus. Needed by the golden A/B, which renders both sides on one machine so platform rasterization differences cancel out.",
+      "required": [
+        "goldensDir",
+        "goldensUpdateCommand"
+      ],
+      "properties": {
+        "goldensDir": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "goldensUpdateCommand": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "argv, not a shell string — a string would need a shell to split it, and a shell is how an argument with a space becomes two arguments."
+        },
+        "goldensCheckCommand": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "assets": {
+      "type": "object",
+      "description": "Asset-pipeline facts. Read by the asset adapters.",
+      "properties": {
+        "root": {
+          "$ref": "#/$defs/relativePath"
+        },
+        "palette": {
+          "type": "string"
+        }
+      }
+    },
+    "componentMaturity": {
+      "type": "object",
+      "description": "Where this project's own component-maturity tags live (schema: templates/component-maturity.schema.json). Optional and separate from the suite's internal proven/unverified/experimental/pointer tier — this one is for the project's OWN components (a DsButton, a Table), populated by the project, not by this suite. Absent means no audit can annotate promotion candidates with a maturity tag; it must not be treated as 'everything is stable'.",
+      "required": [
+        "file"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "componentCapabilities": {
+      "type": "object",
+      "description": "Where this project's own component-capabilities manifest lives (schema: templates/component-capabilities.schema.json). Optional, same spirit as componentMaturity: absent means no audit can gate a duplicate-shape match on capability overlap, and that must read as 'no capability signal available', never as 'components have no capabilities' or 'all shape matches are true duplicates'.",
+      "required": [
+        "file"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "verificationGlossary": {
+      "type": "object",
+      "description": "Where this project's own verification-vocabulary glossary lives (schema: templates/verification-glossary.schema.json). Optional: absent means no tooling can resolve what this project's own verification terms (a gate-status word, a tier name, a maturity label distinct from this suite's) mean, and that must read as 'no glossary registered', never as 'this project has no such terms'.",
+      "required": [
+        "file"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    },
+    "release": {
+      "type": "object",
+      "description": "Config for the release-time checks in bin/ (check_version_consistency.py, deploy_docs_site.py). These compose into a release recipe documented in docs/ADOPTING.md rather than one bundled release.sh — see issue #79's research on why 'deploy' does not generalize past a docs site.",
+      "additionalProperties": false,
+      "properties": {
+        "versionSources": {
+          "type": "array",
+          "description": "Files this project considers authoritative for its own version number, read by check_version_consistency.py. Absent or empty means that check has nothing to compare and refuses to run rather than reporting a silent pass.",
+          "items": {
+            "type": "object",
+            "required": [
+              "file",
+              "kind"
+            ],
+            "properties": {
+              "file": {
+                "$ref": "#/$defs/relativePath"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "jsonKey",
+                  "regex",
+                  "changelogTop"
+                ],
+                "description": "How to pull a version string out of this file. 'jsonKey' needs keyPath; 'regex' needs pattern (first capture group); 'changelogTop' takes the first non-[Unreleased] Keep a Changelog heading."
+              },
+              "keyPath": {
+                "type": "string",
+                "description": "Dotted key path into the JSON document, e.g. 'version' or 'packageInfo.version'. Required when kind is 'jsonKey'."
+              },
+              "pattern": {
+                "type": "string",
+                "description": "Regex with one capture group matched against the file's text. Required when kind is 'regex' — used for formats this suite has no parser for, e.g. pubspec.yaml's 'version: 1.2.0' line."
+              }
+            }
+          }
+        },
+        "docsSite": {
+          "type": "object",
+          "description": "Site-assembly recipe for this project's own docs site, read by deploy_docs_site.py. Absent means that script is a docs-site-only tool with nothing configured, and refuses to run rather than silently doing nothing. No hosting provider is ever hardcoded in the plugin — these commands are this project's own, e.g. rsync, the gh-pages CLI, netlify deploy, or aws s3 sync.",
+          "additionalProperties": false,
+          "required": [
+            "buildCommand",
+            "deployCommand",
+            "smokeCheckRoutes"
+          ],
+          "properties": {
+            "buildCommand": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "argv, not a shell string — a string would need a shell to split it, and a shell is how an argument with a space becomes two arguments."
+            },
+            "deployCommand": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "argv, run after buildCommand succeeds. This project's own publish step — this suite supplies no hosting-provider integration."
+            },
+            "smokeCheckRoutes": {
+              "type": "array",
+              "minItems": 1,
+              "description": "Routes to GET after deploy and check the status of. Required and non-empty: a deploy with nothing checked afterward is silently unverifiable.",
+              "items": {
+                "type": "object",
+                "required": [
+                  "url"
+                ],
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "expectedStatus": {
+                    "type": "integer",
+                    "description": "Defaults to 200 when omitted."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Per-field provenance (RFC-0002 §3b). Optional and additive: a profile without it keeps working unchanged. It must never be read as 'everything here was approved' — doctor.py reports every field with no entry as UNTRUSTED and prints the ratified-of-total count even when it is 0 of 137, because a provenance block that reports nothing and a profile every field of which was ratified must not look the same.",
+      "additionalProperties": false,
+      "properties": {
+        "_readme": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "object",
+          "description": "Dotted profile field path (e.g. 'source.root', 'docs.manifest') → how that field got its value. Paths name leaves of this profile; an entry for a path the profile no longer contains is reported, since a ratification of a field nobody has is a ratification of nothing.",
+          "additionalProperties": {
+            "$ref": "#/$defs/provenanceEntry"
+          }
+        }
+      }
+    },
+    "quickRef": {
+      "type": "object",
+      "description": "Where this project's optional per-component quick-reference notes overlay lives, read by bin/quick_ref.py alongside componentCapabilities.file and componentMaturity.file when it regenerates docs/COMPONENT-QUICK-REF.md. Free-text and unschemaed on purpose (see quick_ref.py's own docstring): it carries editorial judgement — when to reach for a component, what people get wrong — that neither manifest can derive or verify. Absent means the generated card has no hand-authored blurb, never that the component has none.",
+      "required": [
+        "notesFile"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "notesFile": {
+          "$ref": "#/$defs/relativePath"
+        }
+      }
+    }
+  },
+  "_readme": "CANONICAL. This is the one definition of a valid .backend-suite/profile.json, and it lives in the plugin because it describes the SUITE's contract, not any one project's. Consumers keep a copy so editors can resolve $schema offline; doctor.py compares that copy against this file and reports drift. Shipped 2026-08-10 after both consumers were found carrying their own editable copies — 341 and 300 lines, structurally identical (48 properties each, zero divergence) but free to diverge with nothing comparing them. Change this file, then re-sync the consumers. PRIOR README: "
+}

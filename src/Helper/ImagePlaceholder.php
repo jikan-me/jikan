@@ -21,6 +21,9 @@ namespace Jikan\Helper;
  *   /images/company/placeholder.png    company / producer search
  *   /images/na.gif                     club search
  *   /images/na_series_*.png|json       anime / manga missing art
+ *   /img/sp/icon/apple-touch-icon-256.png  anime / manga detail pages with no
+ *                              cover: og:image falls back to the MAL site icon
+ *                              (measured 2026-10-12 on anime/43535, manga/90440)
  *
  * Matching is done against URL *fragments* on purpose: MyAnimeList rewrites
  * these assets with a `/r/WxH/` size prefix and a `?s=` cache-busting query
@@ -38,6 +41,7 @@ final class ImagePlaceholder
         '/images/company/placeholder.png',
         '/images/na.gif',
         '/images/na_series_',
+        '/img/sp/icon/apple-touch-icon-256.png',
     ];
 
     /**

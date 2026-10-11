@@ -6,9 +6,9 @@
         "_note": "DERIVED COLLATERAL \u2014 regenerable, source-stamped; never hand-edit. Contact: MalClient + Request/Parser/Model files + test tree."
     },
     "schemaVersion": 1,
-    "generatedAt": "2026-10-11T20:15:18Z",
+    "generatedAt": "2026-10-11T20:23:54Z",
     "verification": {
-        "commit": "54473a9",
+        "commit": "0e7aa36",
         "methodsSeen": 77,
         "domainsSeen": 20
     },
@@ -45,8 +45,8 @@
             "paged": false,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\Anime\\AnimeParserTest",
-                "file": "test/unit/Parser/Anime/AnimeParserTest.php"
+                "class": "JikanTest\\Parser\\Anime\\AnimePlaceholderImageTest",
+                "file": "test/unit/Parser/Anime/AnimePlaceholderImageTest.php"
             },
             "notes": "getAnime"
         },
@@ -233,7 +233,10 @@
             "pathPattern": "https://myanimelist.net/anime.php",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Genre\\AnimeGenreListParserTest",
+                "file": "test/unit/Parser/Genre/AnimeGenreListParserTest.php"
+            },
             "notes": "getAnimeGenres"
         },
         {
@@ -899,7 +902,10 @@
             "pathPattern": "https://myanimelist.net/manga/magazine",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Magazine\\MagazineListParserTest",
+                "file": "test/unit/Parser/Magazine/MagazineListParserTest.php"
+            },
             "notes": "getMagazines"
         },
         {
@@ -1052,7 +1058,10 @@
             "pathPattern": "https://myanimelist.net/manga.php",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Genre\\MangaGenreListParserTest",
+                "file": "test/unit/Parser/Genre/MangaGenreListParserTest.php"
+            },
             "notes": "getMangaGenres"
         },
         {
@@ -1580,7 +1589,10 @@
             "pathPattern": "https://myanimelist.net/watch/episode/popular",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Watch\\WatchEpisodesParserTest",
+                "file": "test/unit/Parser/Watch/WatchEpisodesParserTest.php"
+            },
             "notes": "getPopularEpisodes"
         },
         {
@@ -1610,7 +1622,10 @@
             "pathPattern": "https://myanimelist.net/watch/promotion/popular",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Watch\\WatchPromotionalVideosParserTest",
+                "file": "test/unit/Parser/Watch/WatchPromotionalVideosParserTest.php"
+            },
             "notes": "getPopularPromotionalVideos"
         },
         {
@@ -1673,7 +1688,10 @@
             "pathPattern": "https://myanimelist.net/anime/producer",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Producer\\ProducerListParserTest",
+                "file": "test/unit/Parser/Producer/ProducerListParserTest.php"
+            },
             "notes": "getProducers"
         },
         {
@@ -1736,7 +1754,10 @@
             "pathPattern": "https://myanimelist.net/watch/episode",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Watch\\WatchEpisodesParserTest",
+                "file": "test/unit/Parser/Watch/WatchEpisodesParserTest.php"
+            },
             "notes": "getRecentEpisodes"
         },
         {
@@ -1829,7 +1850,10 @@
             "pathPattern": "https://myanimelist.net/watch/promotion?p={page}",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Watch\\WatchPromotionalVideosParserTest",
+                "file": "test/unit/Parser/Watch/WatchPromotionalVideosParserTest.php"
+            },
             "notes": "getRecentPromotionalVideos"
         },
         {

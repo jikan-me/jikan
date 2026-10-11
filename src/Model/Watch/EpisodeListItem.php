@@ -19,7 +19,7 @@ class EpisodeListItem
     private $entry;
 
     /**
-     * @var RecentEpisodeListItem
+     * @var RecentEpisodeListItem[]
      */
     private $episodes;
 
@@ -53,9 +53,13 @@ class EpisodeListItem
     }
 
     /**
-     * @return RecentEpisodeListItem
+     * The aired episode links on the card (usually one or a few). The parser
+     * returns a list; the previous `RecentEpisodeListItem` return type made
+     * every call throw a TypeError.
+     *
+     * @return RecentEpisodeListItem[]
      */
-    public function getEpisodes(): RecentEpisodeListItem
+    public function getEpisodes(): array
     {
         return $this->episodes;
     }

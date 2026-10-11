@@ -35,11 +35,11 @@ class CharacterMeta
     /**
      * Genre constructor.
      *
-     * @param string $title
+     * @param string $name
      * @param string $url
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      */
-    public function __construct(string $name, string $url, string $imageUrl)
+    public function __construct(string $name, string $url, ?string $imageUrl)
     {
         $this->url = $url;
         $this->images = CharacterImageResource::factory($imageUrl);

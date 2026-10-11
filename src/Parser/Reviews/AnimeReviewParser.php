@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Reviews;
 
 use Jikan\Exception\ParserException;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReview;
@@ -118,26 +119,26 @@ class AnimeReviewParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAnimeImageUrl(): string
+    public function getAnimeImageUrl(): ?string
     {
         $node = $this->crawler
             ->filterXPath('//div[contains(@class, "thumbbody")]/div[contains(@class, "body")]/div[contains(@class, "text")]/div[contains(@class, "thumb-right")]/a/img');
 
-        return Parser::parseImageQuality($node->attr('data-src'));
+        return ImagePlaceholder::normalize(Parser::parseImageQuality($node->attr('data-src')));
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getAnimeImageUrlFromUserPage(): string
+    public function getAnimeImageUrlFromUserPage(): ?string
     {
         $node = $this->crawler
             ->filterXPath('//div[contains(@class, "thumbbody")]/div[contains(@class, "thumb")]/a/img');
 
-        return Parser::parseImageQuality($node->attr('data-src'));
+        return ImagePlaceholder::normalize(Parser::parseImageQuality($node->attr('data-src')));
     }
 
     /**

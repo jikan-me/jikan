@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Resource\NewsImageResource;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model\Resource\NewsImageResource\Jpg;
 
 /**
@@ -22,6 +23,8 @@ class NewsImageResource
      */
     public static function factory(?string $imageUrl): NewsImageResource
     {
+        $imageUrl = ImagePlaceholder::normalize($imageUrl);
+
         $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
@@ -34,7 +37,7 @@ class NewsImageResource
      */
     public function __toString(): string
     {
-        return $this->getJpg()->getImageUrl();
+        return $this->getJpg()->getImageUrl() ?? '';
     }
 
     /**

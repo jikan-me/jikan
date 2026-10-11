@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Search;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Search\UserSearchListItem;
@@ -60,14 +61,16 @@ class UserSearchListItemParser
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-        return Parser::parseImageThumbToHQ(
-            $this->crawler->filterXPath('//div[2]/a/img')
-                ->attr('data-src')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageThumbToHQ(
+                $this->crawler->filterXPath('//div[2]/a/img')
+                    ->attr('data-src')
+            )
         );
     }
 

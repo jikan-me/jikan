@@ -33,12 +33,14 @@ class UserMeta
      *
      * @param string $username
      * @param string $url
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      */
-    public function __construct(string $username, string $url, string $imageUrl)
+    public function __construct(string $username, string $url, ?string $imageUrl)
     {
         $this->url = $url;
-        $this->images = UserImageResource::factory(Parser::parseImageQuality($imageUrl));
+        $this->images = UserImageResource::factory(
+            $imageUrl === null ? null : Parser::parseImageQuality($imageUrl)
+        );
         $this->username = $username;
     }
 

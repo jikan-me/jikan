@@ -23,10 +23,10 @@ class FavoriteCharacter extends CharacterMeta
      *
      * @param string $name
      * @param string $url
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      * @param MalUrl $malUrl
      */
-    public function __construct(string $name, string $url, string $imageUrl, MalUrl $malUrl)
+    public function __construct(string $name, string $url, ?string $imageUrl, MalUrl $malUrl)
     {
         parent::__construct($name, $url, $imageUrl);
         $this->entry = new FavoriteCharacterRelatedEntry($malUrl);

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\Profile;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Model\Common\MalUrl;
@@ -85,7 +86,9 @@ class UserProfileParser
     public function getImageUrl(): ?string
     {
         try {
-            return $this->crawler->filterXPath('//div[contains(@class, "user-image")]/img')->attr('data-src');
+            return ImagePlaceholder::normalize(
+                $this->crawler->filterXPath('//div[contains(@class, "user-image")]/img')->attr('data-src')
+            );
         } catch (\Exception $e) {
             return null;
         }

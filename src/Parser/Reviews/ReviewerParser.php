@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Reviews;
 
 use Jikan\Exception\ParserException;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Manga\MangaReviewScores;
@@ -79,24 +80,28 @@ class ReviewerParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         // works on Anime/Manga Review pages
         $node = $this->crawler->filterXPath('//div/div/a/img');
         if ($node->count()) {
-            return Parser::parseImageThumbToHQ(
-                $node->attr('data-src')
+            return ImagePlaceholder::normalize(
+                Parser::parseImageThumbToHQ(
+                    $node->attr('data-src')
+                )
             );
         }
 
         // works on Top UserReviewsParser pages, the div is shifted
         $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td[1]/div/a/img');
-        return Parser::parseImageThumbToHQ(
-            $node
-                ->attr('src')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageThumbToHQ(
+                $node
+                    ->attr('src')
+            )
         );
     }
 

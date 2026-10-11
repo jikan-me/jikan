@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Club;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\Parser;
 use Jikan\Model\Club\UserProfile;
 use Jikan\Parser\ParserInterface;
@@ -55,13 +56,19 @@ class UserProfileParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
-        $imageUrl = Parser::parseImageThumbToHQ(
-            $this->crawler->filterXPath('//img[1]')->attr('data-src')
+        $imageUrl = ImagePlaceholder::normalize(
+            Parser::parseImageThumbToHQ(
+                $this->crawler->filterXPath('//img[1]')->attr('data-src')
+            )
         );
+
+        if ($imageUrl === null) {
+            return null;
+        }
 
         if (str_contains($imageUrl, Constants::CDN_URL)) {
             return $imageUrl;

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Character;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Character\CharacterListItem;
@@ -74,13 +75,15 @@ class CharacterListItemParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
-        return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//img[1]')->attr('data-src')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageQuality(
+                $this->crawler->filterXPath('//img[1]')->attr('data-src')
+            )
         );
     }
 

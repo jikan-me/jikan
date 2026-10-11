@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Manga;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model\Common\UserMeta;
 use Jikan\Model\Manga\MangaRecentlyUpdatedByUser;
 use Jikan\Parser\ParserInterface;
@@ -48,17 +49,19 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         $imageUrl = $this->crawler->filterXPath('//td[1]/div[1]/a')->attr('style');
 
-        return str_replace(
-            ['thumbs/', '_thumb', 'background-image:url(', ')'],
-            '',
-            $imageUrl
+        return ImagePlaceholder::normalize(
+            str_replace(
+                ['thumbs/', '_thumb', 'background-image:url(', ')'],
+                '',
+                $imageUrl
+            )
         );
     }
 

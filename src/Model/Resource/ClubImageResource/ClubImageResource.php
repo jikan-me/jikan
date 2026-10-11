@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Resource\ClubImageResource;
 
+use Jikan\Helper\ImagePlaceholder;
+
 /**
  * Class ClubImageResource
  * @package Jikan\Model\Resource\ClubImageResource
@@ -19,6 +21,8 @@ class ClubImageResource
      */
     public static function factory(?string $imageUrl): self
     {
+        $imageUrl = ImagePlaceholder::normalize($imageUrl);
+
         $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
@@ -31,7 +35,7 @@ class ClubImageResource
      */
     public function __toString(): string
     {
-        return $this->getJpg()->getImageUrl();
+        return $this->getJpg()->getImageUrl() ?? '';
     }
 
     /**

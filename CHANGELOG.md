@@ -131,3 +131,10 @@ the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing 
 - **Episode `title_romanji` / `title_japanese` no longer end with a trailing non-breaking space**
   — the episodes-list parser now cleanses the captured titles exactly like the single-episode
   parser does (jikan#564).
+- **Placeholder images are no longer parsed (jikan#488)** — MyAnimeList's "no image" placeholder
+  assets (`questionmark_23.gif`, `questionmark_50.gif`, `qm_50.gif`,
+  `company/placeholder.png`, `na.gif`, `na_series_*.png|json`) are now surfaced as `null` instead
+  of the placeholder URL for characters, people/voice actors, anime/manga, users, clubs and
+  producers without artwork. Both `…->getImages()->getJpg()->getImageUrl()` resource getters and
+  the raw string `getImageUrl()`/`getImage()` getters return `null`; the raw string getters and the
+  affected image-resource properties are now `?string`.

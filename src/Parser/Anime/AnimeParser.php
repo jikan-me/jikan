@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Anime;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\Anime;
@@ -76,12 +77,14 @@ class AnimeParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageURL(): string
+    public function getImageURL(): ?string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content');
+        return ImagePlaceholder::normalize(
+            $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content')
+        );
     }
 
     /**

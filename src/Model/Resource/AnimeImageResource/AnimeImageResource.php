@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Resource\AnimeImageResource;
 
+use Jikan\Helper\ImagePlaceholder;
+
 /**
  * Class AnimeImageResource
  * @package Jikan\Model\Resource\CommonImageResource
@@ -24,6 +26,8 @@ class AnimeImageResource
      */
     public static function factory(?string $imageUrl): self
     {
+        $imageUrl = ImagePlaceholder::normalize($imageUrl);
+
         $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
@@ -37,7 +41,7 @@ class AnimeImageResource
      */
     public function __toString(): string
     {
-        return $this->getJpg()->getImageUrl();
+        return $this->getJpg()->getImageUrl() ?? '';
     }
 
     /**

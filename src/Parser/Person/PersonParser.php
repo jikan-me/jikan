@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Person;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
@@ -75,12 +76,14 @@ class PersonParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getPersonImageUrl(): string
+    public function getPersonImageUrl(): ?string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content');
+        return ImagePlaceholder::normalize(
+            $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content')
+        );
     }
 
     /**

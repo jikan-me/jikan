@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Manga;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\DateRange;
@@ -75,12 +76,14 @@ class MangaParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getMangaImageURL(): string
+    public function getMangaImageURL(): ?string
     {
-        return $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content');
+        return ImagePlaceholder::normalize(
+            $this->crawler->filterXPath('//meta[@property=\'og:image\']')->attr('content')
+        );
     }
 
     /**

@@ -27,6 +27,8 @@ class ImagePlaceholderTest extends TestCase
             'https://cdn.myanimelist.net/r/42x62/images/questionmark_23.gif?s=f7dcbc4a4603d18356d3dfef8abd655c',
             // user search / friend lists
             'https://cdn.myanimelist.net/images/questionmark_50.gif',
+            // user search default avatar (no custom picture)
+            'https://cdn.myanimelist.net/images/kaomoji_mal_white.png',
             // anime search results with missing art
             'https://cdn.myanimelist.net/images/qm_50.gif',
             // company / producer search

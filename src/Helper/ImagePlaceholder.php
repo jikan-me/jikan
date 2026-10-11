@@ -17,6 +17,7 @@ namespace Jikan\Helper;
  *
  *   /images/questionmark_23.gif        characters & voice actors / people
  *   /images/questionmark_50.gif        user search, friend lists
+ *   /images/kaomoji_mal_white.png      user search default avatar (no custom picture)
  *   /images/qm_50.gif                  anime search results (missing art)
  *   /images/company/placeholder.png    company / producer search
  *   /images/na.gif                     club search
@@ -37,6 +38,7 @@ final class ImagePlaceholder
     private const PLACEHOLDER_FRAGMENTS = [
         '/images/questionmark_23.gif',
         '/images/questionmark_50.gif',
+        '/images/kaomoji_mal_white.png',
         '/images/qm_50.gif',
         '/images/company/placeholder.png',
         '/images/na.gif',

@@ -1,0 +1,14 @@
+{
+  "_readme": "This project's own registry of known traps — situations that look safe but aren't, worth telling an agent (or a new teammate) at the start of a session rather than leaving them to be rediscovered the expensive way. Full field contract: plugins/backend-suite/templates/known-traps.schema.json. Delete this whole file (or leave 'entries' empty) if you don't have any yet; every other config file works without it. Populate it the way you'd write a CLAUDE.md 'gotchas' section — each entry is one trap, not a category of traps.",
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "id": "todo-e-g-dirty-main-clone",
+      "title": "TODO: short name for the trap",
+      "trigger": "TODO: the situation that surfaces it — what you'd be about to do right before walking into it",
+      "trap": "TODO: what actually goes wrong if you act on the trigger naively",
+      "correctAction": "TODO: what to do instead, concretely",
+      "severity": "medium"
+    }
+  ]
+}

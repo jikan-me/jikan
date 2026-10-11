@@ -1,0 +1,62 @@
+{
+  "surveyVersion": 1,
+  "sourceStamp": {
+    "generatedBy": "backend-suite bin/survey.py v1",
+    "generatedAt": "2026-10-11T13:48:53Z",
+    "projectRoot": "/Users/irfan/jikan",
+    "commit": "905813ade018dd86d29f6dba570c45af5d5c675e",
+    "branch": "v5",
+    "workingTreeDirty": false,
+    "dirtyFiles": [],
+    "regenerate": "python3 ${CLAUDE_PLUGIN_ROOT}/bin/survey.py",
+    "_note": "Derived collateral. Regenerable and disposable; never written back into profile.json, docs.manifest.json, or any context document."
+  },
+  "stack": {
+    "manifestsFound": [
+      {
+        "file": "composer.json",
+        "stack": "php",
+        "why": "a root composer.json is the Composer manifest"
+      }
+    ],
+    "fileCensus": {
+      "php": 455
+    },
+    "_censusNote": "CORROBORATION ONLY \u2014 never a conclusion. A committed docs build makes a census read the wrong language; measured on a real repo.",
+    "availableAdapters": [
+      "php"
+    ],
+    "stack": "php",
+    "candidateAdapter": "php"
+  },
+  "sourceRoots": [
+    {
+      "path": "src",
+      "files": 388,
+      "why": "conventional source root for composer.json",
+      "confidence": 0.8
+    }
+  ],
+  "documents": {
+    "documents": [
+      {
+        "path": "readme.md",
+        "proposedRole": "entry-point",
+        "confidence": 0.5,
+        "why": "README.md is the conventional entry point, but many projects keep their agent instructions elsewhere",
+        "provenance": "inferred"
+      }
+    ],
+    "unmapped": [],
+    "_note": "Every proposal here is `inferred` and nothing downstream may treat it as authoritative. Choosing between four candidate `design` documents is the judgement half (/map-project), not this script's job."
+  },
+  "filesSeen": 473,
+  "couldNotDetermine": [
+    {
+      "field": "existingConfig",
+      "why": "no .backend-suite/ directory \u2014 this project has no context layer yet",
+      "note": "Nothing to compare against, so `survey.py --check` has no declared side."
+    }
+  ],
+  "_couldNotDetermineNote": "Load-bearing output, not a nicety. A survey that determined everything and a survey that never ran produce the same short file unless this list is here."
+}

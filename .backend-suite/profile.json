@@ -1,0 +1,128 @@
+{
+  "$schema": "../plugins/backend-suite/templates/profile.schema.json",
+  "profileVersion": 1,
+  "project": {
+    "name": "Jikan",
+    "audience": "developers building apps and tools that consume MyAnimeList data",
+    "framework": "PHP ^8.4, Composer PSR-4 library; Symfony BrowserKit/CssSelector/HttpClient for scraping myanimelist.net; PHPUnit + paratest. Deliberate non-features (do not report as gaps): no HTTP server or routes, no authentication, no stateful API service, no request-facing controller layer. This is a client library: Jikan\\\\Http\\\\HttpClientWrapper is the single outbound network edge and every public call is a read against an external site."
+  },
+  "adapters": {
+    "lang": "php"
+  },
+  "source": {
+    "root": "src",
+    "fileGlob": "**/*.php",
+    "otherSharedDirs": [],
+    "testRoot": "test/unit"
+  },
+  "audits": {
+    "exceptionsFile": ".backend-suite/exceptions.json",
+    "archRulesFile": ".backend-suite/arch-rules.json",
+    "baselineDir": ".backend-suite/baselines"
+  },
+  "docs": {
+    "manifest": ".backend-suite/docs.manifest.json"
+  },
+  "provenance": {
+    "fields": {
+      "adapters.lang": {
+        "state": "approved",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": "php",
+        "evidence": "survey read root composer.json; the suite ships exactly one adapter and it is php; jikan source is entirely .php under src/",
+        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+      },
+      "project.framework": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": "PHP ^8.4, Composer PSR-4 library; Symfony BrowserKit/CssSelector/HttpClient for scraping myanimelist.net; PHPUnit + paratest. Deliberate non-features (do not report as gaps): no HTTP server or routes, no authentication, no stateful API service, no request-facing controller layer. This is a client library: Jikan\\\\Http\\\\HttpClientWrapper is the single outbound network edge and every public call is a read against an external site.",
+        "evidence": "composer.json requires php ^8.4 and symfony/browser-kit, css-selector, http-client ^8.0; v5 branch is a library (no Lumen/Laravel app layer)",
+        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+      },
+      "project.audience": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": "developers building apps and tools that consume MyAnimeList data",
+        "evidence": "readme.md describes Jikan as a library 'to assist developers easily get the data they need for their apps and projects'",
+        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+      },
+      "source.root": {
+        "state": "approved",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": "src",
+        "evidence": "survey found src/ with 388 .php files as the only conventional source root for composer.json; autoload maps Jikan\\\\ to src/",
+        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+      },
+      "source.fileGlob": {
+        "state": "approved",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": "**/*.php",
+        "evidence": "single source extension implied by the composer.json php manifest",
+        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+      },
+      "source.testRoot": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": "test/unit",
+        "evidence": "phpunit.xml testsuite points at test/unit; JikanTest\\\\ autoloads from test/JikanTest under it",
+        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+      },
+      "project.name": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": "Jikan",
+        "evidence": "init.py --name Jikan; matches composer.json name jikan-me/jikan and readme title",
+        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+      },
+      "profileVersion": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": 1,
+        "evidence": "scaffold default from init.py; profile.schema.json version"
+      },
+      "audits.exceptionsFile": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": ".backend-suite/exceptions.json",
+        "evidence": "scaffold default; file exists and doctor validates it"
+      },
+      "audits.archRulesFile": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": ".backend-suite/arch-rules.json",
+        "evidence": "scaffold default; file exists and doctor validates it"
+      },
+      "audits.baselineDir": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": ".backend-suite/baselines",
+        "evidence": "scaffold default; directory created as part of onboarding"
+      },
+      "docs.manifest": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": ".backend-suite/docs.manifest.json",
+        "evidence": "scaffold default; file exists and doctor validates it"
+      },
+      "source.otherSharedDirs": {
+        "state": "declared",
+        "by": "irfan (via backend-quality-suite onboarding)",
+        "on": "2026-10-11",
+        "value": [],
+        "evidence": "no shared-component directories in a flat PSR-4 library"
+      }
+    }
+  }
+}

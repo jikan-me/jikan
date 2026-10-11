@@ -837,6 +837,10 @@ class AnimeParser implements ParserInterface
     {
         $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs opnening"]/table/tbody/tr/td');
 
+        if (0 === $node->count()) {
+            return [];
+        }
+
         if (str_contains($node->text(), 'No opening themes have been added to this title')) {
             return [];
         }
@@ -855,6 +859,10 @@ class AnimeParser implements ParserInterface
     public function getEndingThemes(): array
     {
         $node = $this->crawler->filterXPath('//div[@class="theme-songs js-theme-songs ending"]/table/tbody/tr');
+
+        if (0 === $node->count()) {
+            return [];
+        }
 
         if (preg_match('~No ending themes have been added to this title~', $node->text())) {
             return [];

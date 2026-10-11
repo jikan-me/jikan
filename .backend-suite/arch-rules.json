@@ -1,5 +1,5 @@
 {
-  "_readme": "Facts about THIS project's architecture (banned imports, layer directions, error vocabulary) that the structural audits enforce. An absent section makes the matching audit refuse to run rather than pass vacuously. Only sections we genuinely intend to run on this library are configured. contractHeaders (no CONTRACT-banner convention in jikan), layerBoundaries (propose-config measured no clean layer direction: Model<->Parser import each other ~120 files both ways), apiConsistency (checks/scope are explicit human decisions) and the REST-app sections are deliberately absent so those audits refuse with exit 2 rather than report a confident zero.",
+  "_readme": "Facts about THIS project's architecture (banned imports, layer directions, error vocabulary) that the structural audits enforce. An absent section makes the matching audit refuse to run rather than pass vacuously. Only sections we genuinely intend to run on this library are configured. contractHeaders (no CONTRACT-banner convention in jikan), layerBoundaries (propose-config measured no clean layer direction: Model<->Parser import each other ~120 files both ways), errorShape (jikan authors no HTTP error envelope - it is a client library, not a server app; exceptions are the shape) and versioning (no versioned route files in a library) are deliberately absent so those audits refuse with exit 2 rather than report a confident zero.",
   "errorHandling": {
     "_comment": "Consumed by bin/audit_error_handling.py, scoped to jikan's own error machinery. exception_type is the shared exception every MalClient failure is mapped onto (ParserException::fromRequest). jikan has no per-call guard FUNCTION; its guard is the shared funnel class - every outbound request must go through HttpClientWrapper, so a 'bypass' is a call straight to the raw Symfony client injected in MalClient ($this->httpClient->request), and the audit's bypass check is pointed at exactly that shape. state_class_pattern/suffix scope check 3 to the two library exception classes, which are exempted in exceptions.json because a library surfaces failures by throwing and consumers consume them by catching - the audit's instanceof-consumption model is screen-shaped.",
     "exception_type": "Jikan\\Exception\\ParserException",
@@ -12,11 +12,36 @@
     "pages_marker": "/Request/"
   },
   "testNetworkCoupling": {
-    "_comment": "Consumed by bin/audit_test_network_coupling.py. Measured on jikan 2026-10-11: 0/41 host-referencing test files construct a live client directly (all 39 extend JikanTest\\TestCase, which injects MockHttpClient over HttpFilesystemCacheClientCallback); the coupling is shape 2 - HttpFilesystemCacheClientCallback falls back to HttpClient::create() whenever a fixture file is missing, so a checkout that skipped `composer link-fixtures` runs the whole suite live while looking offline.",
+    "_comment": "Consumed by bin/audit_test_network_coupling.py. jikan's 39 host-referencing test files all extend JikanTest\\TestCase, which injects MockHttpClient over HttpFilesystemCacheClientCallback - no live client is ever constructed. The former shape-2 coupling (the callback fell back to HttpClient::create() when a recording was missing) was removed 2026-10-11: the cache is now a pure reader and a missing fixture raises a named RuntimeException. The fallbackPattern below is retained to catch the pattern coming back.",
     "testsGlob": "test/**/*.php",
     "liveHostPattern": "myanimelist\\.net",
     "mockClientPattern": "(?:MockHttpClient|HttpFilesystemCacheClientCallback|extends\\s+TestCase)",
     "fallbackPattern": "HttpClient::create\\(\\)",
     "exempt": {}
+  },
+  "apiConsistency": {
+    "_comment": "Consumed by bin/audit_api_consistency.py. For a library, 'user-facing copy' means the literal strings a consumer would have to fork to re-voice: compared sentinels and hard-baked literals in src/. authoredSemantics (route/tap-target provenance) is a UI concept and is off with a reason. checks.vocabulary off until naming rules are authored - enabling it with zero rules would refuse.",
+    "semanticsWrappers": ["Semantics"],
+    "scope": ["src/**/*.php"],
+    "checks": {
+      "hardBakedCopy": true,
+      "loadBearingCopy": true,
+      "authoredSemantics": {
+        "enabled": false,
+        "why": "jikan is a PHP library with no interaction surface; route/tap-target provenance belongs to the consumers, not this codebase"
+      },
+      "vocabulary": {
+        "enabled": false,
+        "why": "no class-naming rules are authored for this library yet; enabling the check with zero rules would refuse"
+      }
+    },
+    "vocabularyRules": []
+  },
+  "toolchainGates": {
+    "_comment": "Consumed by bin/audit_toolchain_gates.py. The suite measured on jikan (2026-10-11) that the manifest declared no 'test' script despite phpunit.xml/grumphp.yml existing; a 'test' script was added to composer.json in the same change. manifestGlob names the manifest declaring commands, runnerGlob the suite-declaring XML, requiredScripts the command a contributor must be able to run.",
+    "manifestGlob": "composer.json",
+    "runnerGlob": "phpunit.xml",
+    "requiredScripts": ["test"],
+    "testsuiteFlag": "--testsuite"
   }
 }

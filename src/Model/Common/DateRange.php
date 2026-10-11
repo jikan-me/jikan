@@ -70,9 +70,15 @@ class DateRange
      */
     public function getFromProp(): DateProp
     {
-        $date = $this->getFrom();
+        $date = $this->date;
+        if ($date === Constants::DISPLAY_NOT_AVAILABLE) {
+            return new DateProp(null);
+        }
+        if (strpos($date, ' to ') !== false || strpos($date, ' to ?') !== false) {
+            $date = explode(' to ', $date)[0];
+        }
 
-        return DateProp::fromDateTime($date);
+        return $this->propFrom($date);
     }
 
     /**
@@ -80,8 +86,28 @@ class DateRange
      */
     public function getUntilProp(): DateProp
     {
-        $date = $this->getUntil();
+        if (strpos($this->date, ' to ') === false || strpos($this->date, ' to ?') !== false) {
+            return new DateProp(null);
+        }
 
-        return DateProp::fromDateTime($date);
+        return $this->propFrom(explode(' to ', $this->date)[1]);
+    }
+
+    /**
+     * A DateProp built from a RAW date segment so precision survives
+     * (jikan#486). DateProp::parse already knows the three precisions — a bare
+     * year yields null day/month, 'May, 1979' a null day, 'May 1, 1979' all
+     * three. Round-tripping through getFrom()/getUntil() destroyed that by
+     * padding a year-only date to 'YYYY-01-01'.
+     */
+    private function propFrom(string $segment): DateProp
+    {
+        $segment = trim($segment);
+
+        if ($segment === '' || $segment === '?' || $segment === Constants::DISPLAY_NOT_AVAILABLE) {
+            return new DateProp(null);
+        }
+
+        return new DateProp($segment);
     }
 }

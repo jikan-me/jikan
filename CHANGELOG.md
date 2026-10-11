@@ -131,6 +131,9 @@ the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing 
 - **Episode `title_romanji` / `title_japanese` no longer end with a trailing non-breaking space**
   — the episodes-list parser now cleanses the captured titles exactly like the single-episode
   parser does (jikan#564).
+- **Date ranges preserve precision** — a year-only or month-only date (`1989`, `May, 1979`) no
+  longer surfaces as `January 1 of the year`; `from_prop`/`to_prop` `month`/`day` are `null` when
+  the source date omitted them (jikan#486).
 - **`getAnimeSearchAlt()` no longer references a non-existent model class** — its declared return
   type pointed at `Model\Search\AnimeSearchAlt`, which did not exist, so calling it would fatal;
   it now declares what the shared parser actually returns (`Model\Search\AnimeSearch`). Found by the

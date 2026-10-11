@@ -1,13 +1,7 @@
----
-status: stub
-# Scaffolded from a template, not yet written. Delete this whole
-# frontmatter block once you have authored the document. Until then it
-# resolves with exit 5 and counts as design debt, never as coverage.
----
 # Jikan — Contributing
 
 How to work in this repository: what to do at the start of a session, what must be
-true before a PR, and which helper to use instead of a raw framework primitive.
+true before a PR, and how one unit of work (an endpoint) flows through it.
 
 Written for someone who has the repo cloned and nothing else. Owned by the
 codebase owners; must change whenever the toolchain or the checks change.
@@ -16,107 +10,144 @@ codebase owners; must change whenever the toolchain or the checks change.
 
 ## 1. Start of session
 
-<!-- DERIVED: the real commands, from the project's own tooling. Confirm each one
-     actually runs before writing it down — a checklist with a broken command in it
-     stops being read. -->
-
 ```bash
 # Get current
-git checkout <integration-branch> && git pull
+git checkout 5.0.0 && git pull
 
-# Install / restore dependencies
+# Install dependencies (PHP ^8.4)
+composer install
+
+# Fetch the recorded test fixtures — REQUIRED, the tests never hit a live site
+composer link-fixtures
 ```
 
-**Never commit directly to the integration branch.** Cut a feature branch from it
-and land changes through a reviewed PR.
+`composer link-fixtures` clones `jikan-me/jikan-fixtures` and points the
+`jikan-me/jikan-fixtures` package at it. Without it the test cache has no
+recordings and any test its requests are missing **fails with a hard error**
+(the cache is a pure reader; it never fetches live — see `.backend-suite`
+`audit_test_network_coupling`).
 
-<!-- DECIDE: name the integration branch. `main`? `dev`? Both, with a promotion
-     step? Get this wrong and every contributor gets it wrong. -->
+**Never commit directly to `5.0.0`.** Cut a feature branch from it and land
+changes through a reviewed PR into `5.0.0`.
 
 ## 2. Before you open a PR
 
 Every one of these must pass. A PR that fails them wastes a reviewer's time.
 
-<!-- DERIVED: the project's real check commands — formatter, analyzer, tests,
-     any audits. -->
-
 ```bash
-# format
-# analyze / lint
-# test
+# Tests (hermetic — run whenever fixtures are present)
+composer test
+
+# Code style (jikan's .php-cs-fixer.dist.php)
+php vendor/bin/php-cs-fixer fix --dry-run
+
+# The same checks run again automatically on commit via the grumphp pre-commit hook
+# (php-cs-fixer, git blacklist, paratest, phplint).
 ```
 
-- [ ] Branch is cut from the current integration branch
-- [ ] The documents affected by this change are updated **in the same PR**
-- [ ] No secrets, tokens, or client data in the diff
-- [ ] New user-facing copy has been checked against the brand-voice document
+The pre-commit hook also runs the backend-suite gates from `.backend-suite/hooks.map.json`
+(`error_handling`, `test_network_coupling`). Those run through a hand-merged
+`.git/hooks/pre-commit` (suite gate first, then grumphp) — see §6 to wire it on a
+fresh checkout.
+
+- [ ] Branch is cut from current `5.0.0`
+- [ ] `composer test` passes (empty findings in `.backend-suite/scratch/`)
+- [ ] The documents affected by this change are updated **in the same PR** (`CHANGELOG.md`
+      for consumer-visible changes, `DECISIONS.md` for decisions, the `readme.md` usage table
+      for the public surface)
+- [ ] New public surface is reflected in `docs/API-STANDARD.md`'s conventions once authored
+- [ ] No secrets, tokens, or client data in the diff — and no live `https://myanimelist.net`
+      requests introduced in tests (recorded fixtures only)
 
 ## 3. The spine: adding one unit of work
 
-Everything above is universal. **This section is not** — it is the ordered steps for adding the
-one thing this project mostly adds, and that thing differs by what the project is. It is the
-section contributors actually come back to, so it is worth being specific rather than general.
+The unit of work is **an endpoint** — one thing `MalClient` can answer. Follow this
+order; each step has a gate.
 
-<!-- DECIDE: what is the unit? For a product that renders an interface it is usually a surface or
-     a feature; for a design-system package a component; for a content site a page or a section.
-     Name it, then write the ordered steps below. One unit only — a document that describes three
-     spines describes none. -->
+**Adding an endpoint:**
 
-**Adding a <!-- DECIDE: the unit -->:**
+1. **Request value object** — `src/Request/<Domain>/<Thing>Request.php` implementing
+   `Jikan\Request\RequestInterface` (a `getPath()` returning the `myanimelist.net` path and any
+   query it needs). Gate: it is a leaf — it imports only `Jikan\Request\RequestInterface`,
+   `Jikan\Exception`, and `Jikan\Helper` (the `layerBoundaries` audit refuses anything else).
+2. **Parser** — `src/Parser/<Domain>/<Thing>Parser.php` implementing `Jikan\Parser\ParserInterface`,
+   mapping a `Symfony\Component\DomCrawler\Crawler` to a model. Gate: it may import
+   `Jikan\Model`, `Jikan\Helper`, `Jikan\Exception` — never `Jikan\Request`.
+3. **Model** — `src/Model/<Domain>/<Thing>.php` with a `public static function fromParser(...)`
+   factory (the v5 shape). Gate: models are data-only; they import other models and helpers,
+   not parsers beyond their own factory's type.
+4. **Client method** — a `public function getThing(Request\... $request): Model\...` on
+   `Jikan\MyAnimeList\MalClient`, wrapping the call so failures surface as
+   `Jikan\Exception\ParserException`. Gate: `audit_error_handling` stays clean — the call goes
+   through `$this->httpClientWrapper->request(...)` and the parse is wrapped in
+   `try { } catch (\Exception $e) { throw ParserException::fromRequest($request, $e); }`.
+5. **Test** — `test/unit/Parser/<Domain>/<Thing>ParserTest.php` extending `JikanTest\TestCase`,
+   driven by a recorded fixture. If the request is new, record its response into
+   `jikan-me/jikan-fixtures` (commit it there, then `composer link-fixtures` here).
+6. **Docs** — a `CHANGELOG.md` entry (consumer-visible changes only) and the `readme.md` usage
+   table if the method is user-facing.
 
-<!-- DERIVED: the real ordered steps, from how the last few were actually added — read the commits,
-     do not imagine the process. Include the gates each step must clear, since a step with no gate
-     gets skipped. The shapes these usually take:
+**What must be true before it counts as added:** the test passes from fixtures alone
+(no live requests), `composer test` is green, `php-cs-fixer fix --dry-run` is clean,
+and the backend-suite gates report no findings on the changed files.
 
-     - a surface: create it → wire it up so it is reachable → handle every state it can be in →
-       register it in the surface inventory → test
-     - a component: define its API → implement it → document its page under the component schema →
-       add it to the gallery or example → changelog entry → test
-     - a page: write it → place it in the information architecture → check its inbound and outbound
-       links resolve → publish
-
-     Replace this comment entirely with this project's own list. -->
-
-1. <!-- DECIDE -->
-2. …
-
-**What must be true before it counts as added:**
-
-<!-- DECIDE: the per-unit checklist. This is distinct from §2's pre-PR checks, which apply to any
-     change; these are the things specific to this unit that reviewers keep having to ask for. -->
-
-## 4. Component lookup table
-
-Use the project's own component instead of the framework primitive. This table is
-the fastest way to stop the design system being quietly re-implemented.
-
-<!-- DERIVED: scan the shared component directory and list what exists. -->
-<!-- Read by /review-docs, which flags entries here that no longer exist in code,
-     so keep the class names exact. -->
-
-| Instead of | Use | Why |
-|---|---|---|
-| | | |
-
-## 5. Where things go
-
-<!-- DERIVED: from profile.json's `source` section. -->
-
-<!-- DECIDE: the kinds of file this project actually has. The first row is whatever §3's unit of
-     work produces. Every row must name a real location, not an intended one. -->
+## 4. where things go
 
 | Kind of file | Location |
 |---|---|
-| The unit named in §3 | |
-| Shared components | |
-| Tests | |
+| Request value objects | `src/Request/<Domain>/` |
+| Parsers | `src/Parser/<Domain>/` |
+| Models | `src/Model/<Domain>/` |
+| HTTP layer / client | `src/Http/`, `src/MyAnimeList/` |
+| Shared constants | `src/Helper/Constants.php` |
+| Tests | `test/unit/` (mirrors the `src/` layout) |
+| Recorded test fixtures | `vendor/jikan-me/jikan-fixtures/fixtures/` (via `composer link-fixtures`) |
 
-## 6. Things that will fail review
+## 5. Testing and fixtures
 
-<!-- DECIDE: the recurring review comments on this project. Each entry should be
-     something that has actually been sent back more than once. If you cannot think
-     of any yet, leave this empty rather than inventing rules. -->
+The suite is **hermetic**: `JikanTest\TestCase` injects a `MockHttpClient` over
+`HttpFilesystemCacheClientCallback`, which serves only recorded responses keyed by
+request hash. There is no live fallback.
+
+- A missing recording raises a named `RuntimeException` telling you to run
+  `composer link-fixtures` — never a silent network call.
+- To add a new recording: capture the real response, commit it to
+  `jikan-me/jikan-fixtures` under the correct fixture directory, then refresh the local
+  checkout with `composer link-fixtures`.
+- `audit_test_network_coupling` (`python3 <suite>/bin/audit_test_network_coupling.py`)
+  blocks the reintroduction of any live `HttpClient::create()` fallback in `test/`.
+
+## 6. The backend-suite gates
+
+`.backend-suite/` is this project's audit configuration (see `profile.json`, `arch-rules.json`,
+`hooks.map.json`). The audits are fast and read-only:
+
+```bash
+python3 <backend-suite-root>/bin/audit_error_handling.py          # clean → exit 0
+python3 <backend-suite-root>/bin/audit_test_network_coupling.py   # clean → exit 0
+python3 <backend-suite-root>/bin/audit_api_consistency.py         # clean → exit 0
+python3 <backend-suite-root>/bin/survey.py --check                # clean → exit 0
+python3 <backend-suite-root>/bin/doctor.py                        # profile healthy
+```
+
+`hooks.map.json` marks `error_handling` and `test_network_coupling` as `preCommit: true`.
+On a fresh checkout, wire the gate by hand-merging the suite's runner into the existing
+grumphp `.git/hooks/pre-commit` (grumphp owns the hook; the suite installer refuses to
+clobber it):
+
+```bash
+python3 <backend-suite-root>/bin/run_precommit_audits.py --list    # shows the gates
+```
+
+The merged hook runs the suite gate first, then grumphp; the grumphp hook from a prior
+install is preserved at `.git/hooks/pre-commit.grumphp.backup`.
+
+## 7. Things that will fail review
+
+<!-- Recurring review comments go here once they exist. Deliberately empty rather than
+     invented: an invented rule is enforcement without evidence. A good first candidate:
+     a parser comparing a wire literal by hand instead of via `Jikan\Helper\Constants::DISPLAY_*`. -->
 
 ---
 
-_Last updated: <!-- DERIVED --> _
+_Last updated: 2026-10-11_

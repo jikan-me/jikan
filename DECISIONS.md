@@ -120,6 +120,15 @@ what you settled. Plans belong in a working-notes directory where they can be su
 
 ---
 
+## Error-handling audit exemptions
+
+### Keep the BadResponseException / ParserException dead-state exemptions in exceptions.json
+**Date:** 2026-10-11
+**Source:** internal-decision (backend-quality-suite onboarding)
+**Decision:** The two entries in `.backend-suite/exceptions.json` → `errorHandling.intentionalDeadStates` stay. The audit's dead-state check classifies a class as dead when nothing type-tests it with `instanceof`; jikan's two exception types are consumed by throwing and by a consumer's `catch (\Exception)`, so the check would report them as dead on every run.
+**Reason:** The check's consumption model is screen-shaped — it describes a UI state being pattern-matched, not a library exception being caught. Reported, they would be misleading findings; exempted, they carry the explicit "N/A for a library" record the suite's own mechanism exists to hold. Removing them would re-introduce two permanent false findings that every `audit_error_handling` run repeats.
+**Impact:** `.backend-suite/exceptions.json` unchanged. `audit_error_handling` reports 2 documented dead states every run; 0 false findings over 388 files. Reviewed at this decision point and kept as-is.
+
 ## Scraped display strings
 
 ### Compare MyAnimeList display strings through named constants, never raw literals

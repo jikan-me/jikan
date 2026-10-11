@@ -340,8 +340,13 @@ function verify(array $new, string $endpoints_json, string $llm_txt) : int
     if (!$uncovered) {
         echo "COVERAGE: every endpoint has a parser test\n";
     }
-    // HARD: drift vs disk (normalise generatedAt — it legitimately changes each run)
-    $norm = static function (array $i) : array { $i['generatedAt'] = 'NOW'; return $i; };
+    // HARD: drift vs disk (normalise generatedAt + verification.commit — both legitimately
+    //   change whenever the file is regenerated, so content-equality is the real check)
+    $norm = static function (array $i) : array {
+        $i['generatedAt'] = 'NOW';
+        $i['verification']['commit'] = 'HEAD';
+        return $i;
+    };
     $jsonOnDisk = json_decode((string) file_get_contents($endpoints_json), true);
     $jsonOk = $jsonOnDisk !== null
         && trim(json_encode($norm($jsonOnDisk))) === trim(json_encode($norm($new)));

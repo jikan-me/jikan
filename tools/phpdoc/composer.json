@@ -1,0 +1,13 @@
+{
+    "name": "jikan-me/jikan-docs-tooling",
+    "description": "Isolated phpDocumentor install for jikan's API-reference generation. Kept OUT of the main composer graph: phpDocumentor requires symfony/console ^6 / monolog ^2 / league/uri ^6, which conflict with jikan's Symfony 8 (and grumphp-resolved monolog 3) dependencies.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "phpdocumentor/phpdocumentor": "^3.9"
+    },
+    "config": {
+        "allow-plugins": false,
+        "sort-packages": true
+    }
+}

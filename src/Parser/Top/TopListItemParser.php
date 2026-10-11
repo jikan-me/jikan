@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Top;
 
 use Jikan\Exception\ParserException;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
@@ -72,8 +73,10 @@ class TopListItemParser
      */
     public function getImage(): ?string
     {
-        return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//img[1]')->attr('data-src')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageQuality(
+                $this->crawler->filterXPath('//img[1]')->attr('data-src')
+            )
         );
     }
 

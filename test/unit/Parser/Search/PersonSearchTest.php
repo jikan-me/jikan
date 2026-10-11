@@ -35,10 +35,8 @@ class PersonSearchTest extends TestCase
     #[Test]
     public function it_gets_the_image_url()
     {
-        self::assertMatchesRegularExpression(
-            '~https://cdn\.myanimelist\.net/.*~',
-            $this->person->getImages()->getJpg()->getImageUrl()
-        );
+        // ARA has no picture on MAL: the questionmark placeholder must not leak
+        self::assertNull($this->person->getImages()->getJpg()->getImageUrl());
     }
 
     #[Test]

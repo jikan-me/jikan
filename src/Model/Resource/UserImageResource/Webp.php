@@ -21,6 +21,10 @@ class Webp
     {
         $instance = new self();
 
+        if ($imageUrl === null) {
+            return $instance;
+        }
+
         $instance->imageUrl = str_replace('.jpg', '.webp', $imageUrl);
 
         return $instance;

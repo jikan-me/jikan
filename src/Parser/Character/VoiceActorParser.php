@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Character;
 
 use Jikan\Helper;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\ParserInterface;
@@ -76,15 +77,17 @@ class VoiceActorParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
         $img = $this->crawler->filterXPath('//img');
 
-        return Helper\Parser::parseImageQuality(
-            $img->attr('src') ?? $img->attr('data-src')
+        return ImagePlaceholder::normalize(
+            Helper\Parser::parseImageQuality(
+                $img->attr('src') ?? $img->attr('data-src')
+            )
         );
     }
 

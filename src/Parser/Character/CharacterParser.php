@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Character;
 
 use Jikan\Helper\JString;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
@@ -144,12 +145,14 @@ class CharacterParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImage(): string
+    public function getImage(): ?string
     {
-        return $this->crawler->filterXPath('//meta[@property="og:image"]')->attr('content');
+        return ImagePlaceholder::normalize(
+            $this->crawler->filterXPath('//meta[@property="og:image"]')->attr('content')
+        );
     }
 
     /**

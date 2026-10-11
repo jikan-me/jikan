@@ -35,14 +35,16 @@ class PersonMeta
     /**
      * Genre constructor.
      *
-     * @param string $title
+     * @param string $name
      * @param string $url
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      */
-    public function __construct(string $name, string $url, string $imageUrl)
+    public function __construct(string $name, string $url, ?string $imageUrl)
     {
         $this->url = $url;
-        $this->images = PersonImageResource::factory(Parser::parseImageQuality($imageUrl));
+        $this->images = PersonImageResource::factory(
+            $imageUrl === null ? null : Parser::parseImageQuality($imageUrl)
+        );
         $this->name = $name;
 
         $this->malId = Parser::idFromUrl($this->url);

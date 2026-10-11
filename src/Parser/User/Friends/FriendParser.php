@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\Friends;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\UserMeta;
@@ -43,15 +44,17 @@ class FriendParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
-        return str_replace(
-            ['thumbs/', '_thumb'],
-            '',
-            $this->crawler->filterXPath('//div/a/img')->attr('data-src')
+        return ImagePlaceholder::normalize(
+            str_replace(
+                ['thumbs/', '_thumb'],
+                '',
+                $this->crawler->filterXPath('//div/a/img')->attr('data-src')
+            )
         );
     }
 

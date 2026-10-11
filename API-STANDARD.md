@@ -38,7 +38,10 @@ aspiration. Where a choice is genuinely still open, §7 names it for maintainer 
   wrapper call on every new method.
 - **Absence is typed, not guessed** — nullability is explicit in signatures (`?string` for a field
   the page can lack) and the `'Unknown'`/`'N/A'` sentinels on the page map to `null` via
-  `Constants::DISPLAY_*`, never to a string a consumer has to special-case.
+  `Constants::DISPLAY_*`, never to a string a consumer has to special-case. The same holds for
+  image absence: MyAnimeList's placeholder-image assets (entities without artwork) map to `null`
+  through the single `Jikan\Helper\ImagePlaceholder` helper, never to the placeholder URL
+  (see `DECISIONS.md`, "Image placeholders").
 - **Scraped display strings are compared through constants**, not raw literals — the 
   `load-bearing-copy` rule that cleared 20 findings in 2026-10-11 (see `DECISIONS.md`).
 

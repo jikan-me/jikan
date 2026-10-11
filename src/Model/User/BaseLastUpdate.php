@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\User;
 
+use Jikan\Helper\ImagePlaceholder;
+
 class BaseLastUpdate
 {
     /**
@@ -15,7 +17,7 @@ class BaseLastUpdate
     private $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $imageUrl;
 
@@ -49,14 +51,14 @@ class BaseLastUpdate
      * BaseLastUpdate constructor.
      * @param string $url
      * @param string $title
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      * @param int|null $progressedSubEntries
      * @param int|null $total
      * @param string $status
      * @param int|null $score
      * @param \DateTimeImmutable $date
      */
-    public function __construct(string $url, string $title, string $imageUrl, ?int $progressedSubEntries, ?int $total, string $status, ?int $score, \DateTimeImmutable $date)
+    public function __construct(string $url, string $title, ?string $imageUrl, ?int $progressedSubEntries, ?int $total, string $status, ?int $score, \DateTimeImmutable $date)
     {
         $this->progressedSubEntries = $progressedSubEntries;
         $this->total = $total;
@@ -65,7 +67,7 @@ class BaseLastUpdate
         $this->date = $date;
         $this->url = $url;
         $this->title = $title;
-        $this->imageUrl = $imageUrl;
+        $this->imageUrl = ImagePlaceholder::normalize($imageUrl);
     }
 
     /**
@@ -85,9 +87,9 @@ class BaseLastUpdate
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         return $this->imageUrl;
     }

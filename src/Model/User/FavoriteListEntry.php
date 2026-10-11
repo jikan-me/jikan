@@ -26,10 +26,10 @@ class FavoriteListEntry extends CommonMeta
      * FavoriteListEntry constructor.
      * @param string $name
      * @param string $url
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      * @param string $typeAndYear
      */
-    public function __construct(string $name, string $url, string $imageUrl, string $typeAndYear)
+    public function __construct(string $name, string $url, ?string $imageUrl, string $typeAndYear)
     {
         parent::__construct($name, $url, $imageUrl);
         $typeAndYearArr = explode("·", $typeAndYear);

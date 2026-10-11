@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Resource\PersonImageResource;
 
+use Jikan\Helper\ImagePlaceholder;
+
 /**
  * Class PersonImageResource
  * @package Jikan\Model\Resource\PersonImageResource
@@ -20,6 +22,8 @@ class PersonImageResource
      */
     public static function factory(?string $imageUrl): self
     {
+        $imageUrl = ImagePlaceholder::normalize($imageUrl);
+
         $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);

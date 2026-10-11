@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Watch;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\YoutubeMeta;
@@ -72,24 +73,28 @@ class PromotionalVideoListItemParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-        return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a')->attr('data-bg')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageQuality(
+                $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a')->attr('data-bg')
+            )
         );
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImages(): string
+    public function getImages(): ?string
     {
-        return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a')->attr('data-bg')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageQuality(
+                $this->crawler->filterXPath('//div[contains(@class, "video-list")]/a')->attr('data-bg')
+            )
         );
     }
 

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\Parser;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -60,8 +61,10 @@ abstract class ItemMetaParser
      */
     public function getImage(): ?string
     {
-        return Parser::parseImageQuality(
-            $this->crawler->filterXPath('//img')->attr('data-src')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageQuality(
+                $this->crawler->filterXPath('//img')->attr('data-src')
+            )
         );
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model\Anime\PromoListItem;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -48,12 +49,14 @@ class PromoListItemParser implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-        return $this->crawler->filterXPath('//a/img')->attr('data-src');
+        return ImagePlaceholder::normalize(
+            $this->crawler->filterXPath('//a/img')->attr('data-src')
+        );
     }
 
     /**

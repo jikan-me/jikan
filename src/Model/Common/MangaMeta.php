@@ -37,12 +37,14 @@ class MangaMeta
      *
      * @param string $title
      * @param string $url
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      */
-    public function __construct(string $title, string $url, string $imageUrl)
+    public function __construct(string $title, string $url, ?string $imageUrl)
     {
         $this->url = $url;
-        $this->images = CommonImageResource::factory(Parser::parseImageQuality($imageUrl));
+        $this->images = CommonImageResource::factory(
+            $imageUrl === null ? null : Parser::parseImageQuality($imageUrl)
+        );
         $this->title = $title;
 
         $this->malId = Parser::idFromUrl($this->url);

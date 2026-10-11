@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Resource\WrapImageResource;
 
+use Jikan\Helper\ImagePlaceholder;
+
 /**
  * Class WrapImageResource
  * @package Jikan\Model\Resource\WrapImageResource
@@ -19,6 +21,8 @@ class WrapImageResource
      */
     public static function factory(?string $imageUrl): self
     {
+        $imageUrl = ImagePlaceholder::normalize($imageUrl);
+
         $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
@@ -31,7 +35,7 @@ class WrapImageResource
      */
     public function __toString(): string
     {
-        return $this->getJpg()->getImageUrl();
+        return $this->getJpg()->getImageUrl() ?? '';
     }
 
     /**

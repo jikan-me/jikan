@@ -3,6 +3,7 @@
 namespace Jikan\Parser\Common;
 
 use Jikan\Helper\Constants;
+use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\CommonMeta;
 use Jikan\Model\Common\ItemMeta;
@@ -39,14 +40,16 @@ class Recommendation implements ParserInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
-        return Parser::parseImageQuality(
-            $this->crawler
-                ->filterXPath('//table/tbody/tr/td[1]/div[1]/a/img')->attr('data-src')
+        return ImagePlaceholder::normalize(
+            Parser::parseImageQuality(
+                $this->crawler
+                    ->filterXPath('//table/tbody/tr/td[1]/div[1]/a/img')->attr('data-src')
+            )
         );
     }
 

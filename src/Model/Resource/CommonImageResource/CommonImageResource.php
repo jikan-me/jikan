@@ -2,6 +2,8 @@
 
 namespace Jikan\Model\Resource\CommonImageResource;
 
+use Jikan\Helper\ImagePlaceholder;
+
 /**
  * Class CommonImageResource
  * @package Jikan\Model\Resource\CommonImageResource
@@ -24,6 +26,8 @@ class CommonImageResource
      */
     public static function factory(?string $imageUrl): self
     {
+        $imageUrl = ImagePlaceholder::normalize($imageUrl);
+
         $instance = new self();
 
         $instance->jpg = Jpg::factory($imageUrl);
@@ -37,7 +41,7 @@ class CommonImageResource
      */
     public function __toString(): string
     {
-        return $this->getJpg()->getImageUrl();
+        return $this->getJpg()->getImageUrl() ?? '';
     }
 
     /**

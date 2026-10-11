@@ -123,3 +123,11 @@ the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing 
   fixtures (`composer link-fixtures`) and never hit the live site.
 - `composer test` now runs the PHPUnit suite directly (PHPUnit via paratest `^7` — the old
   `phpunit ~9` dev constraint was dropped), grumphp moved to `^2`, php-parallel-lint to `^1.4`.
+
+### Fixed
+- **Opening/ending theme lists no longer include empty entries** — current MAL markup interleaves
+  empty `<td>` cells with the real theme rows, so a one-theme title used to return
+  `['', theme, '']`. Parser now filters them (jikan#593).
+- **Episode `title_romanji` / `title_japanese` no longer end with a trailing non-breaking space**
+  — the episodes-list parser now cleanses the captured titles exactly like the single-episode
+  parser does (jikan#564).

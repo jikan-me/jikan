@@ -55,7 +55,8 @@ fresh checkout.
 - [ ] The documents affected by this change are updated **in the same PR** (`CHANGELOG.md`
       for consumer-visible changes, `DECISIONS.md` for decisions, the `readme.md` usage table
       for the public surface)
-- [ ] New public surface is reflected in `docs/API-STANDARD.md`'s conventions once authored
+- [ ] New public surface follows `API-STANDARD.md`'s conventions (naming, exception envelope,
+      `Results`/`Pagination` shape, `Constants::DISPLAY_*` for scraped display strings)
 - [ ] No secrets, tokens, or client data in the diff — and no live `https://myanimelist.net`
       requests introduced in tests (recorded fixtures only)
 
@@ -144,9 +145,13 @@ install is preserved at `.git/hooks/pre-commit.grumphp.backup`.
 
 ## 7. Things that will fail review
 
-<!-- Recurring review comments go here once they exist. Deliberately empty rather than
-     invented: an invented rule is enforcement without evidence. A good first candidate:
-     a parser comparing a wire literal by hand instead of via `Jikan\Helper\Constants::DISPLAY_*`. -->
+- A parser returning **empty/**whitespace cells from a node list (the theme-songs empties, jikan#593)
+  or a title capture with a **trailing non-breaking space** (jikan#564) — filter/cleanse at parse time,
+  add an `assertNotContains('')`/no-whitespace guard to the fixture test.
+- A parser/model comparing a scraped display string (`'Unknown'`, `'N/A'`, `'Filler'`, …) **by hand** —
+  use `Jikan\Helper\Constants::DISPLAY_*` (see `DECISIONS.md`); `audit_api_consistency` will flag it.
+- A test that can reach the live site, or a fixture hash that no longer matches the request
+  (`composer link-fixtures` refreshes the recordings).
 
 ---
 

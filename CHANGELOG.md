@@ -1,30 +1,32 @@
----
-status: stub
-# Scaffolded from a template, not yet written. Delete this whole
-# frontmatter block once you have authored the document. Until then it
-# resolves with exit 5 and counts as design debt, never as coverage.
----
 # Jikan — Changelog
 
 What changed in each version, written for the people who have to decide whether to upgrade.
 
-Mostly a **format contract**. The prose matters less than the consistency: a consumer scanning ten
-versions to find what will break them needs every entry in the same shape, and one entry that
-improvises costs more than ten that are terse.
+Distinct from the decision log (`DECISIONS.md`), which records *why* things were decided and is read
+by contributors. This is read by consumers and records *what they now have to do*.
 
-Distinct from the decision log, which records *why* things were decided and is read by contributors.
-This is read by consumers and records *what they now have to do*.
+> Entries before v5.0.0 were not kept. This changelog starts at the `^5` line; earlier releases
+> (through v4.x) shipped without one, and reconstructing them from git history would present a
+> guess as a record.
 
 ---
 
 ## 1. What earns an entry
 
-<!-- DECIDE: the bar. The useful test is consumer-visible: if nothing outside this project could
-     observe the change, it does not belong here. Internal refactors, test changes and
-     documentation fixes usually fail that test — and including them trains readers to skim, which
-     is how a breaking change gets missed. -->
+The bar is **consumer-visible**: if nothing outside this project could observe the change, it does
+not belong here. Internal refactors, test changes and documentation fixes usually fail that test —
+including them trains readers to skim, which is how a breaking change gets missed.
 
-An entry is required when: <!-- DECIDE -->
+An entry is required when:
+
+- a consumer must do something to keep working (breaking);
+- a consumer can do something they could not before (added);
+- something a consumer observes behaves differently (changed);
+- something a consumer could observe was wrong (fixed);
+- something a consumer uses is being retired (deprecated).
+
+By that bar, jikan's own internal work — parser refactors, fixture handling, tooling bumps for
+contributors, `.backend-suite` audit configuration — deliberately does not appear here.
 
 ## 2. The format
 
@@ -63,30 +65,31 @@ Rules that are not negotiable:
 
 ## 3. Severity and version number
 
-The link between the two — the reason this document is a contract rather than a diary.
+jikan uses **semantic versioning** on the `5.0.0` line (PHP floor, public API surface, dependencies).
 
-<!-- DECIDE: this project's versioning scheme, and what each kind of change forces. If the scheme
-     is semantic versioning the mapping is standard, but write it down anyway: the disputes are
-     never about the rule, they are about whether a specific change is breaking.
+The cases that actually argue:
 
-     Then settle the cases that actually cause arguments, because they recur:
-     - a changed default value — visible to every consumer who did not set it
-     - a repointed semantic role — every surface reading it changes with no call site changing
-     - a newly enforced rule that previously passed silently
-     - a bug fix that some consumer had built on top of
-     Each of these looks minor and behaves as breaking. Decide now, once. -->
+- **A changed default value** — breaking. Visible to every consumer who did not set it.
+- **A repointed semantic role** — breaking. Every surface reading it changes with no call site
+  changing.
+- **A newly enforced rule that previously passed silently** — breaking.
+- **A bug fix some consumer built on top of** — breaking for that consumer. Call it out.
+- **An upstream change on MyAnimeList's side** — **not** a version decision. The scraped page is
+  external; jikan fixes breakage in a patch regardless of which version part it would otherwise be.
 
 | Kind of change | Version part it increments |
 |---|---|
-| | |
+| Consumer must change code / runtime | Major |
+| New consumer-visible capability | Minor |
+| Bug fix with no consumer action | Patch |
 
 ## 4. Unreleased
 
-<!-- DECIDE: does this project accumulate entries under an "Unreleased" heading as changes land, or
-     write the changelog at release time? Accumulating is strongly preferable — a changelog written
-     at release time is written from `git log`, and `git log` does not know which changes a
-     consumer can see. Whichever you choose, state it, because the two do not mix: half-accumulated
-     entries plus a release-time sweep produces duplicates. -->
+Entries **accumulate** under `## Unreleased` as changes land, and a release simply renames the
+heading. A changelog written at release time is written from `git log`, and `git log` does not know
+which changes a consumer can see.
+
+---
 
 ## Unreleased
 
@@ -94,11 +97,29 @@ The link between the two — the reason this document is a contract rather than 
 
 ---
 
-<!-- Released versions below, newest first. Never reorder, never edit a released entry. -->
+## v5.0.0 — 2026-10-11
 
-## <!-- DERIVED: the current version --> — <!-- DERIVED: today's date -->
+First release on the `^5` line. The public PHP surface (`MalClient` methods, `RequestInterface`,
+`ParserInterface`, the `Jikan\Model\*` classes for existing endpoints) is **unchanged from `^4`** —
+the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing from the API.
 
-<!-- DECIDE: if this project has released before but has no changelog yet, do NOT reconstruct one
-     from git history and present it as a record. A reconstructed changelog is a guess about what
-     consumers could see, and it is indistinguishable from an authored one. Start from this version,
-     and say in one line that entries before it were not kept. -->
+### Breaking
+- **PHP floor raised to 8.4** — **you must** require PHP ^8.4. `composer require jikan-me/jikan ^5`
+  will enforce it, so an existing `^4` tree must be upgraded in the same change.
+- **The HTTP layer swapped from `fabpot/goutte` to the Symfony components**
+  — **you must** run `composer update` (and remove any transitive reliance on the abandoned
+  `fabpot/goutte` package). `MalClient` still takes the same
+  `Symfony\Component\HttpClient\HttpClientInterface`; the concrete
+  `Symfony\Component\BrowserKit\HttpBrowser` crawler is now used internally instead of Goutte.
+
+### Added
+- **Content endpoints** — Article and News support, as 11 new `MalClient` methods:
+  `getArticle`, `getArticleSearch`, `getArticleTags`, `getArticlesByTag`, `getNews`,
+  `getNewsByTag`, `getNewsSearch`, `getNewsTags`, `getPinnedArticles`, `getRecentArticles`,
+  `getRecentNews` (each with a matching `Jikan\Request\*` value object).
+
+### Changed
+- Test suite relocated from `test/JikanTest` to `test/unit`; tests stay hermetic against recorded
+  fixtures (`composer link-fixtures`) and never hit the live site.
+- `composer test` now runs the PHPUnit suite directly (PHPUnit via paratest `^7` — the old
+  `phpunit ~9` dev constraint was dropped), grumphp moved to `^2`, php-parallel-lint to `^1.4`.

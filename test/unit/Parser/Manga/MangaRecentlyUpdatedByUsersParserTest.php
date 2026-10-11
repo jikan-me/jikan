@@ -51,8 +51,9 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     #[Test]
     public function it_gets_image_url(): void
     {
-        self::assertMatchesRegularExpression(
-            '~https://cdn\.myanimelist\.net/.*~',
+        // The default kaomoji avatar is a placeholder — a user with no custom
+        // picture surfaces null, not MAL's default avatar (jikan#488).
+        self::assertNull(
             $this->parser->getResults()[6]->getUser()->getImages()->getJpg()->getImageUrl()
         );
     }

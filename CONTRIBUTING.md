@@ -144,6 +144,15 @@ clobber it):
 python3 <backend-suite-root>/bin/run_precommit_audits.py --list    # shows the gates
 ```
 
+**Endpoint-surface gate.** The generated endpoint catalog (`.backend-suite/endpoints.json`) and its
+digest (`llm.txt`) are derived collateral — regenerate and gate them whenever the public surface
+changes:
+
+```bash
+composer endpoints:write     # regenerate from MalClient + Request/Parser/Model + test tree
+composer endpoints:check     # hard: unreachable types + drift; reported: parser-test coverage gaps
+```
+
 The merged hook runs the suite gate first, then grumphp; the grumphp hook from a prior
 install is preserved at `.git/hooks/pre-commit.grumphp.backup`.
 

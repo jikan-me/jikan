@@ -103,13 +103,14 @@ class NewsListItemParser implements ParserInterface
      */
     public function getDate(): ?\DateTimeImmutable
     {
+        // Read the date from the info block text WITHOUT removing child nodes
+        // (removeChildNodes mutated the live DOM, breaking later getters).
         return Parser::parseDate(
             explode(
                 ' by',
-                Parser::removeChildNodes(
-                    $this->crawler
-                        ->filterXPath('//div[contains(@class, "information")]/p')
-                )->text()
+                $this->crawler
+                    ->filterXPath('//div[contains(@class, "information")]/p')
+                    ->text()
             )[0]
         );
     }

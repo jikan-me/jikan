@@ -6,9 +6,15 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\News\NewsListItemParser;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * Class NewsListItemParserTest
+ *
+ * NewsListItemParser parses the main news index items (div.news-unit with the
+ * exact class — ad placements injected under the same class are skipped).
+ * The previous test targeted the manga-news-tab js-scrollfix/.clearfix layout,
+ * which was the wrong page for this parser; it now drives the /news index.
  */
 class NewsListItemParserTest extends TestCase
 {
@@ -19,29 +25,31 @@ class NewsListItemParserTest extends TestCase
 
     public function setUp(): void
     {
-        $this->markTestSkipped(
-            'Implementation incomplete',
-        );
-
         parent::setUp();
 
         $client = new HttpClientWrapper($this->httpClient);
-        $crawler = $client->request('GET', 'https://myanimelist.net/manga/2/Berserk/news');
-        $this->parser = new NewsListItemParser(
-            $crawler->filterXPath('//div[contains(@class,"js-scrollfix-bottom-rel")]/div[@class="clearfix"]')->first()
-        );
+        $crawler = $client->request('GET', 'https://myanimelist.net/news');
+
+        $unit = $crawler
+            ->filterXPath('//div[contains(concat(" ", normalize-space(@class), " "), " news-unit ")]')
+            ->reduce(
+                static fn (Crawler $c): bool => $c->filterXPath('.//p[contains(@class, "title")]/a')->count() > 0
+            )
+            ->first();
+
+        $this->parser = new NewsListItemParser($unit);
     }
 
     #[Test]
     public function it_gets_the_title(): void
     {
-        self::assertEquals("Kentarou Miura's Assistants Resume 'Berserk' Serialization, 'Holyland' Creator Kouji Mori to Supervise", $this->parser->getTitle());
+        self::assertSame("'Noa-senpai wa Tomodachi' Reveals Main Cast, 2027 Debut", $this->parser->getTitle());
     }
 
     #[Test]
     public function it_gets_the_url(): void
     {
-        self::assertEquals('https://myanimelist.net/news/66547854', $this->parser->getUrl());
+        self::assertSame('https://myanimelist.net/news/74811025', $this->parser->getUrl());
     }
 
     #[Test]
@@ -56,35 +64,38 @@ class NewsListItemParserTest extends TestCase
     #[Test]
     public function it_gets_the_date(): void
     {
-        self::assertEquals('2024-06-07 00:33', $this->parser->getDate()->format('Y-m-d H:i'));
+        // The index serves relative dates ("11 hours ago"); assert plausibility.
+        $date = $this->parser->getDate();
+        self::assertNotNull($date);
+        self::assertGreaterThan(
+            (new \DateTimeImmutable('-30 days', new \DateTimeZone('UTC')))->format('Y-m-d'),
+            $date->format('Y-m-d')
+        );
     }
 
     #[Test]
     public function it_gets_the_author(): void
     {
-        self::assertEquals('Vindstot', (string)$this->parser->getAuthor());
+        self::assertSame('Syureria', (string) $this->parser->getAuthor());
     }
 
     #[Test]
     public function it_gets_the_discussion_link(): void
     {
-        self::assertEquals('https://myanimelist.net/forum/?topicid=2021160', $this->parser->getDiscussionLink());
+        self::assertSame('https://myanimelist.net/forum/?topicid=2282401', $this->parser->getDiscussionLink());
     }
 
     #[Test]
     public function it_gets_the_comments(): void
     {
-        self::assertEquals(
-            70,
-            $this->parser->getComments()
-        );
+        self::assertSame(3, $this->parser->getComments());
     }
 
     #[Test]
     public function it_gets_the_introduction(): void
     {
         self::assertStringContainsString(
-            "The editorial department of Young Animal announced on Tuesday that the late Kentarou Miura's Berserk manga will resume serialization",
+            'The official website for the television anime adaptation',
             $this->parser->getExcerpt()
         );
     }

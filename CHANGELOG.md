@@ -131,6 +131,9 @@ the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing 
 - **Episode `title_romanji` / `title_japanese` no longer end with a trailing non-breaking space**
   — the episodes-list parser now cleanses the captured titles exactly like the single-episode
   parser does (jikan#564).
+- **Date ranges preserve precision** — a year-only or month-only date (`1989`, `May, 1979`) no
+  longer surfaces as `January 1 of the year`; `from_prop`/`to_prop` `month`/`day` are `null` when
+  the source date omitted them (jikan#486).
 - **Placeholder images are no longer parsed (jikan#488)** — MyAnimeList's "no image" placeholder
   assets (`questionmark_23.gif`, `questionmark_50.gif`, `qm_50.gif`,
   `company/placeholder.png`, `na.gif`, `na_series_*.png|json`) are now surfaced as `null` instead

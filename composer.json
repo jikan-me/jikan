@@ -42,6 +42,8 @@
     },
     "scripts": {
         "test": "phpunit",
+        "endpoints:check": "php scripts/generate_endpoints.php --check",
+        "endpoints:write": "php scripts/generate_endpoints.php --write",
         "link-fixtures": [
             "git clone https://github.com/jikan-me/jikan-fixtures.git ../jikan-fixtures || git -C ../jikan-fixtures reset --hard origin/master",
             "rm -rf vendor/jikan-me/jikan-fixtures",

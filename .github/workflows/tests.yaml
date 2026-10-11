@@ -63,6 +63,13 @@ jobs:
       - name: Install Composer dependencies
         run: composer install --no-interaction --no-progress --no-suggest --no-scripts
 
+      - name: Fetch recorded fixtures from source
+        # Tests are hermetic against recorded responses. link-fixtures clones the
+        # jikan-me/jikan-fixtures repo and re-points the package at it, so CI never
+        # depends on the packagist dev-master snapshot being fresh (a new fixtures PR
+        # used to break CI until the lock pin was bumped).
+        run: composer run-script link-fixtures
+
       - name: Run tests
         env:
           CI_ENV: true

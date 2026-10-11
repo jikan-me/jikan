@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Common;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\Parser;
 
 /**
@@ -40,7 +41,7 @@ class DateRange
     public function getFrom(): ?\DateTimeImmutable
     {
         $date = $this->date;
-        if ($date === 'Not available') {
+        if ($date === Constants::DISPLAY_NOT_AVAILABLE) {
             return null;
         }
         if (strpos($date, ' to ') !== false || strpos($date, ' to ?') !== false) {

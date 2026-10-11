@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Model\Common\Title;
 use Jikan\Parser\ParserInterface;
@@ -37,7 +38,7 @@ class AlternativeTitleParser implements ParserInterface
     {
         [$type, $title] = explode(':', $this->crawler->text(), 2);
 
-        if ($type !== 'Synonyms') {
+        if ($type !== Constants::DISPLAY_SYNONYMS) {
             return [new Title($type, JString::cleanse($title))];
         }
 

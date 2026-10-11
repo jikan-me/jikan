@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\Constants;
 use Jikan\Exception\BadResponseException;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
@@ -148,7 +149,7 @@ class AnimeEpisodeParser implements ParserInterface
             return false;
         }
 
-        return trim($filler->text()) === 'Filler';
+        return trim($filler->text()) === Constants::DISPLAY_FILLER;
     }
 
     /**
@@ -162,7 +163,7 @@ class AnimeEpisodeParser implements ParserInterface
             return false;
         }
 
-        return trim($recap->text()) === 'Recap';
+        return trim($recap->text()) === Constants::DISPLAY_RECAP;
     }
 
     /**

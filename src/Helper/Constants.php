@@ -391,4 +391,24 @@ class Constants
     public const REVIEWS_SORT_MOST_VOTED = 'mostvoted';
     public const REVIEWS_SORT_OLDEST = 'oldest';
     public const REVIEWS_SORT_NEWEST = 'newest';
+
+    /**
+     * The display strings MyAnimeList itself writes on the page, compared by
+     * value throughout the parsers (backend-suite audit_api_consistency,
+     * load-bearing-copy). They are upstream data, not jikan's own copy, but the
+     * comparison literal must not be hand-typed at each call site: when
+     * MyAnimeList renames one of these, the rename is one line here instead of a
+     * silent drift at a dozen sites. Where a sentinel is also the "unknown"
+     * meaning, the same constant is used for comparison and for emission so the
+     * two cannot diverge.
+     */
+    public const DISPLAY_CURRENTLY_AIRING = 'Currently Airing';
+    public const DISPLAY_PUBLISHING = 'Publishing';
+    public const DISPLAY_NOT_AVAILABLE = 'Not available';
+    public const DISPLAY_UNKNOWN = 'Unknown';
+    public const DISPLAY_NONE = 'None';
+    public const DISPLAY_N_A = 'N/A';
+    public const DISPLAY_FILLER = 'Filler';
+    public const DISPLAY_RECAP = 'Recap';
+    public const DISPLAY_SYNONYMS = 'Synonyms';
 }

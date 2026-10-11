@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
@@ -256,7 +257,7 @@ class MangaCardParser implements ParserInterface
     public function getMangaScore(): ?float
     {
         $score = JString::cleanse($this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[1]')->text());
-        if ($score === 'N/A') {
+        if ($score === Constants::DISPLAY_N_A) {
             return null;
         }
 

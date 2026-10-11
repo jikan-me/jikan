@@ -120,9 +120,14 @@ what you settled. Plans belong in a working-notes directory where they can be su
 
 ---
 
-## <!-- DECIDE: your first section, if organising topically -->
+## Scraped display strings
 
-### <!-- First entry, using the five-field format above -->
+### Compare MyAnimeList display strings through named constants, never raw literals
+**Date:** 2026-10-11
+**Source:** internal-decision (backend-quality-suite onboarding)
+**Decision:** The display strings MyAnimeList writes on the page and jikan compares by value — `Unknown`, `N/A`, `Filler`, `Recap`, `Currently Airing`, `Publishing`, `Not available`, `None`, `Synonyms` — are referenced only through `Jikan\Helper\Constants::DISPLAY_*` constants. Every comparison *and* every emission of one of these sentinels uses the constant, so the two cannot diverge.
+**Reason:** 20 findings from backend-suite `audit_api_consistency` (load-bearing-copy) measured the defect: the literal on the wire and the comparison sentinel were the same hand-typed string at 21 sites. These values are upstream data, not jikan's own copy — a consumer cannot re-voice them — so the failure mode is precisely the one the audit guards: an upstream rename (e.g. `Unknown` → `Not available`) silently drifts, and the parser keeps matching a string nobody emits. Constants make the rename a one-line change in one file. An enum was considered and rejected: the values are upstream strings, not jikan's vocabulary, so a typed enum would add a conversion at every call site for no consumer-visible gain.
+**Impact:** Added the `DISPLAY_*` block to `src/Helper/Constants.php`; replaced 21 literals across 10 parser/model files (including the `AnimeCardParser` emission, so comparison and emission share the constant). `audit_api_consistency` load-bearing-copy is now clean (exit 0, 388 files). Behaviour unchanged — the constants carry the identical strings and the full PHPUnit suite still passes 394/394.
 
 ---
 

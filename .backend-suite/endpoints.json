@@ -6,9 +6,9 @@
         "_note": "DERIVED COLLATERAL \u2014 regenerable, source-stamped; never hand-edit. Contact: MalClient + Request/Parser/Model files + test tree."
     },
     "schemaVersion": 1,
-    "generatedAt": "2026-10-11T20:23:54Z",
+    "generatedAt": "2026-10-11T20:47:55Z",
     "verification": {
-        "commit": "0e7aa36",
+        "commit": "c5b5162",
         "methodsSeen": 77,
         "domainsSeen": 20
     },
@@ -773,7 +773,10 @@
             "pathPattern": "https://myanimelist.net/character.php?{query}",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Search\\CharacterSearchParserTest",
+                "file": "test/unit/Parser/Search/CharacterSearchParserTest.php"
+            },
             "notes": "getCharacterSearch"
         },
         {
@@ -1244,7 +1247,10 @@
             "pathPattern": "https://myanimelist.net/manga.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Search\\MangaSearchParserTest",
+                "file": "test/unit/Parser/Search/MangaSearchParserTest.php"
+            },
             "notes": "getMangaSearch"
         },
         {
@@ -1526,7 +1532,10 @@
             "pathPattern": "https://myanimelist.net/people.php?{query}",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Search\\PersonSearchParserTest",
+                "file": "test/unit/Parser/Search/PersonSearchParserTest.php"
+            },
             "notes": "getPersonSearch"
         },
         {
@@ -1820,7 +1829,10 @@
             "pathPattern": "https://myanimelist.net/users.php",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Search\\UserSearchParserTest",
+                "file": "test/unit/Parser/Search/UserSearchParserTest.php"
+            },
             "notes": "getRecentOnlineUsers"
         },
         {
@@ -2195,7 +2207,10 @@
             "pathPattern": "https://myanimelist.net/profile/{username}/clubs",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\User\\ClubParserTest",
+                "file": "test/unit/Parser/User/ClubParserTest.php"
+            },
             "notes": "getUserClubs"
         },
         {
@@ -2225,7 +2240,10 @@
             "pathPattern": "https://myanimelist.net/profile/{username}/friends{query}",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\User\\Friends\\FriendsParserTest",
+                "file": "test/unit/Parser/User/Friends/FriendsParserTest.php"
+            },
             "notes": "getUserFriends"
         },
         {
@@ -2372,7 +2390,10 @@
             "pathPattern": "https://myanimelist.net/profile/{username}/reviews?p={page}",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\User\\Reviews\\UserReviewsParserTest",
+                "file": "test/unit/Parser/User/Reviews/UserReviewsParserTest.php"
+            },
             "notes": "getUserReviews"
         },
         {
@@ -2402,7 +2423,10 @@
             "pathPattern": "https://myanimelist.net/users.php?{query}",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Search\\UserSearchParserTest",
+                "file": "test/unit/Parser/Search/UserSearchParserTest.php"
+            },
             "notes": "getUserSearch"
         },
         {
@@ -2432,7 +2456,10 @@
             "pathPattern": "https://myanimelist.net/comments.php?id={id}",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\User\\UsernameByIdParserTest",
+                "file": "test/unit/Parser/User/UsernameByIdParserTest.php"
+            },
             "notes": "getUsernameById"
         }
     ]

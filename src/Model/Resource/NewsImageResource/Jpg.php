@@ -33,13 +33,8 @@ class Jpg
         $instance = new self();
 
         $instance->imageUrl = $imageUrl;
-
-        if ($instance->imageUrl === null) {
-            return $instance;
-        }
-
-        $instance->smallImageUrl = str_replace('/s/', '/r/100x156/s/', $imageUrl);
-        $instance->largeImageUrl = str_replace('/s/', '/r/200x312/s/', $imageUrl);
+        $instance->smallImageUrl = $imageUrl === null ? null : str_replace('/s/', '/r/100x156/s/', $imageUrl);
+        $instance->largeImageUrl = $imageUrl === null ? null : str_replace('/s/', '/r/200x312/s/', $imageUrl);
 
         return $instance;
     }

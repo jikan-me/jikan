@@ -6,9 +6,9 @@
         "_note": "DERIVED COLLATERAL \u2014 regenerable, source-stamped; never hand-edit. Contact: MalClient + Request/Parser/Model files + test tree."
     },
     "schemaVersion": 1,
-    "generatedAt": "2026-10-11T19:11:17Z",
+    "generatedAt": "2026-10-11T19:49:59Z",
     "verification": {
-        "commit": "1e351e0",
+        "commit": "08dbd88",
         "methodsSeen": 77,
         "domainsSeen": 20
     },
@@ -419,7 +419,10 @@
             "pathPattern": "https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Search\\AnimeSearchParserTest",
+                "file": "test/unit/Parser/Search/AnimeSearchParserTest.php"
+            },
             "notes": "getAnimeSearch"
         },
         {
@@ -449,7 +452,10 @@
             "pathPattern": "https://myanimelist.net/anime.php?{query}&c[]=a&c[]=b&c[]=c&c[]=f&c[]=d&c[]=e&c[]=g",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Search\\AnimeSearchParserTest",
+                "file": "test/unit/Parser/Search/AnimeSearchParserTest.php"
+            },
             "notes": "getAnimeSearchAlt"
         },
         {
@@ -2012,7 +2018,10 @@
             "pathPattern": null,
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Top\\TopAnimeParserPageTest",
+                "file": "test/unit/Parser/Top/TopAnimeParserPageTest.php"
+            },
             "notes": "getTopAnime"
         },
         {
@@ -2042,7 +2051,10 @@
             "pathPattern": null,
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Top\\TopCharactersParserPageTest",
+                "file": "test/unit/Parser/Top/TopCharactersParserPageTest.php"
+            },
             "notes": "getTopCharacters"
         },
         {
@@ -2072,7 +2084,10 @@
             "pathPattern": null,
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Top\\TopMangaParserPageTest",
+                "file": "test/unit/Parser/Top/TopMangaParserPageTest.php"
+            },
             "notes": "getTopManga"
         },
         {
@@ -2102,7 +2117,10 @@
             "pathPattern": null,
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Top\\TopPeopleParserPageTest",
+                "file": "test/unit/Parser/Top/TopPeopleParserPageTest.php"
+            },
             "notes": "getTopPeople"
         },
         {

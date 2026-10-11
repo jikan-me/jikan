@@ -93,7 +93,8 @@ which changes a consumer can see.
 
 ## Unreleased
 
-<!-- Entries land here as changes merge. -->
+### Fixed
+- Reading `getSmallImageUrl()`/`getLargeImageUrl()`/WebP image URLs on an entity whose image is a MyAnimeList placeholder (normalized to `null`) no longer throws "typed property must not be accessed before initialization" — those getters now return `null`, matching the `?string` image contract (jikan#488).
 
 ---
 

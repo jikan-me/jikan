@@ -204,7 +204,7 @@ function build_index(string $client_path, string $endpoints_path) : array
     foreach ($rows as $r) { if ($r['domain']) { $domains[$r['domain']] = true; } }
 
     return [
-        '_source' => [
+        'sourceStamp' => [
             'generatedBy' => 'scripts/generate_endpoints.php',
             'generate'    => 'php scripts/generate_endpoints.php --write',
             'check'       => 'php scripts/generate_endpoints.php --check',

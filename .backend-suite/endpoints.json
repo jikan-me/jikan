@@ -6,9 +6,9 @@
         "_note": "DERIVED COLLATERAL \u2014 regenerable, source-stamped; never hand-edit. Contact: MalClient + Request/Parser/Model files + test tree."
     },
     "schemaVersion": 1,
-    "generatedAt": "2026-10-11T20:47:55Z",
+    "generatedAt": "2026-10-11T21:31:23Z",
     "verification": {
-        "commit": "c5b5162",
+        "commit": "441e390",
         "methodsSeen": 77,
         "domainsSeen": 20
     },
@@ -77,7 +77,10 @@
             "pathPattern": "https://myanimelist.net/anime/{id}/_/characters",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Anime\\CharactersAndStaffParserTest",
+                "file": "test/unit/Parser/Anime/CharactersAndStaffParserTest.php"
+            },
             "notes": "getAnimeCharactersAndStaff"
         },
         {
@@ -170,7 +173,10 @@
             "pathPattern": "https://myanimelist.net/anime/{id}/_/forum{query}",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Forum\\ForumPageParserTest",
+                "file": "test/unit/Parser/Forum/ForumPageParserTest.php"
+            },
             "notes": "getAnimeForum"
         },
         {
@@ -743,7 +749,10 @@
             "pathPattern": "https://myanimelist.net/character/{id}/jikan/pics",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Common\\DefaultPicturesPageParserTest",
+                "file": "test/unit/Parser/Common/DefaultPicturesPageParserTest.php"
+            },
             "notes": "getCharacterPictures"
         },
         {
@@ -998,7 +1007,10 @@
             "pathPattern": "https://myanimelist.net/manga/{id}/_/forum{query}",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Forum\\ForumPageParserTest",
+                "file": "test/unit/Parser/Forum/ForumPageParserTest.php"
+            },
             "notes": "getMangaForum"
         },
         {
@@ -1091,7 +1103,10 @@
             "pathPattern": "https://myanimelist.net/manga/{id}/_/moreinfo",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Manga\\MangaMoreInfoParserTest",
+                "file": "test/unit/Parser/Manga/MangaMoreInfoParserTest.php"
+            },
             "notes": "getMangaMoreInfo"
         },
         {
@@ -1502,7 +1517,10 @@
             "pathPattern": "https://myanimelist.net/people/{id}/jikan/pics",
             "paged": false,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Common\\DefaultPicturesPageParserTest",
+                "file": "test/unit/Parser/Common/DefaultPicturesPageParserTest.php"
+            },
             "notes": "getPersonPictures"
         },
         {
@@ -1895,7 +1913,10 @@
             "pathPattern": null,
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Recommendations\\RecentRecommendationsParserTest",
+                "file": "test/unit/Parser/Recommendations/RecentRecommendationsParserTest.php"
+            },
             "notes": "getRecentRecommendations"
         },
         {
@@ -1925,7 +1946,10 @@
             "pathPattern": null,
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Reviews\\ReviewsParserTest",
+                "file": "test/unit/Parser/Reviews/ReviewsParserTest.php"
+            },
             "notes": "getReviews"
         },
         {
@@ -2360,7 +2384,10 @@
             "pathPattern": "https://myanimelist.net/profile/{username}/recommendations?p={page}",
             "paged": true,
             "deprecated": false,
-            "test": null,
+            "test": {
+                "class": "JikanTest\\Parser\\Recommendations\\UserRecommendationsParserTest",
+                "file": "test/unit/Parser/Recommendations/UserRecommendationsParserTest.php"
+            },
             "notes": "getUserRecommendations"
         },
         {

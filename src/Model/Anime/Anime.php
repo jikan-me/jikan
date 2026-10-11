@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Anime;
 
+use Jikan\Helper\Constants;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Url;
@@ -242,7 +243,7 @@ class Anime
         $instance->type = $parser->getType();
         $instance->episodes = $parser->getEpisodes();
         $instance->status = $parser->getStatus();
-        $instance->airing = $instance->status === 'Currently Airing';
+        $instance->airing = $instance->status === Constants::DISPLAY_CURRENTLY_AIRING;
         $instance->aired = $parser->getAired();
         $instance->premiered = $parser->getPremiered();
         $instance->broadcast = $parser->getBroadcast();

@@ -8,6 +8,7 @@ namespace Jikan\Model\Manga;
  * @package Jikan\Model
  */
 
+use Jikan\Helper\Constants;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Title;
@@ -205,7 +206,7 @@ class Manga
         $instance->chapters = $parser->getMangaChapters();
         $instance->volumes = $parser->getMangaVolumes();
         $instance->status = $parser->getMangaStatus();
-        $instance->publishing = $instance->status === 'Publishing';
+        $instance->publishing = $instance->status === Constants::DISPLAY_PUBLISHING;
         $instance->published = $parser->getPublished();
         $instance->genres = $parser->getGenres();
         $instance->explicitGenres = $parser->getExplicitGenres();

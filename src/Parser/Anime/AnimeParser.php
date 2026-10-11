@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\Anime;
@@ -204,7 +205,7 @@ class AnimeParser implements ParserInterface
         }
 
         $type = JString::cleanse(str_replace($type->text(), '', $type->ancestors()->text()));
-        return $type === 'Unknown' ? null : $type;
+        return $type === Constants::DISPLAY_UNKNOWN ? null : $type;
     }
 
     /**
@@ -225,7 +226,7 @@ class AnimeParser implements ParserInterface
             (
                 trim(
                     str_replace($episodes->text(), '', $episodes->ancestors()->text())
-                ) === 'Unknown'
+                ) === Constants::DISPLAY_UNKNOWN
             )
                 ? null
                 : (int) str_replace(
@@ -541,7 +542,7 @@ class AnimeParser implements ParserInterface
             str_replace($rating->text(), '', $rating->ancestors()->text())
         );
 
-        if ($rating === 'None') {
+        if ($rating === Constants::DISPLAY_NONE) {
             return null;
         }
 
@@ -562,7 +563,7 @@ class AnimeParser implements ParserInterface
 
         $score = JString::cleanse($score->text());
 
-        if ($score === 'N/A') {
+        if ($score === Constants::DISPLAY_N_A) {
             return null;
         }
 
@@ -613,7 +614,7 @@ class AnimeParser implements ParserInterface
             Parser::removeChildNodes($rank->ancestors())->text()
         );
 
-        if ($ranked === 'N/A') {
+        if ($ranked === Constants::DISPLAY_N_A) {
             return null;
         }
 

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
@@ -211,7 +212,7 @@ class AnimeCardParser implements ParserInterface
         $type = $matches[1];
 
         if ($type === '-') {
-            $type = 'Unknown';
+            $type = Constants::DISPLAY_UNKNOWN;
         }
 
         return $type;
@@ -341,7 +342,7 @@ class AnimeCardParser implements ParserInterface
         if ($node->count()) {
             $score = JString::cleanse($node->text());
 
-            if ($score === 'N/A') {
+            if ($score === Constants::DISPLAY_N_A) {
                 return null;
             }
         }
@@ -350,7 +351,7 @@ class AnimeCardParser implements ParserInterface
         $node = $this->crawler->filterXPath('//div[contains(@class, "widget")]/div[@class="stars"]');
         if ($node->count()) {
             $score = JString::cleanse($node->text());
-            if ($score === 'N/A') {
+            if ($score === Constants::DISPLAY_N_A) {
                 return null;
             }
         }

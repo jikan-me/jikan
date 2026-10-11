@@ -34,6 +34,24 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 - [Deprecations](DEPRECATIONS.md) — the running deprecation ledger
 - [API standard](API-STANDARD.md) — conventions every public entry point must follow
 
+### Usage
+
+```php
+use Jikan\MyAnimeList\MalClient;
+use Jikan\Request\Anime\AnimeRequest;
+use Jikan\Request\Search\AnimeSearchRequest;
+
+$client = new MalClient(); // or new MalClient(HttpClientInterface $http) to inject the client
+
+$anime = $client->getAnime(new AnimeRequest(1));          // Cowboy Bebop
+$results = $client->getAnimeSearch(new AnimeSearchRequest())->getResults();
+```
+
+Every public endpoint is one `MalClient` method taking one `Jikan\Request\*` value object; the
+method list, the class-per-endpoint surface, and the conventions each must follow are documented in
+`readme` (conceptually), `API-STANDARD.md` (requirements) and `CONTRIBUTING.md` §3 (how to add one).
+A machine-readable endpoint catalog is planned but not yet built.
+
 # Jikan REST API
 
 A REST API service is available as well

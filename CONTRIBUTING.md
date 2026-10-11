@@ -28,7 +28,11 @@ recordings and any test its requests are missing **fails with a hard error**
 `audit_test_network_coupling`).
 
 **Never commit directly to `5.0.0`.** Cut a feature branch from it and land
-changes through a reviewed PR into `5.0.0`.
+changes through a reviewed PR into `5.0.0`. (`5.0.0` is the canonical release branch; the local
+clone often carries it under the alias `v5` — use whichever spelling resolves for you.)
+
+Also read [`AGENTS.md`](AGENTS.md) before starting: it is the navigation map (what to read in what
+order, where things live, the task router) — `CLAUDE.md` is just an `@AGENTS.md` import.
 
 ## 2. Before you open a PR
 
@@ -53,8 +57,8 @@ fresh checkout.
 - [ ] Branch is cut from current `5.0.0`
 - [ ] `composer test` passes (empty findings in `.backend-suite/scratch/`)
 - [ ] The documents affected by this change are updated **in the same PR** (`CHANGELOG.md`
-      for consumer-visible changes, `DECISIONS.md` for decisions, the `readme.md` usage table
-      for the public surface)
+      for consumer-visible changes, `DECISIONS.md` for decisions, the `readme.md` **Usage**
+      section for the public surface)
 - [ ] New public surface follows `API-STANDARD.md`'s conventions (naming, exception envelope,
       `Results`/`Pagination` shape, `Constants::DISPLAY_*` for scraped display strings)
 - [ ] No secrets, tokens, or client data in the diff — and no live `https://myanimelist.net`
@@ -85,8 +89,8 @@ order; each step has a gate.
 5. **Test** — `test/unit/Parser/<Domain>/<Thing>ParserTest.php` extending `JikanTest\TestCase`,
    driven by a recorded fixture. If the request is new, record its response into
    `jikan-me/jikan-fixtures` (commit it there, then `composer link-fixtures` here).
-6. **Docs** — a `CHANGELOG.md` entry (consumer-visible changes only) and the `readme.md` usage
-   table if the method is user-facing.
+6. **Docs** — a `CHANGELOG.md` entry (consumer-visible changes only) and the `readme.md`'s
+   **Usage** section if the method is user-facing.
 
 **What must be true before it counts as added:** the test passes from fixtures alone
 (no live requests), `composer test` is green, `php-cs-fixer fix --dry-run` is clean,
@@ -142,6 +146,12 @@ python3 <backend-suite-root>/bin/run_precommit_audits.py --list    # shows the g
 
 The merged hook runs the suite gate first, then grumphp; the grumphp hook from a prior
 install is preserved at `.git/hooks/pre-commit.grumphp.backup`.
+
+`AGENTS.md` (and its `CLAUDE.md` import) is the repo's portable navigation map. The suite can also
+**generate per-install harness wiring** (`backend-suite harness --status` / `--harness <h> --apply`
+for codex, gemini, cursor, vscode, opencode, aider). Those generated files embed **this machine's
+absolute suite path**, so they are installed locally and never committed — same rule as the
+pre-commit hook. Re-run them after the suite is reinstalled elsewhere.
 
 ## 7. Things that will fail review
 

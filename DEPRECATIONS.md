@@ -1,87 +1,82 @@
----
-status: stub
-# Scaffolded from a template, not yet written. Delete this whole
-# frontmatter block once you have authored the document. Until then it
-# resolves with exit 5 and counts as design debt, never as coverage.
----
 # Jikan — Deprecations
 
 The running ledger: everything currently deprecated, when it was announced, when it goes, and what
 to use instead. One row per deprecation, from announcement until removal.
 
 **This is the list, not the policy.** How much notice a deprecation gets, what counts as breaking,
-and how an announcement is made are *process*, and they live with the release role — see
-`fragments/DEPRECATION-AND-BREAKING-CHANGES.md.template`. They are kept apart deliberately: the
-process changes rarely and is read by maintainers, while this ledger changes constantly and is read
-by consumers deciding whether they are affected. Folding the ledger into the process document buries
-the rows a consumer came for under policy they do not need.
-
-Owned by whoever releases. A deprecation is not announced until it has a row here.
+and how an announcement is made live with the release role — see the breaking-changes process in
+`CHANGELOG.md` §3. **Owned by whoever releases.** A deprecation is not announced until it has a row
+here.
 
 ---
 
 ## 1. Currently deprecated
 
-Everything announced and not yet removed. **This is the table consumers read**, so keep it first and
-keep it complete — something deprecated in a changelog entry but missing here is deprecated only for
-readers who happened to see that release.
+Everything announced and not yet removed. Removal is expressed as a **version when one is known**;
+until then the cell says "not scheduled", which is a real answer (the same one the code gives via
+the `@deprecated` tag and no removal date).
 
-<!-- DECIDE: the removal-date column's form — an absolute date, a version number, or both. Both is
-     usually right: a consumer pinned to a version needs the version, and a consumer planning work
-     needs the date. Whichever you choose, "next major" is not an answer, because nobody outside
-     the project knows when that is. -->
+All current rows describe the same migration: the four title accessors on `Anime` and `Manga` were
+superseded by a `getTitles()` collection, and `Producer::getName()` by the producer's `getTitles()`.
+The deprecated accessors are still present for ^4-era consumers and are stubs of convenience — they
+return the first element / the English title of the collection (`getTitle()`), or the field as
+parsed (`getTitleEnglish()`, `getTitleJapanese()`, `getTitleSynonyms()`, `Producer::getName()`).
 
 | What | Announced | Removal | Use instead | Migration |
 |---|---|---|---|---|
-| <!-- the deprecated thing, named exactly as a consumer writes it --> | | | | <!-- a link to real migration steps, not "see docs" --> |
-
-**Every row needs a `Use instead`.** A deprecation with no replacement is not a deprecation, it is a
-removal with a waiting period — and a consumer who cannot migrate will simply not upgrade. If there
-genuinely is no replacement, say so explicitly in that cell and record why here, because it changes
-what the notice period has to be.
+| `Anime::getTitle(): string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Anime::getTitles(): array` | read the collection; the primary title is `getTitles()[0]` (English-romanized title) |
+| `Anime::getTitleEnglish(): ?string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Anime::getTitles(): array` | find `Title` entries whose `getType()` is `english` |
+| `Anime::getTitleJapanese(): ?string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Anime::getTitles(): array` | find `Title` entries whose `getType()` is `japanese` |
+| `Anime::getTitleSynonyms(): array` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Anime::getTitles(): array` | filter `Title` entries whose `getType()` is `synonym` |
+| `Manga::getTitle(): string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Manga::getTitles(): array` | read the collection; the primary title is `getTitles()[0]` |
+| `Manga::getTitleEnglish(): ?string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Manga::getTitles(): array` | find `Title` entries whose `getType()` is `english` |
+| `Manga::getTitleJapanese(): ?string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Manga::getTitles(): array` | find `Title` entries whose `getType()` is `japanese` |
+| `Manga::getTitleSynonyms(): array` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Manga::getTitles(): array` | filter `Title` entries whose `getType()` is `synonym` |
+| `Producer::getName(): string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Producer::getTitles(): array` | read the collection; the primary name is `getTitles()[0]` |
 
 ## 2. Removed
 
-Kept after removal rather than deleted. A consumer on an older version still encounters these, and a
-reader who finds nothing concludes they imagined it.
-
-<!-- DECIDE: how long a removed entry stays here — usually until no supported version still contains
-     it. State the rule; otherwise this table is either pruned arbitrarily or grows forever. -->
+Nothing has been removed on the `^5` line (`Anime`, `Manga` and the interfaces are byte-compatible
+with `^4`). Rows that arrive here stay for as long as any still-supported version contains the
+removed thing — i.e. until consumers on that version are outside the support window.
 
 | What | Removed in | Was replaced by |
 |---|---|---|
-| | | |
+| (none yet) | | |
 
 ## 3. Deprecated and then un-deprecated
 
-<!-- DECIDE: does this project ever reverse a deprecation? If it does, those reversals belong here
-     with the reason, because a consumer who already migrated needs to know they were not wrong to.
-     If it does not — if announcement is treated as irreversible — say so in one line, and treat
-     that as a reason to be slow about announcing. -->
+This project does **not** reverse a deprecation once announced. That makes announcement the 
+commitment it needs to be — deprecation without removal is a fiction, and so is an announcement
+that can be walked back.
 
 ## 4. How a row gets here
 
-<!-- DERIVED: the real steps, from how the last deprecation was actually done. -->
+A deprecation exists in one place (the `@deprecated` tag in code) before it exists here:
 
-1. <!-- DECIDE: at minimum — who approves, what the notice period is per the release policy, which
-        channels announce it, and what marks the thing as deprecated in code so a consumer hits it
-        without reading anything. That last one matters most: a deprecation announced only in prose
-        reaches the consumers who read prose. -->
+1. The `@deprecated` docblock tag is added on the member, naming the replacement (`Use ... instead.`).
+2. A row lands in §1 **in the same change**, stating `Use instead` without a guess — a deprecation
+   with no replacement is a removal with a waiting period, and needs a notice period to match.
+3. The deprecation is announced in the next `CHANGELOG.md` entry under `### Deprecated`, so consumers
+   who read release notes meet the same fact consumers who read the code do.
 
-**Before the removal date arrives:**
-
-<!-- DECIDE: what has to be true before removal actually happens — known consumers migrated, the
-     migration path confirmed to work end to end, a second go-ahead if the policy requires one.
-     Removing on schedule when the migration path was never tested is how a deadline becomes an
-     outage. -->
+**Before the removal date arrives:** the migration path must have been confirmed working end to end
+(consumers can make the switch from the collection accessors), and a removal only happens at a
+**major** release.
 
 ## 5. Checking this ledger against reality
 
-<!-- DECIDE: what confirms that everything deprecated in code appears here, and that nothing here
-     has already been quietly removed? If nothing does, write that down. A ledger nothing checks
-     drifts in both directions, and the dangerous direction is silent: a consumer reading a complete-
-     looking table concludes the things missing from it are safe. -->
+The reconciliation is a grep: every `@deprecated` tag in `src/Model` must have a row here, and every
+row here must still exist in the code.
+
+```bash
+grep -rn "@deprecated" src/Model
+```
+
+Run it and reconcile §1 against the output before every release. Not yet automated — this check is a
+candidate for the backend-suite `toolchainGates` section when the toolchain gates grow to cover the
+repo's own conventions.
 
 ---
 
-_Last updated: <!-- DERIVED: install date -->_
+_Last updated: 2026-10-11_

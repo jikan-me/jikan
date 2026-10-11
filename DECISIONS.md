@@ -129,6 +129,33 @@ does not explain on its own.
 **Reason:** 20 findings from backend-suite `audit_api_consistency` (load-bearing-copy) measured the defect: the literal on the wire and the comparison sentinel were the same hand-typed string at 21 sites. These values are upstream data, not jikan's own copy — a consumer cannot re-voice them — so the failure mode is precisely the one the audit guards: an upstream rename (e.g. `Unknown` → `Not available`) silently drifts, and the parser keeps matching a string nobody emits. Constants make the rename a one-line change in one file. An enum was considered and rejected: the values are upstream strings, not jikan's vocabulary, so a typed enum would add a conversion at every call site for no consumer-visible gain.
 **Impact:** Added the `DISPLAY_*` block to `src/Helper/Constants.php`; replaced 21 literals across 10 parser/model files (including the `AnimeCardParser` emission, so comparison and emission share the constant). `audit_api_consistency` load-bearing-copy is now clean (exit 0, 388 files). Behaviour unchanged — the constants carry the identical strings and the full PHPUnit suite still passes 394/394.
 
+## Deprecation and release policy
+
+### Deprecated title accessors stay available indefinitely — no removal version
+**Date:** 2026-10-11
+**Source:** internal-decision (maintainer sign-off on API-STANDARD.md §7)
+**Decision:** `Anime::getTitle*`, `Manga::getTitle*` and `Producer::getName()` are deprecated and stay that way with `Removal: not scheduled`, permanently. No removal version is planned.
+**Reason:** jikan's public surface is a compatibility superset — the v4→v5 diff removed nothing. Setting removal dates on these stubs would force a breaking consumer migration at some future major for accessors that cost nothing to keep and that a long tail of ^4-era consumers still call.
+**Impact:** `DEPRECATIONS.md` §1 rows keep `not scheduled`; the deprecated accessors remain in code and in the standard. Nothing in the API is scheduled for removal.
+
+## Documentation standards
+
+### API-STANDARD.md approved as written; it becomes the review benchmark
+**Date:** 2026-10-11
+**Source:** internal-decision (maintainer review of the 6-PR stack)
+**Decision:** The API standard, authored from measured conventions of the `^5` codebase in `API-STANDARD.md`, is approved as written. Convention drift is now rejected in review.
+**Reason:** Every rule in it was measured from code that already follows the rule, so approval describes reality rather than imposing a new regime; a written benchmark stops the next endpoint from quietly re-deciding naming, error shape or pagination.
+**Impact:** `API-STANDARD.md` §7 changed from "open decisions" to "resolved decisions"; future code review uses it as the reference.
+
+## Toolchain gates
+
+### Scope git-blacklist debug keywords to their actual call forms
+**Date:** 2026-10-11
+**Source:** internal-decision (maintainer review; grumphp blacklist)
+**Decision:** `grumphp.yml` blacklist keywords change from bare words (`var_dump`, `exit`, `die`, `ini_set`, `error_reporting`) to their call forms (`var_dump(`, `die(`, `ini_set(`, `error_reporting(`, `exit(`, `exit;`). `else` is kept.
+**Reason:** grumphp passes the keywords to `git grep --cached -G`, so they are POSIX basic regexes matched as substrings. A bare `exit`/`var_dump` blocked any changed PHP line mentioning the word in prose (a docblock saying "exits with exit code N") even when no debug statement existed. Scoping to the call form keeps the ban (a real `var_dump(` still blocks the commit) and stops prose from blocking. `else` stays because jikan is an early-return codebase (zero `else` in `src/`) and the gate is what enforces that.
+**Impact:** `grumphp.yml` keywords tightened; verified no current `src/` line matches any tightened pattern (git grep returns no matches for all). No behaviour loss — every real debug call form is still caught.
+
 ---
 
 _Last updated: 2026-10-11_

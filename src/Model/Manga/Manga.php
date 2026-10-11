@@ -64,9 +64,9 @@ class Manga
     private array $titles;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $status;
+    private ?string $status;
 
     /**
      * @var CommonImageResource

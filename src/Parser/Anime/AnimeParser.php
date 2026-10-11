@@ -845,10 +845,13 @@ class AnimeParser implements ParserInterface
             return [];
         }
 
-        return $node
-            ->each(function (Crawler $crawler) {
+        // Current MAL markup interleaves empty <td> cells with real ones; exclude
+        // them so a one-theme title does not return ["", theme, ""]. jikan#593.
+        return array_values(array_filter(
+            $node->each(function (Crawler $crawler) {
                 return JString::cleanse($crawler->text());
-            });
+            })
+        ));
     }
 
     /**
@@ -868,10 +871,11 @@ class AnimeParser implements ParserInterface
             return [];
         }
 
-        return $node
-            ->each(function (Crawler $crawler) {
+        return array_values(array_filter(
+            $node->each(function (Crawler $crawler) {
                 return JString::cleanse($crawler->text());
-            });
+            })
+        ));
     }
 
     /**

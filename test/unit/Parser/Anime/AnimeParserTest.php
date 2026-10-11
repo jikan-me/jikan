@@ -305,7 +305,10 @@ class AnimeParserTest extends TestCase
     public function it_gets_the_anime_opening(): void
     {
         $ops = $this->parser->getOpeningThemes();
-        self::assertCount(3, $ops);
+        // jikan#593: current MAL markup interleaves empty <td> cells with the real
+        // theme row; they must not surface as empty strings.
+        self::assertCount(1, $ops);
+        self::assertNotContains('', $ops);
         self::assertContains('"H.T." by Tsuneo Imahori', $ops);
     }
 
@@ -314,6 +317,7 @@ class AnimeParserTest extends TestCase
     {
         $eds = $this->parser->getEndingThemes();
         self::assertCount(1, $eds);
+        self::assertNotContains('', $eds);
         self::assertContains('"Kaze wa Mirai ni Fuku (The Wind Blows to the Future)" by AKIMA & NEOS', $eds);
     }
 

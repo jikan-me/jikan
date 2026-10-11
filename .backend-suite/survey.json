@@ -2,12 +2,14 @@
   "surveyVersion": 1,
   "sourceStamp": {
     "generatedBy": "backend-suite bin/survey.py v1",
-    "generatedAt": "2026-10-11T13:48:53Z",
+    "generatedAt": "2026-10-11T15:27:27Z",
     "projectRoot": "/Users/irfan/jikan",
-    "commit": "905813ade018dd86d29f6dba570c45af5d5c675e",
-    "branch": "v5",
-    "workingTreeDirty": false,
-    "dirtyFiles": [],
+    "commit": "78d5179861d1a14477dca2e6c9dc399c6a8d9ea1",
+    "branch": "docs/remaining-context-stubs",
+    "workingTreeDirty": true,
+    "dirtyFiles": [
+      "backend-suite/docs.manifest.json"
+    ],
     "regenerate": "python3 ${CLAUDE_PLUGIN_ROOT}/bin/survey.py",
     "_note": "Derived collateral. Regenerable and disposable; never written back into profile.json, docs.manifest.json, or any context document."
   },
@@ -40,6 +42,41 @@
   "documents": {
     "documents": [
       {
+        "path": "API-STANDARD.md",
+        "proposedRole": "api-standard",
+        "confidence": 0.7,
+        "why": "filename matches the role name 'api-standard'",
+        "provenance": "inferred"
+      },
+      {
+        "path": "CHANGELOG.md",
+        "proposedRole": "changelog",
+        "confidence": 0.7,
+        "why": "filename matches the role name 'changelog'",
+        "provenance": "inferred"
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "proposedRole": "contributing",
+        "confidence": 0.9,
+        "why": "filename matches the role name 'contributing'",
+        "provenance": "inferred"
+      },
+      {
+        "path": "DECISIONS.md",
+        "proposedRole": "decisions",
+        "confidence": 0.8,
+        "why": "filename matches the role name 'decisions'",
+        "provenance": "inferred"
+      },
+      {
+        "path": "DEPRECATIONS.md",
+        "proposedRole": "deprecations",
+        "confidence": 0.7,
+        "why": "filename matches the role name 'deprecations'",
+        "provenance": "inferred"
+      },
+      {
         "path": "readme.md",
         "proposedRole": "entry-point",
         "confidence": 0.5,
@@ -50,13 +87,7 @@
     "unmapped": [],
     "_note": "Every proposal here is `inferred` and nothing downstream may treat it as authoritative. Choosing between four candidate `design` documents is the judgement half (/map-project), not this script's job."
   },
-  "filesSeen": 473,
-  "couldNotDetermine": [
-    {
-      "field": "existingConfig",
-      "why": "no .backend-suite/ directory \u2014 this project has no context layer yet",
-      "note": "Nothing to compare against, so `survey.py --check` has no declared side."
-    }
-  ],
+  "filesSeen": 478,
+  "couldNotDetermine": [],
   "_couldNotDetermineNote": "Load-bearing output, not a nicety. A survey that determined everything and a survey that never ran produce the same short file unless this list is here."
 }

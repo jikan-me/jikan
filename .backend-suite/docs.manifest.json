@@ -1,7 +1,39 @@
 {
-  "_readme": "Maps doc ROLES (the vocabulary skills speak in) to the actual paths in THIS project. Full role vocabulary and the exit-code contract: plugins/backend-suite/docs/DOC-ROLES.md. Map only the roles you actually have. readme.md is the entry point and, for a library, the only authored record of the public API surface (getAnime/getManga/... usage). Jikan deliberately has no api-standard, decisions or backlog documents in this repo, so those roles are left unmapped (an unmapped role makes a skill stop and ask rather than guess).",
+  "_readme": "Maps doc ROLES (the vocabulary skills speak in) to the actual paths in THIS project. Full role vocabulary and the exit-code contract: plugins/backend-suite/docs/DOC-ROLES.md. All seven mapped roles are authored: readme.md plays entry-point and api (the library's public surface), and api-standard, changelog, contributing, decisions and deprecations are their own files. Five app/org-shaped roles (brief, backlog, builds, deployment, production-readiness) are declined with reasons. A role not listed here is unmapped, which makes a skill stop and ask rather than guess.",
   "roles": {
     "entry-point": "readme.md",
-    "api": "readme.md"
+    "api": "readme.md",
+    "changelog": "CHANGELOG.md",
+    "contributing": "CONTRIBUTING.md",
+    "decisions": "DECISIONS.md",
+    "deprecations": "DEPRECATIONS.md",
+    "api-standard": "API-STANDARD.md"
+  },
+  "declinedRoles": {
+    "brief": {
+      "declined": "jikan is a client library with no external-facing product brief; the README's 'About' is the closest thing and covers it",
+      "by": "irfan (onboarding)",
+      "on": "2026-10-11"
+    },
+    "backlog": {
+      "declined": "no internal work-tracking backlog document kept in-repo; issues/roadmap live on GitHub",
+      "by": "irfan (onboarding)",
+      "on": "2026-10-11"
+    },
+    "builds": {
+      "declined": "no build orchestration to document: standard Composer install; no bundling/build step",
+      "by": "irfan (onboarding)",
+      "on": "2026-10-11"
+    },
+    "deployment": {
+      "declined": "publishing a Composer library is a Packagist tag; no deployment process document needed",
+      "by": "irfan (onboarding)",
+      "on": "2026-10-11"
+    },
+    "production-readiness": {
+      "declined": "internal readiness checklists are for service operators; a client-facing library has no production posture to checklist",
+      "by": "irfan (onboarding)",
+      "on": "2026-10-11"
+    }
   }
 }

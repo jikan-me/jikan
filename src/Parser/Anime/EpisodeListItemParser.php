@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Anime\EpisodeListItem;
@@ -110,7 +111,7 @@ class EpisodeListItemParser implements ParserInterface
     {
         $aired = $this->crawler->filterXPath('//td[contains(@class, \'episode-aired\')]')->text();
 
-        if ($aired === 'N/A') {
+        if ($aired === Constants::DISPLAY_N_A) {
             return null;
         }
 

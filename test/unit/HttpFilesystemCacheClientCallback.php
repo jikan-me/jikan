@@ -1,17 +1,25 @@
 <?php
+
 namespace JikanTest;
 
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
 /**
+ * Serves recorded fixtures to MockHttpClient.
  *
+ * This class is a pure cache READER: a request whose hash has no recording
+ * raises loudly instead of fetching the URL live. The recordings are the
+ * `jikan-me/jikan-fixtures` package (vendor/jikan-me/jikan-fixtures/fixtures),
+ * refreshed with:
+ *
+ *     composer link-fixtures
+ *
+ * A live fallback was removed on purpose (backend-quality-suite
+ * audit_test_network_coupling): a suite that silently fetches when a
+ * recording is missing looks offline while it hits the real site — hermetic
+ * only as long as nobody forgets the setup step. A missing recording is now
+ * a test failure with the reason stated, never a quiet network call.
  */
 class HttpFilesystemCacheClientCallback
 {
@@ -21,19 +29,12 @@ class HttpFilesystemCacheClientCallback
     private string $cachePath;
 
     /**
-     * @var HttpClientInterface
-     */
-    private HttpClientInterface $httpClient;
-
-    /**
      * @param string $cachePath
-     * @param HttpClientInterface|null $httpClient
      */
-    public function __construct(string $cachePath, ?HttpClientInterface $httpClient = null)
+    public function __construct(string $cachePath)
     {
-        $this->httpClient = $httpClient ?? HttpClient::create();
         if (!is_dir($cachePath)) {
-            if (false === @mkdir($cachePath, 0755, true)) {
+            if (false === @mkdir($cachePath, 0o755, true)) {
                 throw new \RuntimeException(sprintf('Unable to create the %s directory', $cachePath));
             }
         }
@@ -45,10 +46,7 @@ class HttpFilesystemCacheClientCallback
      * @param string $url
      * @param array $options
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws TransportExceptionInterface
+     * @throws \RuntimeException when the request has no recorded fixture
      */
     public function __invoke(string $method, string $url, array $options = []): ResponseInterface
     {
@@ -56,8 +54,14 @@ class HttpFilesystemCacheClientCallback
 
         $filePath = join(DIRECTORY_SEPARATOR, [$this->cachePath, $hash]);
         if (!file_exists($filePath)) {
-            $response = $this->httpClient->request($method, $url, $options);
-            file_put_contents($filePath, $response->getContent());
+            throw new \RuntimeException(sprintf(
+                'No recorded fixture for %s %s (expected %s). The test cache cannot go '
+                . 'live: run `composer link-fixtures` to fetch the recordings from '
+                . 'jikan-me/jikan-fixtures, or record this request into that package.',
+                strtoupper($method),
+                $url,
+                $filePath
+            ));
         }
         $data = file_get_contents($filePath);
         return new MockResponse($data);

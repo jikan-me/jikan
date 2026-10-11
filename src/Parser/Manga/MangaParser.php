@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Manga;
 
+use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\DateRange;
@@ -214,7 +215,7 @@ class MangaParser implements ParserInterface
         }
 
         $type = JString::cleanse(str_replace($type->text(), '', $type->ancestors()->text()));
-        return $type === 'Unknown' ? null : $type;
+        return $type === Constants::DISPLAY_UNKNOWN ? null : $type;
     }
 
     /**
@@ -235,7 +236,7 @@ class MangaParser implements ParserInterface
             (
                 trim(
                     str_replace($chapters->text(), '', $chapters->ancestors()->text())
-                ) === 'Unknown'
+                ) === Constants::DISPLAY_UNKNOWN
             )
                 ? null
                 : (int) str_replace(
@@ -263,7 +264,7 @@ class MangaParser implements ParserInterface
             (
                 trim(
                     str_replace($volumes->text(), '', $volumes->ancestors()->text())
-                ) === 'Unknown'
+                ) === Constants::DISPLAY_UNKNOWN
             )
                 ? null
                 : (int) str_replace(
@@ -465,7 +466,7 @@ class MangaParser implements ParserInterface
 
         $score = JString::cleanse($score->text());
 
-        if ($score === 'N/A') {
+        if ($score === Constants::DISPLAY_N_A) {
             return null;
         }
 
@@ -523,7 +524,7 @@ class MangaParser implements ParserInterface
             )
         );
 
-        return $ranked !== 'N/A' ? (int) $ranked : null;
+        return $ranked !== Constants::DISPLAY_N_A ? (int) $ranked : null;
     }
 
     /**

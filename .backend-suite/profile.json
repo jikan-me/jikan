@@ -16,7 +16,8 @@
     "testRoot": "test/unit"
   },
   "pipelines": {
-    "scripts": "scripts"
+    "scripts": "scripts",
+    "tools": "tools"
   },
   "audits": {
     "exceptionsFile": ".backend-suite/exceptions.json",
@@ -34,7 +35,9 @@
         "on": "2026-10-11",
         "value": "php",
         "evidence": "survey read root composer.json; the suite ships exactly one adapter and it is php; jikan source is entirely .php under src/",
-        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+        "verifiedAgainst": {
+          "commit": "905813ade018dd86d29f6dba570c45af5d5c675e"
+        }
       },
       "project.framework": {
         "state": "declared",
@@ -42,7 +45,9 @@
         "on": "2026-10-11",
         "value": "PHP ^8.4, Composer PSR-4 library; Symfony BrowserKit/CssSelector/HttpClient for scraping myanimelist.net; PHPUnit + paratest. Deliberate non-features (do not report as gaps): no HTTP server or routes, no authentication, no stateful API service, no request-facing controller layer. This is a client library: Jikan\\\\Http\\\\HttpClientWrapper is the single outbound network edge and every public call is a read against an external site.",
         "evidence": "composer.json requires php ^8.4 and symfony/browser-kit, css-selector, http-client ^8.0; v5 branch is a library (no Lumen/Laravel app layer)",
-        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+        "verifiedAgainst": {
+          "commit": "905813ade018dd86d29f6dba570c45af5d5c675e"
+        }
       },
       "project.audience": {
         "state": "declared",
@@ -50,7 +55,9 @@
         "on": "2026-10-11",
         "value": "developers building apps and tools that consume MyAnimeList data",
         "evidence": "readme.md describes Jikan as a library 'to assist developers easily get the data they need for their apps and projects'",
-        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+        "verifiedAgainst": {
+          "commit": "905813ade018dd86d29f6dba570c45af5d5c675e"
+        }
       },
       "source.root": {
         "state": "approved",
@@ -58,7 +65,9 @@
         "on": "2026-10-11",
         "value": "src",
         "evidence": "survey found src/ with 388 .php files as the only conventional source root for composer.json; autoload maps Jikan\\\\ to src/",
-        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+        "verifiedAgainst": {
+          "commit": "905813ade018dd86d29f6dba570c45af5d5c675e"
+        }
       },
       "source.fileGlob": {
         "state": "approved",
@@ -66,7 +75,9 @@
         "on": "2026-10-11",
         "value": "**/*.php",
         "evidence": "single source extension implied by the composer.json php manifest",
-        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+        "verifiedAgainst": {
+          "commit": "905813ade018dd86d29f6dba570c45af5d5c675e"
+        }
       },
       "source.testRoot": {
         "state": "declared",
@@ -74,7 +85,9 @@
         "on": "2026-10-11",
         "value": "test/unit",
         "evidence": "phpunit.xml testsuite points at test/unit; JikanTest\\\\ autoloads from test/JikanTest under it",
-        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+        "verifiedAgainst": {
+          "commit": "905813ade018dd86d29f6dba570c45af5d5c675e"
+        }
       },
       "project.name": {
         "state": "declared",
@@ -82,7 +95,9 @@
         "on": "2026-10-11",
         "value": "Jikan",
         "evidence": "init.py --name Jikan; matches composer.json name jikan-me/jikan and readme title",
-        "verifiedAgainst": { "commit": "905813ade018dd86d29f6dba570c45af5d5c675e" }
+        "verifiedAgainst": {
+          "commit": "905813ade018dd86d29f6dba570c45af5d5c675e"
+        }
       },
       "profileVersion": {
         "state": "declared",
@@ -132,6 +147,13 @@
         "on": "2026-10-12",
         "value": "scripts",
         "evidence": "scripts/generate_endpoints.php lives there; declared so survey --check does not flag the directory as undeclared"
+      },
+      "pipelines.tools": {
+        "state": "declared",
+        "by": "irfan (docs pipeline)",
+        "on": "2026-10-12",
+        "value": "tools",
+        "evidence": "tools/phpdoc \u2014 the isolated phpDocumentor tooling for composer generate-docs; declared so survey --check does not flag the directory as undeclared"
       }
     }
   }

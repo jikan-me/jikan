@@ -1,0 +1,25 @@
+name: Quality
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-22.04
+    name: composer quality
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v4
+        with:
+          php-version: '8.4'
+          tools: composer
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress --no-suggest --no-scripts
+      - name: Fetch recorded fixtures from source
+        run: composer run-script link-fixtures
+      - name: Run composer quality
+        # php-cs-fixer dry-run + endpoints:check (endpoint manifest staleness/gaps) + tests,
+        # one command — the repo-local gate set enforced server-side.
+        run: composer quality

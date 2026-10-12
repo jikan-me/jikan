@@ -38,9 +38,9 @@ class AnimeCard
     protected $synopsis;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $type;
+    protected ?string $type;
 
     /**
      * @var \DateTimeImmutable|null
@@ -227,7 +227,7 @@ class AnimeCard
     /**
      * @return string
      */
-    public function getType(): string
+    public function getType(): ?string
     {
         return $this->type;
     }

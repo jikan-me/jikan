@@ -196,4 +196,15 @@ fixed (`getAnimeSearchAlt` return type).
 
 ---
 
-_Last updated: 2026-10-11_
+## Live markup drift
+
+### Parser/selector changes require a live probe; fixture-green is not live-green
+**Date:** 2026-10-12
+**Source:** internal-decision (recurring bug class; jikan#593/#564/#488/#629)
+**Decision:** Any change touching a parser selector — especially positional or text-anchored XPath — must be verified against a live MAL page, not only the recorded fixtures. Fixtures freeze the markup as of record time; they prove the parser against one snapshot and say nothing about today's page. "All tests green" has meant "live broken" four times this release cycle.
+**Reason:** The failures of the year were all the same shape: a fixture that no longer matches current markup (#593 theme tables, #564 NBSP titles, #488 placeholders, #629 News/Article). Fixtures are the wrong oracle for upstream drift; a live probe is the right one, and it is cheap (a few `MalClient` calls).
+**Impact:** `CONTRIBUTING.md` §7 now fails review to a change without a live probe for selector edits. The same rule underlies the recommended automated live-drift smoke test (not yet built): a scheduled probe that surfaces drift as an issue before consumers do.
+
+---
+
+_Last updated: 2026-10-12_

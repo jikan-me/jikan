@@ -21,8 +21,12 @@
   },
   "apiConsistency": {
     "_comment": "Consumed by bin/audit_api_consistency.py. For a library, 'user-facing copy' means the literal strings a consumer would have to fork to re-voice: compared sentinels and hard-baked literals in src/. authoredSemantics (route/tap-target provenance) is a UI concept and is off with a reason. checks.vocabulary off until naming rules are authored - enabling it with zero rules would refuse.",
-    "semanticsWrappers": ["Semantics"],
-    "scope": ["src/**/*.php"],
+    "semanticsWrappers": [
+      "Semantics"
+    ],
+    "scope": [
+      "src/**/*.php"
+    ],
     "checks": {
       "hardBakedCopy": true,
       "loadBearingCopy": true,
@@ -38,10 +42,15 @@
     "vocabularyRules": []
   },
   "toolchainGates": {
-    "_comment": "Consumed by bin/audit_toolchain_gates.py. The suite measured on jikan (2026-10-11) that the manifest declared no 'test' script despite phpunit.xml/grumphp.yml existing; a 'test' script was added to composer.json in the same change. manifestGlob names the manifest declaring commands, runnerGlob the suite-declaring XML, requiredScripts the command a contributor must be able to run.",
+    "_comment": "Consumed by bin/audit_toolchain_gates.py. The suite measured on jikan (2026-10-11) that the manifest declared no 'test' script despite phpunit.xml/grumphp.yml existing; a 'test' script was added to composer.json in the same change. manifestGlob names the manifest declaring commands, runnerGlob the suite-declaring XML, requiredScripts the command a contributor must be able to run. checkScripts: the endpoint-manifest gate (composer endpoints:check) is verified natively by audit_toolchain_gates; a stale or broken manifest now surfaces via the toolchain audit rather than a separate step.",
     "manifestGlob": "composer.json",
     "runnerGlob": "phpunit.xml",
-    "requiredScripts": ["test"],
-    "testsuiteFlag": "--testsuite"
+    "requiredScripts": [
+      "test"
+    ],
+    "testsuiteFlag": "--testsuite",
+    "checkScripts": [
+      "endpoints:check"
+    ]
   }
 }

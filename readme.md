@@ -90,12 +90,14 @@ No hosted/public instance of the REST API is provided.
 # Running Tests
 
 ```bash
-composer test   # PHPUnit via paratest — hermetic against recorded fixtures
+composer quality   # everything at once: php-cs-fixer dry-run + endpoint-manifest check + tests
+composer test      # PHPUnit via paratest — hermetic against recorded fixtures
 ```
 
 Quality gates run automatically on every commit (grumphp: php-cs-fixer, php-parallel-lint,
 git blacklist, paratest; plus the backend-suite `error_handling`/`test_network_coupling`
-audits). Full workflow: [CONTRIBUTING.md](CONTRIBUTING.md).
+audits). The same `composer quality` gate is enforced in CI. Full workflow:
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 

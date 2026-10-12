@@ -138,6 +138,7 @@ the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing 
 - **Episode `title_romanji` / `title_japanese` no longer end with a trailing non-breaking space**
   — the episodes-list parser now cleanses the captured titles exactly like the single-episode
   parser does (jikan#564).
+- **AnimeCard`type` no longer TypeErrors on cards without a type** — `AnimeCardParser::getType()` returns `?string` but the model declared `string`; on pages with no card type the assignment would fatal. `type` is now `?string`, matching the source (malId/type consistency sweep).
 - **Date ranges preserve precision** — a year-only or month-only date (`1989`, `May, 1979`) no
   longer surfaces as `January 1 of the year`; `from_prop`/`to_prop` `month`/`day` are `null` when
   the source date omitted them (jikan#486).

@@ -13,9 +13,12 @@ use Jikan\Model\Common\CommonMeta;
 class RecommendationListItem
 {
     /**
+     * The COMPOUND key of a recommendation pair: "{entry[0].malId}-{entry[1].malId}".
+     * Intentionally a string, not an int — a single MAL id cannot identify a pair.
+     *
      * @var string
      */
-    private $malId;
+    private string $malId;
 
     /**
      * @var CommonMeta[]

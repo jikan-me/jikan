@@ -39,14 +39,15 @@ order, where things live, the task router) — `CLAUDE.md` is just an `@AGENTS.m
 Every one of these must pass. A PR that fails them wastes a reviewer's time.
 
 ```bash
-# Tests (hermetic — run whenever fixtures are present)
-composer test
+# Everything, one command: cs-fixer dry-run + endpoint-manifest check + tests
+composer quality
 
-# Code style (jikan's .php-cs-fixer.dist.php)
+# …which runs these individually:
+composer test                        # PHPUnit via paratest, hermetic
 php vendor/bin/php-cs-fixer fix --dry-run
 
 # The same checks run again automatically on commit via the grumphp pre-commit hook
-# (php-cs-fixer, git blacklist, paratest, phplint).
+# (php-cs-fixer, git blacklist, paratest, phplint), and the backend-suite audits in §6.
 ```
 
 The pre-commit hook also runs the backend-suite gates from `.backend-suite/hooks.map.json`
@@ -171,6 +172,9 @@ pre-commit hook. Re-run them after the suite is reinstalled elsewhere.
   use `Jikan\Helper\Constants::DISPLAY_*` (see `DECISIONS.md`); `audit_api_consistency` will flag it.
 - A test that can reach the live site, or a fixture hash that no longer matches the request
   (`composer link-fixtures` refreshes the recordings).
+- A parser/selector change without a **live probe** — fixtures freeze today's markup, so
+  "fixture green" is not "live green". Any positional/text-anchored selector touched in a change
+  must be verified against a live page (see `DECISIONS.md` → "Live markup drift").
 
 ---
 

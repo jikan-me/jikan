@@ -11,7 +11,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        operatingSystem: [ubuntu-22.04, windows-latest]
+        operatingSystem: [ubuntu-22.04]
         phpVersion: ['8.4']
       fail-fast: false
     runs-on: ${{ matrix.operatingSystem }}

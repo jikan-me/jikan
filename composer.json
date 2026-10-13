@@ -19,9 +19,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-          "JikanTest\\": [
-              "test/unit"
-          ]
+            "JikanTest\\": [
+                "test/unit"
+            ]
         }
     },
     "require": {
@@ -29,6 +29,7 @@
         "ext-json": "*",
         "symfony/browser-kit": "^8.0",
         "symfony/css-selector": "^8.0",
+        "symfony/dom-crawler": "^7.4 || ^8.0",
         "symfony/http-client": "^8.0"
     },
     "require-dev": {
@@ -44,16 +45,19 @@
     "scripts": {
         "test": "phpunit",
         "csfixer-check": "php vendor/bin/php-cs-fixer fix --dry-run --diff",
-        "quality": [
+        "quality:static": [
             "@csfixer-check",
             "@phpstan",
-            "@endpoints:check",
+            "@endpoints:check"
+        ],
+        "quality": [
+            "@quality:static",
             "@test"
         ],
         "benchmark": "php scripts/benchmark.php",
         "phpstan": "php vendor/bin/phpstan analyse --memory-limit=1G",
         "phpstan:baseline": "php vendor/bin/phpstan analyse --memory-limit=1G --generate-baseline phpstan-baseline.neon --allow-empty-baseline",
-        "endpoints:check":"php scripts/generate_endpoints.php --check",
+        "endpoints:check": "php scripts/generate_endpoints.php --check",
         "endpoints:write": "php scripts/generate_endpoints.php --write",
         "link-fixtures": [
             "git clone https://github.com/jikan-me/jikan-fixtures.git ../jikan-fixtures || git -C ../jikan-fixtures reset --hard origin/master",
@@ -74,6 +78,5 @@
             "phpro/grumphp": true
         }
     },
-    "repositories": {
-    }
+    "repositories": {}
 }

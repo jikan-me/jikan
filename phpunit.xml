@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
          cacheDirectory=".phpunit.cache"
+         colors="true"
          beStrictAboutOutputDuringTests="true"
          failOnRisky="true"
          failOnWarning="true"
-         colors="true"
+         failOnDeprecation="true"
+         failOnNotice="true"
          failOnEmptyTestSuite="true"
          displayDetailsOnTestsThatTriggerDeprecations="true"
          displayDetailsOnTestsThatTriggerErrors="true"
@@ -13,9 +17,15 @@
 >
   <testsuites>
     <testsuite name="unit">
-      <directory phpVersion="8.3" phpVersionOperator=">=">test/unit</directory>
+      <directory>test/unit</directory>
     </testsuite>
   </testsuites>
+
+  <source>
+    <include>
+      <directory>src</directory>
+    </include>
+  </source>
 
   <php>
     <ini name="precision" value="14"/>

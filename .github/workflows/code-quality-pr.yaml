@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup PHP and linter
-        uses: shivammathur/setup-php@v4
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
           # Only parallel-lint is used by these jobs (tests + style are gated by

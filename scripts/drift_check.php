@@ -69,10 +69,11 @@ function nullStats(mixed $value, \SplObjectStorage $seen): array
     if ($value instanceof \DateTimeInterface || !is_object($value)) {
         return [$value === null ? 1 : 0, 1];
     }
-    if ($seen->contains($value)) {
+    // ArrayAccess, not contains()/attach(): those are deprecated since PHP 8.5.
+    if (isset($seen[$value])) {
         return [0, 0];
     }
-    $seen->attach($value);
+    $seen[$value] = true;
 
     $stats = [0, 0];
     for ($class = new \ReflectionObject($value); $class; $class = $class->getParentClass()) {

@@ -50,8 +50,9 @@ final class ModelSnapshot
             $file,
             'No snapshot for ' . $test::class . '. Create it with JIKAN_UPDATE_SNAPSHOTS=1 after checking the model.'
         );
+        // A Windows checkout may have converted the snapshot to CRLF (core.autocrlf); the model is dumped with LF.
         Assert::assertSame(
-            file_get_contents($file),
+            str_replace("\r\n", "\n", (string) file_get_contents($file)),
             $actual,
             'Parsed model differs from its snapshot (' . $relative . '.json). If the change is intended, '
             . 'review it and refresh with JIKAN_UPDATE_SNAPSHOTS=1.'
@@ -69,10 +70,11 @@ final class ModelSnapshot
         if (!is_object($value)) {
             return $value;
         }
-        if ($seen->contains($value)) {
+        // ArrayAccess, not contains()/attach()/detach(): those are deprecated since PHP 8.5.
+        if (isset($seen[$value])) {
             return '<recursion>';
         }
-        $seen->attach($value);
+        $seen[$value] = true;
 
         $out = ['@class' => $value::class];
         for ($class = new \ReflectionObject($value); $class; $class = $class->getParentClass()) {
@@ -86,7 +88,7 @@ final class ModelSnapshot
                 $out[$property->getName()] = self::dump($property->getValue($value), $maskDates, $seen);
             }
         }
-        $seen->detach($value);
+        unset($seen[$value]);
 
         return $out;
     }

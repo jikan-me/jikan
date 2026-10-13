@@ -76,4 +76,12 @@ jobs:
       - name: Run tests
         env:
           CI_ENV: true
-        run: ./vendor/bin/paratest
+        shell: bash
+        # paratest is only a speed-up. At the lowest versions Composer pairs it with a PHPUnit it does not
+        # fully support, so that job runs plain PHPUnit: what it checks is the library at its floor.
+        run: |
+          if [ "${{ matrix.dependencies }}" = "lowest" ]; then
+            ./vendor/bin/phpunit
+          else
+            ./vendor/bin/paratest
+          fi

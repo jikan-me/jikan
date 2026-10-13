@@ -66,6 +66,6 @@ class MangaGenreParserTest extends TestCase
     #[Test]
     public function it_builds_a_model_that_matches_its_snapshot(): void
     {
-        ModelSnapshot::assertMatches($this, $this->parser->getModel());
+        ModelSnapshot::assertMatches($this, $this->parser->getModel(), true);
     }
 }

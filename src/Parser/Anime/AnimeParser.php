@@ -13,6 +13,7 @@ use Jikan\Model\Common\Title;
 use Jikan\Parser\Common\AlternativeTitleParser;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\Common\UrlParser;
+use Jikan\Parser\Common\IndexesSidebarLabels;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -23,6 +24,39 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class AnimeParser implements ParserInterface
 {
+    use IndexesSidebarLabels;
+
+    /**
+     * Every sidebar label this parser looks up (indexed in one pass by IndexesSidebarLabels).
+     */
+    private const SIDEBAR_LABELS = [
+        'English:',
+        'Synonyms:',
+        'Japanese:',
+        'Type:',
+        'Episodes:',
+        'Status:',
+        'Broadcast:',
+        'Producers:',
+        'Licensors:',
+        'Studios:',
+        'Source:',
+        'Genres:',
+        'Genre:',
+        'Explicit Genres:',
+        'Explicit Genre:',
+        'Demographic:',
+        'Demographics:',
+        'Theme:',
+        'Themes:',
+        'Duration:',
+        'Rating:',
+        'Ranked:',
+        'Popularity:',
+        'Members:',
+        'Favorites:',
+    ];
+
     /**
      * @var Crawler
      */
@@ -120,7 +154,7 @@ class AnimeParser implements ParserInterface
      */
     public function getTitleEnglish(): ?string
     {
-        $title = $this->crawler->filterXPath('//span[text()="English:"]');
+        $title = $this->label('English:');
         if (!$title->count()) {
             return null;
         }
@@ -136,8 +170,7 @@ class AnimeParser implements ParserInterface
      */
     public function getTitleSynonyms(): array
     {
-        $title = $this->crawler
-            ->filterXPath('//span[text()="Synonyms:"]');
+        $title = $this->label('Synonyms:');
 
         if (!$title->count()) {
             return [];
@@ -159,8 +192,7 @@ class AnimeParser implements ParserInterface
      */
     public function getTitleJapanese(): ?string
     {
-        $title = $this->crawler
-            ->filterXPath('//span[text()="Japanese:"]');
+        $title = $this->label('Japanese:');
         if (!$title->count()) {
             return null;
         }
@@ -201,8 +233,7 @@ class AnimeParser implements ParserInterface
      */
     public function getType(): ?string
     {
-        $type = $this->crawler
-            ->filterXPath('//span[text()="Type:"]');
+        $type = $this->label('Type:');
         if (!$type->count()) {
             return null;
         }
@@ -217,8 +248,7 @@ class AnimeParser implements ParserInterface
      */
     public function getEpisodes(): ?int
     {
-        $episodes = $this->crawler
-            ->filterXPath('//span[text()="Episodes:"]');
+        $episodes = $this->label('Episodes:');
 
 
         if (!$episodes->count()) {
@@ -245,8 +275,7 @@ class AnimeParser implements ParserInterface
      */
     public function getStatus(): ?string
     {
-        $status = $this->crawler
-            ->filterXPath('//span[text()="Status:"]');
+        $status = $this->label('Status:');
         if (!$status->count()) {
             return null;
         }
@@ -286,8 +315,7 @@ class AnimeParser implements ParserInterface
      */
     public function getBroadcast(): ?string
     {
-        $broadcast = $this->crawler
-            ->filterXPath('//span[text()="Broadcast:"]');
+        $broadcast = $this->label('Broadcast:');
 
         if (!$broadcast->count()) {
             return null;
@@ -305,8 +333,7 @@ class AnimeParser implements ParserInterface
      */
     public function getProducers(): array
     {
-        $producer = $this->crawler
-            ->filterXPath('//span[text()="Producers:"]');
+        $producer = $this->label('Producers:');
 
         if ($producer->count() && strpos($producer->ancestors()->text(), 'None found') === false) {
             return $producer->ancestors()->first()->filterXPath('//a')->each(
@@ -326,8 +353,7 @@ class AnimeParser implements ParserInterface
      */
     public function getLicensors(): array
     {
-        $licensor = $this->crawler
-            ->filterXPath('//span[text()="Licensors:"]');
+        $licensor = $this->label('Licensors:');
 
         if ($licensor->count() && strpos($licensor->ancestors()->text(), 'None found') === false) {
             return $licensor->ancestors()->first()->filterXPath('//a')->each(
@@ -347,7 +373,7 @@ class AnimeParser implements ParserInterface
      */
     public function getStudios(): array
     {
-        $studio = $this->crawler->filterXPath('//span[text()="Studios:"]');
+        $studio = $this->label('Studios:');
 
         if ($studio->count() && strpos($studio->ancestors()->text(), 'None found') === false) {
             return $studio->ancestors()->first()->filterXPath('//a')->each(
@@ -366,8 +392,7 @@ class AnimeParser implements ParserInterface
      */
     public function getSource(): ?string
     {
-        $source = $this->crawler
-            ->filterXPath('//span[text()="Source:"]');
+        $source = $this->label('Source:');
 
         if (!$source->count()) {
             return null;
@@ -385,8 +410,7 @@ class AnimeParser implements ParserInterface
      */
     public function getGenres(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Genres:"]');
+        $genre = $this->label('Genres:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -396,8 +420,7 @@ class AnimeParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Genre:"]');
+        $genre = $this->label('Genre:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -417,8 +440,7 @@ class AnimeParser implements ParserInterface
      */
     public function getExplicitGenres(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Explicit Genres:"]');
+        $genre = $this->label('Explicit Genres:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -428,8 +450,7 @@ class AnimeParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Explicit Genre:"]');
+        $genre = $this->label('Explicit Genre:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -449,8 +470,7 @@ class AnimeParser implements ParserInterface
      */
     public function getDemographics(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Demographic:"]');
+        $genre = $this->label('Demographic:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -460,8 +480,7 @@ class AnimeParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Demographics:"]');
+        $genre = $this->label('Demographics:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -481,8 +500,7 @@ class AnimeParser implements ParserInterface
      */
     public function getThemes(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Theme:"]');
+        $genre = $this->label('Theme:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -492,8 +510,7 @@ class AnimeParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Themes:"]');
+        $genre = $this->label('Themes:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -512,8 +529,7 @@ class AnimeParser implements ParserInterface
      */
     public function getDuration(): ?string
     {
-        $duration = $this->crawler
-            ->filterXPath('//span[text()="Duration:"]');
+        $duration = $this->label('Duration:');
 
         if (!$duration->count()) {
             return null;
@@ -534,8 +550,7 @@ class AnimeParser implements ParserInterface
      */
     public function getRating(): ?string
     {
-        $rating = $this->crawler
-            ->filterXPath('//span[text()="Rating:"]');
+        $rating = $this->label('Rating:');
 
         if (!$rating->count()) {
             return null;
@@ -606,8 +621,7 @@ class AnimeParser implements ParserInterface
      */
     public function getRank(): ?int
     {
-        $rank = $this->crawler
-            ->filterXPath('//span[text()="Ranked:"]');
+        $rank = $this->label('Ranked:');
 
         if (!$rank->count()) {
             return null;
@@ -634,8 +648,7 @@ class AnimeParser implements ParserInterface
      */
     public function getPopularity(): ?int
     {
-        $popularity = $this->crawler
-            ->filterXPath('//span[text()="Popularity:"]');
+        $popularity = $this->label('Popularity:');
 
         if (!$popularity->count()) {
             return null;
@@ -652,8 +665,7 @@ class AnimeParser implements ParserInterface
      */
     public function getMembers(): ?int
     {
-        $member = $this->crawler
-            ->filterXPath('//span[text()="Members:"]');
+        $member = $this->label('Members:');
 
         if (!$member->count()) {
             return null;
@@ -670,8 +682,7 @@ class AnimeParser implements ParserInterface
      */
     public function getFavorites(): ?int
     {
-        $favorite = $this->crawler
-            ->filterXPath('//span[text()="Favorites:"]');
+        $favorite = $this->label('Favorites:');
 
         if (!$favorite->count()) {
             return null;

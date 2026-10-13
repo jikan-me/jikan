@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Recommendations;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Recommendations\UserRecommendationsParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -53,5 +54,17 @@ class UserRecommendationsParserTest extends TestCase
     public function it_reports_pagination(): void
     {
         self::assertSame(1, $this->parser->getLastPage());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

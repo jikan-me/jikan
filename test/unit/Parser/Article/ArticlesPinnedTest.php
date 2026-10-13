@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Article;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Article\PinnedArticleListParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -57,5 +58,17 @@ class ArticlesPinnedTest extends TestCase
         self::assertEquals(7156, $entry->getViews());
         self::assertStringContainsString("Dive into BLEACH, NARUTO, and Hunter x Hunter movie sagas, now streaming 24/7", $entry->getExcerpt());
         self::assertCount(0, $entry->getTags());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

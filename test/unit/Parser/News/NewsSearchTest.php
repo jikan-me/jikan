@@ -7,6 +7,7 @@ use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\News\NewsByTagRequest;
 use Jikan\Request\Search\NewsSearchRequest;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -58,5 +59,17 @@ class NewsSearchTest extends TestCase
         self::assertStringContainsString("The 14th and final episode of the Bleach: Sennen Kessen-hen", $entry->getExcerpt());
         self::assertCount(2, $entry->getTags());
         self::assertEquals("Preview", (string) $entry->getTags()[0]);
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

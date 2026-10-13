@@ -11,3 +11,4 @@ composer.phar
 /.phpunit.cache
 *.Identifier
 qodana.yaml
+.phpstan-cache

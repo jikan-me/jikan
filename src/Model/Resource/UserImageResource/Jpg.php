@@ -31,7 +31,7 @@ class Jpg
      */
     public function __toString(): string
     {
-        return $this->getJpg()->getImageUrl();
+        return (string) $this->getImageUrl();
     }
 
     /**

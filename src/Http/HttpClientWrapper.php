@@ -32,7 +32,7 @@ class HttpClientWrapper extends HttpBrowser
         array $files = [],
         array $server = [],
         ?string $content = null,
-        bool $changeHistory = true
+        bool $changeHistory = false
     ): Crawler {
         $response = parent::request(
             $method,
@@ -43,6 +43,11 @@ class HttpClientWrapper extends HttpBrowser
             $content,
             $changeHistory
         );
+
+        // Jikan only requests absolute URLs and never navigates back, so history is dead weight. It
+        // grew by one entry per request for the lifetime of the client, a slow leak in long-running
+        // workers (redirects can still add entries, so clear rather than rely on the default alone).
+        $this->history->clear();
 
         $internalResponse = $this->getInternalResponse();
         if ($internalResponse->getStatusCode() >= 400) {

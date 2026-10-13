@@ -16,6 +16,9 @@ class Parser
     /**
      * Removes all html elements so the text is left over
      *
+     * Works on a detached copy: the crawler passed in (and the page DOM behind it) is left
+     * untouched, so later getters and repeated getModel() calls still see the original markup.
+     *
      * @param Crawler $crawler
      *
      * @return Crawler
@@ -26,17 +29,25 @@ class Parser
         if (!$crawler->count()) {
             return $crawler;
         }
-        $crawler->children()->each(
-            function (Crawler $crawler) use ($removeAllNodes) {
-                $node = $crawler->getNode(0);
-                if ($node === null || $node->nodeType === 3 || \in_array($node->nodeName, $removeAllNodes ? [] : self::ALLOWED_NODES, true)) {
-                    return;
-                }
-                $node->parentNode->removeChild($node);
-            }
-        );
 
-        return $crawler;
+        $allowed = $removeAllNodes ? [] : self::ALLOWED_NODES;
+
+        // Copy the node shallowly and deep-copy only the children that survive. Cloning the whole
+        // subtree and then deleting most of it is far slower: some callers pass a container
+        // holding thousands of elements (e.g. the parent of the synopsis on an anime page).
+        $copy = new Crawler();
+        foreach ($crawler as $domNode) {
+            $clone = $domNode->cloneNode(false);
+            foreach ($domNode->childNodes as $child) {
+                if ($child->nodeType === XML_ELEMENT_NODE && !\in_array($child->nodeName, $allowed, true)) {
+                    continue;
+                }
+                $clone->appendChild($child->cloneNode(true));
+            }
+            $copy->add($clone);
+        }
+
+        return $copy;
     }
 
     /**

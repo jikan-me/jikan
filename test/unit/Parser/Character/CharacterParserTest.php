@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Character;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -106,5 +107,17 @@ class CharacterParserTest extends TestCase
         self::assertEquals('Hino, Satoshi', $voiceActors[0]->getPerson()->getName());
         self::assertEquals('Guerrero, Chris', $voiceActors[1]->getPerson()->getName());
         self::assertEquals('Kaminski, Stefan', $voiceActors[3]->getPerson()->getName());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

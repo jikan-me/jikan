@@ -8,6 +8,7 @@ use Jikan\Request\News\NewsByTagRequest;
 use Jikan\Request\News\NewsTagsRequest;
 use Jikan\Request\Search\NewsSearchRequest;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -43,5 +44,17 @@ class NewsTagsTest extends TestCase
         self::assertEquals("https://myanimelist.net/news/tag/new_anime", $entry->getUrl());
         self::assertEquals("Anime", $entry->getType());
         self::assertEquals("Announcements of new anime works.", $entry->getDescription());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

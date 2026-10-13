@@ -272,6 +272,10 @@ class AnimeCardParser implements ParserInterface
 
             return (int) str_replace([',', '.'], '', $count);
         }
+
+        // Previously fell off the end, which is a TypeError for ": int" and escaped MalClient's
+        // catch (\Exception). Same outcome (failure), but now a ParserException like every other parse error.
+        throw new \RuntimeException('Could not find the member count on the anime card.');
     }
 
     /**
@@ -470,6 +474,28 @@ class AnimeCardParser implements ParserInterface
      */
     public function isContinuing(): bool
     {
-        return strpos($this->crawler->ancestors()->text(), '(Continuing)') !== false;
+        // The marker sits in the text of the nearest ancestor (the whole season section). Read the raw
+        // textContent instead of Crawler::text(): the marker has no whitespace, so whitespace
+        // normalisation cannot change the answer, and normalising a section-sized string once per card
+        // made the seasonal page parse take over a second.
+        $parent = $this->crawler->getNode(0)?->parentNode;
+        if ($parent === null) {
+            return false;
+        }
+
+        // Every card in a section shares one parent, so answer once per parent. DOM wrapper objects
+        // are recreated on each access, so key on the (long-lived) document plus the parent's path.
+        static $perDocument = null;
+        $perDocument ??= new \WeakMap();
+
+        $document = $parent->ownerDocument;
+        $path = $parent->getNodePath();
+        $known = $perDocument[$document] ?? [];
+        if (!isset($known[$path])) {
+            $known[$path] = strpos($parent->textContent, '(Continuing)') !== false;
+            $perDocument[$document] = $known;
+        }
+
+        return $known[$path];
     }
 }

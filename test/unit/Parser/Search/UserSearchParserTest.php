@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Search;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Search\UserSearchParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -79,5 +80,19 @@ class UserSearchParserTest extends TestCase
             'https://myanimelist.net/profile/',
             $results[0]->getUrl()
         );
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        // Relative dates ("5 minutes ago") resolve against the clock at parse time, so two
+        // parses differ by microseconds; allow a small delta instead of exact equality.
+        self::assertEqualsWithDelta($this->parser->getModel(), $this->parser->getModel(), 5.0);
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel(), true);
     }
 }

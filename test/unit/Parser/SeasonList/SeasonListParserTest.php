@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\SeasonList\SeasonListItem;
 use Jikan\Parser\SeasonList\SeasonListParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -35,5 +36,17 @@ class SeasonListParserTest extends TestCase
             SeasonListItem::class,
             $this->parser->getModel()->getResults()
         );
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

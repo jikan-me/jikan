@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Article;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Article\ArticleParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -72,5 +73,17 @@ class ArticleParserTest extends TestCase
         // getDate must not mutate the shared DOM; views stay readable after it.
         self::assertSame('2015-08-19', $this->parser->getDate()?->format('Y-m-d'));
         self::assertIsInt($this->parser->getViews());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

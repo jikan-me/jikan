@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Reviews;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Reviews\ReviewsParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -50,5 +51,17 @@ class ReviewsParserTest extends TestCase
         self::assertSame('Nige Jouzu no Wakagimi 2nd Season', $reviews[0]->getEntry()->getTitle());
         self::assertSame(60059, $reviews[0]->getEntry()->getMalId());
         self::assertSame('NHK ni Youkoso!', $reviews[1]->getEntry()->getTitle());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

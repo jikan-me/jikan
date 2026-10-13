@@ -103,14 +103,7 @@ class MalClient
      */
     public function getAnimeVideos(Request\Anime\AnimeVideosRequest $request): Model\Anime\AnimeVideos
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Anime\VideosParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Anime\VideosParser::class);
     }
 
     /**
@@ -139,14 +132,7 @@ class MalClient
      */
     public function getManga(Request\Manga\MangaRequest $request): Model\Manga\Manga
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Manga\MangaParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Manga\MangaParser::class);
     }
 
 
@@ -210,14 +196,7 @@ class MalClient
      */
     public function getUserProfile(Request\User\UserProfileRequest $request): Model\User\Profile
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\User\Profile\UserProfileParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\User\Profile\UserProfileParser::class);
     }
 
     /**
@@ -228,14 +207,7 @@ class MalClient
      */
     public function getUserFriends(Request\User\UserFriendsRequest $request): Model\User\Friends
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\User\Friends\FriendsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\User\Friends\FriendsParser::class);
     }
 
     /**
@@ -246,14 +218,7 @@ class MalClient
      */
     public function getSeasonal(Request\Seasonal\SeasonalRequest $request): Model\Seasonal\Seasonal
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Seasonal\SeasonalParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Seasonal\SeasonalParser::class);
     }
 
     /**
@@ -264,14 +229,7 @@ class MalClient
      */
     public function getProducer(Request\Producer\ProducerRequest $request): Model\Producer\Producer
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Producer\ProducerParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Producer\ProducerParser::class);
     }
 
     /**
@@ -282,14 +240,7 @@ class MalClient
      */
     public function getMagazine(Request\Magazine\MagazineRequest $request): Model\Magazine\Magazine
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Magazine\MagazineParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Magazine\MagazineParser::class);
     }
 
     /**
@@ -300,14 +251,7 @@ class MalClient
      */
     public function getAnimeGenre(Request\Genre\AnimeGenreRequest $request): Model\Genre\AnimeGenre
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Genre\AnimeGenreParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Genre\AnimeGenreParser::class);
     }
 
     /**
@@ -318,14 +262,7 @@ class MalClient
      */
     public function getMangaGenre(Request\Genre\MangaGenreRequest $request): Model\Genre\MangaGenre
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Genre\MangaGenreParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Genre\MangaGenreParser::class);
     }
 
     /**
@@ -336,14 +273,7 @@ class MalClient
      */
     public function getSchedule(Request\Schedule\ScheduleRequest $request): Model\Schedule\Schedule
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Schedule\ScheduleParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Schedule\ScheduleParser::class);
     }
 
     /**
@@ -355,14 +285,7 @@ class MalClient
     public function getAnimeCharactersAndStaff(
         Request\Anime\AnimeCharactersAndStaffRequest $request
     ): Model\Anime\AnimeCharactersAndStaff {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Anime\CharactersAndStaffParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Anime\CharactersAndStaffParser::class);
     }
 
     /**
@@ -373,14 +296,7 @@ class MalClient
      */
     public function getAnimePictures(Request\Anime\AnimePicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Common\PicturesPageParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Common\PicturesPageParser::class);
     }
 
     /**
@@ -391,14 +307,7 @@ class MalClient
      */
     public function getMangaPictures(Request\Manga\MangaPicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Common\PicturesPageParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Common\PicturesPageParser::class);
     }
 
     /**
@@ -409,14 +318,7 @@ class MalClient
      */
     public function getCharacterPictures(Request\Character\CharacterPicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Common\DefaultPicturesPageParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Common\DefaultPicturesPageParser::class);
     }
 
     /**
@@ -428,14 +330,7 @@ class MalClient
      */
     public function getPersonPictures(Request\Person\PersonPicturesRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Common\DefaultPicturesPageParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Common\DefaultPicturesPageParser::class);
     }
 
     /**
@@ -447,14 +342,7 @@ class MalClient
      */
     public function getNewsList(Request\RequestInterface $request): Model\News\ResourceNewsList
     {
-        $crawler = $this->ghoutte->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\News\ResourceNewsListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\News\ResourceNewsListParser::class);
     }
 
     /**
@@ -490,14 +378,7 @@ class MalClient
      */
     public function getAnimeSearchAlt(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Search\AnimeSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Search\AnimeSearchParser::class);
     }
 
     /**
@@ -509,14 +390,7 @@ class MalClient
      */
     public function getMangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Search\MangaSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Search\MangaSearchParser::class);
     }
 
     /**
@@ -598,14 +472,7 @@ class MalClient
      */
     public function getTopAnime(Request\Top\TopAnimeRequest $request): Model\Top\TopAnime
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Top\TopAnimeParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Top\TopAnimeParser::class);
     }
 
     /**
@@ -617,14 +484,7 @@ class MalClient
      */
     public function getTopManga(Request\Top\TopMangaRequest $request): Model\Top\TopManga
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Top\TopMangaParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Top\TopMangaParser::class);
     }
 
     /**
@@ -636,14 +496,7 @@ class MalClient
      */
     public function getTopCharacters(Request\Top\TopCharactersRequest $request): Model\Top\TopCharacters
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Top\TopCharactersParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Top\TopCharactersParser::class);
     }
 
     /**
@@ -655,14 +508,7 @@ class MalClient
      */
     public function getTopPeople(Request\Top\TopPeopleRequest $request): Model\Top\TopPeople
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Top\TopPeopleParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Top\TopPeopleParser::class);
     }
 
     /**
@@ -674,14 +520,7 @@ class MalClient
      */
     public function getAnimeStats(Request\Anime\AnimeStatsRequest $request): Model\Anime\AnimeStats
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Anime\AnimeStatsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Anime\AnimeStatsParser::class);
     }
 
     /**
@@ -692,14 +531,7 @@ class MalClient
      */
     public function getMangaStats(Request\Manga\MangaStatsRequest $request): Model\Manga\MangaStats
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Manga\MangaStatsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Manga\MangaStatsParser::class);
     }
 
     /**
@@ -782,14 +614,7 @@ class MalClient
      */
     public function getSeasonList(Request\SeasonList\SeasonListRequest $request): Model\SeasonList\SeasonArchive
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\SeasonList\SeasonListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\SeasonList\SeasonListParser::class);
     }
 
     /**
@@ -800,14 +625,7 @@ class MalClient
      */
     public function getUserHistory(Request\User\UserHistoryRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\User\History\HistoryParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\User\History\HistoryParser::class);
     }
 
     /**
@@ -886,14 +704,7 @@ class MalClient
      */
     public function getAnimeRecentlyUpdatedByUsers(Request\Anime\AnimeRecentlyUpdatedByUsersRequest $request): Model\Anime\AnimeUserUpdates
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Anime\AnimeRecentlyUpdatedByUsersParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Anime\AnimeRecentlyUpdatedByUsersParser::class);
     }
 
     /**
@@ -904,14 +715,7 @@ class MalClient
      */
     public function getMangaRecentlyUpdatedByUsers(Request\Manga\MangaRecentlyUpdatedByUsersRequest $request): Model\Manga\MangaUserUpdates
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Manga\MangaRecentlyUpdatedByUsersParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Manga\MangaRecentlyUpdatedByUsersParser::class);
     }
 
     /**
@@ -922,14 +726,7 @@ class MalClient
      */
     public function getAnimeRecommendations(Request\Anime\AnimeRecommendationsRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Common\Recommendations($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Common\Recommendations::class);
     }
 
     /**
@@ -940,15 +737,7 @@ class MalClient
      */
     public function getMangaRecommendations(Request\Manga\MangaRecommendationsRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Common\Recommendations($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Common\Recommendations::class);
     }
 
     /**
@@ -960,15 +749,7 @@ class MalClient
      */
     public function getClubUsers(Request\Club\UserListRequest $request): Model\Club\UserList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Club\UserListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Club\UserListParser::class);
     }
 
 
@@ -980,14 +761,7 @@ class MalClient
      */
     public function getAnimeReviews(Request\Anime\AnimeReviewsRequest $request): Model\Anime\AnimeReviews
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Anime\AnimeReviewsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Anime\AnimeReviewsParser::class);
     }
 
 
@@ -999,15 +773,7 @@ class MalClient
      */
     public function getMangaReviews(Request\Manga\MangaReviewsRequest $request): Model\Manga\MangaReviews
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Manga\MangaReviewsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Manga\MangaReviewsParser::class);
     }
 
     /**
@@ -1018,15 +784,7 @@ class MalClient
      */
     public function getClub(Request\Club\ClubRequest $request): Model\Club\Club
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Club\ClubParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Club\ClubParser::class);
     }
 
     /**
@@ -1064,15 +822,7 @@ class MalClient
      */
     public function getProducers(Request\Producer\ProducersRequest $request): Model\Producer\ProducerList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Producer\ProducerListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Producer\ProducerListParser::class);
     }
 
     /**
@@ -1083,15 +833,7 @@ class MalClient
      */
     public function getMagazines(Request\Magazine\MagazinesRequest $request): Model\Magazine\MagazineList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Magazine\MagazineListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Magazine\MagazineListParser::class);
     }
 
     /**
@@ -1102,15 +844,7 @@ class MalClient
      */
     public function getAnimeGenres(Request\Genre\AnimeGenresRequest $request): Model\Genre\AnimeGenreList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Genre\AnimeGenreListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Genre\AnimeGenreListParser::class);
     }
 
     /**
@@ -1121,15 +855,7 @@ class MalClient
      */
     public function getMangaGenres(Request\Genre\MangaGenresRequest $request): Model\Genre\MangaGenreList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        try {
-            $parser = new Parser\Genre\MangaGenreListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Genre\MangaGenreListParser::class);
     }
 
     /**
@@ -1141,14 +867,7 @@ class MalClient
      */
     public function getReviews(Request\Reviews\ReviewsRequest $request): Model\Reviews\Reviews
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Reviews\ReviewsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Reviews\ReviewsParser::class);
     }
 
     /**
@@ -1159,14 +878,7 @@ class MalClient
      */
     public function getRecentRecommendations(Request\Recommendations\RecentRecommendationsRequest $request): Model\Recommendations\RecentRecommendations
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Recommendations\RecentRecommendationsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Recommendations\RecentRecommendationsParser::class);
     }
 
     /**
@@ -1265,14 +977,7 @@ class MalClient
      */
     public function getRecentEpisodes(Request\Watch\RecentEpisodesRequest $request): Model\Watch\Episodes
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchEpisodesParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Watch\WatchEpisodesParser::class);
     }
 
     /**
@@ -1283,14 +988,7 @@ class MalClient
      */
     public function getPopularEpisodes(Request\Watch\PopularEpisodesRequest $request): Model\Watch\Episodes
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchEpisodesParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Watch\WatchEpisodesParser::class);
     }
 
     /**
@@ -1302,14 +1000,7 @@ class MalClient
     public function getRecentPromotionalVideos(
         Request\Watch\RecentPromotionalVideosRequest $request
     ): Model\Watch\PromotionalVideos {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Watch\WatchPromotionalVideosParser::class);
     }
 
     /**
@@ -1321,14 +1012,7 @@ class MalClient
     public function getPopularPromotionalVideos(
         Request\Watch\PopularPromotionalVideosRequest $request
     ): Model\Watch\PromotionalVideos {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Watch\WatchPromotionalVideosParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Watch\WatchPromotionalVideosParser::class);
     }
 
 
@@ -1340,14 +1024,7 @@ class MalClient
      */
     public function getUserRecommendations(Request\User\UserRecommendationsRequest $request): Model\Recommendations\UserRecommendations
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Recommendations\UserRecommendationsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Recommendations\UserRecommendationsParser::class);
     }
 
     /**
@@ -1385,14 +1062,7 @@ class MalClient
      */
     public function getRecentNews(Request\News\RecentNewsRequest $request): Model\News\NewsList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\News\NewsListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\News\NewsListParser::class);
     }
 
     /**
@@ -1403,14 +1073,7 @@ class MalClient
      */
     public function getNewsByTag(Request\News\NewsByTagRequest $request): Model\News\NewsList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\News\NewsListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\News\NewsListParser::class);
     }
 
     /**
@@ -1421,14 +1084,7 @@ class MalClient
      */
     public function getNewsSearch(Request\Search\NewsSearchRequest $request): Model\News\NewsList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\News\NewsListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\News\NewsListParser::class);
     }
 
     /**
@@ -1439,14 +1095,7 @@ class MalClient
      */
     public function getNewsTags(Request\News\NewsTagsRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\News\NewsTagsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\News\NewsTagsParser::class);
     }
 
 
@@ -1458,14 +1107,7 @@ class MalClient
      */
     public function getNews(Request\News\NewsRequest $request): Model\News\ResourceNews
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\News\NewsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\News\NewsParser::class);
     }
 
     /**
@@ -1476,14 +1118,7 @@ class MalClient
      */
     public function getPinnedArticles(Request\Article\PinnedArticlesRequest $request): Model\Article\PinnedArticleList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Article\PinnedArticleListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Article\PinnedArticleListParser::class);
     }
 
     /**
@@ -1494,14 +1129,7 @@ class MalClient
      */
     public function getRecentArticles(Request\Article\RecentArticleRequest $request): Model\Article\ArticleList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Article\ArticleListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Article\ArticleListParser::class);
     }
 
 
@@ -1513,14 +1141,7 @@ class MalClient
      */
     public function getArticlesByTag(Request\Article\ArticlesByTagRequest $request): Model\Article\ArticleList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Article\ArticleListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Article\ArticleListParser::class);
     }
 
     /**
@@ -1531,14 +1152,7 @@ class MalClient
      */
     public function getArticleSearch(Request\Search\ArticleSearchRequest $request): Model\Article\ArticleList
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Article\ArticleListParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Article\ArticleListParser::class);
     }
 
 
@@ -1550,14 +1164,7 @@ class MalClient
      */
     public function getArticleTags(Request\Article\ArticleTagsRequest $request): array
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        try {
-            $parser = new Parser\Article\ArticleTagsParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse($request, Parser\Article\ArticleTagsParser::class);
     }
 
     /**
@@ -1568,11 +1175,22 @@ class MalClient
      */
     public function getArticle(Request\Article\ArticleRequest $request): Model\Article\ResourceArticle
     {
+        return $this->parse($request, Parser\Article\ArticleParser::class);
+    }
+    /**
+     * Fetches the page for a request, parses it and returns the parser's model.
+     *
+     * @param  Request\RequestInterface $request
+     * @param  class-string             $parserClass a parser whose constructor takes the page crawler and which has getModel()
+     * @return mixed
+     * @throws BadResponseException
+     * @throws ParserException
+     */
+    private function parse(Request\RequestInterface $request, string $parserClass): mixed
+    {
         $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
         try {
-            $parser = new Parser\Article\ArticleParser($crawler);
-
-            return $parser->getModel();
+            return new $parserClass($crawler)->getModel();
         } catch (\Exception $e) {
             throw ParserException::fromRequest($request, $e);
         }

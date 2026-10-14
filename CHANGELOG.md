@@ -45,6 +45,13 @@ Every entry, without exception:
 - <what behaves differently, and how to tell>
 
 ### Fixed
+- Anime cards (genre, producer, seasonal and schedule pages; `AnimeCard`/`SeasonalAnime`) now read their type and start date from fields MyAnimeList puts on every card. This fixes four problems:
+  - **Year-only start dates:** `getAiringStart()` gave today's date for a card that shows only a year ("2027"), because the year was read as the time 20:27 today. It now gives 1 January of that year.
+  - **Schedule page types:** `getType()` gave the day of the week ("Friday", "Other") instead of the type.
+  - **Producer pages:** `getType()` and `getAiringStart()` were always `null`.
+  - **Genre pages:** `getAiringStart()` was always `null`.
+
+  An unknown month or day falls on the 1st, as it already did for "Oct 2027". TV Specials on seasonal pages now report `"TV Special"` instead of the `"Special"` heading they are listed under, matching `getAnime()`.
 - <what was wrong>
 
 ### Deprecated

@@ -8,7 +8,7 @@ jobs:
   archive:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/stale@v5.0.0
+    - uses: actions/stale@v11.0.0
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         days-before-stale: 60

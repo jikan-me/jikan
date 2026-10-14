@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Seasonal;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -38,5 +39,17 @@ class SeasonalParserTest extends TestCase
         $anime = $this->springParser->getSeasonalAnime();
         self::assertCount(294, $anime);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Seasonal\SeasonalAnime::class, $anime);
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->springParser->getModel(), $this->springParser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->springParser->getModel());
     }
 }

@@ -7,6 +7,7 @@ use Jikan\MyAnimeList\MalClient;
 use Jikan\Parser\News\NewsListParser;
 use Jikan\Request\News\RecentNewsRequest;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -61,5 +62,19 @@ class RecentNewsParserTest extends TestCase
         self::assertStringContainsString("Production company Kadokawa opened an official website for the television anime adaptation of Sanji Jiksong and", $entry->getExcerpt());
         self::assertCount(4, $entry->getTags());
         self::assertEquals("Adapts Manga", (string) $entry->getTags()[0]);
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        // Relative dates ("5 minutes ago") resolve against the clock at parse time, so two
+        // parses differ by microseconds; allow a small delta instead of exact equality.
+        self::assertEqualsWithDelta($this->parser->getModel(), $this->parser->getModel(), 5.0);
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel(), true);
     }
 }

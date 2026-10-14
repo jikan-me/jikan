@@ -6,9 +6,9 @@
         "_note": "DERIVED COLLATERAL \u2014 regenerable, source-stamped; never hand-edit. Contact: MalClient + Request/Parser/Model files + test tree."
     },
     "schemaVersion": 1,
-    "generatedAt": "2026-10-11T21:50:17Z",
+    "generatedAt": "2026-10-13T07:06:42Z",
     "verification": {
-        "commit": "c9fcf51",
+        "commit": "7abc37e",
         "methodsSeen": 77,
         "domainsSeen": 20
     },
@@ -45,8 +45,8 @@
             "paged": false,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\Anime\\AnimePlaceholderImageTest",
-                "file": "test/unit/Parser/Anime/AnimePlaceholderImageTest.php"
+                "class": "JikanTest\\Parser\\Anime\\AnimeParserTest",
+                "file": "test/unit/Parser/Anime/AnimeParserTest.php"
             },
             "notes": "getAnime"
         },
@@ -363,8 +363,8 @@
             "paged": false,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\Manga\\MangaRecommendationParserTest",
-                "file": "test/unit/Parser/Manga/MangaRecommendationParserTest.php"
+                "class": "JikanTest\\Parser\\Anime\\AnimeRecommendationParserTest",
+                "file": "test/unit/Parser/Anime/AnimeRecommendationParserTest.php"
             },
             "notes": "getAnimeRecommendations"
         },
@@ -627,8 +627,8 @@
             "paged": true,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\Article\\ArticlesByTagTest",
-                "file": "test/unit/Parser/Article/ArticlesByTagTest.php"
+                "class": "JikanTest\\Parser\\Article\\ArticleSearchTest",
+                "file": "test/unit/Parser/Article/ArticleSearchTest.php"
             },
             "notes": "getArticleSearch"
         },
@@ -690,8 +690,8 @@
             "paged": true,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\Article\\ArticlesByTagTest",
-                "file": "test/unit/Parser/Article/ArticlesByTagTest.php"
+                "class": "JikanTest\\Parser\\Article\\ArticleSearchTest",
+                "file": "test/unit/Parser/Article/ArticleSearchTest.php"
             },
             "notes": "getArticlesByTag"
         },
@@ -1200,8 +1200,8 @@
             "paged": false,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\Manga\\MangaRecommendationParserTest",
-                "file": "test/unit/Parser/Manga/MangaRecommendationParserTest.php"
+                "class": "JikanTest\\Parser\\Anime\\AnimeRecommendationParserTest",
+                "file": "test/unit/Parser/Anime/AnimeRecommendationParserTest.php"
             },
             "notes": "getMangaRecommendations"
         },
@@ -1365,8 +1365,8 @@
             "paged": true,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\News\\NewsSearchTest",
-                "file": "test/unit/Parser/News/NewsSearchTest.php"
+                "class": "JikanTest\\Parser\\News\\NewsByTagTest",
+                "file": "test/unit/Parser/News/NewsByTagTest.php"
             },
             "notes": "getNewsByTag"
         },
@@ -1431,8 +1431,8 @@
             "paged": true,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\News\\NewsSearchTest",
-                "file": "test/unit/Parser/News/NewsSearchTest.php"
+                "class": "JikanTest\\Parser\\News\\NewsByTagTest",
+                "file": "test/unit/Parser/News/NewsByTagTest.php"
             },
             "notes": "getNewsSearch"
         },
@@ -1755,8 +1755,8 @@
             "paged": true,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\Article\\ArticlesByTagTest",
-                "file": "test/unit/Parser/Article/ArticlesByTagTest.php"
+                "class": "JikanTest\\Parser\\Article\\ArticleSearchTest",
+                "file": "test/unit/Parser/Article/ArticleSearchTest.php"
             },
             "notes": "getRecentArticles"
         },
@@ -1821,8 +1821,8 @@
             "paged": true,
             "deprecated": false,
             "test": {
-                "class": "JikanTest\\Parser\\News\\NewsSearchTest",
-                "file": "test/unit/Parser/News/NewsSearchTest.php"
+                "class": "JikanTest\\Parser\\News\\NewsByTagTest",
+                "file": "test/unit/Parser/News/NewsByTagTest.php"
             },
             "notes": "getRecentNews"
         },

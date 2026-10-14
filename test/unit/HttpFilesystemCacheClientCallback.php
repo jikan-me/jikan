@@ -33,11 +33,8 @@ class HttpFilesystemCacheClientCallback
      */
     public function __construct(string $cachePath)
     {
-        if (!is_dir($cachePath)) {
-            if (false === @mkdir($cachePath, 0o755, true)) {
-                throw new \RuntimeException(sprintf('Unable to create the %s directory', $cachePath));
-            }
-        }
+        // No mkdir: a test class without recordings used to leave an empty directory under vendor/.
+        // A missing directory surfaces as "No recorded fixture" on the first request, like a missing file.
         $this->cachePath = $cachePath;
     }
 
@@ -63,6 +60,13 @@ class HttpFilesystemCacheClientCallback
                 $filePath
             ));
         }
+        // JIKAN_FIXTURE_LOG=<file> records every fixture served, so unused recordings can be found
+        // (scripts/fixtures_unused.php).
+        $log = getenv('JIKAN_FIXTURE_LOG');
+        if ($log) {
+            file_put_contents($log, basename($this->cachePath) . '/' . $hash . "\n", FILE_APPEND | LOCK_EX);
+        }
+
         $data = file_get_contents($filePath);
         return new MockResponse($data);
     }

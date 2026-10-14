@@ -13,6 +13,7 @@ use Jikan\Model\Manga\Manga;
 use Jikan\Parser\Common\AlternativeTitleParser;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\Common\UrlParser;
+use Jikan\Parser\Common\IndexesSidebarLabels;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -23,6 +24,22 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class MangaParser implements ParserInterface
 {
+    use IndexesSidebarLabels;
+
+    /**
+     * Every sidebar label this parser looks up (indexed in one pass by IndexesSidebarLabels).
+     */
+    private const SIDEBAR_LABELS = [
+        'Genres:',
+        'Genre:',
+        'Explicit Genres:',
+        'Explicit Genre:',
+        'Demographics:',
+        'Demographic:',
+        'Theme:',
+        'Themes:',
+    ];
+
     private \Symfony\Component\DomCrawler\Crawler $crawler;
 
     /**
@@ -333,8 +350,7 @@ class MangaParser implements ParserInterface
      */
     public function getGenres(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Genres:"]');
+        $genre = $this->label('Genres:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -344,8 +360,7 @@ class MangaParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Genre:"]');
+        $genre = $this->label('Genre:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -365,8 +380,7 @@ class MangaParser implements ParserInterface
      */
     public function getExplicitGenres(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Explicit Genres:"]');
+        $genre = $this->label('Explicit Genres:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -376,8 +390,7 @@ class MangaParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Explicit Genre:"]');
+        $genre = $this->label('Explicit Genre:');
 
         if ($genre->count() && strpos($genre->ancestors()->text(), 'No genres have been added yet') === false) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -397,8 +410,7 @@ class MangaParser implements ParserInterface
      */
     public function getDemographics(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Demographics:"]');
+        $genre = $this->label('Demographics:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -408,8 +420,7 @@ class MangaParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Demographic:"]');
+        $genre = $this->label('Demographic:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -429,8 +440,7 @@ class MangaParser implements ParserInterface
      */
     public function getThemes(): array
     {
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Theme:"]');
+        $genre = $this->label('Theme:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(
@@ -440,8 +450,7 @@ class MangaParser implements ParserInterface
             );
         }
 
-        $genre = $this->crawler
-            ->filterXPath('//span[text()="Themes:"]');
+        $genre = $this->label('Themes:');
 
         if ($genre->count()) {
             return $genre->ancestors()->first()->filterXPath('//a')->each(

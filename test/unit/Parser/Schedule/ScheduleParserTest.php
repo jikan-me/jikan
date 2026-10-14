@@ -6,6 +6,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\AnimeCard;
 use Jikan\Parser\Schedule\ScheduleParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -105,5 +106,17 @@ class ScheduleParserTest extends TestCase
         $unknown = $this->parser->getShedule('unknown');
         self::assertContainsOnlyInstancesOf(AnimeCard::class, $unknown);
         self::assertCount(17, $unknown);
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel(), true);
     }
 }

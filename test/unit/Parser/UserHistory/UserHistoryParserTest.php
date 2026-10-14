@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\UserHistory;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -47,4 +48,9 @@ class UserHistoryParserTest extends TestCase
         self::assertInstanceOf(\DateTimeImmutable::class, $this->parser[0]->getDate());
     }
 
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser, true);
+    }
 }

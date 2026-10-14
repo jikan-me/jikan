@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Forum;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Forum\ForumPageParser;
 use JikanTest\TestCase;
@@ -62,5 +63,17 @@ class ForumPageParserTest extends TestCase
         self::assertSame(110887, $topics[0]->getMalId());
         self::assertSame('Berserk Chapter 2 Discussion', $topics[0]->getTitle());
         self::assertSame(57, $topics[0]->getComments());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getTopics(), $this->parser->getTopics());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getTopics(), true);
     }
 }

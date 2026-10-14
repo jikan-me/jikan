@@ -16,6 +16,9 @@ class Parser
     /**
      * Removes all html elements so the text is left over
      *
+     * Works on a detached copy: the crawler passed in (and the page DOM behind it) is left
+     * untouched, so later getters and repeated getModel() calls still see the original markup.
+     *
      * @param Crawler $crawler
      *
      * @return Crawler
@@ -26,17 +29,25 @@ class Parser
         if (!$crawler->count()) {
             return $crawler;
         }
-        $crawler->children()->each(
-            function (Crawler $crawler) use ($removeAllNodes) {
-                $node = $crawler->getNode(0);
-                if ($node === null || $node->nodeType === 3 || \in_array($node->nodeName, $removeAllNodes ? [] : self::ALLOWED_NODES, true)) {
-                    return;
-                }
-                $node->parentNode->removeChild($node);
-            }
-        );
 
-        return $crawler;
+        $allowed = $removeAllNodes ? [] : self::ALLOWED_NODES;
+
+        // Copy the node shallowly and deep-copy only the children that survive. Cloning the whole
+        // subtree and then deleting most of it is far slower: some callers pass a container
+        // holding thousands of elements (e.g. the parent of the synopsis on an anime page).
+        $copy = new Crawler();
+        foreach ($crawler as $domNode) {
+            $clone = $domNode->cloneNode(false);
+            foreach ($domNode->childNodes as $child) {
+                if ($child->nodeType === XML_ELEMENT_NODE && !\in_array($child->nodeName, $allowed, true)) {
+                    continue;
+                }
+                $clone->appendChild($child->cloneNode(true));
+            }
+            $copy->add($clone);
+        }
+
+        return $copy;
     }
 
     /**
@@ -146,7 +157,9 @@ class Parser
 
         $date = str_replace('??', '01', $date);
 
-        return \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC')) ?: null;
+        $parsed = \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC'));
+
+        return $parsed ? self::pivotTwoDigitYear($parsed) : null;
     }
 
     /**
@@ -168,7 +181,22 @@ class Parser
 
         $date = str_replace('??', '01', $date);
 
-        return \DateTimeImmutable::createFromFormat('!d-m-y', $date, new \DateTimeZone('UTC')) ?: null;
+        $parsed = \DateTimeImmutable::createFromFormat('!d-m-y', $date, new \DateTimeZone('UTC'));
+
+        return $parsed ? self::pivotTwoDigitYear($parsed) : null;
+    }
+
+    /**
+     * PHP reads two-digit years 00-69 as 2000-2069, so a 1961 title came back as 2061. MyAnimeList lists dates
+     * at most a few years ahead, so a year more than 10 years in the future belongs to the previous century.
+     */
+    private static function pivotTwoDigitYear(\DateTimeImmutable $date): \DateTimeImmutable
+    {
+        if ((int) $date->format('Y') > (int) date('Y') + 10) {
+            return $date->modify('-100 years');
+        }
+
+        return $date;
     }
 
     /**

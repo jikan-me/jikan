@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Model\Common\MalUrl;
 use Jikan\MyAnimeList\MalClient;
 use JikanTest\TestCase;
@@ -67,5 +68,11 @@ class CharacterSearchTest extends TestCase
     public function it_gets_the_manga()
     {
         self::assertContainsOnlyInstancesOf(MalUrl::class, $this->anime->getManga());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->search);
     }
 }

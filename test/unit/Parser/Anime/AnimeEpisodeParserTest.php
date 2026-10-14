@@ -4,6 +4,7 @@ namespace JikanTest\Parser\Anime;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 class AnimeEpisodeParserTest extends TestCase
@@ -111,5 +112,17 @@ class AnimeEpisodeParserTest extends TestCase
             'In the ocean, Alvida and her pirate crew attack a cruise ship. Coby, a slave of Alvida, discovers',
             $this->parser->getSynopsis()
         );
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

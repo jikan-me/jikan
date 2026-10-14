@@ -93,6 +93,16 @@ which changes a consumer can see.
 
 ## Unreleased
 
+### Breaking
+- **PHP floor raised to 8.4.4** — **you must** run PHP 8.4.4 or later; Composer no longer installs on 8.4.0–8.4.3. Those patch levels have a bug in PHP's own HTML5 parser (`Dom\HTMLDocument`, php-src GH-17481) that corrupts some 4-byte characters (emoji, rare scripts) depending on where they fall in the page, so a parsed field can contain invalid UTF-8 and `json_encode()` fails on the model. Seen on a real MyAnimeList manga review.
+
+### Changed
+- `symfony/dom-crawler` is now a declared requirement (`^7.4 || ^8.0`). The library has always used it directly but only received it through `symfony/browser-kit`, so nothing changes in your tree — no action needed unless you were excluding it.
+- A seasonal page parses roughly 3x faster (about 1.2 s down to 0.4 s in our benchmark). The marker for "continuing" shows was found by reading the text of the whole season section once per anime card; it is now read once per section. The returned `Seasonal` model is identical.
+- An anime card with no member count now raises `ParserException` from `MalClient` (a `RuntimeException` from `AnimeCardParser::getMembers()`), where it used to raise an uncaught `\TypeError` that `catch (\Exception)` and `catch (ParserException)` both missed. **If you caught `\TypeError` around client calls to work around this**, catch `ParserException` instead.
+- `Jikan\Model\Manga\MangaReviewer` and `Jikan\Parser\Manga\MangaReviewerParser` are removed. They extended classes that were deleted earlier, so loading either one was a fatal error and nothing referenced them; no working code can have depended on them.
+- `Jikan\Model\User\Friend::getFriendsSince()` returns `?\DateTimeImmutable`: `null` when MyAnimeList shows no "Friends since" date. It used to declare a non-null date and throw a `TypeError` in that case.
+
 ### Fixed
 - Reading `getSmallImageUrl()`/`getLargeImageUrl()`/WebP image URLs on an entity whose image is a MyAnimeList placeholder (normalized to `null`) no longer throws "typed property must not be accessed before initialization" — those getters now return `null`, matching the `?string` image contract (jikan#488).
 - Anime/manga detail pages with no cover no longer surface the MAL site icon (`og:image` → `/img/sp/icon/apple-touch-icon-256.png`) as the entity's image — it is now treated as a placeholder and resolved to `null` (jikan#488).
@@ -101,6 +111,11 @@ which changes a consumer can see.
 - `getNewsList()` now parses the current MAL news index (`div.news-unit` items, ad placements filtered out) — the previous `js-scrollfix-bottom-rel` layout selector matched nothing on today's markup and returned an empty list (jikan#629).
 - `ResourceArticle::getViews()` returns `null` instead of throwing when an article page has no view count — its type is now `?int` (jikan#629).
 - News-item and article `getDate()` no longer mutate the shared DOM, so reading other info getters (author, views, comments) after the date on the same parser instance no longer fails (jikan#629).
+- Calling `getModel()` a second time on the same parser (or reading getters in a different order) no longer fails with "The current node list is empty" for 14 parsers, including `AnimeParser`, `MangaParser`, `CharacterParser`, the genre, club, news, recommendation and review parsers. `Jikan\Helper\Parser::removeChildNodes()` stripped elements out of the shared page, so whatever was read after it saw a changed page; it now works on a copy. Getters that ran after a mutating one now see the original markup.
+- `MalClient::getNewsList()` no longer fails before sending its request — it referenced a `$this->ghoutte` property left over from the old Goutte client.
+- Casting a `PersonImageResource\Jpg` or `UserImageResource\Jpg` to string returns its image URL (an empty string when it is a placeholder) instead of throwing "call to undefined method `getJpg()`".
+- `Jikan\Http\HttpClientWrapper` no longer records browser history. It kept one entry per request for the lifetime of the client (about 2.5 KB each), so a long-running process that reused one `MalClient` grew without bound. `request()` now defaults `$changeHistory` to `false`.
+- Two-digit years in anime/manga search results and user list dates are no longer read as the 2040s–2060s: "Kaguya-hime" (1961) came back as 2061. A year more than 10 years in the future is now read as 19xx; this also corrects `isAiring()` for those titles.
 
 ---
 

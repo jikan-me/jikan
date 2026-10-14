@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
+use JikanTest\ModelSnapshot;
 use Jikan\MyAnimeList\MalClient;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -49,5 +50,11 @@ class PersonSearchTest extends TestCase
     public function it_gets_the_alternative_names()
     {
         self::assertContains('아라', $this->person->getAlternativeNames());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->search);
     }
 }

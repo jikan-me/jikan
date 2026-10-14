@@ -6,44 +6,42 @@ on:
       - master
   pull_request:
 
+# Never cancel a run on master; supersede older runs of the same pull request.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
 jobs:
   phpUnitTests:
     strategy:
-      max-parallel: 4
-      matrix:
-        operatingSystem: [ubuntu-22.04, windows-latest]
-        phpVersion: ['8.4']
       fail-fast: false
+      matrix:
+        include:
+          - { operatingSystem: ubuntu-22.04, phpVersion: '8.4', dependencies: highest }
+          - { operatingSystem: windows-latest, phpVersion: '8.4', dependencies: highest }
+          # The oldest versions composer.json allows: catches a dependency floor that is too low.
+          - { operatingSystem: ubuntu-22.04, phpVersion: '8.4', dependencies: lowest }
+          # Next PHP: reports new deprecations early, but does not fail the run yet.
+          - { operatingSystem: ubuntu-22.04, phpVersion: '8.5', dependencies: highest, experimental: true }
     runs-on: ${{ matrix.operatingSystem }}
-    name: ${{ matrix.operatingSystem }} / PHP ${{ matrix.phpVersion }}
-    env:
-      extensions: curl, fileinfo, mongodb, gd, mbstring, openssl, pdo, pdo_sqlite, sqlite3, xml
-      key: jikan-cache-v1
+    continue-on-error: ${{ matrix.experimental == true }}
+    timeout-minutes: 15
+    name: ${{ matrix.operatingSystem }} / PHP ${{ matrix.phpVersion }} / ${{ matrix.dependencies }} deps
     steps:
       - name: Checkout changes
         uses: actions/checkout@v4
-
-      - name: Setup extension cache
-        id: extcache
-        uses: shivammathur/cache-extensions@v1
-        with:
-          php-version: ${{ matrix.phpVersion }}
-          extensions: ${{ env.extensions }}
-          key: ${{ env.key }}
-
-      - name: Cache extensions
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.extcache.outputs.dir }}
-          key: ${{ steps.extcache.outputs.key }}
-          restore-keys: ${{ steps.extcache.outputs.key }}
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.phpVersion }}
           tools: composer:v2
-          extensions: ${{ env.extensions }}
+          # What the library, PHPUnit, Composer and the Symfony components actually use.
+          extensions: ctype, curl, dom, iconv, json, libxml, mbstring, openssl, simplexml, tokenizer, xml, xmlwriter
+          coverage: none
 
       - name: Setup dependency cache
         id: composercache
@@ -54,14 +52,19 @@ jobs:
 
       - name: Cache dependencies
         uses: actions/cache@v4
-        id: cache
         with:
           path: ${{ steps.composercache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: ${{ runner.os }}-composer-
+          key: ${{ runner.os }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-${{ matrix.dependencies }}-
 
       - name: Install Composer dependencies
-        run: composer install --no-interaction --no-progress --no-suggest --no-scripts
+        shell: bash
+        run: |
+          if [ "${{ matrix.dependencies }}" = "lowest" ]; then
+            composer update --prefer-lowest --prefer-stable --no-interaction --no-progress --no-scripts
+          else
+            composer install --no-interaction --no-progress --no-scripts
+          fi
 
       - name: Fetch recorded fixtures from source
         # Tests are hermetic against recorded responses. link-fixtures clones the
@@ -73,5 +76,54 @@ jobs:
       - name: Run tests
         env:
           CI_ENV: true
-        run: ./vendor/bin/phpunit
+        shell: bash
+        # paratest is only a speed-up. At the lowest versions Composer pairs it with a PHPUnit it does not
+        # fully support, so that job runs plain PHPUnit: what it checks is the library at its floor.
+        run: |
+          if [ "${{ matrix.dependencies }}" = "lowest" ]; then
+            ./vendor/bin/phpunit
+          else
+            ./vendor/bin/paratest
+          fi
 
+  # Report-only: line coverage, recorded fixtures no test loads, and model fields no recorded page fills.
+  # It never fails the run; the numbers guide which page variants to record next.
+  coverage:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    continue-on-error: true
+    name: coverage and fixture reports
+    steps:
+      - name: Checkout changes
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+          extensions: ctype, curl, dom, iconv, json, libxml, mbstring, openssl, simplexml, tokenizer, xml, xmlwriter
+          coverage: pcov
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --no-scripts
+
+      - name: Fetch recorded fixtures from source
+        run: composer run-script link-fixtures
+
+      - name: Run tests with coverage
+        env:
+          JIKAN_FIXTURE_LOG: ${{ runner.temp }}/fixture-log.txt
+        run: ./vendor/bin/phpunit --coverage-text --only-summary-for-coverage-text --coverage-clover coverage.xml
+
+      - name: Report fixtures no test loads
+        run: php scripts/fixtures_unused.php --from-log=${{ runner.temp }}/fixture-log.txt
+
+      - name: Report model fields no recorded page fills
+        run: php scripts/field_witness.php
+
+      - name: Keep the coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-clover
+          path: coverage.xml

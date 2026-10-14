@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Manga;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Manga\MangaStatsParser;
 use JikanTest\TestCase;
@@ -44,5 +45,17 @@ class MangaStatsParserTest extends TestCase
         self::assertEquals(
             11045, $this->mangaStatsParser->getScores()[10]->getVotes()
         );
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->mangaStatsParser->getModel(), $this->mangaStatsParser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->mangaStatsParser->getModel());
     }
 }

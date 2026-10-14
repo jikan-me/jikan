@@ -7,6 +7,7 @@ use Jikan\MyAnimeList\MalClient;
 use Jikan\Parser\Article\ArticleListParser;
 use Jikan\Request\Article\ArticlesByTagRequest;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -59,5 +60,17 @@ class RecentArticlesTest extends TestCase
         self::assertEquals(17559, $entry->getViews());
         self::assertStringContainsString("The J-POP SOUND CAPSULE music festival brought the spirit", $entry->getExcerpt());
         self::assertCount(0, $entry->getTags());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

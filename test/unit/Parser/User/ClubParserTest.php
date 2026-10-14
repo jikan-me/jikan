@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\User;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -40,5 +41,11 @@ class ClubParserTest extends TestCase
         );
         self::assertSame('20+', $clubs[1]->getName());
         self::assertSame(25565, $clubs[1]->getMalId());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parse());
     }
 }

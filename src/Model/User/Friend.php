@@ -24,7 +24,7 @@ class Friend
     private $lastOnline;
 
     /**
-     * @var \DateTimeImmutable
+     * @var \DateTimeImmutable|null
      */
     private $friendsSince;
 
@@ -61,9 +61,9 @@ class Friend
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null null when MyAnimeList shows no "Friends since" date
      */
-    public function getFriendsSince(): \DateTimeImmutable
+    public function getFriendsSince(): ?\DateTimeImmutable
     {
         return $this->friendsSince;
     }

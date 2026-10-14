@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Watch;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Watch\WatchPromotionalVideosParser;
 use JikanTest\TestCase;
@@ -85,5 +86,17 @@ class WatchPromotionalVideosParserTest extends TestCase
 
         self::assertFalse($parser->getHasNextPage());
         self::assertSame(1, $parser->getLastVisiblePage());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

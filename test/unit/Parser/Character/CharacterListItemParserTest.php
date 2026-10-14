@@ -7,6 +7,7 @@ use Jikan\Model\Character\VoiceActor;
 use Jikan\Parser\Character\CharacterListItemParser;
 use Symfony\Component\DomCrawler\Crawler;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -88,5 +89,17 @@ class CharacterListItemParserTest extends TestCase
             13947,
             $this->parser->getFavorites()
         );
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

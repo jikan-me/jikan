@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Model\Search\AnimeSearch;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Search\AnimeSearchRequest;
@@ -20,6 +21,7 @@ class AnimeSearchAiringTest extends TestCase
     {
         $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getAnimeSearch(new AnimeSearchRequest('Kaguya'));
+        ModelSnapshot::assertMatches($this, $this->search, false, $this->name());
         $anime = $this->search->getResults()[0];
         self::assertEquals('Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen', $anime->getTitle());
 
@@ -32,6 +34,7 @@ class AnimeSearchAiringTest extends TestCase
     {
         $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getAnimeSearch(new AnimeSearchRequest('Aikatsu Friends'));
+        ModelSnapshot::assertMatches($this, $this->search, false, $this->name());
         $anime = $this->search->getResults()[0];
         self::assertEquals('Aikatsu Friends!: Kagayaki no Jewel', $anime->getTitle());
         self::assertFalse($anime->isAiring());

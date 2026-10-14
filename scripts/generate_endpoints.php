@@ -103,6 +103,10 @@ function parser_from_body(string $body) : ?string
     if (preg_match('~new\s+\\\\?(?:Jikan\\\\)?(Parser\\\\[\w\\\\]+)\s*\(~', $body, $m)) {
         return qualify($m[1]);
     }
+    // methods that delegate to MalClient::parse($request, Parser\X::class)
+    if (preg_match('~\$this->parse\(\s*\$request\s*,\s*\\\\?(?:Jikan\\\\)?(Parser\\\\[\w\\\\]+)::class\s*\)~', $body, $m)) {
+        return qualify($m[1]);
+    }
     return null;
 }
 
@@ -111,7 +115,11 @@ function test_index() : array
 {
     $idx = [];
     $it  = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('test/unit', FilesystemIterator::SKIP_DOTS));
-    foreach ($it as $file) {
+    // Directory order is filesystem-dependent and the manifest records the first matching test per
+    // parser, so sort: otherwise --check passes on one machine and reports "stale" on another.
+    $files = iterator_to_array($it, false);
+    usort($files, static fn (SplFileInfo $a, SplFileInfo $b): int => strcmp($a->getPathname(), $b->getPathname()));
+    foreach ($files as $file) {
         if ($file->getExtension() !== 'php') { continue; }
         $text = file_get_contents($file->getPathname());
         if (!preg_match('~namespace\s+([\w\\\\]+);~', $text, $ns)

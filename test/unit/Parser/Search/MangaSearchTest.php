@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
+use JikanTest\ModelSnapshot;
 use Jikan\MyAnimeList\MalClient;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -96,5 +97,11 @@ class MangaSearchTest extends TestCase
     public function it_gets_the_score()
     {
         self::assertEquals(7.77, $this->manga->getScore());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->search);
     }
 }

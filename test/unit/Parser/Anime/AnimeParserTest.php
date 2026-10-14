@@ -5,6 +5,7 @@ use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Title;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -333,5 +334,20 @@ class AnimeParserTest extends TestCase
     {
         $streamingLinks = $this->parser->getStreamingLinks();
         self::assertEquals('http://www.crunchyroll.com/series-275669', $streamingLinks[0]->getUrl());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice_from_one_crawler(): void
+    {
+        $first = $this->parser->getModel();
+        $second = $this->parser->getModel();
+
+        self::assertEquals($first, $second);
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

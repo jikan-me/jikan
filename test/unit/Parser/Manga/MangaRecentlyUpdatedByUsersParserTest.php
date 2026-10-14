@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Manga;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -116,5 +117,9 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser, true);
+    }
 }

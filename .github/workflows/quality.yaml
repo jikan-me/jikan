@@ -5,21 +5,40 @@ on:
     branches: [master]
   pull_request:
 
+# Never cancel a run on master; supersede older runs of the same pull request.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
 jobs:
   quality:
     runs-on: ubuntu-22.04
-    name: composer quality
+    timeout-minutes: 15
+    name: composer quality:static
     steps:
       - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v4
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          tools: composer
+          tools: composer:v2
+          extensions: ctype, curl, dom, iconv, json, libxml, mbstring, openssl, simplexml, tokenizer, xml, xmlwriter
+          coverage: none
+      - name: Setup dependency cache
+        id: composercache
+        run: echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composercache.outputs.dir }}
+          key: ${{ runner.os }}-composer-quality-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-quality-
       - name: Install dependencies
-        run: composer install --no-interaction --no-progress --no-suggest --no-scripts
-      - name: Fetch recorded fixtures from source
-        run: composer run-script link-fixtures
-      - name: Run composer quality
-        # php-cs-fixer dry-run + endpoints:check (endpoint manifest staleness/gaps) + tests,
-        # one command — the repo-local gate set enforced server-side.
-        run: composer quality
+        run: composer install --no-interaction --no-progress --no-scripts
+      - name: Run static quality gates
+        # php-cs-fixer dry-run + PHPStan + endpoints:check (endpoint manifest staleness/gaps).
+        # The tests run in tests.yaml (Ubuntu, Windows, lowest deps, PHP 8.5), so they are not
+        # repeated here; `composer quality` runs the same gates plus the tests locally.
+        run: composer quality:static

@@ -5,6 +5,7 @@ namespace JikanTest\Parser\Anime;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Anime\CharactersAndStaffParser;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -64,5 +65,17 @@ class CharactersAndStaffParserTest extends TestCase
         $model = $this->parser->getModel();
         self::assertCount(126, $model->getCharacters());
         self::assertCount(121, $model->getStaff());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

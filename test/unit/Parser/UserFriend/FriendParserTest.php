@@ -4,6 +4,7 @@ namespace JikanTest\Parser\UserFriend;
 
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
+use JikanTest\ModelSnapshot;
 use PHPUnit\Framework\Attributes\Test;
 
 class FriendParserTest extends TestCase
@@ -59,5 +60,17 @@ class FriendParserTest extends TestCase
     public function it_gets_last_online()
     {
         self::assertInstanceOf(\DateTimeImmutable::class, $this->parser->getLastOnline());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel(), true);
     }
 }

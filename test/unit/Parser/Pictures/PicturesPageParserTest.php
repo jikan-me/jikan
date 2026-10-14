@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Pictures;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\Common\PicturesPageParser;
@@ -42,6 +43,8 @@ class PicturesPageParserTest extends TestCase
         $crawler = $client->request('GET', 'https://myanimelist.net/manga/50145/jikan/pics');
         $this->mangaParser = new PicturesPageParser($crawler);
         $pictures = $this->mangaParser->getModel();
+        self::assertEquals($pictures, $this->mangaParser->getModel());
+        ModelSnapshot::assertMatches($this, $pictures, false, $this->name());
 
         self::assertGreaterThan(0, count($pictures));
         self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);
@@ -64,6 +67,8 @@ class PicturesPageParserTest extends TestCase
         $crawler = $client->request('GET', 'https://myanimelist.net/anime/22147/jikan/pics');
         $this->animeParser = new PicturesPageParser($crawler);
         $pictures = $this->animeParser->getModel();
+        self::assertEquals($pictures, $this->animeParser->getModel());
+        ModelSnapshot::assertMatches($this, $pictures, false, $this->name());
 
         self::assertGreaterThan(0, count($pictures));
         self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);
@@ -86,6 +91,8 @@ class PicturesPageParserTest extends TestCase
         $crawler = $client->request('GET', 'https://myanimelist.net/people/11162/jikan/pics');
         $this->personParser = new PicturesPageParser($crawler);
         $pictures = $this->personParser->getModel();
+        self::assertEquals($pictures, $this->personParser->getModel());
+        ModelSnapshot::assertMatches($this, $pictures, false, $this->name());
 
         self::assertGreaterThan(0, count($pictures));
         self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);
@@ -108,6 +115,8 @@ class PicturesPageParserTest extends TestCase
         $crawler = $client->request('GET', 'https://myanimelist.net/character/105591/jikan/pics');
         $this->characterParser = new PicturesPageParser($crawler);
         $pictures = $this->characterParser->getModel();
+        self::assertEquals($pictures, $this->characterParser->getModel());
+        ModelSnapshot::assertMatches($this, $pictures, false, $this->name());
 
         self::assertGreaterThan(0, count($pictures));
         self::assertContainsOnlyInstancesOf(CommonImageResource::class, $pictures);

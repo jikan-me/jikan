@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\User;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\User\UsernameByIdParser;
 use JikanTest\TestCase;
@@ -38,5 +39,17 @@ class UsernameByIdParserTest extends TestCase
         $user = $this->parser->getUser();
         self::assertSame('Nimbiss', $user->getUsername());
         self::assertSame('https://myanimelist.net/profile/Nimbiss', $user->getUrl());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getUser(), $this->parser->getUser());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getUser());
     }
 }

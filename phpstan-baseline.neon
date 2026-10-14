@@ -1,0 +1,2509 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Offset 1 on array\{non\-falsy\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Helper/Parser.php
+
+		-
+			message: '#^Offset 2 on array\{non\-falsy\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Helper/Parser.php
+
+		-
+			message: '#^Offset 3 on array\{non\-falsy\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: src/Helper/Parser.php
+
+		-
+			message: '#^PHPDoc tag @param has invalid value \(string\)\: Unexpected token "\\n     \*", expected variable at offset 24 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 2
+			path: src/Helper/Parser.php
+
+		-
+			message: '#^Method Jikan\\Http\\HttpClientWrapper\:\:request\(\) has parameter \$files with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Http/HttpClientWrapper.php
+
+		-
+			message: '#^Method Jikan\\Http\\HttpClientWrapper\:\:request\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Http/HttpClientWrapper.php
+
+		-
+			message: '#^Method Jikan\\Http\\HttpClientWrapper\:\:request\(\) has parameter \$server with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Http/HttpClientWrapper.php
+
+		-
+			message: '#^Call to method getAnimationScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Model/Anime/AnimeReviewScores.php
+
+		-
+			message: '#^Call to method getCharacterScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Model/Anime/AnimeReviewScores.php
+
+		-
+			message: '#^Call to method getEnjoymentScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Model/Anime/AnimeReviewScores.php
+
+		-
+			message: '#^Call to method getOverallScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Model/Anime/AnimeReviewScores.php
+
+		-
+			message: '#^Call to method getSoundScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Model/Anime/AnimeReviewScores.php
+
+		-
+			message: '#^Call to method getStoryScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Model/Anime/AnimeReviewScores.php
+
+		-
+			message: '#^Parameter \$parser of method Jikan\\Model\\Anime\\AnimeReviewScores\:\:fromParser\(\) has invalid type Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 2
+			path: src/Model/Anime/AnimeReviewScores.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\AnimeReviews\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Anime/AnimeReviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\AnimeReviews\:\:mock\(\) should return static\(Jikan\\Model\\Anime\\AnimeReviews\) but returns Jikan\\Model\\Anime\\AnimeReviews\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Anime/AnimeReviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\AnimeStats\:\:getScores\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Anime/AnimeStats.php
+
+		-
+			message: '#^Property Jikan\\Model\\Anime\\AnimeStats\:\:\$scores type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Anime/AnimeStats.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Anime\\AnimeStats is incompatible with native type Jikan\\Model\\Anime\\AnimeStatsScore\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Anime/AnimeStatsScore.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\)\: Unexpected token "\\n     ", expected type at offset 15 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Model/Anime/AnimeStatsScore.php
+
+		-
+			message: '#^Property Jikan\\Model\\Anime\\AnimeStatsScore\:\:\$score has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Model/Anime/AnimeStatsScore.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\AnimeUserUpdates\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Anime/AnimeUserUpdates.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Search\\AnimeSearchParser is incompatible with native type Jikan\\Parser\\Anime\\AnimeRecentlyUpdatedByUsersParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Anime/AnimeUserUpdates.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\AnimeVideosEpisodes\:\:fromParser\(\) should return static\(Jikan\\Model\\Anime\\AnimeVideosEpisodes\) but returns Jikan\\Model\\Anime\\AnimeVideosEpisodes\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Anime/AnimeVideosEpisodes.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\AnimeVideosEpisodes\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Anime/AnimeVideosEpisodes.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\AnimeVideosEpisodes\:\:mock\(\) should return static\(Jikan\\Model\\Anime\\AnimeVideosEpisodes\) but returns Jikan\\Model\\Anime\\AnimeVideosEpisodes\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Anime/AnimeVideosEpisodes.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\Episodes\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Anime/Episodes.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\Episodes\:\:mock\(\) should return static\(Jikan\\Model\\Anime\\Episodes\) but returns Jikan\\Model\\Anime\\Episodes\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Anime/Episodes.php
+
+		-
+			message: '#^Method Jikan\\Model\\Anime\\MusicVideoListItem\:\:fromParser\(\) should return static\(Jikan\\Model\\Anime\\MusicVideoListItem\) but returns Jikan\\Model\\Anime\\MusicVideoListItem\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Anime/MusicVideoListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\ArticleList\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ArticleList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\ArticleList\:\:mock\(\) should return static\(Jikan\\Model\\Article\\ArticleList\) but returns Jikan\\Model\\Article\\ArticleList\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Article/ArticleList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\ArticleListItem\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ArticleListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\Article\\ArticleListItem\:\:\$tags type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ArticleListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\PinnedArticleList\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/PinnedArticleList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\PinnedArticleList\:\:mock\(\) should return static\(Jikan\\Model\\Article\\PinnedArticleList\) but returns Jikan\\Model\\Article\\PinnedArticleList\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Article/PinnedArticleList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\PinnedArticleListItem\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/PinnedArticleListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\Article\\PinnedArticleListItem\:\:\$tags type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/PinnedArticleListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\ResourceArticle\:\:getRelatedArticles\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ResourceArticle.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\ResourceArticle\:\:getRelatedEntries\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ResourceArticle.php
+
+		-
+			message: '#^Method Jikan\\Model\\Article\\ResourceArticle\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ResourceArticle.php
+
+		-
+			message: '#^Property Jikan\\Model\\Article\\ResourceArticle\:\:\$malId \(int\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Model/Article/ResourceArticle.php
+
+		-
+			message: '#^Property Jikan\\Model\\Article\\ResourceArticle\:\:\$relatedArticles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ResourceArticle.php
+
+		-
+			message: '#^Property Jikan\\Model\\Article\\ResourceArticle\:\:\$tags type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Article/ResourceArticle.php
+
+		-
+			message: '#^Method Jikan\\Model\\Club\\UserList\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Club/UserList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Club\\UserList\:\:mock\(\) should return static\(Jikan\\Model\\Club\\UserList\) but returns Jikan\\Model\\Club\\UserList\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Club/UserList.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\AnimeCard\:\:\$demographics \(array\<Jikan\\Model\\Common\\MalUrl\>\) does not accept array\<string\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Common/AnimeCard.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\AnimeCard\:\:\$themes \(array\<Jikan\\Model\\Common\\MalUrl\>\) does not accept array\<string\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Common/AnimeCard.php
+
+		-
+			message: '#^Method Jikan\\Model\\Common\\Collection\\Results\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Common/Collection/Results.php
+
+		-
+			message: '#^Method Jikan\\Model\\Common\\Collection\\Results\:\:setResults\(\) has parameter \$results with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Common/Collection/Results.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\Collection\\Results\:\:\$results type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Common/Collection/Results.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$day$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$month$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$year$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\DateProp\:\:\$day has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\DateProp\:\:\$month has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\DateProp\:\:\$year has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between ''1''\|''10''\|''11''\|''12''\|''13''\|''14''\|''15''\|''16''\|''17''\|''18''\|''19''\|''2''\|''20''\|''21''\|''22''\|''23''\|''24''\|''25''\|''26''\|''27''\|''28''\|''29''\|''3''\|''30''\|''31''\|''4''\|''5''\|''6''\|''7''\|''8''\|''9'' and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between ''1''\|''10''\|''11''\|''12''\|''2''\|''3''\|''4''\|''5''\|''6''\|''7''\|''8''\|''9'' and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between numeric\-string and false will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: src/Model/Common/DateProp.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\MangaCard\:\:\$demographics \(array\<Jikan\\Model\\Common\\MalUrl\>\) does not accept array\<string\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Common/MangaCard.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\MangaCard\:\:\$themes \(array\<Jikan\\Model\\Common\\MalUrl\>\) does not accept array\<string\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Common/MangaCard.php
+
+		-
+			message: '#^Method Jikan\\Model\\Common\\UserMeta\:\:getImages\(\) should return Jikan\\Model\\Resource\\UserImageResource\\UserImageResource but returns Jikan\\Model\\Resource\\CommonImageResource\\CommonImageResource\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Common/UserMeta.php
+
+		-
+			message: '#^Property Jikan\\Model\\Common\\UserMeta\:\:\$images \(Jikan\\Model\\Resource\\CommonImageResource\\CommonImageResource\) does not accept Jikan\\Model\\Resource\\UserImageResource\\UserImageResource\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Common/UserMeta.php
+
+		-
+			message: '#^Method Jikan\\Model\\Common\\UserMetaBasic\:\:fromMeta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Model/Common/UserMetaBasic.php
+
+		-
+			message: '#^Method Jikan\\Model\\Common\\UserMetaBasic\:\:fromMeta\(\) has parameter \$url with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Model/Common/UserMetaBasic.php
+
+		-
+			message: '#^Method Jikan\\Model\\Common\\UserMetaBasic\:\:fromMeta\(\) has parameter \$username with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Model/Common/UserMetaBasic.php
+
+		-
+			message: '#^Method Jikan\\Model\\Genre\\AnimeGenre\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Genre/AnimeGenre.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Genre\\AnimeGenre is incompatible with native type Jikan\\Model\\Genre\\AnimeGenreList\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Genre/AnimeGenreList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Genre\\MangaGenre\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Genre/MangaGenre.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Genre\\MangaGenre is incompatible with native type Jikan\\Model\\Genre\\MangaGenreList\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Genre/MangaGenreList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Magazine\\Magazine\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Magazine/Magazine.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Magazine\\MagazineParser is incompatible with native type Jikan\\Parser\\Magazine\\MagazineListParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Magazine/MagazineList.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Magazine\\Magazine is incompatible with native type Jikan\\Model\\Magazine\\MagazineList\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Magazine/MagazineList.php
+
+		-
+			message: '#^Property Jikan\\Model\\Magazine\\MagazineList\:\:\$magazines \(array\<Jikan\\Model\\Magazine\\MagazineListItem\>\) does not accept array\<Jikan\\Model\\Magazine\\MagazineAnime\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Magazine/MagazineList.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Magazine\\MagazineParser is incompatible with native type Jikan\\Parser\\Magazine\\MagazineListItemParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Magazine/MagazineListItem.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Magazine\\Magazine is incompatible with native type Jikan\\Model\\Magazine\\MagazineListItem\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Magazine/MagazineListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\Manga\\Manga\:\:\$externalLinks \(array\<Jikan\\Model\\Common\\Url\>\) does not accept array\<Jikan\\Model\\Common\\MalUrl\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Manga/Manga.php
+
+		-
+			message: '#^Method Jikan\\Model\\Manga\\MangaReviews\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Manga/MangaReviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\Manga\\MangaReviews\:\:mock\(\) should return static\(Jikan\\Model\\Manga\\MangaReviews\) but returns Jikan\\Model\\Manga\\MangaReviews\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Manga/MangaReviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\Manga\\MangaStats\:\:getScores\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Manga/MangaStats.php
+
+		-
+			message: '#^Property Jikan\\Model\\Manga\\MangaStats\:\:\$scores type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Manga/MangaStats.php
+
+		-
+			message: '#^Method Jikan\\Model\\Manga\\MangaUserUpdates\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Manga/MangaUserUpdates.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Anime\\MangaRecentlyUpdatedByUsersParser is not subtype of native type Jikan\\Parser\\Manga\\MangaRecentlyUpdatedByUsersParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Manga/MangaUserUpdates.php
+
+		-
+			message: '#^Parameter \$parser of method Jikan\\Model\\Manga\\MangaUserUpdates\:\:fromParser\(\) has invalid type Jikan\\Parser\\Anime\\MangaRecentlyUpdatedByUsersParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Model/Manga/MangaUserUpdates.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\NewsList\:\:fromParser\(\) should return static\(Jikan\\Model\\News\\NewsList\) but returns Jikan\\Model\\News\\NewsList\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/News/NewsList.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\NewsList\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/NewsList.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\NewsList\:\:mock\(\) should return static\(Jikan\\Model\\News\\NewsList\) but returns Jikan\\Model\\News\\NewsList\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/News/NewsList.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\NewsListItem\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/NewsListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\News\\NewsListItem\:\:\$tags type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/NewsListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\ResourceNews\:\:getRelatedEntries\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/ResourceNews.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\ResourceNews\:\:getRelatedNews\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/ResourceNews.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\ResourceNews\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/ResourceNews.php
+
+		-
+			message: '#^Property Jikan\\Model\\News\\ResourceNews\:\:\$malId \(int\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Model/News/ResourceNews.php
+
+		-
+			message: '#^Property Jikan\\Model\\News\\ResourceNews\:\:\$relatedNews type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/ResourceNews.php
+
+		-
+			message: '#^Property Jikan\\Model\\News\\ResourceNews\:\:\$tags type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/ResourceNews.php
+
+		-
+			message: '#^Method Jikan\\Model\\News\\ResourceNewsList\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/News/ResourceNewsList.php
+
+		-
+			message: '#^Method Jikan\\Model\\Producer\\Producer\:\:getTitles\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Producer/Producer.php
+
+		-
+			message: '#^Property Jikan\\Model\\Producer\\Producer\:\:\$titles type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Producer/Producer.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Producer\\ProducerParser is incompatible with native type Jikan\\Parser\\Producer\\ProducerListParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Producer/ProducerList.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Producer\\Producer is incompatible with native type Jikan\\Model\\Producer\\ProducerList\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Producer/ProducerList.php
+
+		-
+			message: '#^Property Jikan\\Model\\Producer\\ProducerList\:\:\$producers \(array\<Jikan\\Model\\Producer\\ProducerListItem\>\) does not accept array\<Jikan\\Model\\Producer\\ProducerAnime\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Producer/ProducerList.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Producer\\ProducerParser is incompatible with native type Jikan\\Parser\\Producer\\ProducerListItemParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Producer/ProducerListItem.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Producer\\Producer is incompatible with native type Jikan\\Model\\Producer\\ProducerListItem\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Producer/ProducerListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\RecentRecommendations\:\:fromParser\(\) should return static\(Jikan\\Model\\Recommendations\\RecentRecommendations\) but returns Jikan\\Model\\Recommendations\\RecentRecommendations\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Recommendations/RecentRecommendations.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\RecentRecommendations\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Recommendations/RecentRecommendations.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\RecentRecommendations\:\:mock\(\) should return static\(Jikan\\Model\\Recommendations\\RecentRecommendations\) but returns Jikan\\Model\\Recommendations\\RecentRecommendations\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Recommendations/RecentRecommendations.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Common\\Recommendation is incompatible with native type Jikan\\Parser\\Recommendations\\RecommendationListItemParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Recommendations/RecommendationListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\Recommender\:\:fromMeta\(\) has parameter \$url with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Model/Recommendations/Recommender.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\Recommender\:\:fromMeta\(\) has parameter \$username with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Model/Recommendations/Recommender.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\UserRecommendations\:\:fromParser\(\) should return static\(Jikan\\Model\\Recommendations\\UserRecommendations\) but returns Jikan\\Model\\Recommendations\\UserRecommendations\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Recommendations/UserRecommendations.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\UserRecommendations\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Recommendations/UserRecommendations.php
+
+		-
+			message: '#^Method Jikan\\Model\\Recommendations\\UserRecommendations\:\:mock\(\) should return static\(Jikan\\Model\\Recommendations\\UserRecommendations\) but returns Jikan\\Model\\Recommendations\\UserRecommendations\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Recommendations/UserRecommendations.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Resource\\AnimeImageResource\\Jpg is incompatible with native type Jikan\\Model\\Resource\\AnimeImageResource\\Webp\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Resource/AnimeImageResource/Webp.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Resource\\CharacterImageResource\\Jpg is incompatible with native type Jikan\\Model\\Resource\\CharacterImageResource\\Webp\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Resource/CharacterImageResource/Webp.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Resource\\CommonImageResource\\Jpg is incompatible with native type Jikan\\Model\\Resource\\CommonImageResource\\Webp\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Resource/CommonImageResource/Webp.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Resource\\AnimeImageResource\\Webp is incompatible with native type Jikan\\Model\\Resource\\UserImageResource\\Webp\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Resource/UserImageResource/Webp.php
+
+		-
+			message: '#^Method Jikan\\Model\\Reviews\\MangaReview\:\:getChaptersRead\(\) should return string\|null but returns int\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Reviews/MangaReview.php
+
+		-
+			message: '#^Method Jikan\\Model\\Reviews\\Review\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Reviews/Review.php
+
+		-
+			message: '#^Property Jikan\\Model\\Reviews\\Review\:\:\$tags type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Reviews/Review.php
+
+		-
+			message: '#^Method Jikan\\Model\\Reviews\\Reviews\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Reviews/Reviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\Reviews\\Reviews\:\:mock\(\) should return static\(Jikan\\Model\\Reviews\\Reviews\) but returns Jikan\\Model\\Reviews\\Reviews\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Reviews/Reviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\Search\\AnimeSearch\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/AnimeSearch.php
+
+		-
+			message: '#^Method Jikan\\Model\\Search\\CharacterSearch\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/CharacterSearch.php
+
+		-
+			message: '#^Method Jikan\\Model\\Search\\CharacterSearchListItem\:\:getAlternativeNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/CharacterSearchListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\Search\\CharacterSearchListItem\:\:\$alternativeNames type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/CharacterSearchListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Search\\MangaSearch\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/MangaSearch.php
+
+		-
+			message: '#^Method Jikan\\Model\\Search\\PersonSearch\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/PersonSearch.php
+
+		-
+			message: '#^Call to an undefined method Jikan\\Parser\\Person\\PersonParser\:\:getImageUrl\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Model/Search/PersonSearchListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Search\\PersonSearchListItem\:\:getAlternativeNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/PersonSearchListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\Search\\PersonSearchListItem\:\:\$alternativeNames type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/PersonSearchListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\Search\\Search\:\:\$result has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Model/Search/Search.php
+
+		-
+			message: '#^Property Jikan\\Model\\Search\\Search\:\:\$result_last_page has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Model/Search/Search.php
+
+		-
+			message: '#^Method Jikan\\Model\\Search\\UserSearch\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Search/UserSearch.php
+
+		-
+			message: '#^Method Jikan\\Model\\SeasonList\\SeasonArchive\:\:fromParser\(\) should return static\(Jikan\\Model\\SeasonList\\SeasonArchive\) but returns Jikan\\Model\\SeasonList\\SeasonArchive\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/SeasonList/SeasonArchive.php
+
+		-
+			message: '#^Method Jikan\\Model\\SeasonList\\SeasonArchive\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/SeasonList/SeasonArchive.php
+
+		-
+			message: '#^Method Jikan\\Model\\Top\\TopAnime\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Top/TopAnime.php
+
+		-
+			message: '#^Method Jikan\\Model\\Top\\TopCharacters\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Top/TopCharacters.php
+
+		-
+			message: '#^Method Jikan\\Model\\Top\\TopManga\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Top/TopManga.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Search\\AnimeSearchParser is incompatible with native type Jikan\\Parser\\Top\\TopMangaParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Top/TopManga.php
+
+		-
+			message: '#^Method Jikan\\Model\\Top\\TopPeople\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Top/TopPeople.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Search\\AnimeSearchParser is incompatible with native type Jikan\\Parser\\Top\\TopPeopleParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Top/TopPeople.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\AnimeListItem\:\:getDemographics\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\AnimeListItem\:\:getGenres\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\AnimeListItem\:\:getLicensors\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\AnimeListItem\:\:getStudios\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\AnimeListItem\:\:\$demographics type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\AnimeListItem\:\:\$genres type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\AnimeListItem\:\:\$licensors type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\AnimeListItem\:\:\$studios type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/AnimeListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\FavoriteCharacter\:\:\$entry is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Model/User/FavoriteCharacter.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$name$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Model/User/FavoriteCharacterRelatedEntry.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$url$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Model/User/FavoriteCharacterRelatedEntry.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Favorites\:\:getAnime\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Favorites\:\:getCharacters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Favorites\:\:getManga\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Favorites\:\:getPeople\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\Favorites\:\:\$anime type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\Favorites\:\:\$characters type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\Favorites\:\:\$manga type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\Favorites\:\:\$people type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Favorites.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Friends\:\:fromParser\(\) should return static\(Jikan\\Model\\User\\Friends\) but returns Jikan\\Model\\User\\Friends\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/User/Friends.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Friends\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Friends.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Friends\:\:mock\(\) should return static\(Jikan\\Model\\User\\Friends\) but returns Jikan\\Model\\User\\Friends\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/User/Friends.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\LastUpdates\:\:getAnime\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/LastUpdates.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\LastUpdates\:\:getManga\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/LastUpdates.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\LastUpdates\:\:\$anime type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/LastUpdates.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\LastUpdates\:\:\$manga type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/LastUpdates.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\MangaListItem\:\:getDemographics\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/MangaListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\MangaListItem\:\:getGenres\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/MangaListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\MangaListItem\:\:getMagazines\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/MangaListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\MangaListItem\:\:\$demographics type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/MangaListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\MangaListItem\:\:\$genres type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/MangaListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\MangaListItem\:\:\$magazines type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/MangaListItem.php
+
+		-
+			message: '#^Property Jikan\\Model\\User\\Profile\:\:\$externalLinks \(array\<Jikan\\Model\\Common\\Url\>\) does not accept array\<Jikan\\Model\\Common\\MalUrl\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/User/Profile.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\User\\Reviews\\UserAnimeReview is incompatible with native type Jikan\\Model\\User\\Reviews\\UserMangaReview\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/User/Reviews/UserMangaReview.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Reviews\\UserReviews\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/User/Reviews/UserReviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\User\\Reviews\\UserReviews\:\:mock\(\) should return static\(Jikan\\Model\\User\\Reviews\\UserReviews\) but returns Jikan\\Model\\User\\Reviews\\UserReviews\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/User/Reviews/UserReviews.php
+
+		-
+			message: '#^Method Jikan\\Model\\Watch\\Episodes\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Watch/Episodes.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$parser with type Jikan\\Parser\\Watch\\EpisodeListItemParser is incompatible with native type Jikan\\Parser\\Watch\\PromotionalVideoListItemParser\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/Model/Watch/PromotionalVideoListItem.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Watch\\EpisodeListItem is incompatible with native type Jikan\\Model\\Watch\\PromotionalVideoListItem\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Model/Watch/PromotionalVideoListItem.php
+
+		-
+			message: '#^Method Jikan\\Model\\Watch\\PromotionalVideos\:\:getLastVisiblePage\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Watch/PromotionalVideos.php
+
+		-
+			message: '#^Method Jikan\\Model\\Watch\\PromotionalVideos\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Model/Watch/PromotionalVideos.php
+
+		-
+			message: '#^Method Jikan\\Model\\Watch\\PromotionalVideos\:\:hasNextPage\(\) should return bool but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Model/Watch/PromotionalVideos.php
+
+		-
+			message: '#^Property Jikan\\Model\\Watch\\PromotionalVideos\:\:\$hasNextPage \(string\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Watch/PromotionalVideos.php
+
+		-
+			message: '#^Property Jikan\\Model\\Watch\\PromotionalVideos\:\:\$hasNextPage \(string\) does not accept default value of type false\.$#'
+			identifier: property.defaultValue
+			count: 1
+			path: src/Model/Watch/PromotionalVideos.php
+
+		-
+			message: '#^Property Jikan\\Model\\Watch\\PromotionalVideos\:\:\$lastVisiblePage \(string\) does not accept default value of type int\.$#'
+			identifier: property.defaultValue
+			count: 1
+			path: src/Model/Watch/PromotionalVideos.php
+
+		-
+			message: '#^Property Jikan\\Model\\Watch\\PromotionalVideos\:\:\$lastVisiblePage \(string\) does not accept int\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Model/Watch/PromotionalVideos.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getAnimeForum\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getAnimePictures\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getAnimeRecommendations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getArticleTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getCharacterPictures\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getMangaForum\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getMangaPictures\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getMangaRecommendations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getNewsTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getRecentOnlineUsers\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getUserAnimeList\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getUserClubs\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getUserHistory\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Method Jikan\\MyAnimeList\\MalClient\:\:getUserMangaList\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @param for parameter \$request with type Jikan\\Request\\Search\\NewsByTagRequest is not subtype of native type Jikan\\Request\\Search\\NewsSearchRequest\.$#'
+			identifier: parameter.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return has invalid value \(\)\: Unexpected token "\\n     \* ", expected type at offset 79 on line 4$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array is incompatible with native type Jikan\\Model\\Anime\\AnimeUserUpdates\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array is incompatible with native type Jikan\\Model\\Manga\\MangaUserUpdates\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array is incompatible with native type Jikan\\Model\\News\\ResourceNews\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array is incompatible with native type Jikan\\Model\\Recommendations\\RecentRecommendations\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array is incompatible with native type Jikan\\Model\\SeasonList\\SeasonArchive\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array\<Jikan\\Model\\Top\\TopAnimeListItem\> is incompatible with native type Jikan\\Model\\Top\\TopAnime\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array\<Jikan\\Model\\Top\\TopCharacterListItem\> is incompatible with native type Jikan\\Model\\Top\\TopCharacters\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array\<Jikan\\Model\\Top\\TopMangaListItem\> is incompatible with native type Jikan\\Model\\Top\\TopManga\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^PHPDoc tag @return with type array\<Jikan\\Model\\Top\\TopPersonListItem\> is incompatible with native type Jikan\\Model\\Top\\TopPeople\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Parameter \$request of method Jikan\\MyAnimeList\\MalClient\:\:getNewsSearch\(\) has invalid type Jikan\\Request\\Search\\NewsByTagRequest\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Variable \$crawler might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: src/MyAnimeList/MalClient.php
+
+		-
+			message: '#^Parameter \#1 \$message of class Jikan\\Exception\\BadResponseException constructor expects string, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parser/Anime/AnimeEpisodeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getEndingThemes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getExternalLinks\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getFavorites\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getLicensors\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getMembers\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getOpeningThemes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getPopularity\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getProducers\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getRank\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getRelated\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getStreamingLinks\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getStudios\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeParser\:\:getTitleSynonyms\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeRecentlyUpdatedByUsersParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeRecentlyUpdatedByUsersParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeReviewsParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeReviewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeStatsParser\:\:getScores\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Anime/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\AnimeStatsParser\:\:sanitize\(\) has parameter \$input with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Parser/Anime/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Anime\\StreamEpisodeListItemParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Anime/StreamEpisodeListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\ArticleListItemParser\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/ArticleListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\ArticleListParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/ArticleListParser.php
+
+		-
+			message: '#^Anonymous function has an unused use \$node\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: src/Parser/Article/ArticleParser.php
+
+		-
+			message: '#^Anonymous function has an unused use \$relatedArticles\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: src/Parser/Article/ArticleParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\ArticleParser\:\:getRelatedArticles\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/ArticleParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\ArticleParser\:\:getRelatedEntries\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/ArticleParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\ArticleParser\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/ArticleParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\ArticleTagsParser\:\:getModel\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/ArticleTagsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\PinnedArticleListItemParser\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/PinnedArticleListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Article\\PinnedArticleListParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Article/PinnedArticleListParser.php
+
+		-
+			message: '#^Instanceof between Symfony\\Component\\DomCrawler\\Crawler and Symfony\\Component\\DomCrawler\\Crawler will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 4
+			path: src/Parser/Club/ClubParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Club\\ClubParser\:\:getAnimeRelations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Club/ClubParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Club\\ClubParser\:\:getCharacterRelations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Club/ClubParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Club\\ClubParser\:\:getMangaRelations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Club/ClubParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Club\\ClubParser\:\:getStaff\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Club/ClubParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\AnimeCardParser\:\:getDemographics\(\) should return array\<string\> but returns list\<Jikan\\Model\\Common\\MalUrl\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/AnimeCardParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\AnimeCardParser\:\:getThemes\(\) should return array\<string\> but returns list\<Jikan\\Model\\Common\\MalUrl\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/AnimeCardParser.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 2
+			path: src/Parser/Common/AnimeCardParser.php
+
+		-
+			message: '#^Variable \$score might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: src/Parser/Common/AnimeCardParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\DefaultPicturesPageParser\:\:getModel\(\) should return array\<Jikan\\Model\\Common\\DefaultPicture\> but returns list\<Jikan\\Model\\Resource\\PersonImageResource\\PersonImageResource\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/DefaultPicturesPageParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\MangaCardParser\:\:getDemographics\(\) should return array\<string\> but returns list\<Jikan\\Model\\Common\\MalUrl\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/MangaCardParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\MangaCardParser\:\:getThemes\(\) should return array\<string\> but returns list\<Jikan\\Model\\Common\\MalUrl\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/MangaCardParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\MangaCardParser\:\:getVolumes\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/MangaCardParser.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Parser/Common/MangaCardParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\NewsMetaParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/NewsMetaParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\PicturesPageParser\:\:getModel\(\) should return array\<Jikan\\Model\\Common\\Picture\> but returns list\<Jikan\\Model\\Resource\\CommonImageResource\\CommonImageResource\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Common/PicturesPageParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Common\\Recommendations\:\:getModel\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Common/Recommendations.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\AnimeGenreListItemParser\:\:getCount\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/AnimeGenreListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\AnimeGenreListItemParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/AnimeGenreListItemParser.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Genre\\AnimeGenre is incompatible with native type Jikan\\Model\\Genre\\AnimeGenreListItem\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Parser/Genre/AnimeGenreListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\AnimeGenreParser\:\:getLastPage\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/AnimeGenreParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\AnimeGenreParser\:\:getResults\(\) should return array\<Jikan\\Model\\Genre\\AnimeGenre\> but returns list\<Jikan\\Model\\Common\\AnimeCard\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/AnimeGenreParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\MangaGenreListItemParser\:\:getCount\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/MangaGenreListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\MangaGenreListItemParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/MangaGenreListItemParser.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Genre\\MangaGenre is incompatible with native type Jikan\\Model\\Genre\\MangaGenreListItem\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Parser/Genre/MangaGenreListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\MangaGenreParser\:\:getLastPage\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/MangaGenreParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Genre\\MangaGenreParser\:\:getResults\(\) should return array\<Jikan\\Model\\Genre\\MangaGenre\> but returns list\<Jikan\\Model\\Common\\MangaCard\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Genre/MangaGenreParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Magazine\\MagazineListItemParser\:\:getCount\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Magazine/MagazineListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Magazine\\MagazineListItemParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Magazine/MagazineListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Magazine\\MagazineListParser\:\:getMagazines\(\) has invalid return type Jikan\\Model\\Magazine\\MagazineAnime\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Parser/Magazine/MagazineListParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Magazine\\MagazineListParser\:\:getMagazines\(\) should return array\<Jikan\\Model\\Magazine\\MagazineAnime\> but returns list\<Jikan\\Model\\Magazine\\MagazineListItem\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Magazine/MagazineListParser.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Magazine\\Magazine is incompatible with native type Jikan\\Model\\Magazine\\MagazineList\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Parser/Magazine/MagazineListParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Magazine\\MagazineParser\:\:getLastPage\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Magazine/MagazineParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Magazine\\MagazineParser\:\:getResults\(\) should return array\<Jikan\\Model\\Magazine\\MagazineManga\> but returns list\<Jikan\\Model\\Common\\MangaCard\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Magazine/MagazineParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaParser\:\:getExternalLinks\(\) should return array\<Jikan\\Model\\Common\\MalUrl\> but returns list\<Jikan\\Model\\Common\\Url\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Manga/MangaParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaParser\:\:getMangaFavorites\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Manga/MangaParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaParser\:\:getMangaMembers\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Manga/MangaParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaParser\:\:getMangaPopularity\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Manga/MangaParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaParser\:\:getMangaRelated\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Manga/MangaParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaRecentlyUpdatedByUsersParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Manga/MangaRecentlyUpdatedByUsersParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaReviewsParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Manga/MangaReviewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaStatsParser\:\:getScores\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Manga/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Manga\\MangaStatsParser\:\:sanitize\(\) has parameter \$input with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Parser/Manga/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsListItemParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/News/NewsListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsListItemParser\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/News/NewsListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsListParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/News/NewsListParser.php
+
+		-
+			message: '#^Anonymous function has an unused use \$node\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: src/Parser/News/NewsParser.php
+
+		-
+			message: '#^Anonymous function has an unused use \$relatedNews\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: src/Parser/News/NewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsParser\:\:getMalId\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/News/NewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsParser\:\:getRelatedEntries\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/News/NewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsParser\:\:getRelatedNews\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/News/NewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsParser\:\:getTags\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/News/NewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\NewsTagsParser\:\:getModel\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/News/NewsTagsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\News\\ResourceNewsListItemParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/News/ResourceNewsListItemParser.php
+
+		-
+			message: '#^Call to an undefined method DOMNode\:\:getAttribute\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Parser/News/ResourceNewsListParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\ParserInterface\:\:getModel\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Parser/ParserInterface.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Person\\PersonParser\:\:getPersonAlternateNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Person/PersonParser.php
+
+		-
+			message: '#^PHPDoc tag @return with type array\|null is not subtype of native type array\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Parser/Person/PersonParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerListItemParser\:\:getCount\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Producer/ProducerListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerListItemParser\:\:getMalId\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Producer/ProducerListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerListParser\:\:getProducers\(\) should return array\<Jikan\\Model\\Producer\\ProducerAnime\> but returns list\<Jikan\\Model\\Producer\\ProducerListItem\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Producer/ProducerListParser.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Producer\\Producer is incompatible with native type Jikan\\Model\\Producer\\ProducerList\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Parser/Producer/ProducerListParser.php
+
+		-
+			message: '#^Call to function is_null\(\) with non\-falsy\-string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Parser/Producer/ProducerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerParser\:\:getAnimeCount\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Producer/ProducerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerParser\:\:getExternalLinks\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Producer/ProducerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerParser\:\:getFavorites\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Producer/ProducerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerParser\:\:getLastPage\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Producer/ProducerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerParser\:\:getResults\(\) should return array\<Jikan\\Model\\Producer\\ProducerAnime\> but returns list\<Jikan\\Model\\Common\\AnimeCard\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Producer/ProducerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Producer\\ProducerParser\:\:getTitles\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Producer/ProducerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Recommendations\\RecentRecommendationsParser\:\:getRecentRecommendations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Recommendations/RecentRecommendationsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Recommendations\\RecentRecommendationsParser\:\:getUserRecommendations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Recommendations/RecentRecommendationsParser.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Reviews\\Reviews is incompatible with native type Jikan\\Model\\Recommendations\\RecentRecommendations\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Parser/Recommendations/RecentRecommendationsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Recommendations\\RecommendationListItemParser\:\:getRecommendations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Recommendations/RecommendationListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Recommendations\\UserRecommendationsParser\:\:getLastPage\(\) should return int but returns float\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Recommendations/UserRecommendationsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Recommendations\\UserRecommendationsParser\:\:getUserRecommendations\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Recommendations/UserRecommendationsParser.php
+
+		-
+			message: '#^PHPDoc tag @return with type Jikan\\Model\\Reviews\\Reviews is incompatible with native type Jikan\\Model\\Recommendations\\UserRecommendations\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Parser/Recommendations/UserRecommendationsParser.php
+
+		-
+			message: '#^Call to method getModel\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Parser/Reviews/AnimeReviewParser.php
+
+		-
+			message: '#^Instantiated class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Parser/Reviews/AnimeReviewParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Reviews\\AnimeReviewParser\:\:getReviewTag\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Reviews/AnimeReviewParser.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Parser/Reviews/AnimeReviewParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Reviews\\MangaReviewParser\:\:getHelpfulCount\(\) should return int but returns string\.$#'
+			identifier: return.type
+			count: 3
+			path: src/Parser/Reviews/MangaReviewParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Reviews\\MangaReviewParser\:\:getReviewTag\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Reviews/MangaReviewParser.php
+
+		-
+			message: '#^Property Jikan\\Parser\\Reviews\\ReactionsParser\:\:\$reactions type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Reviews/ReactionsParser.php
+
+		-
+			message: '#^Call to method getModel\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Parser/Reviews/ReviewerParser.php
+
+		-
+			message: '#^Instantiated class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Parser/Reviews/ReviewerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Reviews\\ReviewerParser\:\:getModel\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Parser/Reviews/ReviewerParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Reviews\\ReviewsParser\:\:getReviews\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Reviews/ReviewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Schedule\\ScheduleParser\:\:getShedule\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Schedule/ScheduleParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Search\\CharacterSearchListItemParser\:\:getAlternativeNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Search/CharacterSearchListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Search\\CharacterSearchListItemParser\:\:getAnime\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Search/CharacterSearchListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Search\\CharacterSearchListItemParser\:\:getManga\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Search/CharacterSearchListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Search\\PersonSearchListItemParser\:\:getAlternativeNames\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Search/PersonSearchListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\SeasonList\\SeasonListItemParser\:\:getSeasons\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/SeasonList/SeasonListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Seasonal\\SeasonalParser\:\:getSeasonYear\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Seasonal/SeasonalParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Top\\TopAnimeParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Top/TopAnimeParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Top\\TopCharactersParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Top/TopCharactersParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Top\\TopListItemParser\:\:getTextArray\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Top/TopListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Top\\TopMangaParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Top/TopMangaParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Top\\TopPeopleParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Top/TopPeopleParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\ClubParser\:\:getClubs\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/ClubParser.php
+
+		-
+			message: '#^Variable \$pages in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: src/Parser/User/Friends/FriendsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getCompleted\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getDaysWatched\(\) should return float\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getDropped\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getEpisodesWatched\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getMeanScore\(\) should return float\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getOnHold\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getPlanToWatch\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getRewatched\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getTotalEntries\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\AnimeStatsParser\:\:getWatching\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/AnimeStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\FavoritesParser\:\:getAnime\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Profile/FavoritesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\FavoritesParser\:\:getCharacters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Profile/FavoritesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\FavoritesParser\:\:getManga\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Profile/FavoritesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\FavoritesParser\:\:getPeople\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Profile/FavoritesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\LastUpdatesParser\:\:getLastAnimeUpdates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\LastUpdatesParser\:\:getLastMangaUpdates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\LastUpdatesParser\:\:parseBaseListUpdates\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\$baseLastUpdate BaseLastUpdate\)\: Unexpected token "\$baseLastUpdate", expected type at offset 20 on line 2$#'
+			identifier: phpDoc.parseError
+			count: 2
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\$progressed int\|null\)\: Unexpected token "\$progressed", expected type at offset 10 on line 1$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^PHPDoc tag @var has invalid value \(\$total int\|null\)\: Unexpected token "\$total", expected type at offset 10 on line 1$#'
+			identifier: phpDoc.parseError
+			count: 1
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^Parameter \#4 \$progressedSubEntries of class Jikan\\Model\\User\\BaseLastUpdate constructor expects int\|null, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^Parameter \#5 \$total of class Jikan\\Model\\User\\BaseLastUpdate constructor expects int\|null, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parser/User/Profile/LastUpdatesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getChaptersRead\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getCompleted\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getDaysRead\(\) should return float\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getDropped\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getMeanScore\(\) should return float\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getOnHold\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getPlanToRead\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getReading\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getReread\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getTotalEntries\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getVolumesRead\(\) should return int\|null but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/MangaStatsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Profile\\UserProfileParser\:\:getUserExternalLinks\(\) should return array\<Jikan\\Model\\Common\\MalUrl\> but returns list\<Jikan\\Model\\Common\\Url\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/User/Profile/UserProfileParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\User\\Reviews\\UserReviewsParser\:\:getReviews\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/User/Reviews/UserReviewsParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Watch\\EpisodeListItemParser\:\:getEpisodes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Watch/EpisodeListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Watch\\EpisodeListItemParser\:\:getRegionLocked\(\) should return bool but returns int\<0, max\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Parser/Watch/EpisodeListItemParser.php
+
+		-
+			message: '#^Parameter \#4 \$premium of static method Jikan\\Model\\Watch\\RecentEpisodeListItem\:\:factory\(\) expects bool, int\<0, max\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parser/Watch/EpisodeListItemParser.php
+
+		-
+			message: '#^Parameter \#1 \$parser of static method Jikan\\Model\\Watch\\EpisodeListItem\:\:fromParser\(\) expects Jikan\\Parser\\Watch\\EpisodeListItemParser, \$this\(Jikan\\Parser\\Watch\\PromotionalVideoListItemParser\) given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Parser/Watch/PromotionalVideoListItemParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Watch\\WatchEpisodesParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Watch/WatchEpisodesParser.php
+
+		-
+			message: '#^Method Jikan\\Parser\\Watch\\WatchPromotionalVideosParser\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Parser/Watch/WatchPromotionalVideosParser.php
+
+		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$page$#'
+			identifier: parameter.notFound
+			count: 1
+			path: src/Request/Anime/AnimeEpisodeRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\Anime\\AnimeForumRequest\:\:getValidTypes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/Anime/AnimeForumRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Anime\\AnimeForumRequest\:\:\$validTypes type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/Anime/AnimeForumRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\Manga\\MangaForumRequest\:\:getValidTypes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/Manga/MangaForumRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Manga\\MangaForumRequest\:\:\$validTypes type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/Manga/MangaForumRequest.php
+
+		-
+			message: '#^PHPDoc tag @return with type int is incompatible with native type string\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: src/Request/News/NewsRequest.php
+
+		-
+			message: '#^PHPDoc tag @var for property Jikan\\Request\\News\\NewsRequest\:\:\$malId with type int is incompatible with native type string\.$#'
+			identifier: property.phpDocType
+			count: 1
+			path: src/Request/News/NewsRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\News\\NewsRequest\:\:\$malId \(string\) does not accept int\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Request/News/NewsRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between null and string will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Request/Recommendations/RecentRecommendationsRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\Reviews\\ReviewsRequest\:\:__construct\(\) has parameter \$type with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Request/Reviews/ReviewsRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\Search\\AnimeSearchRequest\:\:setGenre\(\) has parameter \$genre with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/Search/AnimeSearchRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Search\\AnimeSearchRequest\:\:\$type \(string\) does not accept default value of type int\.$#'
+			identifier: property.defaultValue
+			count: 1
+			path: src/Request/Search/AnimeSearchRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Search\\CharacterSearchRequest\:\:\$query \(string\) on left side of \?\?\= is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 2
+			path: src/Request/Search/CharacterSearchRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\Search\\MangaSearchRequest\:\:setGenre\(\) has parameter \$genre with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/Search/MangaSearchRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Search\\MangaSearchRequest\:\:\$query \(string\) on left side of \?\?\= is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 2
+			path: src/Request/Search/MangaSearchRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Search\\MangaSearchRequest\:\:\$type \(string\) does not accept default value of type int\.$#'
+			identifier: property.defaultValue
+			count: 1
+			path: src/Request/Search/MangaSearchRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Search\\PersonSearchRequest\:\:\$query \(string\) on left side of \?\?\= is not nullable\.$#'
+			identifier: nullCoalesce.property
+			count: 2
+			path: src/Request/Search/PersonSearchRequest.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments \*NEVER\*, array\{''airing'', ''upcoming'', ''tv'', ''movie'', ''ova'', ''special'', ''bypopularity'', ''favorite'', \.\.\.\} and true will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Request/Top/TopAnimeRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Top\\TopAnimeRequest\:\:\$type \(string\|null\) is never assigned string so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Request/Top/TopAnimeRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between null and null will always evaluate to false\.$#'
+			identifier: notIdentical.alwaysFalse
+			count: 1
+			path: src/Request/Top/TopAnimeRequest.php
+
+		-
+			message: '#^Call to function in_array\(\) with arguments \*NEVER\*, array\{''manga'', ''novels'', ''oneshots'', ''doujin'', ''manhwa'', ''manhua'', ''bypopularity'', ''favorite'', \.\.\.\} and true will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Request/Top/TopMangaRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\Top\\TopMangaRequest\:\:\$type \(string\|null\) is never assigned string so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Request/Top/TopMangaRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between null and null will always evaluate to false\.$#'
+			identifier: notIdentical.alwaysFalse
+			count: 1
+			path: src/Request/Top/TopMangaRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\User\\UserAnimeListRequest\:\:getAiredFrom\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserAnimeListRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\User\\UserAnimeListRequest\:\:getAiredTo\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserAnimeListRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\User\\UserAnimeListRequest\:\:\$airedFrom type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserAnimeListRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\User\\UserAnimeListRequest\:\:\$airedTo type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserAnimeListRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\User\\UserHistoryRequest\:\:\$type \(string\|null\) is never assigned string so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Request/User/UserHistoryRequest.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between null and null will always evaluate to false\.$#'
+			identifier: notIdentical.alwaysFalse
+			count: 1
+			path: src/Request/User/UserHistoryRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\User\\UserMangaListRequest\:\:getPublishedFrom\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserMangaListRequest.php
+
+		-
+			message: '#^Method Jikan\\Request\\User\\UserMangaListRequest\:\:getPublishedTo\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserMangaListRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\User\\UserMangaListRequest\:\:\$publishedFrom type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserMangaListRequest.php
+
+		-
+			message: '#^Property Jikan\\Request\\User\\UserMangaListRequest\:\:\$publishedTo type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Request/User/UserMangaListRequest.php

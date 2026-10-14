@@ -1,0 +1,10 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    # Level 6, ratcheted up over time. Existing findings live in phpstan-baseline.neon: fix them and
+    # regenerate with `composer phpstan:baseline`; never add new entries by hand.
+    level: 6
+    paths:
+        - src
+    tmpDir: .phpstan-cache

@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Anime;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -98,5 +99,9 @@ class AnimeRecentlyUpdatedByUsersParserTest extends TestCase
         );
     }
 
-
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->model, true);
+    }
 }

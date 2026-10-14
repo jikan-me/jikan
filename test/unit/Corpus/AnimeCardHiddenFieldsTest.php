@@ -93,16 +93,27 @@ class AnimeCardHiddenFieldsTest extends TestCase
         self::assertSame($expected, new AnimeCardParser($card)->getAirDates()?->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d'));
     }
 
-    #[Test]
-    public function without_the_hidden_date_a_bare_year_is_not_read_as_a_time_today(): void
+    /**
+     * @return iterable<string, array{string, string}>
+     */
+    public static function shownDates(): iterable
     {
         // "2027" on its own used to parse as 20:27 today.
+        yield 'bare year' => ['2027', '2027-01-01'];
+        yield 'month and year' => ['Oct 2027', '2027-10-01'];
+        yield 'full date with time' => ['Apr 7, 2013, 01:00 (JST)', '2013-04-07'];
+    }
+
+    #[Test]
+    #[DataProvider('shownDates')]
+    public function without_the_hidden_date_the_shown_date_is_read(string $shown, string $expected): void
+    {
         [, $card] = self::cards('seasonal-later')[0];
         $hidden = $card->filter('.js-start_date')->getNode(0);
         $hidden->parentNode->removeChild($hidden);
-        $card->filterXPath('//div/div[2]/div[2]/span[contains(@class, "item")][1]')->getNode(0)->textContent = '2027';
+        $card->filterXPath('//div/div[2]/div[2]/span[contains(@class, "item")][1]')->getNode(0)->textContent = $shown;
 
-        self::assertSame('2027-01-01', new AnimeCardParser($card)->getAirDates()?->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d'));
+        self::assertSame($expected, new AnimeCardParser($card)->getAirDates()?->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d'));
     }
 
     /** The type the card shows: its info line ("TV, 2013") or the header of its seasonal section ("TV (New)"). */

@@ -218,9 +218,8 @@ class AnimeCardParser implements ParserInterface
     {
         // Every card carries its type as a class. It is also the most precise source: seasonal pages file
         // "TV Special" cards under their "Special" section.
-        preg_match('~(?:^|\s)js-anime-type-(\d+)(?:\s|$)~', (string) $this->crawler->attr('class'), $m);
-        if (isset(self::TYPES[(int) ($m[1] ?? 0)])) {
-            return self::TYPES[(int) $m[1]];
+        if (preg_match('~(?:^|\s)js-anime-type-([1-9])(?:\s|$)~', $this->crawler->attr('class') ?? '', $m)) {
+            return self::TYPES[$m[1]];
         }
 
         // genre/producer cards: the info line starts with "<type>, <year>", e.g. "TV, 2013"
@@ -256,7 +255,7 @@ class AnimeCardParser implements ParserInterface
         // Every card carries the start date as "YYYYMMDD", with 00 for what is not known yet ("20270000",
         // "20271000"; "00000000" when nothing is). Genre and producer cards show no full date otherwise.
         $start = $this->crawler->filter('.js-start_date');
-        if ($start->count() && preg_match('~^(\d{4})(\d{2})(\d{2})$~', trim($start->text()), $m)) {
+        if ($start->count() && preg_match('~(\d{4})(\d{2})(\d{2})~', $start->text(), $m)) {
             if ($m[1] === '0000') {
                 return null;
             }
@@ -270,7 +269,7 @@ class AnimeCardParser implements ParserInterface
             return null;
         }
 
-        $date = trim(str_replace('(JST)', '', JString::cleanse($node->text())));
+        $date = JString::cleanse(str_replace('(JST)', '', $node->text()));
 
         // A bare year ("2027") would otherwise be read as the time 20:27 today.
         if (preg_match('~^\d{4}$~', $date)) {

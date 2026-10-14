@@ -1,6 +1,6 @@
 name: Mutation testing
 
-# Report-only. On pull requests that touch src/, only the changed lines are mutated (fast, and it says
+# Fails below the minMsi in infection.json5. On pull requests that touch src/, only the changed lines are mutated (fast, and it says
 # whether the new code is really tested). Nightly and on demand, all of src/Parser and src/Helper are,
 # and the HTML report is kept as an artifact. See infection.json5.
 on:
@@ -21,7 +21,6 @@ permissions:
 jobs:
   infection:
     runs-on: ubuntu-22.04
-    continue-on-error: true
     timeout-minutes: ${{ github.event_name == 'pull_request' && 30 || 180 }}
     name: infection (${{ github.event_name == 'pull_request' && 'changed lines' || 'full' }})
     steps:

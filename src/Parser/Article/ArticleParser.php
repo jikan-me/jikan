@@ -204,7 +204,7 @@ class ArticleParser implements ParserInterface
             ->filterXPath('
                 //*[contains(text(), "Related Database Entries")]
                 /following-sibling::table
-                /tr
+                /tbody/tr
             ')
             ->each(
                 function (Crawler $c) use (&$related) {

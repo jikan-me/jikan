@@ -56,6 +56,19 @@ class ArticleParserTest extends TestCase
     }
 
     #[Test]
+    public function it_parses_related_database_entries(): void
+    {
+        // The HTML5 parser wraps table rows in <tbody>; a "table/tr" path matched nothing.
+        $related = $this->parser->getRelatedEntries();
+        self::assertNotEmpty($related);
+        foreach ($related as $relation => $entries) {
+            self::assertNotSame('', $relation);
+            self::assertNotEmpty($entries);
+            self::assertStringStartsWith('https://myanimelist.net/', $entries[0]->getUrl());
+        }
+    }
+
+    #[Test]
     public function it_parses_content_and_related_articles(): void
     {
         self::assertStringContainsString(

@@ -108,6 +108,7 @@ which changes a consumer can see.
 - `Jikan\Model\User\Friend::getFriendsSince()` returns `?\DateTimeImmutable`: `null` when MyAnimeList shows no "Friends since" date. It used to declare a non-null date and throw a `TypeError` in that case.
 
 ### Fixed
+- `ResourceArticle::getRelatedEntries()` from `getArticle()` returns the article's "Related Database Entries" (anime and manga links grouped by type). It always returned an empty list, because the HTML5 parser puts table rows inside `<tbody>` and the lookup didn't expect it.
 - Reading `getSmallImageUrl()`/`getLargeImageUrl()`/WebP image URLs on an entity whose image is a MyAnimeList placeholder (normalized to `null`) no longer throws "typed property must not be accessed before initialization" — those getters now return `null`, matching the `?string` image contract (jikan#488).
 - Anime/manga detail pages with no cover no longer surface the MAL site icon (`og:image` → `/img/sp/icon/apple-touch-icon-256.png`) as the entity's image — it is now treated as a placeholder and resolved to `null` (jikan#488).
 - `Jikan\Model\Watch\EpisodeListItem::getEpisodes()` returns the aired episode links as an array — every call previously threw a `TypeError` because the declared return type was `RecentEpisodeListItem`.

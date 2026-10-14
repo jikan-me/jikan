@@ -4,7 +4,8 @@
     // ("escaped") marks code that runs in tests but is not really checked by them.
     //
     // Runs in CI (.github/workflows/mutation.yaml): changed lines on pull requests, everything nightly.
-    // Report-only for now; once the nightly score settles, set "minMsi" to stop it from going down.
+    // "minMsi" fails the run when the score drops below it. It was 86% on the first full run (2026-10-14);
+    // raise it as escaped mutants get covered.
     "$schema": "vendor/infection/infection/resources/schema.json",
     "source": {
         "directories": [
@@ -13,6 +14,7 @@
         ]
     },
     "timeout": 30,
+    "minMsi": 85,
     "logs": {
         "text": "build/infection/infection.log",
         "summary": "build/infection/summary.log",

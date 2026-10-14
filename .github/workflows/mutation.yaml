@@ -25,7 +25,7 @@ jobs:
     name: infection (${{ github.event_name == 'pull_request' && 'changed lines' || 'full' }})
     steps:
       - name: Checkout changes
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 

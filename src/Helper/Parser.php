@@ -320,9 +320,7 @@ class Parser
             return null;
         }
 
-        $hours = $match[1] ?? 0;
-        $minutes = $match[2] ?? 0;
-        $seconds = $match[3] ?? 0;
+        [, $hours, $minutes, $seconds] = array_map('intval', $match);
 
         return ($hours * 60 * 60) + ($minutes * 60) + $seconds;
     }

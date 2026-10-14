@@ -68,4 +68,21 @@ class ParserTest extends TestCase
         self::assertSame('20' . $soon, Parser::parseDateMDY("04-01-$soon")->format('Y'));
         self::assertSame('1998-04-03', Parser::parseDateMDY('04-03-98')->format('Y-m-d'));
     }
+
+    #[Test]
+    public function it_reads_a_two_digit_year_exactly_ten_years_ahead_as_this_century(): void
+    {
+        // The clock is frozen in 2026: up to 2036 stays in this century, 2037 and later are read as 19xx.
+        self::assertSame('2036-01-01', Parser::parseDateMDY('01-01-36')->format('Y-m-d'));
+        self::assertSame('1937-01-01', Parser::parseDateMDY('01-01-37')->format('Y-m-d'));
+    }
+
+    #[Test]
+    public function it_converts_durations_to_seconds(): void
+    {
+        self::assertSame(3723, Parser::parseDurationToSeconds('01:02:03'));
+        self::assertSame(36000, Parser::parseDurationToSeconds('10:00:00'));
+        self::assertSame(59, Parser::parseDurationToSeconds('00:00:59'));
+        self::assertNull(Parser::parseDurationToSeconds('24 min'));
+    }
 }

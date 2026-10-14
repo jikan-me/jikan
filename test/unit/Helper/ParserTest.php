@@ -54,4 +54,18 @@ class ParserTest extends TestCase
         $date = Parser::parseDate('?');
         self::assertNull($date);
     }
+
+    #[Test]
+    public function it_reads_two_digit_years_from_the_previous_century_when_they_are_far_ahead(): void
+    {
+        // PHP alone reads "61" as 2061: Kaguya-hime (1961) and Ookami Shounen Ken (1963) came back 100 years late.
+        self::assertSame('1961-01-01', Parser::parseDateMDY('01-01-61')->format('Y-m-d'));
+        self::assertSame('1963-11-25', Parser::parseDateMDY('11-25-63')->format('Y-m-d'));
+        self::assertSame('1963-12-21', Parser::parseDateDMY('21-12-63')->format('Y-m-d'));
+
+        // Dates a few years ahead (announced titles) stay in this century, and the 1990s stay as they were.
+        $soon = (string) ((int) date('y') + 2);
+        self::assertSame('20' . $soon, Parser::parseDateMDY("04-01-$soon")->format('Y'));
+        self::assertSame('1998-04-03', Parser::parseDateMDY('04-03-98')->format('Y-m-d'));
+    }
 }

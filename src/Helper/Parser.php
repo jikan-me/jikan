@@ -157,7 +157,9 @@ class Parser
 
         $date = str_replace('??', '01', $date);
 
-        return \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC')) ?: null;
+        $parsed = \DateTimeImmutable::createFromFormat('!m-d-y', $date, new \DateTimeZone('UTC'));
+
+        return $parsed ? self::pivotTwoDigitYear($parsed) : null;
     }
 
     /**
@@ -179,7 +181,22 @@ class Parser
 
         $date = str_replace('??', '01', $date);
 
-        return \DateTimeImmutable::createFromFormat('!d-m-y', $date, new \DateTimeZone('UTC')) ?: null;
+        $parsed = \DateTimeImmutable::createFromFormat('!d-m-y', $date, new \DateTimeZone('UTC'));
+
+        return $parsed ? self::pivotTwoDigitYear($parsed) : null;
+    }
+
+    /**
+     * PHP reads two-digit years 00-69 as 2000-2069, so a 1961 title came back as 2061. MyAnimeList lists dates
+     * at most a few years ahead, so a year more than 10 years in the future belongs to the previous century.
+     */
+    private static function pivotTwoDigitYear(\DateTimeImmutable $date): \DateTimeImmutable
+    {
+        if ((int) $date->format('Y') > (int) date('Y') + 10) {
+            return $date->modify('-100 years');
+        }
+
+        return $date;
     }
 
     /**

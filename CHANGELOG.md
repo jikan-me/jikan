@@ -96,6 +96,9 @@ which changes a consumer can see.
 ### Breaking
 - **PHP floor raised to 8.4.4** — **you must** run PHP 8.4.4 or later; Composer no longer installs on 8.4.0–8.4.3. Those patch levels have a bug in PHP's own HTML5 parser (`Dom\HTMLDocument`, php-src GH-17481) that corrupts some 4-byte characters (emoji, rare scripts) depending on where they fall in the page, so a parsed field can contain invalid UTF-8 and `json_encode()` fails on the model. Seen on a real MyAnimeList manga review.
 
+### Added
+- `Jikan\Helper\Time` resolves MyAnimeList's relative and partial dates ("Yesterday, 9:25 PM", "5 hours ago", "Oct 13", weekdays) against a PSR-20 clock from the new `symfony/clock` dependency. By default that is the system clock, so results are unchanged. You can pin "now", for example in your own tests, with `Symfony\Component\Clock\Clock::set(new MockClock(...))`.
+
 ### Changed
 - `symfony/dom-crawler` is now a declared requirement (`^7.4 || ^8.0`). The library has always used it directly but only received it through `symfony/browser-kit`, so nothing changes in your tree — no action needed unless you were excluding it.
 - A seasonal page parses roughly 3x faster (about 1.2 s down to 0.4 s in our benchmark). The marker for "continuing" shows was found by reading the text of the whole season section once per anime card; it is now read once per section. The returned `Seasonal` model is identical.
@@ -116,6 +119,9 @@ which changes a consumer can see.
 - Casting a `PersonImageResource\Jpg` or `UserImageResource\Jpg` to string returns its image URL (an empty string when it is a placeholder) instead of throwing "call to undefined method `getJpg()`".
 - `Jikan\Http\HttpClientWrapper` no longer records browser history. It kept one entry per request for the lifetime of the client (about 2.5 KB each), so a long-running process that reused one `MalClient` grew without bound. `request()` now defaults `$changeHistory` to `false`.
 - Two-digit years in anime/manga search results and user list dates are no longer read as the 2040s–2060s: "Kaguya-hime" (1961) came back as 2061. A year more than 10 years in the future is now read as 19xx; this also corrects `isAiring()` for those titles.
+- Anime and manga search with no matches return an empty result (`getResults()` is `[]`) instead of throwing `BadResponseException`. MyAnimeList answers those searches with a 404 page.
+- Person search with no matches returns an empty result instead of throwing `ParserException`. MyAnimeList shows a "No results returned" row there.
+- Character and person search no longer turn a non-404 HTTP error, such as a 429 or 500, into a `TypeError`. The `BadResponseException` now reaches you.
 
 ---
 

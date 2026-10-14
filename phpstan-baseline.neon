@@ -1279,12 +1279,6 @@ parameters:
 			path: src/MyAnimeList/MalClient.php
 
 		-
-			message: '#^Variable \$crawler might not be defined\.$#'
-			identifier: variable.undefined
-			count: 2
-			path: src/MyAnimeList/MalClient.php
-
-		-
 			message: '#^Parameter \#1 \$message of class Jikan\\Exception\\BadResponseException constructor expects string, int given\.$#'
 			identifier: argument.type
 			count: 1

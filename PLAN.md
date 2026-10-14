@@ -141,11 +141,26 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
 - [x] Report-only CI job: pcov line coverage, unused fixtures, `scripts/field_witness.php` (38 model fields no
       recorded page ever fills).
 
-### Phase 2 (decided, not started)
-- `symfony/clock`, frozen at each fixture's recording time in tests; removes all date masking (14 classes).
-- Fixture format with HTTP status + recording time (404 / error paths become testable).
-- One data-driven corpus test over every endpoint x every recorded variant through `MalClient`.
-- `scripts/record_variant.php --live`: one-off recording of ~70 variant pages, >= 3.5 s apart, GET only.
+### Phase 2 (branch v5/test-suite-phase-2)
+- [x] Clock: every date site (about 20) goes through `Jikan\Helper\Time` on `symfony/clock`. Equivalence checked on
+      all 928 distinct date texts the suite parses (identical to the microsecond). Tests freeze it at
+      2026-10-12T12:00Z; all 15 date masks and 6 tolerance comparisons are gone.
+- [x] Corpus: `test/unit/Corpus/variants.json` (99 variants: one per `MalClient` method, all 76, plus page 2s,
+      zero-result searches, airing/upcoming/movie/light-novel/author, old and future seasons, 404 and id 0).
+      Pages live in jikan-fixtures `pages/<key>.html` + `.meta.json` (URL, final URL, HTTP status, content type,
+      recording time); `RecordedPages` serves the recorded status and sets the clock to the recording time.
+      `CorpusTest` runs each through `MalClient`: invariants, named snapshot, second call equal.
+- [x] `scripts/record_variants.php` (`--dry-run`, `--live`, `--only`, `--force`): records exactly what the
+      `MalClient` method requests. One-off live run on 2026-10-14: 98 pages, GET only, 3.5 s apart.
+- Bugs the corpus found and fixed: anime/manga search with no matches threw `BadResponseException` (MAL returns
+  404); person search with no matches threw `ParserException`; character/person search turned non-404 errors
+  into a `TypeError`.
+- Bugs the corpus found, NOT fixed yet (owner decision): anime genre page 1 reports `hasNextPage=false`,
+  `lastVisiblePage=1` though the page links 20 pages (likely the same for manga genres); `Person::publishedManga`
+  is empty for Hayao Miyazaki (1870) although the page has a "Published Manga" section with 28 links. 41 fields
+  remain never filled (`scripts/field_witness.php`), several of them likely parser bugs (`AnimeCard::type`,
+  `MangaCard::authors`, `Top*ListItem::nameKanji`).
+- Not done: migrating the 98 per-class fixtures to the pages format (they keep working as they are).
 
 ### Phase 3 (proposed)
 - Infection mutation testing on `src/Parser` + `src/Helper` (nightly), synthetic missing-field variants,

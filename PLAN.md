@@ -162,9 +162,18 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
   `MangaCard::authors`, `Top*ListItem::nameKanji`).
 - Not done: migrating the 98 per-class fixtures to the pages format (they keep working as they are).
 
-### Phase 3 (proposed)
-- Infection mutation testing on `src/Parser` + `src/Helper` (nightly), synthetic missing-field variants,
-  helper property tests, exact-value assertions in the weakest classes.
+### Phase 3 (branch v5/test-suite-phase-3)
+- [x] Synthetic missing-field variants: `test/unit/Corpus/MissingFieldTest.php` removes each sidebar row from the
+      8 recorded anime/manga detail pages (166 cases) and checks only that row's fields change. Found and fixed:
+      `getAnime()` crashed without an "Aired:" row, `getManga()` without a "Published:" row.
+- [x] Mutation testing: `infection.json5` + `.github/workflows/mutation.yaml` (changed lines on PRs touching
+      `src/`, everything nightly; report-only). First real run happens in CI (no local coverage driver).
+      Next: set `minMsi` from the first nightly score.
+- [x] Property tests: `test/unit/Helper/HelperPropertiesTest.php` (~400 generated inputs per helper). Found and
+      fixed: `parseDate()` returned `false` on "Unknown, 2026", `parseDateMDYReadable()` threw on it,
+      `stringIdFromUrl()` warned without a path. Known and kept: `JString::cleanse()` is not idempotent.
+- [ ] Exact-value assertions in the weakest test classes (lower value now that every class has a snapshot and
+      invariants; mostly documentation of intent).
 
 ### Open questions from the audit
 - The 6 lists with `hasNextPage=true` but `lastVisiblePage=1`: is `lastVisiblePage` meaningful there?

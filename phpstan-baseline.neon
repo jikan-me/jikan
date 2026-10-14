@@ -2125,18 +2125,6 @@ parameters:
 			path: src/Parser/User/Profile/LastUpdatesParser.php
 
 		-
-			message: '#^PHPDoc tag @var has invalid value \(\$progressed int\|null\)\: Unexpected token "\$progressed", expected type at offset 10 on line 1$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Parser/User/Profile/LastUpdatesParser.php
-
-		-
-			message: '#^PHPDoc tag @var has invalid value \(\$total int\|null\)\: Unexpected token "\$total", expected type at offset 10 on line 1$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Parser/User/Profile/LastUpdatesParser.php
-
-		-
 			message: '#^Method Jikan\\Parser\\User\\Profile\\MangaStatsParser\:\:getChaptersRead\(\) should return int\|null but returns string\.$#'
 			identifier: return.type
 			count: 1

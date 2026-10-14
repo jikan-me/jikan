@@ -36,20 +36,20 @@ class ParserTest extends TestCase
 
         $date = Parser::parseDate('Yesterday, 12:04 PM');
         self::assertInstanceOf(\DateTimeImmutable::class, $date);
-        self::assertEquals(1, (new \DateTimeImmutable())->setTime(23, 59)->diff($date)->d);
+        self::assertEquals(1, \Jikan\Helper\Time::now()->setTime(23, 59)->diff($date)->d);
         self::assertEquals('12:04', $date->format('H:i'));
 
         $date = Parser::parseDate('9 hours ago');
         self::assertInstanceOf(\DateTimeImmutable::class, $date);
-        self::assertEquals(0, (new \DateTimeImmutable())->diff($date)->d);
-        self::assertEquals(9, (new \DateTimeImmutable())->diff($date)->h);
-        self::assertEquals(0, (new \DateTimeImmutable())->diff($date)->i);
+        self::assertEquals(0, \Jikan\Helper\Time::now()->diff($date)->d);
+        self::assertEquals(9, \Jikan\Helper\Time::now()->diff($date)->h);
+        self::assertEquals(0, \Jikan\Helper\Time::now()->diff($date)->i);
 
         $date = Parser::parseDate('45 minutes ago');
         self::assertInstanceOf(\DateTimeImmutable::class, $date);
-        self::assertEquals(0, (new \DateTimeImmutable())->diff($date)->d);
-        self::assertEquals(0, (new \DateTimeImmutable())->diff($date)->h);
-        self::assertEquals(45, (new \DateTimeImmutable())->diff($date)->i);
+        self::assertEquals(0, \Jikan\Helper\Time::now()->diff($date)->d);
+        self::assertEquals(0, \Jikan\Helper\Time::now()->diff($date)->h);
+        self::assertEquals(45, \Jikan\Helper\Time::now()->diff($date)->i);
 
         $date = Parser::parseDate('?');
         self::assertNull($date);
@@ -64,7 +64,7 @@ class ParserTest extends TestCase
         self::assertSame('1963-12-21', Parser::parseDateDMY('21-12-63')->format('Y-m-d'));
 
         // Dates a few years ahead (announced titles) stay in this century, and the 1990s stay as they were.
-        $soon = (string) ((int) date('y') + 2);
+        $soon = (string) ((int) \Jikan\Helper\Time::now()->format('y') + 2);
         self::assertSame('20' . $soon, Parser::parseDateMDY("04-01-$soon")->format('Y'));
         self::assertSame('1998-04-03', Parser::parseDateMDY('04-03-98')->format('Y-m-d'));
     }

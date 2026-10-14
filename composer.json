@@ -28,6 +28,7 @@
         "php": "^8.4.4",
         "ext-json": "*",
         "symfony/browser-kit": "^8.0",
+        "symfony/clock": "^7.4 || ^8.0",
         "symfony/css-selector": "^8.0",
         "symfony/dom-crawler": "^7.4 || ^8.0",
         "symfony/http-client": "^8.0"

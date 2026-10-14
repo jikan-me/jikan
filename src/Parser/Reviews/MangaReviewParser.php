@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Reviews;
 
+use Jikan\Helper\Time;
 use Jikan\Exception\ParserException;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
@@ -120,7 +121,7 @@ class MangaReviewParser implements ParserInterface
         $node = $this->crawler->filterXPath('//div/div[2]/div[contains(@class, "update_at")]');
         $date = $node->text();
         $time = $node->attr('title');
-        return new \DateTimeImmutable("{$date} {$time}", new \DateTimeZone('UTC'));
+        return Time::parse("{$date} {$time}", new \DateTimeZone('UTC'));
     }
 
     /**

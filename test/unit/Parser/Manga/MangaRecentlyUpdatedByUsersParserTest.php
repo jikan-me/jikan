@@ -120,6 +120,6 @@ class MangaRecentlyUpdatedByUsersParserTest extends TestCase
     #[Test]
     public function it_builds_a_model_that_matches_its_snapshot(): void
     {
-        ModelSnapshot::assertMatches($this, $this->parser, true);
+        ModelSnapshot::assertMatches($this, $this->parser);
     }
 }

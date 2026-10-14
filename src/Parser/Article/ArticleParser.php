@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Article;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Article\ResourceArticle;
@@ -104,7 +105,7 @@ class ArticleParser implements ParserInterface
         }
 
         try {
-            return new \DateTimeImmutable($text, new \DateTimeZone('UTC'));
+            return Time::parse($text, new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;
         }

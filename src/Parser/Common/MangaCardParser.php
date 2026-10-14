@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Common;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\Constants;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
@@ -173,7 +174,7 @@ class MangaCardParser implements ParserInterface
         $date = $matches[2];
 
         try {
-            return new \DateTimeImmutable($date, new \DateTimeZone('JST'))
+            return Time::parse($date, new \DateTimeZone('JST'))
                 ->setTimezone(new \DateTimeZone('UTC'))
                 ->setTime(0, 0);
         } catch (\Exception $e) {

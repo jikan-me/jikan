@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Search;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
@@ -161,7 +162,7 @@ class AnimeSearchListItemParser
         if (null === $this->getEndDate()) {
             return true;
         }
-        $now = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
+        $now = Time::parse('now', new \DateTimeZone('UTC'));
         // Not yet started
         if ($this->getStartDate() > $now) {
             return false;

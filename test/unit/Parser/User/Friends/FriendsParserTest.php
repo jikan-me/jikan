@@ -62,14 +62,12 @@ class FriendsParserTest extends TestCase
     #[Test]
     public function it_builds_the_same_model_when_parsed_twice(): void
     {
-        // Relative dates ("5 minutes ago") resolve against the clock at parse time, so two
-        // parses differ by microseconds; allow a small delta instead of exact equality.
-        self::assertEqualsWithDelta($this->parser->getModel(), $this->parser->getModel(), 5.0);
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
     }
 
     #[Test]
     public function it_builds_a_model_that_matches_its_snapshot(): void
     {
-        ModelSnapshot::assertMatches($this, $this->parser->getModel(), true);
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

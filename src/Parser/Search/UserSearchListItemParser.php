@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Search;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\Constants;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
@@ -85,7 +86,7 @@ class UserSearchListItemParser
         );
 
         try {
-            return new \DateTimeImmutable(
+            return Time::parse(
                 $lastOnline,
                 new \DateTimeZone('UTC')
             );

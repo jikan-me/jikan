@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\History;
 
+use Jikan\Helper\Time;
 use Jikan\Exception\ParserException;
 use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
@@ -90,6 +91,6 @@ class HistoryItemParser implements ParserInterface
             )
         );
 
-        return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
+        return Time::parse($date, new \DateTimeZone('UTC'));
     }
 }

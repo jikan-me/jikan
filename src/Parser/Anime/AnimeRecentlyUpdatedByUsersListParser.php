@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model\Anime\AnimeRecentlyUpdatedByUser;
 use Jikan\Model\Common\UserMeta;
@@ -139,7 +140,7 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getDate(): \DateTimeImmutable
     {
-        return new \DateTimeImmutable(
+        return Time::parse(
             $this->crawler->filterXPath('//td[5]')->text(),
             new \DateTimeZone('UTC')
         );

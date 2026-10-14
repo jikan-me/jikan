@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Recommendations;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
@@ -82,7 +83,7 @@ class RecommendationListItemParser implements ParserInterface
         preg_match('~- (.*)$~', $date, $time);
 
         try {
-            return new \DateTimeImmutable(
+            return Time::parse(
                 $time[1],
                 new \DateTimeZone('UTC')
             );

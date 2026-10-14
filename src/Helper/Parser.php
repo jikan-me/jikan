@@ -106,7 +106,7 @@ class Parser
     public static function parseForumDate(string $date): ?\DateTimeImmutable
     {
         if (!preg_match('/\d{4}/', $date)) {
-            $date .= ', ' . date('Y');
+            $date .= ', ' . Time::now()->format('Y');
         }
 
         return self::parseDate($date);
@@ -132,7 +132,7 @@ class Parser
         }
 
         try {
-            return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
+            return Time::parse($date, new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;
         }
@@ -151,7 +151,7 @@ class Parser
 
         $dateArray = explode('-', $date);
 
-        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === date('y')) {
+        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === Time::now()->format('y')) {
             return null;
         }
 
@@ -175,7 +175,7 @@ class Parser
 
         $dateArray = explode('-', $date);
 
-        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === date('y')) {
+        if ($dateArray[0] === '??' && $dateArray[1] === '??' && $dateArray[2] === Time::now()->format('y')) {
             return null;
         }
 
@@ -192,7 +192,7 @@ class Parser
      */
     private static function pivotTwoDigitYear(\DateTimeImmutable $date): \DateTimeImmutable
     {
-        if ((int) $date->format('Y') > (int) date('Y') + 10) {
+        if ((int) $date->format('Y') > (int) Time::now()->format('Y') + 10) {
             return $date->modify('-100 years');
         }
 
@@ -210,13 +210,13 @@ class Parser
         $date = str_replace('  ', ' ', $date);
 
         if (preg_match('~[a-zA-z]+ \d+, \d{4}~', $date)) {
-            return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
+            return Time::parse($date, new \DateTimeZone('UTC'));
         }
 
         // Parses invalid dates without days, e.g: May, 1979
         // Converts it to May 01, 1979 otherwise DateTimeImmutable will use today's day
         if (preg_match('~^([a-zA-z]+), (\d{4})$~', $date, $matches)) {
-            return new \DateTimeImmutable("$matches[1] 01, $matches[2]", new \DateTimeZone('UTC'));
+            return Time::parse("$matches[1] 01, $matches[2]", new \DateTimeZone('UTC'));
         }
 
         return null;
@@ -230,7 +230,7 @@ class Parser
     {
         try {
             $malTimeZone = new \DateTimeZone('America/Los_Angeles'); //
-            $parsedDateTime = new \DateTimeImmutable($dateTime, $malTimeZone);
+            $parsedDateTime = Time::parse($dateTime, $malTimeZone);
             return $parsedDateTime->setTimezone(new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;

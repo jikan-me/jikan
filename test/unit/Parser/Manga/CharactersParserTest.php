@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Manga;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Manga\CharactersParser;
 use JikanTest\TestCase;
@@ -37,5 +38,17 @@ class CharactersParserTest extends TestCase
         self::assertContains('Wyald', $names);
         self::assertContains('Casca', $names);
         self::assertEquals('Main', $characters[0]->getRole());
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getCharacters(), $this->parser->getCharacters());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getCharacters());
     }
 }

@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Watch;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Watch\WatchEpisodesParser;
 use JikanTest\TestCase;
@@ -91,5 +92,17 @@ class WatchEpisodesParserTest extends TestCase
 
         self::assertNotNull($artwork);
         self::assertMatchesRegularExpression('~https://cdn\.myanimelist\.net/images/anime/.*~', $artwork);
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->parser->getModel(), $this->parser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->parser->getModel());
     }
 }

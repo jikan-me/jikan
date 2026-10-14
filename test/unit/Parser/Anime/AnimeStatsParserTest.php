@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Anime;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\Anime\AnimeStatsParser;
 use JikanTest\TestCase;
@@ -45,5 +46,17 @@ class AnimeStatsParserTest extends TestCase
             1326,
             $this->animeStatsParser->getScores()[10]->getVotes()
         );
+    }
+
+    #[Test]
+    public function it_builds_the_same_model_when_parsed_twice(): void
+    {
+        self::assertEquals($this->animeStatsParser->getModel(), $this->animeStatsParser->getModel());
+    }
+
+    #[Test]
+    public function it_builds_a_model_that_matches_its_snapshot(): void
+    {
+        ModelSnapshot::assertMatches($this, $this->animeStatsParser->getModel());
     }
 }

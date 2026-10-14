@@ -85,3 +85,45 @@ jobs:
           else
             ./vendor/bin/paratest
           fi
+
+  # Report-only: line coverage, recorded fixtures no test loads, and model fields no recorded page fills.
+  # It never fails the run; the numbers guide which page variants to record next.
+  coverage:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    continue-on-error: true
+    name: coverage and fixture reports
+    steps:
+      - name: Checkout changes
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+          extensions: ctype, curl, dom, iconv, json, libxml, mbstring, openssl, simplexml, tokenizer, xml, xmlwriter
+          coverage: pcov
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --no-scripts
+
+      - name: Fetch recorded fixtures from source
+        run: composer run-script link-fixtures
+
+      - name: Run tests with coverage
+        env:
+          JIKAN_FIXTURE_LOG: ${{ runner.temp }}/fixture-log.txt
+        run: ./vendor/bin/phpunit --coverage-text --only-summary-for-coverage-text --coverage-clover coverage.xml
+
+      - name: Report fixtures no test loads
+        run: php scripts/fixtures_unused.php --from-log=${{ runner.temp }}/fixture-log.txt
+
+      - name: Report model fields no recorded page fills
+        run: php scripts/field_witness.php
+
+      - name: Keep the coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-clover
+          path: coverage.xml

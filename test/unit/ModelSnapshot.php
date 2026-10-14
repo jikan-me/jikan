@@ -26,14 +26,23 @@ final class ModelSnapshot
 {
     private const DIR = __DIR__ . '/../../vendor/jikan-me/jikan-fixtures/snapshots';
 
-    public static function assertMatches(TestCase $test, mixed $model, bool $maskDates = false): void
+    /**
+     * @param string $name distinguishes several snapshots kept by one test class (<test class>.<name>.json)
+     */
+    public static function assertMatches(TestCase $test, mixed $model, bool $maskDates = false, string $name = ''): void
     {
+        // A snapshot proves the output did not change; the invariants check it is plausible.
+        ModelInvariants::assertHold($test, $model, $name);
+
         $actual = json_encode(
             self::dump($model, $maskDates, new \SplObjectStorage()),
             JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION | JSON_THROW_ON_ERROR
         ) . "\n";
 
         $relative = str_replace('\\', '/', substr($test::class, strlen('JikanTest\\')));
+        if ($name !== '') {
+            $relative .= '.' . $name;
+        }
         $file = self::DIR . '/' . $relative . '.json';
 
         if (getenv('JIKAN_UPDATE_SNAPSHOTS') === '1') {

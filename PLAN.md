@@ -119,6 +119,42 @@ Figures marked *estimate* come from reading the code, not from measurement.
 - `getMembers()` now throws when no member count is found; should it return 0 / null instead?
 - Snapshots add 7 MB to the repo. Acceptable, or keep them out of the repo?
 
+## Test suite plan (audit 2026-10-14)
+
+An audit found: almost every endpoint rests on ONE recorded page (no page 2, last page, zero-result search,
+unaired/adult/no-score variants); about half the model getters are never asserted; only 6 of 77 `MalClient`
+methods are called by tests; nothing checked that output is plausible, so invalid UTF-8, 2061 dates, empty
+strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtures were never loaded.
+
+### Phase 1, done in this branch
+- [x] `test/unit/ModelInvariants.php`, run by every snapshot test: valid UTF-8, JSON-encodable, no NBSP / edge
+      whitespace / empty strings / stray entities or tags, absolute URLs, positive ids, non-negative numbers,
+      score 0-10, years 1900..now+5, consistent pagination, and every public getter (incl. `__toString`) callable.
+      Known violations: `test/unit/__invariants__/` (11 empty-string, 6 pagination); may only shrink.
+- [x] Parse-twice and snapshot coverage for 28 more classes (search, stats, seasonal, watch, forum, pictures,
+      reviews, recommendations, user clubs/history, username lookup): 88 snapshots in total.
+- [x] Bugs it found, fixed: two-digit years read as 20xx (1961 -> 2061, also breaks `isAiring`);
+      `Friend::getFriendsSince()` threw `TypeError` on no date; PHP 8.4.0-8.4.3 HTML5 UTF-8 corruption
+      (php-src GH-17481) -> PHP floor `^8.4.4`.
+- [x] 80 dead fixtures deleted, `.gitattributes` in jikan-fixtures, fixture callback no longer creates dirs
+      under vendor/, `JIKAN_FIXTURE_LOG` + `scripts/fixtures_unused.php`.
+- [x] Report-only CI job: pcov line coverage, unused fixtures, `scripts/field_witness.php` (38 model fields no
+      recorded page ever fills).
+
+### Phase 2 (decided, not started)
+- `symfony/clock`, frozen at each fixture's recording time in tests; removes all date masking (14 classes).
+- Fixture format with HTTP status + recording time (404 / error paths become testable).
+- One data-driven corpus test over every endpoint x every recorded variant through `MalClient`.
+- `scripts/record_variant.php --live`: one-off recording of ~70 variant pages, >= 3.5 s apart, GET only.
+
+### Phase 3 (proposed)
+- Infection mutation testing on `src/Parser` + `src/Helper` (nightly), synthetic missing-field variants,
+  helper property tests, exact-value assertions in the weakest classes.
+
+### Open questions from the audit
+- The 6 lists with `hasNextPage=true` but `lastVisiblePage=1`: is `lastVisiblePage` meaningful there?
+- The 38 never-filled fields: MAL removals or parser bugs (e.g. `AnimeCard::type`, `MangaCard::authors`)?
+
 ## 2. Explicitly not doing
 
 - Concurrency / batching; built-in throttle; replacing DomCrawler; lazy hydration; selector DSL/config files;

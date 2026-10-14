@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\Search;
 
+use JikanTest\ModelSnapshot;
 use Jikan\Model\Search\AnimeSearch;
 use Jikan\MyAnimeList\MalClient;
 use Jikan\Request\Search\AnimeSearchRequest;
@@ -19,6 +20,7 @@ class AnimeSearchEpisodeTest extends TestCase
     {
         $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getAnimeSearch(new AnimeSearchRequest('Ijimekko Ookami to Nana-chan'));
+        ModelSnapshot::assertMatches($this, $this->search, false, $this->name());
         $anime = $this->search->getResults()[0];
         self::assertEquals('Ijimekko Ookami to Nana-chan', $anime->getTitle());
         self::assertFalse($anime->isAiring());
@@ -29,6 +31,7 @@ class AnimeSearchEpisodeTest extends TestCase
     {
         $jikan = new MalClient($this->httpClient);
         $this->search = $jikan->getAnimeSearch(new AnimeSearchRequest('Bloody Bunny'));
+        ModelSnapshot::assertMatches($this, $this->search, false, $this->name());
         $anime = $this->search->getResults()[0];
         self::assertEquals('Bloody Bunny', $anime->getTitle());
         self::assertTrue($anime->isAiring());

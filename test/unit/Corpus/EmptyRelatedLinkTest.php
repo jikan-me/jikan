@@ -73,7 +73,8 @@ class EmptyRelatedLinkTest extends TestCase
 
     private static function emptyLink(\DOMElement $row): \DOMElement
     {
-        $link = $row->ownerDocument->createElement('a');
+        // Whitespace only, as MyAnimeList's markup often indents inside the tag: still empty.
+        $link = $row->ownerDocument->createElement('a', "\n    ");
         $link->setAttribute('href', 'https://myanimelist.net/anime/99999999/Removed');
 
         return $link;

@@ -89,7 +89,7 @@ class LastUpdatesParser
 
                 // "Completed 148/148", "Watching 623/?" (total not known yet), "On-Hold -/355" (none read yet),
                 // or just the status: "Plan to Watch".
-                if (preg_match('~^(.*?)\s*(\d+|-)\s*/\s*(\d+|\?)$~', $status, $progress)) {
+                if (preg_match('~(.*?)\s*(\d+|-)\s*/\s*(\d+|\?)~', $status, $progress)) {
                     $status = $progress[1];
                     $progressed = $progress[2] === '-' ? 0 : (int) $progress[2];
                     $total = $progress[3] === '?' ? null : (int) $progress[3];

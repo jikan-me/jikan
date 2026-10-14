@@ -761,7 +761,7 @@ class AnimeParser implements ParserInterface
                     $links = $c->filterXPath('//div[@class="content"]/div[@class="title"]/a');
 
                     $related[$relation] ??= [];
-                    array_push($related[$relation], ...array_slice(MalUrlParser::fromLinks($links), 0, 1));
+                    array_push($related[$relation], ...MalUrlParser::fromLinks($links));
                 }
             );
 

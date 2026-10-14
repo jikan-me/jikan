@@ -132,6 +132,7 @@ which changes a consumer can see.
 - `Profile::getAbout()` returns `null` instead of `""` when the user wrote nothing.
 - A user profile's last anime and manga updates keep the episode or chapter count when the total is not known yet ("Reading 92/?"). It used to be `null`, because the progress was only read when both numbers were present.
 - `getAnime()` and `getManga()` no longer fail when a page has no "Aired:" or "Published:" row. `getAired()`/`getPublished()` return an empty range, both dates `null`, which is what MyAnimeList shows as "Not available".
+- `Helper\Parser::parseDate()` returns `null` instead of failing with a `TypeError` on text such as "Unknown, 2026". `parseDateMDYReadable()` returns `null` instead of throwing on the same text, and `stringIdFromUrl()` no longer warns on a URL without a path.
 
 ---
 

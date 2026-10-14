@@ -71,7 +71,7 @@ class Parser
      */
     public static function stringIdFromUrl(string $url): string
     {
-        $urlParts = explode("/", parse_url($url)['path']);
+        $urlParts = explode("/", parse_url($url)['path'] ?? '');
         return $urlParts[array_key_last($urlParts)];
     }
 
@@ -124,11 +124,15 @@ class Parser
         }
 
         if (preg_match('/(\w{3}), (\d{4})/', $date, $matches)) {
-            return \DateTimeImmutable::createFromFormat(
+            $monthYear = \DateTimeImmutable::createFromFormat(
                 '!M d, Y',
                 "{$matches[1]} 01, {$matches[2]}",
                 new \DateTimeZone('UTC')
             );
+            // "Unknown, 2026" also matches the pattern but is no month: fall through instead of returning false
+            if ($monthYear !== false) {
+                return $monthYear;
+            }
         }
 
         try {
@@ -233,14 +237,19 @@ class Parser
     {
         $date = str_replace('  ', ' ', $date);
 
-        if (preg_match('~[a-zA-z]+ \d+, \d{4}~', $date)) {
-            return Time::parse($date, new \DateTimeZone('UTC'));
-        }
+        try {
+            if (preg_match('~[a-zA-z]+ \d+, \d{4}~', $date)) {
+                return Time::parse($date, new \DateTimeZone('UTC'));
+            }
 
-        // Parses invalid dates without days, e.g: May, 1979
-        // Converts it to May 01, 1979 otherwise DateTimeImmutable will use today's day
-        if (preg_match('~^([a-zA-z]+), (\d{4})$~', $date, $matches)) {
-            return Time::parse("$matches[1] 01, $matches[2]", new \DateTimeZone('UTC'));
+            // Parses invalid dates without days, e.g: May, 1979
+            // Converts it to May 01, 1979 otherwise DateTimeImmutable will use today's day
+            if (preg_match('~^([a-zA-z]+), (\d{4})$~', $date, $matches)) {
+                return Time::parse("$matches[1] 01, $matches[2]", new \DateTimeZone('UTC'));
+            }
+        } catch (\Exception) {
+            // shaped like a date but not one ("Unknown, 2026")
+            return null;
         }
 
         return null;

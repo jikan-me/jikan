@@ -354,11 +354,15 @@ class MalClient
      */
     public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-
-        //        if ($this->httpClientWrapper->getInternalResponse()->getStatusCode()) {
-        //            return Model\Search\AnimeSearch::mock();
-        //        }
+        // MAL answers a search with no matches with a 404 page
+        try {
+            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        } catch (BadResponseException $e) {
+            if ($e->getCode() === 404) {
+                return Model\Search\AnimeSearch::mock();
+            }
+            throw $e;
+        }
 
         try {
             $parser = new Parser\Search\AnimeSearchParser($crawler);
@@ -390,7 +394,15 @@ class MalClient
      */
     public function getMangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
-        return $this->parse($request, Parser\Search\MangaSearchParser::class);
+        // MAL answers a search with no matches with a 404 page
+        try {
+            return $this->parse($request, Parser\Search\MangaSearchParser::class);
+        } catch (BadResponseException $e) {
+            if ($e->getCode() === 404) {
+                return Model\Search\MangaSearch::mock();
+            }
+            throw $e;
+        }
     }
 
     /**
@@ -408,6 +420,7 @@ class MalClient
             if ($e->getCode() === 404) {
                 return Model\Search\CharacterSearch::mock();
             }
+            throw $e;
         }
 
         try {
@@ -433,6 +446,7 @@ class MalClient
             if ($e->getCode() === 404) {
                 return Model\Search\PersonSearch::mock();
             }
+            throw $e;
         }
 
         try {

@@ -54,6 +54,11 @@ class PersonSearchParser
             return [];
         }
 
+        // a query with no matches renders a single "No results returned" row instead of result rows
+        if ($this->crawler->filterXPath('//div[@id="content"]//*[contains(text(), "No results returned")]')->count()) {
+            return [];
+        }
+
         if ($this->crawler->filterXPath('//div[@id="contentWrapper"]/div[1]/div[@class="h1 edit-info"]')->count()) {
             return $this->crawler
                 ->each(

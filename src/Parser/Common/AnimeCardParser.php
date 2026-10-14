@@ -378,34 +378,6 @@ class AnimeCardParser implements ParserInterface
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    public function getLicensors(): array
-    {
-        // this information is no longer available
-        return [];
-        // if anyone can fix this spaghetti code, most welcome
-        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
-
-        $malUrl = [];
-
-        $node->each(function (Crawler $c) use (&$malUrl) {
-            $node = $c->filterXPath('//span');
-
-            if (str_contains($node->text(), "Licensor")) {
-                $node->nextAll()->filterXPath('//a')
-                    ->each(function (Crawler $c) use (&$malUrl) {
-                        $malUrl[] = $c->text();
-                    });
-            }
-        });
-
-        return $malUrl;
-    }
-
-    /**
-     * @return string[]
-     * @throws \InvalidArgumentException
-     * @throws \RuntimeException
-     */
     public function getThemes(): array
     {
         $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]/div[contains(@class, "properties")]/div[3]/span');

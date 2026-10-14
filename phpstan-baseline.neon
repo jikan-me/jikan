@@ -1495,12 +1495,6 @@ parameters:
 			path: src/Parser/Common/AnimeCardParser.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Parser/Common/AnimeCardParser.php
-
-		-
 			message: '#^Variable \$score might not be defined\.$#'
 			identifier: variable.undefined
 			count: 1

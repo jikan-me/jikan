@@ -94,6 +94,7 @@ which changes a consumer can see.
 ## Unreleased
 
 ### Breaking
+- **`AnimeCard::getLicensors()` is removed**, and so `SeasonalAnime::getLicensors()` too — **you must** stop calling it. Anime cards on genre, producer and seasonal lists no longer show licensors on MyAnimeList, and the method has returned an empty list since. Licensors are still on the anime itself: `Anime::getLicensors()` from `getAnime()`.
 - **PHP floor raised to 8.4.4** — **you must** run PHP 8.4.4 or later; Composer no longer installs on 8.4.0–8.4.3. Those patch levels have a bug in PHP's own HTML5 parser (`Dom\HTMLDocument`, php-src GH-17481) that corrupts some 4-byte characters (emoji, rare scripts) depending on where they fall in the page, so a parsed field can contain invalid UTF-8 and `json_encode()` fails on the model. Seen on a real MyAnimeList manga review.
 
 ### Added

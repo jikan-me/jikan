@@ -142,12 +142,6 @@ class SeasonalAnimeParserTest extends TestCase
     }
 
     #[Test]
-    public function it_gets_the_anime_licensor()
-    {
-        self::assertCount(0, $this->parser->getLicensors());
-    }
-
-    #[Test]
     public function it_gets_the_r18_rating()
     {
         self::assertFalse($this->parser->isR18());

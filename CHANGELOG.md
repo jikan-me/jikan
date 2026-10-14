@@ -131,6 +131,7 @@ which changes a consumer can see.
 - Top characters and top people fill `getNameKanji()`, for example "ルルーシュ・ランペルージ". It was always `null` because the name moved to a `div`.
 - `Profile::getAbout()` returns `null` instead of `""` when the user wrote nothing.
 - A user profile's last anime and manga updates keep the episode or chapter count when the total is not known yet ("Reading 92/?"). It used to be `null`, because the progress was only read when both numbers were present.
+- `getAnime()` and `getManga()` no longer fail when a page has no "Aired:" or "Published:" row. `getAired()`/`getPublished()` return an empty range, both dates `null`, which is what MyAnimeList shows as "Not available".
 
 ---
 

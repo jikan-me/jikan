@@ -38,7 +38,7 @@ class MalUrlParser
     {
         $urls = [];
         foreach ($links as $link) {
-            if (trim($link->textContent) !== '') {
+            if (JString::cleanse($link->textContent) !== '') {
                 $urls[] = new self(new Crawler($link, $links->getUri()))->getModel();
             }
         }

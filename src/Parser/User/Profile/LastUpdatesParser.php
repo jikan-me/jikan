@@ -93,10 +93,11 @@ class LastUpdatesParser
                 if ($progressedTotalSeparatorIndex != false) {
                     $totalUnparsed = trim(substr($progressTypeValueUnparsed, $progressedTotalSeparatorIndex + 1));
 
-                    preg_match('~(\d+)\/(\d+)~', $progressTypeValueUnparsed, $progress);
+                    // "92/?" while the total is not known yet: keep the progress, total stays null
+                    preg_match('~(\d+)\s*/\s*(\d+|\?)~', $progressTypeValueUnparsed, $progress);
 
-                    $progressed = $progress[1] ?? null;
-                    $total = $progress[2] ?? null;
+                    $progressed = isset($progress[1]) ? (int) $progress[1] : null;
+                    $total = isset($progress[2]) && $progress[2] !== '?' ? (int) $progress[2] : null;
 
                     preg_match('~([a-zA-Z\s\-]+)~', $progressTypeValueUnparsed, $status);
                     $status = $status[1] ?? null;

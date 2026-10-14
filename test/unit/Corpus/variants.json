@@ -97,5 +97,9 @@
   {"id": "user-reviews-datrandomdude", "method": "getUserReviews", "request": "User\\UserReviewsRequest", "args": ["DatRandomDude", 1]},
   {"id": "user-search-irfan", "method": "getUserSearch", "request": "Search\\UserSearchRequest", "args": ["irfan", 1]},
   {"id": "user-search-zero", "method": "getUserSearch", "request": "Search\\UserSearchRequest", "args": ["zzqxjjvkqzzqxjjvk", 1], "tags": ["zero-results"]},
-  {"id": "username-by-id-144050", "method": "getUsernameById", "request": "User\\UsernameByIdRequest", "args": [144050]}
+  {"id": "username-by-id-144050", "method": "getUsernameById", "request": "User\\UsernameByIdRequest", "args": [144050]},
+  {"id": "anime-11617", "method": "getAnime", "request": "Anime\\AnimeRequest", "args": [11617], "tags": ["explicit-genres"]},
+  {"id": "anime-episodes-20-p1", "method": "getAnimeEpisodes", "request": "Anime\\AnimeEpisodesRequest", "args": [20, 1], "tags": ["filler", "recap"]},
+  {"id": "anime-videos-47917", "method": "getAnimeVideos", "request": "Anime\\AnimeVideosRequest", "args": [47917], "tags": ["music-videos"]},
+  {"id": "user-profile-xinil", "method": "getUserProfile", "request": "User\\UserProfileRequest", "args": ["Xinil"], "tags": ["birthday", "manga-updates"]}
 ]

@@ -130,6 +130,7 @@ which changes a consumer can see.
 - Anime and manga cards (genre, producer, magazine and seasonal lists) fill `getType()` again, for example "TV" or "Manga". Seasonal cards take it from their section header. Manga cards fill `getAuthors()` and `getSerialization()`. All three had been stubbed to `null`/empty after an earlier layout change, and MyAnimeList shows them again.
 - Top characters and top people fill `getNameKanji()`, for example "ルルーシュ・ランペルージ". It was always `null` because the name moved to a `div`.
 - `Profile::getAbout()` returns `null` instead of `""` when the user wrote nothing.
+- A user profile's last anime and manga updates keep the episode or chapter count when the total is not known yet ("Reading 92/?"). It used to be `null`, because the progress was only read when both numbers were present.
 
 ---
 

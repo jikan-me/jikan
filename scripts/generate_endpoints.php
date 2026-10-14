@@ -265,7 +265,10 @@ function parser_ref(?string $fq)    : ?array
 }
 function test_ref(array $tests, string $parser) : ?array
 {
-    $hit = $tests[$parser][0] ?? null;
+    // Prefer the parser's own test over the corpus tests (test/unit/Corpus), which sort first and touch many parsers.
+    $hits = $tests[$parser] ?? [];
+    $own = array_values(array_filter($hits, static fn (array $h): bool => !str_starts_with($h[0], 'JikanTest\\Corpus\\')));
+    $hit = $own[0] ?? $hits[0] ?? null;
     return $hit ? ['class' => $hit[0], 'file' => $hit[1]] : null;
 }
 function parameters(string $signature) : array

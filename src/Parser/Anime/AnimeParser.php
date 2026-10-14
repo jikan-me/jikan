@@ -760,22 +760,8 @@ class AnimeParser implements ParserInterface
 
                     $links = $c->filterXPath('//div[@class="content"]/div[@class="title"]/a');
 
-                    // Check for empty links #justMALThings
-                    if ($links->count() === 1 // if it's the only link MAL has listed
-                        && empty($links->first()->text()) // and if its a bugged/empty link
-                    ) {
-                        $related[$relation] = [];
-                        return;
-                    }
-
-                    // Remove empty/bugged links #justMALThings
-                    foreach ($links as $node) {
-                        if (empty($node->textContent)) {
-                            $node->parentNode->removeChild($node);
-                        }
-                    }
-
-                    $related[$relation][] = new MalUrlParser($links)->getModel();
+                    $related[$relation] ??= [];
+                    array_push($related[$relation], ...MalUrlParser::fromLinks($links));
                 }
             );
 
@@ -789,25 +775,7 @@ class AnimeParser implements ParserInterface
                         str_replace(':', '', $c->filterXPath('//td[1]')->text())
                     );
 
-                    if ($links->count() === 1 // if it's the only link MAL has listed
-                        && empty($links->first()->text()) // and if its a bugged/empty link
-                    ) {
-                        $related[$relation] = [];
-                        return;
-                    }
-
-                    // Remove empty/bugged links #justMALThings
-                    foreach ($links as $node) {
-                        if (empty($node->textContent)) {
-                            $node->parentNode->removeChild($node);
-                        }
-                    }
-
-                    $related[$relation] = $links->each(
-                        function (Crawler $c) {
-                            return new MalUrlParser($c)->getModel();
-                        }
-                    );
+                    $related[$relation] = MalUrlParser::fromLinks($links);
                 }
             );
 

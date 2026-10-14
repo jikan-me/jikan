@@ -3,6 +3,7 @@
 namespace JikanTest\Corpus;
 
 use Jikan\Request\RequestInterface;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * The variant corpus: one entry per MyAnimeList page worth testing, run end-to-end through MalClient.
@@ -34,6 +35,31 @@ final class Variants
         $class = 'Jikan\\Request\\' . $variant['request'];
 
         return new $class(...$variant['args']);
+    }
+
+    /**
+     * @return array{string, string} a variant's recorded page: its URL and HTML
+     */
+    public static function page(string $id): array
+    {
+        foreach (self::all() as $variant) {
+            if ($variant['id'] === $id) {
+                $url = self::request($variant)->getPath();
+
+                return [$url, (string) file_get_contents(self::PAGES . '/' . self::key('GET', $url) . '.html')];
+            }
+        }
+        throw new \RuntimeException("No corpus variant $id");
+    }
+
+    /** A variant's recorded page, parsed. */
+    public static function crawler(string $id): Crawler
+    {
+        [$url, $html] = self::page($id);
+        $crawler = new Crawler(null, $url);
+        $crawler->addHtmlContent($html);
+
+        return $crawler;
     }
 
     /** The recording key: the same hash the per-test fixtures use, so a page is addressed by method + URL. */

@@ -128,14 +128,7 @@ class MissingFieldTest extends TestCase
      */
     private static function page(string $id): array
     {
-        foreach (Variants::all() as $variant) {
-            if ($variant['id'] === $id) {
-                $url = Variants::request($variant)->getPath();
-
-                return [$url, (string) file_get_contents(Variants::PAGES . '/' . Variants::key('GET', $url) . '.html')];
-            }
-        }
-        throw new \RuntimeException("No corpus variant $id");
+        return Variants::page($id);
     }
 
     /**

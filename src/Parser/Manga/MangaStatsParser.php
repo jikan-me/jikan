@@ -188,7 +188,7 @@ class MangaStatsParser implements ParserInterface
 
         for ($i = 1; $i <= 10; $i++) {
             if (!array_key_exists($i, $scores)) {
-                $scores[$i] = MangaStatsScore::setProperties(0, 0, 0);
+                $scores[$i] = MangaStatsScore::setProperties($i, 0, 0);
             }
         }
 

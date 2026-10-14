@@ -1,24 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Offset 1 on array\{non\-falsy\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string\} on left side of \?\? always exists and is not nullable\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: src/Helper/Parser.php
-
-		-
-			message: '#^Offset 2 on array\{non\-falsy\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string\} on left side of \?\? always exists and is not nullable\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: src/Helper/Parser.php
-
-		-
-			message: '#^Offset 3 on array\{non\-falsy\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string, non\-falsy\-string&numeric\-string\} on left side of \?\? always exists and is not nullable\.$#'
-			identifier: nullCoalesce.offset
-			count: 1
-			path: src/Helper/Parser.php
-
-		-
 			message: '#^PHPDoc tag @param has invalid value \(string\)\: Unexpected token "\\n     \*", expected variable at offset 24 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 2
@@ -2140,18 +2122,6 @@ parameters:
 			message: '#^PHPDoc tag @var has invalid value \(\$baseLastUpdate BaseLastUpdate\)\: Unexpected token "\$baseLastUpdate", expected type at offset 20 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 2
-			path: src/Parser/User/Profile/LastUpdatesParser.php
-
-		-
-			message: '#^PHPDoc tag @var has invalid value \(\$progressed int\|null\)\: Unexpected token "\$progressed", expected type at offset 10 on line 1$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/Parser/User/Profile/LastUpdatesParser.php
-
-		-
-			message: '#^PHPDoc tag @var has invalid value \(\$total int\|null\)\: Unexpected token "\$total", expected type at offset 10 on line 1$#'
-			identifier: phpDoc.parseError
-			count: 1
 			path: src/Parser/User/Profile/LastUpdatesParser.php
 
 		-

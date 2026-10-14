@@ -29,6 +29,24 @@ class MalUrlParser
     }
 
     /**
+     * The entries behind a list of related-entry links. MyAnimeList sometimes lists an entry as an empty link
+     * (<a href="..."></a>, for example a removed entry); those are not entries and are skipped.
+     *
+     * @return list<MalUrl>
+     */
+    public static function fromLinks(Crawler $links): array
+    {
+        $urls = [];
+        foreach ($links as $link) {
+            if (JString::cleanse($link->textContent) !== '') {
+                $urls[] = new self(new Crawler($link, $links->getUri()))->getModel();
+            }
+        }
+
+        return $urls;
+    }
+
+    /**
      * @param string $url
      *
      * @return int|string

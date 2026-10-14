@@ -174,9 +174,6 @@ class UserProfileParser
      */
     public function getAnimeStats(): AnimeStats
     {
-        $this->crawler
-            ->filterXPath('//div[@class=\'stats anime\']');
-
         return new AnimeStatsParser($this->crawler)->getModel();
     }
 
@@ -186,9 +183,6 @@ class UserProfileParser
      */
     public function getMangaStats(): MangaStats
     {
-        $this->crawler
-            ->filterXPath('//div[@class=\'stats anime\']');
-
         return new MangaStatsParser($this->crawler)->getModel();
     }
 

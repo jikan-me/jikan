@@ -83,33 +83,18 @@ class LastUpdatesParser
                 $text = $progressScoreDiv->text();
                 $scoreUnparsed = trim(substr($text, strpos($text, 'Scored') + strlen('Scored')));
                 $score = ctype_digit($scoreUnparsed) ? intval($scoreUnparsed) : 0;
-                $progressTypeValueUnparsed = explode('·', $text)[0];
-                /** @var  $total int|null */
-                $total = null;
-                /** @var  $progressed int|null */
+                $status = JString::cleanse(explode('·', $text)[0]);
                 $progressed = null;
+                $total = null;
 
-                $progressedTotalSeparatorIndex = strpos($progressTypeValueUnparsed, '/');
-                if ($progressedTotalSeparatorIndex != false) {
-                    $totalUnparsed = trim(substr($progressTypeValueUnparsed, $progressedTotalSeparatorIndex + 1));
-
-                    // "92/?" while the total is not known yet: keep the progress, total stays null
-                    preg_match('~(\d+)\s*/\s*(\d+|\?)~', $progressTypeValueUnparsed, $progress);
-
-                    $progressed = isset($progress[1]) ? (int) $progress[1] : null;
-                    $total = isset($progress[2]) && $progress[2] !== '?' ? (int) $progress[2] : null;
-
-                    preg_match('~([a-zA-Z\s\-]+)~', $progressTypeValueUnparsed, $status);
-                    $status = $status[1] ?? null;
-
-                    if ($status !== null) {
-                        $status = JString::cleanse($status);
-                    }
-
-                    return new BaseLastUpdate($url, $title, $imageUrl, $progressed, $total, $status, $score, $date);
+                // "Completed 148/148", "Watching 623/?" (total not known yet), "On-Hold -/355" (none read yet),
+                // or just the status: "Plan to Watch".
+                if (preg_match('~(.*?)\s*(\d+|-)\s*/\s*(\d+|\?)~', $status, $progress)) {
+                    $status = $progress[1];
+                    $progressed = $progress[2] === '-' ? 0 : (int) $progress[2];
+                    $total = $progress[3] === '?' ? null : (int) $progress[3];
                 }
-                $progressTypeValueUnparsed = str_replace(" -", "", $progressTypeValueUnparsed);
-                $status = trim($progressTypeValueUnparsed);
+
                 return new BaseLastUpdate($url, $title, $imageUrl, $progressed, $total, $status, $score, $date);
             });
     }

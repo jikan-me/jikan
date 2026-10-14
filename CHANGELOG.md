@@ -108,6 +108,10 @@ which changes a consumer can see.
 - `Jikan\Model\User\Friend::getFriendsSince()` returns `?\DateTimeImmutable`: `null` when MyAnimeList shows no "Friends since" date. It used to declare a non-null date and throw a `TypeError` in that case.
 
 ### Fixed
+- `getUserProfile()` last updates with nothing read or watched yet ("On-Hold -/355" on MyAnimeList) now give status `"On-Hold"`, progress `0` and total `355`. They gave status `"On-Hold -"` with progress and total `null`.
+- Related entries (`getAnime()`, `getManga()`, `getNews()`, `getArticle()`) no longer include MyAnimeList's empty links (`<a href="..."></a>`, for example a removed entry) as entries with an empty name. The code meant to skip them removed them from the page after the list of links had already been read, so they were kept.
+- `getMangaStats()` scores: a score nobody voted for (MyAnimeList leaves its row out) is filled in with 0 votes, but its `getScore()` returned `0` instead of the score itself. The 1–10 keys were right. Anime stats were not affected.
+- `ResourceArticle::getRelatedEntries()` from `getArticle()` returns the article's "Related Database Entries" (anime and manga links grouped by type). It always returned an empty list, because the HTML5 parser puts table rows inside `<tbody>` and the lookup didn't expect it.
 - Reading `getSmallImageUrl()`/`getLargeImageUrl()`/WebP image URLs on an entity whose image is a MyAnimeList placeholder (normalized to `null`) no longer throws "typed property must not be accessed before initialization" — those getters now return `null`, matching the `?string` image contract (jikan#488).
 - Anime/manga detail pages with no cover no longer surface the MAL site icon (`og:image` → `/img/sp/icon/apple-touch-icon-256.png`) as the entity's image — it is now treated as a placeholder and resolved to `null` (jikan#488).
 - `Jikan\Model\Watch\EpisodeListItem::getEpisodes()` returns the aired episode links as an array — every call previously threw a `TypeError` because the declared return type was `RecentEpisodeListItem`.

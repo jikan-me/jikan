@@ -19,6 +19,22 @@ use Symfony\Component\DomCrawler\Crawler;
 class AnimeCardParser implements ParserInterface
 {
     /**
+     * Every card carries its type as a "js-anime-type-N" class, numbered like MyAnimeList's search filter
+     * (Constants::SEARCH_ANIME_*); 0 is unknown. Labels as MyAnimeList prints them on the card.
+     */
+    private const TYPES = [
+        Constants::SEARCH_ANIME_TV => 'TV',
+        Constants::SEARCH_ANIME_OVA => 'OVA',
+        Constants::SEARCH_ANIME_MOVIE => 'Movie',
+        Constants::SEARCH_ANIME_SPECIAL => 'Special',
+        Constants::SEARCH_ANIME_ONA => 'ONA',
+        Constants::SEARCH_ANIME_MUSIC => 'Music',
+        Constants::SEARCH_ANIME_CM => 'CM',
+        Constants::SEARCH_ANIME_PV => 'PV',
+        Constants::SEARCH_ANIME_TV_SPECIAL => 'TV Special',
+    ];
+
+    /**
      * @var Crawler
      */
     private $crawler;
@@ -200,6 +216,12 @@ class AnimeCardParser implements ParserInterface
      */
     public function getType(): ?string
     {
+        // Every card carries its type as a class. It is also the most precise source: seasonal pages file
+        // "TV Special" cards under their "Special" section.
+        if (preg_match('~(?:^|\s)js-anime-type-([1-9])(?:\s|$)~', $this->crawler->attr('class') ?? '', $m)) {
+            return self::TYPES[$m[1]];
+        }
+
         // genre/producer cards: the info line starts with "<type>, <year>", e.g. "TV, 2013"
         $info = $this->crawler->filterXPath('//div[contains(@class, "info")]/span[contains(@class, "item")][1]');
         if ($info->count() && preg_match('/^\s*([A-Za-z][A-Za-z .\-]*?)\s*,/', $info->text(), $m)) {
@@ -230,18 +252,29 @@ class AnimeCardParser implements ParserInterface
      */
     public function getAirDates(): ?\DateTimeImmutable
     {
+        // Every card carries the start date as "YYYYMMDD", with 00 for what is not known yet ("20270000",
+        // "20271000"; "00000000" when nothing is). Genre and producer cards show no full date otherwise.
+        $start = $this->crawler->filter('.js-start_date');
+        if ($start->count() && preg_match('~(\d{4})(\d{2})(\d{2})~', $start->text(), $m)) {
+            if ($m[1] === '0000') {
+                return null;
+            }
+
+            return self::japanMidnight($m[1], $m[2] === '00' ? '01' : $m[2], $m[3] === '00' ? '01' : $m[3]);
+        }
+
         $node = $this->crawler->filterXPath('//div/div[2]/div[2]/span[contains(@class, "item")][1]');
 
         if (!$node->count()) {
-            // this information is no longer available on the producer page
             return null;
         }
 
-        $date = str_replace(
-            '(JST)',
-            '',
-            JString::cleanse($node->text())
-        );
+        $date = JString::cleanse(str_replace('(JST)', '', $node->text()));
+
+        // A bare year ("2027") would otherwise be read as the time 20:27 today.
+        if (preg_match('~^\d{4}$~', $date)) {
+            return self::japanMidnight($date, '01', '01');
+        }
 
         try {
             return Time::parse($date, new \DateTimeZone('JST'))
@@ -249,6 +282,14 @@ class AnimeCardParser implements ParserInterface
         } catch (\Exception $e) {
             return null;
         }
+    }
+
+    /** Midnight in Japan on the given day, in UTC, as the visible dates on cards are read. */
+    private static function japanMidnight(string $year, string $month, string $day): ?\DateTimeImmutable
+    {
+        $date = \DateTimeImmutable::createFromFormat('!Y-m-d', "$year-$month-$day", new \DateTimeZone('JST'));
+
+        return $date === false ? null : $date->setTimezone(new \DateTimeZone('UTC'));
     }
 
     /**

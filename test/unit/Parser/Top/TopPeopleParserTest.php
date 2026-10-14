@@ -64,9 +64,7 @@ class TopPeopleParserTest extends TestCase
     #[Test]
     public function it_gets_the_kanji_name()
     {
-        self::assertNull(
-            $this->parser->getKanjiName()
-        );
+        self::assertSame('尾田 栄一郎', $this->parser->getKanjiName());
     }
 
     #[Test]

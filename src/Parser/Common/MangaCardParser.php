@@ -70,8 +70,7 @@ class MangaCardParser implements ParserInterface
      */
     public function getAuthor(): array
     {
-        return $this->crawler
-            ->filterXPath('//span[contains(@class, "producer")]/a')
+        return $this->property('Authors')
             ->each(
                 function (Crawler $crawler) {
                     return new MalUrlParser($crawler)->getModel();
@@ -112,9 +111,13 @@ class MangaCardParser implements ParserInterface
      */
     public function getType(): ?string
     {
-        // This information is no longer available
-        return null;
-        return JString::cleanse($this->crawler->filterXPath('//span[contains(@class, "source")]')->text());
+        // the info line starts with "<type>, <year>", e.g. "Manga, 1989"
+        $info = $this->crawler->filterXPath('//div[contains(@class, "info")]/span[contains(@class, "item")][1]');
+        if (!$info->count() || !preg_match('/^\s*([A-Za-z][A-Za-z .\-]*?)\s*,/', $info->text(), $m)) {
+            return null;
+        }
+
+        return $m[1];
     }
 
     /**
@@ -277,23 +280,20 @@ class MangaCardParser implements ParserInterface
      */
     public function getSerialization(): ?array
     {
-        // if anyone can fix this spaghetti code, most welcome
-        $node = $this->crawler->filterXPath('//div[contains(@class, "synopsis")]//p[contains(@class, "mb4 mt8")]');
+        return $this->property('Serialization')->each(
+            static fn(Crawler $link): string => JString::cleanse($link->text())
+        );
+    }
 
-        $malUrl = [];
-
-        $node->each(function (Crawler $c) use (&$malUrl) {
-            $node = $c->filterXPath('//span');
-
-            if (str_contains($node->text(), "Serialization")) {
-                $node->nextAll()->filterXPath('//a')
-                    ->each(function (Crawler $c) use (&$malUrl) {
-                        $malUrl[] = $c->text();
-                    });
-            }
-        });
-
-        return $malUrl;
+    /**
+     * Links of one entry in the card's `div.properties` block, found by its caption ("Authors", "Serialization").
+     */
+    private function property(string $caption): Crawler
+    {
+        return $this->crawler->filterXPath(sprintf(
+            '//div[contains(@class, "properties")]/div[contains(@class, "property")][span[contains(@class, "caption")][normalize-space(text())="%s"]]/span[contains(@class, "item")]/a',
+            $caption
+        ));
     }
 
     /**

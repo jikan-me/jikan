@@ -122,6 +122,13 @@ which changes a consumer can see.
 - Anime and manga search with no matches return an empty result (`getResults()` is `[]`) instead of throwing `BadResponseException`. MyAnimeList answers those searches with a 404 page.
 - Person search with no matches returns an empty result instead of throwing `ParserException`. MyAnimeList shows a "No results returned" row there.
 - Character and person search no longer turn a non-404 HTTP error, such as a 429 or 500, into a `TypeError`. The `BadResponseException` now reaches you.
+- Anime and manga genre lists report pagination again: `hasNextPage()` was always `false` and `getLastVisiblePage()` always `1`, though a genre spans many pages (20 for Action). A positional selector no longer matched MyAnimeList's layout.
+- News lists, featured-article lists and "recently updated by users" (anime and manga) report pagination instead of a hard-coded `false`/`1`. For "recently updated by users" the page only links the next page, so `getLastVisiblePage()` is the next page when there is one.
+- `Person::getPublishedManga()` lists a person's manga, for example 14 for Hayao Miyazaki. It was always empty because the selector expected table rows without the `<tbody>` that HTML5 parsing inserts.
+- Manga related entries include the related-entries table (Side Story, Spin-Off, Alternative Version, Character and so on), not only the related tiles. The table was skipped for the same `<tbody>` reason.
+- Anime and manga cards (genre, producer, magazine and seasonal lists) fill `getType()` again, for example "TV" or "Manga". Seasonal cards take it from their section header. Manga cards fill `getAuthors()` and `getSerialization()`. All three had been stubbed to `null`/empty after an earlier layout change, and MyAnimeList shows them again.
+- Top characters and top people fill `getNameKanji()`, for example "ルルーシュ・ランペルージ". It was always `null` because the name moved to a `div`.
+- `Profile::getAbout()` returns `null` instead of `""` when the user wrote nothing.
 
 ---
 

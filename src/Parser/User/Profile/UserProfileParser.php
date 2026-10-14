@@ -205,9 +205,10 @@ class UserProfileParser
             return null;
         }
 
-        return trim(
-            $about->html()
-        );
+        // a user who wrote nothing still gets the (empty) block
+        $html = trim($about->html());
+
+        return $html === '' ? null : $html;
     }
 
     /**

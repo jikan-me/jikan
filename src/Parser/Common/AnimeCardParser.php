@@ -200,24 +200,28 @@ class AnimeCardParser implements ParserInterface
      */
     public function getType(): ?string
     {
-        // this information is no longer available
-        return null;
-        $text = $this->crawler->filterXPath('//div[contains(@class, "info")]');
+        // genre/producer cards: the info line starts with "<type>, <year>", e.g. "TV, 2013"
+        $info = $this->crawler->filterXPath('//div[contains(@class, "info")]/span[contains(@class, "item")][1]');
+        if ($info->count() && preg_match('/^\s*([A-Za-z][A-Za-z .\-]*?)\s*,/', $info->text(), $m)) {
+            return $m[1];
+        }
 
-        if (!$text->count()) {
+        // seasonal cards show only the year there; the type is the header of the section the card is in
+        for ($section = $this->crawler->getNode(0)?->parentNode; $section instanceof \DOMElement; $section = $section->parentNode) {
+            if (!str_contains(' ' . $section->getAttribute('class') . ' ', ' seasonal-anime-list ')) {
+                continue;
+            }
+            foreach ($section->childNodes as $child) {
+                if ($child instanceof \DOMElement && str_contains(' ' . $child->getAttribute('class') . ' ', ' anime-header ')) {
+                    // "TV (New)", "TV (Continuing)" -> "TV"
+                    return trim(preg_replace('/\s*\(.*\)\s*$/', '', JString::cleanse($child->textContent)));
+                }
+            }
+
             return null;
         }
 
-        $text = JString::cleanse($text->text());
-        preg_match('/^([a-zA-Z-\.]+)/', $text, $matches);
-
-        $type = $matches[1];
-
-        if ($type === '-') {
-            $type = Constants::DISPLAY_UNKNOWN;
-        }
-
-        return $type;
+        return null;
     }
 
     /**

@@ -187,6 +187,30 @@ class Parser
     }
 
     /**
+     * Current and last page from a list page's `div.pagination`, which links pages as `?page=N` (genres) or
+     * `?p=N` (news, featured articles) and marks the current one with the `current` class.
+     *
+     * @return array{current: int, last: int} both 1 when the page has no pagination
+     */
+    public static function pagination(Crawler $page): array
+    {
+        $links = $page->filterXPath('//div[contains(@class, "pagination")]/a[contains(@class, "link")]');
+        $current = 1;
+        $last = 1;
+        foreach ($links as $link) {
+            if (!$link instanceof \DOMElement || !preg_match('~[?&](?:page|p)=(\d+)~', $link->getAttribute('href'), $m)) {
+                continue;
+            }
+            $last = max($last, (int) $m[1]);
+            if (str_contains(' ' . $link->getAttribute('class') . ' ', ' current ')) {
+                $current = (int) $m[1];
+            }
+        }
+
+        return ['current' => $current, 'last' => $last];
+    }
+
+    /**
      * PHP reads two-digit years 00-69 as 2000-2069, so a 1961 title came back as 2061. MyAnimeList lists dates
      * at most a few years ahead, so a year more than 10 years in the future belongs to the previous century.
      */

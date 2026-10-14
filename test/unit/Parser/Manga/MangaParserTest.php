@@ -259,7 +259,9 @@ class MangaParserTest extends TestCase
     public function it_gets_the_manga_related()
     {
         $related = $this->parser->getMangaRelated();
-        self::assertCount(2, $related);
+        // the related tiles (Sequel, Adaptation) plus the related-entries table, which used to be skipped
+        self::assertSame(['Sequel', 'Adaptation', 'Side Story', 'Spin-Off', 'Alternative Version', 'Character'], array_keys($related));
+        self::assertCount(24, $related['Side Story']);
         self::assertContainsOnlyInstancesOf(MalUrl::class, $related['Adaptation']);
     }
 

@@ -310,7 +310,7 @@ class PersonParser implements ParserInterface
     public function getPersonPublishedManga(): array
     {
         $node = $this->crawler
-            ->filterXPath('//table[contains(@class, "js-table-people-manga")]/tr[contains(@class, "js-people-manga")]');
+            ->filterXPath('//table[contains(@class, "js-table-people-manga")]/tbody/tr[contains(@class, "js-people-manga")]');
 
         if (!$node->count()) {
             return [];

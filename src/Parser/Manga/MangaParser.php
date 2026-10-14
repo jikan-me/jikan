@@ -667,7 +667,7 @@ class MangaParser implements ParserInterface
 
         // Then we'll parse the table
         $this->crawler
-            ->filterXPath('//table[contains(@class, "entries-table")]/tr')
+            ->filterXPath('//table[contains(@class, "entries-table")]/tbody/tr')
             ->each(
                 function (Crawler $c) use (&$related) {
                     $links = $c->filterXPath('//td[2]//a');

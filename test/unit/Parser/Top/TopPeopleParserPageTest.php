@@ -50,7 +50,7 @@ class TopPeopleParserPageTest extends TestCase
         self::assertSame(1, $result->getRank());
         self::assertSame(118, $result->getMalId());
         self::assertSame('Kamiya, Hiroshi', $result->getTitle());
-        self::assertNull($result->getNameKanji());
+        self::assertSame('神谷 浩史', $result->getNameKanji());
         self::assertSame(108677, $result->getFavorites());
         self::assertSame('1975-01-28', $result->getBirthday()->format('Y-m-d'));
         self::assertMatchesRegularExpression(

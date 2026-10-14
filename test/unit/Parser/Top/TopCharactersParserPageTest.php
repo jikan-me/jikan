@@ -51,7 +51,7 @@ class TopCharactersParserPageTest extends TestCase
         self::assertSame(1, $result->getRank());
         self::assertSame(417, $result->getMalId());
         self::assertSame('Lamperouge, Lelouch', $result->getTitle());
-        self::assertNull($result->getNameKanji());
+        self::assertSame('ルルーシュ・ランペルージ', $result->getNameKanji());
         self::assertSame(181470, $result->getFavorites());
         self::assertMatchesRegularExpression(
             '~https://cdn\.myanimelist\.net/images/characters/.*~',

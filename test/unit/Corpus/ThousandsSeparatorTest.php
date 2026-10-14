@@ -54,6 +54,17 @@ class ThousandsSeparatorTest extends TestCase
     }
 
     #[Test]
+    public function genre_list_names_keep_their_commas_and_counts_drop_theirs(): void
+    {
+        $page = Variants::crawler('anime-genres');
+        $link = $page->filter('a.genre-name-link')->first();
+        self::write($link, '.', 'Boys, Girls (12,345)');
+        $item = new \Jikan\Parser\Genre\AnimeGenreListItemParser($link);
+        self::assertSame('Boys, Girls', $item->getName());
+        self::assertSame(12345, $item->getCount());
+    }
+
+    #[Test]
     public function a_producer_anime_count_reads_numbers_with_separators(): void
     {
         $page = Variants::crawler('producer-1-p1');

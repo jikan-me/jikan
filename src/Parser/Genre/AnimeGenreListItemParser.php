@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Genre;
 
+use Jikan\Helper\JString;
 use Jikan\Helper\Constants;
 use Jikan\Model;
 use Jikan\Parser\ParserInterface;
@@ -70,10 +71,10 @@ class AnimeGenreListItemParser implements ParserInterface
      */
     public function getName(): string
     {
+        // "Sci-Fi (1,234)": the name is everything before the count.
         preg_match('~(.+)\s\(.+\)~', $this->crawler->text(), $node);
-        $count = str_replace(',', '', $node[1]);
 
-        return $count;
+        return JString::cleanse($node[1]);
     }
 
     /**

@@ -108,6 +108,7 @@ which changes a consumer can see.
 - `Jikan\Model\User\Friend::getFriendsSince()` returns `?\DateTimeImmutable`: `null` when MyAnimeList shows no "Friends since" date. It used to declare a non-null date and throw a `TypeError` in that case.
 
 ### Fixed
+- `getAnimeGenres()`/`getMangaGenres()` item names keep their commas. The parser removed commas from the whole name as well as from the count. No genre name has a comma today, so current results are unchanged.
 - `getUserProfile()` last updates with nothing read or watched yet ("On-Hold -/355" on MyAnimeList) now give status `"On-Hold"`, progress `0` and total `355`. They gave status `"On-Hold -"` with progress and total `null`.
 - Related entries (`getAnime()`, `getManga()`, `getNews()`, `getArticle()`) no longer include MyAnimeList's empty links (`<a href="..."></a>`, for example a removed entry) as entries with an empty name. The code meant to skip them removed them from the page after the list of links had already been read, so they were kept.
 - `getMangaStats()` scores: a score nobody voted for (MyAnimeList leaves its row out) is filled in with 0 votes, but its `getScore()` returned `0` instead of the score itself. The 1–10 keys were right. Anime stats were not affected.

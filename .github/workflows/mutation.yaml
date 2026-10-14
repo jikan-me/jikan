@@ -60,7 +60,7 @@ jobs:
 
       - name: Keep the report
         if: always() && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: infection-report
           path: build/infection/

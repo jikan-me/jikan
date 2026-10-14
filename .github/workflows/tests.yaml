@@ -123,7 +123,7 @@ jobs:
         run: php scripts/field_witness.php
 
       - name: Keep the coverage report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-clover
           path: coverage.xml

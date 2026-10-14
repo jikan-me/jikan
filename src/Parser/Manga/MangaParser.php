@@ -725,7 +725,8 @@ class MangaParser implements ParserInterface
      */
     public function getPublished(): DateRange
     {
-        return new DateRange($this->getMangaPublishedString());
+        // no "Published:" row: the empty range MAL itself shows as "Not available"
+        return new DateRange($this->getMangaPublishedString() ?? 'Not available');
     }
 
     /**

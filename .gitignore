@@ -12,3 +12,4 @@ composer.phar
 *.Identifier
 qodana.yaml
 .phpstan-cache
+/build/

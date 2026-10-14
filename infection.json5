@@ -1,0 +1,28 @@
+{
+    // Mutation testing: Infection makes small deliberate changes to the code ("mutants": flip a condition,
+    // drop a line, return early) and runs the tests against each one. A mutant the tests do not notice
+    // ("escaped") marks code that runs in tests but is not really checked by them.
+    //
+    // Runs in CI (.github/workflows/mutation.yaml): changed lines on pull requests, everything nightly.
+    // Report-only for now; once the nightly score settles, set "minMsi" to stop it from going down.
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src/Parser",
+            "src/Helper"
+        ]
+    },
+    "timeout": 30,
+    "logs": {
+        "text": "build/infection/infection.log",
+        "summary": "build/infection/summary.log",
+        "html": "build/infection/infection.html"
+    },
+    "mutators": {
+        "@default": true
+    },
+    "testFramework": "phpunit",
+    "phpUnit": {
+        "customPath": "vendor/phpunit/phpunit/phpunit"
+    }
+}

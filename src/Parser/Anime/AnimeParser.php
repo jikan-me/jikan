@@ -898,7 +898,8 @@ class AnimeParser implements ParserInterface
      */
     public function getAired(): DateRange
     {
-        return new DateRange($this->getAnimeAiredString());
+        // no "Aired:" row: the empty range MAL itself shows as "Not available"
+        return new DateRange($this->getAnimeAiredString() ?? 'Not available');
     }
 
     /**
@@ -907,10 +908,13 @@ class AnimeParser implements ParserInterface
      */
     public function getAnimeAiredString(): ?string
     {
-        $aired = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..')->html();
-        $aired = explode("\n", trim($aired))[1];
+        $row = $this->crawler->filterXPath('//span[contains(text(), "Aired")]/..');
+        if (!$row->count()) {
+            return null;
+        }
+        $aired = explode("\n", trim($row->html()))[1] ?? null;
 
-        return trim($aired);
+        return $aired === null ? null : trim($aired);
     }
 
     /**

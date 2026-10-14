@@ -1,0 +1,46 @@
+name: Markup drift
+
+# Weekly live check that MyAnimeList still serves the markup the parsers expect (scripts/drift_check.php:
+# about 14 requests, 3.5 s apart). The tests only see recorded pages, so this is what notices a changed layout.
+# A failed run means a parser came back empty or broken on a live page; it does not block anything.
+on:
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout changes
+        uses: actions/checkout@v4
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+          extensions: ctype, curl, dom, iconv, json, libxml, mbstring, openssl, simplexml, tokenizer, xml, xmlwriter
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --no-scripts
+
+      - name: Check live pages
+        run: php scripts/drift_check.php --live --json=build/drift.json
+
+      - name: Keep the results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift
+          path: build/drift.json
+          if-no-files-found: ignore

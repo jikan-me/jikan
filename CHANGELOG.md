@@ -98,9 +98,14 @@ which changes a consumer can see.
 - **PHP floor raised to 8.4.4** — **you must** run PHP 8.4.4 or later; Composer no longer installs on 8.4.0–8.4.3. Those patch levels have a bug in PHP's own HTML5 parser (`Dom\HTMLDocument`, php-src GH-17481) that corrupts some 4-byte characters (emoji, rare scripts) depending on where they fall in the page, so a parsed field can contain invalid UTF-8 and `json_encode()` fails on the model. Seen on a real MyAnimeList manga review.
 
 ### Added
+- Search filter constants for the options MyAnimeList's search form has gained:
+  - Anime types `SEARCH_ANIME_CM` (7), `SEARCH_ANIME_PV` (8) and `SEARCH_ANIME_TV_SPECIAL` (9).
+  - Manga type `SEARCH_MANGA_LIGHT_NOVEL` (2).
+  - Manga statuses `SEARCH_MANGA_STATUS_ON_HIATUS` (4) and `SEARCH_MANGA_STATUS_DISCONTINUED` (5).
 - `Jikan\Helper\Time` resolves MyAnimeList's relative and partial dates ("Yesterday, 9:25 PM", "5 hours ago", "Oct 13", weekdays) against a PSR-20 clock from the new `symfony/clock` dependency. By default that is the system clock, so results are unchanged. You can pin "now", for example in your own tests, with `Symfony\Component\Clock\Clock::set(new MockClock(...))`.
 
 ### Changed
+- **`Constants::SEARCH_MANGA_NOVEL` is now `8`** (was `2`). MyAnimeList's manga search now reads `2` as Light Novel and `8` as Novel, so this constant was searching for light novels. **If you want light novels**, use the new `Constants::SEARCH_MANGA_LIGHT_NOVEL` (`2`).
 - `symfony/dom-crawler` is now a declared requirement (`^7.4 || ^8.0`). The library has always used it directly but only received it through `symfony/browser-kit`, so nothing changes in your tree — no action needed unless you were excluding it.
 - A seasonal page parses roughly 3x faster (about 1.2 s down to 0.4 s in our benchmark). The marker for "continuing" shows was found by reading the text of the whole season section once per anime card; it is now read once per section. The returned `Seasonal` model is identical.
 - An anime card with no member count now raises `ParserException` from `MalClient` (a `RuntimeException` from `AnimeCardParser::getMembers()`), where it used to raise an uncaught `\TypeError` that `catch (\Exception)` and `catch (ParserException)` both missed. **If you caught `\TypeError` around client calls to work around this**, catch `ParserException` instead.

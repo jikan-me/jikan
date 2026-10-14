@@ -73,9 +73,13 @@ class Constants
     public const SEARCH_ANIME_SPECIAL = 4;
     public const SEARCH_ANIME_ONA = 5;
     public const SEARCH_ANIME_MUSIC = 6;
+    public const SEARCH_ANIME_CM = 7;
+    public const SEARCH_ANIME_PV = 8;
+    public const SEARCH_ANIME_TV_SPECIAL = 9;
 
     public const SEARCH_MANGA_MANGA = 1;
-    public const SEARCH_MANGA_NOVEL = 2;
+    public const SEARCH_MANGA_LIGHT_NOVEL = 2;
+    public const SEARCH_MANGA_NOVEL = 8;
     public const SEARCH_MANGA_ONESHOT = 3;
     public const SEARCH_MANGA_DOUJIN = 4;
     public const SEARCH_MANGA_MANHWA = 5;
@@ -92,6 +96,8 @@ class Constants
     public const SEARCH_MANGA_STATUS_COMPLETED = 2; // alias
     public const SEARCH_MANGA_STATUS_TO_BE_PUBLISHED = 3;
     public const SEARCH_MANGA_STATUS_TBP = 3; // alias
+    public const SEARCH_MANGA_STATUS_ON_HIATUS = 4;
+    public const SEARCH_MANGA_STATUS_DISCONTINUED = 5;
 
     public const SEARCH_ANIME_RATING_G = 1;
     public const SEARCH_ANIME_RATING_ALL = 1; // alias

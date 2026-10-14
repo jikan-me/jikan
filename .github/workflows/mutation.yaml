@@ -1,0 +1,67 @@
+name: Mutation testing
+
+# Report-only. On pull requests that touch src/, only the changed lines are mutated (fast, and it says
+# whether the new code is really tested). Nightly and on demand, all of src/Parser and src/Helper are,
+# and the HTML report is kept as an artifact. See infection.json5.
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  infection:
+    runs-on: ubuntu-22.04
+    continue-on-error: true
+    timeout-minutes: ${{ github.event_name == 'pull_request' && 30 || 180 }}
+    name: infection (${{ github.event_name == 'pull_request' && 'changed lines' || 'full' }})
+    steps:
+      - name: Checkout changes
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+          extensions: ctype, curl, dom, iconv, json, libxml, mbstring, openssl, simplexml, tokenizer, xml, xmlwriter
+          coverage: pcov
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --no-scripts
+
+      - name: Fetch recorded fixtures from source
+        run: composer run-script link-fixtures
+
+      - name: Mutate the changed lines
+        if: github.event_name == 'pull_request'
+        run: >
+          vendor/bin/infection --threads=max --only-covering-test-cases --no-progress
+          --git-diff-lines --git-diff-base=origin/${{ github.base_ref }}
+          --ignore-msi-with-no-mutations --logger-github
+
+      - name: Mutate everything
+        if: github.event_name != 'pull_request'
+        run: vendor/bin/infection --threads=max --only-covering-test-cases --no-progress
+
+      - name: Show the score
+        if: always()
+        run: cat build/infection/summary.log || true
+
+      - name: Keep the report
+        if: always() && github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: infection-report
+          path: build/infection/

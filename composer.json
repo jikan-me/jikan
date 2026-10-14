@@ -37,6 +37,7 @@
         "brianium/paratest": "^7.3",
         "doctrine/collections": "^1.5",
         "friendsofphp/php-cs-fixer": "^3.8",
+        "infection/infection": "^0.35.7",
         "jikan-me/jikan-fixtures": "dev-master",
         "php-parallel-lint/php-parallel-lint": "^1.4",
         "phpro/grumphp": "^2",
@@ -76,7 +77,8 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "phpro/grumphp": true
+            "phpro/grumphp": true,
+            "infection/extension-installer": true
         }
     },
     "repositories": {}

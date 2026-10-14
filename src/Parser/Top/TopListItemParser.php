@@ -196,11 +196,14 @@ class TopListItemParser
      */
     public function getKanjiName(): ?string
     {
-        try {
-            return trim($this->crawler->filterXPath('//span[@class="fs12 fn-grey6"][1]')->text(), '()');
-        } catch (\Exception $e) {
+        // "(ルルーシュ・ランペルージ)" under the name, in a div with the fn-grey6 class
+        $node = $this->crawler->filterXPath('//div[contains(@class, "information")]/*[contains(@class, "fn-grey6")]');
+        if (!$node->count()) {
             return null;
         }
+        $name = trim(JString::cleanse($node->first()->text()), '()');
+
+        return $name === '' ? null : $name;
     }
 
     /**

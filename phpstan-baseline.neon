@@ -1279,12 +1279,6 @@ parameters:
 			path: src/MyAnimeList/MalClient.php
 
 		-
-			message: '#^Variable \$crawler might not be defined\.$#'
-			identifier: variable.undefined
-			count: 2
-			path: src/MyAnimeList/MalClient.php
-
-		-
 			message: '#^Parameter \#1 \$message of class Jikan\\Exception\\BadResponseException constructor expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1501,12 +1495,6 @@ parameters:
 			path: src/Parser/Common/AnimeCardParser.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 2
-			path: src/Parser/Common/AnimeCardParser.php
-
-		-
 			message: '#^Variable \$score might not be defined\.$#'
 			identifier: variable.undefined
 			count: 1
@@ -1533,12 +1521,6 @@ parameters:
 		-
 			message: '#^Method Jikan\\Parser\\Common\\MangaCardParser\:\:getVolumes\(\) should return int\|null but returns string\.$#'
 			identifier: return.type
-			count: 1
-			path: src/Parser/Common/MangaCardParser.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
 			count: 1
 			path: src/Parser/Common/MangaCardParser.php
 
@@ -1579,12 +1561,6 @@ parameters:
 			path: src/Parser/Genre/AnimeGenreListItemParser.php
 
 		-
-			message: '#^Method Jikan\\Parser\\Genre\\AnimeGenreParser\:\:getLastPage\(\) should return int but returns string\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Parser/Genre/AnimeGenreParser.php
-
-		-
 			message: '#^Method Jikan\\Parser\\Genre\\AnimeGenreParser\:\:getResults\(\) should return array\<Jikan\\Model\\Genre\\AnimeGenre\> but returns list\<Jikan\\Model\\Common\\AnimeCard\>\.$#'
 			identifier: return.type
 			count: 1
@@ -1607,12 +1583,6 @@ parameters:
 			identifier: return.phpDocType
 			count: 1
 			path: src/Parser/Genre/MangaGenreListItemParser.php
-
-		-
-			message: '#^Method Jikan\\Parser\\Genre\\MangaGenreParser\:\:getLastPage\(\) should return int but returns string\.$#'
-			identifier: return.type
-			count: 1
-			path: src/Parser/Genre/MangaGenreParser.php
 
 		-
 			message: '#^Method Jikan\\Parser\\Genre\\MangaGenreParser\:\:getResults\(\) should return array\<Jikan\\Model\\Genre\\MangaGenre\> but returns list\<Jikan\\Model\\Common\\MangaCard\>\.$#'
@@ -2181,18 +2151,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @var has invalid value \(\$total int\|null\)\: Unexpected token "\$total", expected type at offset 10 on line 1$#'
 			identifier: phpDoc.parseError
-			count: 1
-			path: src/Parser/User/Profile/LastUpdatesParser.php
-
-		-
-			message: '#^Parameter \#4 \$progressedSubEntries of class Jikan\\Model\\User\\BaseLastUpdate constructor expects int\|null, string\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Parser/User/Profile/LastUpdatesParser.php
-
-		-
-			message: '#^Parameter \#5 \$total of class Jikan\\Model\\User\\BaseLastUpdate constructor expects int\|null, string\|null given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/Parser/User/Profile/LastUpdatesParser.php
 

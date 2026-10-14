@@ -2,6 +2,7 @@
 
 namespace Jikan\Model\Search;
 
+use Jikan\Helper\Time;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser;
 
@@ -106,7 +107,7 @@ class MangaSearchListItem
             = null === $instance->endDate
             && null !== $instance->startDate
             && (
-                new \DateTimeImmutable(
+                Time::parse(
                     'now',
                     new \DateTimeZone('UTC')
                 ) > $instance->startDate

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Club;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\Constants;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
@@ -132,7 +133,7 @@ class ClubParser implements ParserInterface
                 ->text()
         );
 
-        return new \DateTimeImmutable($date, new \DateTimeZone('UTC'));
+        return Time::parse($date, new \DateTimeZone('UTC'));
     }
 
     /**

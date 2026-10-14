@@ -59,7 +59,7 @@ class TopCharacterParserTest extends TestCase
     #[Test]
     public function it_gets_the_character_kanji()
     {
-        self::assertNull($this->parser->getKanjiName());
+        self::assertSame('リヴァイ', $this->parser->getKanjiName());
     }
 
     #[Test]

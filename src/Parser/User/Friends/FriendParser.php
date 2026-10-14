@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\User\Friends;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
@@ -105,7 +106,7 @@ class FriendParser implements ParserInterface
      */
     public function getLastOnline(): \DateTimeImmutable
     {
-        return new \DateTimeImmutable(
+        return Time::parse(
             JString::cleanse($this->crawler->filterXPath('//div[contains(@class, "data")]/div[2]')->text()),
             new \DateTimeZone('UTC')
         );

@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Manga;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model\Common\UserMeta;
 use Jikan\Model\Manga\MangaRecentlyUpdatedByUser;
@@ -183,7 +184,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getDate(): \DateTimeImmutable
     {
-        return new \DateTimeImmutable(
+        return Time::parse(
             $this->crawler->filterXPath('//td[6]')->text(),
             new \DateTimeZone('UTC')
         );

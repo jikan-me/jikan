@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\News;
 
+use Jikan\Helper\Parser;
 use Jikan\Model\News\NewsList;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
@@ -60,7 +61,9 @@ class NewsListParser implements ParserInterface
      */
     public function getHasNextPage(): bool
     {
-        return false;
+        $pages = Parser::pagination($this->crawler);
+
+        return $pages['current'] < $pages['last'];
     }
 
     /**
@@ -68,6 +71,6 @@ class NewsListParser implements ParserInterface
      */
     public function getLastVisiblePage(): int
     {
-        return 1;
+        return Parser::pagination($this->crawler)['last'];
     }
 }

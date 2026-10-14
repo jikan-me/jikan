@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\News;
 
+use Jikan\Helper\Time;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model\Common\MalUrl;
@@ -83,7 +84,7 @@ class NewsParser implements ParserInterface
         $date = str_replace(['by ', ' |'], '', $date);
 
 
-        return new \DateTimeImmutable(
+        return Time::parse(
             $date,
             new \DateTimeZone('UTC')
         );

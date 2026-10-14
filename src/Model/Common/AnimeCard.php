@@ -93,11 +93,6 @@ class AnimeCard
     protected $score;
 
     /**
-     * @var string[]|null
-     */
-    protected $licensors;
-
-    /**
      * @var bool
      */
     protected $r18;
@@ -147,7 +142,6 @@ class AnimeCard
         $instance->source = $parser->getSource();
         $instance->producers = $parser->getProducer();
         $instance->score = $parser->getAnimeScore();
-        $instance->licensors = $parser->getLicensors();
         $instance->r18 = $parser->isR18();
         $instance->kids = $parser->isKids();
     }
@@ -286,14 +280,6 @@ class AnimeCard
     public function getScore(): ?float
     {
         return $this->score;
-    }
-
-    /**
-     * @return string[]|null
-     */
-    public function getLicensors(): ?array
-    {
-        return $this->licensors;
     }
 
     /**

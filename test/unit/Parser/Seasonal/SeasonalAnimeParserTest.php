@@ -91,7 +91,8 @@ class SeasonalAnimeParserTest extends TestCase
     #[Test]
     public function it_gets_the_type()
     {
-        self::assertNull($this->parser->getType());
+        // seasonal cards carry no type in their info line; it comes from the "TV (New)" section header
+        self::assertSame('TV', $this->parser->getType());
     }
 
     #[Test]
@@ -138,12 +139,6 @@ class SeasonalAnimeParserTest extends TestCase
             7.92,
             $parser2->getAnimeScore()
         );
-    }
-
-    #[Test]
-    public function it_gets_the_anime_licensor()
-    {
-        self::assertCount(0, $this->parser->getLicensors());
     }
 
     #[Test]

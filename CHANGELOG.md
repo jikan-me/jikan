@@ -94,7 +94,11 @@ which changes a consumer can see.
 ## Unreleased
 
 ### Breaking
+- **`AnimeCard::getLicensors()` is removed**, and so `SeasonalAnime::getLicensors()` too — **you must** stop calling it. Anime cards on genre, producer and seasonal lists no longer show licensors on MyAnimeList, and the method has returned an empty list since. Licensors are still on the anime itself: `Anime::getLicensors()` from `getAnime()`.
 - **PHP floor raised to 8.4.4** — **you must** run PHP 8.4.4 or later; Composer no longer installs on 8.4.0–8.4.3. Those patch levels have a bug in PHP's own HTML5 parser (`Dom\HTMLDocument`, php-src GH-17481) that corrupts some 4-byte characters (emoji, rare scripts) depending on where they fall in the page, so a parsed field can contain invalid UTF-8 and `json_encode()` fails on the model. Seen on a real MyAnimeList manga review.
+
+### Added
+- `Jikan\Helper\Time` resolves MyAnimeList's relative and partial dates ("Yesterday, 9:25 PM", "5 hours ago", "Oct 13", weekdays) against a PSR-20 clock from the new `symfony/clock` dependency. By default that is the system clock, so results are unchanged. You can pin "now", for example in your own tests, with `Symfony\Component\Clock\Clock::set(new MockClock(...))`.
 
 ### Changed
 - `symfony/dom-crawler` is now a declared requirement (`^7.4 || ^8.0`). The library has always used it directly but only received it through `symfony/browser-kit`, so nothing changes in your tree — no action needed unless you were excluding it.
@@ -116,6 +120,17 @@ which changes a consumer can see.
 - Casting a `PersonImageResource\Jpg` or `UserImageResource\Jpg` to string returns its image URL (an empty string when it is a placeholder) instead of throwing "call to undefined method `getJpg()`".
 - `Jikan\Http\HttpClientWrapper` no longer records browser history. It kept one entry per request for the lifetime of the client (about 2.5 KB each), so a long-running process that reused one `MalClient` grew without bound. `request()` now defaults `$changeHistory` to `false`.
 - Two-digit years in anime/manga search results and user list dates are no longer read as the 2040s–2060s: "Kaguya-hime" (1961) came back as 2061. A year more than 10 years in the future is now read as 19xx; this also corrects `isAiring()` for those titles.
+- Anime and manga search with no matches return an empty result (`getResults()` is `[]`) instead of throwing `BadResponseException`. MyAnimeList answers those searches with a 404 page.
+- Person search with no matches returns an empty result instead of throwing `ParserException`. MyAnimeList shows a "No results returned" row there.
+- Character and person search no longer turn a non-404 HTTP error, such as a 429 or 500, into a `TypeError`. The `BadResponseException` now reaches you.
+- Anime and manga genre lists report pagination again: `hasNextPage()` was always `false` and `getLastVisiblePage()` always `1`, though a genre spans many pages (20 for Action). A positional selector no longer matched MyAnimeList's layout.
+- News lists, featured-article lists and "recently updated by users" (anime and manga) report pagination instead of a hard-coded `false`/`1`. For "recently updated by users" the page only links the next page, so `getLastVisiblePage()` is the next page when there is one.
+- `Person::getPublishedManga()` lists a person's manga, for example 14 for Hayao Miyazaki. It was always empty because the selector expected table rows without the `<tbody>` that HTML5 parsing inserts.
+- Manga related entries include the related-entries table (Side Story, Spin-Off, Alternative Version, Character and so on), not only the related tiles. The table was skipped for the same `<tbody>` reason.
+- Anime and manga cards (genre, producer, magazine and seasonal lists) fill `getType()` again, for example "TV" or "Manga". Seasonal cards take it from their section header. Manga cards fill `getAuthors()` and `getSerialization()`. All three had been stubbed to `null`/empty after an earlier layout change, and MyAnimeList shows them again.
+- Top characters and top people fill `getNameKanji()`, for example "ルルーシュ・ランペルージ". It was always `null` because the name moved to a `div`.
+- `Profile::getAbout()` returns `null` instead of `""` when the user wrote nothing.
+- A user profile's last anime and manga updates keep the episode or chapter count when the total is not known yet ("Reading 92/?"). It used to be `null`, because the progress was only read when both numbers were present.
 
 ---
 

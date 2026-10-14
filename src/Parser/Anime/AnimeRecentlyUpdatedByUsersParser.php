@@ -51,12 +51,27 @@ class AnimeRecentlyUpdatedByUsersParser
     // @todo anime user updates pagination
     public function getHasNextPage(): bool
     {
-        return false;
+        return $this->nextPage() !== null;
     }
 
+    /**
+     * The page only links the next one ("Next Page", ?show=N with 75 members per page), not the last, so this is
+     * the furthest page it lets you reach: the next page when there is one.
+     */
     public function getLastPage(): int
     {
-        return 1;
+        return $this->nextPage() ?? 1;
+    }
+
+    private function nextPage(): ?int
+    {
+        foreach ($this->crawler->filterXPath('//div[contains(@class, "spaceit")]/a[contains(@href, "show=")]') as $link) {
+            if ($link instanceof \DOMElement && str_contains($link->textContent, 'Next') && preg_match('~[?&]show=(\d+)~', $link->getAttribute('href'), $m)) {
+                return intdiv((int) $m[1], 75) + 1;
+            }
+        }
+
+        return null;
     }
 
     public function getModel(): AnimeUserUpdates

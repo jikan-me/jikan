@@ -254,13 +254,14 @@ class AnimeCardParser implements ParserInterface
     {
         // Every card carries the start date as "YYYYMMDD", with 00 for what is not known yet ("20270000",
         // "20271000"; "00000000" when nothing is). Genre and producer cards show no full date otherwise.
+        // The day is UTC midnight, like Anime::getAired().
         $start = $this->crawler->filter('.js-start_date');
         if ($start->count() && preg_match('~(\d{4})(\d{2})(\d{2})~', $start->text(), $m)) {
             if ($m[1] === '0000') {
                 return null;
             }
 
-            return self::japanMidnight($m[1], $m[2] === '00' ? '01' : $m[2], $m[3] === '00' ? '01' : $m[3]);
+            return self::utcMidnight($m[1], $m[2] === '00' ? '01' : $m[2], $m[3] === '00' ? '01' : $m[3]);
         }
 
         $node = $this->crawler->filterXPath('//div/div[2]/div[2]/span[contains(@class, "item")][1]');
@@ -273,23 +274,26 @@ class AnimeCardParser implements ParserInterface
 
         // A bare year ("2027") would otherwise be read as the time 20:27 today.
         if (preg_match('~^\d{4}$~', $date)) {
-            return self::japanMidnight($date, '01', '01');
+            return self::utcMidnight($date, '01', '01');
         }
 
+        // Cards print a day, which is UTC midnight like every other date here ("Oct 2, 2026" must not become
+        // Oct 1 in UTC). Text that carries a broadcast time ("Apr 7, 2013, 01:00 (JST)") is a real instant in Japan.
+        $zone = preg_match('~\d{1,2}:\d{2}~', $date) ? 'JST' : 'UTC';
+
         try {
-            return Time::parse($date, new \DateTimeZone('JST'))
+            return Time::parse($date, new \DateTimeZone($zone))
                 ->setTimezone(new \DateTimeZone('UTC'));
         } catch (\Exception $e) {
             return null;
         }
     }
 
-    /** Midnight in Japan on the given day, in UTC, as the visible dates on cards are read. */
-    private static function japanMidnight(string $year, string $month, string $day): ?\DateTimeImmutable
+    private static function utcMidnight(string $year, string $month, string $day): ?\DateTimeImmutable
     {
-        $date = \DateTimeImmutable::createFromFormat('!Y-m-d', "$year-$month-$day", new \DateTimeZone('JST'));
+        $date = \DateTimeImmutable::createFromFormat('!Y-m-d', "$year-$month-$day", new \DateTimeZone('UTC'));
 
-        return $date === false ? null : $date->setTimezone(new \DateTimeZone('UTC'));
+        return $date === false ? null : $date;
     }
 
     /**

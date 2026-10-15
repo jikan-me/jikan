@@ -12,7 +12,7 @@ The word _Jikan_ literally translates to _Time_ in Japanese (**時間**). And th
 
 **Notice**: Jikan does not support authenticated requests. You can not update your lists.
 
-**Status**: active development is on `master` — the v5 line, currently **5.0.0-beta**. The v4 line
+**Status**: active development is on `master` — the v5 line, currently **5.0.0-rc.1**. The v4 line
 is **end of life** and no longer supported. Jikan is a PHP **library**, not a hosted service; a
 self-hosted REST API exists as a separate project.
 
@@ -20,14 +20,14 @@ self-hosted REST API exists as a separate project.
 
 | Version                                                                                 | Support                             | PHP                                                                         | Lumen/Laravel |
 |-----------------------------------------------------------------------------------------|-------------------------------------|-----------------------------------------------------------------------------|---------------| 
-| [`^5` (master · 5.0.0-beta)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan))  | 🚧 New features - WIP · **beta (pre-release)** | [![8.4](https://img.shields.io/badge/PHP-^%208.4-blue.svg?style=flat)]()    | `^11`,`^12`   |
+| [`^5` (master · 5.0.0-rc.1)]([https://github.com/jikan-me/jikan](https://github.com/jikan-me/jikan))  | 🚧 **Release candidate** · API frozen, bug fixes only | [![8.4](https://img.shields.io/badge/PHP-^%208.4-blue.svg?style=flat)]()    | `^11`,`^12`   |
 | [`^4`](https://github.com/jikan-me/jikan/releases/tag/v4.0.13)                           | ❌ **End of life** — no longer supported | [![8.1](https://img.shields.io/badge/PHP-^%208.1-blue.svg?style=flat)]()    | `^9`,`^10`    |
 | [`^3`](https://github.com/jikan-me/jikan/releases/tag/v3.3.2)                           | ❌ No longer maintained or supported | [![8.0](https://img.shields.io/badge/PHP-^%208.0-blue.svg?style=flat)]()    | `^8`, `^9`    |
 | [`^2`](https://github.com/jikan-me/jikan/tree/2.19.4)                                   | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.1-blue.svg?style=flat)]() | `^6`          
 | [`~1`](https://github.com/jikan-me/jikan/tree/1.16.3)                                   | ❌ No longer maintained or supported | [![stable](https://img.shields.io/badge/PHP-^%207.0-blue.svg?style=flat)]() | `5.5.*`       |
 
 
-1. `composer require jikan-me/jikan "^5.0@beta"`  <!-- the 5.0.0 line is pre-release; a plain `^5` has no stable tag to resolve to yet -->
+1. `composer require jikan-me/jikan "^5.0@RC"`  <!-- the 5.0.0 line is pre-release; a plain `^5` has no stable tag to resolve to yet -->
 2. Coming from v4? Read the [upgrade guide](UPGRADING.md).
 3. Read the [Repository docs](#repository-docs) below — this repo holds the canonical documentation.
 

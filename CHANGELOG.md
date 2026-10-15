@@ -93,6 +93,12 @@ which changes a consumer can see.
 
 ## Unreleased
 
+---
+
+## v5.0.0-rc.1 — 2026-10-15
+
+Release candidate. **The v5 API is frozen**: from here until `5.0.0` only bug fixes land, and anything that would change a signature waits for the next major. Upgrading from v4? Read [UPGRADING.md](UPGRADING.md). Compared with `5.0.0-beta.3`, three values changed, all listed below.
+
 ### Changed
 - Anime-card start dates (`getAiringStart()` on genre, producer, seasonal and schedule cards) are **UTC midnight of the day shown**, like `Anime::getAired()` and the episode dates. They were midnight in Japan converted to UTC, so "Oct 2, 2026" gave `2026-10-01T15:00:00+00:00` and a year-only "2027" gave `2026-12-31T15:00:00+00:00`, the previous year. The instant is 9 hours later; **if you read the date part, it is now the day shown.** Text that carries a broadcast time still converts from Japan time.
 - `AnimeEpisode::getAired()` (from `getAnimeEpisode()`) is **UTC midnight of the printed day**, like the episode list and `Anime::getAired()`. It was midnight in Japan (`1999-10-20T00:00:00+09:00`), because the page prints "Aired: Oct 20, 1999(JST)" and PHP read the "(JST)" as a UTC+9 offset, so the same episode had two different dates depending on the endpoint (jikan-rest#567). The calendar date is unchanged; the instant is 9 hours later. **If you compared timestamps** between the two endpoints, they are now equal. A new check in the snapshot tests fails on any date that is not UTC.

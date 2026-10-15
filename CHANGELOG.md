@@ -200,9 +200,9 @@ and Changed before upgrading**: the PHP floor is now 8.4.4, `AnimeCard::getLicen
 
 ## v5.0.0 — 2026-10-11
 
-First release on the `^5` line. The public PHP surface (`MalClient` methods, `RequestInterface`,
-`ParserInterface`, the `Jikan\Model\*` classes for existing endpoints) is **unchanged from `^4`** —
-the v4→v5 diff adds endpoints and replaces the HTTP layer; it removes nothing from the API.
+First release on the `^5` line. Every `MalClient` method and `Jikan\Request\*` class from `^4` is still there, and
+the v4→v5 diff adds 11 endpoints and replaces the HTTP layer. It also removes a few classes and methods and makes many
+getters nullable: **see [UPGRADING.md](UPGRADING.md)** for the exact list and what to change.
 
 ### Breaking
 - **PHP floor raised to 8.4** — **you must** require PHP ^8.4. `composer require jikan-me/jikan ^5`

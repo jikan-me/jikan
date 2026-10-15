@@ -15,7 +15,7 @@ class NewsMeta
     /**
      * @var int
      */
-    private int $malId;
+    private ?int $malId;
 
     /**
      * @var string
@@ -30,7 +30,7 @@ class NewsMeta
     /**
      * @var \DateTimeImmutable
      */
-    private \DateTimeImmutable $date;
+    private ?\DateTimeImmutable $date;
 
     /**
      * @var string
@@ -87,9 +87,9 @@ class NewsMeta
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMalId(): int
+    public function getMalId(): ?int
     {
         return $this->malId;
     }
@@ -111,9 +111,9 @@ class NewsMeta
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }

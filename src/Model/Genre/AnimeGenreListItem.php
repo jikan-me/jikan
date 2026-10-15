@@ -50,9 +50,9 @@ class AnimeGenreListItem
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMalId(): int
+    public function getMalId(): ?int
     {
         return $this->malId;
     }

@@ -8,7 +8,6 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Anime\AnimeReviewScores;
 use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Model\Reviews\Reviewer;
-use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -111,7 +110,7 @@ class ReviewerParser implements ParserInterface
      */
     public function getAnimeScores(): AnimeReviewScores
     {
-        return new AnimeReviewScoresParser($this->crawler)->getModel();
+        return AnimeReviewScores::fromOverall(new AnimeReviewParser($this->crawler)->getReviewerScore());
     }
 
     /**
@@ -120,6 +119,6 @@ class ReviewerParser implements ParserInterface
      */
     public function getMangaScores(): MangaReviewScores
     {
-        return new MangaReviewScoresParser($this->crawler)->getModel();
+        return MangaReviewScores::fromOverall(new MangaReviewParser($this->crawler)->getReviewerScore());
     }
 }

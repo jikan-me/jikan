@@ -91,17 +91,17 @@ class MangaStats
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getDaysRead(): float
+    public function getDaysRead(): ?float
     {
         return $this->daysRead;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getMeanScore(): float
+    public function getMeanScore(): ?float
     {
         return $this->meanScore;
     }
@@ -147,33 +147,33 @@ class MangaStats
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTotalEntries(): int
+    public function getTotalEntries(): ?int
     {
         return $this->totalEntries;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getReread(): int
+    public function getReread(): ?int
     {
         return $this->reread;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getChaptersRead(): int
+    public function getChaptersRead(): ?int
     {
         return $this->chaptersRead;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getVolumesRead(): int
+    public function getVolumesRead(): ?int
     {
         return $this->volumesRead;
     }

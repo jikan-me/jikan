@@ -32,7 +32,7 @@ class NewsListItem
     /**
      * @var \DateTimeImmutable
      */
-    private \DateTimeImmutable $date;
+    private ?\DateTimeImmutable $date;
 
     /**
      * @var string
@@ -118,9 +118,9 @@ class NewsListItem
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
-    public function getDate(): \DateTimeImmutable
+    public function getDate(): ?\DateTimeImmutable
     {
         return $this->date;
     }

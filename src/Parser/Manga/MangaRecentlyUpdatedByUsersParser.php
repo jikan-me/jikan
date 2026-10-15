@@ -35,18 +35,19 @@ class MangaRecentlyUpdatedByUsersParser
      */
     public function getResults(): array
     {
-        try {
-            return $this->crawler
-                ->filterXPath('//table[@class="table-recently-updated"]/tbody/tr[1]')
-                ->nextAll()
-                ->each(
-                    function ($c) {
-                        return new MangaRecentlyUpdatedByUsersListParser($c)->getModel();
-                    }
-                );
-        } catch (\Exception $e) {
+        $header = $this->crawler->filterXPath('//table[@class="table-recently-updated"]/tbody/tr[1]');
+
+        // No table, no rows. A row that cannot be parsed is an error (MalClient reports it as a ParserException):
+        // returning [] for the whole page hid it, next to a hasNextPage() that could be true.
+        if (!$header->count()) {
             return [];
         }
+
+        return $header->nextAll()->each(
+            function ($c) {
+                return new MangaRecentlyUpdatedByUsersListParser($c)->getModel();
+            }
+        );
     }
 
 

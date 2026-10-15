@@ -21,7 +21,7 @@ class ResourceNewsListItemParser implements ParserInterface
     /**
      * @var Crawler
      */
-    private Crawler $crawler;
+    protected Crawler $crawler;
 
     /**
      * MangaParser constructor.

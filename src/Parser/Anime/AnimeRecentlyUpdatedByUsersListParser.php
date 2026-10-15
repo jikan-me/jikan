@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Anime;
 
+use Jikan\Helper\Parser;
 use Jikan\Helper\Time;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model\Anime\AnimeRecentlyUpdatedByUser;
@@ -96,20 +97,7 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getEpisodesSeen(): ?int
     {
-        $node = $this->crawler->filterXPath('//td[4]');
-        $nodeText = str_replace(' ', '', trim($node->text()));
-
-        if (empty($nodeText)) {
-            return null;
-        }
-
-        $episodesSeen = explode('/', $nodeText)[0];
-
-        if ($episodesSeen === '-') {
-            return null;
-        }
-
-        return (int) $episodesSeen;
+        return Parser::parseProgress($this->crawler->filterXPath('//td[4]')->text())[0];
     }
 
     /**
@@ -118,20 +106,7 @@ class AnimeRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getEpisodesTotal(): ?int
     {
-        $node = $this->crawler->filterXPath('//td[4]');
-        $nodeText = str_replace(' ', '', trim($node->text()));
-
-        if (empty($nodeText)) {
-            return null;
-        }
-
-        $episodesTotal = explode('/', $nodeText)[1];
-
-        if ($episodesTotal === '-') {
-            return null;
-        }
-
-        return (int) $episodesTotal;
+        return Parser::parseProgress($this->crawler->filterXPath('//td[4]')->text())[1];
     }
 
     /**

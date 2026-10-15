@@ -37,6 +37,7 @@ class ResourceNewsList extends Results implements Pagination
 
         $instance->results = $parser->getResults();
         $instance->hasNextPage = $parser->getHasNextPage();
+        $instance->lastVisiblePage = $parser->getLastVisiblePage();
 
         return $instance;
     }

@@ -29,6 +29,26 @@ class ReviewScoresTest extends TestCase
 
     #[Test]
     #[DataProvider('pages')]
+    public function the_helpful_count_is_the_total_of_the_reactions(string $id, bool $anime): void
+    {
+        // MyAnimeList replaced "helpful" votes with reactions; it used to be a hard-coded 0 (anime) or a failure (manga).
+        $total = 0;
+        foreach (Variants::crawler($id)->filter('div.review-element') as $node) {
+            $review = new Crawler($node, 'https://myanimelist.net/');
+            $parser = $anime ? new AnimeReviewParser($review) : new MangaReviewParser($review);
+            $reactions = $parser->getReactions();
+            $sum = $reactions->getNice() + $reactions->getLoveIt() + $reactions->getFunny() + $reactions->getConfusing()
+                + $reactions->getInformative() + $reactions->getWellWritten() + $reactions->getCreative();
+
+            self::assertSame($reactions->getOverall(), $parser->getHelpfulCount());
+            self::assertSame($sum, $parser->getHelpfulCount(), 'the total MyAnimeList reports is the sum of the seven reactions');
+            $total += $parser->getHelpfulCount();
+        }
+        self::assertGreaterThan(0, $total);
+    }
+
+    #[Test]
+    #[DataProvider('pages')]
     public function the_scores_carry_the_reviewers_overall_rating(string $id, bool $anime): void
     {
         $reviews = Variants::crawler($id)->filter('div.review-element');

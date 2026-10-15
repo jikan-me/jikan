@@ -93,6 +93,9 @@ which changes a consumer can see.
 
 ## Unreleased
 
+### Changed
+- `getHelpfulCount()` on anime and manga reviews returns the review's **total reactions**. MyAnimeList's 2022 review redesign replaced "helpful" votes with reactions (Nice, Love it, Funny, Confusing, Informative, Well-written, Creative), and this is their total. It counts every reaction, not only approving ones; use `getReactions()` for the breakdown. Before this, the anime version always returned `0` and the manga version failed looking for the removed vote count.
+
 ---
 
 ## v5.0.0-beta.3 — 2026-10-15

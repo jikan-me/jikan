@@ -64,10 +64,10 @@ class AnimeCardHiddenFieldsTest extends TestCase
                     continue;
                 }
                 self::assertNotNull($date, "$id: $raw");
-                // Midnight in Japan on that day, as the visible dates are read.
+                // UTC midnight of that day, like Anime::getAired().
                 $expected = substr($raw, 0, 4) . '-' . (substr($raw, 4, 2) === '00' ? '01' : substr($raw, 4, 2))
                     . '-' . (substr($raw, 6, 2) === '00' ? '01' : substr($raw, 6, 2));
-                self::assertSame($expected . ' 00:00', $date->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d H:i'), "$id: $raw");
+                self::assertSame($expected . 'T00:00:00+00:00', $date->format('c'), "$id: $raw");
             }
         }
     }
@@ -77,9 +77,9 @@ class AnimeCardHiddenFieldsTest extends TestCase
      */
     public static function startDates(): iterable
     {
-        yield 'full date' => ['20130407', '2013-04-07'];
-        yield 'month and year' => ['20271000', '2027-10-01'];
-        yield 'year only' => ['20270000', '2027-01-01'];
+        yield 'full date' => ['20130407', '2013-04-07T00:00:00+00:00'];
+        yield 'month and year' => ['20271000', '2027-10-01T00:00:00+00:00'];
+        yield 'year only' => ['20270000', '2027-01-01T00:00:00+00:00'];
         yield 'nothing known' => ['00000000', null];
     }
 
@@ -90,7 +90,7 @@ class AnimeCardHiddenFieldsTest extends TestCase
         [, $card] = self::cards('seasonal-later')[0];
         $card->filter('.js-start_date')->getNode(0)->textContent = $raw;
 
-        self::assertSame($expected, new AnimeCardParser($card)->getAirDates()?->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d'));
+        self::assertSame($expected, new AnimeCardParser($card)->getAirDates()?->format('c'));
     }
 
     /**
@@ -99,9 +99,11 @@ class AnimeCardHiddenFieldsTest extends TestCase
     public static function shownDates(): iterable
     {
         // "2027" on its own used to parse as 20:27 today.
-        yield 'bare year' => ['2027', '2027-01-01'];
-        yield 'month and year' => ['Oct 2027', '2027-10-01'];
-        yield 'full date with time' => ['Apr 7, 2013, 01:00 (JST)', '2013-04-07'];
+        yield 'bare year' => ['2027', '2027-01-01T00:00:00+00:00'];
+        yield 'month and year' => ['Oct 2027', '2027-10-01T00:00:00+00:00'];
+        yield 'a day' => ['Oct 2, 2026', '2026-10-02T00:00:00+00:00'];
+        // a broadcast time is a real instant: 01:00 in Japan is 16:00 the day before in UTC
+        yield 'a day with a broadcast time' => ['Apr 7, 2013, 01:00 (JST)', '2013-04-06T16:00:00+00:00'];
     }
 
     #[Test]
@@ -113,7 +115,7 @@ class AnimeCardHiddenFieldsTest extends TestCase
         $hidden->parentNode->removeChild($hidden);
         $card->filterXPath('//div/div[2]/div[2]/span[contains(@class, "item")][1]')->getNode(0)->textContent = $shown;
 
-        self::assertSame($expected, new AnimeCardParser($card)->getAirDates()?->setTimezone(new \DateTimeZone('Asia/Tokyo'))->format('Y-m-d'));
+        self::assertSame($expected, new AnimeCardParser($card)->getAirDates()?->format('c'));
     }
 
     /** The type the card shows: its info line ("TV, 2013") or the header of its seasonal section ("TV (New)"). */

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
  *
  * A snapshot only proves the output did not change; these prove it is plausible: valid UTF-8 and
  * JSON-encodable (jikan-rest serialises the models), no leftover markup or whitespace, absolute URLs,
- * positive ids, non-negative numbers, sane dates, consistent pagination, and every public getter
+ * positive ids, non-negative numbers, sane UTC dates, consistent pagination, and every public getter
  * callable without throwing.
  *
  * Known violations are recorded per test class in test/unit/__invariants__/<test class>[.<name>].json
@@ -81,6 +81,10 @@ final class ModelInvariants
             $year = (int) $value->format('Y');
             if ($year < 1900 || $year > (int) date('Y') + 5) {
                 $found[] = "date-range $path";
+            }
+            // The library hands out UTC; a "+09:00" leaks when a "(JST)" marker is left in the text parsed.
+            if ($value->getOffset() !== 0) {
+                $found[] = "non-utc-date $path";
             }
 
             return;

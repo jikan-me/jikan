@@ -135,7 +135,9 @@ class AnimeEpisodeParser implements ParserInterface
             return null;
         }
 
-        return Parser::parseDate($match[1]);
+        // The page prints "Aired: Oct 20, 1999(JST)". Left in, PHP reads the marker as a +09:00 offset, so this
+        // date differed from the episode list's and from Anime::getAired(), which are UTC midnight.
+        return Parser::parseDate(trim(str_replace('(JST)', '', $match[1])));
     }
 
     /**

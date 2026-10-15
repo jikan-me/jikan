@@ -81,10 +81,8 @@ class AnimeEpisodeParserTest extends TestCase
     #[Test]
     public function it_gets_aired_date(): void
     {
-        self::assertEquals(
-            940345200,
-            $this->parser->getAired()->getTimestamp()
-        );
+        // UTC midnight of the printed day, like the episode list and Anime::getAired() (jikan-rest#567).
+        self::assertSame('1999-10-20T00:00:00+00:00', $this->parser->getAired()->format('c'));
     }
 
     #[Test]

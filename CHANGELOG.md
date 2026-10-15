@@ -94,6 +94,8 @@ which changes a consumer can see.
 ## Unreleased
 
 ### Changed
+- Anime-card start dates (`getAiringStart()` on genre, producer, seasonal and schedule cards) are **UTC midnight of the day shown**, like `Anime::getAired()` and the episode dates. They were midnight in Japan converted to UTC, so "Oct 2, 2026" gave `2026-10-01T15:00:00+00:00` and a year-only "2027" gave `2026-12-31T15:00:00+00:00`, the previous year. The instant is 9 hours later; **if you read the date part, it is now the day shown.** Text that carries a broadcast time still converts from Japan time.
+- `AnimeEpisode::getAired()` (from `getAnimeEpisode()`) is **UTC midnight of the printed day**, like the episode list and `Anime::getAired()`. It was midnight in Japan (`1999-10-20T00:00:00+09:00`), because the page prints "Aired: Oct 20, 1999(JST)" and PHP read the "(JST)" as a UTC+9 offset, so the same episode had two different dates depending on the endpoint (jikan-rest#567). The calendar date is unchanged; the instant is 9 hours later. **If you compared timestamps** between the two endpoints, they are now equal. A new check in the snapshot tests fails on any date that is not UTC.
 - `getHelpfulCount()` on anime and manga reviews returns the review's **total reactions**. MyAnimeList's 2022 review redesign replaced "helpful" votes with reactions (Nice, Love it, Funny, Confusing, Informative, Well-written, Creative), and this is their total. It counts every reaction, not only approving ones; use `getReactions()` for the breakdown. Before this, the anime version always returned `0` and the manga version failed looking for the removed vote count.
 
 ---

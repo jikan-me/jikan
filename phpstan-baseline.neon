@@ -1831,18 +1831,6 @@ parameters:
 			path: src/Parser/Reviews/AnimeReviewParser.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Parser/Reviews/AnimeReviewParser.php
-
-		-
-			message: '#^Method Jikan\\Parser\\Reviews\\MangaReviewParser\:\:getHelpfulCount\(\) should return int but returns string\.$#'
-			identifier: return.type
-			count: 3
-			path: src/Parser/Reviews/MangaReviewParser.php
-
-		-
 			message: '#^Method Jikan\\Parser\\Reviews\\MangaReviewParser\:\:getReviewTag\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1

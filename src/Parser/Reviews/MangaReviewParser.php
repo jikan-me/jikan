@@ -88,26 +88,13 @@ class MangaReviewParser implements ParserInterface
     }
 
     /**
-     * @return int
-     * @throws \InvalidArgumentException
+     * Total reactions on the review: MyAnimeList's replacement for "helpful" votes, which its 2022 review redesign
+     * removed. It counts every reaction (Nice, Love it, Funny, Confusing, Informative, Well-written, Creative); use
+     * getReactions() for the breakdown.
      */
     public function getHelpfulCount(): int
     {
-        // works on Anime/Manga Review pages
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[2]/table/tbody/tr/td[2]/div/strong/span');
-        if ($node->count()) {
-            return $node->text();
-        }
-
-        // works on Top UserReviewsParser pages, the div is shifted
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td[2]/div/strong/span');
-        if ($node->count()) {
-            return $node->text();
-        }
-
-        // works on User UserReviews pages
-        $node = $this->crawler->filterXPath('//div[1]/div[1]/div[4]/table/tbody/tr/td/div/strong/span');
-        return $node->text();
+        return $this->getReactions()->getOverall();
     }
 
     /**

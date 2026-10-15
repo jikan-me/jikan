@@ -56,13 +56,35 @@ class UserReviewsParser
     }
     public function hasNextPage(): bool
     {
-        // TODO: Add implementation
-        return true;
+        return $this->nextPage() !== null;
     }
 
+    /**
+     * The page only links the next one ("More Reviews", ?p=N, 10 reviews per page), not the last, so this is the
+     * furthest page it lets you reach: the next page when there is one.
+     */
     public function getLastVisiblePage(): ?int
     {
-        // TODO: Add implementation
-        return 1;
+        return $this->nextPage() ?? $this->currentPage();
+    }
+
+    private function currentPage(): int
+    {
+        return preg_match('~[?&]p=(\d+)~', $this->crawler->getUri() ?? '', $m) ? (int) $m[1] : 1;
+    }
+
+    /** The lowest linked page after the current one ("More Reviews"), or null on the last page. */
+    private function nextPage(): ?int
+    {
+        $current = $this->currentPage();
+        $pages = [];
+        foreach ($this->crawler->filterXPath('//a[contains(@href, "/reviews?p=")]') as $link) {
+            if ($link instanceof \DOMElement && preg_match('~[?&]p=(\d+)~', $link->getAttribute('href'), $m)) {
+                $pages[] = (int) $m[1];
+            }
+        }
+        $later = array_filter($pages, static fn(int $page): bool => $page > $current);
+
+        return $later === [] ? null : min($later);
     }
 }

@@ -3,7 +3,6 @@
 namespace Jikan\Parser\Common;
 
 use Jikan\Model\Common\Picture;
-use Jikan\Model\Resource\AnimeImageResource\AnimePicturesImageResource;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;

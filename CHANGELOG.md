@@ -114,6 +114,7 @@ which changes a consumer can see.
 - **`AnimeCard::getMembers()` returns `?int`**: `null` when a card shows no member count. In beta.2 it raised `ParserException`, which failed the whole page. **You must** handle `null`.
 
 ### Fixed
+- `getUserReviews()` pagination: `hasNextPage()` was always `true` and `getLastVisiblePage()` always `1`, so paging through a user's reviews never ended. MyAnimeList shows 10 reviews per page and links only the next page ("More Reviews"), so `hasNextPage()` now reports that link and `getLastVisiblePage()` is the next page when there is one.
 - `getAnimeScores()` and `getMangaScores()` on anime reviews, manga reviews and reviewers return the reviewer's overall rating. They always failed: the anime one called a parser that had been deleted, and the manga one read a score table that no longer exists. MyAnimeList's 2022 review redesign dropped the per-category ratings, so `getOverall()` is the "Reviewer's Rating" and the category getters (`getStory()`, `getAnimation()`, `getArt()` and so on) return `null`. `AnimeReviewScores`/`MangaReviewScores` are built with `fromOverall()`; their `fromParser()` and `Jikan\Parser\Manga\MangaReviewScoresParser`, which could not work, are removed.
 
 ---

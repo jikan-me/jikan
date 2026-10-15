@@ -28,12 +28,14 @@ self-hosted REST API exists as a separate project.
 
 
 1. `composer require jikan-me/jikan "^5.0@beta"`  <!-- the 5.0.0 line is pre-release; a plain `^5` has no stable tag to resolve to yet -->
-2. Read the [Repository docs](#repository-docs) below — this repo holds the canonical documentation.
+2. Coming from v4? Read the [upgrade guide](UPGRADING.md).
+3. Read the [Repository docs](#repository-docs) below — this repo holds the canonical documentation.
 
 ### Repository docs
 
 - [Contributing](CONTRIBUTING.md) — the endpoint spine, hermetic-fixture workflow, pre-commit gates
 - [Changelog](CHANGELOG.md) — what changed per version, written for consumers
+- [Upgrading from v4](UPGRADING.md) — what to change in your code, checked against a side-by-side run of both versions
 - [Decision log](DECISIONS.md) — why things are the way they are
 - [Deprecations](DEPRECATIONS.md) — the running deprecation ledger
 - [API standard](API-STANDARD.md) — conventions every public entry point must follow

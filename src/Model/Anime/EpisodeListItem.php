@@ -126,9 +126,9 @@ class EpisodeListItem
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getScore(): float
+    public function getScore(): ?float
     {
         return $this->score;
     }
@@ -150,17 +150,17 @@ class EpisodeListItem
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getUrl(): string
+    public function getUrl(): ?string
     {
         return $this->url;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getForumUrl(): string
+    public function getForumUrl(): ?string
     {
         return $this->forumUrl;
     }

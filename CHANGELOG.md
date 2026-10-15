@@ -93,6 +93,29 @@ which changes a consumer can see.
 
 ## Unreleased
 
+### Breaking
+- **31 model getters can now return `null`**, where they used to throw a `TypeError` on pages that don't show the field. **You must** handle `null` from these getters; code that only ran on pages with the field present sees no difference.
+  - `Anime::getDuration()`
+  - `EpisodeListItem::getScore()`, `getUrl()`, `getForumUrl()`
+  - `StreamEpisodeListItem::getMalId()`
+  - `ResourceArticle::getDate()`
+  - `NewsMeta::getDate()`, `getMalId()`
+  - `NewsListItem::getDate()`, `ResourceNews::getDate()`, `ResourceNewsListItem::getDate()`
+  - `getMalId()` on `AnimeGenreListItem`, `MangaGenreListItem`, `MagazineListItem` and `ProducerListItem`
+  - `Person::getMemberFavorites()`
+  - `VoiceActingRole::getRole()`
+  - `UserSearchListItem::getLastOnline()`
+  - `AnimeStats`: `getDaysWatched()`, `getEpisodesWatched()`, `getMeanScore()`, `getRewatched()`, `getTotalEntries()`
+  - `MangaStats`: `getChaptersRead()`, `getDaysRead()`, `getMeanScore()`, `getReread()`, `getTotalEntries()`, `getVolumesRead()`
+  - `Profile::getLocation()`
+  - `UserReviews::getLastVisiblePage()`
+
+  Each was declared non-null while its parser already returned `null` when MyAnimeList leaves the field out, for example an episode nobody has voted on, or a profile without a location.
+- **`AnimeCard::getMembers()` returns `?int`**: `null` when a card shows no member count. In beta.2 it raised `ParserException`, which failed the whole page. **You must** handle `null`.
+
+### Fixed
+- `getAnimeScores()` and `getMangaScores()` on anime reviews, manga reviews and reviewers return the reviewer's overall rating. They always failed: the anime one called a parser that had been deleted, and the manga one read a score table that no longer exists. MyAnimeList's 2022 review redesign dropped the per-category ratings, so `getOverall()` is the "Reviewer's Rating" and the category getters (`getStory()`, `getAnimation()`, `getArt()` and so on) return `null`. `AnimeReviewScores`/`MangaReviewScores` are built with `fromOverall()`; their `fromParser()` and `Jikan\Parser\Manga\MangaReviewScoresParser`, which could not work, are removed.
+
 ---
 
 ## v5.0.0-beta.2 — 2026-10-15

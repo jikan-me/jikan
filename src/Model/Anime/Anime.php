@@ -446,9 +446,9 @@ class Anime
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDuration(): string
+    public function getDuration(): ?string
     {
         return $this->duration;
     }

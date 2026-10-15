@@ -62,9 +62,9 @@ class UserReviews extends Results implements Pagination
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getLastVisiblePage(): int
+    public function getLastVisiblePage(): ?int
     {
         return $this->lastVisiblePage;
     }

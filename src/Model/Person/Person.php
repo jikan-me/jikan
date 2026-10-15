@@ -184,9 +184,9 @@ class Person
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getMemberFavorites(): int
+    public function getMemberFavorites(): ?int
     {
         return $this->memberFavorites;
     }

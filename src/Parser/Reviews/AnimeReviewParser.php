@@ -217,7 +217,7 @@ class AnimeReviewParser implements ParserInterface
      */
     public function getAnimeScores(): AnimeReviewScores
     {
-        return new AnimeReviewScoresParser($this->crawler)->getModel();
+        return AnimeReviewScores::fromOverall($this->getReviewerScore());
     }
 
     /**

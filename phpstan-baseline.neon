@@ -25,48 +25,6 @@ parameters:
 			path: src/Http/HttpClientWrapper.php
 
 		-
-			message: '#^Call to method getAnimationScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Model/Anime/AnimeReviewScores.php
-
-		-
-			message: '#^Call to method getCharacterScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Model/Anime/AnimeReviewScores.php
-
-		-
-			message: '#^Call to method getEnjoymentScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Model/Anime/AnimeReviewScores.php
-
-		-
-			message: '#^Call to method getOverallScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Model/Anime/AnimeReviewScores.php
-
-		-
-			message: '#^Call to method getSoundScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Model/Anime/AnimeReviewScores.php
-
-		-
-			message: '#^Call to method getStoryScore\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Model/Anime/AnimeReviewScores.php
-
-		-
-			message: '#^Parameter \$parser of method Jikan\\Model\\Anime\\AnimeReviewScores\:\:fromParser\(\) has invalid type Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 2
-			path: src/Model/Anime/AnimeReviewScores.php
-
-		-
 			message: '#^Method Jikan\\Model\\Anime\\AnimeReviews\:\:getResults\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1867,18 +1825,6 @@ parameters:
 			path: src/Parser/Recommendations/UserRecommendationsParser.php
 
 		-
-			message: '#^Call to method getModel\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Parser/Reviews/AnimeReviewParser.php
-
-		-
-			message: '#^Instantiated class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Parser/Reviews/AnimeReviewParser.php
-
-		-
 			message: '#^Method Jikan\\Parser\\Reviews\\AnimeReviewParser\:\:getReviewTag\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1907,18 +1853,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Parser/Reviews/ReactionsParser.php
-
-		-
-			message: '#^Call to method getModel\(\) on an unknown class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Parser/Reviews/ReviewerParser.php
-
-		-
-			message: '#^Instantiated class Jikan\\Parser\\Reviews\\AnimeReviewScoresParser not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/Parser/Reviews/ReviewerParser.php
 
 		-
 			message: '#^Method Jikan\\Parser\\Reviews\\ReviewerParser\:\:getModel\(\) has no return type specified\.$#'

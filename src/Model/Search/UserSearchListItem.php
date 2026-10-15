@@ -90,9 +90,9 @@ class UserSearchListItem
     }
 
     /**
-     * @return \DateTimeImmutable
+     * @return \DateTimeImmutable|null
      */
-    public function getLastOnline(): \DateTimeImmutable
+    public function getLastOnline(): ?\DateTimeImmutable
     {
         return $this->lastOnline;
     }

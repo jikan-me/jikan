@@ -293,11 +293,10 @@ class AnimeCardParser implements ParserInterface
     }
 
     /**
-     * @return int
-     * @throws \RuntimeException
+     * @return int|null
      * @throws \InvalidArgumentException
      */
-    public function getMembers(): int
+    public function getMembers(): ?int
     {
         $node = $this->crawler->filterXPath('//div[contains(@class, "information")]/div/div/div[2]');
 
@@ -319,9 +318,8 @@ class AnimeCardParser implements ParserInterface
             return (int) str_replace([',', '.'], '', $count);
         }
 
-        // Previously fell off the end, which is a TypeError for ": int" and escaped MalClient's
-        // catch (\Exception). Same outcome (failure), but now a ParserException like every other parse error.
-        throw new \RuntimeException('Could not find the member count on the anime card.');
+        // Some cards carry no member count; the field is empty rather than failing the whole page.
+        return null;
     }
 
     /**

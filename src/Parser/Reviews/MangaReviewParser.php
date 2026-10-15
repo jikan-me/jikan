@@ -12,7 +12,6 @@ use Jikan\Model\Manga\MangaReview;
 use Jikan\Model\Manga\MangaReviewScores;
 use Jikan\Model\Reviews\Reactions;
 use Jikan\Model\Reviews\Reviewer;
-use Jikan\Parser\Manga\MangaReviewScoresParser;
 use Jikan\Parser\ParserInterface;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -161,7 +160,7 @@ class MangaReviewParser implements ParserInterface
      */
     public function getMangaScores(): MangaReviewScores
     {
-        return new MangaReviewScoresParser($this->crawler)->getModel();
+        return MangaReviewScores::fromOverall($this->getReviewerScore());
     }
 
     /**

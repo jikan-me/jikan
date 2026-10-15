@@ -81,6 +81,17 @@ class ThousandsSeparatorTest extends TestCase
     }
 
     #[Test]
+    public function an_anime_card_without_a_member_count_has_null_members(): void
+    {
+        $card = Variants::crawler('anime-genre-1-p1')->filter('div.seasonal-anime')->first();
+        foreach ($card->filterXPath('//div[contains(@class, "information")]/div/div/div[2]') as $node) {
+            $node->parentNode->removeChild($node);
+        }
+
+        self::assertNull(new AnimeCardParser($card)->getMembers());
+    }
+
+    #[Test]
     public function user_recommendations_count_pages_from_a_total_with_separators(): void
     {
         $page = Variants::crawler('user-recommendations-datrandomdude');

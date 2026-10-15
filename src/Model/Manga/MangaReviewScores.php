@@ -2,59 +2,28 @@
 
 namespace Jikan\Model\Manga;
 
-use Jikan\Parser;
-
 /**
  * Class MangaReviewScores
+ *
+ * MyAnimeList's review redesign (2022) dropped the per-category ratings; a review now shows one overall
+ * "Reviewer's Rating". The category getters stay for compatibility and return null.
  *
  * @package Jikan\Model
  */
 class MangaReviewScores
 {
-    /**
-     * @var int
-     */
-    private $overall;
+    private int $overall;
 
-    /**
-     * @var int
-     */
-    private $story;
-
-    /**
-     * @var int
-     */
-    private $art;
-
-    /**
-     * @var int
-     */
-    private $character;
-
-    /**
-     * @var int
-     */
-    private $enjoyment;
-
-    /**
-     * @param  Parser\Manga\MangaReviewScoresParser $parser
-     * @return MangaReviewScores
-     */
-    public static function fromParser(Parser\Manga\MangaReviewScoresParser $parser): MangaReviewScores
+    public static function fromOverall(int $overall): MangaReviewScores
     {
         $instance = new self();
-
-        $instance->overall = $parser->getOverallScore();
-        $instance->story = $parser->getStoryScore();
-        $instance->art = $parser->getArtScore();
-        $instance->character = $parser->getCharacterScore();
-        $instance->enjoyment = $parser->getEnjoymentScore();
+        $instance->overall = $overall;
 
         return $instance;
     }
 
     /**
-     * @return int
+     * The reviewer's overall rating, 1 to 10.
      */
     public function getOverall(): int
     {
@@ -62,34 +31,34 @@ class MangaReviewScores
     }
 
     /**
-     * @return int
+     * @return null MyAnimeList no longer shows category ratings.
      */
-    public function getStory(): int
+    public function getStory(): ?int
     {
-        return $this->story;
+        return null;
     }
 
     /**
-     * @return int
+     * @return null MyAnimeList no longer shows category ratings.
      */
-    public function getArt(): int
+    public function getArt(): ?int
     {
-        return $this->art;
+        return null;
     }
 
     /**
-     * @return int
+     * @return null MyAnimeList no longer shows category ratings.
      */
-    public function getCharacter(): int
+    public function getCharacter(): ?int
     {
-        return $this->character;
+        return null;
     }
 
     /**
-     * @return int
+     * @return null MyAnimeList no longer shows category ratings.
      */
-    public function getEnjoyment(): int
+    public function getEnjoyment(): ?int
     {
-        return $this->enjoyment;
+        return null;
     }
 }

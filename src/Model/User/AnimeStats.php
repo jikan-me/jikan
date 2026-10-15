@@ -86,17 +86,17 @@ class AnimeStats
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getDaysWatched(): float
+    public function getDaysWatched(): ?float
     {
         return $this->daysWatched;
     }
 
     /**
-     * @return float
+     * @return float|null
      */
-    public function getMeanScore(): float
+    public function getMeanScore(): ?float
     {
         return $this->meanScore;
     }
@@ -142,25 +142,25 @@ class AnimeStats
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getTotalEntries(): int
+    public function getTotalEntries(): ?int
     {
         return $this->totalEntries;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getRewatched(): int
+    public function getRewatched(): ?int
     {
         return $this->rewatched;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getEpisodesWatched(): int
+    public function getEpisodesWatched(): ?int
     {
         return $this->episodesWatched;
     }

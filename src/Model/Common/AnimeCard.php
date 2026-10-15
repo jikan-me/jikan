@@ -53,7 +53,7 @@ class AnimeCard
     protected $episodes;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $members;
 
@@ -243,9 +243,9 @@ class AnimeCard
     }
 
     /**
-     * @return int
+     * @return int|null null when the card shows no member count
      */
-    public function getMembers(): int
+    public function getMembers(): ?int
     {
         return $this->members;
     }

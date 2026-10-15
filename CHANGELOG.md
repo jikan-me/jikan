@@ -93,6 +93,14 @@ which changes a consumer can see.
 
 ## Unreleased
 
+### Fixed
+- `getNewsList()` returns the articles on an anime's or manga's news page again (`AnimeNewsRequest`, `MangaNewsRequest`; jikan#661). Those pages have their own layout (no `div.news-unit`), which the parser stopped reading when it was realigned to the main news index in v5.0.0-beta, so it returned an empty list. Each article has its title, `/news/{id}` URL, date, author, discussion link, comment count, excerpt and image, with absolute links. Anything fetched through these requests since v5.0.0-beta was empty.
+- `getNewsList()` pagination: `getLastVisiblePage()` was always `1`, even when `hasNextPage()` was `true`. It is the furthest page the links reach. And `hasNextPage()` no longer counts the "News" tab, which links to the page you're on, so the last page of a long news list no longer claims a next page.
+- "Recently updated by users" for anime and manga (`getAnimeRecentlyUpdatedByUsers()`, `getMangaRecentlyUpdatedByUsers()`; jikan#663):
+  - **Crashes on a bare `-`.** MyAnimeList prints a progress cell as just `-` for many users (39 of 75 rows on manga 2). The total getters assumed a `read/total` pair and raised `Undefined array key 1`; where warnings become exceptions (Laravel does), a catch-all in `getResults()` then returned **no rows at all** for the page. Those cells now read as unknown.
+  - **An unknown total is `null`, not `0`.** `5/?` (the series is still running) gave a total of `0`; it is `null`. **If you treated `0` as "unknown", check for `null`.**
+  - **A row that cannot be parsed is an error**, reported as `ParserException`, instead of an empty page next to a `hasNextPage()` that could be `true`. A page without the table still has no rows.
+
 ---
 
 ## v5.0.0-rc.1 — 2026-10-15

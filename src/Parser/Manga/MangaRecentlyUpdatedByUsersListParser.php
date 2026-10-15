@@ -2,6 +2,7 @@
 
 namespace Jikan\Parser\Manga;
 
+use Jikan\Helper\Parser;
 use Jikan\Helper\Time;
 use Jikan\Helper\ImagePlaceholder;
 use Jikan\Model\Common\UserMeta;
@@ -96,20 +97,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getVolumesRead(): ?int
     {
-        $node = $this->crawler->filterXPath('//td[4]');
-        $nodeText = str_replace(' ', '', trim($node->text()));
-
-        if (empty($nodeText)) {
-            return null;
-        }
-
-        $episodesSeen = explode('/', $nodeText)[0];
-
-        if ($episodesSeen === '-') {
-            return null;
-        }
-
-        return (int) $episodesSeen;
+        return Parser::parseProgress($this->crawler->filterXPath('//td[4]')->text())[0];
     }
 
     /**
@@ -118,20 +106,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getVolumesTotal(): ?int
     {
-        $node = $this->crawler->filterXPath('//td[4]');
-        $nodeText = str_replace(' ', '', trim($node->text()));
-
-        if (empty($nodeText)) {
-            return null;
-        }
-
-        $episodesTotal = explode('/', $nodeText)[1];
-
-        if ($episodesTotal === '-') {
-            return null;
-        }
-
-        return (int) $episodesTotal;
+        return Parser::parseProgress($this->crawler->filterXPath('//td[4]')->text())[1];
     }
 
     /**
@@ -140,20 +115,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getChaptersRead(): ?int
     {
-        $node = $this->crawler->filterXPath('//td[5]');
-        $nodeText = str_replace(' ', '', trim($node->text()));
-
-        if (empty($nodeText)) {
-            return null;
-        }
-
-        $episodesSeen = explode('/', $nodeText)[0];
-
-        if ($episodesSeen === '-') {
-            return null;
-        }
-
-        return (int) $episodesSeen;
+        return Parser::parseProgress($this->crawler->filterXPath('//td[5]')->text())[0];
     }
 
     /**
@@ -162,20 +124,7 @@ class MangaRecentlyUpdatedByUsersListParser implements ParserInterface
      */
     public function getChaptersTotal(): ?int
     {
-        $node = $this->crawler->filterXPath('//td[5]');
-        $nodeText = str_replace(' ', '', trim($node->text()));
-
-        if (empty($nodeText)) {
-            return null;
-        }
-
-        $episodesTotal = explode('/', $nodeText)[1];
-
-        if ($episodesTotal === '-') {
-            return null;
-        }
-
-        return (int) $episodesTotal;
+        return Parser::parseProgress($this->crawler->filterXPath('//td[5]')->text())[1];
     }
 
     /**

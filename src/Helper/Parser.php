@@ -324,4 +324,18 @@ class Parser
 
         return ($hours * 60 * 60) + ($minutes * 60) + $seconds;
     }
+
+    /**
+     * A progress cell as MyAnimeList prints it: "5/12", "5/?" (total not known yet), "-/12", a bare "-" (nothing
+     * yet, no slash at all) or empty. Each number is null when the cell shows "-", "?" or nothing.
+     *
+     * @return array{0: ?int, 1: ?int} [read, total]
+     */
+    public static function parseProgress(string $text): array
+    {
+        $parts = explode('/', str_replace([' ', ','], '', JString::cleanse($text)), 2);
+        $number = static fn(?string $part): ?int => $part !== null && ctype_digit($part) ? (int) $part : null;
+
+        return [$number($parts[0]), $number($parts[1] ?? null)];
+    }
 }

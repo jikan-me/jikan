@@ -1693,12 +1693,6 @@ parameters:
 			path: src/Parser/News/ResourceNewsListItemParser.php
 
 		-
-			message: '#^Call to an undefined method DOMNode\:\:getAttribute\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Parser/News/ResourceNewsListParser.php
-
-		-
 			message: '#^Method Jikan\\Parser\\ParserInterface\:\:getModel\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1

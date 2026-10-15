@@ -52,14 +52,27 @@ class ResourceNewsListParser implements ParserInterface
         // token). The old js-scrollfix-bottom-rel/.clearfix layout is gone.
         // MAL also injects ad placements inside div.news-unit, so keep only the
         // units that actually carry an article title link.
-        return $this->crawler
+        $units = $this->crawler
             ->filterXPath('//div[contains(concat(" ", normalize-space(@class), " "), " news-unit ")]')
             ->reduce(
                 static fn(Crawler $unit): bool => $unit->filterXPath('.//p[contains(@class, "title")]/a')->count() > 0
-            )
-            ->each(
+            );
+
+        if ($units->count()) {
+            return $units->each(
                 function (Crawler $crawler) {
                     return new ResourceNewsListItemParser($crawler)->getModel();
+                }
+            );
+        }
+
+        // A title's own news page (/anime/{id}/_/news, /manga/{id}/_/news) has no div.news-unit: one block per
+        // article, each with a picSurround image. The parent of that image is the article.
+        return $this->crawler
+            ->filterXPath('//*[@id="content"]//div[contains(@class, "picSurround")]/parent::div')
+            ->each(
+                function (Crawler $crawler) {
+                    return new TitleNewsListItemParser($crawler)->getModel();
                 }
             );
     }
@@ -69,17 +82,30 @@ class ResourceNewsListParser implements ParserInterface
      */
     public function getHasNextPage(): bool
     {
-        // The news index paginates with `?p=N` range links (e.g. "21 - 40");
-        // a link to a page beyond 1 means a next page exists.
-        $pageLinks = $this->crawler
-            ->filterXPath('//*[@id="content"]//a[contains(@href, "?p=")]');
+        return $this->getLastVisiblePage() > $this->currentPage();
+    }
 
-        foreach ($pageLinks as $node) {
-            if (preg_match('~[?&]p=(\d+)~', $node->getAttribute('href'), $m) && (int) $m[1] > 1) {
-                return true;
+    /**
+     * The furthest page the page's links reach. The news index links ranges ("21 - 40") up to the last page; a
+     * title's own news page links only the next one ("More News"), and its "News" tab links to the page you are
+     * on, so only a link beyond the current page counts.
+     *
+     * @return int
+     */
+    public function getLastVisiblePage(): int
+    {
+        $last = $this->currentPage();
+        foreach ($this->crawler->filterXPath('//*[@id="content"]//a[contains(@href, "?p=")]') as $node) {
+            if ($node instanceof \DOMElement && preg_match('~[?&]p=(\d+)~', $node->getAttribute('href'), $m)) {
+                $last = max($last, (int) $m[1]);
             }
         }
 
-        return false;
+        return $last;
+    }
+
+    private function currentPage(): int
+    {
+        return preg_match('~[?&]p=(\d+)~', $this->crawler->getUri() ?? '', $m) ? max(1, (int) $m[1]) : 1;
     }
 }

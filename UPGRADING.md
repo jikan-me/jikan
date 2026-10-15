@@ -79,7 +79,7 @@ These don't change a signature, but they change what you get back. Each one was 
 - **UTC.** A single episode's air date is UTC midnight of the printed day, the same as in the episode list. In v4 it was midnight in Japan (`+09:00`).
 - **Two-digit years** are read in the right century: "Kaguya-hime" (1961) would be 2061 with plain PHP date parsing.
 - **Relative dates** ("Yesterday", "5 hours ago") are resolved against a PSR-20 clock, which is the system clock by default. In your own tests you can pin it with `Symfony\Component\Clock\Clock::set(new MockClock(...))`.
-- **Year-only dates** on anime cards ("2027") give 1 January of that year. In v4 they gave the current date and time.
+- **Card start dates** (`getAiringStart()` on anime cards from genre, producer, seasonal and schedule pages) are UTC midnight of the day shown. Where v4 had a value it was midnight in Japan converted to UTC, 9 hours earlier, so its date part was the day before. A year-only date ("2027") gives 1 January of that year; in v4 it gave the current date and time.
 
 **Other**
 - **Repeatable parsing.** Calling `getModel()` twice, or reading getters in a different order, failed with "The current node list is empty" on `AnimeParser` and other parsers in v4. It works.

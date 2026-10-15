@@ -93,6 +93,12 @@ which changes a consumer can see.
 
 ## Unreleased
 
+---
+
+## v5.0.0-rc.2 — 2026-10-16
+
+Release candidate 2. Bug fixes only since `5.0.0-rc.1`; the API is unchanged. jikan-rest found both problems while validating rc.1: three of its endpoints (`/anime/{id}/news`, `/manga/{id}/news` and `/manga/{id}/userupdates`) came back empty.
+
 ### Fixed
 - `getNewsList()` returns the articles on an anime's or manga's news page again (`AnimeNewsRequest`, `MangaNewsRequest`; jikan#661). Those pages have their own layout (no `div.news-unit`), which the parser stopped reading when it was realigned to the main news index in v5.0.0-beta, so it returned an empty list. Each article has its title, `/news/{id}` URL, date, author, discussion link, comment count, excerpt and image, with absolute links. Anything fetched through these requests since v5.0.0-beta was empty.
 - `getNewsList()` pagination: `getLastVisiblePage()` was always `1`, even when `hasNextPage()` was `true`. It is the furthest page the links reach. And `hasNextPage()` no longer counts the "News" tab, which links to the page you're on, so the last page of a long news list no longer claims a next page.

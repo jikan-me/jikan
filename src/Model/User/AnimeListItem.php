@@ -5,9 +5,7 @@ namespace Jikan\Model\User;
 use Jikan\Helper\Constants;
 use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
-use Jikan\Model\Common\LicensorMeta;
 use Jikan\Model\Common\MalUrl;
-use Jikan\Model\Common\StudioMeta;
 use Jikan\Model\Resource\CommonImageResource\CommonImageResource;
 
 /**

@@ -50,7 +50,6 @@ class MangaRecentlyUpdatedByUsersParser
     }
 
 
-    // @todo anime user updates pagination
     public function getHasNextPage(): bool
     {
         return $this->nextPage() !== null;

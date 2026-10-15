@@ -45,13 +45,6 @@ Every entry, without exception:
 - <what behaves differently, and how to tell>
 
 ### Fixed
-- Anime cards (genre, producer, seasonal and schedule pages; `AnimeCard`/`SeasonalAnime`) now read their type and start date from fields MyAnimeList puts on every card. This fixes four problems:
-  - **Year-only start dates:** `getAiringStart()` gave today's date for a card that shows only a year ("2027"), because the year was read as the time 20:27 today. It now gives 1 January of that year.
-  - **Schedule page types:** `getType()` gave the day of the week ("Friday", "Other") instead of the type.
-  - **Producer pages:** `getType()` and `getAiringStart()` were always `null`.
-  - **Genre pages:** `getAiringStart()` was always `null`.
-
-  An unknown month or day falls on the 1st, as it already did for "Oct 2027". TV Specials on seasonal pages now report `"TV Special"` instead of the `"Special"` heading they are listed under, matching `getAnime()`.
 - <what was wrong>
 
 ### Deprecated
@@ -100,6 +93,15 @@ which changes a consumer can see.
 
 ## Unreleased
 
+---
+
+## v5.0.0-beta.2 — 2026-10-15
+
+Pre-release. Hardening and fidelity work on the `^5` line since `v5.0.0-beta`: parser fixes found by a recorded-page
+test corpus and mutation testing, plus fields MyAnimeList serves that were read wrong or not at all. **Read Breaking
+and Changed before upgrading**: the PHP floor is now 8.4.4, `AnimeCard::getLicensors()` is gone, and
+`SEARCH_MANGA_NOVEL` changed value.
+
 ### Breaking
 - **`AnimeCard::getLicensors()` is removed**, and so `SeasonalAnime::getLicensors()` too — **you must** stop calling it. Anime cards on genre, producer and seasonal lists no longer show licensors on MyAnimeList, and the method has returned an empty list since. Licensors are still on the anime itself: `Anime::getLicensors()` from `getAnime()`.
 - **PHP floor raised to 8.4.4** — **you must** run PHP 8.4.4 or later; Composer no longer installs on 8.4.0–8.4.3. Those patch levels have a bug in PHP's own HTML5 parser (`Dom\HTMLDocument`, php-src GH-17481) that corrupts some 4-byte characters (emoji, rare scripts) depending on where they fall in the page, so a parsed field can contain invalid UTF-8 and `json_encode()` fails on the model. Seen on a real MyAnimeList manga review.
@@ -120,6 +122,13 @@ which changes a consumer can see.
 - `Jikan\Model\User\Friend::getFriendsSince()` returns `?\DateTimeImmutable`: `null` when MyAnimeList shows no "Friends since" date. It used to declare a non-null date and throw a `TypeError` in that case.
 
 ### Fixed
+- Anime cards (genre, producer, seasonal and schedule pages; `AnimeCard`/`SeasonalAnime`) now read their type and start date from fields MyAnimeList puts on every card. This fixes four problems:
+  - **Year-only start dates:** `getAiringStart()` gave today's date for a card that shows only a year ("2027"), because the year was read as the time 20:27 today. It now gives 1 January of that year.
+  - **Schedule page types:** `getType()` gave the day of the week ("Friday", "Other") instead of the type.
+  - **Producer pages:** `getType()` and `getAiringStart()` were always `null`.
+  - **Genre pages:** `getAiringStart()` was always `null`.
+
+  An unknown month or day falls on the 1st, as it already did for "Oct 2027". TV Specials on seasonal pages now report `"TV Special"` instead of the `"Special"` heading they are listed under, matching `getAnime()`.
 - `getAnimeGenres()`/`getMangaGenres()` item names keep their commas. The parser removed commas from the whole name as well as from the count. No genre name has a comma today, so current results are unchanged.
 - `getUserProfile()` last updates with nothing read or watched yet ("On-Hold -/355" on MyAnimeList) now give status `"On-Hold"`, progress `0` and total `355`. They gave status `"On-Hold -"` with progress and total `null`.
 - Related entries (`getAnime()`, `getManga()`, `getNews()`, `getArticle()`) no longer include MyAnimeList's empty links (`<a href="..."></a>`, for example a removed entry) as entries with an empty name. The code meant to skip them removed them from the page after the list of links had already been read, so they were kept.

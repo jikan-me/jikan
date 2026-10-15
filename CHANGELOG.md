@@ -93,6 +93,13 @@ which changes a consumer can see.
 
 ## Unreleased
 
+---
+
+## v5.0.0-beta.3 — 2026-10-15
+
+Pre-release, and the last planned API change before the release candidate. **Read Breaking before upgrading**: 31 getters
+that could throw a `TypeError` now return `null`, and `AnimeCard::getMembers()` returns `null` instead of throwing.
+
 ### Breaking
 - **31 model getters can now return `null`**, where they used to throw a `TypeError` on pages that don't show the field. **You must** handle `null` from these getters; code that only ran on pages with the field present sees no difference.
   - `Anime::getDuration()`

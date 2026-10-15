@@ -70,22 +70,21 @@ class UserReviewsParser
 
     private function currentPage(): int
     {
-        preg_match('~[?&]p=(\d+)~', (string) $this->crawler->getUri(), $m);
-
-        return max(1, (int) ($m[1] ?? 1));
+        return preg_match('~[?&]p=(\d+)~', $this->crawler->getUri() ?? '', $m) ? (int) $m[1] : 1;
     }
 
+    /** The lowest linked page after the current one ("More Reviews"), or null on the last page. */
     private function nextPage(): ?int
     {
         $current = $this->currentPage();
-        $next = null;
+        $pages = [];
         foreach ($this->crawler->filterXPath('//a[contains(@href, "/reviews?p=")]') as $link) {
-            if ($link instanceof \DOMElement && preg_match('~[?&]p=(\d+)~', $link->getAttribute('href'), $m)
-                && (int) $m[1] > $current) {
-                $next = min($next ?? PHP_INT_MAX, (int) $m[1]);
+            if ($link instanceof \DOMElement && preg_match('~[?&]p=(\d+)~', $link->getAttribute('href'), $m)) {
+                $pages[] = (int) $m[1];
             }
         }
+        $later = array_filter($pages, static fn(int $page): bool => $page > $current);
 
-        return $next;
+        return $later === [] ? null : min($later);
     }
 }

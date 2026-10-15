@@ -42,6 +42,25 @@ class UserReviewsPaginationTest extends TestCase
         self::assertSame(3, $parser->getLastVisiblePage());
     }
 
+    #[Test]
+    public function without_a_page_number_the_first_page_is_assumed(): void
+    {
+        $parser = new UserReviewsParser(self::page('https://myanimelist.net/profile/DatRandomDude/reviews', ['1']));
+
+        self::assertFalse($parser->hasNextPage());
+        self::assertSame(1, $parser->getLastVisiblePage());
+    }
+
+    #[Test]
+    public function the_nearest_later_page_is_the_next_one(): void
+    {
+        // A link to the current page and several later ones: the next page is the lowest one after the current.
+        $parser = new UserReviewsParser(self::page('https://myanimelist.net/profile/DatRandomDude/reviews?p=2', ['2', '5', '3']));
+
+        self::assertTrue($parser->hasNextPage());
+        self::assertSame(3, $parser->getLastVisiblePage());
+    }
+
     /**
      * The recorded reviews page, served as $uri, with a "More Reviews" link for each of $links.
      *

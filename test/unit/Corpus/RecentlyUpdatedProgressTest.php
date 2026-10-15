@@ -33,6 +33,7 @@ class RecentlyUpdatedProgressTest extends TestCase
         yield 'thousands separator' => ['1,044/1,100', [1044, 1100]];
         yield 'both unknown' => ['-/?', [null, null]];
         yield 'zero is a number' => ['0/0', [0, 0]];
+        yield 'more than two parts is not a number' => ['5/12/7', [5, null]];
     }
 
     /**

@@ -108,6 +108,54 @@ class TitleNewsTest extends TestCase
         self::assertSame(2, $list->getLastVisiblePage());
     }
 
+    /**
+     * @return iterable<string, array{string, int}>
+     */
+    public static function commentLines(): iterable
+    {
+        yield 'one comment' => ['Discuss (1 comment)', 1];
+        yield 'several comments' => ['Discuss (12 comments)', 12];
+        yield 'capitalised' => ['Discuss (3 Comments)', 3];
+        yield 'no count shown' => ['Discuss', 0];
+        yield 'none yet' => ['Discuss (0 comments)', 0];
+    }
+
+    #[Test]
+    #[DataProvider('commentLines')]
+    public function the_comment_count_is_read_from_the_discussion_link(string $text, int $expected): void
+    {
+        $page = Variants::crawler('anime-news-1');
+        $link = $page->filterXPath('(//p[contains(@class, "lightLink")])[1]/a[last()]')->getNode(0);
+        $link->textContent = $text;
+
+        self::assertSame($expected, new ResourceNewsListParser($page)->getResults()[0]->getComments());
+    }
+
+    /**
+     * @return iterable<string, array{string, string, bool, int}>
+     */
+    public static function urls(): iterable
+    {
+        // a page of news with no further page, requested with and without a page number
+        yield 'no page number, last page' => ['anime-news-1', 'https://myanimelist.net/anime/1/_/news', false, 1];
+        yield 'page 0 is page 1' => ['anime-news-1', 'https://myanimelist.net/anime/1/_/news?p=0', false, 1];
+        yield 'page 1, last page' => ['anime-news-1', 'https://myanimelist.net/anime/1/_/news?p=1', false, 1];
+        // a page that links "More News" to page 2: asked for without a page number it is page 1, so page 2 is next
+        yield 'no page number, more to come' => ['anime-news-21', 'https://myanimelist.net/anime/21/_/news', true, 2];
+    }
+
+    #[Test]
+    #[DataProvider('urls')]
+    public function a_url_without_a_usable_page_number_is_the_first_page(string $id, string $uri, bool $hasNext, int $last): void
+    {
+        $page = new Crawler(null, $uri);
+        $page->addHtmlContent(Variants::page($id)[1]);
+        $list = new ResourceNewsListParser($page)->getModel();
+
+        self::assertSame($hasNext, $list->hasNextPage());
+        self::assertSame($last, $list->getLastVisiblePage());
+    }
+
     #[Test]
     public function a_title_with_no_news_has_no_articles(): void
     {

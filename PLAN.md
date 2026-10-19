@@ -1,6 +1,6 @@
 # Jikan v5 — Improvement Plan
 
-Status: draft, agreed 2026-10-13. Constraints decided by the owner:
+Status: agreed 2026-10-13 and largely delivered in 5.0.0 (see CHANGELOG.md); the unchecked boxes are the v5.x backlog. Constraints decided by the owner:
 
 - **Stay on Symfony DomCrawler** for parsing. No engine swap.
 - **`MalClient` facade stays stable** (methods, `Request\*`, `Model\*` getters, exceptions).
@@ -56,20 +56,19 @@ Figures marked *estimate* come from reading the code, not from measurement.
 ## 1. v5.x, no breaking changes
 
 - [x] PHPStan level 6 with a baseline (`composer phpstan`, part of `composer quality`; `phpstan-baseline.neon`
-      holds 429 pre-existing findings; regenerate with `composer phpstan:baseline` after fixing some).
+      holds the pre-existing findings and only shrinks; regenerate with `composer phpstan:baseline` after fixing some).
       Level 0 alone found real bugs, fixed with regression tests (they fail on the old code):
       `MalClient::getNewsList()` read a non-existent `$this->ghoutte` (always failed); both `Jpg::__toString()`
       called a method that does not exist; `AnimeCardParser::getMembers()` fell off the end (TypeError that
-      bypassed `catch (\Exception)`), now throws a RuntimeException so it surfaces as a ParserException.
-      Unfixed, see "Open decisions" below.
+      bypassed `catch (\Exception)`), now returns `null` (a card can have no member count; 5.0.0-beta.3).
 - [x] Live drift canaries: `scripts/drift_check.php --live` (14 pages: anime x3, manga x2, character, person,
       club, producer, genre, seasonal, schedule, search, top; GET only, 3.5 s apart, `--live` required, not part of
       `composer test`; `--json` / `--compare` flag a null-rate rise of >10 points). **First live run
       (2026-10-13): 14 of 14 parsed, no failures.** Null rates: nearly all 0-8%; producer/1 is 27.7% (probably
-      normal for that page, but it is the number to watch). Scheduling it (cron/CI) is not done; that needs an
-      owner decision on where it runs.
+      normal for that page, but it is the number to watch). It runs weekly in CI (`.github/workflows/drift.yaml`, Mondays
+      04:00 UTC) and on demand.
       Same run answers the `getMembers()` question: the card parser's no-count path did not trigger on live
-      producer, genre, seasonal or top pages, so a missing count looks rare; it stays a catchable exception.
+      producer, genre, seasonal or top pages, so a missing count looks rare; `getMembers()` returns `null` for it.
 - [x] Live probe (one-off, 8 requests): MAL sends **no ETag or Last-Modified** and `Cache-Control: no-cache`
       (it does set MALSESSIONID / mal_cache_key / is_logged_in cookies), so conditional-request revalidation
       is not possible. Anime, manga and top-anime parse fine with the cookie jar cleared before every request,
@@ -109,15 +108,14 @@ Figures marked *estimate* come from reading the code, not from measurement.
 - [ ] Opt-in lenient parse mode (`ParseMode`): strict stays default; lenient records diagnostics for
       optional fields instead of failing the whole entity.
 
-## Open decisions (need the owner)
+## Open decisions (all resolved for 5.0.0)
 
 - ~~Delete the dead `Model\Manga\MangaReviewer` and `Parser\Manga\MangaReviewerParser`~~ **Done** (owner
   decision): they extended classes deleted in d8ec60b and nothing referenced them.
-- `Parser\Reviews\ReviewerParser::getAnimeScores()` and `AnimeReviewParser::getAnimeScores()` instantiate
-  `AnimeReviewScoresParser`, which does not exist (so those two methods always fail), and
-  `Model\Anime\AnimeReviewScores::fromParser()` type-hints it. Restore the class or remove the methods?
-- `getMembers()` now throws when no member count is found; should it return 0 / null instead?
-- Snapshots add 7 MB to the repo. Acceptable, or keep them out of the repo?
+- ~~`getAnimeScores()` called a parser that does not exist~~ **Done**: MyAnimeList shows only the reviewer's overall
+  rating now, so `getAnimeScores()` and `getMangaScores()` return that and the category getters return `null` (5.0.0-beta.3).
+- ~~`getMembers()` throws when no member count is found~~ **Done**: it returns `null` (5.0.0-beta.3).
+- ~~Snapshots add 7 MB to the repo~~ **Done**: they live in the jikan-fixtures repo.
 
 ## Test suite plan (audit 2026-10-14)
 

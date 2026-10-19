@@ -28,8 +28,8 @@ recordings and any test its requests are missing **fails with a hard error**
 `audit_test_network_coupling`).
 
 **Never commit directly to `master`.** Cut a feature branch from it and land
-changes through a reviewed PR into `master`. The v5 line is tagged as it ships
-(`v5.0.0-beta`); `5.0.0` was the pre-master branch name for that line and is no longer used.
+changes through a reviewed PR into `master`. Releases are tagged on `master`
+(`v5.0.0`, then the `5.0.x` patches); `5.0.0` was the pre-master branch name for that line and is no longer used.
 
 Also read [`AGENTS.md`](AGENTS.md) before starting: it is the navigation map (what to read in what
 order, where things live, the task router) — `CLAUDE.md` is just an `@AGENTS.md` import.

@@ -55,7 +55,7 @@ to change what they say, change the code or docs that produce them — not the f
 
 Kept deliberately short — do NOT move CONTRIBUTING's branch workflow or API-STANDARD's rules here.
 
-- Work happens on **`master`**, which hosts the v5 line (currently `5.0.0-beta`; the old `5.0.0`
+- Work happens on **`master`**, which hosts the v5 line (currently `5.0.0`; the old `5.0.0`
   branch name was retired after the v4→v5 migration). **`master` is the base for every PR.**
 - `CLAUDE.md` is an `@AGENTS.md` import — keep them in sync by keeping the canonical text here.
 - The backend-suite harness files (`.codex/`, `.gemini/`, `.cursor/`, … and the generated AGENTS.md

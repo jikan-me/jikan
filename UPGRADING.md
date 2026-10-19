@@ -1,6 +1,6 @@
 # Upgrading from v4 to v5
 
-For code on `jikan-me/jikan ^4`. v5 is currently a release candidate (`5.0.0-rc.2`); this guide is for moving to it and to `5.0.0` when that ships. For the complete list of changes, including fixes that only affected earlier v5 pre-releases, read the [changelog](CHANGELOG.md).
+For code on `jikan-me/jikan ^4`. This guide is for moving to v5 (`5.0.0` and later). For the complete list of changes, including fixes that only affected earlier v5 pre-releases, read the [changelog](CHANGELOG.md).
 
 **In short:** `MalClient` and all its existing methods and request classes still work as before. What changes is the PHP version, the HTTP libraries underneath, a handful of removed classes, and many getters that can now return `null` where they used to throw.
 
@@ -16,7 +16,7 @@ For code on `jikan-me/jikan ^4`. v5 is currently a release candidate (`5.0.0-rc.
 PHP 8.4.0–8.4.3 are refused on purpose. They have a bug in PHP's own HTML5 parser that can corrupt emoji and rare characters, which makes `json_encode()` fail on a model.
 
 ```bash
-composer require jikan-me/jikan:^5.0@RC     # "@RC" until a stable 5.0.0 exists
+composer require jikan-me/jikan:^5.0
 composer update                              # also removes fabpot/goutte
 ```
 

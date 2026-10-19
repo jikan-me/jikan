@@ -95,6 +95,30 @@ which changes a consumer can see.
 
 ---
 
+## v5.0.0 — 2026-10-19
+
+The first stable release of the `^5` line. **The code is identical to `5.0.0-rc.2`.** jikan-rest validated it on its Laravel 13 migration branch (403 tests, a 114-route crawl, and the news and "recently updated" endpoints that rc.1 had broken), and a live check of 14 MyAnimeList pages found no markup drift.
+
+**Upgrading from v4? Read [UPGRADING.md](UPGRADING.md).** It lists every change to your code, and was checked by running v4 and v5 against the same 85 recorded pages. The sections below it record each pre-release in full.
+
+### Breaking (from v4)
+- **PHP 8.4.4 or later** — **you must** run it; Composer will not install on older versions. PHP 8.4.0–8.4.3 have an HTML5 parser bug that corrupts some emoji and rare characters.
+- **The HTTP layer is Symfony's instead of `fabpot/goutte`** — **you must** run `composer update`. `new MalClient($client)` still takes a `Symfony\Contracts\HttpClient\HttpClientInterface`.
+- **Removed:** `AnimeCard::getLicensors()` and `SeasonalAnime::getLicensors()` (read `Anime::getLicensors()`), `Model\Manga\MangaReviewer`, `Parser\Manga\MangaReviewerParser`, `Parser\Manga\MangaReviewScoresParser`, `Jikan\Goutte\GoutteWrapper` (now `Jikan\Http\HttpClientWrapper`), and `NewsListItemParser::getImage()` and `getIntro()`.
+- **Many getters can return `null`** where a missing field used to be a `TypeError` — **you must** handle `null`. The list is in `UPGRADING.md` §3.
+- **`getNewsList()` returns `Model\News\ResourceNewsList`**; the getters have the same names.
+- **`Constants::SEARCH_MANGA_NOVEL` is now `8`** (it was `2`, which MyAnimeList reads as Light Novel); use `SEARCH_MANGA_LIGHT_NOVEL` for `2`.
+
+### Added
+- 11 content endpoints: `getArticle`, `getArticleSearch`, `getArticleTags`, `getArticlesByTag`, `getNews`, `getNewsByTag`, `getNewsSearch`, `getNewsTags`, `getPinnedArticles`, `getRecentArticles` and `getRecentNews`, each with its `Jikan\Request\*` class.
+- Search constants for the anime types CM, PV and TV Special, the manga type Light Novel, and the manga statuses On Hiatus and Discontinued.
+- `Jikan\Helper\Time`: relative and partial dates resolve against a PSR-20 clock (the system clock by default; pin it in tests with `Symfony\Component\Clock\Clock::set()`).
+
+### Fixed
+- Over forty parser fixes since v4, most found by running every endpoint against recorded MyAnimeList pages: pagination that never ended, lists that came back empty, dates in the wrong century or timezone, fields that were always `null`. See the pre-release sections below.
+
+---
+
 ## v5.0.0-rc.2 — 2026-10-16
 
 Release candidate 2. Bug fixes only since `5.0.0-rc.1`; the API is unchanged. jikan-rest found both problems while validating rc.1: three of its endpoints (`/anime/{id}/news`, `/manga/{id}/news` and `/manga/{id}/userupdates`) came back empty.
@@ -218,7 +242,7 @@ and Changed before upgrading**: the PHP floor is now 8.4.4, `AnimeCard::getLicen
 
 ---
 
-## v5.0.0 — 2026-10-11
+## v5.0.0-beta — 2026-10-11
 
 First release on the `^5` line. Every `MalClient` method and `Jikan\Request\*` class from `^4` is still there, and
 the v4→v5 diff adds 11 endpoints and replaces the HTTP layer. It also removes a few classes and methods and makes many

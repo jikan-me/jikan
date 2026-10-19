@@ -149,6 +149,8 @@ does not explain on its own.
 **Reason:** The endpoint must parse what the site actually serves. The featured pages remain the correct source for `getArticle`; the news index is the correct source for `getNewsList`. `ArticleParser::getViews()` and `News/Article` date getters were also stripping child nodes from the live DOM (`Parser::removeChildNodes` mutates the crawler), which broke any getter called after `getDate()` on the same parser instance — they now parse text without mutating.
 **Out of scope, deliberately:** Featured articles that MAL no longer serves a field for — an article page without a view count now resolves `getViews()` to `null` (`ResourceArticle::getViews(): ?int`) rather than a fabricated number. `ArticleListItemParser::getViews()` stays `int` (related-article blocks on featured pages still serve counts; not under endpoint tests). News search/tags parsers and the news *item* page (`news/{id}`) were not re-aligned — `getArticle`'s source is the featured stream, and `news/{id}` blurbs are a separate layout. The eight `NewsListItemParserTest` cases were re-pointed at the recorded `news` index and un-skipped.
 
+**Correction (2026-10-16):** this realignment covered only the main news index. A title's own news page (`/anime/{id}/_/news`, `/manga/{id}/_/news`), which `getNewsList()` also serves for `AnimeNewsRequest` and `MangaNewsRequest`, has a different layout (no `div.news-unit`), so those requests returned an empty list from `v5.0.0-beta` until jikan#661. `ResourceNewsListParser` now reads both layouts, and the corpus has recorded pages for each. A realignment of one layout needs a recorded page for **every** page the method serves.
+
 ## Deprecation and release policy
 
 ### Deprecated title accessors stay available indefinitely — no removal version
@@ -157,6 +159,8 @@ does not explain on its own.
 **Decision:** `Anime::getTitle*`, `Manga::getTitle*` and `Producer::getName()` are deprecated and stay that way with `Removal: not scheduled`, permanently. No removal version is planned.
 **Reason:** jikan's public surface is a compatibility superset — the v4→v5 diff removed nothing. Setting removal dates on these stubs would force a breaking consumer migration at some future major for accessors that cost nothing to keep and that a long tail of ^4-era consumers still call.
 **Impact:** `DEPRECATIONS.md` §1 rows keep `not scheduled`; the deprecated accessors remain in code and in the standard. Nothing in the API is scheduled for removal.
+
+**Correction (2026-10-19):** the claim that "the v4→v5 diff removed nothing" is wrong for the API as a whole. Computed from the source of `v4.0.13` and v5, v5 removes 4 classes (`MangaReviewer`, `MangaReviewerParser`, `MangaReviewScoresParser`, `GoutteWrapper`) and 6 methods, and changes 78 return types, most to nullable. What is true, and what this decision rests on: **none of the deprecated title accessors was removed.** The full list is in `UPGRADING.md`.
 
 ## Documentation standards
 
@@ -210,3 +214,30 @@ fixed (`getAnimeSearchAlt` return type).
 ---
 
 _Last updated: 2026-10-12_
+
+## Dates and times
+
+### Every date is UTC; a day printed without a time is UTC midnight
+**Date:** 2026-10-15
+**Source:** internal-decision (maintainer, after jikan-rest#567 and a side-by-side run of v4 and v5)
+**Decision:** Every date a model returns is in UTC. A day MyAnimeList prints without a time (an episode's "Aired", an anime card's start date) is UTC midnight of that day, as `Anime::getAired()` already was. Text that carries a broadcast time ("Apr 7, 2013, 01:00 (JST)") is converted from Japan time, because it is a real instant. A "(JST)" marker is stripped, never left for PHP to read as an offset. `ModelInvariants` fails any model date whose offset is not 0.
+**Reason:** The same fact had two forms: the episode list and the single-episode page gave `+00:00` and `+09:00` for one air date (jikan-rest#567), and anime-card dates were Japan midnight converted to UTC, so "Oct 2" read as the day before and a year-only "2027" as 31 December 2026. Consumers sort and compare these. Rejected: Japan midnight everywhere, which keeps one wrong form instead of one right one.
+**Impact:** `AnimeEpisodeParser::getAired()`, `AnimeCardParser::getAirDates()` (2,049 snapshot dates moved by exactly +9 hours); the `non-utc-date` invariant. Listed under Changed in the changelog. Dates with a time component are unchanged.
+
+## Missing and unreadable data
+
+### A field MyAnimeList leaves out is null; a row that cannot be read is an error
+**Date:** 2026-10-16
+**Source:** internal-decision (maintainer: `getMembers()` on 2026-10-15; the rest in review of PR #658 and #668)
+**Decision:** When a page does not show a value, its getter returns `null` and says so in its return type (31 getters were made nullable). An unknown total printed as `?` is `null`, never `0`. `AnimeCard::getMembers()` returns `null` for a card with no member count. A row or section that is present but cannot be parsed raises an exception, which `MalClient` reports as `ParserException`; parsers do not catch everything and return an empty list.
+**Reason:** A getter declared non-null while its parser returns null is a `TypeError` waiting for the right page, and a catch-all that returns `[]` turns a markup change into a silent empty page (jikan#663: a bare `-` cell emptied a whole page, next to a `hasNextPage()` that could be true). Failing loudly is what makes drift visible. Rejected: skipping the bad row, which hides drift the same way; returning `0` for an unknown total, which cannot be told from a real zero.
+**Impact:** 31 getters and `getMembers()` nullable (breaking, listed in `UPGRADING.md`); `Parser::parseProgress()`; `getResults()` of the recently-updated parsers no longer catches everything. A page that has no table still has no rows.
+
+## Reviews
+
+### Review scores are the reviewer's overall rating; the helpful count is the total of the reactions
+**Date:** 2026-10-15
+**Source:** external constraint (MyAnimeList's 2022 review redesign), maintainer decisions on the two options
+**Decision:** `getAnimeScores()` and `getMangaScores()` return the reviewer's overall rating (`getOverall()`); the category getters (story, animation, art, sound, character, enjoyment) return `null`. `getHelpfulCount()` returns the review's total reactions (all seven kinds, including "Funny" and "Confusing"); `getReactions()` has the breakdown.
+**Reason:** The page shows one "Reviewer's Rating" and reactions; the per-category ratings and the "helpful" votes no longer exist, and these methods had been failing or returning 0. Rejected: removing the methods (a breaking removal for something that can still answer), and counting only approving reactions (a judgement MyAnimeList does not make).
+**Impact:** `AnimeReviewScores` and `MangaReviewScores` are built with `fromOverall()`; `MangaReviewScoresParser` was removed. Listed in the changelog and `UPGRADING.md`.

@@ -283,6 +283,8 @@ class Anime
 
     /**
      * @return MalUrl[]
+     * @deprecated Use {@link Anime::getGenres()} instead; MyAnimeList no longer lists explicit genres
+     *             separately, they appear among the genres.
      */
     public function getExplicitGenres(): array
     {

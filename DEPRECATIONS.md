@@ -22,6 +22,11 @@ The deprecated accessors are still present for ^4-era consumers and are stubs of
 return the first element / the English title of the collection (`getTitle()`), or the field as
 parsed (`getTitleEnglish()`, `getTitleJapanese()`, `getTitleSynonyms()`, `Producer::getName()`).
 
+The two `getExplicitGenres()` accessors are deprecated for a different reason: MyAnimeList removed the
+separate "Explicit Genres" row from detail pages (verified across 40 recorded pages, including an `R+`
+title), so the getter can only ever return `[]`. Explicit genres now appear among the genres, which is
+what the row points consumers at.
+
 | What | Announced | Removal | Use instead | Migration |
 |---|---|---|---|---|
 | `Anime::getTitle(): string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Anime::getTitles(): array` | read the collection; the primary title is `getTitles()[0]` (English-romanized title) |
@@ -33,6 +38,8 @@ parsed (`getTitleEnglish()`, `getTitleJapanese()`, `getTitleSynonyms()`, `Produc
 | `Manga::getTitleJapanese(): ?string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Manga::getTitles(): array` | find `Title` entries whose `getType()` is `japanese` |
 | `Manga::getTitleSynonyms(): array` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Manga::getTitles(): array` | filter `Title` entries whose `getType()` is `synonym` |
 | `Producer::getName(): string` | ^4 (noted in code); recorded here 2026-10-11 | not scheduled | `Producer::getTitles(): array` | read the collection; the primary name is `getTitles()[0]` |
+| `Anime::getExplicitGenres(): array` | recorded here 2026-11-11 | not scheduled | `Anime::getGenres(): array` | read the genres; explicit genres (Ecchi, Hentai) are listed among them now |
+| `Manga::getExplicitGenres(): array` | recorded here 2026-11-11 | not scheduled | `Manga::getGenres(): array` | read the genres; explicit genres (Ecchi, Hentai) are listed among them now |
 
 ## 2. Removed
 

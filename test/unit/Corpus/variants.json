@@ -102,6 +102,7 @@
   {"id": "user-profile-sandshark", "method": "getUserProfile", "request": "User\\UserProfileRequest", "args": ["sandshark"]},
   {"id": "user-recommendations-datrandomdude", "method": "getUserRecommendations", "request": "User\\UserRecommendationsRequest", "args": ["DatRandomDude", 1]},
   {"id": "user-reviews-datrandomdude", "method": "getUserReviews", "request": "User\\UserReviewsRequest", "args": ["DatRandomDude", 1]},
+  {"id": "user-reviews-noya-xoxo", "method": "getUserReviews", "request": "User\\UserReviewsRequest", "args": ["Noya_xoxo", 1], "tags": ["spoiler"]},
   {"id": "user-search-irfan", "method": "getUserSearch", "request": "Search\\UserSearchRequest", "args": ["irfan", 1]},
   {"id": "user-search-zero", "method": "getUserSearch", "request": "Search\\UserSearchRequest", "args": ["zzqxjjvkqzzqxjjvk", 1], "tags": ["zero-results"]},
   {"id": "username-by-id-144050", "method": "getUsernameById", "request": "User\\UsernameByIdRequest", "args": [144050]},

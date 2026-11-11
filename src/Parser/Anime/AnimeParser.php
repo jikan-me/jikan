@@ -9,6 +9,7 @@ use Jikan\Helper\Parser;
 use Jikan\Model\Anime\Anime;
 use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
+use Jikan\Model\Common\Url;
 use Jikan\Model\Common\Title;
 use Jikan\Parser\Common\AlternativeTitleParser;
 use Jikan\Parser\Common\MalUrlParser;
@@ -723,10 +724,28 @@ class AnimeParser implements ParserInterface
             return [];
         }
 
-        return $links->filterXPath('//a')
+        return $this->streamingLinks($links);
+    }
+
+    /**
+     * @param Crawler $links
+     * @return \Jikan\Model\Common\Url[]
+     */
+    private function streamingLinks(Crawler $links): array
+    {
+        $models = $links->filterXPath('//a')
             ->each(function (Crawler  $c) {
                 return new UrlParser($c)->getModel();
             });
+
+        // The block ends with a JustWatch attribution link ("Streaming platforms provided by
+        // JustWatch"), which is not a platform and carries no name.
+        return array_values(
+            array_filter(
+                $models,
+                static fn(Url $url): bool => $url->getName() !== ''
+            )
+        );
     }
 
     /**
@@ -807,7 +826,11 @@ class AnimeParser implements ParserInterface
             return null;
         }
 
-        return JString::cleanse($background);
+        // The section can be present and still hold no text (the paragraph is removed above), which
+        // is an absent background, not an empty one — the model's getter is ?string for exactly this.
+        $background = JString::cleanse($background);
+
+        return $background === '' ? null : $background;
     }
 
     /**

@@ -96,6 +96,8 @@ which changes a consumer can see.
 ### Fixed
 - **A person's anime staff positions** (`AnimeStaffPosition::getPosition()`) started with the text of MyAnimeList's "add" (to list) button, e.g. `add Director, Storyboard`; they now hold the position alone, e.g. `Director, Storyboard`.
 - **A producer's external links** (`Producer::getExternalLinks()`) were empty when its page had only one of the "Available At" and "Resources" sections; the links of the section present are now returned.
+- **Streaming platform links** (`Anime::getStreamingLinks()`) included MyAnimeList's "Streaming platforms provided by JustWatch" attribution link: an extra entry with no platform name and a `justwatch.com` URL on every page that lists platforms. Only platforms are returned now.
+- **`Anime::getBackground()`** returned `''` for a title whose sidebar has the background section but no text in it; it returns `null`, as it already did for a title with no background section at all.
 
 ---
 

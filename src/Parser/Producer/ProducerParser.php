@@ -246,10 +246,6 @@ class ProducerParser implements ParserInterface
         $availableAtLinks = $this->crawler
             ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "user-profile-sns")]/span//a');
 
-        if (!$availableAtLinks->count()) {
-            return [];
-        }
-
         $links = array_merge($links, $availableAtLinks
             ->each(function (Crawler $c) {
                 return new UrlParser($c)->getModel();
@@ -258,10 +254,6 @@ class ProducerParser implements ParserInterface
 
         $resourcesLinks = $this->crawler
             ->filterXPath('//*[@id="content"]/div[1]/div[contains(@class, "pb16")]/span//a');
-
-        if (!$resourcesLinks->count()) {
-            return [];
-        }
 
         $links = array_merge($links, $resourcesLinks
             ->each(function (Crawler $c) {

@@ -174,7 +174,10 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
 
 ### Open questions from the audit
 - The 6 lists with `hasNextPage=true` but `lastVisiblePage=1`: is `lastVisiblePage` meaningful there?
-- The 38 never-filled fields: MAL removals or parser bugs (e.g. `AnimeCard::type`, `MangaCard::authors`)?
+  Still open — tracked as jikan#679 with the options, since answering it changes what the model promises.
+- The never-filled fields: MAL removals or parser bugs (e.g. `AnimeCard::type`, `MangaCard::authors`)?
+  Answered for all of them in the sweep section below; the count is 19, or 18 once jikan#681's recordings
+  land (`isSpoiler`).
 
 ## Parser-correctness sweep (2026-11-11)
 
@@ -191,14 +194,16 @@ Batches in review, each with its fixtures PR, merged in order:
   page carries an empty block) and is now `?string`.
 - **batch 2** (jikan#677 / fixtures#22): `AnimeCard::getSource()` returned `""` when the "Source" property is
   rendered with an empty item. The positional selector (`div[2]/span[2]`) was checked against every recorded
-  seasonal card before changing anything and is correct today (420 of 421 cards carry Source as the second
-  property; the exception has no properties at all), so only the empty-item case changed.
+  seasonal card before changing anything and is correct today: every card that has properties carries Source
+  as the second property (92/92 on the 1990 spring page, 420/421 on the "later" page — the exceptions have no
+  properties at all), so only the empty-item case changed.
 
 Result: invariant debt **34 → 10**. Everything left is the `pagination` entry — a semantics question
 (what `lastVisiblePage` means on a list that does not paginate), not a parser bug; it is tracked as an issue
 rather than patched.
 
-All 19 witness fields were triaged; **none is a parser bug**:
+All 19 witness fields were triaged — 18 once jikan#681's recordings land, which fill `isSpoiler`; **none is a
+parser bug**:
 
 - `Anime::explicitGenres` / `Manga::explicitGenres` — MAL removed the "Explicit Genres:" sidebar row (40
   recorded detail pages, including an `R+` title); Ecchi now sits inside `Genres`.
@@ -210,9 +215,11 @@ All 19 witness fields were triaged; **none is a parser bug**:
 - `UserAnimeReview::isSpoiler` — no spoiler-tagged review on the recorded user's page; the anime-reviews page
   tags spoilers and parses them correctly.
 
-Open decision: the first and third groups can never fill. Either deprecate them (API-STANDARD §5:
-`@deprecated` tag, `DEPRECATIONS.md` row, removal not scheduled) or derive them (e.g. explicit genres =
-`Genres ∩ {Ecchi, Hentai}`), which changes returned data.
+Resolved 2026-11-11 (jikan#680): `getExplicitGenres()` is deprecated in favour of `getGenres()`, because it
+has a real replacement. The user-list fields are **not** deprecated — there is no replacement, and
+`DEPRECATIONS.md` §4 makes a replacement a precondition for a deprecation; `DECISIONS.md` records the evidence
+and why the fields stay. Deriving them (e.g. explicit genres = `Genres ∩ {Ecchi, Hentai}`) was rejected as
+inventing upstream data.
 
 One fragile spot to keep in mind: `AnimeCardParser::getSource()` selects the second property by position. If
 MAL ever inserts a property before "Source", it returns a wrong value silently rather than failing.

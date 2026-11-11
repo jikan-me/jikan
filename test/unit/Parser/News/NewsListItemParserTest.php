@@ -2,6 +2,7 @@
 
 namespace JikanTest\Parser\News;
 
+use Jikan\Helper\Time;
 use Jikan\Http\HttpClientWrapper;
 use Jikan\Parser\News\NewsListItemParser;
 use JikanTest\TestCase;
@@ -65,11 +66,13 @@ class NewsListItemParserTest extends TestCase
     #[Test]
     public function it_gets_the_date(): void
     {
-        // The index serves relative dates ("11 hours ago"); assert plausibility.
+        // The index serves relative dates ("11 hours ago"); assert plausibility against the suite's
+        // clock, not the wall clock. Read against the wall clock the bound moves with today's date
+        // while the recording does not, so the test starts failing a month after it was recorded.
         $date = $this->parser->getDate();
         self::assertNotNull($date);
         self::assertGreaterThan(
-            (new \DateTimeImmutable('-30 days', new \DateTimeZone('UTC')))->format('Y-m-d'),
+            Time::now()->modify('-30 days')->format('Y-m-d'),
             $date->format('Y-m-d')
         );
     }

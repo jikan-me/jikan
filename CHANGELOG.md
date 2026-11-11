@@ -99,6 +99,9 @@ which changes a consumer can see.
 - **Streaming platform links** (`Anime::getStreamingLinks()`) included MyAnimeList's "Streaming platforms provided by JustWatch" attribution link: an extra entry with no platform name and a `justwatch.com` URL on every page that lists platforms. Only platforms are returned now.
 - **`Anime::getBackground()`** returned `''` for a title whose sidebar has the background section but no text in it; it returns `null`, as it already did for a title with no background section at all.
 
+### Changed
+- **`AnimeSearchListItem::getSynopsis()` and `MangaSearchListItem::getSynopsis()`** return `null` when MyAnimeList shows a search result with no synopsis (the page carries an empty synopsis block), instead of `''`. These were the last search fields that reported absence as an empty string rather than `null`.
+
 ---
 
 ## v5.0.0 — 2026-10-19

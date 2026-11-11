@@ -74,16 +74,20 @@ class AnimeSearchListItemParser
     }
 
     /**
-     * @return string
+     * @return string|null
      * @throws \InvalidArgumentException
      */
-    public function getSynopsis(): string
+    public function getSynopsis(): ?string
     {
-        return JString::cleanse(
+        $synopsis = JString::cleanse(
             Parser::removeChildNodes(
                 $this->crawler->filterXPath('//td[2]/div[@class="pt4"]')
             )->text()
         );
+
+        // A title with no synopsis still gets the div, empty: that is absence, not an empty string
+        // (DECISIONS.md, "Missing and unreadable data").
+        return $synopsis === '' ? null : $synopsis;
     }
 
     /**

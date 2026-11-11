@@ -38,7 +38,7 @@ class AnimeSearchListItem
     private $airing;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $synopsis;
 
@@ -139,9 +139,9 @@ class AnimeSearchListItem
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSynopsis(): string
+    public function getSynopsis(): ?string
     {
         return $this->synopsis;
     }

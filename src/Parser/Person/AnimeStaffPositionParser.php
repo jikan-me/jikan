@@ -47,8 +47,9 @@ class AnimeStaffPositionParser implements ParserInterface
      */
     public function getPosition(): string
     {
+        // The position is the <small>; the div also holds the "add" (to list) button.
         $role = $this->crawler
-            ->filterXPath('//td[2]/div[2]');
+            ->filterXPath('//td[2]/div[2]/small');
 
         return JString::cleanse(
             $role->text()

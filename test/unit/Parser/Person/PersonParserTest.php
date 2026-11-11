@@ -95,6 +95,7 @@ class PersonParserTest extends TestCase
         $animeStaffPositions = $this->parser->getPersonAnimeStaffPositions();
         self::assertCount(41, $animeStaffPositions);
         self::assertContainsOnlyInstancesOf(\Jikan\Model\Person\AnimeStaffPosition::class, $animeStaffPositions);
+        self::assertSame('Theme Song Performance (OP2)', $animeStaffPositions[0]->getPosition());
     }
 
     #[Test]

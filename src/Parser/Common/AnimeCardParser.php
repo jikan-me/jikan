@@ -159,7 +159,12 @@ class AnimeCardParser implements ParserInterface
             return null;
         }
 
-        return $node->text();
+        // MyAnimeList renders the "Source" property with an empty item for a title it has no source
+        // for (e.g. "Eigo de Asobo" on the 1990 spring page): that is absence, not an empty string
+        // (DECISIONS.md, "Missing and unreadable data").
+        $source = trim($node->text());
+
+        return $source === '' ? null : $source;
     }
 
     /**

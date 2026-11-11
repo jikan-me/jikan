@@ -16,7 +16,7 @@ Everything announced and not yet removed. Removal is expressed as a **version wh
 until then the cell says "not scheduled", which is a real answer (the same one the code gives via
 the `@deprecated` tag and no removal date).
 
-All current rows describe the same migration: the four title accessors on `Anime` and `Manga` were
+Most current rows describe the same migration: the four title accessors on `Anime` and `Manga` were
 superseded by a `getTitles()` collection, and `Producer::getName()` by the producer's `getTitles()`.
 The deprecated accessors are still present for ^4-era consumers and are stubs of convenience — they
 return the first element / the English title of the collection (`getTitle()`), or the field as

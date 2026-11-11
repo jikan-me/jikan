@@ -93,6 +93,9 @@ which changes a consumer can see.
 
 ## Unreleased
 
+### Fixed
+- **A person's anime staff positions** (`AnimeStaffPosition::getPosition()`) started with the text of MyAnimeList's "add" (to list) button, e.g. `add Director, Storyboard`; they now hold the position alone, e.g. `Director, Storyboard`.
+
 ---
 
 ## v5.0.0 — 2026-10-19

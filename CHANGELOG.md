@@ -94,6 +94,7 @@ which changes a consumer can see.
 ## Unreleased
 
 ### Fixed
+- **A person's anime staff positions** (`AnimeStaffPosition::getPosition()`) started with the text of MyAnimeList's "add" (to list) button, e.g. `add Director, Storyboard`; they now hold the position alone, e.g. `Director, Storyboard`.
 - **A producer's external links** (`Producer::getExternalLinks()`) were empty when its page had only one of the "Available At" and "Resources" sections; the links of the section present are now returned.
 
 ---

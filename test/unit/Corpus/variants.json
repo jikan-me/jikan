@@ -74,7 +74,7 @@
   {"id": "popular-promotional-videos", "method": "getPopularPromotionalVideos", "request": "Watch\\PopularPromotionalVideosRequest", "args": []},
   {"id": "producer-1-p1", "method": "getProducer", "request": "Producer\\ProducerRequest", "args": [1, 1]},
   {"id": "producer-1-p2", "method": "getProducer", "request": "Producer\\ProducerRequest", "args": [1, 2], "tags": ["page-2"]},
-  {"id": "producer-28", "method": "getProducer", "request": "Producer\\ProducerRequest", "args": [28, 1], "tags": ["one-link-section"]},
+  {"id": "producer-28-p1", "method": "getProducer", "request": "Producer\\ProducerRequest", "args": [28, 1], "tags": ["one-link-section"]},
   {"id": "producers", "method": "getProducers", "request": "Producer\\ProducersRequest", "args": []},
   {"id": "recent-articles-p1", "method": "getRecentArticles", "request": "Article\\RecentArticleRequest", "args": [1]},
   {"id": "recent-episodes", "method": "getRecentEpisodes", "request": "Watch\\RecentEpisodesRequest", "args": []},

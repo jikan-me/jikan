@@ -176,8 +176,8 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
 - The 6 lists with `hasNextPage=true` but `lastVisiblePage=1`: is `lastVisiblePage` meaningful there?
   Still open — tracked as jikan#679 with the options, since answering it changes what the model promises.
 - The never-filled fields: MAL removals or parser bugs (e.g. `AnimeCard::type`, `MangaCard::authors`)?
-  Answered for all of them in the sweep section below; the count is 19, or 18 once jikan#681's recordings
-  land (`isSpoiler`).
+  Answered for all of them in the sweep section below; the count is 19, or 18 after jikan#681's recordings landed
+  (`isSpoiler`).
 
 ## Parser-correctness sweep (2026-11-11)
 
@@ -186,7 +186,7 @@ recorded page ever fills) and the model-invariant allowlists in `test/unit/__inv
 shrink). Each entry is classified as a parser bug, an upstream absence, or a recording gap; only the first
 gets code, and each fix deletes its allowlist entry rather than emptying it.
 
-Batches in review, each with its fixtures PR, merged in order:
+Batches landed 2026-11-12, each with its fixtures PR, in this order:
 
 - **batch 1** (jikan#676 / fixtures#21): MyAnimeList's "Streaming platforms provided by JustWatch" link was
   parsed as a 12th streaming platform with no name; `Anime::getBackground()` returned `""` for a section that
@@ -202,8 +202,8 @@ Result: invariant debt **34 → 10**. Everything left is the `pagination` entry 
 (what `lastVisiblePage` means on a list that does not paginate), not a parser bug; it is tracked as an issue
 rather than patched.
 
-All 19 witness fields were triaged — 18 once jikan#681's recordings land, which fill `isSpoiler`; **none is a
-parser bug**:
+All 19 witness fields were triaged — 18 after jikan#681's recordings landed, which fill `isSpoiler`; **none is
+a parser bug**:
 
 - `Anime::explicitGenres` / `Manga::explicitGenres` — MAL removed the "Explicit Genres:" sidebar row (40
   recorded detail pages, including an `R+` title); Ecchi now sits inside `Genres`.

@@ -42,4 +42,29 @@ class StreamingLinksTest extends TestCase
 
         self::assertNull($anime->getBackground());
     }
+
+    #[Test]
+    public function it_keeps_a_background_that_exists(): void
+    {
+        // The null path above must not swallow a real background: anime/1 has one.
+        $anime = (new AnimeParser(Variants::crawler('anime-1')))->getModel();
+
+        self::assertIsString($anime->getBackground());
+        self::assertNotSame('', $anime->getBackground());
+    }
+
+    #[Test]
+    public function it_filters_the_attribution_on_the_other_streaming_markup(): void
+    {
+        // anime/5114 has no #broadcast-block — its platforms hang off div.broadcast anchors instead, so
+        // this pins the filter against the second shape MyAnimeList serves.
+        $links = (new AnimeParser(Variants::crawler('anime-5114')))->getStreamingLinks();
+
+        self::assertNotSame([], $links);
+
+        foreach ($links as $link) {
+            self::assertNotSame('', $link->getName(), 'A streaming link has no platform name.');
+            self::assertStringNotContainsString('//www.justwatch.com/', $link->getUrl());
+        }
+    }
 }

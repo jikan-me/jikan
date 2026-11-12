@@ -103,6 +103,9 @@ which changes a consumer can see.
 ### Changed
 - **`AnimeSearchListItem::getSynopsis()` and `MangaSearchListItem::getSynopsis()`** return `null` when MyAnimeList shows a search result with no synopsis (the page carries an empty synopsis block), instead of `''`. These were the last search fields that reported absence as an empty string rather than `null`.
 
+### Deprecated
+- **`Anime::getExplicitGenres()` and `Manga::getExplicitGenres()`** — MyAnimeList no longer lists explicit genres separately (they appear among the genres), so these can only return `[]`. Read `getGenres()` instead. Removal is not scheduled.
+
 ---
 
 ## v5.0.0 — 2026-10-19

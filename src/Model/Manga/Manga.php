@@ -237,6 +237,8 @@ class Manga
 
     /**
      * @return MalUrl[]
+     * @deprecated Use {@link Manga::getGenres()} instead; MyAnimeList no longer lists explicit genres
+     *             separately, they appear among the genres.
      */
     public function getExplicitGenres(): array
     {

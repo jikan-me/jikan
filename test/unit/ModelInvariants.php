@@ -26,6 +26,22 @@ final class ModelInvariants
     /** Model fields that legitimately carry HTML or free text with markup-like content. */
     private const RICH_TEXT = ['content', 'review', 'synopsis', 'background', 'about', 'body', 'text'];
 
+    /**
+     * Models whose MyAnimeList page links a "next"/"More" page but no numbered pager, so the parser
+     * correctly reports `lastVisiblePage = 1` next to `hasNextPage = true`. The rule below assumes
+     * numbered links; these pages simply do not have them (see jikan#679, decided 2026-11-12 — the
+     * nullable-getter alternative is deferred to a major).
+     *
+     * @var list<class-string>
+     */
+    private const NO_NUMBERED_PAGER = [
+        \Jikan\Model\Anime\AnimeReviews::class,
+        \Jikan\Model\Manga\MangaReviews::class,
+        \Jikan\Model\Reviews\Reviews::class,
+        \Jikan\Model\Top\TopAnime::class,
+        \Jikan\Model\User\Friends::class,
+    ];
+
     public static function assertHold(TestCase $test, mixed $model, string $name = ''): void
     {
         $found = [];
@@ -116,7 +132,9 @@ final class ModelInvariants
         }
 
         if (isset($props['hasNextPage'], $props['lastVisiblePage']) && $props['hasNextPage'] === true && $props['lastVisiblePage'] < 2) {
-            $found[] = "pagination $path";
+            if (!in_array($value::class, self::NO_NUMBERED_PAGER, true)) {
+                $found[] = "pagination $path";
+            }
         }
 
         if (str_starts_with($value::class, 'Jikan\\Model\\')) {

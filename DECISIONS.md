@@ -248,3 +248,12 @@ _Last updated: 2026-10-12_
 **Decision:** `getAnimeScores()` and `getMangaScores()` return the reviewer's overall rating (`getOverall()`); the category getters (story, animation, art, sound, character, enjoyment) return `null`. `getHelpfulCount()` returns the review's total reactions (all seven kinds, including "Funny" and "Confusing"); `getReactions()` has the breakdown.
 **Reason:** The page shows one "Reviewer's Rating" and reactions; the per-category ratings and the "helpful" votes no longer exist, and these methods had been failing or returning 0. Rejected: removing the methods (a breaking removal for something that can still answer), and counting only approving reactions (a judgement MyAnimeList does not make).
 **Impact:** `AnimeReviewScores` and `MangaReviewScores` are built with `fromOverall()`; `MangaReviewScoresParser` was removed. Listed in the changelog and `UPGRADING.md`.
+
+## Pagination
+
+### A "next"-only page reports lastVisiblePage 1, and the invariant knows it
+**Date:** 2026-11-12
+**Source:** internal-decision (settles jikan#679, raised by the parser-correctness sweep)
+**Decision:** `hasNextPage()` and `getLastVisiblePage()` keep their present meaning and signatures. The model-invariant rule "`hasNextPage` implies `lastVisiblePage >= 2`" now exempts the five models whose page links a "next"/"More ..." page but no numbered pager — `AnimeReviews`, `MangaReviews`, `Reviews`, `TopAnime`, `User\Friends` — through one documented list in `ModelInvariants` rather than ten per-fixture allowlists. Making `getLastVisiblePage()` nullable (null when the page has no numbered pager) is deferred to a major.
+**Reason:** The getters agree with what the page shows; the invariant encoded an assumption (numbered links) that these five pages do not satisfy, so the ten entries were describing a rule's blind spot as if it were four models' bug. Nullable would be the honest representation, but it changes five public signatures and the v4 JSON mapping (`pagination.last_visible_page`), which is a breaking change and belongs in a major, not mid-5.x, on a library whose surface is a compatibility superset. Rejected: reporting `lastVisiblePage = 2` from the "next" link (a number that looks authoritative and is not), and leaving the ten per-fixture allowlists (fixture noise standing in for a general rule).
+**Impact:** Ten `pagination` allowlist files deleted; model-invariant debt 34 → 0; no consumer-visible change. jikan#679 closed with this decision; the nullable-getter alternative stays on the v6 RFC track alongside the model overhaul.

@@ -2,6 +2,7 @@
 
 namespace JikanTest\Corpus;
 
+use Jikan\Parser\Schedule\ScheduleParser;
 use Jikan\Parser\Seasonal\SeasonalParser;
 use JikanTest\TestCase;
 use PHPUnit\Framework\Attributes\Test;
@@ -26,6 +27,25 @@ class SeasonSourceTest extends TestCase
         self::assertArrayHasKey('Eigo de Asobo: Tanken Goblin Tou', $sources);
         self::assertNull($sources['Eigo de Asobo: Tanken Goblin Tou'], 'An empty Source item is absence, not an empty string.');
         self::assertSame('Original', $sources['Fushigi no Umi no Nadia'], 'A card that does list a source keeps its value.');
+
+        foreach ($sources as $title => $source) {
+            self::assertNotSame('', $source, $title . ' kept an empty source.');
+        }
+    }
+
+    #[Test]
+    public function a_schedule_card_without_a_source_is_null(): void
+    {
+        // The schedule page uses the same card parser; it carried the same allowlist entry.
+        $schedule = (new ScheduleParser(Variants::crawler('schedule')))->getModel();
+
+        $sources = [];
+        foreach ($schedule->getTuesday() as $card) {
+            $sources[$card->getTitle()] = $card->getSource();
+        }
+
+        self::assertArrayHasKey('Origami Ninja Koyankinte', $sources);
+        self::assertNull($sources['Origami Ninja Koyankinte']);
 
         foreach ($sources as $title => $source) {
             self::assertNotSame('', $source, $title . ' kept an empty source.');

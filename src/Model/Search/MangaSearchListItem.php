@@ -39,7 +39,7 @@ class MangaSearchListItem
     private $publishing;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $synopsis;
 
@@ -151,9 +151,9 @@ class MangaSearchListItem
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSynopsis(): string
+    public function getSynopsis(): ?string
     {
         return $this->synopsis;
     }

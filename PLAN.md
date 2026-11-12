@@ -153,11 +153,10 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
 - Bugs the corpus found and fixed: anime/manga search with no matches threw `BadResponseException` (MAL returns
   404); person search with no matches threw `ParserException`; character/person search turned non-404 errors
   into a `TypeError`.
-- Bugs the corpus found, NOT fixed yet (owner decision): anime genre page 1 reports `hasNextPage=false`,
-  `lastVisiblePage=1` though the page links 20 pages (likely the same for manga genres); `Person::publishedManga`
-  is empty for Hayao Miyazaki (1870) although the page has a "Published Manga" section with 28 links. 41 fields
-  remain never filled (`scripts/field_witness.php`), several of them likely parser bugs (`AnimeCard::type`,
-  `MangaCard::authors`, `Top*ListItem::nameKanji`).
+- Bugs the corpus found, now fixed (verified 2026-11-11): anime genre page 1 reported `hasNextPage=false`,
+  `lastVisiblePage=1` though the page links 20 pages — it reports 20 now, manga likewise; `Person::publishedManga`
+  was empty for Hayao Miyazaki (1870) — it returns 14 entries. The 41 never-filled fields are 19
+  (`scripts/field_witness.php`, 2026-11-11), all triaged in the sweep below.
 - Not done: migrating the 98 per-class fixtures to the pages format (they keep working as they are).
 
 ### Phase 3 (branch v5/test-suite-phase-3)
@@ -175,7 +174,55 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
 
 ### Open questions from the audit
 - The 6 lists with `hasNextPage=true` but `lastVisiblePage=1`: is `lastVisiblePage` meaningful there?
-- The 38 never-filled fields: MAL removals or parser bugs (e.g. `AnimeCard::type`, `MangaCard::authors`)?
+  Still open — tracked as jikan#679 with the options, since answering it changes what the model promises.
+- The never-filled fields: MAL removals or parser bugs (e.g. `AnimeCard::type`, `MangaCard::authors`)?
+  Answered for all of them in the sweep section below; the count is 19, or 18 after jikan#681's recordings landed
+  (`isSpoiler`).
+
+## Parser-correctness sweep (2026-11-11)
+
+Triage of the two report-only signals the suite already had: `scripts/field_witness.php` (properties no
+recorded page ever fills) and the model-invariant allowlists in `test/unit/__invariants__/` (which may only
+shrink). Each entry is classified as a parser bug, an upstream absence, or a recording gap; only the first
+gets code, and each fix deletes its allowlist entry rather than emptying it.
+
+Batches landed 2026-11-12, each with its fixtures PR, in this order:
+
+- **batch 1** (jikan#676 / fixtures#21): MyAnimeList's "Streaming platforms provided by JustWatch" link was
+  parsed as a 12th streaming platform with no name; `Anime::getBackground()` returned `""` for a section that
+  exists but is empty; `AnimeSearchListItem::getSynopsis()` returned `""` for a result with no synopsis (the
+  page carries an empty block) and is now `?string`.
+- **batch 2** (jikan#677 / fixtures#22): `AnimeCard::getSource()` returned `""` when the "Source" property is
+  rendered with an empty item. The positional selector (`div[2]/span[2]`) was checked against every recorded
+  seasonal card before changing anything and is correct today: every card that has properties carries Source
+  as the second property (92/92 on the 1990 spring page, 420/421 on the "later" page — the exceptions have no
+  properties at all), so only the empty-item case changed.
+
+Result: invariant debt **34 → 10**. Everything left is the `pagination` entry — a semantics question
+(what `lastVisiblePage` means on a list that does not paginate), not a parser bug; it is tracked as an issue
+rather than patched.
+
+All 19 witness fields were triaged — 18 after jikan#681's recordings landed, which fill `isSpoiler`; **none is
+a parser bug**:
+
+- `Anime::explicitGenres` / `Manga::explicitGenres` — MAL removed the "Explicit Genres:" sidebar row (40
+  recorded detail pages, including an `R+` title); Ecchi now sits inside `Genres`.
+- `AnimeEpisode::filler` / `recap` — the single-episode page carries no marker at all; only episode-list rows do.
+- user-list `studios`, `licensors`, `seasonName`, `seasonYear`, `magazines`, `addedToList` — MAL's `load.json`
+  returns null/false for all 300 items, checked on two users (one live on 2026-11-11).
+- five `hasNextPage` flags (producer, character search, recent episodes, user recommendations, user reviews) —
+  those recordings genuinely have no next page; genre pages, which do, report 20.
+- `UserAnimeReview::isSpoiler` — no spoiler-tagged review on the recorded user's page; the anime-reviews page
+  tags spoilers and parses them correctly.
+
+Resolved 2026-11-11 (jikan#680): `getExplicitGenres()` is deprecated in favour of `getGenres()`, because it
+has a real replacement. The user-list fields are **not** deprecated — there is no replacement, and
+`DEPRECATIONS.md` §4 makes a replacement a precondition for a deprecation; `DECISIONS.md` records the evidence
+and why the fields stay. Deriving them (e.g. explicit genres = `Genres ∩ {Ecchi, Hentai}`) was rejected as
+inventing upstream data.
+
+One fragile spot to keep in mind: `AnimeCardParser::getSource()` selects the second property by position. If
+MAL ever inserts a property before "Source", it returns a wrong value silently rather than failing.
 
 ## 2. Explicitly not doing
 

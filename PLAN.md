@@ -198,9 +198,10 @@ Batches landed 2026-11-12, each with its fixtures PR, in this order:
   as the second property (92/92 on the 1990 spring page, 420/421 on the "later" page — the exceptions have no
   properties at all), so only the empty-item case changed.
 
-Result: invariant debt **34 → 10**. Everything left is the `pagination` entry — a semantics question
-(what `lastVisiblePage` means on a list that does not paginate), not a parser bug; it is tracked as an issue
-rather than patched.
+Result: invariant debt **34 → 0**. The last ten entries were the `pagination` rule's blind spot, not parser
+bugs: five models whose page links only a "next" page were failing a rule built for numbered pagers. The rule
+now names those five in one place (`ModelInvariants::NO_NUMBERED_PAGER`), and the ten per-fixture allowlists
+are gone (DECISIONS.md, "Pagination"). Nullable `getLastVisiblePage()` is deferred to a major.
 
 All 19 witness fields were triaged — 18 after jikan#681's recordings landed, which fill `isSpoiler`; **none is
 a parser bug**:

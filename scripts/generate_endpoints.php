@@ -104,7 +104,7 @@ function parser_from_body(string $body) : ?string
         return qualify($m[1]);
     }
     // methods that delegate to MalClient::parse($request, Parser\X::class)
-    if (preg_match('~\$this->parse\(\s*\$request\s*,\s*\\\\?(?:Jikan\\\\)?(Parser\\\\[\w\\\\]+)::class\s*\)~', $body, $m)) {
+    if (preg_match('~\$this->parse\(\s*\$request\s*,\s*\\\\?(?:Jikan\\\\)?(Parser\\\\[\w\\\\]+)::class(?:\s*,[^)]*)?\s*\)~', $body, $m)) {
         return qualify($m[1]);
     }
     return null;

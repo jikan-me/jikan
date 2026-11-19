@@ -76,23 +76,11 @@ class MalClient
     public function getAnimeEpisodes(Request\Anime\AnimeEpisodesRequest $request): Model\Anime\Episodes
     {
         // Episode page returns 404 when there are no results
-        try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        } catch (\Exception $e) {
-            if ($e->getCode() === 404) {
-                return new Model\Anime\Episodes();
-            }
-
-            throw $e;
-        }
-
-        try {
-            $parser = new Parser\Anime\EpisodesParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse(
+            $request,
+            Parser\Anime\EpisodesParser::class,
+            static fn() => new Model\Anime\Episodes()
+        );
     }
 
     /**
@@ -355,22 +343,11 @@ class MalClient
     public function getAnimeSearch(Request\Search\AnimeSearchRequest $request): Model\Search\AnimeSearch
     {
         // MAL answers a search with no matches with a 404 page
-        try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        } catch (BadResponseException $e) {
-            if ($e->getCode() === 404) {
-                return Model\Search\AnimeSearch::mock();
-            }
-            throw $e;
-        }
-
-        try {
-            $parser = new Parser\Search\AnimeSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse(
+            $request,
+            Parser\Search\AnimeSearchParser::class,
+            static fn() => Model\Search\AnimeSearch::mock()
+        );
     }
 
     /**
@@ -395,14 +372,11 @@ class MalClient
     public function getMangaSearch(Request\Search\MangaSearchRequest $request): Model\Search\MangaSearch
     {
         // MAL answers a search with no matches with a 404 page
-        try {
-            return $this->parse($request, Parser\Search\MangaSearchParser::class);
-        } catch (BadResponseException $e) {
-            if ($e->getCode() === 404) {
-                return Model\Search\MangaSearch::mock();
-            }
-            throw $e;
-        }
+        return $this->parse(
+            $request,
+            Parser\Search\MangaSearchParser::class,
+            static fn() => Model\Search\MangaSearch::mock()
+        );
     }
 
     /**
@@ -414,22 +388,12 @@ class MalClient
      */
     public function getCharacterSearch(Request\Search\CharacterSearchRequest $request): Model\Search\CharacterSearch
     {
-        try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        } catch (BadResponseException $e) {
-            if ($e->getCode() === 404) {
-                return Model\Search\CharacterSearch::mock();
-            }
-            throw $e;
-        }
-
-        try {
-            $parser = new Parser\Search\CharacterSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        // MAL answers a search with no matches with a 404 page
+        return $this->parse(
+            $request,
+            Parser\Search\CharacterSearchParser::class,
+            static fn() => Model\Search\CharacterSearch::mock()
+        );
     }
 
     /**
@@ -440,22 +404,12 @@ class MalClient
      */
     public function getPersonSearch(Request\Search\PersonSearchRequest $request): Model\Search\PersonSearch
     {
-        try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        } catch (BadResponseException $e) {
-            if ($e->getCode() === 404) {
-                return Model\Search\PersonSearch::mock();
-            }
-            throw $e;
-        }
-
-        try {
-            $parser = new Parser\Search\PersonSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        // MAL answers a search with no matches with a 404 page
+        return $this->parse(
+            $request,
+            Parser\Search\PersonSearchParser::class,
+            static fn() => Model\Search\PersonSearch::mock()
+        );
     }
 
     /**
@@ -905,22 +859,11 @@ class MalClient
     public function getUserSearch(Request\Search\UserSearchRequest $request): Model\Search\UserSearch
     {
         // Returns 404 when there are no results
-        try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        } catch (\Exception $e) {
-            if ($e->getCode() === 404) {
-                return new Model\Search\UserSearch();
-            }
-            throw $e;
-        }
-
-        try {
-            $parser = new Parser\Search\UserSearchParser($crawler);
-
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        return $this->parse(
+            $request,
+            Parser\Search\UserSearchParser::class,
+            static fn() => new Model\Search\UserSearch()
+        );
     }
 
     /**
@@ -967,20 +910,12 @@ class MalClient
      */
     public function getUserReviews(Request\User\UserReviewsRequest $request): Model\User\Reviews\UserReviews
     {
-        try {
-            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
-        } catch (\Exception $e) {
-            if ($e->getCode() === 404) {
-                return Model\User\Reviews\UserReviews::mock();
-            }
-            throw $e;
-        }
-        try {
-            $parser = new Parser\User\Reviews\UserReviewsParser($crawler);
-            return $parser->getModel();
-        } catch (\Exception $e) {
-            throw ParserException::fromRequest($request, $e);
-        }
+        // The page 404s for a user with no reviews
+        return $this->parse(
+            $request,
+            Parser\User\Reviews\UserReviewsParser::class,
+            static fn() => Model\User\Reviews\UserReviews::mock()
+        );
     }
 
     /**
@@ -1200,9 +1135,27 @@ class MalClient
      * @throws BadResponseException
      * @throws ParserException
      */
-    private function parse(Request\RequestInterface $request, string $parserClass): mixed
+    /**
+     * Fetch and parse a request, wrapping parse failures as ParserException.
+     *
+     * $on404 is the endpoint's 404 policy: MyAnimeList answers several lists with a 404 when they are
+     * empty rather than absent, and each such method passes the empty model to return instead. Without
+     * it, a 404 propagates as BadResponseException.
+     *
+     * @param callable():mixed|null $on404
+     */
+    private function parse(Request\RequestInterface $request, string $parserClass, ?callable $on404 = null): mixed
     {
-        $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        try {
+            $crawler = $this->httpClientWrapper->request('GET', $request->getPath());
+        } catch (BadResponseException $e) {
+            if ($on404 !== null && $e->getCode() === 404) {
+                return $on404();
+            }
+
+            throw $e;
+        }
+
         try {
             return new $parserClass($crawler)->getModel();
         } catch (\Exception $e) {

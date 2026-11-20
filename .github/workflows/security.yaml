@@ -1,0 +1,55 @@
+name: Dependency audit
+
+# `composer audit` over a freshly resolved dependency tree.
+#
+# There is no committed composer.lock (a library resolves at install time), so this cannot gate a
+# pinned version — a fresh resolve already picks the newest patch release inside jikan's constraints.
+# What it catches is the case that resolve cannot fix: an advisory with no release inside those
+# constraints. It runs weekly as well, because advisories are published long after the dependency
+# change that introduced them — the local tree on 2026-11-11 carried six, none of them new code here.
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+# Never cancel a run on master; supersede older runs of the same pull request.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    name: composer audit
+    steps:
+      - name: Checkout changes
+        uses: actions/checkout@v7
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+          coverage: none
+
+      # `composer audit` reads installed packages, so the dependency tree has to exist first.
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress --no-scripts
+
+      - name: Audit production dependencies
+        # Consumers of a library resolve their own dev tools, so an advisory on a runtime dependency
+        # is the only one that can reach them — that is what fails the build.
+        run: composer audit --no-dev
+
+      - name: Report dev-tool advisories
+        # Build-machine only (phpunit, php-cs-fixer, grumphp, infection): reported, never blocking,
+        # or an unavailable patch release would hold up every unrelated change.
+        continue-on-error: true
+        run: composer audit

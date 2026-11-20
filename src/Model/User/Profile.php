@@ -89,6 +89,11 @@ class Profile
     private ?string $about;
 
     /**
+     * @var ProfileBadge[]
+     */
+    private array $badges = [];
+
+    /**
      * @param UserProfileParser $parser
      *
      * @return Profile
@@ -110,6 +115,7 @@ class Profile
         $instance->animeStats = $parser->getAnimeStats();
         $instance->mangaStats = $parser->getMangaStats();
         $instance->about = $parser->getAbout();
+        $instance->badges = $parser->getBadges();
         $instance->favorites = $parser->getFavorites();
         $instance->lastUpdates = $parser->getUserLastUpdates();
         $instance->externalLinks = $parser->getUserExternalLinks();
@@ -203,6 +209,16 @@ class Profile
     public function getAbout(): ?string
     {
         return $this->about;
+    }
+
+    /**
+     * The badge tiles the profile shows — the eight most recent, each with its artwork; jikan#539.
+     *
+     * @return ProfileBadge[]
+     */
+    public function getBadges(): array
+    {
+        return $this->badges;
     }
 
     /**

@@ -100,6 +100,7 @@
   {"id": "user-friends-nekomata1037", "method": "getUserFriends", "request": "User\\UserFriendsRequest", "args": ["nekomata1037", 1]},
   {"id": "user-history-morshuwarrior", "method": "getUserHistory", "request": "User\\UserHistoryRequest", "args": ["morshuwarrior"]},
   {"id": "user-profile-sandshark", "method": "getUserProfile", "request": "User\\UserProfileRequest", "args": ["sandshark"]},
+  {"id": "user-profile-kineta", "method": "getUserProfile", "request": "User\\UserProfileRequest", "args": ["Kineta"], "tags": ["badges"]},
   {"id": "user-recommendations-datrandomdude", "method": "getUserRecommendations", "request": "User\\UserRecommendationsRequest", "args": ["DatRandomDude", 1]},
   {"id": "user-reviews-datrandomdude", "method": "getUserReviews", "request": "User\\UserReviewsRequest", "args": ["DatRandomDude", 1]},
   {"id": "user-reviews-noya-xoxo", "method": "getUserReviews", "request": "User\\UserReviewsRequest", "args": ["Noya_xoxo", 1], "tags": ["spoiler"]},

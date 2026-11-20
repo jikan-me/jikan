@@ -4,6 +4,7 @@ namespace JikanTest\Corpus;
 
 use Jikan\Parser\Manga\MangaParser;
 use JikanTest\TestCase;
+use Symfony\Component\DomCrawler\Crawler;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -42,6 +43,26 @@ class MangaAuthorRolesTest extends TestCase
             ['Hasekura, Isuna' => 'Story', 'Ayakura, Juu' => 'Art'],
             $byName
         );
+    }
+
+    #[Test]
+    public function a_role_split_across_text_nodes_is_read_whole(): void
+    {
+        // A role can arrive as more than one DOMText node (here split by a comment). The parser
+        // concatenates them and skips non-text nodes, so the role reads "Story" - not the last
+        // fragment, and not the comment's text.
+        $html = '<div class="spaceit_pad"><span class="dark_text">Authors:</span>'
+            . '<a href="https://myanimelist.net/people/1/A">A</a> (Sto<!-- c -->ry), '
+            . '<a href="https://myanimelist.net/people/2/B">B</a> (Art)</div>';
+        $crawler = new Crawler(null, 'https://myanimelist.net/manga/1');
+        $crawler->addHtmlContent($html);
+
+        $byName = [];
+        foreach ((new MangaParser($crawler))->getMangaAuthorsWithRoles() as $author) {
+            $byName[$author->getName()] = $author->getRole();
+        }
+
+        self::assertSame(['A' => 'Story', 'B' => 'Art'], $byName);
     }
 
     #[Test]

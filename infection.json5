@@ -5,7 +5,7 @@
     //
     // Runs in CI (.github/workflows/mutation.yaml): changed lines on pull requests, everything nightly.
     // "minMsi" fails the run when the score drops below it: one point under the last full run on master
-    // (86% on 2026-10-14, 89% after the escaped-mutant tests in #651). Raise it as escaped mutants get covered.
+    // (86% on 2026-10-14, 89% after #651, 90% on 2026-11-20). Raise it as escaped mutants get covered.
     "$schema": "vendor/infection/infection/resources/schema.json",
     "source": {
         "directories": [
@@ -14,7 +14,7 @@
         ]
     },
     "timeout": 30,
-    "minMsi": 88,
+    "minMsi": 89,
     "logs": {
         "text": "build/infection/infection.log",
         "summary": "build/infection/summary.log",

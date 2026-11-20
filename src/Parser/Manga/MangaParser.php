@@ -345,10 +345,14 @@ class MangaParser implements ParserInterface
                 function (Crawler $crawler) {
                     $role = '';
 
-                    // text nodes up to the next author's link, or the end of the row
+                    // text nodes up to the next author's link, or the end of the row: other nodes are
+                    // crossed without contributing, so a comment inside the row neither ends the role
+                    // nor leaks into it
                     $node = $crawler->getNode(0);
                     while ($node !== null && ($node = $node->nextSibling) !== null && !$node instanceof \DOMElement) {
-                        $role .= $node->textContent;
+                        if ($node instanceof \DOMText) {
+                            $role .= $node->textContent;
+                        }
                     }
 
                     $role = JString::cleanse(trim($role, " \t\n\r(),"));

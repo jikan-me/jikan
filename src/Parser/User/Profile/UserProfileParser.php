@@ -56,7 +56,7 @@ class UserProfileParser
                 static function (Crawler $crawler) {
                     return new Model\User\ProfileBadge(
                         JString::cleanse((string) $crawler->attr('title')),
-                        JString::cleanse((string) $crawler->attr('data-bg'))
+                        ImagePlaceholder::normalize($crawler->attr('data-bg'))
                     );
                 }
             );

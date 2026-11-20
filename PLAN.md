@@ -94,7 +94,8 @@ Figures marked *estimate* come from reading the code, not from measurement.
       new call form; the endpoint manifest was regenerated (parser refs unchanged).
 - [ ] (second half, needs owner decision on names) per-domain clients behind the facade, e.g.
       `$client->anime()->get(1)`. New public API: decide naming and whether `MalClient` methods stay un-deprecated.
-- [ ] Fold the 404 policy into the helper (an option per request) so the remaining special cases shrink too.
+- [x] Fold the 404 policy into the helper — done in jikan#684, as `parse()`'s optional third argument
+      (the empty-model builder); seven method bodies are one call each.
 - [x] HTTP state fix, small version. Measured: with the old wrapper the BrowserKit history grew one entry per
       request, unbounded (400 requests -> 400 entries, +1.0 MB vs +0.2 MB flat). `HttpClientWrapper` now defaults
       `changeHistory` to false and clears history after each request (regression test fails without the fix).
@@ -128,7 +129,8 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
 - [x] `test/unit/ModelInvariants.php`, run by every snapshot test: valid UTF-8, JSON-encodable, no NBSP / edge
       whitespace / empty strings / stray entities or tags, absolute URLs, positive ids, non-negative numbers,
       score 0-10, years 1900..now+5, consistent pagination, and every public getter (incl. `__toString`) callable.
-      Known violations: `test/unit/__invariants__/` (11 empty-string, 6 pagination); may only shrink.
+      Known violations: `test/unit/__invariants__/` (11 empty-string, 6 pagination at Phase-1 time;
+      the directory is empty since the sweep — 34 → 0). May only shrink.
 - [x] Parse-twice and snapshot coverage for 28 more classes (search, stats, seasonal, watch, forum, pictures,
       reviews, recommendations, user clubs/history, username lookup): 88 snapshots in total.
 - [x] Bugs it found, fixed: two-digit years read as 20xx (1961 -> 2061, also breaks `isAiring`);
@@ -164,8 +166,8 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
       8 recorded anime/manga detail pages (166 cases) and checks only that row's fields change. Found and fixed:
       `getAnime()` crashed without an "Aired:" row, `getManga()` without a "Published:" row.
 - [x] Mutation testing: `infection.json5` + `.github/workflows/mutation.yaml` (changed lines on PRs touching
-      `src/`, everything nightly; report-only). First real run happens in CI (no local coverage driver).
-      Next: set `minMsi` from the first nightly score.
+      `src/`, everything nightly; the nightly fails below `minMsi`). First real run happens in CI
+      (no local coverage driver). `minMsi` is 89 — one under the first nightly's 90% (jikan#689).
 - [x] Property tests: `test/unit/Helper/HelperPropertiesTest.php` (~400 generated inputs per helper). Found and
       fixed: `parseDate()` returned `false` on "Unknown, 2026", `parseDateMDYReadable()` threw on it,
       `stringIdFromUrl()` warned without a path. Known and kept: `JString::cleanse()` is not idempotent.
@@ -173,8 +175,10 @@ strings and inconsistent pagination sat in "passing" snapshots; 80 of 178 fixtur
       invariants; mostly documentation of intent).
 
 ### Open questions from the audit
-- The 6 lists with `hasNextPage=true` but `lastVisiblePage=1`: is `lastVisiblePage` meaningful there?
-  Still open — tracked as jikan#679 with the options, since answering it changes what the model promises.
+- The lists with `hasNextPage=true` but `lastVisiblePage=1`: is `lastVisiblePage` meaningful there?
+  Answered 2026-11-12 (jikan#679 closed): the five models whose pages link only a "next" page keep
+  `lastVisiblePage` 1 — named in `ModelInvariants::NO_NUMBERED_PAGER` (DECISIONS.md, "Pagination");
+  a nullable `getLastVisiblePage()` stays on the v6 RFC track.
 - The never-filled fields: MAL removals or parser bugs (e.g. `AnimeCard::type`, `MangaCard::authors`)?
   Answered for all of them in the sweep section below; the count is 19, or 18 after jikan#681's recordings landed
   (`isSpoiler`).

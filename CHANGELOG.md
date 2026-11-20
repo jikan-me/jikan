@@ -97,19 +97,19 @@ which changes a consumer can see.
 - **A manga's author roles** (`Manga::getAuthorsWithRoles()`) — each author of a manga with the role MyAnimeList prints beside their name (e.g. `Story & Art`), per author on a multi-author title; `getAuthors()` keeps the bare list it always returned (jikan#569).
 - **A user's profile badges** (`Profile::getBadges()`) — the badge tiles MyAnimeList renders on a profile, each with its name and artwork (jikan#539).
 
+### Changed
+- **`AnimeSearchListItem::getSynopsis()` and `MangaSearchListItem::getSynopsis()`** return `null` when MyAnimeList shows a search result with no synopsis (the page carries an empty synopsis block), instead of `''`.
+- **`Anime::getBackground()`** returned `''` for a title whose sidebar has the background section but no text in it; it returns `null`, as it already did for a title with no background section at all.
+- **`AnimeCard::getSource()`** returned `''` for a card whose "Source" property is present but empty — MyAnimeList shows the caption and leaves the item blank for a title it has no source for; it returns `null`, as it already did for a card with no "Source" property at all. These three were the last fields reporting absence as an empty string; it is `null` everywhere now (DECISIONS.md, "Versioning").
+
 ### Fixed
 - **A person's anime staff positions** (`AnimeStaffPosition::getPosition()`) started with the text of MyAnimeList's "add" (to list) button, e.g. `add Director, Storyboard`; they now hold the position alone, e.g. `Director, Storyboard`.
 - **A producer's external links** (`Producer::getExternalLinks()`) were empty when its page had only one of the "Available At" and "Resources" sections; the links of the section present are now returned.
 - **Streaming platform links** (`Anime::getStreamingLinks()`) included MyAnimeList's "Streaming platforms provided by JustWatch" attribution link: an extra entry with no platform name and a `justwatch.com` URL on every page that lists platforms. Only platforms are returned now.
-- **`Anime::getBackground()`** returned `''` for a title whose sidebar has the background section but no text in it; it returns `null`, as it already did for a title with no background section at all.
-- **`AnimeCard::getSource()`** returned `''` for a card whose "Source" property is present but empty — MyAnimeList shows the caption and leaves the item blank for a title it has no source for; it returns `null`, as it already did for a card with no "Source" property at all.
-
-### Changed
-- **`AnimeSearchListItem::getSynopsis()` and `MangaSearchListItem::getSynopsis()`** return `null` when MyAnimeList shows a search result with no synopsis (the page carries an empty synopsis block), instead of `''`. These were the last search fields that reported absence as an empty string rather than `null`.
+- **A manga author's role no longer absorbs text from other nodes inside the row** — only the role's own text nodes are read, so a comment MyAnimeList serves between name and role can no longer leak into it.
 
 ### Deprecated
 - **`Anime::getExplicitGenres()` and `Manga::getExplicitGenres()`** — MyAnimeList no longer lists explicit genres separately (they appear among the genres), so these can only return `[]`. Read `getGenres()` instead. Removal is not scheduled.
-
 ---
 
 ## v5.0.0 — 2026-10-19

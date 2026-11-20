@@ -64,6 +64,10 @@ One envelope, two types, already fixed by the code:
 Both extend `\Exception`; consumers catch the base. See the `errorHandling` section of
 `.backend-suite/arch-rules.json` for the enforced vocabulary.
 
+One carve-out: the endpoints whose empty list MyAnimeList answers with a 404 return their
+empty model instead of throwing — the policy is per endpoint, passed to `MalClient::parse()`
+(`getAnimeSearch` is the shape).
+
 ## 5. Versioning and breaking changes
 
 Semantic versioning on the `^5` line; **breaking = a consumer must change code or runtime**, decided
@@ -96,4 +100,4 @@ per kind in `CHANGELOG.md` §3. Announcement order, in one flow (also see `DEPRE
 
 ---
 
-_Last updated: 2026-10-11_
+_Last updated: 2026-11-20_

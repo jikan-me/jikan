@@ -44,8 +44,8 @@ Figures marked *estimate* come from reading the code, not from measurement.
       `~/projects/jikan-fixtures`, commit 83d7a2f), read through `vendor/jikan-me/jikan-fixtures/snapshots`.
       **Merge order matters:** the fixtures PR must merge before this one, or CI's `dev-master` fixtures have no
       snapshots and all 60 snapshot tests fail with "No snapshot". Locally `vendor/jikan-me/jikan-fixtures` is a
-      symlink to the sibling clone. Do not run `composer link-fixtures` against that clone: it runs
-      `git reset --hard origin/master` and would discard the unpushed snapshots commit.
+      symlink to the sibling clone. `composer link-fixtures` refuses to touch a clone with uncommitted
+      work (`scripts/link_fixtures.php`); commit the snapshots first, then link.
       Update deliberately with `JIKAN_UPDATE_SNAPSHOTS=1 composer test` and review the diff. Verified: output is deterministic across runs, and breaking one selector fails the snapshot
       (`score` 8.22 -> null). Dates are masked in the 6 relative-date classes. Same coverage gap as the parse-twice tests.
 - [x] Seasonal hot spot: `AnimeCardParser::isContinuing()` re-read the whole season section per card

@@ -60,7 +60,7 @@
         "endpoints:check": "php scripts/generate_endpoints.php --check",
         "endpoints:write": "php scripts/generate_endpoints.php --write",
         "link-fixtures": [
-            "git clone https://github.com/jikan-me/jikan-fixtures.git ../jikan-fixtures || git -C ../jikan-fixtures reset --hard origin/master",
+            "@php scripts/link_fixtures.php",
             "rm -rf vendor/jikan-me/jikan-fixtures",
             "composer config repositories.fixtures path ../jikan-fixtures",
             "composer update jikan-me/jikan-fixtures",

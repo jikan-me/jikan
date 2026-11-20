@@ -41,11 +41,11 @@ order, where things live, the task router) — `CLAUDE.md` is just an `@AGENTS.m
 Every one of these must pass. A PR that fails them wastes a reviewer's time.
 
 ```bash
-# Everything, one command: cs-fixer dry-run + endpoint-manifest check + tests
+# Everything, one command: cs-fixer dry-run + PHPStan + endpoint-manifest check + tests
 composer quality
 
 # …which runs these individually:
-composer test                        # PHPUnit via paratest, hermetic
+composer test                        # PHPUnit, hermetic (paratest runs in CI and the pre-commit hook)
 php vendor/bin/php-cs-fixer fix --dry-run
 
 # The same checks run again automatically on commit via the grumphp pre-commit hook
@@ -86,9 +86,13 @@ order; each step has a gate.
    not parsers beyond their own factory's type.
 4. **Client method** — a `public function getThing(Request\... $request): Model\...` on
    `Jikan\MyAnimeList\MalClient`, wrapping the call so failures surface as
-   `Jikan\Exception\ParserException`. Gate: `audit_error_handling` stays clean — the call goes
-   through `$this->httpClientWrapper->request(...)` and the parse is wrapped in
-   `try { } catch (\Exception $e) { throw ParserException::fromRequest($request, $e); }`.
+   `Jikan\Exception\ParserException`. Gate: `audit_error_handling` stays clean — the body is one
+   call through the shared helper, `return $this->parse($request, Parser\ThingParser::class);`,
+   which fetches through `$this->httpClientWrapper` and wraps parse failures as
+   `ParserException::fromRequest(...)`. For an endpoint MyAnimeList answers with a **404 when the
+   list is empty**, pass a third argument — the empty-model builder:
+   `$this->parse($request, Parser\ThingParser::class, static fn() => new Model\Thing())`
+   (`getAnimeSearch` is the shape to copy).
 5. **Test** — `test/unit/Parser/<Domain>/<Thing>ParserTest.php` extending `JikanTest\TestCase`,
    driven by a recorded fixture. If the request is new, record its response into
    `jikan-me/jikan-fixtures` (commit it there, then `composer link-fixtures` here).
@@ -122,6 +126,9 @@ request hash. There is no live fallback.
 - To add a new recording: capture the real response, commit it to
   `jikan-me/jikan-fixtures` under the correct fixture directory, then refresh the local
   checkout with `composer link-fixtures`.
+- The fixtures repo runs its own CI (`scripts/validate.py`): a new `pages/*.html` needs its
+  `.meta.json` beside it (`url`, `status`, `recorded_at`), and every snapshot must parse — the
+  Validate workflow reports a malformed recording against your fixtures commit.
 - `audit_test_network_coupling` (`python3 <suite>/bin/audit_test_network_coupling.py`)
   blocks the reintroduction of any live `HttpClient::create()` fallback in `test/`.
 
@@ -180,4 +187,4 @@ pre-commit hook. Re-run them after the suite is reinstalled elsewhere.
 
 ---
 
-_Last updated: 2026-10-11_
+_Last updated: 2026-11-20_

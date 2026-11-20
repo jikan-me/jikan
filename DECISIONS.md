@@ -211,9 +211,6 @@ fixed (`getAnimeSearchAlt` return type).
 **Reason:** The failures of the year were all the same shape: a fixture that no longer matches current markup (#593 theme tables, #564 NBSP titles, #488 placeholders, #629 News/Article). Fixtures are the wrong oracle for upstream drift; a live probe is the right one, and it is cheap (a few `MalClient` calls).
 **Impact:** `CONTRIBUTING.md` §7 now fails review to a change without a live probe for selector edits. The same rule underlies the recommended automated live-drift smoke test (not yet built): a scheduled probe that surfaces drift as an issue before consumers do.
 
----
-
-_Last updated: 2026-10-12_
 
 ## Dates and times
 
@@ -266,3 +263,9 @@ _Last updated: 2026-10-12_
 **Decision:** A getter whose parser used to return `''` for a value the page does not show, and now returns `null` with a `?string` signature, is recorded under Changed and ships in a minor. The next release is **v5.1.0**, not a major.
 **Reason:** Absence-as-null has been the library's rule since 2026-10-16 ("A field MyAnimeList leaves out is null"); the `''` those getters returned was the bug, and a consumer branching on `=== ''` was coding against it. The strict alternative — every nullability correction forces a major — was rejected because jikan-rest pins `jikan ^5.0` mid-migration to Laravel 13 (#614, open since 2026-10-11), and one corrected getter would strand that project's upgrade. Majors stay reserved for the RFC track (enumification jikan#636, readonly models, the REST-shape normalizer), where the breaking payload justifies the version. Widening a return type to nullable is a compatible change for callers — it breaks only subclass overrides, and jikan's models are not documented as extension points.
 **Impact:** jikan#676's synopsis entry stays under Changed; v5.1.0 carries no Breaking section. Removals and type changes that are not absence corrections still require a major, as does anything forcing consumers to restructure. Future nullability corrections follow this row without a new decision.
+
+**Correction (2026-11-20):** the Impact line named only #676's synopsis entry. The `Anime::getBackground()` and `AnimeCard::getSource()` entries from #676/#677 are the same shape and sit under Changed with it, so the three read as one rule; no classification changed, only the record of where they live.
+
+---
+
+_Last updated: 2026-11-20_

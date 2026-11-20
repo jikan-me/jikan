@@ -40,7 +40,7 @@ arch-rules, doc manifest) matter when your task touches the public surface or th
 | Does this conform | `API-STANDARD.md` + `.backend-suite/arch-rules.json` | Review rejects drift |
 | What is the whole public surface | `llm.txt` (generated catalog) + `readme.md` (authored) | `llm.txt` is derived — regenerate via `scripts/generate_endpoints.php`, never hand-edit |
 | Change consumer-visible behaviour | `CHANGELOG.md` §1–2 | An entry is required, or the change does not belong |
-| Run the gates | `CONTRIBUTING.md` §5–6 | `composer test`, php-cs-fixer, the backend-suite audits, per-install harness wiring |
+| Run the gates | `CONTRIBUTING.md` §2 + §5–6 | `composer test`, php-cs-fixer, the backend-suite audits, per-install harness wiring |
 
 ## 4. Derived collateral — regenerate, never hand-edit
 
@@ -65,6 +65,6 @@ Kept deliberately short — do NOT move CONTRIBUTING's branch workflow or API-ST
 ## 6. Backend-suite gates
 
 Fast, read-only audits configured in `.backend-suite/` (`profile.json`, `arch-rules.json`,
-`hooks.map.json`): `error_handling`, `test_network_coupling`, `api_consistency`, `toolchain_gates`,
+`hooks.map.json`): `error_handling`, `test_network_coupling`, `api_consistency`,
 plus `survey.py --check` and `doctor.py`. Run them with the installed suite root — exact commands and
 the pre-commit wiring are in `CONTRIBUTING.md` §6.

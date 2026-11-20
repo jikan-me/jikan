@@ -21,8 +21,10 @@ composer install
 composer link-fixtures
 ```
 
-`composer link-fixtures` clones `jikan-me/jikan-fixtures` and points the
-`jikan-me/jikan-fixtures` package at it. Without it the test cache has no
+`composer link-fixtures` clones `jikan-me/jikan-fixtures` — or, when a clone
+already exists beside this repo, fetches it, moves it to `master`, fast-forwards,
+and **refuses to touch a clone that has uncommitted changes** (`scripts/link_fixtures.php`) —
+then points the `jikan-me/jikan-fixtures` package at it. Without it the test cache has no
 recordings and any test its requests are missing **fails with a hard error**
 (the cache is a pure reader; it never fetches live — see `.backend-suite`
 `audit_test_network_coupling`).

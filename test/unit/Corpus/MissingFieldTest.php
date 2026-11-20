@@ -68,7 +68,7 @@ class MissingFieldTest extends TestCase
         'Volumes:' => ['volumes'],
         'Chapters:' => ['chapters'],
         'Serialization:' => ['serializations'],
-        'Authors:' => ['authors'],
+        'Authors:' => ['authors', 'authorsWithRoles'],
     ];
 
     /**

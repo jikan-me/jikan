@@ -10,6 +10,7 @@ use Jikan\Model\Common\DateRange;
 use Jikan\Model\Common\MalUrl;
 use Jikan\Model\Common\Title;
 use Jikan\Model\Manga\Manga;
+use Jikan\Model\Manga\MangaAuthor;
 use Jikan\Parser\Common\AlternativeTitleParser;
 use Jikan\Parser\Common\MalUrlParser;
 use Jikan\Parser\Common\UrlParser;
@@ -324,6 +325,38 @@ class MangaParser implements ParserInterface
             ->each(
                 function (Crawler $crawler) {
                     return new MalUrlParser($crawler)->getModel();
+                }
+            );
+    }
+
+    /**
+     * The same authors, each with the role MyAnimeList prints after their name — the text between
+     * one author's link and the next, e.g. " (Story & Art), ".
+     *
+     * @return MangaAuthor[]
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     */
+    public function getMangaAuthorsWithRoles(): array
+    {
+        return $this->crawler
+            ->filterXPath('//span[text()="Authors:"]/following-sibling::a')
+            ->each(
+                function (Crawler $crawler) {
+                    $role = '';
+
+                    // text nodes up to the next author's link, or the end of the row
+                    $node = $crawler->getNode(0);
+                    while ($node !== null && ($node = $node->nextSibling) !== null && !$node instanceof \DOMElement) {
+                        $role .= $node->textContent;
+                    }
+
+                    $role = JString::cleanse(trim($role, " \t\n\r(),"));
+
+                    return new MangaAuthor(
+                        new MalUrlParser($crawler)->getModel(),
+                        $role === '' ? null : $role
+                    );
                 }
             );
     }

@@ -17,15 +17,15 @@ class ProfileBadge
     private string $name;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $imageUrl;
+    private ?string $imageUrl;
 
     /**
      * @param string $name
-     * @param string $imageUrl
+     * @param string|null $imageUrl
      */
-    public function __construct(string $name, string $imageUrl)
+    public function __construct(string $name, ?string $imageUrl)
     {
         $this->name = $name;
         $this->imageUrl = $imageUrl;
@@ -40,9 +40,11 @@ class ProfileBadge
     }
 
     /**
-     * @return string
+     * MyAnimeList placeholder assets normalize to null, like every other image getter.
+     *
+     * @return string|null
      */
-    public function getImageUrl(): string
+    public function getImageUrl(): ?string
     {
         return $this->imageUrl;
     }

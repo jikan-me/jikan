@@ -37,9 +37,9 @@ class ProfileBadgesTest extends TestCase
     #[Test]
     public function a_badge_tile_without_its_attributes_is_an_empty_badge(): void
     {
-        // The (string) casts in the parser are load-bearing: Crawler::attr() is ?string and
-        // JString::cleanse() takes string, so a tile without its attributes must come out as an
-        // empty badge, not a TypeError.
+        // A tile without its attributes comes out as an empty badge, not a TypeError or a null
+        // object: the name is an empty string (JString::cleanse on the cast), the artwork is null
+        // (ImagePlaceholder::normalize of the absent attribute) - the library's absence rule.
         $html = '<div class="user-badges">'
             . '<div class="user-badge"><span class="text">nameless</span></div>'
             . '</div>';
@@ -50,7 +50,26 @@ class ProfileBadgesTest extends TestCase
 
         self::assertCount(1, $badges);
         self::assertSame('', $badges[0]->getName());
-        self::assertSame('', $badges[0]->getImageUrl());
+        self::assertNull($badges[0]->getImageUrl());
+    }
+
+    #[Test]
+    public function placeholder_artwork_is_null(): void
+    {
+        // The artwork funnels through ImagePlaceholder like every other image getter, so a
+        // placeholder asset reads as absence instead of a URL a consumer would render as a "?" gif.
+        $html = '<div class="user-badges">'
+            . '<div class="user-badge" data-bg="https://cdn.myanimelist.net/r/80x80/images/questionmark_50.gif?s=x"'
+            . ' title="Ghost badge"><span class="text">Ghost badge</span></div>'
+            . '</div>';
+        $crawler = new Crawler(null, 'https://myanimelist.net/profile/Kineta');
+        $crawler->addHtmlContent($html);
+
+        $badges = (new UserProfileParser($crawler))->getBadges();
+
+        self::assertCount(1, $badges);
+        self::assertSame('Ghost badge', $badges[0]->getName());
+        self::assertNull($badges[0]->getImageUrl());
     }
 
     #[Test]

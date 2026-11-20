@@ -93,6 +93,9 @@ which changes a consumer can see.
 
 ## Unreleased
 
+### Added
+- **A manga's author roles** (`Manga::getAuthorsWithRoles()`) — each author of a manga with the role MyAnimeList prints beside their name (e.g. `Story & Art`), per author on a multi-author title; `getAuthors()` keeps the bare list it always returned (jikan#569).
+
 ### Fixed
 - **A person's anime staff positions** (`AnimeStaffPosition::getPosition()`) started with the text of MyAnimeList's "add" (to list) button, e.g. `add Director, Storyboard`; they now hold the position alone, e.g. `Director, Storyboard`.
 - **A producer's external links** (`Producer::getExternalLinks()`) were empty when its page had only one of the "Available At" and "Resources" sections; the links of the section present are now returned.

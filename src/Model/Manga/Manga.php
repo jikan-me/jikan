@@ -169,6 +169,11 @@ class Manga
     private array $authors = [];
 
     /**
+     * @var MangaAuthor[]
+     */
+    private array $authorsWithRoles = [];
+
+    /**
      * @var MalUrl[]
      */
     private array $serializations = [];
@@ -222,6 +227,7 @@ class Manga
         $instance->related = $parser->getMangaRelated();
         $instance->background = $parser->getMangaBackground();
         $instance->authors = $parser->getMangaAuthors();
+        $instance->authorsWithRoles = $parser->getMangaAuthorsWithRoles();
         $instance->serializations = $parser->getMangaSerialization();
 
         return $instance;
@@ -472,6 +478,17 @@ class Manga
     public function getAuthors(): array
     {
         return $this->authors;
+    }
+
+    /**
+     * The same authors as getAuthors(), each with the role MyAnimeList prints beside their name
+     * (e.g. "Story & Art"); jikan#569.
+     *
+     * @return MangaAuthor[]
+     */
+    public function getAuthorsWithRoles(): array
+    {
+        return $this->authorsWithRoles;
     }
 
     /**

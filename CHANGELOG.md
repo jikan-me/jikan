@@ -95,6 +95,7 @@ which changes a consumer can see.
 
 ### Added
 - **A manga's author roles** (`Manga::getAuthorsWithRoles()`) — each author of a manga with the role MyAnimeList prints beside their name (e.g. `Story & Art`), per author on a multi-author title; `getAuthors()` keeps the bare list it always returned (jikan#569).
+- **A user's profile badges** (`Profile::getBadges()`) — the badge tiles MyAnimeList renders on a profile, each with its name and artwork (jikan#539).
 
 ### Fixed
 - **A person's anime staff positions** (`AnimeStaffPosition::getPosition()`) started with the text of MyAnimeList's "add" (to list) button, e.g. `add Director, Storyboard`; they now hold the position alone, e.g. `Director, Storyboard`.

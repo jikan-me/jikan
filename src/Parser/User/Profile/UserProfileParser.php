@@ -3,6 +3,7 @@
 namespace Jikan\Parser\User\Profile;
 
 use Jikan\Helper\ImagePlaceholder;
+use Jikan\Helper\JString;
 use Jikan\Helper\Parser;
 use Jikan\Model;
 use Jikan\Model\Common\MalUrl;
@@ -40,6 +41,27 @@ class UserProfileParser
      * @throws \Exception
      * @throws \Exception
      */
+    /**
+     * The badge tiles the profile shows (the eight most recent; a profile without badges renders no
+     * block at all).
+     *
+     * @return Model\User\ProfileBadge[]
+     * @throws \InvalidArgumentException
+     */
+    public function getBadges(): array
+    {
+        return $this->crawler
+            ->filterXPath('//div[contains(@class, "user-badges")]/div[contains(@class, "user-badge")]')
+            ->each(
+                static function (Crawler $crawler) {
+                    return new Model\User\ProfileBadge(
+                        JString::cleanse((string) $crawler->attr('title')),
+                        JString::cleanse((string) $crawler->attr('data-bg'))
+                    );
+                }
+            );
+    }
+
     public function getModel(): Model\User\Profile
     {
         return Model\User\Profile::fromParser($this);
